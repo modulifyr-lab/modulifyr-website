@@ -1,26 +1,80 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-heading: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+
+  /* Brand Colors (Static) */
+  --color-brand-orange: #FF5A3C;
+  --color-brand-navy: #0E3448;
+  --color-brand-teal: #2F9BB3;
+  --color-brand-gold: #F2C14E;
+
+  /* Dynamic Theme Colors */
+  --color-bg-light: var(--bg-main);
+  --color-bg-secondary: var(--bg-alt);
+  --color-bg-dark: var(--bg-deep);
+  /* Keep for specific dark needs if any */
+  --color-border-base: var(--border-main);
+  --color-text-primary: var(--text-main);
+  --color-text-secondary: var(--text-alt);
+  --color-text-muted: var(--text-dim);
+
+  /* Transitions */
+  --transition-timing-base: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-duration-base: 300ms;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-main: #FFFFFF;
+  --bg-alt: #F8FAFC;
+  --bg-deep: #0F1724;
+  --border-main: #E2E8F0;
+  --text-main: #0F172A;
+  --text-alt: #475569;
+  --text-dim: #94A3B8;
+
+  --background: var(--bg-main);
+  --foreground: var(--text-main);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+.dark {
+  --bg-main: #0F1724;
+  --bg-alt: #1E293B;
+  --bg-deep: #020617;
+  --border-main: #334155;
+  --text-main: #F8FAFC;
+  --text-alt: #94A3B8;
+  --text-dim: #64748B;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: var(--bg-main);
+  --foreground: var(--text-main);
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.container-custom {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
 }
