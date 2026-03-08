@@ -17,7 +17,8 @@ import {
     ArrowRight,
     ShieldCheck,
     Layout,
-    Terminal
+    Terminal,
+    Download
 } from "lucide-react";
 
 export default function WorkPage() {
@@ -78,7 +79,12 @@ export default function WorkPage() {
                                         View Live Project <ExternalLink className="w-4 h-4" />
                                     </Button>
                                 </Link>
-                                <Button variant="outline">Download Technical Breakdown (PDF)</Button>
+                                {/* ✅ FIXED: links to actual technical briefing PDF */}
+                                <a href="/downloads/modulifyr-technical-briefing.pdf" download>
+                                    <Button variant="outline" className="flex items-center gap-2 group">
+                                        Download Technical Briefing <Download className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
+                                    </Button>
+                                </a>
                             </div>
                         </div>
 
@@ -161,16 +167,19 @@ export default function WorkPage() {
                 </div>
             </section>
 
-            {/* CTA */}
+            {/* ✅ FIXED: "Speak with an Engineer" → /contact, "Request Technical Briefing" → /about/technical-standards */}
             <section className="py-24 bg-bg-secondary">
                 <div className="container-custom text-center">
                     <div className="max-w-3xl mx-auto flex flex-col gap-8">
                         <h2 className="text-4xl font-heading font-bold text-brand-navy tracking-tight leading-tight">Need to see the thinking behind our code?</h2>
                         <p className="text-lg text-text-secondary">We can provide a live code walkthrough or detailed documentation for our public samples under NDA.</p>
                         <div className="flex flex-wrap justify-center gap-4">
-                            <Button size="lg">Request Technical Briefing</Button>
+                            <Link href="/about/technical-standards">
+                                <Button size="lg">View Technical Standards</Button>
+                            </Link>
+                            {/* ✅ FIXED: links to /contact */}
                             <Link href="/contact">
-                                <Button variant="outline" size="lg">Speak with an Engineer</Button>
+                                <Button variant="outline" size="lg">Speak with an Engineer <ArrowRight className="w-4 h-4 ml-2" /></Button>
                             </Link>
                         </div>
                     </div>

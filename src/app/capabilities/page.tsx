@@ -7,18 +7,17 @@ export const metadata: Metadata = {
 };
 import { Button } from "@/components/ui/Button";
 import {
-    Cpu,
     Layers,
     ShieldCheck,
     Cloud,
     Database,
-    Zap,
-    Code2,
     Server,
+    Code2,
     Lock,
-    Globe,
     FileCode,
-    ArrowRight
+    ArrowRight,
+    Download,
+    Layout
 } from "lucide-react";
 import Link from "next/link";
 
@@ -60,12 +59,9 @@ const architecturePatterns = [
     }
 ];
 
-import { Layout } from "lucide-react";
-
 export default function CapabilitiesPage() {
     return (
         <div className="flex flex-col w-full">
-            {/* Hero Section */}
             <section className="bg-brand-navy text-white py-24">
                 <div className="container-custom">
                     <div className="max-w-4xl">
@@ -77,7 +73,6 @@ export default function CapabilitiesPage() {
                 </div>
             </section>
 
-            {/* Tech Stack Grid */}
             <section className="py-24">
                 <div className="container-custom">
                     <div className="flex flex-col gap-4 mb-16">
@@ -104,14 +99,13 @@ export default function CapabilitiesPage() {
                 </div>
             </section>
 
-            {/* Architecture Patterns */}
             <section className="py-24 bg-bg-secondary">
                 <div className="container-custom">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                         <div className="flex flex-col gap-8">
                             <h2 className="text-3xl md:text-5xl font-heading font-bold text-brand-navy">Modular Architecture <span className="text-brand-orange">Patterns</span></h2>
                             <p className="text-lg text-text-secondary leading-relaxed">
-                                We specialize in designing software that evolves. Our architectures ensure that different parts of your system can be updated or replaced independently, minimizing future technical debt.
+                                We specialize in designing software that evolves. Our architectures ensure that different parts of your system can be updated or replaced independently.
                             </p>
                             <div className="space-y-6">
                                 {architecturePatterns.map((pattern, idx) => (
@@ -128,7 +122,6 @@ export default function CapabilitiesPage() {
                             </div>
                         </div>
                         <div className="relative aspect-square max-w-lg mx-auto w-full">
-                            {/* Architecture Visual Mockup */}
                             <div className="absolute inset-0 bg-brand-navy rounded-[3rem] p-12 flex flex-col gap-8 overflow-hidden">
                                 <div className="flex justify-between items-center mb-4">
                                     <div className="w-8 h-8 rounded-full border-2 border-brand-orange" />
@@ -156,7 +149,6 @@ export default function CapabilitiesPage() {
                 </div>
             </section>
 
-            {/* Security & Compliance */}
             <section className="py-24">
                 <div className="container-custom">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
@@ -171,7 +163,7 @@ export default function CapabilitiesPage() {
                             <Lock className="w-12 h-12 text-brand-orange" />
                             <h3 className="text-2xl font-heading font-bold text-brand-navy">Data Privacy</h3>
                             <p className="text-text-secondary leading-relaxed">
-                                Compliance with GDPS & local data protection standards. We design systems that handle PII with the highest standards of confidentiality.
+                                GDPR-aligned data processing. We design systems that handle PII with the highest standards of confidentiality and compliance.
                             </p>
                         </div>
                         <div className="flex flex-col gap-6">
@@ -185,18 +177,18 @@ export default function CapabilitiesPage() {
                 </div>
             </section>
 
-            {/* CTA */}
+            {/* ✅ FIXED: "Download Technical PDF" → actual PDF download */}
             <section className="py-16 bg-brand-navy text-white">
                 <div className="container-custom flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
                     <div className="flex flex-col gap-2">
                         <h2 className="text-3xl font-heading font-bold">Request our Technical Briefing</h2>
                         <p className="text-text-muted">A deep dive into our engineering standards and internal SOPs.</p>
                     </div>
-                    <Link href="/request-proposal">
+                    <a href="/downloads/modulifyr-technical-briefing.pdf" download>
                         <Button size="lg" className="bg-brand-orange text-white hover:bg-brand-orange/90 group">
-                            Download Technical PDF <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                            Download Technical PDF <Download className="w-5 h-5 ml-2 group-hover:translate-y-0.5 transition-transform" />
                         </Button>
-                    </Link>
+                    </a>
                 </div>
             </section>
         </div>

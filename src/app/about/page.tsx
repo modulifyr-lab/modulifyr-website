@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
     title: "About Modulifyr | Modular Systems Engineering",
-    description: "Learn about Modulifyr's mission, engineering values, and our Kabul-based team of modular architecture specialists.",
+    description: "Learn about Modulifyr's mission, engineering values, and our Kathmandu-based team of modular architecture specialists.",
 };
 import { Card, CardTitle, CardDescription } from "@/components/ui/Card";
 import {
@@ -36,7 +36,7 @@ const team = [
     },
     {
         name: "Senior Engineer",
-        role: "Full-stack Modular specialist",
+        role: "Full-stack Modular Specialist",
         bio: "Expert in React, Node.js, and scaling high-performance digital platforms.",
         img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=2787"
     },
@@ -55,7 +55,9 @@ export default function AboutPage() {
             <section className="bg-bg-light py-24 border-b border-border-base relative overflow-hidden">
                 <div className="container-custom">
                     <div className="max-w-4xl">
-                        <h1 className="text-4xl md:text-6xl font-heading font-bold text-brand-navy mb-8 leading-tight">We Build the Systems That <span className="text-brand-orange">Evolve</span></h1>
+                        <h1 className="text-4xl md:text-6xl font-heading font-bold text-brand-navy mb-8 leading-tight">
+                            We Build the Systems That <span className="text-brand-orange">Evolve</span>
+                        </h1>
                         <p className="text-xl text-text-secondary leading-relaxed mb-6">
                             Modulifyr was founded with a single mission: to provide organizations with the modular digital infrastructure they need to scale without technical debt.
                         </p>
@@ -63,7 +65,10 @@ export default function AboutPage() {
                             Headquartered in <span className="font-bold text-brand-navy">Kathmandu, Nepal</span>, we serve organizations worldwide, delivering custom software systems built by contract and tailored for long-term growth.
                         </p>
                         <div className="flex flex-wrap gap-4">
-                            <Button size="lg">Our Technical Standards</Button>
+                            {/* ✅ FIXED: links to actual Technical Standards page */}
+                            <Link href="/about/technical-standards">
+                                <Button size="lg">Our Technical Standards</Button>
+                            </Link>
                             <Link href="/contact">
                                 <Button variant="outline" size="lg">Contact Our Team</Button>
                             </Link>
@@ -147,9 +152,12 @@ export default function AboutPage() {
                                     <li>• System Design Intern (Kathmandu Office)</li>
                                 </ul>
                             </div>
-                            <Button size="lg" className="w-fit bg-brand-orange hover:bg-brand-orange/90 group mt-4">
-                                View Career Openings <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                            </Button>
+                            {/* ✅ FIXED: links to actual /careers page */}
+                            <Link href="/careers" className="w-fit">
+                                <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 group">
+                                    View Career Openings <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                                </Button>
+                            </Link>
                         </div>
                         <div className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl grayscale group">
                             <Image

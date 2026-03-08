@@ -11,12 +11,11 @@ import {
     Layers,
     Settings,
     RefreshCw,
-    Search,
-    ShieldCheck,
-    Database,
     Cloud,
+    Database,
     Zap,
-    ArrowRight
+    ArrowRight,
+    Download
 } from "lucide-react";
 import Link from "next/link";
 
@@ -86,7 +85,6 @@ const services = [
 export default function ServicesPage() {
     return (
         <div className="flex flex-col w-full">
-            {/* Hero Section */}
             <section className="bg-brand-navy text-white py-24">
                 <div className="container-custom">
                     <div className="max-w-3xl">
@@ -98,7 +96,6 @@ export default function ServicesPage() {
                 </div>
             </section>
 
-            {/* Services Grid */}
             <section className="py-24">
                 <div className="container-custom">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -109,7 +106,6 @@ export default function ServicesPage() {
                                 </div>
                                 <CardTitle>{service.title}</CardTitle>
                                 <CardDescription className="mb-6 flex-grow">{service.desc}</CardDescription>
-
                                 <div className="space-y-4 pt-6 border-t border-border-base">
                                     <div>
                                         <span className="text-xs font-bold text-text-muted uppercase tracking-wider mb-2 block">Key Deliverables</span>
@@ -122,7 +118,7 @@ export default function ServicesPage() {
                                         </ul>
                                     </div>
                                     <div className="flex justify-between items-center text-xs font-semibold">
-                                        <span className="text-text-muted">Typical Timeline: {service.time}</span>
+                                        <span className="text-text-muted">Timeline: {service.time}</span>
                                         <span className="bg-bg-secondary px-2 py-1 rounded text-brand-navy">{service.size}</span>
                                     </div>
                                 </div>
@@ -132,7 +128,7 @@ export default function ServicesPage() {
                 </div>
             </section>
 
-            {/* Capabilities CTA */}
+            {/* Capabilities CTA — ✅ FIXED: Download links to actual PDF */}
             <section className="py-24 bg-bg-secondary">
                 <div className="container-custom">
                     <div className="bg-white border border-border-base rounded-3xl p-8 md:p-16 shadow-xl flex flex-col md:flex-row items-center justify-between gap-12">
@@ -142,7 +138,12 @@ export default function ServicesPage() {
                                 Download our detailed capability deck to learn more about our engineering standards, tech stack, and how we handle complex enterprise requirements.
                             </p>
                             <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-                                <Button>Download Capability Deck</Button>
+                                {/* ✅ FIXED: actual PDF download */}
+                                <a href="/downloads/modulifyr-capability-deck.pdf" download>
+                                    <Button className="group">
+                                        Download Capability Deck <Download className="w-4 h-4 ml-2 group-hover:translate-y-0.5 transition-transform" />
+                                    </Button>
+                                </a>
                                 <Link href="/request-proposal">
                                     <Button variant="outline">Request Proposal</Button>
                                 </Link>
@@ -165,7 +166,6 @@ export default function ServicesPage() {
                 </div>
             </section>
 
-            {/* Trust Quote */}
             <section className="py-24">
                 <div className="container-custom text-center">
                     <blockquote className="max-w-4xl mx-auto italic text-2xl md:text-3xl text-brand-navy leading-relaxed font-heading">
