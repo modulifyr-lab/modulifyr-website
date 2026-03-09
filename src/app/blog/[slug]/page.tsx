@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { posts } from "../page";
-import { ArrowLeft, ArrowRight, Clock } from "lucide-react";
+import { ArrowLeft, ArrowRight, Clock, User } from "lucide-react";
 
 type Props = { params: { slug: string } };
 
@@ -17,6 +17,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {
         title: `${post.title} | Modulifyr Blog`,
         description: post.excerpt,
+        openGraph: {
+            title: post.title,
+            description: post.excerpt,
+            type: "article",
+            publishedTime: post.dateISO,
+            authors: ["Modulifyr Engineering"],
+        }
     };
 }
 
@@ -37,7 +44,29 @@ export default function BlogPostPage({ params }: Props) {
     const prev = posts[currentIndex - 1] ?? null;
     const next = posts[currentIndex + 1] ?? null;
 
-    // Parse the content into sections (naive markdown-ish)
+    const articleSchema = {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": post.title,
+        "description": post.excerpt,
+        "datePublished": post.dateISO,
+        "dateModified": post.dateISO,
+        "author": {
+            "@type": "Organization",
+            "name": "Modulifyr Engineering",
+            "url": "https://modulifyr.com"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Modulifyr",
+            "url": "https://modulifyr.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://modulifyr.com/company-logo.png"
+            }
+        }
+    };
+
     const sections = post.content
         .trim()
         .split("\n\n")
@@ -51,6 +80,11 @@ export default function BlogPostPage({ params }: Props) {
 
     return (
         <div className="flex flex-col w-full">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+            />
+
             {/* Hero */}
             <section className="bg-brand-navy text-white py-20">
                 <div className="container-custom max-w-4xl">
@@ -66,7 +100,7 @@ export default function BlogPostPage({ params }: Props) {
                         <span>·</span>
                         <span>{post.date}</span>
                         <span>·</span>
-                        <span>Modulifyr Engineering</span>
+                        <span className="flex items-center gap-1.5"><User className="w-4 h-4" /> Modulifyr Engineering Team</span>
                     </div>
                 </div>
             </section>
@@ -95,6 +129,16 @@ export default function BlogPostPage({ params }: Props) {
                                         )
                                     ))}
                                 </div>
+                                {/* Author footer */}
+                                <div className="mt-12 pt-8 border-t border-border-base flex items-center gap-4">
+                                    <div className="w-10 h-10 bg-brand-orange/10 rounded-full flex items-center justify-center">
+                                        <User className="w-5 h-5 text-brand-orange" />
+                                    </div>
+                                    <div>
+                                        <p className="text-sm font-bold text-brand-navy">Modulifyr Engineering Team</p>
+                                        <p className="text-xs text-text-muted">Birtamode, Jhapa, Nepal · modulifyr.com</p>
+                                    </div>
+                                </div>
                             </div>
 
                             {/* Navigation */}
@@ -117,9 +161,9 @@ export default function BlogPostPage({ params }: Props) {
                         {/* Sidebar */}
                         <aside className="flex flex-col gap-6">
                             <div className="bg-brand-navy text-white rounded-3xl p-7 sticky top-28">
-                                <h3 className="font-heading font-bold text-lg mb-3">Want to work with us?</h3>
+                                <h3 className="font-heading font-bold text-lg mb-3">Put this into practice</h3>
                                 <p className="text-text-muted text-sm leading-relaxed mb-5">
-                                    Put these patterns to work in your organization with a custom-built modular system.
+                                    We build custom systems for businesses in Nepal and globally. Let's talk about your project.
                                 </p>
                                 <Link href="/request-proposal">
                                     <Button className="w-full" size="sm">Request Proposal</Button>
