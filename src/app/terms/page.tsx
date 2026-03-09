@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 const sections = [
     {
         title: "1. Acceptance of Terms",
-        body: "By accessing modulifyr.vercel.app or engaging with any Modulifyr services, you agree to these Terms of Service. If you do not agree, please do not use our site. These Terms apply to all visitors, clients, and job applicants."
+        body: "By accessing modulifyr.com or engaging with any Modulifyr services, you agree to these Terms of Service. If you do not agree, please do not use our site. These Terms apply to all visitors, clients, and job applicants."
     },
     {
         title: "2. Services Description",
@@ -45,7 +45,7 @@ const sections = [
     },
     {
         title: "10. Governing Law",
-        body: "These Terms are governed by the laws of Nepal. Disputes will first be subject to good-faith negotiation. If unresolved, disputes shall be submitted to binding arbitration in Kathmandu, Nepal. International clients may mutually agree on alternative dispute resolution mechanisms."
+        body: "These Terms are governed by the laws of Nepal. Disputes will first be subject to good-faith negotiation. If unresolved, disputes shall be submitted to binding arbitration in Jhapa, Nepal. International clients may mutually agree on alternative dispute resolution mechanisms."
     },
     {
         title: "11. Changes to Terms",
@@ -53,7 +53,7 @@ const sections = [
     },
     {
         title: "12. Contact",
-        body: "For questions about these Terms, contact us at contact@modulifyr.com. Address: Modulifyr Engineering Center, Kathmandu, Nepal. Response time: within 5 business days."
+        body: "For questions about these Terms, contact us at contact@modulifyr.com. Address: Modulifyr Engineering, Birtamode, Jhapa, Province No. 1, Nepal. Response time: within 5 business days."
     }
 ];
 
