@@ -19,7 +19,7 @@ export function Footer() {
                             <span className="font-heading font-bold text-xl tracking-tight">Modulifyr</span>
                         </Link>
                         <p className="text-text-muted text-sm leading-relaxed max-w-xs">
-                            Modulifyr is a custom software development company specializing in modular systems designed for long-term scalability and engineering excellence.
+                            Custom modular software systems for SMBs that have outgrown off-the-shelf tools. Based in Birtamode, Jhapa, Nepal. Building for clients worldwide.
                         </p>
                     </div>
 
@@ -31,6 +31,7 @@ export function Footer() {
                             <Link href="/work" className="text-sm text-text-muted hover:text-brand-orange">Work</Link>
                             <Link href="/resources" className="text-sm text-text-muted hover:text-brand-orange">Resources</Link>
                             <Link href="/blog" className="text-sm text-text-muted hover:text-brand-orange">Blog</Link>
+                            <Link href="/careers" className="text-sm text-text-muted hover:text-brand-orange">Careers</Link>
                         </div>
                         <div className="flex flex-col gap-3">
                             <h4 className="font-heading font-semibold text-white mb-2">Services</h4>
@@ -38,14 +39,18 @@ export function Footer() {
                             <Link href="/process" className="text-sm text-text-muted hover:text-brand-orange">Process</Link>
                             <Link href="/capabilities" className="text-sm text-text-muted hover:text-brand-orange">Tech Stack</Link>
                             <Link href="/pricing" className="text-sm text-text-muted hover:text-brand-orange">Pricing</Link>
+                            <Link href="/industries" className="text-sm text-text-muted hover:text-brand-orange">Industries</Link>
                         </div>
                     </div>
 
                     {/* Column 3: Contact */}
                     <div className="flex flex-col gap-4">
                         <h4 className="font-heading font-semibold text-white">Contact</h4>
-                        <p className="text-sm text-text-muted">Kathmandu, Nepal</p>
-                        <p className="text-sm text-text-muted">Business Inquiries: contact@modulifyr.com</p>
+                        <p className="text-sm text-text-muted">Birtamode, Jhapa, Nepal</p>
+                        <a href="mailto:contact@modulifyr.com" className="text-sm text-text-muted hover:text-brand-orange transition-colors">
+                            contact@modulifyr.com
+                        </a>
+                        <p className="text-xs text-text-muted mt-1">Response within 1 business day</p>
                         <div className="flex gap-4 mt-2">
                             <Link href="/privacy" className="text-xs text-text-muted hover:text-white">Privacy Policy</Link>
                             <Link href="/terms" className="text-xs text-text-muted hover:text-white">Terms</Link>
@@ -53,8 +58,9 @@ export function Footer() {
                     </div>
                 </div>
 
-                <div className="mt-16 pt-8 border-t border-white/10 text-center text-xs text-text-muted">
-                    © {new Date().getFullYear()} Modulifyr. All rights reserved. Built with Engineering-first philosophy.
+                <div className="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-text-muted">
+                    <span>© {new Date().getFullYear()} Modulifyr. All rights reserved. Birtamode, Jhapa, Nepal.</span>
+                    <span>Custom software development for businesses in Nepal and worldwide.</span>
                 </div>
             </div>
         </footer>
