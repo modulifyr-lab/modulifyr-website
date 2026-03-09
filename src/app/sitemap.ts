@@ -15,10 +15,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/about/technical-standards`,     changeFrequency: 'monthly', priority: 0.6 },
     { url: `${base}/careers`,                       changeFrequency: 'weekly',  priority: 0.7 },
     { url: `${base}/blog`,                          changeFrequency: 'weekly',  priority: 0.8 },
-    
-    { url: `${base}/resources`,                     changeFrequency: 'weekly',  priority: 0.7 }
+    { url: `${base}/resources`,                     changeFrequency: 'weekly',  priority: 0.7 },
     { url: `${base}/request-proposal`,              changeFrequency: 'monthly', priority: 0.9 },
     { url: `${base}/privacy`,                       changeFrequency: 'yearly',  priority: 0.3 },
-    { url: `${base}/terms`,                         changeFrequency: 'yearly',  priority: 0.3 },
+    { url: `${base}/terms`,                         changeFrequency: 'yearly',  priority: 0.3 }
   ]
 }
