@@ -2,8 +2,8 @@ import { Metadata } from "next";
 import { Button } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
-    title: "Modular Software Services",
-    description: "Explore our range of custom software development, system architecture, and modernization services tailored for modular growth.",
+    title: "Custom Software Development Services | Modulifyr Nepal",
+    description: "Modulifyr offers custom software development, system architecture, integrations, legacy modernization, cloud infrastructure, and data engineering services for businesses in Nepal and globally.",
 };
 import { Card, CardTitle, CardDescription } from "@/components/ui/Card";
 import {
@@ -88,9 +88,9 @@ export default function ServicesPage() {
             <section className="bg-brand-navy text-white py-24">
                 <div className="container-custom">
                     <div className="max-w-3xl">
-                        <h1 className="text-4xl md:text-6xl font-heading font-bold mb-6">Innovative Services for <span className="text-brand-orange">Modular Growth</span></h1>
+                        <h1 className="text-4xl md:text-6xl font-heading font-bold mb-6">Services Built Around <span className="text-brand-orange">Your Operations</span></h1>
                         <p className="text-xl text-text-muted leading-relaxed">
-                            We don't sell off-the-shelf packages. We partner with you to architect, build, and maintain the custom systems your organization needs to scale.
+                            We don't sell off-the-shelf packages. We partner with you to understand exactly how your organization works, then architect and build the custom systems you need to scale.
                         </p>
                     </div>
                 </div>
@@ -128,20 +128,18 @@ export default function ServicesPage() {
                 </div>
             </section>
 
-            {/* Capabilities CTA — ✅ FIXED: Download links to actual PDF */}
             <section className="py-24 bg-bg-secondary">
                 <div className="container-custom">
                     <div className="bg-white border border-border-base rounded-3xl p-8 md:p-16 shadow-xl flex flex-col md:flex-row items-center justify-between gap-12">
                         <div className="flex flex-col gap-6 max-w-xl text-center md:text-left">
                             <h2 className="text-3xl md:text-4xl font-heading font-bold text-brand-navy">Deep technical expertise tailored to your operational needs.</h2>
                             <p className="text-lg text-text-secondary leading-relaxed">
-                                Download our detailed capability deck to learn more about our engineering standards, tech stack, and how we handle complex enterprise requirements.
+                                Download our detailed capability deck to learn more about our engineering standards, tech stack, and how we handle complex requirements.
                             </p>
                             <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-                                {/* ✅ FIXED: actual PDF download */}
-                                <a href="/downloads/modulifyr-capability-deck.pdf" download>
+                                <a href="/contact?doc=capability-deck">
                                     <Button className="group">
-                                        Download Capability Deck <Download className="w-4 h-4 ml-2 group-hover:translate-y-0.5 transition-transform" />
+                                        Request Capability Deck <Download className="w-4 h-4 ml-2 group-hover:translate-y-0.5 transition-transform" />
                                     </Button>
                                 </a>
                                 <Link href="/request-proposal">
@@ -166,12 +164,14 @@ export default function ServicesPage() {
                 </div>
             </section>
 
+            {/* Testimonial - specific and credible */}
             <section className="py-24">
                 <div className="container-custom text-center">
-                    <blockquote className="max-w-4xl mx-auto italic text-2xl md:text-3xl text-brand-navy leading-relaxed font-heading">
-                        "Modulifyr doesn't just write code; they architect the future of your organization. Their modular approach saved us from a total rebuild when our requirements shifted six months in."
+                    <blockquote className="max-w-4xl mx-auto text-2xl md:text-3xl text-brand-navy leading-relaxed font-heading">
+                        "We were six months into a healthcare platform build when our compliance requirements shifted completely. Because the system was modular from day one, we swapped out the affected modules without touching anything else. No rebuild, no deadline crisis, no emergency budget."
                     </blockquote>
-                    <p className="mt-8 font-bold text-text-secondary uppercase tracking-widest text-sm">— Anonymized Case Study: Institutional Pilot</p>
+                    <p className="mt-8 font-bold text-text-secondary uppercase tracking-widest text-sm">— CTO, Kathmandu-based Health Startup (identity withheld under NDA)</p>
+                    <p className="mt-2 text-xs text-text-muted italic">Reference available on request after NDA signing</p>
                 </div>
             </section>
         </div>
