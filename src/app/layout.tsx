@@ -19,8 +19,40 @@ export const metadata: Metadata = {
     default: "Modulifyr | Custom Software Systems & Modular Architecture",
     template: "%s | Modulifyr"
   },
-  description: "Modulifyr designs and builds modular software systems for organizations requiring flexibility, scalability, and long-term reliability. Custom engineering for B2B and enterprise.",
-  keywords: ["custom software development", "modular architecture", "system design", "enterprise software", "Kathmandu software company", "modular systems", "B2B software solutions"],
+  description: "Modulifyr designs and builds modular software systems for organizations requiring flexibility, scalability, and long-term reliability. Custom software development company based in Birtamode, Nepal serving businesses globally.",
+  keywords: [
+    "custom software development Nepal",
+    "software company Birtamode",
+    "software company Nepal",
+    "modular software systems Nepal",
+    "ERP system Nepal",
+    "custom ERP Nepal",
+    "school management system Nepal",
+    "hospital management software Nepal",
+    "retail POS system Nepal",
+    "modular architecture",
+    "system design Nepal",
+    "enterprise software Nepal",
+    "B2B software solutions Nepal",
+    "custom software Jhapa",
+    "software development Birtamode Jhapa",
+    "business software Nepal SME",
+    "custom software development",
+    "software company",
+    "modular software systems",
+    "ERP system",
+    "custom ERP",
+    "school management system",
+    "hospital management software",
+    "retail POS system",
+    "modular architecture",
+    "system design",
+    "enterprise software",
+    "B2B software solutions",
+    "custom software",
+    "software development",
+    "business software SME"
+  ],
   authors: [{ name: "Modulifyr Engineering" }],
   creator: "Modulifyr",
   metadataBase: new URL("https://modulifyr.com"),
@@ -30,7 +62,7 @@ export const metadata: Metadata = {
     url: "https://modulifyr.com",
     siteName: "Modulifyr",
     title: "Modulifyr | Custom Software Systems Built to Scale",
-    description: "Engineering tailored solutions for complex operational requirements with modular architecture.",
+    description: "Engineering tailored modular software solutions for businesses across Nepal and worldwide. Based in Birtamode, Jhapa.",
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Modulifyr - Custom Modular Systems" }]
   },
   twitter: {
@@ -45,6 +77,43 @@ export const metadata: Metadata = {
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareCompany",
+  "name": "Modulifyr",
+  "url": "https://modulifyr.com",
+  "logo": "https://modulifyr.com/company-logo.png",
+  "description": "Custom modular software systems for small and medium-sized businesses in education, healthcare, retail, commerce, and IT.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Birtamode",
+    "addressRegion": "Jhapa",
+    "addressCountry": "NP"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "contact@modulifyr.com",
+    "contactType": "sales",
+    "availableLanguage": ["English", "Nepali"]
+  },
+  "areaServed": "Worldwide",
+  "foundingLocation": {
+    "@type": "Place",
+    "name": "Birtamode, Jhapa, Nepal"
+  },
+  "serviceType": [
+    "Custom Software Development",
+    "System Architecture Consulting",
+    "ERP Development",
+    "Legacy System Modernization",
+    "Cloud Infrastructure"
+  ],
+  "sameAs": [
+    "https://www.linkedin.com/company/modulifyr",
+    "https://github.com/Modulifyr"
+  ]
+};
 
 export default function RootLayout({
   children,
@@ -61,6 +130,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-TX4PZBKK');`}
         </Script>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
       </head>
       <body
         className={`${inter.variable} ${poppins.variable} antialiased font-sans transition-colors duration-300`}
