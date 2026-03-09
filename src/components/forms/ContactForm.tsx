@@ -105,13 +105,13 @@ export function ContactForm() {
                             <div className="flex flex-col gap-6">
                                 <h4 className="font-heading font-bold text-brand-navy">Follow Our Work</h4>
                                 <div className="flex gap-4">
-                                    <Link href="#" className="w-12 h-12 border border-border-base rounded-full flex items-center justify-center hover:bg-brand-navy hover:text-white transition-colors">
+                                    <Link href="https://www.linkedin.com/company/modulifyr/" className="w-12 h-12 border border-border-base rounded-full flex items-center justify-center hover:bg-brand-navy hover:text-white transition-colors">
                                         <Linkedin className="w-5 h-5" />
                                     </Link>
-                                    <Link href="#" className="w-12 h-12 border border-border-base rounded-full flex items-center justify-center hover:bg-brand-navy hover:text-white transition-colors">
+                                    <Link href="https://x.com/modulifyr" className="w-12 h-12 border border-border-base rounded-full flex items-center justify-center hover:bg-brand-navy hover:text-white transition-colors">
                                         <Twitter className="w-5 h-5" />
                                     </Link>
-                                    <Link href="#" className="w-12 h-12 border border-border-base rounded-full flex items-center justify-center hover:bg-brand-navy hover:text-white transition-colors">
+                                    <Link href="https://github.com/Modulifyr" className="w-12 h-12 border border-border-base rounded-full flex items-center justify-center hover:bg-brand-navy hover:text-white transition-colors">
                                         <Github className="w-5 h-5" />
                                     </Link>
                                 </div>
