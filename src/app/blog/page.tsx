@@ -5,19 +5,118 @@ import { Card, CardTitle } from "@/components/ui/Card";
 import { ArrowRight, Clock } from "lucide-react";
 
 export const metadata: Metadata = {
-    title: "Engineering Blog | Modulifyr",
-    description: "Technical insights, architecture patterns, and engineering perspectives from the Modulifyr team.",
+    title: "Engineering Blog | Modulifyr — Software Insights for Nepal & Beyond",
+    description: "Technical insights, architecture patterns, and practical engineering perspectives from the Modulifyr team in Birtamode, Nepal.",
 };
 
 export const posts = [
+    {
+        slug: "custom-software-nepal-sme",
+        title: "Why Nepali SMEs Are Replacing Off-the-Shelf Software With Custom Systems",
+        excerpt: "Generic ERP and management software wasn't designed for how businesses in Nepal actually operate. Here's what we've learned building custom systems for schools, clinics, and retailers across the country.",
+        category: "Strategy",
+        readTime: "7 min read",
+        date: "March 2026",
+        dateISO: "2026-03-01",
+        featured: true,
+        content: `
+Most small and medium businesses in Nepal reach the same point eventually. They start with a spreadsheet, graduate to Tally or some off-the-shelf management tool, and within two or three years they're running operations on five different disconnected systems — none of which talk to each other.
+
+We've seen this in Jhapa-based retailers managing inventory in Excel while billing in one system and tracking staff in another. We've seen schools in Kathmandu using a student information system that can't generate the report format the government exam board requires. We've seen clinics in Pokhara where the appointment booking system doesn't connect to the billing module because they're from two different vendors.
+
+**The Problem Isn't the Software Category. It's the Fit.**
+
+Off-the-shelf software is built for a generic business. It's built for the average. And the average business in Nepal — in terms of workflow, language requirements, integration needs, and regulatory environment — is not the same as the average business in the US or India that these tools were originally designed for.
+
+Custom software is not about prestige. It's about fit. A custom system built around exactly how your procurement team works, exactly what your finance department needs to report, and exactly which third-party services you're already using, will be used properly. Generic software gets worked around.
+
+**The Cost Comparison Most People Get Wrong**
+
+The immediate cost of custom software looks higher. A license for an off-the-shelf system might be NPR 50,000 per year. A custom build might start at NPR 500,000.
+
+But that comparison misses the hidden costs of a bad-fit system: staff time spent on workarounds, manual data entry between disconnected tools, the cost of an ERP "consultant" who configures the system for six months and leaves, and — the most expensive one — the cost of eventually rebuilding on a proper foundation after two years of accumulating technical debt.
+
+We've helped businesses calculate this honestly. In most cases where a company has been using an ill-fitting system for two or more years, the true accumulated cost already exceeds what a custom build would have cost.
+
+**What Modular Architecture Changes**
+
+The traditional argument against custom software is that it's expensive to change. You build it for your operations today, and in three years when your operations look different, you have to rebuild.
+
+Modular architecture addresses this directly. When we build a system, each function — inventory management, billing, HR, reporting — is a discrete module with clean boundaries. When your billing requirements change (as they did for several of our clients when Nepal's VAT reporting requirements were updated), we update the billing module. The rest of the system doesn't move.
+
+This is why we can build custom systems that are actually cost-competitive with off-the-shelf alternatives over a five-year horizon, even for SMBs with modest budgets.
+
+**What to Look For in a Custom Development Partner in Nepal**
+
+If you're evaluating custom software development in Nepal, the questions that matter: Do they use version control? (Surprising how many don't.) Do they write tests? Can they show you a system they built that's still running two years later? Do they provide source code ownership? Can they explain their architecture decisions in plain language?
+
+The answers to those questions will tell you more than any portfolio showcase.
+        `
+    },
+    {
+        slug: "erp-schools-colleges-nepal",
+        title: "ERP Systems for Schools and Colleges in Nepal: What Most Vendors Won't Tell You",
+        excerpt: "Having built student information and institutional management systems for educational institutions across Nepal, here's the honest guide to what works, what doesn't, and what questions to ask before signing any contract.",
+        category: "Strategy",
+        readTime: "9 min read",
+        date: "February 2026",
+        dateISO: "2026-02-15",
+        featured: false,
+        content: `
+Education is one of the most common sectors where we see technology failing organizations in Nepal. Schools and colleges invest in management software and then spend the next three years managing the software instead of the other way around.
+
+Having built custom student information systems, library management tools, and exam and result platforms for educational institutions across Nepal, we've developed a clear picture of where things go wrong — and how to avoid it.
+
+**The Most Common Failure Mode: Buying the Demo**
+
+Most ERP vendors targeting Nepal's education sector sell on demo impressions. The demo shows a beautiful dashboard, a clean student profile page, and a one-click result sheet generator. It looks exactly like what you need.
+
+Then you go live. Your exam numbering system is slightly different from the vendor's assumptions. Your fee structure has five subcategories the system doesn't support. The result sheet format doesn't match what your board requires. And the vendor's support line takes four days to respond.
+
+This happens because the demo was built for the average school. Your school isn't average — it has specific workflows, specific formats, and specific integrations that have developed over years of operation.
+
+**The Integration Question Nobody Asks in the First Meeting**
+
+Before any school signs a contract for management software, they should ask: what does this system connect to, and what does it not connect to?
+
+In practice, a school's digital operations span: student records, fee collection (often connected to bank or eSewa), exam scheduling, result generation (which may need to interface with national board formats), attendance tracking, library management, and staff HR.
+
+Most vendor systems handle two or three of these well and the rest partially or not at all. You end up paying for a system that handles 60% of your needs and still requires manual processes for the other 40%.
+
+**What a Properly Modular System Looks Like for a School**
+
+When we build institutional management systems, we structure them as independent modules that share a common data layer. The student profile module manages core student data. The fee module handles billing and payment tracking. The exam module manages schedules, marks entry, and result generation. The HR module handles staff records.
+
+Because they share data, you don't re-enter a student's name in three places. Because they're modular, you can add a new module — say, a parent communication portal — without rebuilding the whole system. Because the data layer is yours, you can generate any report format you need, including custom formats for specific boards.
+
+**The Government Compliance Factor**
+
+This is the piece most vendors underestimate for Nepal specifically. Reporting requirements from the Education Ministry, SLC/SEE boards, and local municipality offices change regularly. A rigid system that can't adapt to new report formats becomes a serious operational problem every time a new directive comes in.
+
+A modular system lets you update the reporting module without disrupting the rest of the platform. A good development partner will handle this as maintenance, not as a new project.
+
+**Price Anchoring: What to Actually Budget**
+
+For a school of 500-1500 students, a properly built custom management system covering core modules (student records, fee management, exam and results, attendance) typically runs NPR 400,000 – 900,000 as an initial build, with annual maintenance of 15-20% of that figure.
+
+Cheaper options exist. Some will work fine for very small, simple institutions. But for any school handling exam boards, government reporting, or more than a thousand students, the cost of working around a bad-fit system will exceed the cost difference within 18 months.
+
+**Questions to Ask Any ERP Vendor in Nepal**
+
+Can you show us a school using this system that has been running it for three years or more? Can we speak with their admin staff directly? What happens when a reporting requirement changes — how do we get an update and what does it cost? Who owns the data and the database? If we ever move to a different system, can we export everything? Do you provide source code for the custom parts of our implementation?
+
+If a vendor is reluctant to answer any of those questions clearly, treat that as important information.
+        `
+    },
     {
         slug: "modular-vs-monolith",
         title: "Modular Monolith vs. Microservices: Choosing the Right Architecture",
         excerpt: "A practical decision framework for organizations evaluating whether to adopt microservices or a well-structured modular monolith — and why the answer is almost never black and white.",
         category: "Architecture",
         readTime: "8 min read",
-        date: "February 2026",
-        featured: true,
+        date: "January 2026",
+        dateISO: "2026-01-20",
+        featured: false,
         content: `
 Most organizations approach the monolith vs. microservices question as a binary choice. It is not. The real question is: what level of modularity does your team's operational maturity actually support?
 
@@ -46,7 +145,8 @@ This approach is what we call "architecture-forward development." Build for chan
         excerpt: "How we approach phased system replacement — keeping the old system live while incrementally migrating to new modular infrastructure, module by module.",
         category: "Engineering",
         readTime: "12 min read",
-        date: "January 2026",
+        date: "December 2025",
+        dateISO: "2025-12-10",
         featured: false,
         content: `
 Legacy modernization is one of the most technically and organizationally complex engineering challenges an organization can face. The stakes are high: a failed migration can bring down critical operations. The path forward requires discipline.
@@ -80,7 +180,8 @@ The legacy system shrinks from the outside in until nothing remains.
         excerpt: "The patterns we use to design APIs that serve as clean contracts between modules — covering versioning strategies, error standardization, and hypermedia controls.",
         category: "Backend",
         readTime: "10 min read",
-        date: "December 2025",
+        date: "November 2025",
+        dateISO: "2025-11-05",
         featured: false,
         content: `
 In a modular system, APIs are not just technical interfaces — they are contracts between teams and between system components. A poorly designed API creates coupling. A well-designed API enables independent evolution.
@@ -110,7 +211,8 @@ For each client type (web, mobile, third-party), we create a Backend for Fronten
         excerpt: "A data-backed look at how unmanaged technical debt compounds over time, and the inflection points at which organizations should prioritize architectural investment.",
         category: "Strategy",
         readTime: "7 min read",
-        date: "November 2025",
+        date: "October 2025",
+        dateISO: "2025-10-15",
         featured: false,
         content: `
 Technical debt is often framed as a technical problem. It is not. It is a business problem. And like financial debt, it compounds.
@@ -138,7 +240,8 @@ At that point, the cost of modernization — even accounting for the disruption 
         excerpt: "Site reliability engineering isn't just for Google-scale systems. Here's how we implement SRE fundamentals for startups and scale-ups without over-engineering.",
         category: "DevOps",
         readTime: "9 min read",
-        date: "October 2025",
+        date: "September 2025",
+        dateISO: "2025-09-08",
         featured: false,
         content: `
 Site Reliability Engineering emerged from Google's need to operate systems at planetary scale. But the underlying principles — defining reliability as a product feature, basing operational decisions on data, and treating infrastructure as code — are valuable at any scale.
@@ -166,7 +269,8 @@ Even small teams need a lightweight incident management protocol: a clear severi
         excerpt: "Our experience adopting React Server Components in production enterprise dashboards — performance wins, architectural shifts, and the tradeoffs nobody talks about.",
         category: "Frontend",
         readTime: "11 min read",
-        date: "September 2025",
+        date: "August 2025",
+        dateISO: "2025-08-20",
         featured: false,
         content: `
 React Server Components represent the most significant architectural shift in React since hooks. After running RSC in production enterprise applications for over a year, here's what we've actually learned.
@@ -217,7 +321,7 @@ export default function BlogPage() {
                             Engineering <span className="text-brand-orange">Insights</span>
                         </h1>
                         <p className="text-xl text-text-secondary leading-relaxed">
-                            Architecture decisions, engineering patterns, and technical perspectives from the Modulifyr team.
+                            Architecture decisions, engineering patterns, and practical perspectives from the Modulifyr team — including what we've learned building custom software for businesses in Nepal.
                         </p>
                     </div>
                 </div>
@@ -232,7 +336,7 @@ export default function BlogPage() {
                             <div className="aspect-video bg-brand-navy rounded-3xl flex items-center justify-center relative overflow-hidden">
                                 <div className="absolute inset-0 bg-gradient-to-br from-brand-navy via-brand-navy/90 to-brand-teal/30" />
                                 <div className="relative z-10 text-center p-8">
-                                    <p className="text-brand-teal font-bold text-sm uppercase tracking-widest">Architecture Series</p>
+                                    <p className="text-brand-teal font-bold text-sm uppercase tracking-widest">Nepal Business Series</p>
                                 </div>
                             </div>
                             <div className="flex flex-col gap-5">
@@ -290,7 +394,7 @@ export default function BlogPage() {
             <section className="py-20 bg-brand-navy text-white">
                 <div className="container-custom text-center max-w-2xl">
                     <h2 className="text-3xl font-heading font-bold mb-4">Get New Articles in Your Inbox</h2>
-                    <p className="text-text-muted mb-8">Engineering insights delivered monthly. No spam.</p>
+                    <p className="text-text-muted mb-8">Engineering and business software insights, monthly. No spam.</p>
                     <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
                         <input
                             type="email"
