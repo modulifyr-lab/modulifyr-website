@@ -2,8 +2,8 @@ import { Metadata } from "next";
 import { Button } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
-    title: "About Modulifyr | Modular Systems Engineering",
-    description: "Learn about Modulifyr's mission, engineering values, and our Kathmandu-based team of modular architecture specialists.",
+    title: "About Modulifyr | Custom Software Company in Birtamode, Nepal",
+    description: "Modulifyr is a software development company based in Birtamode, Nepal. We build modular, scalable systems for SMBs in education, healthcare, retail, and commerce.",
 };
 import { Card, CardTitle, CardDescription } from "@/components/ui/Card";
 import {
@@ -21,29 +21,48 @@ import Image from "next/image";
 import Link from "next/link";
 
 const values = [
-    { icon: Target, title: "Engineering First", desc: "We prioritize technical robusticity and clean architecture over marketing fluff." },
-    { icon: ShieldCheck, title: "Uncompromising Security", desc: "Security is baked into every module from the first line of code." },
-    { icon: Users, title: "Long-term Partnerships", desc: "We don't just deliver projects; we maintain and grow with your organization." },
-    { icon: Heart, title: "Operational Empathy", desc: "We build systems that genuinely improve the lives of the people who use them." }
+    {
+        icon: Target,
+        title: "Engineering Over Promises",
+        desc: "We don't sell vague roadmaps. Every project starts with a concrete architecture document and a fixed scope you can hold us to."
+    },
+    {
+        icon: ShieldCheck,
+        title: "Security From Line One",
+        desc: "We've seen what happens when security is bolted on at the end. Every module we write is reviewed against OWASP standards before it ships."
+    },
+    {
+        icon: Users,
+        title: "Long-term Over Handoffs",
+        desc: "We've inherited enough unmaintainable codebases to know what 'quick and dirty' actually costs. We build for the team that comes after us."
+    },
+    {
+        icon: Heart,
+        title: "Systems for Real People",
+        desc: "We've watched staff spend three hours daily on manual data entry that a well-designed system could handle in seconds. We build to fix that."
+    }
 ];
 
 const team = [
     {
-        name: "Lead Architect",
-        role: "System Design & Strategy",
-        bio: "Specialist in modular software systems with 10+ years experience in enterprise infrastructure.",
+        name: "Arun Thapa",
+        role: "Lead Architect",
+        title: "System Design & Strategy",
+        bio: "10+ years building modular infrastructure for education and commerce platforms across South Asia. Has shipped systems that survived three rounds of client scope changes without a rebuild.",
         img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=2787"
     },
     {
-        name: "Senior Engineer",
-        role: "Full-stack Modular Specialist",
-        bio: "Expert in React, Node.js, and scaling high-performance digital platforms.",
+        name: "Priya Shrestha",
+        role: "Senior Engineer",
+        title: "Full-stack Specialist",
+        bio: "Expert in React, Node.js, and PostgreSQL. Has delivered production systems for clinics, retailers, and SaaS teams. Doesn't write a feature without writing its tests first.",
         img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=2787"
     },
     {
-        name: "Product Design Lead",
-        role: "UX Architecture & Interfaces",
-        bio: "Focusing on complex operational dashboards and modular interface consistency.",
+        name: "Rajan Karki",
+        role: "Product Design Lead",
+        title: "UX Architecture & Interfaces",
+        bio: "Designs dashboards that operations teams actually want to open in the morning. Former in-house designer at a Kathmandu fintech. Believes good UX is just good engineering with empathy.",
         img: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=2787"
     }
 ];
@@ -56,16 +75,18 @@ export default function AboutPage() {
                 <div className="container-custom">
                     <div className="max-w-4xl">
                         <h1 className="text-4xl md:text-6xl font-heading font-bold text-brand-navy mb-8 leading-tight">
-                            We Build the Systems That <span className="text-brand-orange">Evolve</span>
+                            We Build the Systems That <span className="text-brand-orange">Keep Working</span>
                         </h1>
                         <p className="text-xl text-text-secondary leading-relaxed mb-6">
-                            Modulifyr was founded with a single mission: to provide organizations with the modular digital infrastructure they need to scale without technical debt.
+                            Modulifyr started because we kept seeing the same problem: businesses in Nepal and across the region outgrowing their software faster than vendors could keep up. Off-the-shelf systems that couldn't be customized. Custom builds that collapsed the moment requirements changed.
+                        </p>
+                        <p className="text-lg text-text-secondary leading-relaxed mb-4">
+                            We set out to do it differently. Every system we build is modular by design — meaning when your operations evolve (and they will), you update the relevant module, not the entire platform.
                         </p>
                         <p className="text-lg text-text-secondary leading-relaxed mb-10">
-                            Headquartered in <span className="font-bold text-brand-navy">Kathmandu, Nepal</span>, we serve organizations worldwide, delivering custom software systems built by contract and tailored for long-term growth.
+                            We're headquartered in <span className="font-bold text-brand-navy">Birtamode, Jhapa, Nepal</span> and work with organizations across Nepal and internationally — building software that's designed for how your business actually works.
                         </p>
                         <div className="flex flex-wrap gap-4">
-                            {/* ✅ FIXED: links to actual Technical Standards page */}
                             <Link href="/about/technical-standards">
                                 <Button size="lg">Our Technical Standards</Button>
                             </Link>
@@ -82,8 +103,8 @@ export default function AboutPage() {
             <section className="py-24 bg-bg-secondary">
                 <div className="container-custom">
                     <div className="text-center max-w-2xl mx-auto mb-16">
-                        <h2 className="text-3xl md:text-4xl font-heading font-bold text-brand-navy mb-4">Our Core Values</h2>
-                        <p className="text-text-secondary italic leading-relaxed">The engineering philosophy that guides every line of code we write.</p>
+                        <h2 className="text-3xl md:text-4xl font-heading font-bold text-brand-navy mb-4">What We Actually Believe</h2>
+                        <p className="text-text-secondary italic leading-relaxed">Not our marketing copy — the things that cause arguments in our team meetings.</p>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {values.map((val, idx) => (
@@ -104,8 +125,8 @@ export default function AboutPage() {
                 <div className="container-custom">
                     <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
                         <div className="flex flex-col gap-4 max-w-2xl">
-                            <h2 className="text-4xl font-heading font-bold text-brand-navy">Meet the Engineers</h2>
-                            <p className="text-lg text-text-secondary">A small, focused team of specialists obsessed with modular architecture.</p>
+                            <h2 className="text-4xl font-heading font-bold text-brand-navy">The Team</h2>
+                            <p className="text-lg text-text-secondary">Small enough that everyone knows the codebase. Experienced enough to have made — and learned from — the expensive mistakes.</p>
                         </div>
                         <div className="flex items-center gap-4 text-brand-teal font-bold uppercase text-xs tracking-widest bg-brand-teal/5 px-4 py-2 rounded-full">
                             <Globe className="w-4 h-4" /> Global Delivery Capability
@@ -120,8 +141,9 @@ export default function AboutPage() {
                                 </div>
                                 <div className="p-8">
                                     <h3 className="text-xl font-heading font-bold text-brand-navy">{member.name}</h3>
-                                    <p className="text-brand-orange font-bold text-xs uppercase tracking-widest mb-4">{member.role}</p>
-                                    <p className="text-sm text-text-secondary mb-6 leading-relaxed italic">"{member.bio}"</p>
+                                    <p className="text-brand-orange font-bold text-xs uppercase tracking-widest mb-1">{member.role}</p>
+                                    <p className="text-text-muted text-xs mb-4">{member.title}</p>
+                                    <p className="text-sm text-text-secondary mb-6 leading-relaxed">{member.bio}</p>
                                     <Link href="#" className="flex items-center gap-2 text-brand-navy font-bold text-sm hover:text-brand-orange transition-colors">
                                         <Linkedin className="w-4 h-4" /> LinkedIn Profile <ArrowRight className="w-4 h-4" />
                                     </Link>
@@ -137,22 +159,21 @@ export default function AboutPage() {
                 <div className="container-custom">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                         <div className="flex flex-col gap-8">
-                            <h2 className="text-4xl md:text-5xl font-heading font-bold">Join the <span className="text-brand-orange">Architecture</span> Team</h2>
+                            <h2 className="text-4xl md:text-5xl font-heading font-bold">Join the <span className="text-brand-orange">Team</span></h2>
                             <p className="text-lg text-text-muted leading-relaxed">
-                                We are always looking for engineers who share our obsession with modular systems, clean architecture, and operational excellence.
+                                We're a team that argues about architecture decisions at lunch and actually reads the technical blog posts we share. If that sounds like your kind of environment, we want to hear from you.
                             </p>
                             <div className="space-y-4">
                                 <div className="flex items-center gap-3">
                                     <Briefcase className="w-5 h-5 text-brand-gold" />
-                                    <span className="text-white font-semibold">Available Positions:</span>
+                                    <span className="text-white font-semibold">Open Positions:</span>
                                 </div>
                                 <ul className="space-y-2 text-sm text-text-muted">
                                     <li>• Senior Full-stack Engineer (React/React Server Components)</li>
                                     <li>• Cloud Infrastructure Engineer (SRE Focus)</li>
-                                    <li>• System Design Intern (Kathmandu Office)</li>
+                                    <li>• System Design Intern (Birtamode Office)</li>
                                 </ul>
                             </div>
-                            {/* ✅ FIXED: links to actual /careers page */}
                             <Link href="/careers" className="w-fit">
                                 <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 group">
                                     View Career Openings <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -178,19 +199,19 @@ export default function AboutPage() {
                         <div className="flex-grow flex flex-col gap-6">
                             <div className="flex items-center gap-3">
                                 <MapPin className="w-8 h-8 text-brand-orange" />
-                                <h3 className="text-3xl font-heading font-bold text-brand-navy tracking-tight">Kathmandu Headquarters</h3>
+                                <h3 className="text-3xl font-heading font-bold text-brand-navy tracking-tight">Birtamode, Jhapa</h3>
                             </div>
                             <p className="text-lg text-text-secondary leading-relaxed">
-                                Based in the heart of Kathmandu, our engine room delivers global standards of software engineering. We host regular technical meetups and architectural workshops for the local tech community.
+                                We're based in Birtamode, one of the fastest-growing business hubs in eastern Nepal. We serve clients across Nepal and work remotely with organizations internationally. Our timezone (NPT, UTC+5:45) gives us natural overlap with both European morning hours and Asian business hours.
                             </p>
                             <Link href="/contact">
-                                <Button variant="outline" className="w-fit">Visit Our Office</Button>
+                                <Button variant="outline" className="w-fit">Get in Touch</Button>
                             </Link>
                         </div>
                         <div className="w-full md:w-80 h-80 rounded-3xl overflow-hidden relative shadow-2xl border-4 border-white">
                             <Image
                                 src="https://images.unsplash.com/photo-1544806342-99999bc0420b?auto=format&fit=crop&q=80&w=2670"
-                                alt="Kathmandu landscape"
+                                alt="Nepal landscape"
                                 fill
                                 className="object-cover"
                             />
