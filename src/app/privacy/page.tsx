@@ -77,7 +77,7 @@ const sections = [
         title: "9. Contact",
         body: [
             { heading: "Email", text: "contact@modulifyr.com" },
-            { heading: "Address", text: "Modulifyr Engineering Center, Kathmandu, Nepal" },
+            { heading: "Address", text: "Modulifyr Engineering, Birtamode, Jhapa, Province No. 1, Nepal" },
             { heading: "Response Time", text: "Within 5 business days." },
         ]
     }
@@ -120,7 +120,7 @@ export default function PrivacyPage() {
                         <div className="lg:col-span-3">
                             <div className="bg-white border border-border-base rounded-3xl p-8 md:p-12">
                                 <p className="text-text-secondary leading-relaxed mb-10 pb-8 border-b border-border-base">
-                                    Modulifyr ("we", "us", "our") is committed to protecting your privacy. This policy applies to all information collected through our website at <span className="text-brand-teal font-medium">modulifyr.vercel.app</span> and any related services or communications.
+                                    Modulifyr ("we", "us", "our") is committed to protecting your privacy. This policy applies to all information collected through our website at <span className="text-brand-teal font-medium">modulifyr.com</span> and any related services or communications.
                                 </p>
 
                                 <div className="space-y-10">
