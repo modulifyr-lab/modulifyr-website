@@ -85,7 +85,6 @@ export default function BlogPostPage({ params }: Props) {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
             />
 
-            {/* Hero */}
             <section className="bg-brand-navy text-white py-20">
                 <div className="container-custom max-w-4xl">
                     <Link href="/blog" className="flex items-center gap-2 text-text-muted hover:text-brand-teal text-sm font-medium mb-8 transition-colors">
@@ -98,18 +97,17 @@ export default function BlogPostPage({ params }: Props) {
                     <div className="flex items-center gap-4 text-sm text-text-muted">
                         <span className="flex items-center gap-1.5"><Clock className="w-4 h-4" /> {post.readTime}</span>
                         <span>·</span>
-                        <span>{post.date}</span>
+                        {/* FIX: Use dateISO for the machine-readable datetime, display date for humans */}
+                        <time dateTime={post.dateISO}>{post.date}</time>
                         <span>·</span>
                         <span className="flex items-center gap-1.5"><User className="w-4 h-4" /> Modulifyr Engineering Team</span>
                     </div>
                 </div>
             </section>
 
-            {/* Content */}
             <section className="py-16 bg-bg-light">
                 <div className="container-custom">
                     <div className="grid grid-cols-1 lg:grid-cols-4 gap-16 max-w-6xl mx-auto">
-                        {/* Article */}
                         <article className="lg:col-span-3">
                             <div className="bg-white border border-border-base rounded-3xl p-8 md:p-12">
                                 <p className="text-xl text-text-secondary leading-relaxed mb-8 pb-8 border-b border-border-base font-medium italic">
@@ -129,7 +127,6 @@ export default function BlogPostPage({ params }: Props) {
                                         )
                                     ))}
                                 </div>
-                                {/* Author footer */}
                                 <div className="mt-12 pt-8 border-t border-border-base flex items-center gap-4">
                                     <div className="w-10 h-10 bg-brand-orange/10 rounded-full flex items-center justify-center">
                                         <User className="w-5 h-5 text-brand-orange" />
@@ -141,7 +138,6 @@ export default function BlogPostPage({ params }: Props) {
                                 </div>
                             </div>
 
-                            {/* Navigation */}
                             <div className="grid grid-cols-2 gap-4 mt-8">
                                 {prev ? (
                                     <Link href={`/blog/${prev.slug}`} className="group p-5 bg-white border border-border-base rounded-2xl hover:border-brand-orange transition-colors">
@@ -158,12 +154,11 @@ export default function BlogPostPage({ params }: Props) {
                             </div>
                         </article>
 
-                        {/* Sidebar */}
                         <aside className="flex flex-col gap-6">
                             <div className="bg-brand-navy text-white rounded-3xl p-7 sticky top-28">
                                 <h3 className="font-heading font-bold text-lg mb-3">Put this into practice</h3>
                                 <p className="text-text-muted text-sm leading-relaxed mb-5">
-                                    We build custom systems for businesses in Nepal and globally. Let's talk about your project.
+                                    We build custom systems for businesses in Nepal and globally.
                                 </p>
                                 <Link href="/request-proposal">
                                     <Button className="w-full" size="sm">Request Proposal</Button>
