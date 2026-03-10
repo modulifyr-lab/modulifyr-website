@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = 'https://modulifyr.com'
+  const base = 'https://modulifyr.vercel.app'
 
   return [
     { url: `${base}/`,                              changeFrequency: 'weekly',  priority: 1.0 },
