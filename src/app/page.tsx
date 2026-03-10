@@ -27,7 +27,7 @@ export default function Home() {
                 Custom Software Systems <span className="text-brand-orange">Built to Scale</span> With Your Organization
               </h1>
               <p className="text-lg md:text-xl text-text-secondary leading-relaxed">
-                Modulifyr designs and builds modular software systems for organizations that require flexibility, scalability, and long-term reliability. We partner with companies worldwide and in Kathmandu to architect and deliver software tailored to their operations.
+                Modulifyr designs and builds modular software systems for organizations that require flexibility, scalability, and long-term reliability. We partner with companies worldwide and in Birtamode, Nepal to architect and deliver software tailored to their operations.
               </p>
               <div className="flex flex-wrap gap-4 mt-2">
                 <Link href="/request-proposal">
@@ -44,12 +44,17 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="relative group perspective-1000 hidden lg:block">
-              {/* Modular Illustration Mockup */}
+            <div className="relative hidden lg:block">
+              {/*
+                FIX: Removed animate-pulse and animate-bounce.
+                CSS animations on page load contribute to TBT (Total Blocking Time)
+                and cause continuous repaints that hurt performance scores.
+                Replaced with static decorative elements — visually similar, zero perf cost.
+              */}
               <div className="relative w-full aspect-square max-w-lg mx-auto">
-                <div className="absolute top-0 left-0 w-32 h-32 bg-brand-orange/10 rounded-2xl animate-pulse delay-75" />
-                <div className="absolute bottom-0 right-0 w-48 h-48 bg-brand-navy/5 rounded-[40px] animate-pulse delay-300" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-background shadow-2xl rounded-3xl p-8 border border-border-base flex flex-col gap-6 transform group-hover:rotate-y-12 group-hover:scale-105 transition-all duration-700">
+                <div className="absolute top-0 left-0 w-32 h-32 bg-brand-orange/10 rounded-2xl" />
+                <div className="absolute bottom-0 right-0 w-48 h-48 bg-brand-navy/5 rounded-[40px]" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-background shadow-2xl rounded-3xl p-8 border border-border-base flex flex-col gap-6">
                   <div className="w-16 h-16 bg-brand-orange rounded-xl flex items-center justify-center">
                     <Layers className="text-white w-8 h-8" />
                   </div>
@@ -63,11 +68,11 @@ export default function Home() {
                     <div className="h-2 bg-brand-orange/40 rounded-full" />
                   </div>
                 </div>
-                {/* Floating "modules" */}
-                <div className="absolute top-10 right-10 w-24 h-24 bg-brand-navy rounded-2xl flex items-center justify-center shadow-xl animate-bounce duration-[4000ms]">
+                {/* Floating modules — static, no animation */}
+                <div className="absolute top-10 right-10 w-24 h-24 bg-brand-navy rounded-2xl flex items-center justify-center shadow-xl">
                   <Cpu className="text-white w-10 h-10" />
                 </div>
-                <div className="absolute bottom-10 left-10 w-20 h-20 bg-brand-gold rounded-full flex items-center justify-center shadow-xl animate-bounce duration-[3000ms]">
+                <div className="absolute bottom-10 left-10 w-20 h-20 bg-brand-gold rounded-full flex items-center justify-center shadow-xl">
                   <Globe className="text-brand-navy w-8 h-8" />
                 </div>
               </div>
@@ -186,7 +191,6 @@ export default function Home() {
             ))}
           </div>
         </div>
-        {/* Background Decorative blocks */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-brand-orange/5 translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-brand-teal/5 -translate-x-1/2 translate-y-1/2 rounded-full blur-3xl" />
       </section>
@@ -213,10 +217,19 @@ export default function Home() {
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl border border-border-base group">
+              {/*
+                FIX: Added priority prop — this is the LCP element on the homepage.
+                Without priority, Next.js lazy-loads it, making Google wait to measure LCP.
+                Also removed the oversized ?w=2426 from the Unsplash URL — Next.js image
+                optimization handles resizing, no need to pre-size the source URL.
+                Added sizes so Next.js serves appropriately sized image per breakpoint.
+              */}
               <Image
-                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2426"
-                alt="The Planning Bord"
+                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80"
+                alt="The Planning Bord — ERP System built by Modulifyr"
                 fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/80 to-transparent flex items-end p-8">
