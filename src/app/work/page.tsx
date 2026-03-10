@@ -7,24 +7,15 @@ export const metadata: Metadata = {
 };
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
-import { Card, CardTitle, CardDescription } from "@/components/ui/Card";
+import { Card, CardTitle } from "@/components/ui/Card";
 import {
-    ExternalLink,
-    Code2,
-    Layers,
-    Cpu,
-    Zap,
-    ArrowRight,
-    ShieldCheck,
-    Layout,
-    Terminal,
-    Download
+    ExternalLink, Code2, Layers, Cpu, Zap,
+    ArrowRight, ShieldCheck, Layout, Terminal, Download, CheckCircle2
 } from "lucide-react";
 
 export default function WorkPage() {
     return (
         <div className="flex flex-col w-full">
-            {/* Hero Section */}
             <section className="bg-bg-light py-24 border-b border-border-base">
                 <div className="container-custom text-center lg:text-left">
                     <div className="max-w-3xl">
@@ -39,7 +30,6 @@ export default function WorkPage() {
                 </div>
             </section>
 
-            {/* Featured Project */}
             <section className="py-24">
                 <div className="container-custom">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
@@ -48,7 +38,7 @@ export default function WorkPage() {
                                 <span className="text-brand-orange font-bold uppercase text-xs tracking-[0.2em]">Featured Project</span>
                                 <h2 className="text-4xl md:text-5xl font-heading font-bold text-brand-navy">The Planning Bord</h2>
                                 <p className="text-lg text-text-secondary leading-relaxed">
-                                    A comprehensive ERP system that brings inventory, HR, projects, finance, and automation into one powerful platform. Built for modern teams who move fast.
+                                    A comprehensive ERP system that brings inventory, HR, projects, finance, and automation into one powerful platform.
                                 </p>
                             </div>
 
@@ -74,26 +64,32 @@ export default function WorkPage() {
                             </div>
 
                             <div className="flex flex-wrap gap-4 pt-4 border-t border-border-base">
-                                <Link href="https://the-planning-bord.vercel.app" target="_blank">
+                                <Link href="https://the-planning-bord.vercel.app" target="_blank" rel="noopener noreferrer">
                                     <Button className="flex items-center gap-2">
                                         View Live Project <ExternalLink className="w-4 h-4" />
                                     </Button>
                                 </Link>
-                                {/* ✅ FIXED: links to actual technical briefing PDF */}
-                                <a href="/downloads/modulifyr-technical-briefing.pdf" download>
-                                    <Button variant="outline" className="flex items-center gap-2 group">
-                                        Download Technical Briefing <Download className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
+                                <Link href="/about/technical-standards">
+                                    <Button variant="outline" className="flex items-center gap-2">
+                                        Technical Standards <ArrowRight className="w-4 h-4" />
                                     </Button>
-                                </a>
+                                </Link>
                             </div>
                         </div>
 
                         <div className="relative group">
                             <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-border-base">
+                                {/*
+                                    FIX: priority added — this is the LCP element on the /work page.
+                                    sizes set to 50vw on desktop (it's in a 2-col grid), 100vw on mobile.
+                                    Removed ?w=2426 from source URL — Next.js optimizer handles sizing.
+                                */}
                                 <Image
-                                    src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2426"
-                                    alt="The Planning Bord UI"
+                                    src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80"
+                                    alt="The Planning Bord ERP system interface"
                                     fill
+                                    priority
+                                    sizes="(max-width: 1024px) 100vw, 50vw"
                                     className="object-cover group-hover:scale-105 transition-transform duration-1000"
                                 />
                             </div>
@@ -113,7 +109,6 @@ export default function WorkPage() {
                 </div>
             </section>
 
-            {/* NDA Section */}
             <section className="py-24 bg-brand-navy text-white">
                 <div className="container-custom">
                     <div className="max-w-4xl mx-auto text-center flex flex-col items-center gap-8">
@@ -143,7 +138,6 @@ export default function WorkPage() {
                 </div>
             </section>
 
-            {/* Placeholder Grid */}
             <section className="py-24">
                 <div className="container-custom">
                     <div className="flex flex-col gap-4 mb-16">
@@ -155,7 +149,7 @@ export default function WorkPage() {
                             { title: "Enterprise HR Portal", type: "Internal Prototype", icon: Cpu },
                             { title: "Retail POS Modular Demo", type: "Demo available on request", icon: Code2 }
                         ].map((item, idx) => (
-                            <div key={idx} className="bg-bg-secondary p-12 rounded-3xl border-2 border-dashed border-border-base flex items-center justify-between group grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100">
+                            <div key={idx} className="bg-bg-secondary p-12 rounded-3xl border-2 border-dashed border-border-base flex items-center justify-between group opacity-70 hover:opacity-100 transition-opacity">
                                 <div className="flex flex-col gap-2">
                                     <span className="text-brand-orange font-bold uppercase text-[10px] tracking-widest">{item.type}</span>
                                     <h3 className="text-2xl font-heading font-bold text-brand-navy">{item.title}</h3>
@@ -167,7 +161,6 @@ export default function WorkPage() {
                 </div>
             </section>
 
-            {/* ✅ FIXED: "Speak with an Engineer" → /contact, "Request Technical Briefing" → /about/technical-standards */}
             <section className="py-24 bg-bg-secondary">
                 <div className="container-custom text-center">
                     <div className="max-w-3xl mx-auto flex flex-col gap-8">
@@ -177,7 +170,6 @@ export default function WorkPage() {
                             <Link href="/about/technical-standards">
                                 <Button size="lg">View Technical Standards</Button>
                             </Link>
-                            {/* ✅ FIXED: links to /contact */}
                             <Link href="/contact">
                                 <Button variant="outline" size="lg">Speak with an Engineer <ArrowRight className="w-4 h-4 ml-2" /></Button>
                             </Link>
