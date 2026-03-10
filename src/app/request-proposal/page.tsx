@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { RegionProvider } from "@/components/RegionProvider";
 import { RFPForm } from "@/components/forms/RFPForm";
 
 export const metadata: Metadata = {
@@ -7,5 +8,9 @@ export const metadata: Metadata = {
 };
 
 export default function RFPPage() {
-    return <RFPForm />;
+    return (
+        <RegionProvider>
+            <RFPForm />
+        </RegionProvider>
+    );
 }

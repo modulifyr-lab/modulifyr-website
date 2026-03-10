@@ -1,14 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/Button";
+import { useRegion } from "@/components/RegionProvider";
 import {
     CheckCircle2,
     AlertCircle,
     Loader2,
     ArrowRight,
     ShieldCheck,
-    Globe
+    Globe,
+    MapPin
 } from "lucide-react";
 
 const industries = ["Education", "Commerce", "Healthcare", "IT", "Retail", "Services", "Other"];
@@ -21,13 +23,24 @@ const projectTypes = [
     "Data Architecture & Analytics",
     "Other / Not Sure Yet"
 ];
-const budgets = [
-    "$3k – $8k (Discovery Phase)",
-    "$8k – $20k (Pilot / Proof-of-Value)",
-    "$20k – $50k (Focused Build)",
-    "$50k – $100k (Full System)",
-    "$100k+ (Enterprise / Team)",
-    "Not Sure Yet"
+
+// ─── Region-specific budget options ──────────────────────────────────────────
+const budgetsNepal = [
+    "NPR 2,00,000 – 4,50,000 (Discovery Phase)",
+    "NPR 6,00,000 – 15,00,000 (Pilot / Proof-of-Value)",
+    "NPR 15,00,000 – 30,00,000 (Focused Build)",
+    "NPR 30,00,000 – 60,00,000 (Full System)",
+    "NPR 60,00,000+ (Enterprise / Team)",
+    "Not Sure Yet",
+];
+
+const budgetsInternational = [
+    "$6k – $12k (Discovery Phase)",
+    "$15k – $35k (Pilot / Proof-of-Value)",
+    "$35k – $70k (Focused Build)",
+    "$70k – $150k (Full System)",
+    "$150k+ (Enterprise / Team)",
+    "Not Sure Yet",
 ];
 
 interface FormState {
@@ -53,9 +66,22 @@ const initialForm: FormState = {
 };
 
 export function RFPForm() {
+    const { region, setRegion } = useRegion();
+    const isNepal = region === "nepal";
+    const budgets = isNepal ? budgetsNepal : budgetsInternational;
+
     const [form, setForm] = useState<FormState>(initialForm);
     const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
     const [errorMsg, setErrorMsg] = useState("");
+
+    // Reset budget when region switches so stale value isn't submitted
+    const prevRegion = useRef(region);
+    useEffect(() => {
+        if (prevRegion.current !== region) {
+            setForm(f => ({ ...f, budget: "" }));
+            prevRegion.current = region;
+        }
+    }, [region]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -64,7 +90,6 @@ export function RFPForm() {
     const handleSubmit = async (e: React.MouseEvent) => {
         e.preventDefault();
 
-        // Client-side validation
         if (!form.name || !form.company || !form.email || !form.industry || !form.project_type || !form.budget || !form.message) {
             setErrorMsg("Please fill in all required fields.");
             setStatus("error");
@@ -78,14 +103,16 @@ export function RFPForm() {
             const res = await fetch("/api/submit-proposal", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(form),
+                body: JSON.stringify({
+                    ...form,
+                    // Region fields — passed to Make → Notion → Discord
+                    region: isNepal ? "Nepal / South Asia" : "International",
+                    region_code: isNepal ? "nepal" : "international",
+                }),
             });
 
             const data = await res.json();
-
-            if (!res.ok) {
-                throw new Error(data.error || "Something went wrong");
-            }
+            if (!res.ok) throw new Error(data.error || "Something went wrong");
 
             setStatus("success");
             setForm(initialForm);
@@ -148,6 +175,29 @@ export function RFPForm() {
                 </div>
             </section>
 
+            {/* Region banner */}
+            <div className="bg-brand-navy/5 border-b border-border-base py-3">
+                <div className="container-custom flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                    <span className="text-xs text-text-muted font-semibold uppercase tracking-widest">Budget shown for:</span>
+                    <div className="flex gap-2">
+                        <button
+                            type="button"
+                            onClick={() => setRegion("nepal")}
+                            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border transition-all ${isNepal ? "border-brand-orange bg-brand-orange/10 text-brand-orange" : "border-border-base bg-white text-text-secondary hover:border-brand-orange/40"}`}
+                        >
+                            <MapPin className="w-3 h-3" /> Nepal / South Asia (NPR)
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => setRegion("international")}
+                            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border transition-all ${!isNepal ? "border-brand-teal bg-brand-teal/10 text-brand-teal" : "border-border-base bg-white text-text-secondary hover:border-brand-teal/40"}`}
+                        >
+                            <Globe className="w-3 h-3" /> International (USD)
+                        </button>
+                    </div>
+                </div>
+            </div>
+
             {/* Form */}
             <section className="py-20 bg-bg-light">
                 <div className="container-custom">
@@ -157,7 +207,6 @@ export function RFPForm() {
                         <div className="lg:col-span-2">
                             <div className="bg-white border border-border-base rounded-3xl p-8 md:p-12 shadow-sm">
 
-                                {/* Error Banner */}
                                 {status === "error" && (
                                     <div className="flex items-start gap-3 bg-red-50 border border-red-200 rounded-xl p-4 mb-8">
                                         <AlertCircle className="w-5 h-5 text-red-500 mt-0.5 shrink-0" />
@@ -165,121 +214,78 @@ export function RFPForm() {
                                     </div>
                                 )}
 
-                                {/* Section: Contact Info */}
+                                {/* Section 01 */}
                                 <div className="mb-10">
                                     <h2 className="text-xs font-bold text-text-muted uppercase tracking-widest mb-6 pb-3 border-b border-border-base">
                                         01 — Contact Information
                                     </h2>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                        <div className="flex flex-col gap-2">
-                                            <label className="text-sm font-semibold text-brand-navy">
-                                                Full Name <span className="text-brand-orange">*</span>
-                                            </label>
-                                            <input
-                                                type="text"
-                                                name="name"
-                                                value={form.name}
-                                                onChange={handleChange}
-                                                placeholder="Your full name"
-                                                className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/10 transition-all text-sm"
-                                            />
-                                        </div>
-                                        <div className="flex flex-col gap-2">
-                                            <label className="text-sm font-semibold text-brand-navy">
-                                                Company / Organization <span className="text-brand-orange">*</span>
-                                            </label>
-                                            <input
-                                                type="text"
-                                                name="company"
-                                                value={form.company}
-                                                onChange={handleChange}
-                                                placeholder="Your company name"
-                                                className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/10 transition-all text-sm"
-                                            />
-                                        </div>
-                                        <div className="flex flex-col gap-2">
-                                            <label className="text-sm font-semibold text-brand-navy">
-                                                Work Email <span className="text-brand-orange">*</span>
-                                            </label>
-                                            <input
-                                                type="email"
-                                                name="email"
-                                                value={form.email}
-                                                onChange={handleChange}
-                                                placeholder="you@company.com"
-                                                className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/10 transition-all text-sm"
-                                            />
-                                        </div>
-                                        <div className="flex flex-col gap-2">
-                                            <label className="text-sm font-semibold text-brand-navy">
-                                                Phone <span className="text-text-muted font-normal">(Optional)</span>
-                                            </label>
-                                            <input
-                                                type="tel"
-                                                name="phone"
-                                                value={form.phone}
-                                                onChange={handleChange}
-                                                placeholder="+977 98XXXXXXXX"
-                                                className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/10 transition-all text-sm"
-                                            />
-                                        </div>
+                                        {[
+                                            { label: "Full Name", name: "name", type: "text", placeholder: "Your full name", required: true },
+                                            { label: "Company / Organization", name: "company", type: "text", placeholder: "Your company name", required: true },
+                                            { label: "Work Email", name: "email", type: "email", placeholder: "you@company.com", required: true },
+                                            { label: "Phone", name: "phone", type: "tel", placeholder: "+977 98XXXXXXXX", required: false },
+                                        ].map(f => (
+                                            <div key={f.name} className="flex flex-col gap-2">
+                                                <label className="text-sm font-semibold text-brand-navy">
+                                                    {f.label} {f.required ? <span className="text-brand-orange">*</span> : <span className="text-text-muted font-normal">(Optional)</span>}
+                                                </label>
+                                                <input
+                                                    type={f.type}
+                                                    name={f.name}
+                                                    value={(form as any)[f.name]}
+                                                    onChange={handleChange}
+                                                    placeholder={f.placeholder}
+                                                    className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/10 transition-all text-sm"
+                                                />
+                                            </div>
+                                        ))}
                                     </div>
                                 </div>
 
-                                {/* Section: Project Details */}
+                                {/* Section 02 */}
                                 <div className="mb-10">
                                     <h2 className="text-xs font-bold text-text-muted uppercase tracking-widest mb-6 pb-3 border-b border-border-base">
                                         02 — Project Details
                                     </h2>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                         <div className="flex flex-col gap-2">
-                                            <label className="text-sm font-semibold text-brand-navy">
-                                                Industry <span className="text-brand-orange">*</span>
-                                            </label>
-                                            <select
-                                                name="industry"
-                                                value={form.industry}
-                                                onChange={handleChange}
-                                                className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary focus:outline-none focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/10 transition-all text-sm appearance-none cursor-pointer"
-                                            >
+                                            <label className="text-sm font-semibold text-brand-navy">Industry <span className="text-brand-orange">*</span></label>
+                                            <select name="industry" value={form.industry} onChange={handleChange}
+                                                className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary focus:outline-none focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/10 transition-all text-sm appearance-none cursor-pointer">
                                                 <option value="" disabled>Select your industry</option>
-                                                {industries.map(i => (
-                                                    <option key={i} value={i}>{i}</option>
-                                                ))}
+                                                {industries.map(i => <option key={i} value={i}>{i}</option>)}
                                             </select>
                                         </div>
                                         <div className="flex flex-col gap-2">
-                                            <label className="text-sm font-semibold text-brand-navy">
-                                                Project Type <span className="text-brand-orange">*</span>
-                                            </label>
-                                            <select
-                                                name="project_type"
-                                                value={form.project_type}
-                                                onChange={handleChange}
-                                                className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary focus:outline-none focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/10 transition-all text-sm appearance-none cursor-pointer"
-                                            >
+                                            <label className="text-sm font-semibold text-brand-navy">Project Type <span className="text-brand-orange">*</span></label>
+                                            <select name="project_type" value={form.project_type} onChange={handleChange}
+                                                className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary focus:outline-none focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/10 transition-all text-sm appearance-none cursor-pointer">
                                                 <option value="" disabled>Select project type</option>
-                                                {projectTypes.map(p => (
-                                                    <option key={p} value={p}>{p}</option>
-                                                ))}
+                                                {projectTypes.map(p => <option key={p} value={p}>{p}</option>)}
                                             </select>
                                         </div>
+
+                                        {/* Budget — region-aware toggle buttons */}
                                         <div className="flex flex-col gap-2 md:col-span-2">
-                                            <label className="text-sm font-semibold text-brand-navy">
-                                                Budget Range <span className="text-brand-orange">*</span>
-                                            </label>
+                                            <div className="flex items-center justify-between">
+                                                <label className="text-sm font-semibold text-brand-navy">
+                                                    Budget Range ({isNepal ? "NPR" : "USD"}) <span className="text-brand-orange">*</span>
+                                                </label>
+                                                <button type="button" onClick={() => setRegion(isNepal ? "international" : "nepal")}
+                                                    className="text-xs text-brand-orange hover:underline font-medium">
+                                                    Switch to {isNepal ? "USD" : "NPR"}
+                                                </button>
+                                            </div>
                                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                                                 {budgets.map(b => (
-                                                    <button
-                                                        key={b}
-                                                        type="button"
+                                                    <button key={b} type="button"
                                                         onClick={() => setForm(prev => ({ ...prev, budget: b }))}
                                                         className={`px-3 py-3 rounded-xl border text-xs font-semibold text-left transition-all cursor-pointer ${
                                                             form.budget === b
                                                                 ? "border-brand-orange bg-brand-orange/5 text-brand-orange"
                                                                 : "border-border-base bg-bg-light text-text-secondary hover:border-brand-navy"
-                                                        }`}
-                                                    >
+                                                        }`}>
                                                         {b}
                                                     </button>
                                                 ))}
@@ -288,41 +294,26 @@ export function RFPForm() {
                                     </div>
                                 </div>
 
-                                {/* Section: Message */}
+                                {/* Section 03 */}
                                 <div className="mb-10">
                                     <h2 className="text-xs font-bold text-text-muted uppercase tracking-widest mb-6 pb-3 border-b border-border-base">
                                         03 — Project Brief
                                     </h2>
                                     <div className="flex flex-col gap-2">
-                                        <label className="text-sm font-semibold text-brand-navy">
-                                            Describe your project <span className="text-brand-orange">*</span>
-                                        </label>
-                                        <p className="text-xs text-text-muted mb-2">
-                                            Include current systems, key workflows, pain points, and what success looks like.
-                                        </p>
-                                        <textarea
-                                            name="message"
-                                            value={form.message}
-                                            onChange={handleChange}
-                                            rows={6}
+                                        <label className="text-sm font-semibold text-brand-navy">Describe your project <span className="text-brand-orange">*</span></label>
+                                        <p className="text-xs text-text-muted mb-2">Include current systems, key workflows, pain points, and what success looks like.</p>
+                                        <textarea name="message" value={form.message} onChange={handleChange} rows={6}
                                             placeholder="We currently use [system X] for [workflow Y]. The main challenge is... We need a solution that..."
                                             className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/10 transition-all text-sm resize-none"
                                         />
                                     </div>
                                 </div>
 
-                                {/* Submit */}
-                                <Button
-                                    size="lg"
-                                    onClick={handleSubmit}
-                                    disabled={status === "loading"}
-                                    className="w-full justify-center group"
-                                >
-                                    {status === "loading" ? (
-                                        <><Loader2 className="w-5 h-5 mr-2 animate-spin" /> Submitting...</>
-                                    ) : (
-                                        <>Submit Proposal Request <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" /></>
-                                    )}
+                                <Button size="lg" onClick={handleSubmit} disabled={status === "loading"} className="w-full justify-center group">
+                                    {status === "loading"
+                                        ? <><Loader2 className="w-5 h-5 mr-2 animate-spin" /> Submitting...</>
+                                        : <>Submit Proposal Request <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" /></>
+                                    }
                                 </Button>
 
                                 <p className="text-xs text-text-muted text-center mt-4">

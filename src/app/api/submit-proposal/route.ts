@@ -18,7 +18,6 @@ export async function POST(req: NextRequest) {
 
         const webhookUrl = process.env.MAKE_PROPOSAL_WEBHOOK_URL;
         if (!webhookUrl) {
-            // If webhook not configured, still return success (dev mode)
             console.warn("MAKE_PROPOSAL_WEBHOOK_URL not set — skipping webhook");
             return NextResponse.json({ success: true, message: "Proposal request received" }, { status: 200 });
         }
@@ -32,6 +31,9 @@ export async function POST(req: NextRequest) {
             project_type: body.project_type,
             budget: body.budget,
             message: body.message.trim(),
+            // Region fields — map in Make → Notion "Region" property + Discord message
+            region: body.region || "Not specified",
+            region_code: body.region_code || "unknown",
         };
 
         const makeResponse = await fetch(webhookUrl, {

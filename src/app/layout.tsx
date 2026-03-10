@@ -6,7 +6,7 @@ import "./globals.css";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-  display: "swap", // prevents FOIT (flash of invisible text)
+  display: "swap",
 });
 
 const poppins = Poppins({
@@ -79,6 +79,8 @@ export const metadata: Metadata = {
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { RegionProvider } from "@/components/RegionProvider";
+import { RegionModal } from "@/components/RegionModal";
 
 const organizationSchema = {
   "@context": "https://schema.org",
@@ -100,10 +102,7 @@ const organizationSchema = {
     "availableLanguage": ["English", "Nepali"]
   },
   "areaServed": "Worldwide",
-  "foundingLocation": {
-    "@type": "Place",
-    "name": "Birtamode, Jhapa, Nepal"
-  },
+  "foundingLocation": { "@type": "Place", "name": "Birtamode, Jhapa, Nepal" },
   "serviceType": [
     "Custom Software Development",
     "System Architecture Consulting",
@@ -119,49 +118,37 @@ const organizationSchema = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* JSON-LD — inline, no render blocking */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
       </head>
-      <body
-        className={`${inter.variable} ${poppins.variable} antialiased font-sans transition-colors duration-300`}
-      >
-        {/* GTM noscript fallback */}
+      <body className={`${inter.variable} ${poppins.variable} antialiased font-sans transition-colors duration-300`}>
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-TX4PZBKK"
-            height="0"
-            width="0"
+            height="0" width="0"
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
 
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Navbar />
-          <main className="min-h-screen pt-20">
-            {children}
-          </main>
-          <Footer />
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          {/* RegionProvider wraps everything so pricing + form can both read the choice */}
+          <RegionProvider>
+            {/* Modal renders on first visit, anywhere on the site */}
+            <RegionModal />
+            <Navbar />
+            <main className="min-h-screen pt-20">
+              {children}
+            </main>
+            <Footer />
+          </RegionProvider>
         </ThemeProvider>
 
-        {/*
-          FIX: was strategy="beforeInteractive" which BLOCKED rendering until GTM loaded.
-          afterInteractive loads GTM after the page is interactive — analytics still fires,
-          but your LCP/FCP scores are no longer penalized by a third-party script.
-        */}
         <Script
           id="gtm-script"
           strategy="afterInteractive"
