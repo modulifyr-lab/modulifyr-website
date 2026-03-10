@@ -6,12 +6,14 @@ import "./globals.css";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap", // prevents FOIT (flash of invisible text)
 });
 
 const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -55,11 +57,11 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Modulifyr Engineering" }],
   creator: "Modulifyr",
-  metadataBase: new URL("https://modulifyr.com"),
+  metadataBase: new URL("https://modulifyr.vercel.app"),
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://modulifyr.com",
+    url: "https://modulifyr.vercel.app",
     siteName: "Modulifyr",
     title: "Modulifyr | Custom Software Systems Built to Scale",
     description: "Engineering tailored modular software solutions for businesses across Nepal and worldwide. Based in Birtamode, Jhapa.",
@@ -82,8 +84,8 @@ const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareCompany",
   "name": "Modulifyr",
-  "url": "https://modulifyr.com",
-  "logo": "https://modulifyr.com/company-logo.png",
+  "url": "https://modulifyr.vercel.app",
+  "logo": "https://modulifyr.vercel.app/company-logo.png",
   "description": "Custom modular software systems for small and medium-sized businesses in education, healthcare, retail, commerce, and IT.",
   "address": {
     "@type": "PostalAddress",
@@ -110,7 +112,7 @@ const organizationSchema = {
     "Cloud Infrastructure"
   ],
   "sameAs": [
-    "https://www.linkedin.com/company/modulifyr",
+    "https://linkedin.com/company/modulifyr",
     "https://github.com/Modulifyr"
   ]
 };
@@ -123,13 +125,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <Script id="gtm-script" strategy="beforeInteractive">
-          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-TX4PZBKK');`}
-        </Script>
+        {/* JSON-LD — inline, no render blocking */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
@@ -138,6 +134,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <body
         className={`${inter.variable} ${poppins.variable} antialiased font-sans transition-colors duration-300`}
       >
+        {/* GTM noscript fallback */}
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-TX4PZBKK"
@@ -146,6 +143,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
+
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -158,6 +156,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           </main>
           <Footer />
         </ThemeProvider>
+
+        {/*
+          FIX: was strategy="beforeInteractive" which BLOCKED rendering until GTM loaded.
+          afterInteractive loads GTM after the page is interactive — analytics still fires,
+          but your LCP/FCP scores are no longer penalized by a third-party script.
+        */}
+        <Script
+          id="gtm-script"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TX4PZBKK');`
+          }}
+        />
       </body>
     </html>
   );
