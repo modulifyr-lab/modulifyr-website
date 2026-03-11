@@ -8,7 +8,6 @@ import {
     Loader2,
     ArrowRight,
     Briefcase,
-    Globe,
     Github,
     Linkedin
 } from "lucide-react";
@@ -16,7 +15,7 @@ import {
 const roles = [
     "Senior Full-stack Engineer (React / RSC)",
     "Cloud Infrastructure Engineer (SRE Focus)",
-    "System Design Intern (Kathmandu Office)",
+    "System Design Intern (Birtamode Office)",   // was: Kathmandu Office
     "Other / General Application"
 ];
 
@@ -75,9 +74,9 @@ export function JobApplicationForm() {
 
             setStatus("success");
             setForm(initialForm);
-        } catch (err: any) {
+        } catch (err: unknown) {
             setStatus("error");
-            setErrorMsg(err.message || "Failed to submit. Try again or email us directly.");
+            setErrorMsg(err instanceof Error ? err.message : "Failed to submit. Try again or email us directly.");
         }
     };
 
@@ -157,71 +156,48 @@ export function JobApplicationForm() {
                                     </div>
                                 )}
 
-                                {/* Section 1: Personal Info */}
+                                {/* Section 1 */}
                                 <div className="mb-10">
                                     <h2 className="text-xs font-bold text-text-muted uppercase tracking-widest mb-6 pb-3 border-b border-border-base">
                                         01 — Personal Information
                                     </h2>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                        <div className="flex flex-col gap-2">
-                                            <label className="text-sm font-semibold text-brand-navy">
-                                                Full Name <span className="text-brand-orange">*</span>
-                                            </label>
-                                            <input
-                                                type="text"
-                                                name="name"
-                                                value={form.name}
-                                                onChange={handleChange}
-                                                placeholder="Your full name"
-                                                className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/10 transition-all text-sm"
-                                            />
-                                        </div>
-                                        <div className="flex flex-col gap-2">
-                                            <label className="text-sm font-semibold text-brand-navy">
-                                                Email <span className="text-brand-orange">*</span>
-                                            </label>
-                                            <input
-                                                type="email"
-                                                name="email"
-                                                value={form.email}
-                                                onChange={handleChange}
-                                                placeholder="you@email.com"
-                                                className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/10 transition-all text-sm"
-                                            />
-                                        </div>
-                                        <div className="flex flex-col gap-2">
-                                            <label className="text-sm font-semibold text-brand-navy">
-                                                Phone <span className="text-text-muted font-normal">(Optional)</span>
-                                            </label>
-                                            <input
-                                                type="tel"
-                                                name="phone"
-                                                value={form.phone}
-                                                onChange={handleChange}
-                                                placeholder="+977 98XXXXXXXX"
-                                                className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/10 transition-all text-sm"
-                                            />
-                                        </div>
-                                        <div className="flex flex-col gap-2">
-                                            <label className="text-sm font-semibold text-brand-navy">
-                                                Role Applying For <span className="text-brand-orange">*</span>
-                                            </label>
-                                            <select
-                                                name="role"
-                                                value={form.role}
-                                                onChange={handleChange}
-                                                className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/10 transition-all text-sm appearance-none cursor-pointer"
-                                            >
-                                                <option value="" disabled>Select a role</option>
-                                                {roles.map(r => (
-                                                    <option key={r} value={r}>{r}</option>
-                                                ))}
-                                            </select>
-                                        </div>
+                                        {[
+                                            { label: "Full Name", name: "name", type: "text", placeholder: "Your full name", required: true },
+                                            { label: "Email", name: "email", type: "email", placeholder: "you@email.com", required: true },
+                                            { label: "Phone", name: "phone", type: "tel", placeholder: "+977 98XXXXXXXX", required: false },
+                                            { label: "Role Applying For", name: "role", type: "select", required: true },
+                                        ].map(f => (
+                                            <div key={f.name} className="flex flex-col gap-2">
+                                                <label className="text-sm font-semibold text-brand-navy">
+                                                    {f.label} {f.required ? <span className="text-brand-orange">*</span> : <span className="text-text-muted font-normal">(Optional)</span>}
+                                                </label>
+                                                {f.type === "select" ? (
+                                                    <select
+                                                        name={f.name}
+                                                        value={(form as Record<string, string>)[f.name]}
+                                                        onChange={handleChange}
+                                                        className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/10 transition-all text-sm appearance-none cursor-pointer"
+                                                    >
+                                                        <option value="" disabled>Select a role</option>
+                                                        {roles.map(r => <option key={r} value={r}>{r}</option>)}
+                                                    </select>
+                                                ) : (
+                                                    <input
+                                                        type={f.type}
+                                                        name={f.name}
+                                                        value={(form as Record<string, string>)[f.name]}
+                                                        onChange={handleChange}
+                                                        placeholder={f.placeholder}
+                                                        className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/10 transition-all text-sm"
+                                                    />
+                                                )}
+                                            </div>
+                                        ))}
                                     </div>
                                 </div>
 
-                                {/* Section 2: Skills & Links */}
+                                {/* Section 2 */}
                                 <div className="mb-10">
                                     <h2 className="text-xs font-bold text-text-muted uppercase tracking-widest mb-6 pb-3 border-b border-border-base">
                                         02 — Skills & Profile Links
@@ -271,7 +247,7 @@ export function JobApplicationForm() {
                                     </div>
                                 </div>
 
-                                {/* Section 3: Cover Note */}
+                                {/* Section 3 */}
                                 <div className="mb-10">
                                     <h2 className="text-xs font-bold text-text-muted uppercase tracking-widest mb-6 pb-3 border-b border-border-base">
                                         03 — Cover Note
@@ -318,15 +294,16 @@ export function JobApplicationForm() {
                             <div className="bg-brand-navy text-white rounded-3xl p-8">
                                 <h3 className="font-heading font-bold text-xl mb-2">Life at Modulifyr</h3>
                                 <p className="text-text-muted text-sm mb-6 leading-relaxed">
-                                    We're a small, focused team that values depth over breadth. You'll work on real enterprise systems that matter.
+                                    We're a small, focused team that values depth over breadth. You'll work on real enterprise systems that matter to real businesses in Nepal and internationally.
                                 </p>
                                 <div className="space-y-4">
                                     {[
-                                        "Engineering-first culture",
-                                        "Work on complex, real-world systems",
-                                        "Kathmandu HQ + remote flexibility",
+                                        "Architecture-first engineering culture",
+                                        "Real enterprise systems, not demos",
+                                        "Birtamode HQ + remote flexibility",  // was: Kathmandu HQ
                                         "Direct collaboration with lead architect",
-                                        "Long-term projects, not short sprints"
+                                        "Long-term projects, not short sprints",
+                                        "Skill development path with senior mentorship",
                                     ].map(item => (
                                         <div key={item} className="flex items-center gap-3">
                                             <CheckCircle2 className="w-4 h-4 text-brand-teal shrink-0" />

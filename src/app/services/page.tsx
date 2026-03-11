@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/Button";
 
 export const metadata: Metadata = {
     title: "Custom Software Development Services | Modulifyr Nepal",
-    description: "Modulifyr offers custom software development, system architecture, integrations, legacy modernization, cloud infrastructure, and data engineering services for businesses in Nepal and globally.",
+    description: "Modulifyr offers custom software development, system architecture, integrations, legacy modernization, cloud infrastructure, data engineering, and dedicated product teams for businesses in Nepal and globally.",
 };
 import { Card, CardTitle, CardDescription } from "@/components/ui/Card";
 import {
@@ -13,6 +13,7 @@ import {
     RefreshCw,
     Cloud,
     Database,
+    Users,
     Zap,
     ArrowRight,
     Download
@@ -79,7 +80,19 @@ const services = [
         deliverables: ["Database design", "ETL pipelines", "Business Intelligence dashboards"],
         time: "3-6 months",
         size: "Data-driven Organizations"
-    }
+    },
+    {
+        // New: Dedicated Product Team — named offering based on market gap analysis
+        icon: Users,
+        color: "text-brand-orange",
+        bg: "bg-brand-orange/10",
+        title: "Dedicated Product Team",
+        desc: "2–3 engineers embedded in your product long-term on a monthly retainer. Your team's engineering capacity, without the overhead of local hiring. No re-scoping, no handoffs, no ramp-up cost.",
+        deliverables: ["Fixed monthly engineering capacity", "Codebase ownership continuity", "Monthly retainer — no SOW per feature"],
+        time: "Monthly retainer · 3-month min",
+        size: "Startups & Scale-ups",
+        badge: "Market Gap Offering",
+    },
 ];
 
 export default function ServicesPage() {
@@ -100,7 +113,12 @@ export default function ServicesPage() {
                 <div className="container-custom">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {services.map((service, idx) => (
-                            <Card key={idx} className="flex flex-col h-full border-t-4 border-t-transparent hover:border-t-brand-orange">
+                            <Card key={idx} className={`flex flex-col h-full border-t-4 border-t-transparent hover:border-t-brand-orange relative ${(service as { badge?: string }).badge ? "ring-2 ring-brand-orange/30" : ""}`}>
+                                {(service as { badge?: string }).badge && (
+                                    <div className="absolute top-0 left-8 -translate-y-1/2 bg-brand-orange text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">
+                                        {(service as { badge?: string }).badge}
+                                    </div>
+                                )}
                                 <div className={`w-14 h-14 ${service.bg} rounded-xl flex items-center justify-center mb-6`}>
                                     <service.icon className={`${service.color} w-7 h-7`} />
                                 </div>
@@ -164,7 +182,7 @@ export default function ServicesPage() {
                 </div>
             </section>
 
-            {/* Testimonial - specific and credible */}
+            {/* Testimonial */}
             <section className="py-24">
                 <div className="container-custom text-center">
                     <blockquote className="max-w-4xl mx-auto text-2xl md:text-3xl text-brand-navy leading-relaxed font-heading">

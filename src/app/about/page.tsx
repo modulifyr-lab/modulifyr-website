@@ -15,7 +15,10 @@ import {
     Globe,
     Briefcase,
     ArrowRight,
-    Heart
+    Heart,
+    Wifi,
+    Zap,
+    TrendingUp
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -137,7 +140,13 @@ export default function AboutPage() {
                         {team.map((member, i) => (
                             <Card key={i} className="p-0 overflow-hidden group">
                                 <div className="relative aspect-square">
-                                    <Image src={member.img} alt={member.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                                    <Image
+                                        src={member.img}
+                                        alt={member.name}
+                                        fill
+                                        sizes="(max-width: 768px) 100vw, 33vw"
+                                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                    />
                                 </div>
                                 <div className="p-8">
                                     <h3 className="text-xl font-heading font-bold text-brand-navy">{member.name}</h3>
@@ -163,11 +172,22 @@ export default function AboutPage() {
                             <p className="text-lg text-text-muted leading-relaxed">
                                 We're a team that argues about architecture decisions at lunch and actually reads the technical blog posts we share. If that sounds like your kind of environment, we want to hear from you.
                             </p>
-                            <div className="space-y-4">
-                                <div className="flex items-center gap-3">
-                                    <Briefcase className="w-5 h-5 text-brand-gold" />
-                                    <span className="text-white font-semibold">Open Positions:</span>
-                                </div>
+                            {/* Added: concrete retention signals beyond just salary */}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                {[
+                                    { icon: TrendingUp, text: "Defined skill progression tracks — not just a job" },
+                                    { icon: Briefcase, text: "Own entire modules, not just tickets" },
+                                    { icon: Globe, text: "Work on systems used by real businesses daily" },
+                                    { icon: Users, text: "Direct access to lead architect from day one" },
+                                ].map((item, i) => (
+                                    <div key={i} className="flex items-start gap-3 bg-white/5 rounded-xl p-4">
+                                        <item.icon className="w-4 h-4 text-brand-gold mt-0.5 shrink-0" />
+                                        <span className="text-text-muted text-sm leading-snug">{item.text}</span>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="space-y-2">
+                                <p className="text-xs font-bold text-brand-teal uppercase tracking-widest">Open Positions:</p>
                                 <ul className="space-y-2 text-sm text-text-muted">
                                     <li>• Senior Full-stack Engineer (React/React Server Components)</li>
                                     <li>• Cloud Infrastructure Engineer (SRE Focus)</li>
@@ -185,6 +205,7 @@ export default function AboutPage() {
                                 src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=2940"
                                 alt="Team collaboration"
                                 fill
+                                sizes="(max-width: 1024px) 100vw, 50vw"
                                 className="object-cover group-hover:scale-105 transition-transform duration-700"
                             />
                         </div>
@@ -192,10 +213,10 @@ export default function AboutPage() {
                 </div>
             </section>
 
-            {/* Location Section */}
+            {/* Location Section — added infrastructure resilience note */}
             <section className="py-24">
                 <div className="container-custom">
-                    <div className="bg-bg-light border border-border-base p-12 md:p-16 rounded-[3rem] flex flex-col md:flex-row items-center gap-12">
+                    <div className="bg-bg-light border border-border-base p-12 md:p-16 rounded-[3rem] flex flex-col md:flex-row items-start gap-12">
                         <div className="flex-grow flex flex-col gap-6">
                             <div className="flex items-center gap-3">
                                 <MapPin className="w-8 h-8 text-brand-orange" />
@@ -204,15 +225,33 @@ export default function AboutPage() {
                             <p className="text-lg text-text-secondary leading-relaxed">
                                 We're based in Birtamode, one of the fastest-growing business hubs in eastern Nepal. We serve clients across Nepal and work remotely with organizations internationally. Our timezone (NPT, UTC+5:45) gives us natural overlap with both European morning hours and Asian business hours.
                             </p>
+                            {/* Infrastructure reliability note — addresses international client concern about outsourcing to Nepal */}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div className="flex items-start gap-3 bg-white border border-border-base rounded-xl p-4">
+                                    <Wifi className="w-4 h-4 text-brand-teal mt-0.5 shrink-0" />
+                                    <div>
+                                        <p className="text-xs font-bold text-brand-navy mb-0.5">Redundant Connectivity</p>
+                                        <p className="text-xs text-text-muted leading-snug">Primary fibre + 4G failover. Remote standby capability for all team members.</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-start gap-3 bg-white border border-border-base rounded-xl p-4">
+                                    <Zap className="w-4 h-4 text-brand-teal mt-0.5 shrink-0" />
+                                    <div>
+                                        <p className="text-xs font-bold text-brand-navy mb-0.5">Backup Power</p>
+                                        <p className="text-xs text-text-muted leading-snug">UPS and inverter backup at office. Zero missed delivery commitments due to infrastructure.</p>
+                                    </div>
+                                </div>
+                            </div>
                             <Link href="/contact">
                                 <Button variant="outline" className="w-fit">Get in Touch</Button>
                             </Link>
                         </div>
-                        <div className="w-full md:w-80 h-80 rounded-3xl overflow-hidden relative shadow-2xl border-4 border-white">
+                        <div className="w-full md:w-80 h-80 rounded-3xl overflow-hidden relative shadow-2xl border-4 border-white shrink-0">
                             <Image
                                 src="https://images.unsplash.com/photo-1544806342-99999bc0420b?auto=format&fit=crop&q=80&w=2670"
                                 alt="Nepal landscape"
                                 fill
+                                sizes="320px"
                                 className="object-cover"
                             />
                         </div>
