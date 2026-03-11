@@ -81,6 +81,7 @@ import { Footer } from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { RegionProvider } from "@/components/RegionProvider";
 import { RegionModal } from "@/components/RegionModal";
+import { StartupBanner } from "@/components/StartupBanner";
 
 const organizationSchema = {
   "@context": "https://schema.org",
@@ -137,10 +138,12 @@ export default function RootLayout({
         </noscript>
 
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          {/* RegionProvider wraps everything so pricing + form can both read the choice */}
           <RegionProvider>
-            {/* Modal renders on first visit, anywhere on the site */}
             <RegionModal />
+            {/* StartupBanner sits above the fixed Navbar in document flow.
+                It scrolls away naturally — zero layout impact on the rest of the page.
+                Remove this line to disable the banner permanently. */}
+            <StartupBanner />
             <Navbar />
             <main className="min-h-screen pt-20">
               {children}

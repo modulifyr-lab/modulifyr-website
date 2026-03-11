@@ -5,20 +5,22 @@ export const metadata: Metadata = {
     title: "About Modulifyr | Custom Software Company in Birtamode, Nepal",
     description: "Modulifyr is a software development company based in Birtamode, Nepal. We build modular, scalable systems for SMBs in education, healthcare, retail, and commerce.",
 };
-import { Card, CardTitle, CardDescription } from "@/components/ui/Card";
+import { Card } from "@/components/ui/Card";
 import {
     Users,
     MapPin,
     Target,
     ShieldCheck,
-    Linkedin,
     Globe,
     Briefcase,
     ArrowRight,
     Heart,
     Wifi,
     Zap,
-    TrendingUp
+    TrendingUp,
+    Rocket,
+    Wrench,
+    Coffee
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -43,30 +45,6 @@ const values = [
         icon: Heart,
         title: "Systems for Real People",
         desc: "We've watched staff spend three hours daily on manual data entry that a well-designed system could handle in seconds. We build to fix that."
-    }
-];
-
-const team = [
-    {
-        name: "Arun Thapa",
-        role: "Lead Architect",
-        title: "System Design & Strategy",
-        bio: "10+ years building modular infrastructure for education and commerce platforms across South Asia. Has shipped systems that survived three rounds of client scope changes without a rebuild.",
-        img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=2787"
-    },
-    {
-        name: "Priya Shrestha",
-        role: "Senior Engineer",
-        title: "Full-stack Specialist",
-        bio: "Expert in React, Node.js, and PostgreSQL. Has delivered production systems for clinics, retailers, and SaaS teams. Doesn't write a feature without writing its tests first.",
-        img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=2787"
-    },
-    {
-        name: "Rajan Karki",
-        role: "Product Design Lead",
-        title: "UX Architecture & Interfaces",
-        bio: "Designs dashboards that operations teams actually want to open in the morning. Former in-house designer at a Kathmandu fintech. Believes good UX is just good engineering with empathy.",
-        img: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=2787"
     }
 ];
 
@@ -123,42 +101,134 @@ export default function AboutPage() {
                 </div>
             </section>
 
-            {/* Team Section */}
-            <section className="py-24">
+            {/* ─── TEAM SECTION ─── */}
+            <section className="py-24" id="team">
                 <div className="container-custom">
                     <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
                         <div className="flex flex-col gap-4 max-w-2xl">
                             <h2 className="text-4xl font-heading font-bold text-brand-navy">The Team</h2>
-                            <p className="text-lg text-text-secondary">Small enough that everyone knows the codebase. Experienced enough to have made — and learned from — the expensive mistakes.</p>
+                            <p className="text-lg text-text-secondary">
+                                Right now, Modulifyr is one person. One founder, one city, one conviction — that the businesses around us deserve software built specifically for how they work.
+                            </p>
                         </div>
-                        <div className="flex items-center gap-4 text-brand-teal font-bold uppercase text-xs tracking-widest bg-brand-teal/5 px-4 py-2 rounded-full">
-                            <Globe className="w-4 h-4" /> Global Delivery Capability
+                        {/* Active hiring badge */}
+                        <div className="flex items-center gap-3 bg-brand-orange/5 border border-brand-orange/20 px-5 py-3 rounded-full shrink-0">
+                            <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-orange opacity-75" />
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-orange" />
+                            </span>
+                            <span className="text-brand-orange font-bold text-xs uppercase tracking-widest">
+                                Actively seeking collaborators
+                            </span>
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {team.map((member, i) => (
-                            <Card key={i} className="p-0 overflow-hidden group">
-                                <div className="relative aspect-square">
-                                    <Image
-                                        src={member.img}
-                                        alt={member.name}
-                                        fill
-                                        sizes="(max-width: 768px) 100vw, 33vw"
-                                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                                    />
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+
+                        {/* Left: Founder card */}
+                        <div className="bg-white border border-border-base rounded-3xl overflow-hidden shadow-sm">
+                            {/* Accent bar */}
+                            <div className="h-1.5 w-full bg-gradient-to-r from-brand-orange via-brand-gold to-brand-teal" />
+                            <div className="p-10">
+                                {/* Identity */}
+                                <div className="flex items-center gap-5 mb-8">
+                                    <div className="w-16 h-16 rounded-2xl bg-brand-navy flex items-center justify-center text-2xl font-bold text-white font-heading shrink-0 select-none">
+                                        M
+                                    </div>
+                                    <div>
+                                        <h3 className="text-xl font-heading font-bold text-brand-navy">Modulifyr Founder</h3>
+                                        <p className="text-brand-orange font-bold text-xs uppercase tracking-widest mt-0.5">Founder</p>
+                                        <p className="text-text-muted text-xs mt-1 flex items-center gap-1">
+                                            <MapPin className="w-3 h-3" /> Birtamode, Jhapa, Nepal
+                                        </p>
+                                    </div>
                                 </div>
-                                <div className="p-8">
-                                    <h3 className="text-xl font-heading font-bold text-brand-navy">{member.name}</h3>
-                                    <p className="text-brand-orange font-bold text-xs uppercase tracking-widest mb-1">{member.role}</p>
-                                    <p className="text-text-muted text-xs mb-4">{member.title}</p>
-                                    <p className="text-sm text-text-secondary mb-6 leading-relaxed">{member.bio}</p>
-                                    <Link href="#" className="flex items-center gap-2 text-brand-navy font-bold text-sm hover:text-brand-orange transition-colors">
-                                        <Linkedin className="w-4 h-4" /> LinkedIn Profile <ArrowRight className="w-4 h-4" />
-                                    </Link>
+
+                                {/* Origin story */}
+                                <blockquote className="border-l-2 border-brand-orange/30 pl-5 mb-8 space-y-3">
+                                    <p className="text-text-secondary text-sm leading-relaxed">
+                                        Modulifyr was registered one week ago. I am the only person here right now.
+                                        Every line of code, every page on this site, and every automation running
+                                        behind the scenes was built by me — using free tools and late nights in
+                                        Birtamode.
+                                    </p>
+                                    <p className="text-text-secondary text-sm leading-relaxed">
+                                        I built this because the businesses around me deserve real software — not
+                                        spreadsheets, not retrofitted SaaS. Purpose-built systems that work the way
+                                        they actually operate.
+                                    </p>
+                                    <p className="text-text-secondary text-sm leading-relaxed">
+                                        If that mission resonates with you and you want to help build it from zero,
+                                        I want to hear from you.
+                                    </p>
+                                </blockquote>
+
+                                {/* CTA */}
+                                <Link href="/careers">
+                                    <Button className="w-full justify-between group">
+                                        Join as Volunteer or Equity Collaborator
+                                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                    </Button>
+                                </Link>
+                                <p className="text-center text-xs text-text-muted mt-3">
+                                    Equity-only · Remote-friendly · Birtamode office also welcome
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Right: origin callout + open roles */}
+                        <div className="flex flex-col gap-8">
+                            {/* Zero-budget origin */}
+                            <div className="bg-brand-navy text-white rounded-3xl p-8">
+                                <div className="flex items-center gap-3 mb-4">
+                                    <div className="w-10 h-10 bg-brand-orange/20 rounded-xl flex items-center justify-center shrink-0">
+                                        <Rocket className="w-5 h-5 text-brand-orange" />
+                                    </div>
+                                    <h4 className="font-heading font-bold text-white">The zero-budget origin</h4>
                                 </div>
-                            </Card>
-                        ))}
+                                <p className="text-text-muted text-sm leading-relaxed mb-5">
+                                    This entire company — website, CRM, automation pipelines, proposal system — runs on free tiers.
+                                    Vercel. Notion. Make. That's the stack. Not because we can't build better, but because
+                                    we wanted to prove the model works before asking anyone else to bet on it.
+                                </p>
+                                <div className="grid grid-cols-3 gap-3">
+                                    {[
+                                        { icon: Wrench, label: "Free tools" },
+                                        { icon: Coffee, label: "Late nights" },
+                                        { icon: Globe, label: "Live in 4 days" },
+                                    ].map((item, i) => (
+                                        <div key={i} className="bg-white/5 border border-white/10 rounded-xl p-3 text-center">
+                                            <item.icon className="w-4 h-4 text-brand-teal mx-auto mb-1.5" />
+                                            <p className="text-xs text-text-muted">{item.label}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Open positions */}
+                            <div className="bg-bg-secondary border border-border-base rounded-3xl p-8">
+                                <p className="text-xs font-bold text-text-muted uppercase tracking-widest mb-5">
+                                    Open Positions (Equity / Volunteer)
+                                </p>
+                                <div className="space-y-3">
+                                    {[
+                                        "Senior Full-stack Engineer (React / RSC)",
+                                        "Cloud Infrastructure Engineer (SRE Focus)",
+                                        "System Design Intern (Birtamode Office)",
+                                    ].map((role, i) => (
+                                        <div key={i} className="flex items-center justify-between gap-4 bg-white border border-border-base rounded-xl px-4 py-3">
+                                            <span className="text-sm font-medium text-brand-navy">{role}</span>
+                                            <Link
+                                                href="/careers"
+                                                className="text-xs font-bold text-brand-orange hover:underline shrink-0 flex items-center gap-1"
+                                            >
+                                                Apply <ArrowRight className="w-3 h-3" />
+                                            </Link>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -170,29 +240,20 @@ export default function AboutPage() {
                         <div className="flex flex-col gap-8">
                             <h2 className="text-4xl md:text-5xl font-heading font-bold">Join the <span className="text-brand-orange">Team</span></h2>
                             <p className="text-lg text-text-muted leading-relaxed">
-                                We're a team that argues about architecture decisions at lunch and actually reads the technical blog posts we share. If that sounds like your kind of environment, we want to hear from you.
+                                We're building something real from the ground up. If you're someone who wants to own entire modules — not just tickets — and you care about clean architecture, we want to hear from you.
                             </p>
-                            {/* Added: concrete retention signals beyond just salary */}
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 {[
                                     { icon: TrendingUp, text: "Defined skill progression tracks — not just a job" },
                                     { icon: Briefcase, text: "Own entire modules, not just tickets" },
                                     { icon: Globe, text: "Work on systems used by real businesses daily" },
-                                    { icon: Users, text: "Direct access to lead architect from day one" },
+                                    { icon: Users, text: "Direct access to founder from day one" },
                                 ].map((item, i) => (
                                     <div key={i} className="flex items-start gap-3 bg-white/5 rounded-xl p-4">
                                         <item.icon className="w-4 h-4 text-brand-gold mt-0.5 shrink-0" />
                                         <span className="text-text-muted text-sm leading-snug">{item.text}</span>
                                     </div>
                                 ))}
-                            </div>
-                            <div className="space-y-2">
-                                <p className="text-xs font-bold text-brand-teal uppercase tracking-widest">Open Positions:</p>
-                                <ul className="space-y-2 text-sm text-text-muted">
-                                    <li>• Senior Full-stack Engineer (React/React Server Components)</li>
-                                    <li>• Cloud Infrastructure Engineer (SRE Focus)</li>
-                                    <li>• System Design Intern (Birtamode Office)</li>
-                                </ul>
                             </div>
                             <Link href="/careers" className="w-fit">
                                 <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 group">
@@ -213,7 +274,7 @@ export default function AboutPage() {
                 </div>
             </section>
 
-            {/* Location Section — added infrastructure resilience note */}
+            {/* Location Section */}
             <section className="py-24">
                 <div className="container-custom">
                     <div className="bg-bg-light border border-border-base p-12 md:p-16 rounded-[3rem] flex flex-col md:flex-row items-start gap-12">
@@ -225,7 +286,6 @@ export default function AboutPage() {
                             <p className="text-lg text-text-secondary leading-relaxed">
                                 We're based in Birtamode, one of the fastest-growing business hubs in eastern Nepal. We serve clients across Nepal and work remotely with organizations internationally. Our timezone (NPT, UTC+5:45) gives us natural overlap with both European morning hours and Asian business hours.
                             </p>
-                            {/* Infrastructure reliability note — addresses international client concern about outsourcing to Nepal */}
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div className="flex items-start gap-3 bg-white border border-border-base rounded-xl p-4">
                                     <Wifi className="w-4 h-4 text-brand-teal mt-0.5 shrink-0" />
