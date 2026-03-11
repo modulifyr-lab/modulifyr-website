@@ -140,12 +140,15 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <RegionProvider>
             <RegionModal />
-            {/* StartupBanner sits above the fixed Navbar in document flow.
-                It scrolls away naturally — zero layout impact on the rest of the page.
-                Remove this line to disable the banner permanently. */}
-            <StartupBanner />
             <Navbar />
+            {/*
+              StartupBanner lives INSIDE main, at the very top.
+              It uses `sticky top-20` so it sticks just below the fixed Navbar (h-20 = 80px).
+              It scrolls away with the page — zero overlap with nav links.
+              Remove the line below to disable the banner permanently.
+            */}
             <main className="min-h-screen pt-20">
+              <StartupBanner />
               {children}
             </main>
             <Footer />
