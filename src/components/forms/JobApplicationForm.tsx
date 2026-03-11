@@ -162,38 +162,30 @@ export function JobApplicationForm() {
                                         01 — Personal Information
                                     </h2>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                        {[
-                                            { label: "Full Name", name: "name", type: "text", placeholder: "Your full name", required: true },
-                                            { label: "Email", name: "email", type: "email", placeholder: "you@email.com", required: true },
-                                            { label: "Phone", name: "phone", type: "tel", placeholder: "+977 98XXXXXXXX", required: false },
-                                            { label: "Role Applying For", name: "role", type: "select", required: true },
-                                        ].map(f => (
-                                            <div key={f.name} className="flex flex-col gap-2">
-                                                <label className="text-sm font-semibold text-brand-navy">
-                                                    {f.label} {f.required ? <span className="text-brand-orange">*</span> : <span className="text-text-muted font-normal">(Optional)</span>}
-                                                </label>
-                                                {f.type === "select" ? (
-                                                    <select
-                                                        name={f.name}
-                                                        value={(form as Record<string, string>)[f.name]}
-                                                        onChange={handleChange}
-                                                        className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/10 transition-all text-sm appearance-none cursor-pointer"
-                                                    >
-                                                        <option value="" disabled>Select a role</option>
-                                                        {roles.map(r => <option key={r} value={r}>{r}</option>)}
-                                                    </select>
-                                                ) : (
-                                                    <input
-                                                        type={f.type}
-                                                        name={f.name}
-                                                        value={(form as Record<string, string>)[f.name]}
-                                                        onChange={handleChange}
-                                                        placeholder={f.placeholder}
-                                                        className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/10 transition-all text-sm"
-                                                    />
-                                                )}
-                                            </div>
-                                        ))}
+                                        {/* Rendered individually to keep TypeScript happy — no dynamic key access */}
+                                        <div className="flex flex-col gap-2">
+                                            <label className="text-sm font-semibold text-brand-navy">Full Name <span className="text-brand-orange">*</span></label>
+                                            <input type="text" name="name" value={form.name} onChange={handleChange} placeholder="Your full name"
+                                                className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/10 transition-all text-sm" />
+                                        </div>
+                                        <div className="flex flex-col gap-2">
+                                            <label className="text-sm font-semibold text-brand-navy">Email <span className="text-brand-orange">*</span></label>
+                                            <input type="email" name="email" value={form.email} onChange={handleChange} placeholder="you@email.com"
+                                                className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/10 transition-all text-sm" />
+                                        </div>
+                                        <div className="flex flex-col gap-2">
+                                            <label className="text-sm font-semibold text-brand-navy">Phone <span className="text-text-muted font-normal">(Optional)</span></label>
+                                            <input type="tel" name="phone" value={form.phone} onChange={handleChange} placeholder="+977 98XXXXXXXX"
+                                                className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/10 transition-all text-sm" />
+                                        </div>
+                                        <div className="flex flex-col gap-2">
+                                            <label className="text-sm font-semibold text-brand-navy">Role Applying For <span className="text-brand-orange">*</span></label>
+                                            <select name="role" value={form.role} onChange={handleChange}
+                                                className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/10 transition-all text-sm appearance-none cursor-pointer">
+                                                <option value="" disabled>Select a role</option>
+                                                {roles.map(r => <option key={r} value={r}>{r}</option>)}
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
 
