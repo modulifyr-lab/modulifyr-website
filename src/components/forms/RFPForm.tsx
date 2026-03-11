@@ -26,19 +26,19 @@ const projectTypes = [
 
 // ─── Region-specific budget options ──────────────────────────────────────────
 const budgetsNepal = [
-    "NPR 2,00,000 – 4,50,000 (Discovery Phase)",
-    "NPR 6,00,000 – 15,00,000 (Pilot / Proof-of-Value)",
-    "NPR 15,00,000 – 30,00,000 (Focused Build)",
-    "NPR 30,00,000 – 60,00,000 (Full System)",
-    "NPR 60,00,000+ (Enterprise / Team)",
+    "NPR 200000 – 450000 (Discovery Phase)",
+    "NPR 600000 – 1500000 (Pilot / Proof-of-Value)",
+    "NPR 1500000 – 3000000 (Focused Build)",
+    "NPR 3000000 – 6000000 (Full System)",
+    "NPR 6000000+ (Enterprise / Team)",
     "Not Sure Yet",
 ];
 
 const budgetsInternational = [
-    "$6k – $12k (Discovery Phase)",
-    "$15k – $35k (Pilot / Proof-of-Value)",
-    "$35k – $70k (Focused Build)",
-    "$70k – $150k (Full System)",
+    "$6000 – $12000 (Discovery Phase)",
+    "$15000 – $35000 (Pilot / Proof-of-Value)",
+    "$35000 – $70000 (Focused Build)",
+    "$70000 – $150000 (Full System)",
     "$150k+ (Enterprise / Team)",
     "Not Sure Yet",
 ];
