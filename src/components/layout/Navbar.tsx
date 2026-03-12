@@ -6,8 +6,8 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { Sun, Moon, Menu, X } from "lucide-react";
-import { useLanguage } from "@/contexts/LanguageContext";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { useLanguage } from "@/components/LanguageContext";
+import LanguageSwitcher from "@/contexts/LanguageSwitcher";
 
 const NAV_LINKS = [
   { href: "/services",   key: "nav.services" },
@@ -53,7 +53,7 @@ export function Navbar() {
 
   return (
     <>
-      {/* ── Skip to main content (screen-reader / keyboard users) ─────────── */}
+      {/* ── Skip to main content ─────────────────────────────────────────── */}
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only fixed top-2 left-2 z-[100]
@@ -63,7 +63,7 @@ export function Navbar() {
         {t("nav.skip_to_content")}
       </a>
 
-      {/* ── Navbar ─────────────────────────────────────────────────────────── */}
+      {/* ── Navbar ───────────────────────────────────────────────────────── */}
       <nav
         role="navigation"
         aria-label="Main navigation"
@@ -115,11 +115,8 @@ export function Navbar() {
 
           {/* ── Desktop right controls ─────────────────────────────────────── */}
           <div className="hidden lg:flex items-center gap-3">
-            {/* Language switcher — left side, opposite to Request Proposal */}
             <LanguageSwitcher />
-
             <div className="flex items-center gap-3 border-l border-border-base pl-4">
-              {/* Theme toggle */}
               {mounted && (
                 <button
                   onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
@@ -134,8 +131,6 @@ export function Navbar() {
                     : <Moon className="h-5 w-5" aria-hidden="true" />}
                 </button>
               )}
-
-              {/* Request Proposal */}
               <Link href="/request-proposal">
                 <button
                   aria-label={t("nav.request_proposal")}
@@ -212,11 +207,9 @@ export function Navbar() {
               </Link>
             );
           })}
-
           <div className="pt-2 border-t border-border-base">
             <LanguageSwitcher />
           </div>
-
           <Link href="/request-proposal">
             <button
               aria-label={t("nav.request_proposal")}
