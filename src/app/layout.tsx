@@ -165,15 +165,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <RegionProvider>
-            <LanguageProvider>
-              <RegionModal />
-              <Navbar />
-              {/* ← "Skip to main content" link in Navbar.tsx targets this id */}
-              <main id="main-content" className="min-h-screen pt-20">
-                <StartupBanner />
-                {children}
-              </main>
-            </LanguageProvider>
+            <RegionModal />
+            <Navbar />
+            {/*
+              StartupBanner lives INSIDE main, at the very top.
+              It uses `sticky top-20` so it sticks just below the fixed Navbar (h-20 = 80px).
+              It scrolls away with the page — zero overlap with nav links.
+              Remove the line below to disable the banner permanently.
+            */}
+            <main className="min-h-screen pt-20">
+              <StartupBanner />
+              {children}
+            </main>
+            <Footer />
           </RegionProvider>
         </ThemeProvider>
 
