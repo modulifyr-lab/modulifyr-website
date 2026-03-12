@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import { RegionProvider } from "@/contexts/RegionContext";
+import { RegionProvider } from "@/components/RegionProvider";
 import { RegionModal } from "@/components/RegionModal";
-import { LanguageProvider } from "@/contexts/LanguageContext";
-import { Navbar } from "@/components/Navbar";
+import { LanguageProvider } from "@/components/LanguageContext";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";   
 import StartupBanner from "@/components/StartupBanner";
 import Script from "next/script";
 
@@ -22,37 +23,20 @@ export const metadata: Metadata = {
     "Modulifyr designs and builds modular software systems for organizations requiring flexibility, scalability, and long-term reliability. Custom software development company based in Birtamode, Nepal serving businesses globally.",
   authors: [{ name: "Modulifyr Engineering" }],
   keywords: [
-    "custom software development Nepal",
-    "software company Birtamode",
-    "software company Nepal",
-    "modular software systems Nepal",
-    "ERP system Nepal",
-    "custom ERP Nepal",
-    "school management system Nepal",
-    "hospital management software Nepal",
-    "retail POS system Nepal",
-    "modular architecture",
-    "system design Nepal",
-    "enterprise software Nepal",
-    "B2B software solutions Nepal",
-    "custom software Jhapa",
-    "software development Birtamode Jhapa",
-    "business software Nepal SME",
-    "custom software development",
-    "software company",
-    "modular software systems",
-    "ERP system",
-    "custom ERP",
-    "school management system",
-    "hospital management software",
-    "retail POS system",
-    "modular architecture",
-    "system design",
-    "enterprise software",
-    "B2B software solutions",
-    "custom software",
-    "software development",
-    "business software SME"
+    "custom software development Nepal","software company Birtamode",
+    "software company Nepal","modular software systems Nepal",
+    "ERP system Nepal","custom ERP Nepal",
+    "school management system Nepal","hospital management software Nepal",
+    "retail POS system Nepal","modular architecture",
+    "system design Nepal","enterprise software Nepal",
+    "B2B software solutions Nepal","custom software Jhapa",
+    "software development Birtamode Jhapa","business software Nepal SME",
+    "custom software development","software company",
+    "modular software systems","ERP system","custom ERP",
+    "school management system","hospital management software",
+    "retail POS system","system design","enterprise software",
+    "B2B software solutions","custom software","software development",
+    "business software SME",
   ],
   creator: "Modulifyr",
   openGraph: {
@@ -165,19 +149,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <RegionProvider>
-            <RegionModal />
-            <Navbar />
-            {/*
-              StartupBanner lives INSIDE main, at the very top.
-              It uses `sticky top-20` so it sticks just below the fixed Navbar (h-20 = 80px).
-              It scrolls away with the page — zero overlap with nav links.
-              Remove the line below to disable the banner permanently.
-            */}
-            <main className="min-h-screen pt-20">
-              <StartupBanner />
-              {children}
-            </main>
-            <Footer />
+            <LanguageProvider>
+              <RegionModal />
+              <Navbar />
+              {/* id="main-content" ← paired with skip-to-content link in Navbar */}
+              <main id="main-content" className="min-h-screen pt-20">
+                <StartupBanner />
+                {children}
+              </main>
+              <Footer />
+            </LanguageProvider>
           </RegionProvider>
         </ThemeProvider>
 
