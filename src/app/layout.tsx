@@ -6,8 +6,8 @@ import { RegionProvider } from "@/components/RegionProvider";
 import { RegionModal } from "@/components/RegionModal";
 import { LanguageProvider } from "@/components/LanguageContext";
 import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";   
-import StartupBanner from "@/components/StartupBanner";
+import { Footer } from "@/components/layout/Footer";
+import { StartupBanner } from "@/components/StartupBanner";
 import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
