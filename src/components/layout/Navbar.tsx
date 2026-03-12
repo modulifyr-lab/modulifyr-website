@@ -21,11 +21,14 @@ const NAV_LINKS = [
 
 export function Navbar() {
   const pathname = usePathname();
-  const { resolvedTheme, setTheme, mounted } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const { t } = useLanguage();
+  const [mounted, setMounted] = useState(false);   // ✅ local state — not from useTheme()
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => { setMounted(true); }, []);       // ✅ set after hydration
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -53,7 +56,7 @@ export function Navbar() {
 
   return (
     <>
-      {/* ── Skip to main content ─────────────────────────────────────────── */}
+      {/* ── Skip to main content ───────────────────────────────────────── */}
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only fixed top-2 left-2 z-[100]
@@ -63,7 +66,7 @@ export function Navbar() {
         {t("nav.skip_to_content")}
       </a>
 
-      {/* ── Navbar ───────────────────────────────────────────────────────── */}
+      {/* ── Navbar ─────────────────────────────────────────────────────── */}
       <nav
         role="navigation"
         aria-label="Main navigation"
@@ -92,7 +95,7 @@ export function Navbar() {
             </span>
           </Link>
 
-          {/* ── Desktop links ─────────────────────────────────────────────── */}
+          {/* ── Desktop links ──────────────────────────────────────────── */}
           <div className="hidden lg:flex items-center gap-6" role="list">
             {NAV_LINKS.map(({ href, key }) => {
               const active = pathname === href || pathname.startsWith(href + "/");
@@ -113,7 +116,7 @@ export function Navbar() {
             })}
           </div>
 
-          {/* ── Desktop right controls ─────────────────────────────────────── */}
+          {/* ── Desktop right controls ─────────────────────────────────── */}
           <div className="hidden lg:flex items-center gap-3">
             <LanguageSwitcher />
             <div className="flex items-center gap-3 border-l border-border-base pl-4">
@@ -146,7 +149,7 @@ export function Navbar() {
             </div>
           </div>
 
-          {/* ── Mobile controls ────────────────────────────────────────────── */}
+          {/* ── Mobile controls ────────────────────────────────────────── */}
           <div className="flex items-center gap-3 lg:hidden">
             {mounted && (
               <button
@@ -180,7 +183,7 @@ export function Navbar() {
         </div>
       </nav>
 
-      {/* ── Mobile menu ──────────────────────────────────────────────────────── */}
+      {/* ── Mobile menu ────────────────────────────────────────────────── */}
       <div
         id="mobile-menu"
         role="dialog"
