@@ -4,9 +4,11 @@
 import { Client } from "@notionhq/client";
 
 // ─── Singleton client ────────────────────────────────────────────────────────
-let _notion: Client | null = null;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let _notion: any = null;
 
-function getClient(): Client | null {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function getClient(): any {
   if (!isConfigured()) return null;
   if (!_notion) {
     _notion = new Client({ auth: process.env.NOTION_API_KEY });
