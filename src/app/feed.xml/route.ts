@@ -1,5 +1,5 @@
 import { getAllPosts } from "@/lib/notion-blog";
-import { staticPosts } from "@/app/blog/page";
+import { posts as staticPosts } from "@/app/blog/page";
 
 const SITE_URL = "https://modulifyr.vercel.app";
 
