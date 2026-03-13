@@ -19,6 +19,10 @@ import { ArrowLeft, ArrowRight, Clock, User } from "lucide-react";
 // ─── ISR — revalidate every hour so Notion edits go live automatically ────────
 export const revalidate = 3600;
 
+// ─── KEY FIX: allow slugs not in generateStaticParams (i.e. Notion posts) ────
+// Without this, Next.js returns 404 for ANY slug not pre-built at build time.
+export const dynamicParams = true;
+
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {

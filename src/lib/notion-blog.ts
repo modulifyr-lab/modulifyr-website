@@ -1,21 +1,15 @@
-// ─── Lazy imports — only resolved when Notion is actually configured ──────────
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-let _notion: any = null;
+// ─── Use a real top-level import — Turbopack (Next.js 16) does NOT support ────
+// dynamic require() the same way webpack does, which caused:
+// "client.databases.query is not a function"
+import { Client } from "@notionhq/client";
 
-function getClient() {
-  if (_notion) return _notion;
-  try {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const mod = require("@notionhq/client");
-    // Handle CJS default export, named export, and ESM interop
-    const ClientClass = mod.Client ?? mod.default?.Client ?? mod.default;
-    if (typeof ClientClass !== "function") {
-      throw new Error("@notionhq/client: Client constructor not found in module");
-    }
-    _notion = new ClientClass({ auth: process.env.NOTION_API_KEY });
-  } catch (e) {
-    console.error("[notion-blog] Failed to init Notion client:", e);
-    return null;
+// ─── Singleton client ────────────────────────────────────────────────────────
+let _notion: Client | null = null;
+
+function getClient(): Client | null {
+  if (!isConfigured()) return null;
+  if (!_notion) {
+    _notion = new Client({ auth: process.env.NOTION_API_KEY });
   }
   return _notion;
 }
