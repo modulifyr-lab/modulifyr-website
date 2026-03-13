@@ -23,39 +23,78 @@ export const metadata: Metadata = {
     "Modulifyr designs and builds modular software systems for organizations requiring flexibility, scalability, and long-term reliability. Custom software development company based in Birtamode, Nepal serving businesses globally.",
   authors: [{ name: "Modulifyr Engineering" }],
   keywords: [
-    "custom software development Nepal","software company Birtamode",
-    "software company Nepal","modular software systems Nepal",
-    "ERP system Nepal","custom ERP Nepal",
-    "school management system Nepal","hospital management software Nepal",
-    "retail POS system Nepal","modular architecture",
-    "system design Nepal","enterprise software Nepal",
-    "B2B software solutions Nepal","custom software Jhapa",
-    "software development Birtamode Jhapa","business software Nepal SME",
-    "custom software development","software company",
-    "modular software systems","ERP system","custom ERP",
-    "school management system","hospital management software",
-    "retail POS system","system design","enterprise software",
-    "B2B software solutions","custom software","software development",
+    "custom software development Nepal",
+    "software company Birtamode",
+    "software company Nepal",
+    "modular software systems Nepal",
+    "ERP system Nepal",
+    "custom ERP Nepal",
+    "school management system Nepal",
+    "hospital management software Nepal",
+    "retail POS system Nepal",
+    "modular architecture",
+    "system design Nepal",
+    "enterprise software Nepal",
+    "B2B software solutions Nepal",
+    "custom software Jhapa",
+    "software development Birtamode Jhapa",
+    "business software Nepal SME",
+    "custom software development",
+    "software company",
+    "modular software systems",
+    "ERP system",
+    "custom ERP",
+    "school management system",
+    "hospital management software",
+    "retail POS system",
+    "system design",
+    "enterprise software",
+    "B2B software solutions",
+    "custom software",
+    "software development",
     "business software SME",
   ],
   creator: "Modulifyr",
   openGraph: {
     title: "Modulifyr | Custom Software Systems Built to Scale",
-    description: "Engineering tailored modular software solutions for businesses across Nepal and worldwide. Based in Birtamode, Jhapa.",
+    description:
+      "Engineering tailored modular software solutions for businesses across Nepal and worldwide. Based in Birtamode, Jhapa.",
     url: "https://modulifyr.vercel.app",
     siteName: "Modulifyr",
     locale: "en_US",
-    images: [{ url: "https://modulifyr.vercel.app/og-image.png", width: 1200, height: 630, alt: "Modulifyr - Custom Modular Systems" }],
+    images: [
+      {
+        url: "https://modulifyr.vercel.app/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Modulifyr - Custom Modular Systems",
+      },
+    ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     creator: "@modulifyr",
     title: "Modulifyr | Custom Software Systems",
-    description: "Engineering tailored solutions for complex operational requirements with modular architecture.",
+    description:
+      "Engineering tailored solutions for complex operational requirements with modular architecture.",
     images: ["https://modulifyr.vercel.app/og-image.png"],
   },
-  icons: { icon: [{ url: "/favicon.ico", sizes: "128x128", type: "image/x-icon" }] },
+  icons: {
+    icon: [{ url: "/favicon.ico", sizes: "128x128", type: "image/x-icon" }],
+  },
+  // ── RSS feed discovery ───────────────────────────────────────────────────
+  // Browsers and feed readers detect this <link> tag automatically in <head>.
+  alternates: {
+    types: {
+      "application/rss+xml": [
+        {
+          url: "https://modulifyr.vercel.app/feed.xml",
+          title: "Modulifyr Engineering Blog",
+        },
+      ],
+    },
+  },
 };
 
 // ─── Schema.org — Organisation + Founder (Rijan Mainali) ─────────────────────
@@ -65,53 +104,57 @@ const schemaOrg = {
     {
       "@type": "Organization",
       "@id": "https://modulifyr.vercel.app/#organization",
-      "name": "Modulifyr",
-      "alternateName": "Modulifyr Lab",
-      "url": "https://modulifyr.vercel.app",
-      "logo": {
+      name: "Modulifyr",
+      alternateName: "Modulifyr Lab",
+      url: "https://modulifyr.vercel.app",
+      logo: {
         "@type": "ImageObject",
-        "url": "https://modulifyr.vercel.app/company-logo.png",
-        "width": 512,
-        "height": 512,
+        url: "https://modulifyr.vercel.app/company-logo.png",
+        width: 512,
+        height: 512,
       },
-      "description": "Custom modular software systems for small and medium-sized businesses in education, healthcare, retail, commerce, and IT.",
-      "address": {
+      description:
+        "Custom modular software systems for small and medium-sized businesses in education, healthcare, retail, commerce, and IT.",
+      address: {
         "@type": "PostalAddress",
-        "addressLocality": "Birtamode",
-        "addressRegion": "Jhapa",
-        "addressCountry": "NP",
+        addressLocality: "Birtamode",
+        addressRegion: "Jhapa",
+        addressCountry: "NP",
       },
-      "contactPoint": {
+      contactPoint: {
         "@type": "ContactPoint",
-        "email": "contact@modulifyr.com",
-        "contactType": "sales",
-        "availableLanguage": ["English", "Nepali"],
+        email: "contact@modulifyr.com",
+        contactType: "sales",
+        availableLanguage: ["English", "Nepali"],
       },
-      "areaServed": "Worldwide",
-      "foundingDate": "2025",
-      "foundingLocation": { "@type": "Place", "name": "Birtamode, Jhapa, Nepal" },
-      "founder": {
+      areaServed: "Worldwide",
+      foundingDate: "2025",
+      foundingLocation: {
+        "@type": "Place",
+        name: "Birtamode, Jhapa, Nepal",
+      },
+      founder: {
         "@type": "Person",
         "@id": "https://modulifyr.vercel.app/#founder",
-        "name": "Rijan Mainali",
-        "jobTitle": "Founder & Lead Engineer",
-        "image": "https://modulifyr.vercel.app/rijan-mainali.jpg",
-        "worksFor": { "@id": "https://modulifyr.vercel.app/#organization" },
-        "address": {
+        name: "Rijan Mainali",
+        jobTitle: "Founder & Lead Engineer",
+        image: "https://modulifyr.vercel.app/rijan-mainali.jpg",
+        worksFor: { "@id": "https://modulifyr.vercel.app/#organization" },
+        address: {
           "@type": "PostalAddress",
-          "addressLocality": "Birtamode",
-          "addressRegion": "Jhapa",
-          "addressCountry": "NP",
+          addressLocality: "Birtamode",
+          addressRegion: "Jhapa",
+          addressCountry: "NP",
         },
       },
-      "serviceType": [
+      serviceType: [
         "Custom Software Development",
         "System Architecture Consulting",
         "ERP Development",
         "Legacy System Modernization",
         "Cloud Infrastructure",
       ],
-      "sameAs": [
+      sameAs: [
         "https://linkedin.com/company/modulifyr",
         "https://github.com/modulifyr-lab",
       ],
@@ -119,14 +162,18 @@ const schemaOrg = {
     {
       "@type": "WebSite",
       "@id": "https://modulifyr.vercel.app/#website",
-      "url": "https://modulifyr.vercel.app",
-      "name": "Modulifyr",
-      "publisher": { "@id": "https://modulifyr.vercel.app/#organization" },
+      url: "https://modulifyr.vercel.app",
+      name: "Modulifyr",
+      publisher: { "@id": "https://modulifyr.vercel.app/#organization" },
     },
   ],
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -147,7 +194,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           />
         </noscript>
 
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
           <RegionProvider>
             <LanguageProvider>
               <RegionModal />
