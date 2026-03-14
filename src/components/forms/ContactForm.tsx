@@ -162,13 +162,13 @@ export function ContactForm() {
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div className="space-y-2">
                                             <label htmlFor="contact-name" className="text-sm font-bold text-brand-navy font-heading">Your Name <span className="text-brand-orange">*</span></label>
-                                            <input id="contact-name" type="text" name="name" value={(form as Record<string, unknown>).name as string} onChange={handleChange}
+                                            <input id="contact-name" type="text" name="name" value={form.name} onChange={handleChange}
                                                 placeholder="Full Name" required maxLength={200}
                                                 className="flex h-12 w-full rounded-lg border border-border-base bg-background px-4 py-2 text-base placeholder:text-text-dim focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange disabled:opacity-50 transition-all text-foreground" />
                                         </div>
                                         <div className="space-y-2">
                                             <label htmlFor="contact-email" className="text-sm font-bold text-brand-navy font-heading">Your Email <span className="text-brand-orange">*</span></label>
-                                            <input id="contact-email" type="email" name="email" value={(form as Record<string, unknown>).email as string} onChange={handleChange}
+                                            <input id="contact-email" type="email" name="email" value={form.email} onChange={handleChange}
                                                 placeholder="email@company.com" required
                                                 className="flex h-12 w-full rounded-lg border border-border-base bg-background px-4 py-2 text-base placeholder:text-text-dim focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange disabled:opacity-50 transition-all text-foreground" />
                                         </div>
@@ -176,14 +176,14 @@ export function ContactForm() {
 
                                     <div className="space-y-2">
                                         <label htmlFor="contact-subject" className="text-sm font-bold text-brand-navy font-heading">Subject <span className="text-brand-orange">*</span></label>
-                                        <input id="contact-subject" type="text" name="subject" value={(form as Record<string, unknown>).subject as string} onChange={handleChange}
+                                        <input id="contact-subject" type="text" name="subject" value={form.subject} onChange={handleChange}
                                             placeholder="How can we help?" required maxLength={300}
                                             className="flex h-12 w-full rounded-lg border border-border-base bg-background px-4 py-2 text-base placeholder:text-text-dim focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange disabled:opacity-50 transition-all text-foreground" />
                                     </div>
 
                                     <div className="space-y-2">
                                         <label htmlFor="contact-message" className="text-sm font-bold text-brand-navy font-heading">Message <span className="text-brand-orange">*</span></label>
-                                        <textarea id="contact-message" name="message" value={(form as Record<string, unknown>).message as string} onChange={handleChange}
+                                        <textarea id="contact-message" name="message" value={form.message} onChange={handleChange}
                                             placeholder="Tell us about your project or question..." required maxLength={5000}
                                             className="flex min-h-[150px] w-full rounded-lg border border-border-base bg-background px-4 py-3 text-base placeholder:text-text-dim focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange disabled:opacity-50 transition-all text-foreground resize-none" />
                                         <p className="text-xs text-text-muted text-right">{form.message.length}/5000</p>
@@ -192,7 +192,7 @@ export function ContactForm() {
                                     {/* Honeypot */}
                                     <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: "1px", height: "1px", overflow: "hidden" }}>
                                         <label htmlFor="contact-website">Website</label>
-                                        <input id="contact-website" type="text" name="website" value={(form as Record<string, unknown>).website as string} onChange={handleChange} tabIndex={-1} autoComplete="off" />
+                                        <input id="contact-website" type="text" name="website" value={form.website} onChange={handleChange} tabIndex={-1} autoComplete="off" />
                                     </div>
 
                                     <div className="flex items-center gap-3 bg-bg-secondary p-4 rounded-lg">

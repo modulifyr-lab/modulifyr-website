@@ -139,22 +139,22 @@ export function JobApplicationForm() {
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                         <div className="flex flex-col gap-2">
                                             <label className="text-sm font-semibold text-brand-navy">Full Name <span className="text-brand-orange">*</span></label>
-                                            <input type="text" name="name" value={(form as Record<string, unknown>).name as string} onChange={handleChange} placeholder="Your full name" maxLength={200}
+                                            <input type="text" name="name" value={form.name} onChange={handleChange} placeholder="Your full name" maxLength={200}
                                                 className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/10 transition-all text-sm" />
                                         </div>
                                         <div className="flex flex-col gap-2">
                                             <label className="text-sm font-semibold text-brand-navy">Email <span className="text-brand-orange">*</span></label>
-                                            <input type="email" name="email" value={(form as Record<string, unknown>).email as string} onChange={handleChange} placeholder="you@email.com"
+                                            <input type="email" name="email" value={form.email} onChange={handleChange} placeholder="you@email.com"
                                                 className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/10 transition-all text-sm" />
                                         </div>
                                         <div className="flex flex-col gap-2">
                                             <label className="text-sm font-semibold text-brand-navy">Phone <span className="text-text-muted font-normal">(Optional)</span></label>
-                                            <input type="tel" name="phone" value={(form as Record<string, unknown>).phone as string} onChange={handleChange} placeholder="+977 98XXXXXXXX"
+                                            <input type="tel" name="phone" value={form.phone} onChange={handleChange} placeholder="+977 98XXXXXXXX"
                                                 className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/10 transition-all text-sm" />
                                         </div>
                                         <div className="flex flex-col gap-2">
                                             <label className="text-sm font-semibold text-brand-navy">Role Applying For <span className="text-brand-orange">*</span></label>
-                                            <select name="role" value={(form as Record<string, unknown>).role as string} onChange={handleChange}
+                                            <select name="role" value={form.role} onChange={handleChange}
                                                 className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/10 transition-all text-sm appearance-none cursor-pointer">
                                                 <option value="" disabled>Select a role</option>
                                                 {roles.map(r => <option key={r} value={r}>{r}</option>)}
@@ -169,19 +169,19 @@ export function JobApplicationForm() {
                                     <div className="flex flex-col gap-5">
                                         <div className="flex flex-col gap-2">
                                             <label className="text-sm font-semibold text-brand-navy">Key Skills <span className="text-brand-orange">*</span></label>
-                                            <input type="text" name="skills" value={(form as Record<string, unknown>).skills as string} onChange={handleChange}
+                                            <input type="text" name="skills" value={form.skills} onChange={handleChange}
                                                 placeholder="e.g. React, TypeScript, Node.js, PostgreSQL, AWS" maxLength={500}
                                                 className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/10 transition-all text-sm" />
                                         </div>
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                             <div className="flex flex-col gap-2">
                                                 <label className="text-sm font-semibold text-brand-navy flex items-center gap-2"><Github className="w-4 h-4" /> Portfolio / GitHub</label>
-                                                <input type="url" name="portfolio_url" value={(form as Record<string, unknown>).portfolio_url as string} onChange={handleChange} placeholder="https://github.com/yourhandle"
+                                                <input type="url" name="portfolio_url" value={form.portfolio_url} onChange={handleChange} placeholder="https://github.com/yourhandle"
                                                     className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/10 transition-all text-sm" />
                                             </div>
                                             <div className="flex flex-col gap-2">
                                                 <label className="text-sm font-semibold text-brand-navy flex items-center gap-2"><Linkedin className="w-4 h-4" /> LinkedIn Profile</label>
-                                                <input type="url" name="linkedin_url" value={(form as Record<string, unknown>).linkedin_url as string} onChange={handleChange} placeholder="https://linkedin.com/in/yourname"
+                                                <input type="url" name="linkedin_url" value={form.linkedin_url} onChange={handleChange} placeholder="https://linkedin.com/in/yourname"
                                                     className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/10 transition-all text-sm" />
                                             </div>
                                         </div>
@@ -194,7 +194,7 @@ export function JobApplicationForm() {
                                     <div className="flex flex-col gap-2">
                                         <label className="text-sm font-semibold text-brand-navy">Why Modulifyr? <span className="text-brand-orange">*</span></label>
                                         <p className="text-xs text-text-muted mb-2">Tell us about your background, what excites you about modular systems, and what you'd bring to the team.</p>
-                                        <textarea name="cover_note" value={(form as Record<string, unknown>).cover_note as string} onChange={handleChange} rows={6} maxLength={5000}
+                                        <textarea name="cover_note" value={form.cover_note} onChange={handleChange} rows={6} maxLength={5000}
                                             placeholder="I've been working with modular architectures for X years... What draws me to Modulifyr is..."
                                             className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/10 transition-all text-sm resize-none" />
                                         <p className="text-xs text-text-muted text-right">{form.cover_note.length}/5000</p>
@@ -204,7 +204,7 @@ export function JobApplicationForm() {
                                 {/* Honeypot */}
                                 <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: "1px", height: "1px", overflow: "hidden" }}>
                                     <label htmlFor="job-website">Website</label>
-                                    <input id="job-website" type="text" name="website" value={(form as Record<string, unknown>).website as string} onChange={handleChange} tabIndex={-1} autoComplete="off" />
+                                    <input id="job-website" type="text" name="website" value={form.website} onChange={handleChange} tabIndex={-1} autoComplete="off" />
                                 </div>
 
                                 <Button size="lg" onClick={handleSubmit} disabled={status === "loading"} className="w-full justify-center group bg-brand-navy hover:bg-brand-navy/90">

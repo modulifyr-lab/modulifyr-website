@@ -25,8 +25,14 @@ const budgetsInternational = [
 ];
 
 interface FormState {
-    name: string; company: string; email: string; phone: string;
-    industry: string; project_type: string; budget: string; message: string;
+    name: string;
+    company: string;
+    email: string;
+    phone: string;
+    industry: string;
+    project_type: string;
+    budget: string;
+    message: string;
     website: string; // honeypot
 }
 
@@ -173,8 +179,14 @@ export function RFPForm() {
                                                 <label className="text-sm font-semibold text-brand-navy">
                                                     {f.label} {f.required ? <span className="text-brand-orange">*</span> : <span className="text-text-muted font-normal">(Optional)</span>}
                                                 </label>
-                                                <input type={f.type} name={f.name} value={(form as Record<string, unknown>)[f.name] as string} onChange={handleChange} placeholder={f.placeholder}
-                                                    className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/10 transition-all text-sm" />
+                                                <input
+                                                    type={f.type}
+                                                    name={f.name}
+                                                    value={form[f.name as keyof FormState]}
+                                                    onChange={handleChange}
+                                                    placeholder={f.placeholder}
+                                                    className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/10 transition-all text-sm"
+                                                />
                                             </div>
                                         ))}
                                     </div>
@@ -186,7 +198,7 @@ export function RFPForm() {
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                         <div className="flex flex-col gap-2">
                                             <label className="text-sm font-semibold text-brand-navy">Industry <span className="text-brand-orange">*</span></label>
-                                            <select name="industry" value={(form as Record<string, unknown>).industry as string} onChange={handleChange}
+                                            <select name="industry" value={form.industry} onChange={handleChange}
                                                 className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary focus:outline-none focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/10 transition-all text-sm appearance-none cursor-pointer">
                                                 <option value="" disabled>Select your industry</option>
                                                 {industries.map(i => <option key={i} value={i}>{i}</option>)}
@@ -194,7 +206,7 @@ export function RFPForm() {
                                         </div>
                                         <div className="flex flex-col gap-2">
                                             <label className="text-sm font-semibold text-brand-navy">Project Type <span className="text-brand-orange">*</span></label>
-                                            <select name="project_type" value={(form as Record<string, unknown>).project_type as string} onChange={handleChange}
+                                            <select name="project_type" value={form.project_type} onChange={handleChange}
                                                 className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary focus:outline-none focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/10 transition-all text-sm appearance-none cursor-pointer">
                                                 <option value="" disabled>Select project type</option>
                                                 {projectTypes.map(p => <option key={p} value={p}>{p}</option>)}
@@ -223,17 +235,17 @@ export function RFPForm() {
                                     <div className="flex flex-col gap-2">
                                         <label className="text-sm font-semibold text-brand-navy">Describe your project <span className="text-brand-orange">*</span></label>
                                         <p className="text-xs text-text-muted mb-2">Include current systems, key workflows, pain points, and what success looks like.</p>
-                                        <textarea name="message" value={(form as Record<string, unknown>).message as string} onChange={handleChange} rows={6} maxLength={8000}
+                                        <textarea name="message" value={form.message} onChange={handleChange} rows={6} maxLength={8000}
                                             placeholder="We currently use [system X] for [workflow Y]. The main challenge is... We need a solution that..."
                                             className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/10 transition-all text-sm resize-none" />
-                                        <p className="text-xs text-text-muted text-right">{(form as Record<string, unknown>).message.length as number}/8000</p>
+                                        <p className="text-xs text-text-muted text-right">{form.message.length}/8000</p>
                                     </div>
                                 </div>
 
                                 {/* Honeypot */}
                                 <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: "1px", height: "1px", overflow: "hidden" }}>
                                     <label htmlFor="rfp-website">Website</label>
-                                    <input id="rfp-website" type="text" name="website" value={(form as Record<string, unknown>).website as string} onChange={handleChange} tabIndex={-1} autoComplete="off" />
+                                    <input id="rfp-website" type="text" name="website" value={form.website} onChange={handleChange} tabIndex={-1} autoComplete="off" />
                                 </div>
 
                                 <Button size="lg" onClick={handleSubmit} disabled={status === "loading"} className="w-full justify-center group">
