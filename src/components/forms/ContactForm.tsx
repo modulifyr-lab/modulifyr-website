@@ -49,52 +49,37 @@ export function ContactForm() {
         setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
     };
 
-    // Rate limit check
-    const ip = getClientIp(req);
-    if (isRateLimited(ip)) {
-        return {
-            status: 429,
-            body: JSON.stringify({ error: "Rate limit exceeded. Please try again later." }),
-        };
-    }
+    
 
-    // Rate limit check
-    const ip = getClientIp(e.currentTarget);
-    if (isRateLimited(ip)) {
-        return {
-            status: 429,
-            body: JSON.stringify({ error: "Rate limit exceeded. Please try again later." }),
-        };
-    }
 
     const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setStatus("loading");
-        setErrorMsg("");
+    e.preventDefault();
+    setStatus("loading");
+    setErrorMsg("");
 
-        try {
-            const res = await fetch("/api/submit-contact", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(form),
-            });
+    try {
+        const res = await fetch("/api/submit-contact", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(form),
+        });
 
-            const data = await res.json();
-            if (!res.ok) throw new Error(data.error || "Submission failed");
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "Submission failed");
 
-            setSubmitted(true);
-            setForm(initialForm);
-        } catch (err: unknown) {
-            setStatus("error");
-            setErrorMsg(
-                err instanceof Error
-                    ? err.message
-                    : "Failed to send. Please email us directly at contact@modulifyr.com"
-            );
-        } finally {
-            setStatus("idle");
-        }
-    };
+        setSubmitted(true);
+        setForm(initialForm);
+    } catch (err: unknown) {
+        setStatus("error");
+        setErrorMsg(
+            err instanceof Error
+                ? err.message
+                : "Failed to send. Please email us directly at contact@modulifyr.com"
+        );
+    } finally {
+        setStatus("idle");
+    }
+};
 
     if (submitted) {
         return (
