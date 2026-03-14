@@ -1,13 +1,22 @@
-// ─── notion-blog.ts ──────────────────────────────────────────────────────────
-// Uses raw fetch() to call the Notion REST API directly.
-// The @notionhq/client SDK causes "notion.databases.query is not a function"
-// under Turbopack (Next.js 16) because Turbopack doesn't bundle the SDK's
-// prototype methods correctly. Raw fetch has zero dependencies and always works.
+// src/lib/notion-blog.ts
+// ─────────────────────────────────────────────────────────────────────────────
+// Fetches blog posts directly from Notion's REST API.
+//
+// ARCHITECTURE NOTE:
+// This file handles DATA READING from Notion on page render.
+// CACHE INVALIDATION is handled by Make (automation):
+//   Notion publishes post → Make detects change → Make calls /api/revalidate
+//   → Next.js ISR cache clears immediately → next visitor gets fresh data.
+//
+// This means you don't need to wait for the revalidate window — as soon as
+// you publish or update a post in Notion, Make pushes the change live.
+// The revalidate value here is just a safety net fallback.
+// ─────────────────────────────────────────────────────────────────────────────
 
 const NOTION_API_BASE = "https://api.notion.com/v1";
 const NOTION_VERSION = "2022-06-28";
 
-// ─── Types ───────────────────────────────────────────────────────────────────
+// ─── Types ────────────────────────────────────────────────────────────────────
 export interface BlogPost {
   id: string;
   slug: string;
@@ -24,7 +33,7 @@ export interface BlogPostWithContent extends BlogPost {
   contentHtml: string;
 }
 
-// ─── Helpers ─────────────────────────────────────────────────────────────────
+// ─── Helpers ──────────────────────────────────────────────────────────────────
 function isConfigured(): boolean {
   return Boolean(process.env.NOTION_API_KEY && process.env.NOTION_BLOG_DATABASE_ID);
 }
@@ -82,7 +91,7 @@ function pageToPost(page: any): BlogPost {
     category: selectProp(props["Category"]),
     date:     formatDate(iso),
     dateISO:  iso,
-    readTime: "5 min read",
+    readTime: estimateReadTime(blocksToHtml(page.blocks ?? [])),
     featured: checkboxProp(props["Featured"]),
   };
 }
@@ -92,35 +101,97 @@ function inlineToHtml(richTextArr: any[]): string {
   return richTextArr.map((span) => {
     let text = (span.plain_text ?? "")
       .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-    if (span.annotations?.bold)   text = `<strong>${text}</strong>`;
-    if (span.annotations?.italic) text = `<em>${text}</em>`;
-    if (span.annotations?.code)   text = `<code>${text}</code>`;
-    if (span.href) text = `<a href="${span.href}" class="notion-link">${text}</a>`;
+    if (span.annotations?.bold)          text = `<strong>${text}</strong>`;
+    if (span.annotations?.italic)        text = `<em>${text}</em>`;
+    if (span.annotations?.underline)     text = `<u>${text}</u>`;
+    if (span.annotations?.strikethrough) text = `<s>${text}</s>`;
+    if (span.annotations?.code)          text = `<code>${text}</code>`;
+    if (span.href) text = `<a href="${span.href}" class="notion-link" target="_blank" rel="noopener noreferrer">${text}</a>`;
     return text;
   }).join("");
 }
 
 function blocksToHtml(blocks: any[]): string {
   const parts: string[] = [];
+  let inBulletList = false;
+  let inNumberList = false;
+
   for (const block of blocks) {
+    // Close open lists when we hit a non-list block
+    if (block.type !== "bulleted_list_item" && inBulletList) {
+      parts.push("</ul>");
+      inBulletList = false;
+    }
+    if (block.type !== "numbered_list_item" && inNumberList) {
+      parts.push("</ol>");
+      inNumberList = false;
+    }
+
     switch (block.type) {
-      case "paragraph":        parts.push(`<p class="notion-p">${inlineToHtml(block.paragraph?.rich_text ?? [])}</p>`); break;
-      case "heading_1":        parts.push(`<h1 class="notion-h1">${inlineToHtml(block.heading_1?.rich_text ?? [])}</h1>`); break;
-      case "heading_2":        parts.push(`<h2 class="notion-h2">${inlineToHtml(block.heading_2?.rich_text ?? [])}</h2>`); break;
-      case "heading_3":        parts.push(`<h3 class="notion-h3">${inlineToHtml(block.heading_3?.rich_text ?? [])}</h3>`); break;
-      case "bulleted_list_item": parts.push(`<li class="notion-li">${inlineToHtml(block.bulleted_list_item?.rich_text ?? [])}</li>`); break;
-      case "numbered_list_item": parts.push(`<li class="notion-li notion-oli">${inlineToHtml(block.numbered_list_item?.rich_text ?? [])}</li>`); break;
-      case "code":             parts.push(`<pre class="notion-pre"><code>${inlineToHtml(block.code?.rich_text ?? [])}</code></pre>`); break;
-      case "quote":            parts.push(`<blockquote class="notion-quote">${inlineToHtml(block.quote?.rich_text ?? [])}</blockquote>`); break;
-      case "divider":          parts.push(`<hr class="notion-hr" />`); break;
-      case "callout":          parts.push(`<div class="notion-callout">${inlineToHtml(block.callout?.rich_text ?? [])}</div>`); break;
+      case "paragraph":
+        parts.push(`<p class="notion-p">${inlineToHtml(block.paragraph?.rich_text ?? [])}</p>`);
+        break;
+      case "heading_1":
+        parts.push(`<h1 class="notion-h1">${inlineToHtml(block.heading_1?.rich_text ?? [])}</h1>`);
+        break;
+      case "heading_2":
+        parts.push(`<h2 class="notion-h2">${inlineToHtml(block.heading_2?.rich_text ?? [])}</h2>`);
+        break;
+      case "heading_3":
+        parts.push(`<h3 class="notion-h3">${inlineToHtml(block.heading_3?.rich_text ?? [])}</h3>`);
+        break;
+      case "bulleted_list_item":
+        if (!inBulletList) { parts.push("<ul class=\"notion-ul\">"); inBulletList = true; }
+        parts.push(`<li class="notion-li">${inlineToHtml(block.bulleted_list_item?.rich_text ?? [])}</li>`);
+        break;
+      case "numbered_list_item":
+        if (!inNumberList) { parts.push("<ol class=\"notion-ol\">"); inNumberList = true; }
+        parts.push(`<li class="notion-li">${inlineToHtml(block.numbered_list_item?.rich_text ?? [])}</li>`);
+        break;
+      case "code":
+        parts.push(`<pre class="notion-pre"><code class="notion-code language-${block.code?.language ?? "plain"}">${inlineToHtml(block.code?.rich_text ?? [])}</code></pre>`);
+        break;
+      case "quote":
+        parts.push(`<blockquote class="notion-quote">${inlineToHtml(block.quote?.rich_text ?? [])}</blockquote>`);
+        break;
+      case "divider":
+        parts.push(`<hr class="notion-hr" />`);
+        break;
+      case "callout":
+        const emoji = block.callout?.icon?.emoji ?? "💡";
+        parts.push(`<div class="notion-callout"><span class="notion-callout-icon">${emoji}</span><div>${inlineToHtml(block.callout?.rich_text ?? [])}</div></div>`);
+        break;
+      case "image": {
+        const url = block.image?.file?.url ?? block.image?.external?.url ?? "";
+        const caption = inlineToHtml(block.image?.caption ?? []);
+        parts.push(`<figure class="notion-figure"><img src="${url}" alt="${caption}" class="notion-image" loading="lazy" />${caption ? `<figcaption class="notion-caption">${caption}</figcaption>` : ""}</figure>`);
+        break;
+      }
+      case "video": {
+        const videoUrl = block.video?.external?.url ?? "";
+        if (videoUrl.includes("youtube") || videoUrl.includes("youtu.be")) {
+          const videoId = videoUrl.match(/(?:v=|youtu\.be\/)([^&?/]+)/)?.[1];
+          if (videoId) parts.push(`<div class="notion-video-wrapper"><iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen class="notion-video"></iframe></div>`);
+        }
+        break;
+      }
     }
   }
+
+  // Close any still-open lists
+  if (inBulletList) parts.push("</ul>");
+  if (inNumberList) parts.push("</ol>");
+
   return parts.join("\n");
 }
 
-// ─── Public API ──────────────────────────────────────────────────────────────
+// ─── Public API ───────────────────────────────────────────────────────────────
 
+/**
+ * Fetch all published posts from Notion.
+ * Cache is refreshed on-demand by Make via /api/revalidate.
+ * The revalidate:86400 here is a 24h safety-net fallback only.
+ */
 export async function getAllPosts(): Promise<BlogPost[]> {
   if (!isConfigured()) return [];
   try {
@@ -133,7 +204,8 @@ export async function getAllPosts(): Promise<BlogPost[]> {
           filter: { property: "Status", select: { equals: "Published" } },
           sorts: [{ property: "Publish Date", direction: "descending" }],
         }),
-        next: { revalidate: 3600 },
+        // 24h fallback — Make revalidation handles real-time updates
+        next: { revalidate: 86400 },
       }
     );
     if (!res.ok) { console.warn(`[notion-blog] getAllPosts HTTP ${res.status}`); return []; }
@@ -145,6 +217,10 @@ export async function getAllPosts(): Promise<BlogPost[]> {
   }
 }
 
+/**
+ * Fetch a single published post by slug from Notion.
+ * Cache is refreshed on-demand by Make via /api/revalidate?slug=<slug>.
+ */
 export async function getPostBySlug(slug: string): Promise<BlogPostWithContent | null> {
   if (!isConfigured()) return null;
   try {
@@ -162,7 +238,7 @@ export async function getPostBySlug(slug: string): Promise<BlogPostWithContent |
           },
           page_size: 1,
         }),
-        next: { revalidate: 3600 },
+        next: { revalidate: 86400 },
       }
     );
     if (!queryRes.ok) { console.warn(`[notion-blog] getPostBySlug query HTTP ${queryRes.status}`); return null; }
@@ -172,7 +248,11 @@ export async function getPostBySlug(slug: string): Promise<BlogPostWithContent |
 
     const blocksRes = await fetch(
       `${NOTION_API_BASE}/blocks/${page.id}/children?page_size=100`,
-      { method: "GET", headers: notionHeaders(), next: { revalidate: 3600 } }
+      {
+        method: "GET",
+        headers: notionHeaders(),
+        next: { revalidate: 86400 },
+      }
     );
     if (!blocksRes.ok) { console.warn(`[notion-blog] getPostBySlug blocks HTTP ${blocksRes.status}`); return null; }
     const blocksData = await blocksRes.json();
