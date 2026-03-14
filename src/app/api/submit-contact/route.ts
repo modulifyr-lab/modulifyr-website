@@ -1,4 +1,4 @@
-// src/app/api/submit-proposal/route.ts
+// src/app/api/submit-contact/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { isRateLimited, getClientIp } from "@/lib/ratelimit";
 
@@ -17,11 +17,12 @@ export async function POST(req: NextRequest) {
 
     // ── Honeypot: bots fill this field, humans don't ──────────────────────
     if (body.website && String(body.website).trim() !== "") {
+      // Silently succeed — don't let bots know they were blocked
       return NextResponse.json({ success: true }, { status: 200 });
     }
 
     // ── Required field validation ─────────────────────────────────────────
-    const required = ["name", "company", "email", "industry", "project_type", "budget", "message"];
+    const required = ["name", "email", "subject", "message"];
     for (const field of required) {
       if (!body[field] || String(body[field]).trim() === "") {
         return NextResponse.json(
@@ -37,35 +38,29 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid email address" }, { status: 400 });
     }
 
-    // ── Max length validation ─────────────────────────────────────────────
-    if (String(body.name).length > 200)    return NextResponse.json({ error: "Name is too long" }, { status: 400 });
-    if (String(body.company).length > 300) return NextResponse.json({ error: "Company name is too long" }, { status: 400 });
-    if (String(body.message).length > 8000) return NextResponse.json({ error: "Message is too long (max 8000 characters)" }, { status: 400 });
-
-    // ── Allowlist validation on select fields ─────────────────────────────
-    const allowedIndustries = ["Education", "Commerce", "Healthcare", "IT", "Retail", "Services", "Other"];
-    if (!allowedIndustries.includes(body.industry)) {
-      return NextResponse.json({ error: "Invalid industry selection" }, { status: 400 });
+    // ── Max length validation (prevent payload abuse) ─────────────────────
+    if (String(body.name).length > 200) {
+      return NextResponse.json({ error: "Name is too long" }, { status: 400 });
+    }
+    if (String(body.subject).length > 300) {
+      return NextResponse.json({ error: "Subject is too long" }, { status: 400 });
+    }
+    if (String(body.message).length > 5000) {
+      return NextResponse.json({ error: "Message is too long (max 5000 characters)" }, { status: 400 });
     }
 
     // ── Send to Make webhook ──────────────────────────────────────────────
-    const webhookUrl = process.env.MAKE_PROPOSAL_WEBHOOK_URL;
+    const webhookUrl = process.env.MAKE_CONTACT_WEBHOOK_URL;
     if (!webhookUrl) {
-      console.warn("MAKE_PROPOSAL_WEBHOOK_URL not set — skipping webhook");
-      return NextResponse.json({ success: true, message: "Proposal request received" }, { status: 200 });
+      console.warn("MAKE_CONTACT_WEBHOOK_URL not set — skipping webhook");
+      return NextResponse.json({ success: true, message: "Message received" }, { status: 200 });
     }
 
     const payload = {
-      name:         body.name.trim(),
-      company:      body.company.trim(),
-      email:        body.email.trim().toLowerCase(),
-      phone:        body.phone?.trim() || "Not provided",
-      industry:     body.industry,
-      project_type: body.project_type,
-      budget:       body.budget,
-      message:      body.message.trim(),
-      region:       body.region      || "Not specified",
-      region_code:  body.region_code || "unknown",
+      name:    body.name.trim(),
+      email:   body.email.trim().toLowerCase(),
+      subject: body.subject.trim(),
+      message: body.message.trim(),
     };
 
     const makeResponse = await fetch(webhookUrl, {
@@ -79,9 +74,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Failed to process submission" }, { status: 502 });
     }
 
-    return NextResponse.json({ success: true, message: "Proposal request received" }, { status: 200 });
+    return NextResponse.json({ success: true, message: "Message received" }, { status: 200 });
   } catch (error) {
-    console.error("Proposal API error:", error);
+    console.error("Contact API error:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

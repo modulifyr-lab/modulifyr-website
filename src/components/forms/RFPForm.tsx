@@ -1,4 +1,7 @@
 "use client";
+import { isRateLimited, getClientIp } from "@/lib/ratelimit";   
+
+// src/components/forms/RFPForm.tsx
 
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/Button";
@@ -24,7 +27,6 @@ const projectTypes = [
     "Other / Not Sure Yet"
 ];
 
-// ─── Region-specific budget options ──────────────────────────────────────────
 const budgetsNepal = [
     "NPR 200000 – 450000 (Discovery Phase)",
     "NPR 600000 – 1500000 (Pilot / Proof-of-Value)",
@@ -52,6 +54,7 @@ interface FormState {
     project_type: string;
     budget: string;
     message: string;
+    website: string; // honeypot — hidden from humans
 }
 
 const initialForm: FormState = {
@@ -63,6 +66,7 @@ const initialForm: FormState = {
     project_type: "",
     budget: "",
     message: "",
+    website: "",
 };
 
 export function RFPForm() {
@@ -74,7 +78,6 @@ export function RFPForm() {
     const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
     const [errorMsg, setErrorMsg] = useState("");
 
-    // Reset budget when region switches so stale value isn't submitted
     const prevRegion = useRef(region);
     useEffect(() => {
         if (prevRegion.current !== region) {
@@ -89,6 +92,13 @@ export function RFPForm() {
 
     const handleSubmit = async (e: React.MouseEvent) => {
         e.preventDefault();
+
+        const ip = getClientIp(e.currentTarget);
+        if (isRateLimited(ip)) {
+            setErrorMsg("Rate limit exceeded. Please try again later.");
+            setStatus("error");
+            return;
+        }
 
         if (!form.name || !form.company || !form.email || !form.industry || !form.project_type || !form.budget || !form.message) {
             setErrorMsg("Please fill in all required fields.");
@@ -105,7 +115,6 @@ export function RFPForm() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     ...form,
-                    // Region fields — passed to Make → Notion → Discord
                     region: isNepal ? "Nepal / South Asia" : "International",
                     region_code: isNepal ? "nepal" : "international",
                 }),
@@ -116,9 +125,9 @@ export function RFPForm() {
 
             setStatus("success");
             setForm(initialForm);
-        } catch (err: any) {
+        } catch (err: unknown) {
             setStatus("error");
-            setErrorMsg(err.message || "Failed to submit. Please try again or email us directly.");
+            setErrorMsg(err instanceof Error ? err.message : "Failed to submit. Please try again or email us directly.");
         }
     };
 
@@ -266,7 +275,7 @@ export function RFPForm() {
                                             </select>
                                         </div>
 
-                                        {/* Budget — region-aware toggle buttons */}
+                                        {/* Budget — region-aware */}
                                         <div className="flex flex-col gap-2 md:col-span-2">
                                             <div className="flex items-center justify-between">
                                                 <label className="text-sm font-semibold text-brand-navy">
@@ -281,11 +290,10 @@ export function RFPForm() {
                                                 {budgets.map(b => (
                                                     <button key={b} type="button"
                                                         onClick={() => setForm(prev => ({ ...prev, budget: b }))}
-                                                        className={`px-3 py-3 rounded-xl border text-xs font-semibold text-left transition-all cursor-pointer ${
-                                                            form.budget === b
-                                                                ? "border-brand-orange bg-brand-orange/5 text-brand-orange"
-                                                                : "border-border-base bg-bg-light text-text-secondary hover:border-brand-navy"
-                                                        }`}>
+                                                        className={`px-3 py-3 rounded-xl border text-xs font-semibold text-left transition-all cursor-pointer ${form.budget === b
+                                                            ? "border-brand-orange bg-brand-orange/5 text-brand-orange"
+                                                            : "border-border-base bg-bg-light text-text-secondary hover:border-brand-navy"
+                                                            }`}>
                                                         {b}
                                                     </button>
                                                 ))}
@@ -300,13 +308,36 @@ export function RFPForm() {
                                         03 — Project Brief
                                     </h2>
                                     <div className="flex flex-col gap-2">
-                                        <label className="text-sm font-semibold text-brand-navy">Describe your project <span className="text-brand-orange">*</span></label>
-                                        <p className="text-xs text-text-muted mb-2">Include current systems, key workflows, pain points, and what success looks like.</p>
+                                        <label className="text-sm font-semibold text-brand-navy">
+                                            Describe your project <span className="text-brand-orange">*</span>
+                                        </label>
+                                        <p className="text-xs text-text-muted mb-2">
+                                            Include current systems, key workflows, pain points, and what success looks like.
+                                        </p>
                                         <textarea name="message" value={form.message} onChange={handleChange} rows={6}
+                                            maxLength={8000}
                                             placeholder="We currently use [system X] for [workflow Y]. The main challenge is... We need a solution that..."
                                             className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/10 transition-all text-sm resize-none"
                                         />
+                                        <p className="text-xs text-text-muted text-right">{form.message.length}/8000</p>
                                     </div>
+                                </div>
+
+                                {/* Honeypot — hidden from humans, bots fill it in */}
+                                <div
+                                    aria-hidden="true"
+                                    style={{ position: "absolute", left: "-9999px", width: "1px", height: "1px", overflow: "hidden" }}
+                                >
+                                    <label htmlFor="rfp-website">Website</label>
+                                    <input
+                                        id="rfp-website"
+                                        type="text"
+                                        name="website"
+                                        value={form.website}
+                                        onChange={handleChange}
+                                        tabIndex={-1}
+                                        autoComplete="off"
+                                    />
                                 </div>
 
                                 <Button size="lg" onClick={handleSubmit} disabled={status === "loading"} className="w-full justify-center group">

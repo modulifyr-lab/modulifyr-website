@@ -1,8 +1,11 @@
 "use client";
 
+import { isRateLimited, getClientIp } from "@/lib/ratelimit";
+
+// src/components/forms/ContactForm.tsx
+
 import { Button } from "@/components/ui/Button";
 import { Card, CardTitle } from "@/components/ui/Card";
-import { Input, Textarea } from "@/components/ui/FormElements";
 import {
     Mail,
     Phone,
@@ -13,17 +16,84 @@ import {
     ArrowRight,
     Clock,
     ShieldCheck,
-    CheckCircle2
+    CheckCircle2,
+    AlertCircle,
+    Loader2,
 } from "lucide-react";
 import * as React from "react";
 import Link from "next/link";
 
-export function ContactForm() {
-    const [submitted, setSubmitted] = React.useState(false);
+interface FormState {
+    name: string;
+    email: string;
+    subject: string;
+    message: string;
+    website: string; // honeypot — hidden from humans
+}
 
-    const handleSubmit = (e: React.FormEvent) => {
+const initialForm: FormState = {
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+    website: "",
+};
+
+export function ContactForm() {
+    const [form, setForm] = React.useState<FormState>(initialForm);
+    const [submitted, setSubmitted] = React.useState(false);
+    const [status, setStatus] = React.useState<"idle" | "loading" | "error">("idle");
+    const [errorMsg, setErrorMsg] = React.useState("");
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    };
+
+    // Rate limit check
+    const ip = getClientIp(req);
+    if (isRateLimited(ip)) {
+        return {
+            status: 429,
+            body: JSON.stringify({ error: "Rate limit exceeded. Please try again later." }),
+        };
+    }
+
+    // Rate limit check
+    const ip = getClientIp(e.currentTarget);
+    if (isRateLimited(ip)) {
+        return {
+            status: 429,
+            body: JSON.stringify({ error: "Rate limit exceeded. Please try again later." }),
+        };
+    }
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setSubmitted(true);
+        setStatus("loading");
+        setErrorMsg("");
+
+        try {
+            const res = await fetch("/api/submit-contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(form),
+            });
+
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.error || "Submission failed");
+
+            setSubmitted(true);
+            setForm(initialForm);
+        } catch (err: unknown) {
+            setStatus("error");
+            setErrorMsg(
+                err instanceof Error
+                    ? err.message
+                    : "Failed to send. Please email us directly at contact@modulifyr.com"
+            );
+        } finally {
+            setStatus("idle");
+        }
     };
 
     if (submitted) {
@@ -48,7 +118,9 @@ export function ContactForm() {
             <section className="py-24 border-b border-border-base bg-white">
                 <div className="container-custom">
                     <div className="max-w-3xl">
-                        <h1 className="text-4xl md:text-6xl font-heading font-bold text-brand-navy mb-6">Let's Talk About <span className="text-brand-orange">Your Project</span></h1>
+                        <h1 className="text-4xl md:text-6xl font-heading font-bold text-brand-navy mb-6">
+                            Let's Talk About <span className="text-brand-orange">Your Project</span>
+                        </h1>
                         <p className="text-xl text-text-secondary leading-relaxed">
                             Whether you have a clear spec or just a problem you're trying to solve, reach out. We'll tell you honestly whether we can help and what it would take.
                         </p>
@@ -59,7 +131,8 @@ export function ContactForm() {
             <section className="py-24">
                 <div className="container-custom">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-                        {/* Left Content: Contact Info */}
+
+                        {/* ── Left: Contact Info ── */}
                         <div className="flex flex-col gap-12">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 <div className="flex flex-col gap-4">
@@ -68,7 +141,9 @@ export function ContactForm() {
                                     </div>
                                     <h4 className="font-heading font-bold text-lg text-brand-navy">Email Us</h4>
                                     <p className="text-sm text-text-secondary">Direct engineering inquiries:</p>
-                                    <a href="mailto:contact@modulifyr.com" className="font-bold text-brand-orange hover:underline text-lg">contact@modulifyr.com</a>
+                                    <a href="mailto:contact@modulifyr.com" className="font-bold text-brand-orange hover:underline text-lg">
+                                        contact@modulifyr.com
+                                    </a>
                                 </div>
                                 <div className="flex flex-col gap-4">
                                     <div className="w-10 h-10 bg-brand-navy/10 rounded-lg flex items-center justify-center">
@@ -76,7 +151,9 @@ export function ContactForm() {
                                     </div>
                                     <h4 className="font-heading font-bold text-lg text-brand-navy">Call Us</h4>
                                     <p className="text-sm text-text-secondary">Mon – Fri, 9am – 6pm NPT:</p>
-                                    <a href="tel:+9779800000000" className="font-bold text-brand-orange hover:underline text-lg">+977 9764478571</a>
+                                    <a href="tel:+9779764478571" className="font-bold text-brand-orange hover:underline text-lg">
+                                        +977 9764478571
+                                    </a>
                                 </div>
                             </div>
 
@@ -128,49 +205,145 @@ export function ContactForm() {
                             </div>
                         </div>
 
-                        {/* Right Content: Quick Form */}
+                        {/* ── Right: Form ── */}
                         <div className="flex flex-col gap-8">
                             <Card className="p-8 md:p-12 shadow-xl border-t-8 border-t-brand-teal">
                                 <form onSubmit={handleSubmit} className="space-y-6">
-                                    <h2 className="text-2xl font-heading font-bold text-brand-navy mb-4">Send a Message</h2>
+                                    <h2 className="text-2xl font-heading font-bold text-brand-navy mb-4">
+                                        Send a Message
+                                    </h2>
+
+                                    {/* Error state */}
+                                    {status === "error" && (
+                                        <div className="flex items-start gap-3 bg-red-50 border border-red-200 rounded-xl p-4">
+                                            <AlertCircle className="w-5 h-5 text-red-500 mt-0.5 shrink-0" />
+                                            <p className="text-sm text-red-700">{errorMsg}</p>
+                                        </div>
+                                    )}
+
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div className="space-y-2">
-                                            <label className="text-sm font-bold text-brand-navy font-heading">Your Name</label>
-                                            <Input placeholder="Full Name" required />
+                                            <label htmlFor="contact-name" className="text-sm font-bold text-brand-navy font-heading">
+                                                Your Name <span className="text-brand-orange">*</span>
+                                            </label>
+                                            <input
+                                                id="contact-name"
+                                                type="text"
+                                                name="name"
+                                                value={form.name}
+                                                onChange={handleChange}
+                                                placeholder="Full Name"
+                                                required
+                                                maxLength={200}
+                                                className="flex h-12 w-full rounded-lg border border-border-base bg-background px-4 py-2 text-base placeholder:text-text-dim focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange disabled:opacity-50 transition-all text-foreground"
+                                            />
                                         </div>
                                         <div className="space-y-2">
-                                            <label className="text-sm font-bold text-brand-navy font-heading">Your Email</label>
-                                            <Input type="email" placeholder="email@company.com" required />
+                                            <label htmlFor="contact-email" className="text-sm font-bold text-brand-navy font-heading">
+                                                Your Email <span className="text-brand-orange">*</span>
+                                            </label>
+                                            <input
+                                                id="contact-email"
+                                                type="email"
+                                                name="email"
+                                                value={form.email}
+                                                onChange={handleChange}
+                                                placeholder="email@company.com"
+                                                required
+                                                className="flex h-12 w-full rounded-lg border border-border-base bg-background px-4 py-2 text-base placeholder:text-text-dim focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange disabled:opacity-50 transition-all text-foreground"
+                                            />
                                         </div>
                                     </div>
+
                                     <div className="space-y-2">
-                                        <label className="text-sm font-bold text-brand-navy font-heading">Subject</label>
-                                        <Input placeholder="How can we help?" required />
+                                        <label htmlFor="contact-subject" className="text-sm font-bold text-brand-navy font-heading">
+                                            Subject <span className="text-brand-orange">*</span>
+                                        </label>
+                                        <input
+                                            id="contact-subject"
+                                            type="text"
+                                            name="subject"
+                                            value={form.subject}
+                                            onChange={handleChange}
+                                            placeholder="How can we help?"
+                                            required
+                                            maxLength={300}
+                                            className="flex h-12 w-full rounded-lg border border-border-base bg-background px-4 py-2 text-base placeholder:text-text-dim focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange disabled:opacity-50 transition-all text-foreground"
+                                        />
                                     </div>
+
                                     <div className="space-y-2">
-                                        <label className="text-sm font-bold text-brand-navy font-heading">Message</label>
-                                        <Textarea placeholder="Tell us about your project or question..." required className="min-h-[150px]" />
+                                        <label htmlFor="contact-message" className="text-sm font-bold text-brand-navy font-heading">
+                                            Message <span className="text-brand-orange">*</span>
+                                        </label>
+                                        <textarea
+                                            id="contact-message"
+                                            name="message"
+                                            value={form.message}
+                                            onChange={handleChange}
+                                            placeholder="Tell us about your project or question..."
+                                            required
+                                            maxLength={5000}
+                                            className="flex min-h-[150px] w-full rounded-lg border border-border-base bg-background px-4 py-3 text-base placeholder:text-text-dim focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange disabled:opacity-50 transition-all text-foreground resize-none"
+                                        />
+                                        <p className="text-xs text-text-muted text-right">
+                                            {form.message.length}/5000
+                                        </p>
                                     </div>
-                                    <div className="flex items-center gap-3 py-2 bg-bg-secondary p-4 rounded-lg">
-                                        <ShieldCheck className="w-5 h-5 text-brand-teal" />
+
+                                    {/* Honeypot — visually hidden, bots fill it in */}
+                                    <div
+                                        aria-hidden="true"
+                                        style={{ position: "absolute", left: "-9999px", width: "1px", height: "1px", overflow: "hidden" }}
+                                    >
+                                        <label htmlFor="contact-website">Website</label>
+                                        <input
+                                            id="contact-website"
+                                            type="text"
+                                            name="website"
+                                            value={form.website}
+                                            onChange={handleChange}
+                                            tabIndex={-1}
+                                            autoComplete="off"
+                                        />
+                                    </div>
+
+                                    <div className="flex items-center gap-3 bg-bg-secondary p-4 rounded-lg">
+                                        <ShieldCheck className="w-5 h-5 text-brand-teal shrink-0" />
                                         <span className="text-[10px] text-text-secondary leading-tight italic">
                                             All communication is treated as confidential. We can sign an NDA before any technical discussion.
                                         </span>
                                     </div>
-                                    <Button type="submit" className="w-full h-14 text-lg">
-                                        Send Message <ArrowRight className="w-5 h-5 ml-2" />
+
+                                    <Button
+                                        type="submit"
+                                        disabled={status === "loading"}
+                                        className="w-full h-14 text-lg"
+                                    >
+                                        {status === "loading" ? (
+                                            <><Loader2 className="w-5 h-5 mr-2 animate-spin" /> Sending...</>
+                                        ) : (
+                                            <>Send Message <ArrowRight className="w-5 h-5 ml-2" /></>
+                                        )}
                                     </Button>
                                 </form>
                             </Card>
+
                             <div className="text-center px-4">
-                                <p className="text-sm text-text-secondary">Have a detailed project brief? Use our structured <Link href="/request-proposal" className="text-brand-orange font-bold hover:underline">Proposal Request Form</Link> instead.</p>
+                                <p className="text-sm text-text-secondary">
+                                    Have a detailed project brief? Use our structured{" "}
+                                    <Link href="/request-proposal" className="text-brand-orange font-bold hover:underline">
+                                        Proposal Request Form
+                                    </Link>{" "}
+                                    instead.
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Google Maps Embed — Birtamode, Jhapa */}
+            {/* Google Maps Embed */}
             <section className="py-12 px-4 md:px-0">
                 <div className="container-custom">
                     <div className="w-full h-96 rounded-3xl overflow-hidden border border-border-base shadow-sm">

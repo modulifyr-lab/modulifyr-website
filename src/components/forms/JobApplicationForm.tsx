@@ -1,4 +1,7 @@
 "use client";
+import { isRateLimited, getClientIp } from "@/lib/ratelimit";   
+
+// src/components/forms/JobApplicationForm.tsx
 
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
@@ -15,7 +18,7 @@ import {
 const roles = [
     "Senior Full-stack Engineer (React / RSC)",
     "Cloud Infrastructure Engineer (SRE Focus)",
-    "System Design Intern (Birtamode Office)",   // was: Kathmandu Office
+    "System Design Intern (Birtamode Office)",
     "Other / General Application"
 ];
 
@@ -28,6 +31,7 @@ interface FormState {
     portfolio_url: string;
     linkedin_url: string;
     cover_note: string;
+    website: string; // honeypot — hidden from humans
 }
 
 const initialForm: FormState = {
@@ -39,6 +43,7 @@ const initialForm: FormState = {
     portfolio_url: "",
     linkedin_url: "",
     cover_note: "",
+    website: "",
 };
 
 export function JobApplicationForm() {
@@ -50,7 +55,15 @@ export function JobApplicationForm() {
         setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
     };
 
-    const handleSubmit = async (e: React.MouseEvent) => {
+    // Rate limit check
+    const ip = getClientIp(e.currentTarget);
+    if (isRateLimited(ip)) {
+        setErrorMsg("Rate limit exceeded. Please try again later.");
+        setStatus("error");
+        return;
+    }
+
+        const handleSubmit = async (e: React.MouseEvent) => {
         e.preventDefault();
 
         if (!form.name || !form.email || !form.role || !form.skills || !form.cover_note) {
@@ -156,30 +169,40 @@ export function JobApplicationForm() {
                                     </div>
                                 )}
 
-                                {/* Section 1 */}
+                                {/* Section 01 */}
                                 <div className="mb-10">
                                     <h2 className="text-xs font-bold text-text-muted uppercase tracking-widest mb-6 pb-3 border-b border-border-base">
                                         01 — Personal Information
                                     </h2>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                        {/* Rendered individually to keep TypeScript happy — no dynamic key access */}
                                         <div className="flex flex-col gap-2">
-                                            <label className="text-sm font-semibold text-brand-navy">Full Name <span className="text-brand-orange">*</span></label>
-                                            <input type="text" name="name" value={form.name} onChange={handleChange} placeholder="Your full name"
+                                            <label className="text-sm font-semibold text-brand-navy">
+                                                Full Name <span className="text-brand-orange">*</span>
+                                            </label>
+                                            <input type="text" name="name" value={form.name} onChange={handleChange}
+                                                placeholder="Your full name" maxLength={200}
                                                 className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/10 transition-all text-sm" />
                                         </div>
                                         <div className="flex flex-col gap-2">
-                                            <label className="text-sm font-semibold text-brand-navy">Email <span className="text-brand-orange">*</span></label>
-                                            <input type="email" name="email" value={form.email} onChange={handleChange} placeholder="you@email.com"
+                                            <label className="text-sm font-semibold text-brand-navy">
+                                                Email <span className="text-brand-orange">*</span>
+                                            </label>
+                                            <input type="email" name="email" value={form.email} onChange={handleChange}
+                                                placeholder="you@email.com"
                                                 className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/10 transition-all text-sm" />
                                         </div>
                                         <div className="flex flex-col gap-2">
-                                            <label className="text-sm font-semibold text-brand-navy">Phone <span className="text-text-muted font-normal">(Optional)</span></label>
-                                            <input type="tel" name="phone" value={form.phone} onChange={handleChange} placeholder="+977 98XXXXXXXX"
+                                            <label className="text-sm font-semibold text-brand-navy">
+                                                Phone <span className="text-text-muted font-normal">(Optional)</span>
+                                            </label>
+                                            <input type="tel" name="phone" value={form.phone} onChange={handleChange}
+                                                placeholder="+977 98XXXXXXXX"
                                                 className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/10 transition-all text-sm" />
                                         </div>
                                         <div className="flex flex-col gap-2">
-                                            <label className="text-sm font-semibold text-brand-navy">Role Applying For <span className="text-brand-orange">*</span></label>
+                                            <label className="text-sm font-semibold text-brand-navy">
+                                                Role Applying For <span className="text-brand-orange">*</span>
+                                            </label>
                                             <select name="role" value={form.role} onChange={handleChange}
                                                 className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/10 transition-all text-sm appearance-none cursor-pointer">
                                                 <option value="" disabled>Select a role</option>
@@ -189,7 +212,7 @@ export function JobApplicationForm() {
                                     </div>
                                 </div>
 
-                                {/* Section 2 */}
+                                {/* Section 02 */}
                                 <div className="mb-10">
                                     <h2 className="text-xs font-bold text-text-muted uppercase tracking-widest mb-6 pb-3 border-b border-border-base">
                                         02 — Skills & Profile Links
@@ -199,47 +222,32 @@ export function JobApplicationForm() {
                                             <label className="text-sm font-semibold text-brand-navy">
                                                 Key Skills <span className="text-brand-orange">*</span>
                                             </label>
-                                            <input
-                                                type="text"
-                                                name="skills"
-                                                value={form.skills}
-                                                onChange={handleChange}
-                                                placeholder="e.g. React, TypeScript, Node.js, PostgreSQL, AWS"
-                                                className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/10 transition-all text-sm"
-                                            />
+                                            <input type="text" name="skills" value={form.skills} onChange={handleChange}
+                                                placeholder="e.g. React, TypeScript, Node.js, PostgreSQL, AWS" maxLength={500}
+                                                className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/10 transition-all text-sm" />
                                         </div>
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                             <div className="flex flex-col gap-2">
                                                 <label className="text-sm font-semibold text-brand-navy flex items-center gap-2">
                                                     <Github className="w-4 h-4" /> Portfolio / GitHub
                                                 </label>
-                                                <input
-                                                    type="url"
-                                                    name="portfolio_url"
-                                                    value={form.portfolio_url}
-                                                    onChange={handleChange}
+                                                <input type="url" name="portfolio_url" value={form.portfolio_url} onChange={handleChange}
                                                     placeholder="https://github.com/yourhandle"
-                                                    className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/10 transition-all text-sm"
-                                                />
+                                                    className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/10 transition-all text-sm" />
                                             </div>
                                             <div className="flex flex-col gap-2">
                                                 <label className="text-sm font-semibold text-brand-navy flex items-center gap-2">
                                                     <Linkedin className="w-4 h-4" /> LinkedIn Profile
                                                 </label>
-                                                <input
-                                                    type="url"
-                                                    name="linkedin_url"
-                                                    value={form.linkedin_url}
-                                                    onChange={handleChange}
+                                                <input type="url" name="linkedin_url" value={form.linkedin_url} onChange={handleChange}
                                                     placeholder="https://linkedin.com/in/yourname"
-                                                    className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/10 transition-all text-sm"
-                                                />
+                                                    className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/10 transition-all text-sm" />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                {/* Section 3 */}
+                                {/* Section 03 */}
                                 <div className="mb-10">
                                     <h2 className="text-xs font-bold text-text-muted uppercase tracking-widest mb-6 pb-3 border-b border-border-base">
                                         03 — Cover Note
@@ -251,23 +259,33 @@ export function JobApplicationForm() {
                                         <p className="text-xs text-text-muted mb-2">
                                             Tell us about your background, what excites you about modular systems, and what you'd bring to the team.
                                         </p>
-                                        <textarea
-                                            name="cover_note"
-                                            value={form.cover_note}
-                                            onChange={handleChange}
-                                            rows={6}
+                                        <textarea name="cover_note" value={form.cover_note} onChange={handleChange} rows={6}
+                                            maxLength={5000}
                                             placeholder="I've been working with modular architectures for X years... What draws me to Modulifyr is..."
-                                            className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/10 transition-all text-sm resize-none"
-                                        />
+                                            className="px-4 py-3 rounded-xl border border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:outline-none focus:border-brand-teal focus:ring-2 focus:ring-brand-teal/10 transition-all text-sm resize-none" />
+                                        <p className="text-xs text-text-muted text-right">{form.cover_note.length}/5000</p>
                                     </div>
                                 </div>
 
-                                <Button
-                                    size="lg"
-                                    onClick={handleSubmit}
-                                    disabled={status === "loading"}
-                                    className="w-full justify-center group bg-brand-navy hover:bg-brand-navy/90"
+                                {/* Honeypot — hidden from humans, bots fill it in */}
+                                <div
+                                    aria-hidden="true"
+                                    style={{ position: "absolute", left: "-9999px", width: "1px", height: "1px", overflow: "hidden" }}
                                 >
+                                    <label htmlFor="job-website">Website</label>
+                                    <input
+                                        id="job-website"
+                                        type="text"
+                                        name="website"
+                                        value={form.website}
+                                        onChange={handleChange}
+                                        tabIndex={-1}
+                                        autoComplete="off"
+                                    />
+                                </div>
+
+                                <Button size="lg" onClick={handleSubmit} disabled={status === "loading"}
+                                    className="w-full justify-center group bg-brand-navy hover:bg-brand-navy/90">
                                     {status === "loading" ? (
                                         <><Loader2 className="w-5 h-5 mr-2 animate-spin" /> Submitting...</>
                                     ) : (
@@ -292,7 +310,7 @@ export function JobApplicationForm() {
                                     {[
                                         "Architecture-first engineering culture",
                                         "Real enterprise systems, not demos",
-                                        "Birtamode HQ + remote flexibility",  // was: Kathmandu HQ
+                                        "Birtamode HQ + remote flexibility",
                                         "Direct collaboration with lead architect",
                                         "Long-term projects, not short sprints",
                                         "Skill development path with senior mentorship",
