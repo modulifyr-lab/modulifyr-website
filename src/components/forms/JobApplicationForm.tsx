@@ -55,43 +55,36 @@ export function JobApplicationForm() {
         setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
     };
 
-    // Rate limit check
-    const ip = getClientIp(e.currentTarget);
-    if (isRateLimited(ip)) {
-        setErrorMsg("Rate limit exceeded. Please try again later.");
-        setStatus("error");
-        return;
-    }
+    
 
-        const handleSubmit = async (e: React.MouseEvent) => {
-        e.preventDefault();
-
-        if (!form.name || !form.email || !form.role || !form.skills || !form.cover_note) {
-            setErrorMsg("Please fill in all required fields.");
-            setStatus("error");
-            return;
-        }
-
-        setStatus("loading");
-        setErrorMsg("");
-
-        try {
-            const res = await fetch("/api/submit-application", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(form),
-            });
-
-            const data = await res.json();
-            if (!res.ok) throw new Error(data.error || "Something went wrong");
-
-            setStatus("success");
-            setForm(initialForm);
-        } catch (err: unknown) {
-            setStatus("error");
-            setErrorMsg(err instanceof Error ? err.message : "Failed to submit. Try again or email us directly.");
-        }
-    };
+        const handleSubmit = async (e: React.FormEvent) => {
+            e.preventDefault();
+            setStatus("loading");
+            setErrorMsg("");
+        
+            try {
+                const res = await fetch("/api/submit-application", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(form),
+                });
+        
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || "Submission failed");
+        
+                setSubmitted(true);
+                setForm(initialForm);
+            } catch (err: unknown) {
+                setStatus("error");
+                setErrorMsg(
+                    err instanceof Error
+                        ? err.message
+                        : "Failed to send. Please email us directly at contact@modulifyr.com"
+                );
+            } finally {
+                setStatus("idle");
+            }
+        };
 
     if (status === "success") {
         return (
