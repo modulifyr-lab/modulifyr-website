@@ -181,6 +181,7 @@ export default function RootLayout({
       </head>
       <body
         className={`${inter.variable} ${poppins.variable} antialiased font-sans transition-colors duration-300`}
+        style={{ overflowY: "auto" }}
       >
         <noscript>
           <iframe
