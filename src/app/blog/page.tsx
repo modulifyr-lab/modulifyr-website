@@ -3,13 +3,17 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Card, CardTitle } from "@/components/ui/Card";
 import { ArrowRight, Clock } from "lucide-react";
+import { getAllPosts } from "@/lib/notion-blog";
 
 export const metadata: Metadata = {
     title: "Engineering Blog | Modulifyr — Software Insights for Nepal & Beyond",
     description: "Technical insights, architecture patterns, and practical engineering perspectives from the Modulifyr team in Birtamode, Nepal.",
 };
 
-export const posts = [
+// ─── ISR — revalidate every hour as safety net; Make webhook handles instant updates ──
+export const revalidate = 3600;
+
+export const staticPosts = [
     {
         slug: "custom-software-nepal-sme",
         title: "Why Nepali SMEs Are Replacing Off-the-Shelf Software With Custom Systems",
@@ -298,6 +302,9 @@ Adopt RSC for data-heavy pages: dashboards, listings, admin interfaces. Keep cli
     }
 ];
 
+// Keep the old export name for backward compatibility with [slug]/page.tsx
+export const posts = staticPosts;
+
 const categoryColors: Record<string, string> = {
     "Architecture": "bg-brand-orange/10 text-brand-orange",
     "Engineering": "bg-brand-navy/10 text-brand-navy",
@@ -307,9 +314,23 @@ const categoryColors: Record<string, string> = {
     "Strategy": "bg-brand-orange/10 text-brand-orange",
 };
 
-export default function BlogPage() {
-    const featured = posts.find(p => p.featured);
-    const rest = posts.filter(p => !p.featured);
+export default async function BlogPage() {
+    // Fetch Notion posts — these are the live, managed posts
+    const notionPosts = await getAllPosts();
+
+    // Merge: Notion posts come first (newest), then static posts that don't
+    // have a Notion equivalent (avoid duplicates by slug)
+    const notionSlugs = new Set(notionPosts.map(p => p.slug));
+    const filteredStatic = staticPosts.filter(p => !notionSlugs.has(p.slug));
+
+    // All posts combined, sorted by date descending
+    const allPosts = [...notionPosts, ...filteredStatic].sort(
+        (a, b) => new Date(b.dateISO).getTime() - new Date(a.dateISO).getTime()
+    );
+
+    // Featured: prefer Notion featured post, fall back to static
+    const featured = allPosts.find(p => p.featured) ?? allPosts[0];
+    const rest = allPosts.filter(p => p.slug !== featured?.slug);
 
     return (
         <div className="flex flex-col w-full">
@@ -340,7 +361,7 @@ export default function BlogPage() {
                                 </div>
                             </div>
                             <div className="flex flex-col gap-5">
-                                <span className={`px-3 py-1 rounded-full text-xs font-bold w-fit ${categoryColors[featured.category]}`}>
+                                <span className={`px-3 py-1 rounded-full text-xs font-bold w-fit ${categoryColors[featured.category] ?? "bg-bg-secondary text-text-muted"}`}>
                                     {featured.category}
                                 </span>
                                 <h2 className="text-3xl font-heading font-bold text-brand-navy leading-tight">{featured.title}</h2>
@@ -363,30 +384,34 @@ export default function BlogPage() {
             {/* All Posts */}
             <section className="py-20 bg-bg-light">
                 <div className="container-custom">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {rest.map((post, idx) => (
-                            <Link key={idx} href={`/blog/${post.slug}`} className="block group">
-                                <Card className="flex flex-col h-full group-hover:-translate-y-2">
-                                    <span className={`px-3 py-1 rounded-full text-xs font-bold w-fit mb-4 ${categoryColors[post.category] || 'bg-bg-secondary text-text-muted'}`}>
-                                        {post.category}
-                                    </span>
-                                    <CardTitle className="text-lg group-hover:text-brand-orange transition-colors leading-snug mb-3">
-                                        {post.title}
-                                    </CardTitle>
-                                    <p className="text-sm text-text-secondary leading-relaxed flex-grow mb-4">{post.excerpt}</p>
-                                    <div className="flex items-center justify-between pt-4 border-t border-border-base mt-auto">
-                                        <div className="flex items-center gap-3 text-xs text-text-muted">
-                                            <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {post.readTime}</span>
-                                            <span>{post.date}</span>
-                                        </div>
-                                        <span className="text-brand-orange text-xs font-bold flex items-center gap-1">
-                                            Read <ArrowRight className="w-3 h-3" />
+                    {rest.length === 0 ? (
+                        <p className="text-text-muted text-center py-12">No more posts yet. Check back soon.</p>
+                    ) : (
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {rest.map((post, idx) => (
+                                <Link key={`${post.slug}-${idx}`} href={`/blog/${post.slug}`} className="block group">
+                                    <Card className="flex flex-col h-full group-hover:-translate-y-2">
+                                        <span className={`px-3 py-1 rounded-full text-xs font-bold w-fit mb-4 ${categoryColors[post.category] || 'bg-bg-secondary text-text-muted'}`}>
+                                            {post.category}
                                         </span>
-                                    </div>
-                                </Card>
-                            </Link>
-                        ))}
-                    </div>
+                                        <CardTitle className="text-lg group-hover:text-brand-orange transition-colors leading-snug mb-3">
+                                            {post.title}
+                                        </CardTitle>
+                                        <p className="text-sm text-text-secondary leading-relaxed flex-grow mb-4">{post.excerpt}</p>
+                                        <div className="flex items-center justify-between pt-4 border-t border-border-base mt-auto">
+                                            <div className="flex items-center gap-3 text-xs text-text-muted">
+                                                <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {post.readTime}</span>
+                                                <span>{post.date}</span>
+                                            </div>
+                                            <span className="text-brand-orange text-xs font-bold flex items-center gap-1">
+                                                Read <ArrowRight className="w-3 h-3" />
+                                            </span>
+                                        </div>
+                                    </Card>
+                                </Link>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </section>
 
