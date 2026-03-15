@@ -175,6 +175,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="cb4cf5d8-e26a-408e-8bd0-5ed3a98c1022";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrg) }}
