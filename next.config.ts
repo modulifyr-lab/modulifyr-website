@@ -11,12 +11,28 @@ const securityHeaders = [
     key: "Content-Security-Policy",
     value: [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com",
-      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-      "font-src 'self' https://fonts.gstatic.com",
-      "img-src 'self' https://images.unsplash.com https://maps.gstatic.com https://maps.googleapis.com data:",
-      "frame-src https://maps.google.com https://www.google.com",
-      "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com",
+
+      // Scripts: self + GTM + Google Analytics + Crisp + CookieHub
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://client.crisp.chat https://cdn.cookiehub.eu",
+
+      // Styles: self + Google Fonts + Crisp
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://client.crisp.chat",
+
+      // Fonts: self + Google Fonts + Crisp
+      "font-src 'self' https://fonts.gstatic.com https://client.crisp.chat",
+
+      // Images: self + Unsplash + Google Maps + Crisp + CookieHub + data URIs
+      "img-src 'self' https://images.unsplash.com https://maps.gstatic.com https://maps.googleapis.com https://client.crisp.chat https://image.crisp.chat https://storage.crisp.chat data: blob:",
+
+      // Frames: Google Maps + Crisp
+      "frame-src https://maps.google.com https://www.google.com https://game.crisp.chat",
+
+      // Connections: self + Analytics + GTM + Crisp (incl. websocket) + CookieHub
+      "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://client.crisp.chat https://storage.crisp.chat wss://client.relay.crisp.chat wss://stream.relay.crisp.chat https://api.crisp.chat https://cdn.cookiehub.eu",
+
+      // Media: Crisp (voice messages)
+      "media-src 'self' https://client.crisp.chat",
+
       "worker-src 'self' blob:",
     ].join("; "),
   },
