@@ -83,8 +83,6 @@ export const metadata: Metadata = {
   icons: {
     icon: [{ url: "/favicon.ico", sizes: "128x128", type: "image/x-icon" }],
   },
-  // ── RSS feed discovery ───────────────────────────────────────────────────
-  // Browsers and feed readers detect this <link> tag automatically in <head>.
   alternates: {
     types: {
       "application/rss+xml": [
@@ -204,7 +202,6 @@ export default function RootLayout({
             <LanguageProvider>
               <RegionModal />
               <Navbar />
-              {/* id="main-content" ← paired with skip-to-content link in Navbar */}
               <main id="main-content" className="min-h-screen pt-20">
                 <StartupBanner />
                 {children}
@@ -214,6 +211,7 @@ export default function RootLayout({
           </RegionProvider>
         </ThemeProvider>
 
+        {/* ── Google Tag Manager ───────────────────────────────────────── */}
         <Script
           id="gtm-script"
           strategy="afterInteractive"
@@ -223,6 +221,25 @@ new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-TX4PZBKK');`,
+          }}
+        />
+
+        {/* ── Crisp Live Chat ──────────────────────────────────────────── */}
+        <Script
+          id="crisp-chat"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.$crisp=[];
+              window.CRISP_WEBSITE_ID="cb4cf5d8-e26a-408e-8bd0-5ed3a98c1022";
+              (function(){
+                d=document;
+                s=d.createElement("script");
+                s.src="https://client.crisp.chat/l.js";
+                s.async=1;
+                d.getElementsByTagName("head")[0].appendChild(s);
+              })();
+            `,
           }}
         />
       </body>
