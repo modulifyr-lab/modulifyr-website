@@ -14,7 +14,6 @@
   --color-bg-light: var(--bg-main);
   --color-bg-secondary: var(--bg-alt);
   --color-bg-dark: var(--bg-deep);
-  /* Keep for specific dark needs if any */
   --color-border-base: var(--border-main);
   --color-text-primary: var(--text-main);
   --color-text-secondary: var(--text-alt);
@@ -49,6 +48,16 @@
 
   --background: var(--bg-main);
   --foreground: var(--text-main);
+}
+
+/* ── Scroll fix ─────────────────────────────────────────────────────────────
+   Force scrolling on the html element so the mobile menu's
+   document.body.style.overflow = "hidden" can never permanently lock the page.
+   The html element scroll is the source of truth.
+──────────────────────────────────────────────────────────────────────────── */
+html {
+  overflow-y: scroll;
+  scroll-behavior: smooth;
 }
 
 body {

@@ -95,7 +95,6 @@ export const metadata: Metadata = {
   },
 };
 
-// ─── Schema.org — Organisation + Founder (Rijan Mainali) ─────────────────────
 const schemaOrg = {
   "@context": "https://schema.org",
   "@graph": [
@@ -227,6 +226,13 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `window.$crisp=[];window.CRISP_WEBSITE_ID="cb4cf5d8-e26a-408e-8bd0-5ed3a98c1022";(function(){var d=document;var s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();`,
           }}
+        />
+
+        {/* ── CookieHub Consent Banner ─────────────────────────────────── */}
+        <Script
+          id="cookiehub"
+          strategy="afterInteractive"
+          src="https://cdn.cookiehub.eu/c2/ed0faa37.js"
         />
       </body>
     </html>
