@@ -1,12 +1,15 @@
 // src/app/api/submit-application/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { isRateLimited, getClientIp } from "@/lib/ratelimit";
+import logger from "@/lib/logger";
 
 export async function POST(req: NextRequest) {
+  const ip = getClientIp(req);
+
   try {
     // ── Rate limit: 3 requests per 5 minutes per IP ───────────────────────
-    const ip = getClientIp(req);
-    if (isRateLimited(ip, 3, 5 * 60_000)) {
+    if (await isRateLimited(ip, 3, 5 * 60_000)) {
+      logger.warn("Job application rate limited", { ip });
       return NextResponse.json(
         { error: "Too many requests. Please wait before trying again." },
         { status: 429 }
@@ -15,8 +18,9 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json();
 
-    // ── Honeypot: bots fill this field, humans don't ──────────────────────
+    // ── Honeypot ──────────────────────────────────────────────────────────
     if (body.website && String(body.website).trim() !== "") {
+      logger.info("Job application honeypot triggered", { ip });
       return NextResponse.json({ success: true }, { status: 200 });
     }
 
@@ -38,9 +42,12 @@ export async function POST(req: NextRequest) {
     }
 
     // ── Max length validation ─────────────────────────────────────────────
-    if (String(body.name).length > 200)       return NextResponse.json({ error: "Name is too long" }, { status: 400 });
-    if (String(body.skills).length > 500)     return NextResponse.json({ error: "Skills field is too long" }, { status: 400 });
-    if (String(body.cover_note).length > 5000) return NextResponse.json({ error: "Cover note is too long (max 5000 characters)" }, { status: 400 });
+    if (String(body.name).length > 200)
+      return NextResponse.json({ error: "Name is too long" }, { status: 400 });
+    if (String(body.skills).length > 500)
+      return NextResponse.json({ error: "Skills field is too long" }, { status: 400 });
+    if (String(body.cover_note).length > 5000)
+      return NextResponse.json({ error: "Cover note is too long (max 5000 characters)" }, { status: 400 });
 
     // ── Allowlist validation on role ──────────────────────────────────────
     const allowedRoles = [
@@ -65,7 +72,7 @@ export async function POST(req: NextRequest) {
     // ── Send to Make webhook ──────────────────────────────────────────────
     const webhookUrl = process.env.MAKE_JOB_WEBHOOK_URL;
     if (!webhookUrl) {
-      console.warn("MAKE_JOB_WEBHOOK_URL not set — skipping webhook");
+      logger.warn("MAKE_JOB_WEBHOOK_URL not set — skipping webhook");
       return NextResponse.json({ success: true, message: "Application received" }, { status: 200 });
     }
 
@@ -87,13 +94,14 @@ export async function POST(req: NextRequest) {
     });
 
     if (!makeResponse.ok) {
-      console.error("Make webhook failed:", makeResponse.status);
+      logger.error("Make webhook failed for job application", { status: makeResponse.status, ip });
       return NextResponse.json({ error: "Failed to process submission" }, { status: 502 });
     }
 
+    logger.info("Job application submitted successfully", { email: payload.email, role: payload.role, ip });
     return NextResponse.json({ success: true, message: "Application received" }, { status: 200 });
   } catch (error) {
-    console.error("Job application API error:", error);
+    logger.error("Job application API unhandled error", { error: String(error), ip });
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

@@ -1,0 +1,285 @@
+openapi: 3.0.3
+info:
+  title: Modulifyr Public API
+  description: |
+    Public-facing API endpoints for the Modulifyr website.
+    All endpoints are rate-limited by IP using Upstash Redis sliding-window algorithm.
+    All forms include server-side honeypot fields — do not submit with a `website` field populated.
+  version: 1.0.0
+  contact:
+    name: Modulifyr Engineering
+    email: contact@modulifyr.com
+
+servers:
+  - url: https://modulifyr.vercel.app
+    description: Production
+
+tags:
+  - name: Forms
+    description: Public form submission endpoints
+
+paths:
+  /api/submit-contact:
+    post:
+      tags: [Forms]
+      summary: Submit a contact form message
+      description: |
+        Accepts a contact form submission and forwards it to the Make webhook.
+        Rate limited to 5 requests per minute per IP.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContactFormRequest"
+            example:
+              name: "Rijan Mainali"
+              email: "rijan@example.com"
+              subject: "Project inquiry"
+              message: "We are looking for a custom ERP system for our school."
+              website: ""
+      responses:
+        "200":
+          description: Message received successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+        "400":
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "429":
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/submit-proposal:
+    post:
+      tags: [Forms]
+      summary: Submit a Request for Proposal (RFP)
+      description: |
+        Accepts a structured project proposal submission and forwards to Make.
+        Rate limited to 5 requests per minute per IP.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProposalFormRequest"
+      responses:
+        "200":
+          description: Proposal received successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+        "400":
+          $ref: "#/components/responses/ValidationError"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "500":
+          $ref: "#/components/responses/InternalError"
+
+  /api/submit-application:
+    post:
+      tags: [Forms]
+      summary: Submit a job application
+      description: |
+        Accepts a job application and forwards to Make.
+        Rate limited to 3 requests per 5 minutes per IP.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/JobApplicationRequest"
+      responses:
+        "200":
+          description: Application received successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+        "400":
+          $ref: "#/components/responses/ValidationError"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "500":
+          $ref: "#/components/responses/InternalError"
+
+  /api/revalidate:
+    post:
+      tags: [Internal]
+      summary: Trigger ISR revalidation (internal/Make only)
+      description: |
+        Called by Make when a Notion blog post is published, updated, or deleted.
+        Requires `x-revalidate-secret` header matching REVALIDATION_SECRET env var.
+      security:
+        - RevalidateSecret: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                slug:
+                  type: string
+                  description: Optional slug of the specific post to revalidate. If omitted, only the blog index is revalidated.
+                  example: "custom-software-nepal-sme"
+      responses:
+        "200":
+          description: Revalidation triggered
+        "401":
+          description: Unauthorized — invalid or missing secret
+
+components:
+  securitySchemes:
+    RevalidateSecret:
+      type: apiKey
+      in: header
+      name: x-revalidate-secret
+
+  responses:
+    ValidationError:
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    RateLimited:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    InternalError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+
+  schemas:
+    SuccessResponse:
+      type: object
+      required: [success]
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: "Message received"
+
+    ErrorResponse:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
+          example: "Missing required field: email"
+
+    ContactFormRequest:
+      type: object
+      required: [name, email, subject, message]
+      properties:
+        name:
+          type: string
+          maxLength: 200
+          example: "Rijan Mainali"
+        email:
+          type: string
+          format: email
+          example: "rijan@example.com"
+        subject:
+          type: string
+          maxLength: 300
+          example: "Custom ERP inquiry"
+        message:
+          type: string
+          maxLength: 5000
+          example: "We need a modular ERP system for our 500-student school."
+        website:
+          type: string
+          description: Honeypot field — must be empty. Populate only if you are a bot.
+          example: ""
+
+    ProposalFormRequest:
+      type: object
+      required: [name, company, email, industry, project_type, budget, message]
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        company:
+          type: string
+          maxLength: 300
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        industry:
+          type: string
+          enum: [Education, Commerce, Healthcare, IT, Retail, Services, Other]
+        project_type:
+          type: string
+        budget:
+          type: string
+        message:
+          type: string
+          maxLength: 8000
+        region:
+          type: string
+        region_code:
+          type: string
+          enum: [nepal, international, unknown]
+        website:
+          type: string
+          description: Honeypot field
+
+    JobApplicationRequest:
+      type: object
+      required: [name, email, role, skills, cover_note]
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        role:
+          type: string
+          enum:
+            - "Senior Full-stack Engineer (React / RSC)"
+            - "Cloud Infrastructure Engineer (SRE Focus)"
+            - "System Design Intern (Birtamode Office)"
+            - "Other / General Application"
+        skills:
+          type: string
+          maxLength: 500
+        portfolio_url:
+          type: string
+          format: uri
+        linkedin_url:
+          type: string
+          format: uri
+        cover_note:
+          type: string
+          maxLength: 5000
+        website:
+          type: string
+          description: Honeypot field

@@ -1,0 +1,66 @@
+# .github/workflows/ci.yml
+# ─────────────────────────────────────────────────────────────────────────────
+# Runs on every push and pull request.
+# Pipeline: install → lint → audit → test → build
+#
+# All steps must pass before a PR can be merged.
+# This enforces the CI/CD standard documented in our Technical Standards.
+# ─────────────────────────────────────────────────────────────────────────────
+
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    name: Lint · Audit · Test · Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint (ESLint)
+        run: npm run lint
+
+      - name: Security audit
+        run: npm audit --audit-level=high
+        # Fails the build if any high or critical vulnerabilities are found.
+        # Run `npm audit fix` locally to resolve, or add an exception below.
+        continue-on-error: false
+
+      - name: Run tests
+        run: npm test -- --run
+        env:
+          # Provide test-safe env vars so API route tests don't fail on missing config
+          NODE_ENV: test
+          UPSTASH_REDIS_REST_URL: ""
+          UPSTASH_REDIS_REST_TOKEN: ""
+          NOTION_API_KEY: ""
+          NOTION_BLOG_DATABASE_ID: ""
+          REVALIDATION_SECRET: test-secret
+
+      - name: Build
+        run: npm run build
+        env:
+          # Required for Next.js build — safe dummy values for CI
+          NEXT_PUBLIC_SITE_URL: https://modulifyr.vercel.app
+          NODE_ENV: production

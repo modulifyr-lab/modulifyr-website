@@ -1,12 +1,15 @@
 // src/app/api/submit-contact/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { isRateLimited, getClientIp } from "@/lib/ratelimit";
+import logger from "@/lib/logger";
 
 export async function POST(req: NextRequest) {
+  const ip = getClientIp(req);
+
   try {
     // ── Rate limit: 5 requests per minute per IP ──────────────────────────
-    const ip = getClientIp(req);
-    if (isRateLimited(ip, 5, 60_000)) {
+    if (await isRateLimited(ip, 5, 60_000)) {
+      logger.warn("Contact form rate limited", { ip });
       return NextResponse.json(
         { error: "Too many requests. Please wait before trying again." },
         { status: 429 }
@@ -17,7 +20,7 @@ export async function POST(req: NextRequest) {
 
     // ── Honeypot: bots fill this field, humans don't ──────────────────────
     if (body.website && String(body.website).trim() !== "") {
-      // Silently succeed — don't let bots know they were blocked
+      logger.info("Contact form honeypot triggered", { ip });
       return NextResponse.json({ success: true }, { status: 200 });
     }
 
@@ -39,20 +42,17 @@ export async function POST(req: NextRequest) {
     }
 
     // ── Max length validation (prevent payload abuse) ─────────────────────
-    if (String(body.name).length > 200) {
+    if (String(body.name).length > 200)
       return NextResponse.json({ error: "Name is too long" }, { status: 400 });
-    }
-    if (String(body.subject).length > 300) {
+    if (String(body.subject).length > 300)
       return NextResponse.json({ error: "Subject is too long" }, { status: 400 });
-    }
-    if (String(body.message).length > 5000) {
+    if (String(body.message).length > 5000)
       return NextResponse.json({ error: "Message is too long (max 5000 characters)" }, { status: 400 });
-    }
 
     // ── Send to Make webhook ──────────────────────────────────────────────
     const webhookUrl = process.env.MAKE_CONTACT_WEBHOOK_URL;
     if (!webhookUrl) {
-      console.warn("MAKE_CONTACT_WEBHOOK_URL not set — skipping webhook");
+      logger.warn("MAKE_CONTACT_WEBHOOK_URL not set — skipping webhook");
       return NextResponse.json({ success: true, message: "Message received" }, { status: 200 });
     }
 
@@ -70,13 +70,14 @@ export async function POST(req: NextRequest) {
     });
 
     if (!makeResponse.ok) {
-      console.error("Make webhook failed:", makeResponse.status);
+      logger.error("Make webhook failed for contact form", { status: makeResponse.status, ip });
       return NextResponse.json({ error: "Failed to process submission" }, { status: 502 });
     }
 
+    logger.info("Contact form submitted successfully", { email: payload.email, ip });
     return NextResponse.json({ success: true, message: "Message received" }, { status: 200 });
   } catch (error) {
-    console.error("Contact API error:", error);
+    logger.error("Contact API unhandled error", { error: String(error), ip });
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

@@ -1,12 +1,15 @@
 // src/app/api/submit-proposal/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { isRateLimited, getClientIp } from "@/lib/ratelimit";
+import logger from "@/lib/logger";
 
 export async function POST(req: NextRequest) {
+  const ip = getClientIp(req);
+
   try {
     // ── Rate limit: 5 requests per minute per IP ──────────────────────────
-    const ip = getClientIp(req);
-    if (isRateLimited(ip, 5, 60_000)) {
+    if (await isRateLimited(ip, 5, 60_000)) {
+      logger.warn("Proposal form rate limited", { ip });
       return NextResponse.json(
         { error: "Too many requests. Please wait before trying again." },
         { status: 429 }
@@ -15,8 +18,9 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json();
 
-    // ── Honeypot: bots fill this field, humans don't ──────────────────────
+    // ── Honeypot ──────────────────────────────────────────────────────────
     if (body.website && String(body.website).trim() !== "") {
+      logger.info("Proposal form honeypot triggered", { ip });
       return NextResponse.json({ success: true }, { status: 200 });
     }
 
@@ -38,9 +42,12 @@ export async function POST(req: NextRequest) {
     }
 
     // ── Max length validation ─────────────────────────────────────────────
-    if (String(body.name).length > 200)    return NextResponse.json({ error: "Name is too long" }, { status: 400 });
-    if (String(body.company).length > 300) return NextResponse.json({ error: "Company name is too long" }, { status: 400 });
-    if (String(body.message).length > 8000) return NextResponse.json({ error: "Message is too long (max 8000 characters)" }, { status: 400 });
+    if (String(body.name).length > 200)
+      return NextResponse.json({ error: "Name is too long" }, { status: 400 });
+    if (String(body.company).length > 300)
+      return NextResponse.json({ error: "Company name is too long" }, { status: 400 });
+    if (String(body.message).length > 8000)
+      return NextResponse.json({ error: "Message is too long (max 8000 characters)" }, { status: 400 });
 
     // ── Allowlist validation on select fields ─────────────────────────────
     const allowedIndustries = ["Education", "Commerce", "Healthcare", "IT", "Retail", "Services", "Other"];
@@ -51,7 +58,7 @@ export async function POST(req: NextRequest) {
     // ── Send to Make webhook ──────────────────────────────────────────────
     const webhookUrl = process.env.MAKE_PROPOSAL_WEBHOOK_URL;
     if (!webhookUrl) {
-      console.warn("MAKE_PROPOSAL_WEBHOOK_URL not set — skipping webhook");
+      logger.warn("MAKE_PROPOSAL_WEBHOOK_URL not set — skipping webhook");
       return NextResponse.json({ success: true, message: "Proposal request received" }, { status: 200 });
     }
 
@@ -75,13 +82,14 @@ export async function POST(req: NextRequest) {
     });
 
     if (!makeResponse.ok) {
-      console.error("Make webhook failed:", makeResponse.status);
+      logger.error("Make webhook failed for proposal form", { status: makeResponse.status, ip });
       return NextResponse.json({ error: "Failed to process submission" }, { status: 502 });
     }
 
+    logger.info("Proposal form submitted successfully", { email: payload.email, company: payload.company, ip });
     return NextResponse.json({ success: true, message: "Proposal request received" }, { status: 200 });
   } catch (error) {
-    console.error("Proposal API error:", error);
+    logger.error("Proposal API unhandled error", { error: String(error), ip });
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
