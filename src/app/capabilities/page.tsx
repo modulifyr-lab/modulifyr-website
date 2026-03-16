@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import { Card, CardTitle, CardDescription } from "@/components/ui/Card";
 
 export const metadata: Metadata = {
   title: "Technical Capabilities & Architecture",
@@ -16,11 +15,9 @@ import {
   Code2,
   Lock,
   FileCode,
-  ArrowRight,
   Download,
   Layout,
 } from "lucide-react";
-import Link from "next/link";
 
 const techStack = [
   {

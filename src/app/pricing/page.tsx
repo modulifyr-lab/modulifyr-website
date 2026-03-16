@@ -1,12 +1,10 @@
 "use client";
 
-import { Metadata } from "next";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import {
   CheckCircle2,
   ChevronRight,
-  ArrowRight,
   ShieldCheck,
   Clock,
   FileText,

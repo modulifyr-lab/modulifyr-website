@@ -16,10 +16,9 @@ import {
   Clock,
   FileText,
   Calendar,
-  ArrowRight,
 } from "lucide-react";
 import Link from "next/link";
-import { Card, CardTitle, CardDescription } from "@/components/ui/Card";
+import { Card, CardTitle } from "@/components/ui/Card";
 
 const steps = [
   {

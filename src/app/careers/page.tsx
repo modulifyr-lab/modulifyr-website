@@ -1,8 +1,6 @@
 import { Metadata } from "next";
 import { JobApplicationForm } from "@/components/forms/JobApplicationForm";
-import { Button } from "@/components/ui/Button";
-import { ArrowRight, Rocket, Coffee, Wrench, Globe } from "lucide-react";
-import Link from "next/link";
+import { Coffee, Wrench, Globe } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Career Openings | Modulifyr",

@@ -16,7 +16,6 @@ import {
   Database,
   Users,
   Zap,
-  ArrowRight,
   Download,
 } from "lucide-react";
 import Link from "next/link";

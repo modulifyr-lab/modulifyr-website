@@ -10,18 +10,12 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import {
   ExternalLink,
-  Code2,
   Layers,
-  Cpu,
-  Zap,
   ArrowRight,
   ShieldCheck,
-  Layout,
-  Terminal,
   CheckCircle2,
   AlertTriangle,
   Target,
-  BarChart,
 } from "lucide-react";
 
 // ─── Case study data ──────────────────────────────────────────────────────────

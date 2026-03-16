@@ -9,7 +9,6 @@ import {
   Server,
   FileText,
   Lock,
-  Zap,
   CheckCircle2,
   ArrowRight,
   Download,
