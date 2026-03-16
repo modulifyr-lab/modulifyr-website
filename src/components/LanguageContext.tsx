@@ -30,16 +30,20 @@ export const translations: Record<Language, Record<string, string>> = {
 
     // Home hero
     "home.hero.headline": "Custom Software Systems Built to Scale With Your Organization",
-    "home.hero.sub": "Modulifyr designs and builds modular software systems for organizations that require flexibility, scalability, and long-term reliability. We partner with companies worldwide and in Birtamode, Nepal to architect and deliver software tailored to their operations.",
+    "home.hero.sub":
+      "Modulifyr designs and builds modular software systems for organizations that require flexibility, scalability, and long-term reliability. We partner with companies worldwide and in Birtamode, Nepal to architect and deliver software tailored to their operations.",
     "home.hero.cta_primary": "Request Proposal",
     "home.hero.cta_secondary": "Book Discovery Call",
     "home.hero.badge_nda": "NDA available",
     "home.hero.badge_global": "Global collaboration",
 
     // Home philosophy
-    "home.philosophy.headline": "Built for organizations that need systems that evolve — not generic software.",
-    "home.philosophy.body": "Many businesses rely on rigid software that cannot adapt as their operations grow. Modulifyr takes a different approach. We design systems using modular architecture so that new functionality, integrations, and workflows can evolve over time without rebuilding the entire platform.",
-    "home.philosophy.quote": "\"Our work focuses on building long-term digital infrastructure rather than short-term software products.\"",
+    "home.philosophy.headline":
+      "Built for organizations that need systems that evolve — not generic software.",
+    "home.philosophy.body":
+      "Many businesses rely on rigid software that cannot adapt as their operations grow. Modulifyr takes a different approach. We design systems using modular architecture so that new functionality, integrations, and workflows can evolve over time without rebuilding the entire platform.",
+    "home.philosophy.quote":
+      '"Our work focuses on building long-term digital infrastructure rather than short-term software products."',
 
     // Services
     "services.label": "Our Capabilities",
@@ -47,13 +51,17 @@ export const translations: Record<Language, Record<string, string>> = {
     "services.sub": "Engineering tailored solutions for complex operational requirements.",
     "services.explore_all": "Explore All Services",
     "services.custom_dev": "Custom Software Development",
-    "services.custom_dev_desc": "Design and development of tailored systems aligned with your workflows, data structures, and operational processes.",
+    "services.custom_dev_desc":
+      "Design and development of tailored systems aligned with your workflows, data structures, and operational processes.",
     "services.architecture": "System Architecture",
-    "services.architecture_desc": "Design scalable architectures that allow software to evolve as your organization grows.",
+    "services.architecture_desc":
+      "Design scalable architectures that allow software to evolve as your organization grows.",
     "services.integrations": "Integrations & Automation",
-    "services.integrations_desc": "Connect internal tools, APIs, databases, and third-party platforms into unified workflows.",
+    "services.integrations_desc":
+      "Connect internal tools, APIs, databases, and third-party platforms into unified workflows.",
     "services.modernization": "Modernization & Rebuilds",
-    "services.modernization_desc": "Replace legacy systems with modern, scalable platforms built for future expansion.",
+    "services.modernization_desc":
+      "Replace legacy systems with modern, scalable platforms built for future expansion.",
 
     // How we work
     "process.headline": "How We Work",
@@ -71,7 +79,8 @@ export const translations: Record<Language, Record<string, string>> = {
 
     // Industries
     "industries.headline": "Industries We Serve",
-    "industries.sub": "Our modular architecture approach adapts to the operational requirements of different industries.",
+    "industries.sub":
+      "Our modular architecture approach adapts to the operational requirements of different industries.",
     "industries.education": "Education",
     "industries.commerce": "Commerce",
     "industries.healthcare": "Healthcare",
@@ -81,12 +90,14 @@ export const translations: Record<Language, Record<string, string>> = {
 
     // CTA section
     "cta.headline": "Planning a system for your organization?",
-    "cta.body": "Whether you're building new digital infrastructure or replacing legacy systems, Modulifyr can help design and build a scalable solution tailored to your organization.",
+    "cta.body":
+      "Whether you're building new digital infrastructure or replacing legacy systems, Modulifyr can help design and build a scalable solution tailored to your organization.",
     "cta.primary": "Request Proposal",
     "cta.secondary": "Schedule Discovery Call",
 
     // Footer
-    "footer.tagline": "Custom modular software systems for SMBs that have outgrown off-the-shelf tools. Based in Birtamode, Jhapa, Nepal. Building for clients worldwide.",
+    "footer.tagline":
+      "Custom modular software systems for SMBs that have outgrown off-the-shelf tools. Based in Birtamode, Jhapa, Nepal. Building for clients worldwide.",
     "footer.company": "Company",
     "footer.about": "About",
     "footer.work": "Work",
@@ -109,7 +120,6 @@ export const translations: Record<Language, Record<string, string>> = {
   },
 
   ne: {
-    // Navbar
     "nav.services": "सेवाहरू",
     "nav.process": "प्रक्रिया",
     "nav.industries": "उद्योगहरू",
@@ -123,35 +133,34 @@ export const translations: Record<Language, Record<string, string>> = {
     "nav.toggle_theme": "रङ थिम परिवर्तन गर्नुहोस्",
     "nav.switch_language": "भाषा परिवर्तन गर्नुहोस्",
     "nav.skip_to_content": "मुख्य सामग्रीमा जानुहोस्",
-
-    // Home hero
     "home.hero.headline": "तपाईंको संस्थासँगै बढ्न बनाइएका कस्टम सफ्टवेयर प्रणालीहरू",
-    "home.hero.sub": "Modulifyr ले लचिलोपन, मापनीयता र दीर्घकालीन भरोसायोग्यता चाहने संस्थाहरूका लागि मड्युलर सफ्टवेयर प्रणालीहरू डिजाइन र निर्माण गर्दछ। हामी विश्वभरका र बिर्तामोड, नेपालका कम्पनीहरूसँग मिलेर तिनीहरूको सञ्चालनका लागि उपयुक्त सफ्टवेयर निर्माण गर्छौं।",
+    "home.hero.sub":
+      "Modulifyr ले लचिलोपन, मापनीयता र दीर्घकालीन भरोसायोग्यता चाहने संस्थाहरूका लागि मड्युलर सफ्टवेयर प्रणालीहरू डिजाइन र निर्माण गर्दछ।",
     "home.hero.cta_primary": "प्रस्ताव अनुरोध गर्नुहोस्",
     "home.hero.cta_secondary": "खोज कल बुक गर्नुहोस्",
     "home.hero.badge_nda": "NDA उपलब्ध",
     "home.hero.badge_global": "विश्वव्यापी सहकार्य",
-
-    // Home philosophy
-    "home.philosophy.headline": "विकसित हुने प्रणाली चाहने संस्थाहरूका लागि — सामान्य सफ्टवेयर होइन।",
-    "home.philosophy.body": "धेरै व्यवसायहरू कठोर सफ्टवेयरमा निर्भर छन् जुन तिनीहरूको सञ्चालन बढ्दै जाँदा अनुकूल हुन सक्दैन। Modulifyr फरक दृष्टिकोण अपनाउँछ। हामी मड्युलर आर्किटेक्चर प्रयोग गरेर प्रणालीहरू डिजाइन गर्छौं ताकि नयाँ कार्यक्षमता, एकीकरण र कार्यप्रवाहहरू सम्पूर्ण प्लेटफर्म पुनर्निर्माण नगरी विकसित हुन सक्छन्।",
-    "home.philosophy.quote": "\"हाम्रो काम अल्पकालीन सफ्टवेयर उत्पादनभन्दा दीर्घकालीन डिजिटल पूर्वाधार निर्माणमा केन्द्रित छ।\"",
-
-    // Services
+    "home.philosophy.headline":
+      "विकसित हुने प्रणाली चाहने संस्थाहरूका लागि — सामान्य सफ्टवेयर होइन।",
+    "home.philosophy.body": "धेरै व्यवसायहरू कठोर सफ्टवेयरमा निर्भर छन्।",
+    "home.philosophy.quote":
+      '"हाम्रो काम अल्पकालीन सफ्टवेयर उत्पादनभन्दा दीर्घकालीन डिजिटल पूर्वाधार निर्माणमा केन्द्रित छ।"',
     "services.label": "हाम्रा क्षमताहरू",
     "services.headline": "हामी के गर्छौं",
     "services.sub": "जटिल सञ्चालन आवश्यकताहरूका लागि अनुकूलित समाधानहरूको इन्जिनियरिङ।",
     "services.explore_all": "सबै सेवाहरू हेर्नुहोस्",
     "services.custom_dev": "कस्टम सफ्टवेयर विकास",
-    "services.custom_dev_desc": "तपाईंको कार्यप्रवाह, डेटा संरचना र सञ्चालन प्रक्रियाहरूसँग मेल खाने अनुकूलित प्रणालीहरूको डिजाइन र विकास।",
+    "services.custom_dev_desc":
+      "तपाईंको कार्यप्रवाह, डेटा संरचना र सञ्चालन प्रक्रियाहरूसँग मेल खाने अनुकूलित प्रणालीहरूको डिजाइन र विकास।",
     "services.architecture": "प्रणाली आर्किटेक्चर",
-    "services.architecture_desc": "तपाईंको संस्था बढ्दै जाँदा सफ्टवेयरलाई विकसित हुन दिने मापनीय आर्किटेक्चरहरू डिजाइन गर्नुहोस्।",
+    "services.architecture_desc":
+      "तपाईंको संस्था बढ्दै जाँदा सफ्टवेयरलाई विकसित हुन दिने मापनीय आर्किटेक्चरहरू डिजाइन गर्नुहोस्।",
     "services.integrations": "एकीकरण र स्वचालन",
-    "services.integrations_desc": "आन्तरिक उपकरणहरू, API हरू, डेटाबेसहरू र तृतीय-पक्ष प्लेटफर्महरूलाई एकीकृत कार्यप्रवाहमा जोड्नुहोस्।",
+    "services.integrations_desc":
+      "आन्तरिक उपकरणहरू, API हरू, डेटाबेसहरू र तृतीय-पक्ष प्लेटफर्महरूलाई एकीकृत कार्यप्रवाहमा जोड्नुहोस्।",
     "services.modernization": "आधुनिकीकरण र पुनर्निर्माण",
-    "services.modernization_desc": "पुराना प्रणालीहरूलाई भविष्यको विस्तारका लागि निर्मित आधुनिक, मापनीय प्लेटफर्महरूले प्रतिस्थापन गर्नुहोस्।",
-
-    // How we work
+    "services.modernization_desc":
+      "पुराना प्रणालीहरूलाई भविष्यको विस्तारका लागि निर्मित आधुनिक, मापनीय प्लेटफर्महरूले प्रतिस्थापन गर्नुहोस्।",
     "process.headline": "हामी कसरी काम गर्छौं",
     "process.sub": "मड्युलर प्रणालीहरू डेलिभर गर्न व्यवस्थित, इन्जिनियरिङ-प्रथम दृष्टिकोण।",
     "process.discovery": "खोज",
@@ -164,25 +173,22 @@ export const translations: Record<Language, Record<string, string>> = {
     "process.deployment_desc": "क्लाउड डिप्लोयमेन्ट, पूर्वाधार र परीक्षण।",
     "process.support": "समर्थन",
     "process.support_desc": "मर्मत, स्तरवृद्धि र निरन्तर सुधारहरू।",
-
-    // Industries
     "industries.headline": "हामी सेवा गर्ने उद्योगहरू",
-    "industries.sub": "हाम्रो मड्युलर आर्किटेक्चर दृष्टिकोण विभिन्न उद्योगहरूको सञ्चालन आवश्यकताहरूमा अनुकूल हुन्छ।",
+    "industries.sub":
+      "हाम्रो मड्युलर आर्किटेक्चर दृष्टिकोण विभिन्न उद्योगहरूको सञ्चालन आवश्यकताहरूमा अनुकूल हुन्छ।",
     "industries.education": "शिक्षा",
     "industries.commerce": "वाणिज्य",
     "industries.healthcare": "स्वास्थ्य सेवा",
     "industries.it": "सूचना प्रविधि",
     "industries.retail": "खुद्रा व्यापार",
     "industries.services": "सेवाहरू",
-
-    // CTA section
     "cta.headline": "तपाईंको संस्थाका लागि प्रणाली योजना बनाउँदै हुनुहुन्छ?",
-    "cta.body": "चाहे तपाईं नयाँ डिजिटल पूर्वाधार निर्माण गर्दै हुनुहुन्छ वा पुराना प्रणालीहरू प्रतिस्थापन गर्दै, Modulifyr ले तपाईंको संस्थाका लागि अनुकूलित मापनीय समाधान डिजाइन र निर्माण गर्न मद्दत गर्न सक्छ।",
+    "cta.body":
+      "Modulifyr ले तपाईंको संस्थाका लागि अनुकूलित मापनीय समाधान डिजाइन र निर्माण गर्न मद्दत गर्न सक्छ।",
     "cta.primary": "प्रस्ताव अनुरोध गर्नुहोस्",
     "cta.secondary": "खोज कल तालिका गर्नुहोस्",
-
-    // Footer
-    "footer.tagline": "तयारी उपकरणहरू भन्दा बढेका SMB हरूका लागि कस्टम मड्युलर सफ्टवेयर प्रणालीहरू। बिर्तामोड, झापा, नेपालमा आधारित। विश्वव्यापी ग्राहकहरूका लागि निर्माण।",
+    "footer.tagline":
+      "तयारी उपकरणहरू भन्दा बढेका SMB हरूका लागि कस्टम मड्युलर सफ्टवेयर प्रणालीहरू।",
     "footer.company": "कम्पनी",
     "footer.about": "हाम्रो बारे",
     "footer.work": "काम",
@@ -212,16 +218,18 @@ const LanguageContext = createContext<LanguageContextType>({
   t: (key: string) => key,
 });
 
+function getInitialLanguage(): Language {
+  if (typeof window === "undefined") return "en";
+  const stored = localStorage.getItem("modulifyr_lang") as Language | null;
+  return stored === "en" || stored === "ne" ? stored : "en";
+}
+
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = useState<Language>("en");
+  const [language, setLanguageState] = useState<Language>(getInitialLanguage);
 
   useEffect(() => {
-    const stored = localStorage.getItem("modulifyr_lang") as Language | null;
-    if (stored === "en" || stored === "ne") {
-      setLanguageState(stored);
-      document.documentElement.lang = stored === "ne" ? "ne" : "en";
-    }
-  }, []);
+    document.documentElement.lang = language === "ne" ? "ne" : "en";
+  }, [language]);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);

@@ -10,25 +10,28 @@ import { useLanguage } from "@/components/LanguageContext";
 import LanguageSwitcher from "@/contexts/LanguageSwitcher";
 
 const NAV_LINKS = [
-  { href: "/services",   key: "nav.services" },
-  { href: "/process",    key: "nav.process" },
+  { href: "/services", key: "nav.services" },
+  { href: "/process", key: "nav.process" },
   { href: "/industries", key: "nav.industries" },
-  { href: "/work",       key: "nav.work" },
-  { href: "/resources",  key: "nav.resources" },
-  { href: "/about",      key: "nav.about" },
-  { href: "/contact",    key: "nav.contact" },
+  { href: "/work", key: "nav.work" },
+  { href: "/resources", key: "nav.resources" },
+  { href: "/about", key: "nav.about" },
+  { href: "/contact", key: "nav.contact" },
 ];
 
 export function Navbar() {
   const pathname = usePathname();
   const { resolvedTheme, setTheme } = useTheme();
   const { t } = useLanguage();
-  const [mounted, setMounted] = useState(false);   // ✅ local state — not from useTheme()
+  const [mounted, setMounted] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
 
-  useEffect(() => { setMounted(true); }, []);       // ✅ set after hydration
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -36,7 +39,10 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => { setMenuOpen(false); }, [pathname]);
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -51,7 +57,9 @@ export function Navbar() {
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [menuOpen]);
 
   return (
@@ -59,9 +67,7 @@ export function Navbar() {
       {/* ── Skip to main content ───────────────────────────────────────── */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only fixed top-2 left-2 z-[100]
-          bg-brand-orange text-white font-bold text-sm px-4 py-2 rounded-lg
-          focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+        className="bg-brand-orange sr-only fixed top-2 left-2 z-[100] rounded-lg px-4 py-2 text-sm font-bold text-white focus:not-sr-only focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
       >
         {t("nav.skip_to_content")}
       </a>
@@ -70,17 +76,14 @@ export function Navbar() {
       <nav
         role="navigation"
         aria-label="Main navigation"
-        className={`fixed top-0 left-0 right-0 z-50 h-20 flex items-center transition-all duration-300
-          ${scrolled ? "bg-background/95 backdrop-blur-md border-b border-border-base shadow-sm" : "bg-transparent"}`}
+        className={`fixed top-0 right-0 left-0 z-50 flex h-20 items-center transition-all duration-300 ${scrolled ? "bg-background/95 border-border-base border-b shadow-sm backdrop-blur-md" : "bg-transparent"}`}
       >
-        <div className="container-custom flex items-center justify-between w-full">
-
+        <div className="container-custom flex w-full items-center justify-between">
           {/* Logo */}
           <Link
             href="/"
             aria-label="Modulifyr — go to homepage"
-            className="flex items-center gap-2 focus-visible:outline focus-visible:outline-2
-              focus-visible:outline-offset-2 focus-visible:outline-brand-orange rounded-md"
+            className="focus-visible:outline-brand-orange flex items-center gap-2 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
           >
             <Image
               src="/company-logo.png"
@@ -88,15 +91,15 @@ export function Navbar() {
               aria-hidden="true"
               width={40}
               height={40}
-              className="w-10 h-10 object-contain dark:invert"
+              className="h-10 w-10 object-contain dark:invert"
             />
-            <span className="font-heading font-bold text-xl tracking-tight hidden sm:block text-brand-navy dark:text-foreground">
+            <span className="font-heading text-brand-navy dark:text-foreground hidden text-xl font-bold tracking-tight sm:block">
               Modulifyr
             </span>
           </Link>
 
           {/* ── Desktop links ──────────────────────────────────────────── */}
-          <div className="hidden lg:flex items-center gap-6" role="list">
+          <div className="hidden items-center gap-6 lg:flex" role="list">
             {NAV_LINKS.map(({ href, key }) => {
               const active = pathname === href || pathname.startsWith(href + "/");
               return (
@@ -105,10 +108,7 @@ export function Navbar() {
                   href={href}
                   role="listitem"
                   aria-current={active ? "page" : undefined}
-                  className={`text-sm font-medium transition-colors
-                    focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                    focus-visible:outline-brand-orange rounded-sm
-                    ${active ? "text-brand-orange font-semibold" : "text-text-alt hover:text-brand-orange"}`}
+                  className={`focus-visible:outline-brand-orange rounded-sm text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${active ? "text-brand-orange font-semibold" : "text-text-alt hover:text-brand-orange"}`}
                 >
                   {t(key)}
                 </Link>
@@ -117,31 +117,26 @@ export function Navbar() {
           </div>
 
           {/* ── Desktop right controls ─────────────────────────────────── */}
-          <div className="hidden lg:flex items-center gap-3">
+          <div className="hidden items-center gap-3 lg:flex">
             <LanguageSwitcher />
-            <div className="flex items-center gap-3 border-l border-border-base pl-4">
+            <div className="border-border-base flex items-center gap-3 border-l pl-4">
               {mounted && (
                 <button
                   onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
                   aria-label={t("nav.toggle_theme")}
-                  className="inline-flex items-center justify-center w-10 h-10 rounded-full
-                    text-foreground hover:bg-bg-secondary transition-colors
-                    focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                    focus-visible:outline-brand-orange"
+                  className="text-foreground hover:bg-bg-secondary focus-visible:outline-brand-orange inline-flex h-10 w-10 items-center justify-center rounded-full transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                 >
-                  {resolvedTheme === "dark"
-                    ? <Sun className="h-5 w-5" aria-hidden="true" />
-                    : <Moon className="h-5 w-5" aria-hidden="true" />}
+                  {resolvedTheme === "dark" ? (
+                    <Sun className="h-5 w-5" aria-hidden="true" />
+                  ) : (
+                    <Moon className="h-5 w-5" aria-hidden="true" />
+                  )}
                 </button>
               )}
               <Link href="/request-proposal">
                 <button
                   aria-label={t("nav.request_proposal")}
-                  className="inline-flex items-center justify-center rounded-lg
-                    bg-brand-orange text-white hover:bg-brand-orange/90
-                    px-4 py-2 text-sm font-semibold transition-colors
-                    focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                    focus-visible:outline-brand-orange"
+                  className="bg-brand-orange hover:bg-brand-orange/90 focus-visible:outline-brand-orange inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold text-white transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                 >
                   {t("nav.request_proposal")}
                 </button>
@@ -155,14 +150,13 @@ export function Navbar() {
               <button
                 onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
                 aria-label={t("nav.toggle_theme")}
-                className="inline-flex items-center justify-center w-10 h-10 rounded-full
-                  text-foreground hover:bg-bg-secondary transition-colors
-                  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                  focus-visible:outline-brand-orange"
+                className="text-foreground hover:bg-bg-secondary focus-visible:outline-brand-orange inline-flex h-10 w-10 items-center justify-center rounded-full transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
               >
-                {resolvedTheme === "dark"
-                  ? <Sun className="h-5 w-5" aria-hidden="true" />
-                  : <Moon className="h-5 w-5" aria-hidden="true" />}
+                {resolvedTheme === "dark" ? (
+                  <Sun className="h-5 w-5" aria-hidden="true" />
+                ) : (
+                  <Moon className="h-5 w-5" aria-hidden="true" />
+                )}
               </button>
             )}
             <button
@@ -171,13 +165,13 @@ export function Navbar() {
               aria-expanded={menuOpen}
               aria-controls="mobile-menu"
               aria-label={menuOpen ? t("nav.close_menu") : t("nav.open_menu")}
-              className="p-2 text-foreground rounded-md
-                focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                focus-visible:outline-brand-orange"
+              className="text-foreground focus-visible:outline-brand-orange rounded-md p-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
             >
-              {menuOpen
-                ? <X className="w-6 h-6" aria-hidden="true" />
-                : <Menu className="w-6 h-6" aria-hidden="true" />}
+              {menuOpen ? (
+                <X className="h-6 w-6" aria-hidden="true" />
+              ) : (
+                <Menu className="h-6 w-6" aria-hidden="true" />
+              )}
             </button>
           </div>
         </div>
@@ -189,11 +183,9 @@ export function Navbar() {
         role="dialog"
         aria-modal="true"
         aria-label="Navigation menu"
-        className={`fixed inset-0 top-20 bg-background z-40 lg:hidden
-          transition-transform duration-300 ease-in-out
-          ${menuOpen ? "translate-x-0" : "translate-x-full"}`}
+        className={`bg-background fixed inset-0 top-20 z-40 transition-transform duration-300 ease-in-out lg:hidden ${menuOpen ? "translate-x-0" : "translate-x-full"}`}
       >
-        <nav aria-label="Mobile navigation" className="flex flex-col p-6 gap-5">
+        <nav aria-label="Mobile navigation" className="flex flex-col gap-5 p-6">
           {NAV_LINKS.map(({ href, key }) => {
             const active = pathname === href || pathname.startsWith(href + "/");
             return (
@@ -201,26 +193,19 @@ export function Navbar() {
                 key={href}
                 href={href}
                 aria-current={active ? "page" : undefined}
-                className={`text-lg font-semibold
-                  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                  focus-visible:outline-brand-orange rounded-sm
-                  ${active ? "text-brand-orange" : "text-text-main hover:text-brand-orange"}`}
+                className={`focus-visible:outline-brand-orange rounded-sm text-lg font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 ${active ? "text-brand-orange" : "text-text-main hover:text-brand-orange"}`}
               >
                 {t(key)}
               </Link>
             );
           })}
-          <div className="pt-2 border-t border-border-base">
+          <div className="border-border-base border-t pt-2">
             <LanguageSwitcher />
           </div>
           <Link href="/request-proposal">
             <button
               aria-label={t("nav.request_proposal")}
-              className="inline-flex items-center justify-center rounded-lg w-full
-                bg-brand-orange text-white hover:bg-brand-orange/90
-                px-6 py-3 text-base font-semibold
-                focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
-                focus-visible:outline-brand-orange"
+              className="bg-brand-orange hover:bg-brand-orange/90 focus-visible:outline-brand-orange inline-flex w-full items-center justify-center rounded-lg px-6 py-3 text-base font-semibold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
             >
               {t("nav.request_proposal")}
             </button>

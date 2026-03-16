@@ -7,11 +7,11 @@ import { posts as staticPosts } from "../page";
 // ─── Defined locally so this file has no dependency on page.tsx exports ──────
 const categoryColors: Record<string, string> = {
   Architecture: "bg-brand-orange/10 text-brand-orange",
-  Engineering:  "bg-brand-navy/10 text-brand-navy",
-  Backend:      "bg-brand-teal/10 text-brand-teal",
-  Frontend:     "bg-brand-gold/20 text-amber-700",
-  DevOps:       "bg-brand-teal/10 text-brand-teal",
-  Strategy:     "bg-brand-orange/10 text-brand-orange",
+  Engineering: "bg-brand-navy/10 text-brand-navy",
+  Backend: "bg-brand-teal/10 text-brand-teal",
+  Frontend: "bg-brand-gold/20 text-amber-700",
+  DevOps: "bg-brand-teal/10 text-brand-teal",
+  Strategy: "bg-brand-orange/10 text-brand-orange",
 };
 import { getPostBySlug } from "@/lib/notion-blog";
 import { ArrowLeft, ArrowRight, Clock, User } from "lucide-react";
@@ -84,7 +84,7 @@ function StaticContent({ content }: { content: string }) {
         section.type === "heading" ? (
           <h2
             key={i}
-            className="text-2xl font-heading font-bold text-brand-navy mt-10 mb-3 first:mt-0"
+            className="font-heading text-brand-navy mt-10 mb-3 text-2xl font-bold first:mt-0"
           >
             {section.text}
           </h2>
@@ -102,12 +102,7 @@ function StaticContent({ content }: { content: string }) {
 
 // ─── Render Notion HTML content ───────────────────────────────────────────────
 function NotionContent({ html }: { html: string }) {
-  return (
-    <div
-      className="notion-content space-y-2"
-      dangerouslySetInnerHTML={{ __html: html }}
-    />
-  );
+  return <div className="notion-content space-y-2" dangerouslySetInnerHTML={{ __html: html }} />;
 }
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
@@ -157,53 +152,53 @@ export default async function BlogPostPage({ params }: Props) {
   };
 
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex w-full flex-col">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
 
       {/* ── Header ── */}
-      <section className="bg-brand-navy text-white py-20">
+      <section className="bg-brand-navy py-20 text-white">
         <div className="container-custom max-w-4xl">
           <Link
             href="/blog"
-            className="flex items-center gap-2 text-text-muted hover:text-brand-teal text-sm font-medium mb-8 transition-colors"
+            className="text-text-muted hover:text-brand-teal mb-8 flex items-center gap-2 text-sm font-medium transition-colors"
           >
-            <ArrowLeft className="w-4 h-4" /> Back to Blog
+            <ArrowLeft className="h-4 w-4" /> Back to Blog
           </Link>
           <span
-            className={`px-3 py-1 rounded-full text-xs font-bold mb-6 inline-block ${
+            className={`mb-6 inline-block rounded-full px-3 py-1 text-xs font-bold ${
               categoryColors[post.category] ?? "bg-white/10 text-white"
             }`}
           >
             {post.category}
           </span>
-          <h1 className="text-3xl md:text-5xl font-heading font-bold leading-tight mb-6">
+          <h1 className="font-heading mb-6 text-3xl leading-tight font-bold md:text-5xl">
             {post.title}
           </h1>
-          <div className="flex items-center gap-4 text-sm text-text-muted">
+          <div className="text-text-muted flex items-center gap-4 text-sm">
             <span className="flex items-center gap-1.5">
-              <Clock className="w-4 h-4" /> {post.readTime}
+              <Clock className="h-4 w-4" /> {post.readTime}
             </span>
             <span>·</span>
             <time dateTime={post.dateISO}>{post.date}</time>
             <span>·</span>
             <span className="flex items-center gap-1.5">
-              <User className="w-4 h-4" /> Modulifyr Engineering Team
+              <User className="h-4 w-4" /> Modulifyr Engineering Team
             </span>
           </div>
         </div>
       </section>
 
       {/* ── Content ── */}
-      <section className="py-16 bg-bg-light">
+      <section className="bg-bg-light py-16">
         <div className="container-custom">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-16 max-w-6xl mx-auto">
+          <div className="mx-auto grid max-w-6xl grid-cols-1 gap-16 lg:grid-cols-4">
             <article className="lg:col-span-3">
-              <div className="bg-white border border-border-base rounded-3xl p-8 md:p-12">
+              <div className="border-border-base rounded-3xl border bg-white p-8 md:p-12">
                 {/* Excerpt / lede */}
-                <p className="text-xl text-text-secondary leading-relaxed mb-8 pb-8 border-b border-border-base font-medium italic">
+                <p className="text-text-secondary border-border-base mb-8 border-b pb-8 text-xl leading-relaxed font-medium italic">
                   {post.excerpt}
                 </p>
 
@@ -211,19 +206,17 @@ export default async function BlogPostPage({ params }: Props) {
                 {notionPost ? (
                   <NotionContent html={notionPost.contentHtml} />
                 ) : (
-                  <StaticContent content={(staticPost as typeof staticPosts[0]).content} />
+                  <StaticContent content={(staticPost as (typeof staticPosts)[0]).content} />
                 )}
 
                 {/* Author footer */}
-                <div className="mt-12 pt-8 border-t border-border-base flex items-center gap-4">
-                  <div className="w-10 h-10 bg-brand-orange/10 rounded-full flex items-center justify-center">
-                    <User className="w-5 h-5 text-brand-orange" />
+                <div className="border-border-base mt-12 flex items-center gap-4 border-t pt-8">
+                  <div className="bg-brand-orange/10 flex h-10 w-10 items-center justify-center rounded-full">
+                    <User className="text-brand-orange h-5 w-5" />
                   </div>
                   <div>
-                    <p className="text-sm font-bold text-brand-navy">
-                      Modulifyr Engineering Team
-                    </p>
-                    <p className="text-xs text-text-muted">
+                    <p className="text-brand-navy text-sm font-bold">Modulifyr Engineering Team</p>
+                    <p className="text-text-muted text-xs">
                       Birtamode, Jhapa, Nepal · modulifyr.com
                     </p>
                   </div>
@@ -231,16 +224,16 @@ export default async function BlogPostPage({ params }: Props) {
               </div>
 
               {/* Prev / Next navigation */}
-              <div className="grid grid-cols-2 gap-4 mt-8">
+              <div className="mt-8 grid grid-cols-2 gap-4">
                 {prev ? (
                   <Link
                     href={`/blog/${prev.slug}`}
-                    className="group p-5 bg-white border border-border-base rounded-2xl hover:border-brand-orange transition-colors"
+                    className="group border-border-base hover:border-brand-orange rounded-2xl border bg-white p-5 transition-colors"
                   >
-                    <div className="text-xs text-text-muted mb-1 flex items-center gap-1">
-                      <ArrowLeft className="w-3 h-3" /> Previous
+                    <div className="text-text-muted mb-1 flex items-center gap-1 text-xs">
+                      <ArrowLeft className="h-3 w-3" /> Previous
                     </div>
-                    <p className="text-sm font-bold text-brand-navy group-hover:text-brand-orange transition-colors line-clamp-2">
+                    <p className="text-brand-navy group-hover:text-brand-orange line-clamp-2 text-sm font-bold transition-colors">
                       {prev.title}
                     </p>
                   </Link>
@@ -250,12 +243,12 @@ export default async function BlogPostPage({ params }: Props) {
                 {next ? (
                   <Link
                     href={`/blog/${next.slug}`}
-                    className="group p-5 bg-white border border-border-base rounded-2xl hover:border-brand-orange transition-colors text-right"
+                    className="group border-border-base hover:border-brand-orange rounded-2xl border bg-white p-5 text-right transition-colors"
                   >
-                    <div className="text-xs text-text-muted mb-1 flex items-center gap-1 justify-end">
-                      Next <ArrowRight className="w-3 h-3" />
+                    <div className="text-text-muted mb-1 flex items-center justify-end gap-1 text-xs">
+                      Next <ArrowRight className="h-3 w-3" />
                     </div>
-                    <p className="text-sm font-bold text-brand-navy group-hover:text-brand-orange transition-colors line-clamp-2">
+                    <p className="text-brand-navy group-hover:text-brand-orange line-clamp-2 text-sm font-bold transition-colors">
                       {next.title}
                     </p>
                   </Link>
@@ -267,11 +260,9 @@ export default async function BlogPostPage({ params }: Props) {
 
             {/* ── Sidebar ── */}
             <aside className="flex flex-col gap-6">
-              <div className="bg-brand-navy text-white rounded-3xl p-7 sticky top-28">
-                <h3 className="font-heading font-bold text-lg mb-3">
-                  Put this into practice
-                </h3>
-                <p className="text-text-muted text-sm leading-relaxed mb-5">
+              <div className="bg-brand-navy sticky top-28 rounded-3xl p-7 text-white">
+                <h3 className="font-heading mb-3 text-lg font-bold">Put this into practice</h3>
+                <p className="text-text-muted mb-5 text-sm leading-relaxed">
                   We build custom systems for businesses in Nepal and globally.
                 </p>
                 <Link href="/request-proposal">
@@ -280,8 +271,8 @@ export default async function BlogPostPage({ params }: Props) {
                   </Button>
                 </Link>
               </div>
-              <div className="bg-bg-secondary border border-border-base rounded-3xl p-7">
-                <h3 className="font-heading font-bold text-brand-navy mb-3 text-sm">
+              <div className="bg-bg-secondary border-border-base rounded-3xl border p-7">
+                <h3 className="font-heading text-brand-navy mb-3 text-sm font-bold">
                   More Articles
                 </h3>
                 <div className="space-y-3">
@@ -292,7 +283,7 @@ export default async function BlogPostPage({ params }: Props) {
                       <Link
                         key={p.slug}
                         href={`/blog/${p.slug}`}
-                        className="block text-sm text-text-secondary hover:text-brand-orange transition-colors leading-snug"
+                        className="text-text-secondary hover:text-brand-orange block text-sm leading-snug transition-colors"
                       >
                         {p.title}
                       </Link>

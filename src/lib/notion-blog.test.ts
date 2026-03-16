@@ -30,7 +30,10 @@ describe("notion-blog helpers (pure functions)", () => {
   // ── Read time estimation ───────────────────────────────────────────────────
   it("estimates read time as at least 1 minute for short content", () => {
     const html = "<p>Short content here with a few words.</p>";
-    const words = html.replace(/<[^>]+>/g, " ").split(/\s+/).filter(Boolean).length;
+    const words = html
+      .replace(/<[^>]+>/g, " ")
+      .split(/\s+/)
+      .filter(Boolean).length;
     const readTime = Math.max(1, Math.round(words / 200));
     expect(readTime).toBeGreaterThanOrEqual(1);
   });
@@ -44,10 +47,7 @@ describe("notion-blog helpers (pure functions)", () => {
   // ── HTML sanitisation (inline) ─────────────────────────────────────────────
   it("escapes HTML special characters in plain text", () => {
     const input = "Hello <script>alert('xss')</script> & World";
-    const escaped = input
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;");
+    const escaped = input.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
     expect(escaped).toBe("Hello &lt;script&gt;alert('xss')&lt;/script&gt; &amp; World");
     expect(escaped).not.toContain("<script>");
   });

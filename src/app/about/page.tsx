@@ -2,8 +2,18 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  Users, MapPin, Target, ShieldCheck, Globe,
-  Briefcase, ArrowRight, Heart, Wifi, Zap, TrendingUp, Coffee
+  Users,
+  MapPin,
+  Target,
+  ShieldCheck,
+  Globe,
+  Briefcase,
+  ArrowRight,
+  Heart,
+  Wifi,
+  Zap,
+  TrendingUp,
+  Coffee,
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
@@ -18,19 +28,19 @@ const founderSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
   "@id": "https://modulifyr.vercel.app/#founder",
-  "name": "Rijan Mainali",
-  "jobTitle": "Founder & Lead Engineer",
-  "image": "https://modulifyr.vercel.app/rijan-mainali.jpg",
-  "worksFor": {
+  name: "Rijan Mainali",
+  jobTitle: "Founder & Lead Engineer",
+  image: "https://modulifyr.vercel.app/rijan-mainali.jpg",
+  worksFor: {
     "@type": "Organization",
-    "name": "Modulifyr",
-    "url": "https://modulifyr.vercel.app",
+    name: "Modulifyr",
+    url: "https://modulifyr.vercel.app",
   },
-  "address": {
+  address: {
     "@type": "PostalAddress",
-    "addressLocality": "Birtamode",
-    "addressRegion": "Jhapa",
-    "addressCountry": "NP",
+    addressLocality: "Birtamode",
+    addressRegion: "Jhapa",
+    addressCountry: "NP",
   },
 };
 
@@ -59,7 +69,7 @@ const values = [
 
 export default function AboutPage() {
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex w-full flex-col">
       {/* Page-level founder schema */}
       <script
         type="application/ld+json"
@@ -67,22 +77,21 @@ export default function AboutPage() {
       />
 
       {/* ── Hero ───────────────────────────────────────────────────────────── */}
-      <section className="bg-bg-light py-24 border-b border-border-base relative overflow-hidden">
+      <section className="bg-bg-light border-border-base relative overflow-hidden border-b py-24">
         <div className="container-custom">
           <div className="max-w-4xl">
-            <h1 className="text-4xl md:text-6xl font-heading font-bold text-brand-navy mb-8 leading-tight">
-              We Build the Systems That{" "}
-              <span className="text-brand-orange">Keep Working</span>
+            <h1 className="font-heading text-brand-navy mb-8 text-4xl leading-tight font-bold md:text-6xl">
+              We Build the Systems That <span className="text-brand-orange">Keep Working</span>
             </h1>
-            <p className="text-xl text-text-secondary leading-relaxed mb-6">
+            <p className="text-text-secondary mb-6 text-xl leading-relaxed">
               Modulifyr started because we kept seeing the same problem: businesses in Nepal and
               across the region outgrowing their software faster than vendors could keep up.
               Off-the-shelf systems that couldn't be customized. Custom builds that collapsed the
               moment requirements changed.
             </p>
-            <p className="text-lg text-text-secondary leading-relaxed mb-10">
+            <p className="text-text-secondary mb-10 text-lg leading-relaxed">
               We're headquartered in{" "}
-              <span className="font-bold text-brand-navy">Birtamode, Jhapa, Nepal</span> and work
+              <span className="text-brand-navy font-bold">Birtamode, Jhapa, Nepal</span> and work
               with organizations across Nepal and internationally — building software designed for
               how your business actually works.
             </p>
@@ -91,36 +100,38 @@ export default function AboutPage() {
                 <Button size="lg">Our Technical Standards</Button>
               </Link>
               <Link href="/contact">
-                <Button variant="outline" size="lg">Contact Our Team</Button>
+                <Button variant="outline" size="lg">
+                  Contact Our Team
+                </Button>
               </Link>
             </div>
           </div>
         </div>
-        <div className="absolute -top-20 -right-20 w-96 h-96 bg-brand-orange/5 rounded-full blur-3xl" />
+        <div className="bg-brand-orange/5 absolute -top-20 -right-20 h-96 w-96 rounded-full blur-3xl" />
       </section>
 
       {/* ── Values ─────────────────────────────────────────────────────────── */}
-      <section className="py-24 bg-bg-secondary">
+      <section className="bg-bg-secondary py-24">
         <div className="container-custom">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-heading font-bold text-brand-navy mb-4">
+          <div className="mx-auto mb-16 max-w-2xl text-center">
+            <h2 className="font-heading text-brand-navy mb-4 text-3xl font-bold md:text-4xl">
               What We Actually Believe
             </h2>
-            <p className="text-text-secondary italic leading-relaxed">
+            <p className="text-text-secondary leading-relaxed italic">
               Not our marketing copy — the things that cause arguments in our team meetings.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
             {values.map((val, idx) => (
               <div
                 key={idx}
-                className="bg-white p-8 rounded-2xl border border-border-base flex flex-col items-center text-center gap-4"
+                className="border-border-base flex flex-col items-center gap-4 rounded-2xl border bg-white p-8 text-center"
               >
-                <div className="w-12 h-12 bg-bg-secondary rounded-xl flex items-center justify-center">
-                  <val.icon className="w-6 h-6 text-brand-orange" aria-hidden="true" />
+                <div className="bg-bg-secondary flex h-12 w-12 items-center justify-center rounded-xl">
+                  <val.icon className="text-brand-orange h-6 w-6" aria-hidden="true" />
                 </div>
-                <h4 className="font-heading font-bold text-brand-navy">{val.title}</h4>
-                <p className="text-xs text-text-muted leading-relaxed">{val.desc}</p>
+                <h4 className="font-heading text-brand-navy font-bold">{val.title}</h4>
+                <p className="text-text-muted text-xs leading-relaxed">{val.desc}</p>
               </div>
             ))}
           </div>
@@ -130,35 +141,35 @@ export default function AboutPage() {
       {/* ── Founder / Team ─────────────────────────────────────────────────── */}
       <section className="py-24" id="team">
         <div className="container-custom">
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
-            <div className="flex flex-col gap-4 max-w-2xl">
-              <h2 className="text-4xl font-heading font-bold text-brand-navy">The Team</h2>
-              <p className="text-lg text-text-secondary">
-                Right now, Modulifyr is one person. One founder, one city, one conviction — that
-                the businesses around us deserve software built specifically for how they work.
+          <div className="mb-16 flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
+            <div className="flex max-w-2xl flex-col gap-4">
+              <h2 className="font-heading text-brand-navy text-4xl font-bold">The Team</h2>
+              <p className="text-text-secondary text-lg">
+                Right now, Modulifyr is one person. One founder, one city, one conviction — that the
+                businesses around us deserve software built specifically for how they work.
               </p>
             </div>
             {/* Active hiring badge */}
-            <div className="flex items-center gap-3 bg-brand-orange/5 border border-brand-orange/20 px-5 py-3 rounded-full shrink-0">
+            <div className="bg-brand-orange/5 border-brand-orange/20 flex shrink-0 items-center gap-3 rounded-full border px-5 py-3">
               <span className="relative flex h-2 w-2" aria-hidden="true">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-orange opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-orange" />
+                <span className="bg-brand-orange absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" />
+                <span className="bg-brand-orange relative inline-flex h-2 w-2 rounded-full" />
               </span>
-              <span className="text-brand-orange font-bold text-xs uppercase tracking-widest">
+              <span className="text-brand-orange text-xs font-bold tracking-widest uppercase">
                 Actively seeking collaborators
               </span>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2">
             {/* Founder card */}
             <article
               aria-label="Rijan Mainali — Founder & Lead Engineer"
-              className="bg-brand-navy rounded-3xl p-8 flex flex-col gap-6"
+              className="bg-brand-navy flex flex-col gap-6 rounded-3xl p-8"
             >
               <div className="flex items-center gap-5">
                 {/* ── FOUNDER PHOTO ── */}
-                <div className="relative w-20 h-20 rounded-2xl overflow-hidden shrink-0 ring-2 ring-brand-orange/40">
+                <div className="ring-brand-orange/40 relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl ring-2">
                   <Image
                     src="/rijan-mainali.jpg"
                     alt="Rijan Mainali, Founder of Modulifyr"
@@ -169,10 +180,12 @@ export default function AboutPage() {
                   />
                 </div>
                 <div>
-                  <h3 className="text-xl font-heading font-bold text-white">Rijan Mainali</h3>
-                  <p className="text-brand-orange text-sm font-semibold">Founder &amp; Lead Engineer</p>
-                  <p className="text-text-muted text-xs mt-1 flex items-center gap-1">
-                    <MapPin className="w-3 h-3" aria-hidden="true" />
+                  <h3 className="font-heading text-xl font-bold text-white">Rijan Mainali</h3>
+                  <p className="text-brand-orange text-sm font-semibold">
+                    Founder &amp; Lead Engineer
+                  </p>
+                  <p className="text-text-muted mt-1 flex items-center gap-1 text-xs">
+                    <MapPin className="h-3 w-3" aria-hidden="true" />
                     Birtamode, Jhapa, Nepal
                   </p>
                 </div>
@@ -185,23 +198,29 @@ export default function AboutPage() {
                 they work.
               </p>
 
-              <div className="grid grid-cols-3 gap-3 mt-2">
+              <div className="mt-2 grid grid-cols-3 gap-3">
                 {[
                   { icon: Coffee, label: "Late nights" },
                   { icon: Globe, label: "Global reach" },
                   { icon: Zap, label: "Ships fast" },
                 ].map((item, i) => (
-                  <div key={i} className="bg-white/5 border border-white/10 rounded-xl p-3 text-center">
-                    <item.icon className="w-4 h-4 text-brand-teal mx-auto mb-1.5" aria-hidden="true" />
-                    <p className="text-xs text-text-muted">{item.label}</p>
+                  <div
+                    key={i}
+                    className="rounded-xl border border-white/10 bg-white/5 p-3 text-center"
+                  >
+                    <item.icon
+                      className="text-brand-teal mx-auto mb-1.5 h-4 w-4"
+                      aria-hidden="true"
+                    />
+                    <p className="text-text-muted text-xs">{item.label}</p>
                   </div>
                 ))}
               </div>
             </article>
 
             {/* Open positions */}
-            <div className="bg-bg-secondary border border-border-base rounded-3xl p-8">
-              <p className="text-xs font-bold text-text-muted uppercase tracking-widest mb-5">
+            <div className="bg-bg-secondary border-border-base rounded-3xl border p-8">
+              <p className="text-text-muted mb-5 text-xs font-bold tracking-widest uppercase">
                 Open Positions (Equity / Volunteer)
               </p>
               <div className="space-y-3">
@@ -212,15 +231,15 @@ export default function AboutPage() {
                 ].map((role, i) => (
                   <div
                     key={i}
-                    className="flex items-center justify-between gap-4 bg-white border border-border-base rounded-xl px-4 py-3"
+                    className="border-border-base flex items-center justify-between gap-4 rounded-xl border bg-white px-4 py-3"
                   >
-                    <span className="text-sm font-medium text-brand-navy">{role}</span>
+                    <span className="text-brand-navy text-sm font-medium">{role}</span>
                     <Link
                       href="/careers"
                       aria-label={`Apply for ${role}`}
-                      className="text-xs font-bold text-brand-orange hover:underline shrink-0 flex items-center gap-1"
+                      className="text-brand-orange flex shrink-0 items-center gap-1 text-xs font-bold hover:underline"
                     >
-                      Apply <ArrowRight className="w-3 h-3" aria-hidden="true" />
+                      Apply <ArrowRight className="h-3 w-3" aria-hidden="true" />
                     </Link>
                   </div>
                 ))}
@@ -231,26 +250,30 @@ export default function AboutPage() {
       </section>
 
       {/* ── Join the team ──────────────────────────────────────────────────── */}
-      <section className="py-24 bg-brand-navy text-white">
+      <section className="bg-brand-navy py-24 text-white">
         <div className="container-custom">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
             <div className="flex flex-col gap-8">
-              <h2 className="text-4xl md:text-5xl font-heading font-bold">
+              <h2 className="font-heading text-4xl font-bold md:text-5xl">
                 Join the <span className="text-brand-orange">Team</span>
               </h2>
-              <p className="text-lg text-text-muted leading-relaxed">
+              <p className="text-text-muted text-lg leading-relaxed">
                 We're building something real from the ground up. If you want to own entire modules
-                — not just tickets — and you care about clean architecture, we want to hear from you.
+                — not just tickets — and you care about clean architecture, we want to hear from
+                you.
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 {[
                   { icon: TrendingUp, text: "Defined skill progression tracks" },
                   { icon: Briefcase, text: "Own entire modules, not just tickets" },
                   { icon: Globe, text: "Work on real systems used by real businesses" },
                   { icon: Users, text: "Direct access to founder from day one" },
                 ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-3 bg-white/5 rounded-xl p-4">
-                    <item.icon className="w-4 h-4 text-brand-gold mt-0.5 shrink-0" aria-hidden="true" />
+                  <div key={i} className="flex items-start gap-3 rounded-xl bg-white/5 p-4">
+                    <item.icon
+                      className="text-brand-gold mt-0.5 h-4 w-4 shrink-0"
+                      aria-hidden="true"
+                    />
                     <span className="text-text-muted text-sm leading-snug">{item.text}</span>
                   </div>
                 ))}
@@ -258,17 +281,20 @@ export default function AboutPage() {
               <Link href="/careers" className="w-fit">
                 <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 group">
                   View Career Openings{" "}
-                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                  <ArrowRight
+                    className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"
+                    aria-hidden="true"
+                  />
                 </Button>
               </Link>
             </div>
-            <div className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl grayscale group">
+            <div className="group relative aspect-video overflow-hidden rounded-3xl shadow-2xl grayscale">
               <Image
                 src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=2940"
                 alt="Team collaboration"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover group-hover:scale-105 transition-transform duration-700"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
             </div>
           </div>
@@ -278,41 +304,49 @@ export default function AboutPage() {
       {/* ── Location ───────────────────────────────────────────────────────── */}
       <section className="py-24">
         <div className="container-custom">
-          <div className="bg-bg-light border border-border-base p-12 md:p-16 rounded-[3rem] flex flex-col md:flex-row items-start gap-12">
-            <div className="flex-grow flex flex-col gap-6">
+          <div className="bg-bg-light border-border-base flex flex-col items-start gap-12 rounded-[3rem] border p-12 md:flex-row md:p-16">
+            <div className="flex flex-grow flex-col gap-6">
               <div className="flex items-center gap-3">
-                <MapPin className="w-8 h-8 text-brand-orange" aria-hidden="true" />
-                <h3 className="text-3xl font-heading font-bold text-brand-navy tracking-tight">
+                <MapPin className="text-brand-orange h-8 w-8" aria-hidden="true" />
+                <h3 className="font-heading text-brand-navy text-3xl font-bold tracking-tight">
                   Birtamode, Jhapa
                 </h3>
               </div>
-              <p className="text-lg text-text-secondary leading-relaxed">
+              <p className="text-text-secondary text-lg leading-relaxed">
                 We're based in Birtamode, one of the fastest-growing business hubs in eastern Nepal.
                 We serve clients across Nepal and work remotely with organizations internationally.
                 Our timezone (NPT, UTC+5:45) gives us natural overlap with European morning hours
                 and Asian business hours.
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="flex items-start gap-3 bg-white border border-border-base rounded-xl p-4">
-                  <Wifi className="w-4 h-4 text-brand-teal mt-0.5 shrink-0" aria-hidden="true" />
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div className="border-border-base flex items-start gap-3 rounded-xl border bg-white p-4">
+                  <Wifi className="text-brand-teal mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
                   <div>
-                    <p className="text-xs font-bold text-brand-navy mb-0.5">Redundant Connectivity</p>
-                    <p className="text-xs text-text-muted leading-snug">Primary fibre + 4G failover.</p>
+                    <p className="text-brand-navy mb-0.5 text-xs font-bold">
+                      Redundant Connectivity
+                    </p>
+                    <p className="text-text-muted text-xs leading-snug">
+                      Primary fibre + 4G failover.
+                    </p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3 bg-white border border-border-base rounded-xl p-4">
-                  <Zap className="w-4 h-4 text-brand-teal mt-0.5 shrink-0" aria-hidden="true" />
+                <div className="border-border-base flex items-start gap-3 rounded-xl border bg-white p-4">
+                  <Zap className="text-brand-teal mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
                   <div>
-                    <p className="text-xs font-bold text-brand-navy mb-0.5">Backup Power</p>
-                    <p className="text-xs text-text-muted leading-snug">UPS and inverter backup. Zero missed deadlines.</p>
+                    <p className="text-brand-navy mb-0.5 text-xs font-bold">Backup Power</p>
+                    <p className="text-text-muted text-xs leading-snug">
+                      UPS and inverter backup. Zero missed deadlines.
+                    </p>
                   </div>
                 </div>
               </div>
               <Link href="/contact">
-                <Button variant="outline" className="w-fit">Get in Touch</Button>
+                <Button variant="outline" className="w-fit">
+                  Get in Touch
+                </Button>
               </Link>
             </div>
-            <div className="w-full md:w-80 h-80 rounded-3xl overflow-hidden relative shadow-2xl border-4 border-white shrink-0">
+            <div className="relative h-80 w-full shrink-0 overflow-hidden rounded-3xl border-4 border-white shadow-2xl md:w-80">
               <Image
                 src="https://images.unsplash.com/photo-1544806342-99999bc0420b?auto=format&fit=crop&q=80&w=2670"
                 alt="Nepal landscape"

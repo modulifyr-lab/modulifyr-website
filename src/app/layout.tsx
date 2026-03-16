@@ -151,10 +151,7 @@ const schemaOrg = {
         "Legacy System Modernization",
         "Cloud Infrastructure",
       ],
-      sameAs: [
-        "https://linkedin.com/company/modulifyr",
-        "https://github.com/modulifyr-lab",
-      ],
+      sameAs: ["https://linkedin.com/company/modulifyr", "https://github.com/modulifyr-lab"],
     },
     {
       "@type": "WebSite",
@@ -166,11 +163,7 @@ const schemaOrg = {
   ],
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -180,7 +173,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${poppins.variable} antialiased font-sans transition-colors duration-300`}
+        className={`${inter.variable} ${poppins.variable} font-sans antialiased transition-colors duration-300`}
         style={{ overflowY: "auto" }}
       >
         <noscript>

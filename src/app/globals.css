@@ -1,14 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-sans:
+    var(--font-inter), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
   --font-heading: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
 
   /* Brand Colors (Static) */
-  --color-brand-orange: #FF5A3C;
-  --color-brand-navy: #0E3448;
-  --color-brand-teal: #2F9BB3;
-  --color-brand-gold: #F2C14E;
+  --color-brand-orange: #ff5a3c;
+  --color-brand-navy: #0e3448;
+  --color-brand-teal: #2f9bb3;
+  --color-brand-gold: #f2c14e;
 
   /* Dynamic Theme Colors */
   --color-bg-light: var(--bg-main);
@@ -25,26 +27,26 @@
 }
 
 :root {
-  --bg-main: #FFFFFF;
-  --bg-alt: #F8FAFC;
-  --bg-deep: #0F1724;
-  --border-main: #E2E8F0;
-  --text-main: #0F172A;
+  --bg-main: #ffffff;
+  --bg-alt: #f8fafc;
+  --bg-deep: #0f1724;
+  --border-main: #e2e8f0;
+  --text-main: #0f172a;
   --text-alt: #475569;
-  --text-dim: #94A3B8;
+  --text-dim: #94a3b8;
 
   --background: var(--bg-main);
   --foreground: var(--text-main);
 }
 
 .dark {
-  --bg-main: #0F1724;
-  --bg-alt: #1E293B;
+  --bg-main: #0f1724;
+  --bg-alt: #1e293b;
   --bg-deep: #020617;
   --border-main: #334155;
-  --text-main: #F8FAFC;
-  --text-alt: #94A3B8;
-  --text-dim: #64748B;
+  --text-main: #f8fafc;
+  --text-alt: #94a3b8;
+  --text-dim: #64748b;
 
   --background: var(--bg-main);
   --foreground: var(--text-main);
@@ -66,7 +68,9 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 h1,

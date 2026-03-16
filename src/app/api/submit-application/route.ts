@@ -28,10 +28,7 @@ export async function POST(req: NextRequest) {
     const required = ["name", "email", "role", "skills", "cover_note"];
     for (const field of required) {
       if (!body[field] || String(body[field]).trim() === "") {
-        return NextResponse.json(
-          { error: `Missing required field: ${field}` },
-          { status: 400 }
-        );
+        return NextResponse.json({ error: `Missing required field: ${field}` }, { status: 400 });
       }
     }
 
@@ -47,7 +44,10 @@ export async function POST(req: NextRequest) {
     if (String(body.skills).length > 500)
       return NextResponse.json({ error: "Skills field is too long" }, { status: 400 });
     if (String(body.cover_note).length > 5000)
-      return NextResponse.json({ error: "Cover note is too long (max 5000 characters)" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Cover note is too long (max 5000 characters)" },
+        { status: 400 }
+      );
 
     // ── Allowlist validation on role ──────────────────────────────────────
     const allowedRoles = [
@@ -62,7 +62,11 @@ export async function POST(req: NextRequest) {
 
     // ── URL validation (optional fields) ─────────────────────────────────
     const urlRegex = /^https?:\/\/.+/;
-    if (body.portfolio_url && body.portfolio_url.trim() !== "" && !urlRegex.test(body.portfolio_url)) {
+    if (
+      body.portfolio_url &&
+      body.portfolio_url.trim() !== "" &&
+      !urlRegex.test(body.portfolio_url)
+    ) {
       return NextResponse.json({ error: "Invalid portfolio URL" }, { status: 400 });
     }
     if (body.linkedin_url && body.linkedin_url.trim() !== "" && !urlRegex.test(body.linkedin_url)) {
@@ -77,14 +81,14 @@ export async function POST(req: NextRequest) {
     }
 
     const payload = {
-      name:          body.name.trim(),
-      email:         body.email.trim().toLowerCase(),
-      phone:         body.phone?.trim() || "Not provided",
-      role:          body.role,
-      skills:        body.skills.trim(),
+      name: body.name.trim(),
+      email: body.email.trim().toLowerCase(),
+      phone: body.phone?.trim() || "Not provided",
+      role: body.role,
+      skills: body.skills.trim(),
       portfolio_url: body.portfolio_url?.trim() || "Not provided",
-      linkedin_url:  body.linkedin_url?.trim() || "Not provided",
-      cover_note:    body.cover_note.trim(),
+      linkedin_url: body.linkedin_url?.trim() || "Not provided",
+      cover_note: body.cover_note.trim(),
     };
 
     const makeResponse = await fetch(webhookUrl, {
@@ -98,7 +102,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Failed to process submission" }, { status: 502 });
     }
 
-    logger.info("Job application submitted successfully", { email: payload.email, role: payload.role, ip });
+    logger.info("Job application submitted successfully", {
+      email: payload.email,
+      role: payload.role,
+      ip,
+    });
     return NextResponse.json({ success: true, message: "Application received" }, { status: 200 });
   } catch (error) {
     logger.error("Job application API unhandled error", { error: String(error), ip });

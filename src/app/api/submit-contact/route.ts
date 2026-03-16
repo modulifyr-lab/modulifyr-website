@@ -28,10 +28,7 @@ export async function POST(req: NextRequest) {
     const required = ["name", "email", "subject", "message"];
     for (const field of required) {
       if (!body[field] || String(body[field]).trim() === "") {
-        return NextResponse.json(
-          { error: `Missing required field: ${field}` },
-          { status: 400 }
-        );
+        return NextResponse.json({ error: `Missing required field: ${field}` }, { status: 400 });
       }
     }
 
@@ -47,7 +44,10 @@ export async function POST(req: NextRequest) {
     if (String(body.subject).length > 300)
       return NextResponse.json({ error: "Subject is too long" }, { status: 400 });
     if (String(body.message).length > 5000)
-      return NextResponse.json({ error: "Message is too long (max 5000 characters)" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Message is too long (max 5000 characters)" },
+        { status: 400 }
+      );
 
     // ── Send to Make webhook ──────────────────────────────────────────────
     const webhookUrl = process.env.MAKE_CONTACT_WEBHOOK_URL;
@@ -57,8 +57,8 @@ export async function POST(req: NextRequest) {
     }
 
     const payload = {
-      name:    body.name.trim(),
-      email:   body.email.trim().toLowerCase(),
+      name: body.name.trim(),
+      email: body.email.trim().toLowerCase(),
       subject: body.subject.trim(),
       message: body.message.trim(),
     };

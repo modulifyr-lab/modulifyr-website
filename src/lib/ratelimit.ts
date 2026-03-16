@@ -38,11 +38,7 @@ function inMemoryCheck(ip: string, limit: number, windowMs: number): boolean {
  * @param limit    Max requests allowed in the window (default: 5)
  * @param windowMs Time window in milliseconds (default: 60000 = 1 minute)
  */
-export async function isRateLimited(
-  ip: string,
-  limit = 5,
-  windowMs = 60_000
-): Promise<boolean> {
+export async function isRateLimited(ip: string, limit = 5, windowMs = 60_000): Promise<boolean> {
   const url = process.env.UPSTASH_REDIS_REST_URL;
   const token = process.env.UPSTASH_REDIS_REST_TOKEN;
 

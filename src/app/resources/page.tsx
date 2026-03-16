@@ -5,136 +5,154 @@ import { Card, CardTitle } from "@/components/ui/Card";
 import { FileBox, BookOpen, Terminal, Layers, ArrowRight, Download } from "lucide-react";
 
 export const metadata: Metadata = {
-    title: "Engineering Resources & Whitepapers",
-    description: "Explore Modulifyr's collection of engineering guides, modular architecture whitepapers, and technical case studies.",
+  title: "Engineering Resources & Whitepapers",
+  description:
+    "Explore Modulifyr's collection of engineering guides, modular architecture whitepapers, and technical case studies.",
 };
 
 export const resources = [
-    {
-        slug: "modular-architecture",
-        title: "Modular Architecture Deep Dive",
-        description: "A comprehensive guide on designing scalable systems using strategic modularism and domain-driven design.",
-        type: "Whitepaper",
-        icon: "layers",
-        stats: "24 Pages · PDF",
-        isPdf: true,
-        pdfPath: "/downloads/modulifyr-capability-deck.pdf",
-        category: "Architecture",
-    },
-    {
-        slug: "micro-frontend-orchestration",
-        title: "Micro-Frontend Orchestration",
-        description: "Technical implementation patterns for managing large-scale frontend applications with independent modules.",
-        type: "Technical Guide",
-        icon: "terminal",
-        stats: "15 min read",
-        isPdf: false,
-        category: "Frontend",
-    },
-    {
-        slug: "modernization-roadmap",
-        title: "System Modernization Roadmap",
-        description: "Strategic framework for migrating legacy monolithic systems to modern modular architectures without downtime.",
-        type: "Playbook",
-        icon: "book",
-        stats: "12 Pages · PDF",
-        isPdf: true,
-        pdfPath: "/downloads/modulifyr-technical-briefing.pdf",
-        category: "Strategy",
-    },
-    {
-        slug: "sre-best-practices",
-        title: "SRE Best Practices for Startups",
-        description: "How we implement site reliability engineering for early-to-mid stage companies to ensure 99.9% uptime.",
-        type: "Case Study",
-        icon: "filebox",
-        stats: "8 min read",
-        isPdf: false,
-        category: "DevOps",
-    },
+  {
+    slug: "modular-architecture",
+    title: "Modular Architecture Deep Dive",
+    description:
+      "A comprehensive guide on designing scalable systems using strategic modularism and domain-driven design.",
+    type: "Whitepaper",
+    icon: "layers",
+    stats: "24 Pages · PDF",
+    isPdf: true,
+    pdfPath: "/downloads/modulifyr-capability-deck.pdf",
+    category: "Architecture",
+  },
+  {
+    slug: "micro-frontend-orchestration",
+    title: "Micro-Frontend Orchestration",
+    description:
+      "Technical implementation patterns for managing large-scale frontend applications with independent modules.",
+    type: "Technical Guide",
+    icon: "terminal",
+    stats: "15 min read",
+    isPdf: false,
+    category: "Frontend",
+  },
+  {
+    slug: "modernization-roadmap",
+    title: "System Modernization Roadmap",
+    description:
+      "Strategic framework for migrating legacy monolithic systems to modern modular architectures without downtime.",
+    type: "Playbook",
+    icon: "book",
+    stats: "12 Pages · PDF",
+    isPdf: true,
+    pdfPath: "/downloads/modulifyr-technical-briefing.pdf",
+    category: "Strategy",
+  },
+  {
+    slug: "sre-best-practices",
+    title: "SRE Best Practices for Startups",
+    description:
+      "How we implement site reliability engineering for early-to-mid stage companies to ensure 99.9% uptime.",
+    type: "Case Study",
+    icon: "filebox",
+    stats: "8 min read",
+    isPdf: false,
+    category: "DevOps",
+  },
 ];
 
 const iconMap: Record<string, React.ReactNode> = {
-    "layers": <Layers className="w-6 h-6 text-brand-orange" />,
-    "terminal": <Terminal className="w-6 h-6 text-brand-teal" />,
-    "book": <BookOpen className="w-6 h-6 text-brand-gold" />,
-    "filebox": <FileBox className="w-6 h-6 text-brand-navy dark:text-brand-teal" />,
+  layers: <Layers className="text-brand-orange h-6 w-6" />,
+  terminal: <Terminal className="text-brand-teal h-6 w-6" />,
+  book: <BookOpen className="text-brand-gold h-6 w-6" />,
+  filebox: <FileBox className="text-brand-navy dark:text-brand-teal h-6 w-6" />,
 };
 
 export default function ResourcesPage() {
-    return (
-        <div className="flex flex-col w-full">
-            <section className="py-24 bg-bg-secondary border-b border-border-base">
-                <div className="container-custom">
-                    <div className="max-w-3xl">
-                        <h1 className="text-4xl md:text-6xl font-heading font-bold text-foreground mb-6">
-                            Engineering <span className="text-brand-orange">Knowledge</span> Base
-                        </h1>
-                        <p className="text-xl text-text-alt leading-relaxed">
-                            Open-source guides, technical whitepapers, and strategic frameworks developed by Modulifyr's engineering team to help organizations build better software.
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            <section className="py-24">
-                <div className="container-custom">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        {resources.map((res, index) => (
-                            <Card key={index} className="p-8 hover:shadow-lg transition-all group border-border-base bg-background">
-                                <div className="flex items-start justify-between mb-6">
-                                    <div className="p-3 rounded-xl bg-bg-secondary border border-border-base group-hover:bg-brand-orange/10 group-hover:border-brand-orange/20 transition-colors">
-                                        {iconMap[res.icon]}
-                                    </div>
-                                    <span className="text-[10px] uppercase tracking-widest font-bold text-text-dim px-3 py-1 bg-bg-secondary rounded-full">
-                                        {res.type}
-                                    </span>
-                                </div>
-                                <CardTitle className="text-2xl mb-4 text-foreground group-hover:text-brand-orange transition-colors">
-                                    {res.title}
-                                </CardTitle>
-                                <p className="text-text-alt mb-8 leading-relaxed">
-                                    {res.description}
-                                </p>
-                                <div className="flex items-center justify-between mt-auto pt-6 border-t border-border-base">
-                                    <span className="text-xs font-medium text-text-dim">{res.stats}</span>
-                                    {res.isPdf ? (
-                                        <a href={res.pdfPath} download>
-                                            <Button variant="ghost" size="sm" className="text-brand-orange p-0 h-auto hover:bg-transparent hover:underline hover:text-brand-orange/80 flex items-center gap-2">
-                                                Download <Download className="w-4 h-4" />
-                                            </Button>
-                                        </a>
-                                    ) : (
-                                        <Link href={`/resources/${res.slug}`}>
-                                            <Button variant="ghost" size="sm" className="text-brand-orange p-0 h-auto hover:bg-transparent hover:underline hover:text-brand-orange/80">
-                                                Read More <ArrowRight className="w-4 h-4 ml-2" />
-                                            </Button>
-                                        </Link>
-                                    )}
-                                </div>
-                            </Card>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            <section className="py-24 bg-brand-navy text-white overflow-hidden relative">
-                <div className="container-custom relative z-10 text-center max-w-2xl">
-                    <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">Stay Updated with Our Technical Log</h2>
-                    <p className="text-text-dim mb-10 text-lg">
-                        Join our engineering community for monthly insights on modular architecture and system design.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-                        <input
-                            type="email"
-                            placeholder="Engineering Email"
-                            className="px-6 py-3 rounded-lg bg-white/10 border border-white/20 focus:outline-none focus:border-brand-orange flex-grow text-white placeholder:text-white/40"
-                        />
-                        <Button className="shrink-0">Subscribe</Button>
-                    </div>
-                </div>
-                <div className="absolute top-0 right-0 w-96 h-96 bg-brand-teal/10 blur-[120px] rounded-full -mr-48 -mt-48" />
-            </section>
+  return (
+    <div className="flex w-full flex-col">
+      <section className="bg-bg-secondary border-border-base border-b py-24">
+        <div className="container-custom">
+          <div className="max-w-3xl">
+            <h1 className="font-heading text-foreground mb-6 text-4xl font-bold md:text-6xl">
+              Engineering <span className="text-brand-orange">Knowledge</span> Base
+            </h1>
+            <p className="text-text-alt text-xl leading-relaxed">
+              Open-source guides, technical whitepapers, and strategic frameworks developed by
+              Modulifyr's engineering team to help organizations build better software.
+            </p>
+          </div>
         </div>
-    );
+      </section>
+
+      <section className="py-24">
+        <div className="container-custom">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+            {resources.map((res, index) => (
+              <Card
+                key={index}
+                className="group border-border-base bg-background p-8 transition-all hover:shadow-lg"
+              >
+                <div className="mb-6 flex items-start justify-between">
+                  <div className="bg-bg-secondary border-border-base group-hover:bg-brand-orange/10 group-hover:border-brand-orange/20 rounded-xl border p-3 transition-colors">
+                    {iconMap[res.icon]}
+                  </div>
+                  <span className="text-text-dim bg-bg-secondary rounded-full px-3 py-1 text-[10px] font-bold tracking-widest uppercase">
+                    {res.type}
+                  </span>
+                </div>
+                <CardTitle className="text-foreground group-hover:text-brand-orange mb-4 text-2xl transition-colors">
+                  {res.title}
+                </CardTitle>
+                <p className="text-text-alt mb-8 leading-relaxed">{res.description}</p>
+                <div className="border-border-base mt-auto flex items-center justify-between border-t pt-6">
+                  <span className="text-text-dim text-xs font-medium">{res.stats}</span>
+                  {res.isPdf ? (
+                    <a href={res.pdfPath} download>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="text-brand-orange hover:text-brand-orange/80 flex h-auto items-center gap-2 p-0 hover:bg-transparent hover:underline"
+                      >
+                        Download <Download className="h-4 w-4" />
+                      </Button>
+                    </a>
+                  ) : (
+                    <Link href={`/resources/${res.slug}`}>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="text-brand-orange hover:text-brand-orange/80 h-auto p-0 hover:bg-transparent hover:underline"
+                      >
+                        Read More <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </Link>
+                  )}
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-brand-navy relative overflow-hidden py-24 text-white">
+        <div className="container-custom relative z-10 max-w-2xl text-center">
+          <h2 className="font-heading mb-6 text-3xl font-bold md:text-4xl">
+            Stay Updated with Our Technical Log
+          </h2>
+          <p className="text-text-dim mb-10 text-lg">
+            Join our engineering community for monthly insights on modular architecture and system
+            design.
+          </p>
+          <div className="mx-auto flex max-w-md flex-col gap-4 sm:flex-row">
+            <input
+              type="email"
+              placeholder="Engineering Email"
+              className="focus:border-brand-orange flex-grow rounded-lg border border-white/20 bg-white/10 px-6 py-3 text-white placeholder:text-white/40 focus:outline-none"
+            />
+            <Button className="shrink-0">Subscribe</Button>
+          </div>
+        </div>
+        <div className="bg-brand-teal/10 absolute top-0 right-0 -mt-48 -mr-48 h-96 w-96 rounded-full blur-[120px]" />
+      </section>
+    </div>
+  );
 }

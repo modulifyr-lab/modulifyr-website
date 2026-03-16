@@ -6,24 +6,26 @@ import { ArrowRight, Clock } from "lucide-react";
 import { getAllPosts } from "@/lib/notion-blog";
 
 export const metadata: Metadata = {
-    title: "Engineering Blog | Modulifyr — Software Insights for Nepal & Beyond",
-    description: "Technical insights, architecture patterns, and practical engineering perspectives from the Modulifyr team in Birtamode, Nepal.",
+  title: "Engineering Blog | Modulifyr — Software Insights for Nepal & Beyond",
+  description:
+    "Technical insights, architecture patterns, and practical engineering perspectives from the Modulifyr team in Birtamode, Nepal.",
 };
 
 // ─── ISR — revalidate every hour as safety net; Make webhook handles instant updates ──
 export const revalidate = 3600;
 
 export const staticPosts = [
-    {
-        slug: "custom-software-nepal-sme",
-        title: "Why Nepali SMEs Are Replacing Off-the-Shelf Software With Custom Systems",
-        excerpt: "Generic ERP and management software wasn't designed for how businesses in Nepal actually operate. Here's what we've learned building custom systems for schools, clinics, and retailers across the country.",
-        category: "Strategy",
-        readTime: "7 min read",
-        date: "March 2026",
-        dateISO: "2026-03-01",
-        featured: true,
-        content: `
+  {
+    slug: "custom-software-nepal-sme",
+    title: "Why Nepali SMEs Are Replacing Off-the-Shelf Software With Custom Systems",
+    excerpt:
+      "Generic ERP and management software wasn't designed for how businesses in Nepal actually operate. Here's what we've learned building custom systems for schools, clinics, and retailers across the country.",
+    category: "Strategy",
+    readTime: "7 min read",
+    date: "March 2026",
+    dateISO: "2026-03-01",
+    featured: true,
+    content: `
 Most small and medium businesses in Nepal reach the same point eventually. They start with a spreadsheet, graduate to Tally or some off-the-shelf management tool, and within two or three years they're running operations on five different disconnected systems — none of which talk to each other.
 
 We've seen this in Jhapa-based retailers managing inventory in Excel while billing in one system and tracking staff in another. We've seen schools in Kathmandu using a student information system that can't generate the report format the government exam board requires. We've seen clinics in Pokhara where the appointment booking system doesn't connect to the billing module because they're from two different vendors.
@@ -55,18 +57,19 @@ This is why we can build custom systems that are actually cost-competitive with 
 If you're evaluating custom software development in Nepal, the questions that matter: Do they use version control? (Surprising how many don't.) Do they write tests? Can they show you a system they built that's still running two years later? Do they provide source code ownership? Can they explain their architecture decisions in plain language?
 
 The answers to those questions will tell you more than any portfolio showcase.
-        `
-    },
-    {
-        slug: "erp-schools-colleges-nepal",
-        title: "ERP Systems for Schools and Colleges in Nepal: What Most Vendors Won't Tell You",
-        excerpt: "Having built student information and institutional management systems for educational institutions across Nepal, here's the honest guide to what works, what doesn't, and what questions to ask before signing any contract.",
-        category: "Strategy",
-        readTime: "9 min read",
-        date: "February 2026",
-        dateISO: "2026-02-15",
-        featured: false,
-        content: `
+        `,
+  },
+  {
+    slug: "erp-schools-colleges-nepal",
+    title: "ERP Systems for Schools and Colleges in Nepal: What Most Vendors Won't Tell You",
+    excerpt:
+      "Having built student information and institutional management systems for educational institutions across Nepal, here's the honest guide to what works, what doesn't, and what questions to ask before signing any contract.",
+    category: "Strategy",
+    readTime: "9 min read",
+    date: "February 2026",
+    dateISO: "2026-02-15",
+    featured: false,
+    content: `
 Education is one of the most common sectors where we see technology failing organizations in Nepal. Schools and colleges invest in management software and then spend the next three years managing the software instead of the other way around.
 
 Having built custom student information systems, library management tools, and exam and result platforms for educational institutions across Nepal, we've developed a clear picture of where things go wrong — and how to avoid it.
@@ -110,18 +113,19 @@ Cheaper options exist. Some will work fine for very small, simple institutions. 
 Can you show us a school using this system that has been running it for three years or more? Can we speak with their admin staff directly? What happens when a reporting requirement changes — how do we get an update and what does it cost? Who owns the data and the database? If we ever move to a different system, can we export everything? Do you provide source code for the custom parts of our implementation?
 
 If a vendor is reluctant to answer any of those questions clearly, treat that as important information.
-        `
-    },
-    {
-        slug: "modular-vs-monolith",
-        title: "Modular Monolith vs. Microservices: Choosing the Right Architecture",
-        excerpt: "A practical decision framework for organizations evaluating whether to adopt microservices or a well-structured modular monolith — and why the answer is almost never black and white.",
-        category: "Architecture",
-        readTime: "8 min read",
-        date: "January 2026",
-        dateISO: "2026-01-20",
-        featured: false,
-        content: `
+        `,
+  },
+  {
+    slug: "modular-vs-monolith",
+    title: "Modular Monolith vs. Microservices: Choosing the Right Architecture",
+    excerpt:
+      "A practical decision framework for organizations evaluating whether to adopt microservices or a well-structured modular monolith — and why the answer is almost never black and white.",
+    category: "Architecture",
+    readTime: "8 min read",
+    date: "January 2026",
+    dateISO: "2026-01-20",
+    featured: false,
+    content: `
 Most organizations approach the monolith vs. microservices question as a binary choice. It is not. The real question is: what level of modularity does your team's operational maturity actually support?
 
 **The Case for Modular Monolith**
@@ -141,18 +145,19 @@ If you have fewer than 15 engineers, the overhead of distributed tracing, servic
 Start modular. Structure your application correctly from day one with clean module boundaries and well-defined interfaces. When the need for independent deployment actually emerges — driven by real scaling pressure, not engineering preference — your modules extract cleanly into services.
 
 This approach is what we call "architecture-forward development." Build for change, not for the hype of the week.
-        `
-    },
-    {
-        slug: "legacy-modernization-playbook",
-        title: "The Legacy Modernization Playbook: Replacing Systems Without Downtime",
-        excerpt: "How we approach phased system replacement — keeping the old system live while incrementally migrating to new modular infrastructure, module by module.",
-        category: "Engineering",
-        readTime: "12 min read",
-        date: "December 2025",
-        dateISO: "2025-12-10",
-        featured: false,
-        content: `
+        `,
+  },
+  {
+    slug: "legacy-modernization-playbook",
+    title: "The Legacy Modernization Playbook: Replacing Systems Without Downtime",
+    excerpt:
+      "How we approach phased system replacement — keeping the old system live while incrementally migrating to new modular infrastructure, module by module.",
+    category: "Engineering",
+    readTime: "12 min read",
+    date: "December 2025",
+    dateISO: "2025-12-10",
+    featured: false,
+    content: `
 Legacy modernization is one of the most technically and organizationally complex engineering challenges an organization can face. The stakes are high: a failed migration can bring down critical operations. The path forward requires discipline.
 
 **The Strangler Fig Pattern**
@@ -176,18 +181,19 @@ We identify the highest-value, lowest-risk module to extract first — typically
 Each subsequent module follows the same pattern: build → shadow → validate → cut over → monitor → retire legacy code. With each successful migration, confidence grows and the team develops muscle memory for the process.
 
 The legacy system shrinks from the outside in until nothing remains.
-        `
-    },
-    {
-        slug: "api-design-patterns",
-        title: "API Design Patterns for Modular Systems",
-        excerpt: "The patterns we use to design APIs that serve as clean contracts between modules — covering versioning strategies, error standardization, and hypermedia controls.",
-        category: "Backend",
-        readTime: "10 min read",
-        date: "November 2025",
-        dateISO: "2025-11-05",
-        featured: false,
-        content: `
+        `,
+  },
+  {
+    slug: "api-design-patterns",
+    title: "API Design Patterns for Modular Systems",
+    excerpt:
+      "The patterns we use to design APIs that serve as clean contracts between modules — covering versioning strategies, error standardization, and hypermedia controls.",
+    category: "Backend",
+    readTime: "10 min read",
+    date: "November 2025",
+    dateISO: "2025-11-05",
+    featured: false,
+    content: `
 In a modular system, APIs are not just technical interfaces — they are contracts between teams and between system components. A poorly designed API creates coupling. A well-designed API enables independent evolution.
 
 **Versioning Strategy**
@@ -207,18 +213,19 @@ Cursor-based pagination for any collection that grows unboundedly. Offset-based 
 **The BFF Pattern**
 
 For each client type (web, mobile, third-party), we create a Backend for Frontend (BFF) — a thin API gateway that aggregates and shapes data from internal services into the exact shape each client needs. This eliminates over-fetching, under-fetching, and the proliferation of client-specific logic in shared services.
-        `
-    },
-    {
-        slug: "cost-of-technical-debt",
-        title: "The True Cost of Technical Debt in Growing Organizations",
-        excerpt: "A data-backed look at how unmanaged technical debt compounds over time, and the inflection points at which organizations should prioritize architectural investment.",
-        category: "Strategy",
-        readTime: "7 min read",
-        date: "October 2025",
-        dateISO: "2025-10-15",
-        featured: false,
-        content: `
+        `,
+  },
+  {
+    slug: "cost-of-technical-debt",
+    title: "The True Cost of Technical Debt in Growing Organizations",
+    excerpt:
+      "A data-backed look at how unmanaged technical debt compounds over time, and the inflection points at which organizations should prioritize architectural investment.",
+    category: "Strategy",
+    readTime: "7 min read",
+    date: "October 2025",
+    dateISO: "2025-10-15",
+    featured: false,
+    content: `
 Technical debt is often framed as a technical problem. It is not. It is a business problem. And like financial debt, it compounds.
 
 **The Compounding Effect**
@@ -236,18 +243,19 @@ Organizations typically measure technical debt by its direct cost: slower develo
 We use a simple metric to help clients decide when to modernize: if your "percentage of engineering time spent on maintenance and workarounds" exceeds 40%, the system is holding back the business, not enabling it.
 
 At that point, the cost of modernization — even accounting for the disruption — is lower than the accumulated cost of continued technical debt over the following 18 months.
-        `
-    },
-    {
-        slug: "sre-for-startups",
-        title: "SRE Principles for Early-Stage Companies",
-        excerpt: "Site reliability engineering isn't just for Google-scale systems. Here's how we implement SRE fundamentals for startups and scale-ups without over-engineering.",
-        category: "DevOps",
-        readTime: "9 min read",
-        date: "September 2025",
-        dateISO: "2025-09-08",
-        featured: false,
-        content: `
+        `,
+  },
+  {
+    slug: "sre-for-startups",
+    title: "SRE Principles for Early-Stage Companies",
+    excerpt:
+      "Site reliability engineering isn't just for Google-scale systems. Here's how we implement SRE fundamentals for startups and scale-ups without over-engineering.",
+    category: "DevOps",
+    readTime: "9 min read",
+    date: "September 2025",
+    dateISO: "2025-09-08",
+    featured: false,
+    content: `
 Site Reliability Engineering emerged from Google's need to operate systems at planetary scale. But the underlying principles — defining reliability as a product feature, basing operational decisions on data, and treating infrastructure as code — are valuable at any scale.
 
 **Start with SLOs, Not SLAs**
@@ -265,18 +273,19 @@ Toil is manual, repetitive operational work that scales linearly with system siz
 **Incident Management**
 
 Even small teams need a lightweight incident management protocol: a clear severity classification system (P1-P4), a designated incident commander role, a communication template for stakeholders, and a mandatory 24-hour blameless postmortem. The postmortem is not about blame — it is about capturing the systemic failure that allowed the incident to occur.
-        `
-    },
-    {
-        slug: "react-server-components-enterprise",
-        title: "React Server Components in Enterprise Applications",
-        excerpt: "Our experience adopting React Server Components in production enterprise dashboards — performance wins, architectural shifts, and the tradeoffs nobody talks about.",
-        category: "Frontend",
-        readTime: "11 min read",
-        date: "August 2025",
-        dateISO: "2025-08-20",
-        featured: false,
-        content: `
+        `,
+  },
+  {
+    slug: "react-server-components-enterprise",
+    title: "React Server Components in Enterprise Applications",
+    excerpt:
+      "Our experience adopting React Server Components in production enterprise dashboards — performance wins, architectural shifts, and the tradeoffs nobody talks about.",
+    category: "Frontend",
+    readTime: "11 min read",
+    date: "August 2025",
+    dateISO: "2025-08-20",
+    featured: false,
+    content: `
 React Server Components represent the most significant architectural shift in React since hooks. After running RSC in production enterprise applications for over a year, here's what we've actually learned.
 
 **The Real Performance Win**
@@ -298,138 +307,165 @@ RSC also makes caching explicit in ways that are unfamiliar. Next.js's layered c
 **Our Recommendation**
 
 Adopt RSC for data-heavy pages: dashboards, listings, admin interfaces. Keep client components for interaction-heavy UI: forms, real-time updates, drag-and-drop interfaces. Use the boundary deliberately, not reactively.
-        `
-    }
+        `,
+  },
 ];
 
 // Keep the old export name for backward compatibility with [slug]/page.tsx
 export const posts = staticPosts;
 
 const categoryColors: Record<string, string> = {
-    "Architecture": "bg-brand-orange/10 text-brand-orange",
-    "Engineering": "bg-brand-navy/10 text-brand-navy",
-    "Backend": "bg-brand-teal/10 text-brand-teal",
-    "Frontend": "bg-brand-gold/20 text-amber-700",
-    "DevOps": "bg-brand-teal/10 text-brand-teal",
-    "Strategy": "bg-brand-orange/10 text-brand-orange",
+  Architecture: "bg-brand-orange/10 text-brand-orange",
+  Engineering: "bg-brand-navy/10 text-brand-navy",
+  Backend: "bg-brand-teal/10 text-brand-teal",
+  Frontend: "bg-brand-gold/20 text-amber-700",
+  DevOps: "bg-brand-teal/10 text-brand-teal",
+  Strategy: "bg-brand-orange/10 text-brand-orange",
 };
 
 export default async function BlogPage() {
-    // Fetch Notion posts — these are the live, managed posts
-    const notionPosts = await getAllPosts();
+  // Fetch Notion posts — these are the live, managed posts
+  const notionPosts = await getAllPosts();
 
-    // Merge: Notion posts come first (newest), then static posts that don't
-    // have a Notion equivalent (avoid duplicates by slug)
-    const notionSlugs = new Set(notionPosts.map(p => p.slug));
-    const filteredStatic = staticPosts.filter(p => !notionSlugs.has(p.slug));
+  // Merge: Notion posts come first (newest), then static posts that don't
+  // have a Notion equivalent (avoid duplicates by slug)
+  const notionSlugs = new Set(notionPosts.map((p) => p.slug));
+  const filteredStatic = staticPosts.filter((p) => !notionSlugs.has(p.slug));
 
-    // All posts combined, sorted by date descending
-    const allPosts = [...notionPosts, ...filteredStatic].sort(
-        (a, b) => new Date(b.dateISO).getTime() - new Date(a.dateISO).getTime()
-    );
+  // All posts combined, sorted by date descending
+  const allPosts = [...notionPosts, ...filteredStatic].sort(
+    (a, b) => new Date(b.dateISO).getTime() - new Date(a.dateISO).getTime()
+  );
 
-    // Featured: prefer Notion featured post, fall back to static
-    const featured = allPosts.find(p => p.featured) ?? allPosts[0];
-    const rest = allPosts.filter(p => p.slug !== featured?.slug);
+  // Featured: prefer Notion featured post, fall back to static
+  const featured = allPosts.find((p) => p.featured) ?? allPosts[0];
+  const rest = allPosts.filter((p) => p.slug !== featured?.slug);
 
-    return (
-        <div className="flex flex-col w-full">
-            <section className="bg-bg-secondary py-24 border-b border-border-base">
-                <div className="container-custom">
-                    <div className="max-w-3xl">
-                        <span className="text-brand-orange font-bold tracking-widest uppercase text-xs mb-4 block">Technical Log</span>
-                        <h1 className="text-4xl md:text-6xl font-heading font-bold text-brand-navy mb-6">
-                            Engineering <span className="text-brand-orange">Insights</span>
-                        </h1>
-                        <p className="text-xl text-text-secondary leading-relaxed">
-                            Architecture decisions, engineering patterns, and practical perspectives from the Modulifyr team — including what we've learned building custom software for businesses in Nepal.
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            {/* Featured */}
-            {featured && (
-                <section className="py-16 bg-bg-light border-b border-border-base">
-                    <div className="container-custom">
-                        <p className="text-xs font-bold text-brand-orange uppercase tracking-widest mb-6">Featured Post</p>
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                            <div className="aspect-video bg-brand-navy rounded-3xl flex items-center justify-center relative overflow-hidden">
-                                <div className="absolute inset-0 bg-gradient-to-br from-brand-navy via-brand-navy/90 to-brand-teal/30" />
-                                <div className="relative z-10 text-center p-8">
-                                    <p className="text-brand-teal font-bold text-sm uppercase tracking-widest">Nepal Business Series</p>
-                                </div>
-                            </div>
-                            <div className="flex flex-col gap-5">
-                                <span className={`px-3 py-1 rounded-full text-xs font-bold w-fit ${categoryColors[featured.category] ?? "bg-bg-secondary text-text-muted"}`}>
-                                    {featured.category}
-                                </span>
-                                <h2 className="text-3xl font-heading font-bold text-brand-navy leading-tight">{featured.title}</h2>
-                                <p className="text-text-secondary leading-relaxed">{featured.excerpt}</p>
-                                <div className="flex items-center gap-4 text-xs text-text-muted">
-                                    <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {featured.readTime}</span>
-                                    <span>{featured.date}</span>
-                                </div>
-                                <Link href={`/blog/${featured.slug}`}>
-                                    <Button className="w-fit group">
-                                        Read Article <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                                    </Button>
-                                </Link>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            )}
-
-            {/* All Posts */}
-            <section className="py-20 bg-bg-light">
-                <div className="container-custom">
-                    {rest.length === 0 ? (
-                        <p className="text-text-muted text-center py-12">No more posts yet. Check back soon.</p>
-                    ) : (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {rest.map((post, idx) => (
-                                <Link key={`${post.slug}-${idx}`} href={`/blog/${post.slug}`} className="block group">
-                                    <Card className="flex flex-col h-full group-hover:-translate-y-2">
-                                        <span className={`px-3 py-1 rounded-full text-xs font-bold w-fit mb-4 ${categoryColors[post.category] || 'bg-bg-secondary text-text-muted'}`}>
-                                            {post.category}
-                                        </span>
-                                        <CardTitle className="text-lg group-hover:text-brand-orange transition-colors leading-snug mb-3">
-                                            {post.title}
-                                        </CardTitle>
-                                        <p className="text-sm text-text-secondary leading-relaxed flex-grow mb-4">{post.excerpt}</p>
-                                        <div className="flex items-center justify-between pt-4 border-t border-border-base mt-auto">
-                                            <div className="flex items-center gap-3 text-xs text-text-muted">
-                                                <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {post.readTime}</span>
-                                                <span>{post.date}</span>
-                                            </div>
-                                            <span className="text-brand-orange text-xs font-bold flex items-center gap-1">
-                                                Read <ArrowRight className="w-3 h-3" />
-                                            </span>
-                                        </div>
-                                    </Card>
-                                </Link>
-                            ))}
-                        </div>
-                    )}
-                </div>
-            </section>
-
-            {/* Newsletter */}
-            <section className="py-20 bg-brand-navy text-white">
-                <div className="container-custom text-center max-w-2xl">
-                    <h2 className="text-3xl font-heading font-bold mb-4">Get New Articles in Your Inbox</h2>
-                    <p className="text-text-muted mb-8">Engineering and business software insights, monthly. No spam.</p>
-                    <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-                        <input
-                            type="email"
-                            placeholder="your@email.com"
-                            className="flex-grow px-5 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder:text-white/40 focus:outline-none focus:border-brand-orange text-sm"
-                        />
-                        <Button className="shrink-0">Subscribe</Button>
-                    </div>
-                </div>
-            </section>
+  return (
+    <div className="flex w-full flex-col">
+      <section className="bg-bg-secondary border-border-base border-b py-24">
+        <div className="container-custom">
+          <div className="max-w-3xl">
+            <span className="text-brand-orange mb-4 block text-xs font-bold tracking-widest uppercase">
+              Technical Log
+            </span>
+            <h1 className="font-heading text-brand-navy mb-6 text-4xl font-bold md:text-6xl">
+              Engineering <span className="text-brand-orange">Insights</span>
+            </h1>
+            <p className="text-text-secondary text-xl leading-relaxed">
+              Architecture decisions, engineering patterns, and practical perspectives from the
+              Modulifyr team — including what we've learned building custom software for businesses
+              in Nepal.
+            </p>
+          </div>
         </div>
-    );
+      </section>
+
+      {/* Featured */}
+      {featured && (
+        <section className="bg-bg-light border-border-base border-b py-16">
+          <div className="container-custom">
+            <p className="text-brand-orange mb-6 text-xs font-bold tracking-widest uppercase">
+              Featured Post
+            </p>
+            <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+              <div className="bg-brand-navy relative flex aspect-video items-center justify-center overflow-hidden rounded-3xl">
+                <div className="from-brand-navy via-brand-navy/90 to-brand-teal/30 absolute inset-0 bg-gradient-to-br" />
+                <div className="relative z-10 p-8 text-center">
+                  <p className="text-brand-teal text-sm font-bold tracking-widest uppercase">
+                    Nepal Business Series
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-col gap-5">
+                <span
+                  className={`w-fit rounded-full px-3 py-1 text-xs font-bold ${categoryColors[featured.category] ?? "bg-bg-secondary text-text-muted"}`}
+                >
+                  {featured.category}
+                </span>
+                <h2 className="font-heading text-brand-navy text-3xl leading-tight font-bold">
+                  {featured.title}
+                </h2>
+                <p className="text-text-secondary leading-relaxed">{featured.excerpt}</p>
+                <div className="text-text-muted flex items-center gap-4 text-xs">
+                  <span className="flex items-center gap-1">
+                    <Clock className="h-3 w-3" /> {featured.readTime}
+                  </span>
+                  <span>{featured.date}</span>
+                </div>
+                <Link href={`/blog/${featured.slug}`}>
+                  <Button className="group w-fit">
+                    Read Article{" "}
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* All Posts */}
+      <section className="bg-bg-light py-20">
+        <div className="container-custom">
+          {rest.length === 0 ? (
+            <p className="text-text-muted py-12 text-center">No more posts yet. Check back soon.</p>
+          ) : (
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {rest.map((post, idx) => (
+                <Link
+                  key={`${post.slug}-${idx}`}
+                  href={`/blog/${post.slug}`}
+                  className="group block"
+                >
+                  <Card className="flex h-full flex-col group-hover:-translate-y-2">
+                    <span
+                      className={`mb-4 w-fit rounded-full px-3 py-1 text-xs font-bold ${categoryColors[post.category] || "bg-bg-secondary text-text-muted"}`}
+                    >
+                      {post.category}
+                    </span>
+                    <CardTitle className="group-hover:text-brand-orange mb-3 text-lg leading-snug transition-colors">
+                      {post.title}
+                    </CardTitle>
+                    <p className="text-text-secondary mb-4 flex-grow text-sm leading-relaxed">
+                      {post.excerpt}
+                    </p>
+                    <div className="border-border-base mt-auto flex items-center justify-between border-t pt-4">
+                      <div className="text-text-muted flex items-center gap-3 text-xs">
+                        <span className="flex items-center gap-1">
+                          <Clock className="h-3 w-3" /> {post.readTime}
+                        </span>
+                        <span>{post.date}</span>
+                      </div>
+                      <span className="text-brand-orange flex items-center gap-1 text-xs font-bold">
+                        Read <ArrowRight className="h-3 w-3" />
+                      </span>
+                    </div>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Newsletter */}
+      <section className="bg-brand-navy py-20 text-white">
+        <div className="container-custom max-w-2xl text-center">
+          <h2 className="font-heading mb-4 text-3xl font-bold">Get New Articles in Your Inbox</h2>
+          <p className="text-text-muted mb-8">
+            Engineering and business software insights, monthly. No spam.
+          </p>
+          <div className="mx-auto flex max-w-md flex-col gap-3 sm:flex-row">
+            <input
+              type="email"
+              placeholder="your@email.com"
+              className="focus:border-brand-orange flex-grow rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm text-white placeholder:text-white/40 focus:outline-none"
+            />
+            <Button className="shrink-0">Subscribe</Button>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
 }

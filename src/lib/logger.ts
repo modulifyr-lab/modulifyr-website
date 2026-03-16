@@ -41,8 +41,8 @@ function log(level: LogLevel, msg: string, ctx?: LogContext): void {
 }
 
 const logger = {
-  info:  (msg: string, ctx?: LogContext) => log("info",  msg, ctx),
-  warn:  (msg: string, ctx?: LogContext) => log("warn",  msg, ctx),
+  info: (msg: string, ctx?: LogContext) => log("info", msg, ctx),
+  warn: (msg: string, ctx?: LogContext) => log("warn", msg, ctx),
   error: (msg: string, ctx?: LogContext) => log("error", msg, ctx),
   debug: (msg: string, ctx?: LogContext) => {
     if (process.env.NODE_ENV === "development") log("debug", msg, ctx);

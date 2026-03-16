@@ -1,5 +1,5 @@
 // src/lib/ratelimit.test.ts
-import { describe, it, expect, beforeEach } from "vitest";
+import { describe, it, expect } from "vitest";
 import { getClientIp } from "./ratelimit";
 
 // Note: isRateLimited is async and calls Upstash when env vars are set.
@@ -42,12 +42,8 @@ describe("getClientIp", () => {
 });
 
 describe("isRateLimited (in-memory fallback — no Upstash env vars)", () => {
-  // These run without UPSTASH env vars set, so they use the in-memory path.
-  // We import dynamically to avoid module-level side effects.
-
   it("allows requests under the limit", async () => {
     const { isRateLimited } = await import("./ratelimit");
-    // Use a unique IP per test to avoid cross-test contamination
     const ip = `test-under-${Date.now()}`;
     const blocked = await isRateLimited(ip, 3, 60_000);
     expect(blocked).toBe(false);
@@ -56,10 +52,8 @@ describe("isRateLimited (in-memory fallback — no Upstash env vars)", () => {
   it("blocks requests over the limit", async () => {
     const { isRateLimited } = await import("./ratelimit");
     const ip = `test-over-${Date.now()}`;
-    // Exhaust limit
     await isRateLimited(ip, 2, 60_000);
     await isRateLimited(ip, 2, 60_000);
-    // Third request should be blocked
     const blocked = await isRateLimited(ip, 2, 60_000);
     expect(blocked).toBe(true);
   });
