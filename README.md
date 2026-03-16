@@ -2,7 +2,7 @@
 
 The official marketing and content website for Modulifyr — a custom software development company based in Birtamode, Jhapa, Nepal.
 
-Built with Next.js 16, TypeScript, TailwindCSS v4, and Notion as the blog CMS.
+Built with Next.js 16, TypeScript, TailwindCSS v4, and Notion as the blog CMS
 
 ---
 
