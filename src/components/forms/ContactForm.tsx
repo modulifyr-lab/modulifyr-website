@@ -18,6 +18,7 @@ import {
   CheckCircle2,
   AlertCircle,
   Loader2,
+  Calendar,
 } from "lucide-react";
 import * as React from "react";
 import Link from "next/link";
@@ -134,6 +135,31 @@ export function ContactForm() {
                     className="text-brand-orange text-lg font-bold hover:underline"
                   >
                     +977 9764478571
+                  </a>
+                </div>
+              </div>
+
+              {/* Cal.com booking card */}
+              <div className="border-brand-teal/30 bg-brand-teal/5 flex items-start gap-6 rounded-3xl border p-8">
+                <div className="bg-brand-teal/10 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl">
+                  <Calendar className="text-brand-teal h-6 w-6" />
+                </div>
+                <div className="flex flex-col gap-3">
+                  <h4 className="font-heading text-brand-navy text-xl font-bold">
+                    Prefer a Call First?
+                  </h4>
+                  <p className="text-text-secondary text-sm leading-relaxed">
+                    Book a free discovery call directly in our calendar. Pick a time that works for
+                    you — no back-and-forth needed.
+                  </p>
+                  <a
+                    href="https://cal.eu/modulifyr/booking"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="w-fit" size="sm">
+                      Book a Discovery Call <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
                   </a>
                 </div>
               </div>

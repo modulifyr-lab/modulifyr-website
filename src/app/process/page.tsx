@@ -217,9 +217,15 @@ export default function ProcessPage() {
               timezone-aware scheduling for organizations worldwide.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button size="lg" className="flex items-center gap-2">
-                <Calendar className="h-5 w-5" /> Schedule Call (Calendly)
-              </Button>
+              <a
+                href="https://cal.eu/modulifyr/booking"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button size="lg" className="flex items-center gap-2">
+                  <Calendar className="h-5 w-5" /> Schedule Discovery Call
+                </Button>
+              </a>
               <Link href="/request-proposal">
                 <Button variant="outline" size="lg">
                   Send Project RFP
