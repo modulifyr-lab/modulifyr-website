@@ -50,10 +50,15 @@ export async function POST(req: NextRequest) {
       );
 
     // ── Allowlist validation on role ──────────────────────────────────────
+    // All 7 open positions from the hiring guide + general application
     const allowedRoles = [
-      "Senior Full-stack Engineer (React / RSC)",
-      "Cloud Infrastructure Engineer (SRE Focus)",
-      "System Design Intern (Birtamode Office)",
+      "Senior Full-Stack Engineer",
+      "Frontend Engineer",
+      "Backend Engineer",
+      "Mobile Engineer (React Native / Expo)",
+      "Desktop Engineer (Tauri / Electron)",
+      "DevOps / SRE Engineer",
+      "Data Engineer / Analytics Engineer",
       "Other / General Application",
     ];
     if (!allowedRoles.includes(body.role)) {

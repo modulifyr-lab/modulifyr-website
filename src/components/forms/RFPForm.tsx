@@ -17,29 +17,42 @@ import {
 } from "lucide-react";
 
 const industries = ["Education", "Commerce", "Healthcare", "IT", "Retail", "Services", "Other"];
+
+// ─── Project types = the 8 packages from pricing-packaging.md ────────────────
 const projectTypes = [
-  "Custom Software Development",
-  "System Architecture & Consulting",
-  "Integrations & Automation",
-  "Modernization & Refactoring",
-  "Infrastructure & SRE",
-  "Data Architecture & Analytics",
-  "Other / Not Sure Yet",
+  "Strategy Sprint (Discovery) — 1–2 weeks",
+  "Launch Kit (Static Website) — 1–3 weeks",
+  "Product MVP (Web App) — 4–10 weeks",
+  "Internal Ops System (Internal Tool) — 3–8 weeks",
+  "Automation Layer (Integrations & Automation) — 1–6 weeks",
+  "Modernization Sprint (Legacy Refactoring) — 4–16 weeks",
+  "Platform Setup (Infrastructure & SRE) — 1–4 weeks",
+  "Engineering Retainer (Dedicated Team) — Monthly",
+  "Not Sure Yet — Help me decide",
 ];
+
+// ─── Budget options aligned to the 8 packages ────────────────────────────────
 const budgetsNepal = [
-  "NPR 200000 – 450000 (Discovery Phase)",
-  "NPR 600000 – 1500000 (Pilot / Proof-of-Value)",
-  "NPR 1500000 – 3000000 (Focused Build)",
-  "NPR 3000000 – 6000000 (Full System)",
-  "NPR 6000000+ (Enterprise / Team)",
+  "NPR 2,00,000 – 6,60,000 · Strategy Sprint (Discovery)",
+  "NPR 3,30,000 – 10,60,000 · Launch Kit (Static Website)",
+  "NPR 10,60,000 – 39,80,000 · Internal Ops System",
+  "NPR 4,00,000 – 26,50,000 · Automation Layer",
+  "NPR 6,60,000 – 33,20,000 · Platform Setup (Infrastructure)",
+  "NPR 15,90,000 – 59,60,000 · Product MVP (Web App)",
+  "NPR 19,90,000 – 1,06,00,000+ · Modernization Sprint",
+  "NPR 5,30,000 – 23,90,000+ /mo · Engineering Retainer",
   "Not Sure Yet",
 ];
+
 const budgetsInternational = [
-  "$6000 – $12000 (Discovery Phase)",
-  "$15000 – $35000 (Pilot / Proof-of-Value)",
-  "$35000 – $70000 (Focused Build)",
-  "$70000 – $150000 (Full System)",
-  "$150k+ (Enterprise / Team)",
+  "$1,500 – $5,000 · Strategy Sprint (Discovery)",
+  "$2,500 – $8,000 · Launch Kit (Static Website)",
+  "$8,000 – $30,000 · Internal Ops System",
+  "$3,000 – $20,000 · Automation Layer",
+  "$5,000 – $25,000 · Platform Setup (Infrastructure)",
+  "$12,000 – $45,000 · Product MVP (Web App)",
+  "$15,000 – $80,000+ · Modernization Sprint",
+  "$4,000 – $18,000+ /mo · Engineering Retainer",
   "Not Sure Yet",
 ];
 
@@ -170,6 +183,7 @@ export function RFPForm() {
 
   return (
     <div className="flex w-full flex-col">
+      {/* Hero */}
       <section className="bg-brand-navy border-b border-white/10 py-20 text-white">
         <div className="container-custom">
           <div className="max-w-4xl">
@@ -195,6 +209,7 @@ export function RFPForm() {
         </div>
       </section>
 
+      {/* Region switcher */}
       <div className="bg-brand-navy/5 border-border-base border-b py-3">
         <div className="container-custom flex flex-col items-start gap-3 sm:flex-row sm:items-center">
           <span className="text-text-muted text-xs font-semibold tracking-widest uppercase">
@@ -231,41 +246,17 @@ export function RFPForm() {
                   </div>
                 )}
 
-                {/* Section 01 */}
+                {/* Section 01 — Contact */}
                 <div className="mb-10">
                   <h2 className="text-text-muted border-border-base mb-6 border-b pb-3 text-xs font-bold tracking-widest uppercase">
                     01 — Contact Information
                   </h2>
                   <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
                     {[
-                      {
-                        label: "Full Name",
-                        name: "name",
-                        type: "text",
-                        placeholder: "Your full name",
-                        required: true,
-                      },
-                      {
-                        label: "Company / Organization",
-                        name: "company",
-                        type: "text",
-                        placeholder: "Your company name",
-                        required: true,
-                      },
-                      {
-                        label: "Work Email",
-                        name: "email",
-                        type: "email",
-                        placeholder: "you@company.com",
-                        required: true,
-                      },
-                      {
-                        label: "Phone",
-                        name: "phone",
-                        type: "tel",
-                        placeholder: "+977 98XXXXXXXX",
-                        required: false,
-                      },
+                      { label: "Full Name", name: "name", type: "text", placeholder: "Your full name", required: true },
+                      { label: "Company / Organization", name: "company", type: "text", placeholder: "Your company name", required: true },
+                      { label: "Work Email", name: "email", type: "email", placeholder: "you@company.com", required: true },
+                      { label: "Phone", name: "phone", type: "tel", placeholder: "+977 98XXXXXXXX", required: false },
                     ].map((f) => (
                       <div key={f.name} className="flex flex-col gap-2">
                         <label className="text-brand-navy text-sm font-semibold">
@@ -289,12 +280,13 @@ export function RFPForm() {
                   </div>
                 </div>
 
-                {/* Section 02 */}
+                {/* Section 02 — Project Details */}
                 <div className="mb-10">
                   <h2 className="text-text-muted border-border-base mb-6 border-b pb-3 text-xs font-bold tracking-widest uppercase">
                     02 — Project Details
                   </h2>
                   <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+                    {/* Industry */}
                     <div className="flex flex-col gap-2">
                       <label className="text-brand-navy text-sm font-semibold">
                         Industry <span className="text-brand-orange">*</span>
@@ -315,9 +307,11 @@ export function RFPForm() {
                         ))}
                       </select>
                     </div>
+
+                    {/* Package / Project Type */}
                     <div className="flex flex-col gap-2">
                       <label className="text-brand-navy text-sm font-semibold">
-                        Project Type <span className="text-brand-orange">*</span>
+                        Package / Project Type <span className="text-brand-orange">*</span>
                       </label>
                       <select
                         name="project_type"
@@ -326,7 +320,7 @@ export function RFPForm() {
                         className="border-border-base bg-bg-light text-text-primary focus:border-brand-orange focus:ring-brand-orange/10 cursor-pointer appearance-none rounded-xl border px-4 py-3 text-sm transition-all focus:ring-2 focus:outline-none"
                       >
                         <option value="" disabled>
-                          Select project type
+                          Select a package
                         </option>
                         {projectTypes.map((p) => (
                           <option key={p} value={p}>
@@ -335,6 +329,8 @@ export function RFPForm() {
                         ))}
                       </select>
                     </div>
+
+                    {/* Budget — full width, card grid */}
                     <div className="flex flex-col gap-2 md:col-span-2">
                       <div className="flex items-center justify-between">
                         <label className="text-brand-navy text-sm font-semibold">
@@ -349,13 +345,17 @@ export function RFPForm() {
                           Switch to {isNepal ? "USD" : "NPR"}
                         </button>
                       </div>
-                      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
+                      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3">
                         {budgets.map((b) => (
                           <button
                             key={b}
                             type="button"
                             onClick={() => setForm((prev) => ({ ...prev, budget: b }))}
-                            className={`cursor-pointer rounded-xl border px-3 py-3 text-left text-xs font-semibold transition-all ${form.budget === b ? "border-brand-orange bg-brand-orange/5 text-brand-orange" : "border-border-base bg-bg-light text-text-secondary hover:border-brand-navy"}`}
+                            className={`cursor-pointer rounded-xl border px-3 py-3 text-left text-xs font-semibold transition-all ${
+                              form.budget === b
+                                ? "border-brand-orange bg-brand-orange/5 text-brand-orange"
+                                : "border-border-base bg-bg-light text-text-secondary hover:border-brand-navy"
+                            }`}
                           >
                             {b}
                           </button>
@@ -365,7 +365,7 @@ export function RFPForm() {
                   </div>
                 </div>
 
-                {/* Section 03 */}
+                {/* Section 03 — Brief */}
                 <div className="mb-10">
                   <h2 className="text-text-muted border-border-base mb-6 border-b pb-3 text-xs font-bold tracking-widest uppercase">
                     03 — Project Brief
@@ -441,26 +441,15 @@ export function RFPForm() {
               </div>
             </div>
 
+            {/* Sidebar */}
             <div className="flex flex-col gap-6">
               <div className="bg-brand-navy rounded-3xl p-8 text-white">
                 <h3 className="font-heading mb-6 text-xl font-bold">What to Expect</h3>
                 <div className="space-y-6">
                   {[
-                    {
-                      step: "01",
-                      title: "Review",
-                      desc: "We read every submission carefully and research your organization.",
-                    },
-                    {
-                      step: "02",
-                      title: "Discovery Call",
-                      desc: "A 30-min call with our lead architect to align on requirements.",
-                    },
-                    {
-                      step: "03",
-                      title: "Proposal",
-                      desc: "Structured technical proposal, architecture diagram, and cost estimate.",
-                    },
+                    { step: "01", title: "Review", desc: "We read every submission carefully and research your organisation." },
+                    { step: "02", title: "Discovery Call", desc: "A 30-min call with our lead architect to align on requirements." },
+                    { step: "03", title: "Proposal", desc: "Structured technical proposal, architecture diagram, and cost estimate." },
                   ].map((item) => (
                     <div key={item.step} className="flex gap-4">
                       <span className="text-brand-orange font-heading text-lg font-bold">
@@ -474,6 +463,49 @@ export function RFPForm() {
                   ))}
                 </div>
               </div>
+
+              {/* Package reference card */}
+              <div className="bg-bg-secondary border-border-base rounded-3xl border p-8">
+                <h3 className="font-heading text-brand-navy mb-4 text-sm font-bold tracking-widest uppercase">
+                  Package Price Guide
+                </h3>
+                <div className="space-y-2">
+                  {(isNepal
+                    ? [
+                        { name: "Strategy Sprint", price: "NPR 2L – 6.6L" },
+                        { name: "Launch Kit", price: "NPR 3.3L – 10.6L" },
+                        { name: "Internal Ops System", price: "NPR 10.6L – 39.8L" },
+                        { name: "Automation Layer", price: "NPR 4L – 26.5L" },
+                        { name: "Platform Setup", price: "NPR 6.6L – 33.2L" },
+                        { name: "Product MVP", price: "NPR 15.9L – 59.6L" },
+                        { name: "Modernization Sprint", price: "NPR 19.9L – 1Cr+" },
+                        { name: "Engineering Retainer", price: "NPR 5.3L – 23.9L /mo" },
+                      ]
+                    : [
+                        { name: "Strategy Sprint", price: "$1,500 – $5,000" },
+                        { name: "Launch Kit", price: "$2,500 – $8,000" },
+                        { name: "Internal Ops System", price: "$8,000 – $30,000" },
+                        { name: "Automation Layer", price: "$3,000 – $20,000" },
+                        { name: "Platform Setup", price: "$5,000 – $25,000" },
+                        { name: "Product MVP", price: "$12,000 – $45,000" },
+                        { name: "Modernization Sprint", price: "$15,000 – $80,000+" },
+                        { name: "Engineering Retainer", price: "$4,000 – $18,000+ /mo" },
+                      ]
+                  ).map((pkg) => (
+                    <div
+                      key={pkg.name}
+                      className="border-border-base flex items-center justify-between border-b py-2 last:border-0"
+                    >
+                      <span className="text-text-secondary text-xs">{pkg.name}</span>
+                      <span className="text-brand-orange text-xs font-bold">{pkg.price}</span>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-text-muted mt-3 text-[10px] italic">
+                  All figures are indicative ranges. Final pricing confirmed in written SOW.
+                </p>
+              </div>
+
               <div className="bg-bg-secondary border-border-base rounded-3xl border p-8">
                 <h3 className="font-heading text-brand-navy mb-4 font-bold">
                   Prefer to talk first?
@@ -487,6 +519,7 @@ export function RFPForm() {
                   </Button>
                 </a>
               </div>
+
               <div className="bg-brand-teal/5 border-brand-teal/20 flex items-start gap-3 rounded-2xl border p-5">
                 <ShieldCheck className="text-brand-teal mt-0.5 h-5 w-5 shrink-0" />
                 <p className="text-text-secondary text-xs leading-relaxed">

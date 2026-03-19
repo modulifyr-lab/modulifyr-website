@@ -15,11 +15,24 @@ import {
   Linkedin,
 } from "lucide-react";
 
+// ─── All open roles from the hiring guide (excluding internal Founder/Lead) ──
 const roles = [
-  "Senior Full-stack Engineer (React / RSC)",
-  "Cloud Infrastructure Engineer (SRE Focus)",
-  "System Design Intern (Birtamode Office)",
+  "Senior Full-Stack Engineer",
+  "Frontend Engineer",
+  "Backend Engineer",
+  "Mobile Engineer (React Native / Expo)",
+  "Desktop Engineer (Tauri / Electron)",
+  "DevOps / SRE Engineer",
+  "Data Engineer / Analytics Engineer",
   "Other / General Application",
+];
+
+// Quick-click badges shown above the form (first 4 most likely roles)
+const featuredRoles = [
+  "Senior Full-Stack Engineer",
+  "DevOps / SRE Engineer",
+  "Frontend Engineer",
+  "Backend Engineer",
 ];
 
 interface FormState {
@@ -130,21 +143,29 @@ export function JobApplicationForm() {
         </div>
       </section>
 
+      {/* Quick-click role badges */}
       <section className="bg-bg-secondary border-border-base border-b py-12">
         <div className="container-custom">
-          <div className="flex flex-wrap items-center gap-4">
-            <span className="text-text-muted mr-4 flex items-center gap-2 text-xs font-bold tracking-widest uppercase">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="text-text-muted mr-2 flex items-center gap-2 text-xs font-bold tracking-widest uppercase">
               <Briefcase className="h-4 w-4" /> Open Positions:
             </span>
-            {roles.slice(0, 3).map((role) => (
+            {featuredRoles.map((role) => (
               <span
                 key={role}
-                className="border-border-base text-brand-navy hover:border-brand-orange cursor-pointer rounded-full border bg-white px-4 py-2 text-xs font-semibold transition-colors"
+                className={`border-border-base cursor-pointer rounded-full border px-4 py-2 text-xs font-semibold transition-colors ${
+                  form.role === role
+                    ? "border-brand-orange bg-brand-orange/10 text-brand-orange"
+                    : "bg-white text-brand-navy hover:border-brand-orange"
+                }`}
                 onClick={() => setForm((prev) => ({ ...prev, role }))}
               >
                 {role}
               </span>
             ))}
+            <span className="text-text-muted text-xs italic">
+              + {roles.length - featuredRoles.length} more in the form below
+            </span>
           </div>
         </div>
       </section>
@@ -355,6 +376,7 @@ export function JobApplicationForm() {
               </div>
             </div>
 
+            {/* Sidebar */}
             <div className="flex flex-col gap-6">
               <div className="bg-brand-navy rounded-3xl p-8 text-white">
                 <h3 className="font-heading mb-2 text-xl font-bold">Life at Modulifyr</h3>
@@ -369,7 +391,7 @@ export function JobApplicationForm() {
                     "Birtamode HQ + remote flexibility",
                     "Direct collaboration with lead architect",
                     "Long-term projects, not short sprints",
-                    "Skill development path with senior mentorship",
+                    "Skill development with senior mentorship",
                   ].map((item) => (
                     <div key={item} className="flex items-center gap-3">
                       <CheckCircle2 className="text-brand-teal h-4 w-4 shrink-0" />
@@ -378,6 +400,32 @@ export function JobApplicationForm() {
                   ))}
                 </div>
               </div>
+
+              {/* All roles reference */}
+              <div className="bg-bg-secondary border-border-base rounded-3xl border p-8">
+                <h3 className="font-heading text-brand-navy mb-3 text-sm font-bold tracking-widest uppercase">
+                  All Open Positions
+                </h3>
+                <ul className="space-y-2">
+                  {roles.filter((r) => r !== "Other / General Application").map((r) => (
+                    <li
+                      key={r}
+                      className={`cursor-pointer rounded-lg px-3 py-2 text-xs font-semibold transition-colors ${
+                        form.role === r
+                          ? "bg-brand-orange/10 text-brand-orange"
+                          : "text-text-secondary hover:bg-bg-light"
+                      }`}
+                      onClick={() => setForm((prev) => ({ ...prev, role: r }))}
+                    >
+                      → {r}
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-text-muted mt-4 text-xs">
+                  Click any role to pre-fill the dropdown above.
+                </p>
+              </div>
+
               <div className="bg-bg-secondary border-border-base rounded-3xl border p-8">
                 <h3 className="font-heading text-brand-navy mb-3 text-sm font-bold tracking-widest uppercase">
                   Questions?
