@@ -12,111 +12,309 @@ import {
   RefreshCw,
   MapPin,
   Globe,
+  Search,
+  Layers,
+  LayoutGrid,
+  Settings,
+  Cloud,
+  Users,
 } from "lucide-react";
 import Link from "next/link";
 import { useRegion } from "@/components/RegionProvider";
 
-// ─── Pricing data ────────────────────────────────────────────────────────────
+// ─── All 8 packages ───────────────────────────────────────────────────────────
 
-const pricingNepal = [
+const packagesNepal = [
   {
-    title: "Discovery Phase",
-    price: "NPR 2,00,000 – 4,50,000",
-    subprice: "approx. $1,500 – $3,400",
-    duration: "2-4 Weeks",
-    desc: "A focused engagement to define scope, architecture, and roadmap for a new system.",
+    icon: Search,
+    internalName: "Discovery Sprint",
+    clientName: "Strategy Sprint",
+    price: "NPR 2,00,000 – 6,60,000",
+    subprice: "approx. $1,500–$5,000",
+    duration: "1–2 Weeks",
+    desc: "For new clients, unclear scope, architecture decisions, and system rescues.",
     features: [
-      "Discovery report & audit",
-      "System architecture diagram",
-      "Prioritized product backlog",
-      "High-level roadmap & estimate",
-      "Technical feasibility study",
+      "Workshops & requirement breakdown",
+      "Architecture blueprint",
+      "Scope definition & roadmap",
+      "Tech stack recommendation",
     ],
     cta: "Start Discovery",
     highlight: false,
+    bestFor: "New projects / unclear scope",
   },
   {
-    title: "Pilot / Proof-of-Value",
-    price: "NPR 6,00,000 – 15,00,000",
-    subprice: "approx. $4,500 – $11,000",
-    duration: "4-8 Weeks",
-    desc: "Development of a working prototype for a critical workflow or integration.",
+    icon: Globe,
+    internalName: "Static Website Package",
+    clientName: "Launch Kit",
+    price: "NPR 3,30,000 – 10,60,000",
+    subprice: "approx. $2,500–$8,000",
+    duration: "1–3 Weeks",
+    desc: "Landing pages, marketing sites, brochure sites, and documentation.",
     features: [
-      "Working prototype (core flow)",
-      "Simulated production data",
-      "Modular technical blueprint",
-      "Fixed-fee delivery",
-      "Signed IP & code handoff",
+      "4–8 responsive pages",
+      "SEO basics & analytics",
+      "Content editing flow",
+      "Cloudflare Pages / Vercel deploy",
     ],
-    cta: "Book Pilot Briefing",
-    highlight: true,
-  },
-  {
-    title: "Full Build / Team",
-    price: "Custom Quote",
-    subprice: "Starting NPR 15,00,000+",
-    duration: "Milestone-based",
-    desc: "End-to-end development of a complete modular system or dedicated engineering team.",
-    features: [
-      "Production-ready modular system",
-      "Full documentation & SRE",
-      "Milestone-based payments",
-      "Scalable engineering team",
-      "Long-term support & SLA",
-    ],
-    cta: "Request Proposal",
+    cta: "Request Launch Kit",
     highlight: false,
+    bestFor: "Marketing & content sites",
+  },
+  {
+    icon: Layers,
+    internalName: "Web App MVP Package",
+    clientName: "Product MVP",
+    price: "NPR 15,90,000 – 59,60,000",
+    subprice: "approx. $12,000–$45,000",
+    duration: "4–10 Weeks",
+    desc: "SaaS MVPs, portals, dashboards, and client-facing product systems.",
+    features: [
+      "Authentication & database setup",
+      "Core workflows & admin panel",
+      "QA pass & launch support",
+      "Production deployment",
+    ],
+    cta: "Build Your MVP",
+    highlight: true,
+    bestFor: "SaaS & product teams",
+  },
+  {
+    icon: LayoutGrid,
+    internalName: "Internal Tool Package",
+    clientName: "Internal Ops System",
+    price: "NPR 10,60,000 – 39,80,000",
+    subprice: "approx. $8,000–$30,000",
+    duration: "3–8 Weeks",
+    desc: "Operations systems, approval flows, HR tools, and internal CRM-like apps.",
+    features: [
+      "Roles & permissions system",
+      "CRUD workflows & reporting",
+      "Audit trail basics",
+      "Integrations when needed",
+    ],
+    cta: "Build Internal Tool",
+    highlight: false,
+    bestFor: "Operational teams",
+  },
+  {
+    icon: Settings,
+    internalName: "Integrations & Automation",
+    clientName: "Automation Layer",
+    price: "NPR 4,00,000 – 26,50,000",
+    subprice: "approx. $3,000–$20,000",
+    duration: "1–6 Weeks",
+    desc: "API development, workflow automation, data sync, and system-to-system connections.",
+    features: [
+      "API implementation & webhooks",
+      "Sync jobs & retry logic",
+      "Monitoring & error handling",
+      "Third-party integrations",
+    ],
+    cta: "Automate Workflows",
+    highlight: false,
+    bestFor: "Integration-focused",
+  },
+  {
+    icon: RefreshCw,
+    internalName: "Modernization / Refactoring",
+    clientName: "Modernization Sprint",
+    price: "NPR 19,90,000 – 1,06,00,000+",
+    subprice: "approx. $15,000–$80,000+",
+    duration: "4–16 Weeks",
+    desc: "Legacy systems, performance issues, cloud migration, and modular cleanup.",
+    features: [
+      "Code audit & refactor plan",
+      "Modularisation & migration",
+      "Performance optimisation",
+      "Zero-downtime approach",
+    ],
+    cta: "Modernise Your Stack",
+    highlight: false,
+    bestFor: "Legacy systems",
+  },
+  {
+    icon: Cloud,
+    internalName: "Infrastructure & SRE Setup",
+    clientName: "Platform Setup",
+    price: "NPR 6,60,000 – 33,20,000",
+    subprice: "approx. $5,000–$25,000",
+    duration: "1–4 Weeks",
+    desc: "Cloud setup, CI/CD pipelines, security hardening, and release automation.",
+    features: [
+      "Cloud environment & Terraform IaC",
+      "GitHub Actions CI/CD",
+      "Logging, monitoring & alerting",
+      "Secrets & security baseline",
+    ],
+    cta: "Set Up Platform",
+    highlight: false,
+    bestFor: "Cloud-native teams",
+  },
+  {
+    icon: Users,
+    internalName: "Dedicated Product Team Retainer",
+    clientName: "Engineering Retainer",
+    price: "NPR 5,30,000 – 23,90,000+ /mo",
+    subprice: "approx. $4,000–$18,000+ /mo",
+    duration: "Monthly · 3-month min",
+    desc: "Fixed monthly engineering capacity, codebase ownership, and roadmap execution.",
+    features: [
+      "1 Senior Full-Stack + 1 specialist",
+      "Codebase ownership continuity",
+      "Monthly roadmap execution",
+      "No SOW per feature",
+    ],
+    cta: "Start Retainer",
+    highlight: false,
+    bestFor: "Ongoing product work",
   },
 ];
 
-const pricingInternational = [
+const packagesInternational = [
   {
-    title: "Discovery Phase",
-    price: "$6,000 – $12,000",
+    icon: Search,
+    internalName: "Discovery Sprint",
+    clientName: "Strategy Sprint",
+    price: "$1,500 – $5,000",
     subprice: "USD · fixed fee",
-    duration: "2-4 Weeks",
-    desc: "A focused engagement to define scope, architecture, and roadmap for a new system.",
+    duration: "1–2 Weeks",
+    desc: "For new clients, unclear scope, architecture decisions, and system rescues.",
     features: [
-      "Discovery report & audit",
-      "System architecture diagram",
-      "Prioritized product backlog",
-      "High-level roadmap & estimate",
-      "Technical feasibility study",
+      "Workshops & requirement breakdown",
+      "Architecture blueprint",
+      "Scope definition & roadmap",
+      "Tech stack recommendation",
     ],
     cta: "Start Discovery",
     highlight: false,
+    bestFor: "New projects / unclear scope",
   },
   {
-    title: "Pilot / Proof-of-Value",
-    price: "$15,000 – $35,000",
+    icon: Globe,
+    internalName: "Static Website Package",
+    clientName: "Launch Kit",
+    price: "$2,500 – $8,000",
     subprice: "USD · fixed fee",
-    duration: "4-8 Weeks",
-    desc: "Development of a working prototype for a critical workflow or integration.",
+    duration: "1–3 Weeks",
+    desc: "Landing pages, marketing sites, brochure sites, and documentation.",
     features: [
-      "Working prototype (core flow)",
-      "Simulated production data",
-      "Modular technical blueprint",
-      "Fixed-fee delivery",
-      "Signed IP & code handoff",
+      "4–8 responsive pages",
+      "SEO basics & analytics",
+      "Content editing flow",
+      "Cloudflare Pages / Vercel deploy",
     ],
-    cta: "Book Pilot Briefing",
-    highlight: true,
+    cta: "Request Launch Kit",
+    highlight: false,
+    bestFor: "Marketing & content sites",
   },
   {
-    title: "Full Build / Team",
-    price: "Custom Quote",
-    subprice: "Starting $40,000+",
-    duration: "Milestone-based",
-    desc: "End-to-end development of a complete modular system or dedicated engineering team.",
+    icon: Layers,
+    internalName: "Web App MVP Package",
+    clientName: "Product MVP",
+    price: "$12,000 – $45,000",
+    subprice: "USD · fixed fee",
+    duration: "4–10 Weeks",
+    desc: "SaaS MVPs, portals, dashboards, and client-facing product systems.",
     features: [
-      "Production-ready modular system",
-      "Full documentation & SRE",
-      "Milestone-based payments",
-      "Scalable engineering team",
-      "Long-term support & SLA",
+      "Authentication & database setup",
+      "Core workflows & admin panel",
+      "QA pass & launch support",
+      "Production deployment",
     ],
-    cta: "Request Proposal",
+    cta: "Build Your MVP",
+    highlight: true,
+    bestFor: "SaaS & product teams",
+  },
+  {
+    icon: LayoutGrid,
+    internalName: "Internal Tool Package",
+    clientName: "Internal Ops System",
+    price: "$8,000 – $30,000",
+    subprice: "USD · fixed fee",
+    duration: "3–8 Weeks",
+    desc: "Operations systems, approval flows, HR tools, and internal CRM-like apps.",
+    features: [
+      "Roles & permissions system",
+      "CRUD workflows & reporting",
+      "Audit trail basics",
+      "Integrations when needed",
+    ],
+    cta: "Build Internal Tool",
     highlight: false,
+    bestFor: "Operational teams",
+  },
+  {
+    icon: Settings,
+    internalName: "Integrations & Automation",
+    clientName: "Automation Layer",
+    price: "$3,000 – $20,000",
+    subprice: "USD · fixed fee",
+    duration: "1–6 Weeks",
+    desc: "API development, workflow automation, data sync, and system-to-system connections.",
+    features: [
+      "API implementation & webhooks",
+      "Sync jobs & retry logic",
+      "Monitoring & error handling",
+      "Third-party integrations",
+    ],
+    cta: "Automate Workflows",
+    highlight: false,
+    bestFor: "Integration-focused",
+  },
+  {
+    icon: RefreshCw,
+    internalName: "Modernization / Refactoring",
+    clientName: "Modernization Sprint",
+    price: "$15,000 – $80,000+",
+    subprice: "USD · fixed fee",
+    duration: "4–16 Weeks",
+    desc: "Legacy systems, performance issues, cloud migration, and modular cleanup.",
+    features: [
+      "Code audit & refactor plan",
+      "Modularisation & migration",
+      "Performance optimisation",
+      "Zero-downtime approach",
+    ],
+    cta: "Modernise Your Stack",
+    highlight: false,
+    bestFor: "Legacy systems",
+  },
+  {
+    icon: Cloud,
+    internalName: "Infrastructure & SRE Setup",
+    clientName: "Platform Setup",
+    price: "$5,000 – $25,000",
+    subprice: "USD · fixed fee",
+    duration: "1–4 Weeks",
+    desc: "Cloud setup, CI/CD pipelines, security hardening, and release automation.",
+    features: [
+      "Cloud environment & Terraform IaC",
+      "GitHub Actions CI/CD",
+      "Logging, monitoring & alerting",
+      "Secrets & security baseline",
+    ],
+    cta: "Set Up Platform",
+    highlight: false,
+    bestFor: "Cloud-native teams",
+  },
+  {
+    icon: Users,
+    internalName: "Dedicated Product Team Retainer",
+    clientName: "Engineering Retainer",
+    price: "$4,000 – $18,000+ /mo",
+    subprice: "USD · monthly",
+    duration: "Monthly · 3-month min",
+    desc: "Fixed monthly engineering capacity, codebase ownership, and roadmap execution.",
+    features: [
+      "1 Senior Full-Stack + 1 specialist",
+      "Codebase ownership continuity",
+      "Monthly roadmap execution",
+      "No SOW per feature",
+    ],
+    cta: "Start Retainer",
+    highlight: false,
+    bestFor: "Ongoing product work",
   },
 ];
 
@@ -124,22 +322,22 @@ const engagementModels = [
   {
     title: "Fixed-Price Milestone",
     icon: BarChart4,
-    desc: "Clear deliverables and defined budgets per milestone. Ideal for Pilot and Full Build phases.",
+    desc: "Clear deliverables and defined budgets per milestone. Best for Discovery, Launch Kit, MVP, and platform builds.",
   },
   {
     title: "Time & Materials",
     icon: Clock,
-    desc: "Flexible resourcing for discovery and iterative development where scope is evolving.",
+    desc: "Flexible resourcing for discovery and iterative development where scope is still evolving.",
   },
   {
     title: "Monthly Retainer",
     icon: RefreshCw,
-    desc: "Ongoing engineering support, maintenance, and technical consulting with a set capacity.",
+    desc: "Ongoing engineering capacity with a set monthly budget. No re-scoping, no handoffs, no ramp-up cost.",
   },
   {
     title: "SLA-based Support",
     icon: ShieldCheck,
-    desc: "Uptime-guaranteed maintenance agreements tailored to system criticality.",
+    desc: "Uptime-guaranteed maintenance agreements tailored to system criticality — up to 99.9% uptime.",
   },
 ];
 
@@ -147,10 +345,8 @@ const engagementModels = [
 
 export default function PricingPage() {
   const { region, setRegion } = useRegion();
-
-  // Default to international if no choice yet (avoids blank state)
   const isNepal = region === "nepal";
-  const tiers = isNepal ? pricingNepal : pricingInternational;
+  const packages = isNepal ? packagesNepal : packagesInternational;
 
   return (
     <div className="flex w-full flex-col">
@@ -159,11 +355,12 @@ export default function PricingPage() {
         <div className="container-custom">
           <div className="max-w-4xl">
             <h1 className="font-heading text-brand-navy mb-6 text-4xl font-bold md:text-6xl">
-              Transparent <span className="text-brand-orange">Engagement</span> Models
+              Simple Packages, <span className="text-brand-orange">Transparent Prices</span>
             </h1>
             <p className="text-text-secondary max-w-2xl text-xl leading-relaxed">
-              We provide representative pricing bands and structured engagement models designed for
-              procurement-friendly partnerships. No hidden costs.
+              Eight clearly defined packages covering everything from a 1-week discovery sprint to a
+              full ongoing engineering retainer. Fixed fees when scope is clear; retainer when work
+              is ongoing.
             </p>
           </div>
         </div>
@@ -207,58 +404,64 @@ export default function PricingPage() {
         </div>
       </section>
 
-      {/* Pricing Cards */}
+      {/* All 8 packages */}
       <section className="relative overflow-hidden py-24">
         <div className="container-custom">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-            {tiers.map((tier, idx) => (
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {packages.map((pkg, idx) => (
               <Card
                 key={idx}
                 className={`relative flex h-full flex-col transition-all ${
-                  tier.highlight
-                    ? "border-brand-orange z-10 scale-105 shadow-xl hover:shadow-2xl"
+                  pkg.highlight
+                    ? "border-brand-orange z-10 shadow-xl hover:shadow-2xl lg:col-span-2"
                     : "hover:border-brand-navy"
                 }`}
               >
-                {tier.highlight && (
+                {pkg.highlight && (
                   <div className="bg-brand-orange absolute top-0 right-8 -translate-y-1/2 rounded-full px-3 py-1 text-[10px] font-bold tracking-widest text-white uppercase">
-                    Recommended Start
+                    Most Popular
                   </div>
                 )}
-                <div className="mb-8 flex flex-col gap-1">
-                  <h3 className="text-text-muted text-sm font-bold tracking-widest uppercase">
-                    {tier.title}
-                  </h3>
-                  <div className="mt-2 flex items-baseline gap-2">
-                    <span className="font-heading text-brand-navy text-2xl font-bold md:text-3xl">
-                      {tier.price}
-                    </span>
+
+                <div className="mb-4 flex items-center gap-3">
+                  <div className="bg-bg-secondary flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
+                    <pkg.icon className="text-brand-orange h-5 w-5" />
                   </div>
-                  <span className="text-text-muted text-xs">{tier.subprice}</span>
-                  <div className="text-brand-teal mt-1 flex items-center gap-2 text-xs font-semibold uppercase">
-                    <Clock className="h-4 w-4" /> {tier.duration}
+                  <div>
+                    <h3 className="text-brand-navy text-sm font-bold">{pkg.clientName}</h3>
+                    <p className="text-text-muted text-[10px] font-medium tracking-wider uppercase">
+                      {pkg.internalName}
+                    </p>
                   </div>
                 </div>
 
-                <p className="text-text-secondary mb-8 flex-grow text-sm leading-relaxed">
-                  {tier.desc}
+                <div className="mb-4">
+                  <div className="font-heading text-brand-navy text-xl font-bold">{pkg.price}</div>
+                  <div className="text-text-muted text-xs">{pkg.subprice}</div>
+                  <div className="text-brand-teal mt-1 flex items-center gap-1.5 text-xs font-semibold uppercase">
+                    <Clock className="h-3 w-3" /> {pkg.duration}
+                  </div>
+                </div>
+
+                <p className="text-text-secondary mb-5 flex-grow text-sm leading-relaxed">
+                  {pkg.desc}
                 </p>
 
-                <ul className="mb-8 space-y-4">
-                  {tier.features.map((feature, i) => (
-                    <li key={i} className="text-text-secondary flex items-start gap-3 text-sm">
-                      <CheckCircle2 className="text-brand-teal mt-0.5 h-4 w-4 shrink-0" />
-                      {feature}
+                <ul className="mb-6 space-y-2.5">
+                  {pkg.features.map((f, i) => (
+                    <li key={i} className="text-text-secondary flex items-start gap-2.5 text-xs">
+                      <CheckCircle2 className="text-brand-teal mt-0.5 h-3.5 w-3.5 shrink-0" />
+                      {f}
                     </li>
                   ))}
                 </ul>
 
                 <Link href="/request-proposal" className="w-full">
                   <Button
-                    variant={tier.highlight ? "primary" : "outline"}
-                    className="group w-full justify-between"
+                    variant={pkg.highlight ? "primary" : "outline"}
+                    className="group w-full justify-between text-sm"
                   >
-                    {tier.cta}
+                    {pkg.cta}
                     <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </Link>
@@ -266,12 +469,10 @@ export default function PricingPage() {
             ))}
           </div>
 
-          {/* Context note */}
           <div className="mt-10 text-center">
             <p className="text-text-muted text-sm">
-              {isNepal
-                ? "All NPR figures are indicative ranges. Final pricing confirmed in written SOW after discovery."
-                : "All USD figures are indicative ranges. Final pricing confirmed in written SOW after discovery."}{" "}
+              All figures are indicative ranges. Final pricing confirmed in a written SOW after
+              discovery.{" "}
               <button
                 onClick={() => setRegion(isNepal ? "international" : "nepal")}
                 className="text-brand-orange font-semibold hover:underline"
@@ -284,15 +485,51 @@ export default function PricingPage() {
         <div className="bg-brand-orange/5 absolute top-1/2 left-0 -z-10 h-64 w-64 -translate-x-1/2 rounded-full blur-3xl" />
       </section>
 
+      {/* Decision flow */}
+      <section className="bg-bg-secondary py-16">
+        <div className="container-custom">
+          <h2 className="font-heading text-brand-navy mb-8 text-2xl font-bold">
+            Not sure which package to start with?
+          </h2>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            {[
+              {
+                q: "Scope is unclear or brand-new project",
+                a: "Start with Strategy Sprint (Discovery)",
+                color: "border-brand-orange",
+              },
+              {
+                q: "Ongoing product work or feature delivery",
+                a: "Engineering Retainer is the best fit",
+                color: "border-brand-teal",
+              },
+              {
+                q: "Scope is clear and defined",
+                a: "Go straight to fixed-fee: MVP, Internal Tool, or Platform Setup",
+                color: "border-brand-navy",
+              },
+            ].map((item, i) => (
+              <div key={i} className={`border-l-4 ${item.color} rounded-xl bg-white p-6`}>
+                <p className="text-text-muted mb-2 text-xs font-bold tracking-widest uppercase">
+                  If…
+                </p>
+                <p className="text-brand-navy mb-3 font-semibold">{item.q}</p>
+                <p className="text-brand-orange text-sm font-bold">→ {item.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Engagement Models */}
-      <section className="bg-bg-secondary py-24">
+      <section className="py-24">
         <div className="container-custom">
           <div className="mx-auto mb-16 max-w-2xl px-4 text-center">
             <h2 className="font-heading text-brand-navy mb-4 text-3xl font-bold md:text-4xl">
               Flexible Engagement Models
             </h2>
             <p className="text-text-secondary">
-              We adapt to your organization's internal procurement processes.
+              We adapt to your organisation's internal procurement processes.
             </p>
           </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -335,40 +572,24 @@ export default function PricingPage() {
               </div>
             </div>
             <div className="flex flex-grow justify-center">
-              <div className="relative flex h-80 w-64 rotate-3 flex-col gap-4 overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-8">
-                <div className="h-2 w-3/4 rounded-full bg-white/20" />
-                <div className="h-2 w-1/2 rounded-full bg-white/10" />
-                <div className="mt-4 space-y-2">
-                  {[1, 2, 3, 4, 5, 6].map((i) => (
-                    <div key={i} className="h-1 w-full rounded-full bg-white/5" />
-                  ))}
-                </div>
-                <div className="mt-auto flex justify-between">
-                  <div className="bg-brand-orange/30 h-4 w-12 rounded" />
-                  <div className="bg-brand-teal/30 h-4 w-12 rounded" />
-                </div>
-                <div className="from-brand-navy/60 absolute inset-0 bg-gradient-to-t to-transparent" />
+              <div className="flex flex-col gap-4">
+                <Link href="/request-proposal">
+                  <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90">
+                    Request Proposal
+                  </Button>
+                </Link>
+                <Link href="/contact">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-white/30 text-white hover:bg-white/10"
+                  >
+                    Speak with an Engineer
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* FAQ CTA */}
-      <section className="py-24">
-        <div className="container-custom text-center">
-          <h3 className="font-heading text-brand-navy mb-4 text-2xl font-bold">
-            Have questions about our pricing structure?
-          </h3>
-          <p className="text-text-secondary mb-8">
-            Every project is unique. Request a custom estimate for your specific engineering
-            requirements.
-          </p>
-          <Link href="/request-proposal">
-            <Button variant="outline" size="lg">
-              Send Request for Proposal (RFP)
-            </Button>
-          </Link>
         </div>
       </section>
     </div>
