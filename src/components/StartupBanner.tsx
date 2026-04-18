@@ -44,7 +44,7 @@ export function StartupBanner() {
           <span className="font-bold text-white">Modulifyr is brand-new</span>
           {" — "}built by our founder. We&rsquo;re bootstrapped on free tools and actively seeking{" "}
           <span className="text-brand-gold font-semibold">volunteers</span> or{" "}
-          <span className="text-brand-gold font-semibold">equity-only collaborators</span>.{" "}
+          <span className="text-brand-gold font-semibold">collaborators</span>.{" "}
           <Link
             href="/careers"
             className="text-brand-orange hover:text-brand-orange/80 decoration-brand-orange/40 inline-flex items-center gap-1 font-bold underline underline-offset-2 transition-colors duration-150"
