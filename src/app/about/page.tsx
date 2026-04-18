@@ -221,7 +221,7 @@ export default function AboutPage() {
             {/* Open positions */}
             <div className="bg-bg-secondary border-border-base rounded-3xl border p-8">
               <p className="text-text-muted mb-5 text-xs font-bold tracking-widest uppercase">
-                Open Positions (Equity / Volunteer)
+                Open Positions (collaborators / Volunteer)
               </p>
               <div className="space-y-3">
                 {[

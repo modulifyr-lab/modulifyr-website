@@ -50,7 +50,7 @@ const roles = [
       "Strong ownership",
     ],
     success: "Features ship with low rework. Architecture stays clean. Team velocity improves.",
-    type: "Equity / Volunteer",
+    type: "collaborators / Volunteer",
     remote: true,
     internal: false,
   },
@@ -66,7 +66,7 @@ const roles = [
     skills: ["React", "Next.js", "TypeScript", "TailwindCSS", "UX awareness"],
     success:
       "Interfaces feel clean and consistent. Components are reusable. UI regressions are low.",
-    type: "Equity / Volunteer",
+    type: "collaborators / Volunteer",
     remote: true,
     internal: false,
   },
@@ -82,7 +82,7 @@ const roles = [
     skills: ["NestJS", "TypeScript", "PostgreSQL", "Prisma", "Redis / BullMQ"],
     success:
       "APIs are stable and documented. Integrations are reliable. Systems can be maintained by others.",
-    type: "Equity / Volunteer",
+    type: "collaborators / Volunteer",
     remote: true,
     internal: false,
   },
@@ -98,7 +98,7 @@ const roles = [
     skills: ["React Native", "Expo", "TypeScript", "Release management"],
     success:
       "Apps are easy to release. Mobile UI matches product quality. Shared code reuse is high.",
-    type: "Equity / Volunteer",
+    type: "collaborators / Volunteer",
     remote: true,
     internal: false,
   },
@@ -118,7 +118,7 @@ const roles = [
       "Local storage / OS integration",
     ],
     success: "Desktop apps launch reliably. Binaries are stable and maintainable.",
-    type: "Equity / Volunteer",
+    type: "collaborators / Volunteer",
     remote: true,
     internal: false,
   },
@@ -139,7 +139,7 @@ const roles = [
       "Observability tools",
     ],
     success: "Deployments are repeatable. Incidents are detectable. Infrastructure is documented.",
-    type: "Equity / Volunteer",
+    type: "collaborators / Volunteer",
     remote: true,
     internal: false,
   },
@@ -154,7 +154,7 @@ const roles = [
     ],
     skills: ["SQL", "Python", "Data modelling", "Reporting systems"],
     success: "Reporting is accurate. Data pipelines are maintainable. Operational data is useful.",
-    type: "Equity / Volunteer",
+    type: "collaborators / Volunteer",
     remote: true,
     internal: false,
   },
@@ -314,7 +314,7 @@ export default function CareersPage() {
         <div className="container-custom">
           <div className="mb-10">
             <p className="text-text-muted mb-2 text-xs font-bold tracking-widest uppercase">
-              Open Positions (Equity / Volunteer)
+              Open Positions (collaborators / Volunteer)
             </p>
             <h2 className="font-heading text-brand-navy text-3xl font-bold">Role Scorecards</h2>
           </div>
