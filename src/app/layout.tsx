@@ -8,6 +8,7 @@ import { LanguageProvider } from "@/components/LanguageContext";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { StartupBanner } from "@/components/StartupBanner";
+import { DevelopmentAlertModal } from "@/components/DevelopmentAlertModal";
 import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -201,6 +202,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <RegionProvider>
             <LanguageProvider>
               <RegionModal />
+              <DevelopmentAlertModal />
               <Navbar />
               <main id="main-content" className="min-h-screen pt-20">
                 <StartupBanner />
