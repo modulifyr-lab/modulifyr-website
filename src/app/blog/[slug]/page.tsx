@@ -138,15 +138,15 @@ export default async function BlogPostPage({ params }: Props) {
     author: {
       "@type": "Organization",
       name: "Modulifyr Engineering",
-      url: "https://modulifyr.vercel.app",
+      url: "https://modulifyr.com",
     },
     publisher: {
       "@type": "Organization",
       name: "Modulifyr",
-      url: "https://modulifyr.vercel.app",
+      url: "https://modulifyr.com",
       logo: {
         "@type": "ImageObject",
-        url: "https://modulifyr.vercel.app/company-logo.png",
+        url: "https://modulifyr.com/company-logo.png",
       },
     },
   };

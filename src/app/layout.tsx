@@ -60,12 +60,12 @@ export const metadata: Metadata = {
     title: "Modulifyr | Custom Software Systems Built to Scale",
     description:
       "Engineering tailored modular software solutions for businesses across Nepal and worldwide. Based in Birtamode, Jhapa.",
-    url: "https://modulifyr.vercel.app",
+    url: "https://modulifyr.com",
     siteName: "Modulifyr",
     locale: "en_US",
     images: [
       {
-        url: "https://modulifyr.vercel.app/og-image.png",
+        url: "https://modulifyr.com/og-image.png",
         width: 1200,
         height: 630,
         alt: "Modulifyr - Custom Modular Systems",
@@ -79,7 +79,7 @@ export const metadata: Metadata = {
     title: "Modulifyr | Custom Software Systems",
     description:
       "Engineering tailored solutions for complex operational requirements with modular architecture.",
-    images: ["https://modulifyr.vercel.app/og-image.png"],
+    images: ["https://modulifyr.com/og-image.png"],
   },
   icons: {
     icon: [{ url: "/favicon.ico", sizes: "128x128", type: "image/x-icon" }],
@@ -88,7 +88,7 @@ export const metadata: Metadata = {
     types: {
       "application/rss+xml": [
         {
-          url: "https://modulifyr.vercel.app/feed.xml",
+          url: "https://modulifyr.com/feed.xml",
           title: "Modulifyr Engineering Blog",
         },
       ],
@@ -101,13 +101,13 @@ const schemaOrg = {
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://modulifyr.vercel.app/#organization",
+      "@id": "https://modulifyr.com/#organization",
       name: "Modulifyr",
       alternateName: "Modulifyr Lab",
-      url: "https://modulifyr.vercel.app",
+      url: "https://modulifyr.com",
       logo: {
         "@type": "ImageObject",
-        url: "https://modulifyr.vercel.app/company-logo.png",
+        url: "https://modulifyr.com/company-logo.png",
         width: 512,
         height: 512,
       },
@@ -133,11 +133,11 @@ const schemaOrg = {
       },
       founder: {
         "@type": "Person",
-        "@id": "https://modulifyr.vercel.app/#founder",
+        "@id": "https://modulifyr.com/#founder",
         name: "Rijan Mainali",
         jobTitle: "Founder & Lead Engineer",
-        image: "https://modulifyr.vercel.app/rijan-mainali.jpg",
-        worksFor: { "@id": "https://modulifyr.vercel.app/#organization" },
+        image: "https://modulifyr.com/rijan-mainali.jpg",
+        worksFor: { "@id": "https://modulifyr.com/#organization" },
         address: {
           "@type": "PostalAddress",
           addressLocality: "Birtamode",
@@ -156,10 +156,10 @@ const schemaOrg = {
     },
     {
       "@type": "WebSite",
-      "@id": "https://modulifyr.vercel.app/#website",
-      url: "https://modulifyr.vercel.app",
+      "@id": "https://modulifyr.com/#website",
+      url: "https://modulifyr.com",
       name: "Modulifyr",
-      publisher: { "@id": "https://modulifyr.vercel.app/#organization" },
+      publisher: { "@id": "https://modulifyr.com/#organization" },
     },
   ],
 };

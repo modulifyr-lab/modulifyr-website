@@ -11,7 +11,7 @@ info:
     email: contact@modulifyr.com
 
 servers:
-  - url: https://modulifyr.vercel.app
+  - url: https://modulifyr.com
     description: Production
 
 tags:

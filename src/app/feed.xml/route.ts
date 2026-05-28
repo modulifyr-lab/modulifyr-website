@@ -1,7 +1,7 @@
 import { getAllPosts } from "@/lib/notion-blog";
 import { posts as staticPosts } from "@/app/blog/page";
 
-const SITE_URL = "https://modulifyr.vercel.app";
+const SITE_URL = "https://modulifyr.com";
 
 function escXml(s: string) {
   return s

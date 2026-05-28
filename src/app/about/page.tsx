@@ -27,14 +27,14 @@ export const metadata: Metadata = {
 const founderSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
-  "@id": "https://modulifyr.vercel.app/#founder",
+  "@id": "https://modulifyr.com/#founder",
   name: "Rijan Mainali",
   jobTitle: "Founder & Lead Engineer",
-  image: "https://modulifyr.vercel.app/rijan-mainali.jpg",
+  image: "https://modulifyr.com/rijan-mainali.jpg",
   worksFor: {
     "@type": "Organization",
     name: "Modulifyr",
-    url: "https://modulifyr.vercel.app",
+    url: "https://modulifyr.com",
   },
   address: {
     "@type": "PostalAddress",

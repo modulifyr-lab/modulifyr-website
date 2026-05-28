@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = "https://modulifyr.vercel.app";
+  const base = "https://modulifyr.com";
 
   return [
     // Core pages

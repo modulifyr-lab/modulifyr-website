@@ -190,7 +190,7 @@ See `docs/adr/` for Architecture Decision Records explaining key technical choic
 ## Contributing
 
 1. Branch from `main`: `git checkout -b feat/your-feature`
-2. Make changes following the [Technical Standards](https://modulifyr.vercel.app/about/technical-standards)
+2. Make changes following the [Technical Standards](https://modulifyr.com/about/technical-standards)
 3. Run `npm run lint && npm test` — both must pass
 4. Open a PR — CI will run automatically
 5. Request review from the lead engineer
