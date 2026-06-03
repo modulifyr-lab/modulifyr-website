@@ -80,7 +80,7 @@ export async function POST(req: NextRequest) {
       phone: body.phone?.trim() || "Not provided",
       industry: body.industry,
       project_type: body.project_type,
-      budget: body.budget,
+      budget: (body.budget as string).replace(/,/g, ""),
       message: body.message.trim(),
       region: body.region || "Not specified",
       region_code: body.region_code || "unknown",
