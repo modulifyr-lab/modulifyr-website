@@ -200,4 +200,4 @@ See `docs/adr/` for Architecture Decision Records explaining key technical choic
 ## Contact
 
 Engineering questions: contact@modulifyr.com  
-Office: Birtamode, Jhapa, Nepal
+Office: Birtamode, Jhapa, Nepal.
