@@ -14,6 +14,8 @@ import {
   Zap,
   TrendingUp,
   Coffee,
+  Gamepad2,
+  ShoppingBag,
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
@@ -64,6 +66,34 @@ const values = [
     icon: Heart,
     title: "Systems for Real People",
     desc: "We build to eliminate hours of daily manual work that a well-designed system can handle in seconds.",
+  },
+];
+
+// ─── Division summaries shown in the open positions card ─────────────────────
+const divisionRoles = [
+  {
+    icon: Globe,
+    division: "Modulifyr",
+    tagline: "B2B Custom Software Consultancy",
+    color: "text-brand-teal",
+    bg: "bg-brand-teal/10",
+    examples: "Engineers, Designers, Product, Sales, Marketing",
+  },
+  {
+    icon: Gamepad2,
+    division: "Modulifyr Speedline",
+    tagline: "Desktop Game Studio (Unity / C#)",
+    color: "text-brand-orange",
+    bg: "bg-brand-orange/10",
+    examples: "Programmers, Artists, Game Designers, Audio",
+  },
+  {
+    icon: ShoppingBag,
+    division: "Modulifyr Virtual",
+    tagline: "B2C Software Storefront",
+    color: "text-brand-gold",
+    bg: "bg-brand-gold/20",
+    examples: "Engineers, Growth, Product, Customer Success",
   },
 ];
 
@@ -146,7 +176,8 @@ export default function AboutPage() {
               <h2 className="font-heading text-brand-navy text-4xl font-bold">The Team</h2>
               <p className="text-text-secondary text-lg">
                 Right now, Modulifyr is one person. One founder, one city, one conviction — that the
-                businesses around us deserve software built specifically for how they work.
+                businesses around us deserve software built specifically for how they work. We're
+                actively building the team across all three divisions.
               </p>
             </div>
             {/* Active hiring badge */}
@@ -218,25 +249,32 @@ export default function AboutPage() {
               </div>
             </article>
 
-            {/* Open positions */}
+            {/* Open positions — three divisions */}
             <div className="bg-bg-secondary border-border-base rounded-3xl border p-8">
               <p className="text-text-muted mb-5 text-xs font-bold tracking-widest uppercase">
-                Open Positions (collaborators / Volunteer)
+                Open Positions — Volunteer / Collaborator
               </p>
               <div className="space-y-3">
-                {[
-                  "Senior Full-stack Engineer (React / RSC)",
-                  "Cloud Infrastructure Engineer (SRE Focus)",
-                  "System Design Intern (Birtamode Office)",
-                ].map((role, i) => (
+                {divisionRoles.map((div, i) => (
                   <div
                     key={i}
-                    className="border-border-base flex items-center justify-between gap-4 rounded-xl border bg-white px-4 py-3"
+                    className="border-border-base flex items-start justify-between gap-4 rounded-xl border bg-white px-4 py-4"
                   >
-                    <span className="text-brand-navy text-sm font-medium">{role}</span>
+                    <div className="flex items-start gap-3">
+                      <div className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${div.bg}`}>
+                        <div.icon className={`h-4 w-4 ${div.color}`} aria-hidden="true" />
+                      </div>
+                      <div>
+                        <p className="text-brand-navy text-sm font-bold">{div.division}</p>
+                        <p className="text-text-muted text-[10px] font-semibold tracking-wide uppercase">
+                          {div.tagline}
+                        </p>
+                        <p className="text-text-muted mt-1 text-xs">{div.examples}</p>
+                      </div>
+                    </div>
                     <Link
                       href="/careers"
-                      aria-label={`Apply for ${role}`}
+                      aria-label={`View openings in ${div.division}`}
                       className="text-brand-orange flex shrink-0 items-center gap-1 text-xs font-bold hover:underline"
                     >
                       Apply <ArrowRight className="h-3 w-3" aria-hidden="true" />
@@ -244,6 +282,14 @@ export default function AboutPage() {
                   </div>
                 ))}
               </div>
+              <p className="text-text-muted mt-4 text-xs leading-relaxed">
+                All positions are unpaid volunteer roles at this stage. Full role list and
+                application on the{" "}
+                <Link href="/careers" className="text-brand-orange font-semibold hover:underline">
+                  careers page
+                </Link>
+                .
+              </p>
             </div>
           </div>
         </div>
@@ -258,15 +304,16 @@ export default function AboutPage() {
                 Join the <span className="text-brand-orange">Team</span>
               </h2>
               <p className="text-text-muted text-lg leading-relaxed">
-                We're building something real from the ground up. If you want to own entire modules
-                — not just tickets — and you care about clean architecture, we want to hear from
-                you.
+                We're building three real products from scratch. A B2B software consultancy, a
+                Unity game studio, and a consumer software storefront. If you want to own entire
+                functions — not just tickets — and you care about doing the work properly, we want
+                to hear from you.
               </p>
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 {[
-                  { icon: TrendingUp, text: "Defined skill progression tracks" },
-                  { icon: Briefcase, text: "Own entire modules, not just tickets" },
-                  { icon: Globe, text: "Work on real systems used by real businesses" },
+                  { icon: TrendingUp, text: "Own entire functions, not sub-tasks" },
+                  { icon: Briefcase, text: "Three divisions, one team" },
+                  { icon: Globe, text: "Remote-first — apply from anywhere" },
                   { icon: Users, text: "Direct access to founder from day one" },
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-3 rounded-xl bg-white/5 p-4">
@@ -280,7 +327,7 @@ export default function AboutPage() {
               </div>
               <Link href="/careers" className="w-fit">
                 <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 group">
-                  View Career Openings{" "}
+                  View All Openings{" "}
                   <ArrowRight
                     className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"
                     aria-hidden="true"

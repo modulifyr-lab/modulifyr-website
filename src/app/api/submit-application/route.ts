@@ -3,6 +3,88 @@ import { NextRequest, NextResponse } from "next/server";
 import { isRateLimited, getClientIp } from "@/lib/ratelimit";
 import logger from "@/lib/logger";
 
+// ─── All allowed roles (must match JobApplicationForm.tsx role groups) ────────
+const allowedRoles = [
+  // Engineering
+  "Full-Stack Engineer",
+  "Frontend Engineer",
+  "Backend Engineer",
+  "DevOps Engineer",
+  "Cloud Infrastructure Engineer",
+  "Security Engineer",
+  "QA Engineer",
+  "Solutions Architect",
+  "Technical Lead",
+  "Engineering Manager",
+  // Game Dev — Speedline
+  "Gameplay Programmer",
+  "Engine Programmer",
+  "AI Programmer",
+  "Tools Programmer",
+  "Graphics Programmer",
+  // Art — Speedline
+  "Concept Artist",
+  "3D Artist",
+  "Animator",
+  "Technical Artist",
+  "VFX Artist",
+  // Product Design
+  "UX Designer",
+  "UI Designer",
+  "Product Designer",
+  "UX Researcher",
+  "Design Lead",
+  // Game Design — Speedline
+  "Game Designer",
+  "Level Designer",
+  "Narrative Designer",
+  "Systems Designer",
+  "QA Tester",
+  // Audio — Speedline
+  "Audio Designer",
+  "Composer",
+  // Product Management
+  "Product Manager",
+  "Senior Product Manager",
+  "Technical Project Manager",
+  "Project Manager",
+  // Marketing & Growth
+  "Growth Marketer",
+  "Digital Marketing Manager",
+  "Content Strategist",
+  "SEO Specialist",
+  "Paid Acquisition Specialist",
+  "Brand Manager",
+  "Community Manager",
+  "Publishing Manager",
+  // Sales & Client Success
+  "Business Development Manager",
+  "Sales Executive",
+  "Pre-Sales Engineer",
+  "Account Manager",
+  "Client Onboarding Specialist",
+  "Customer Success Manager",
+  "Technical Support Engineer",
+  "Customer Support Specialist",
+  // Data
+  "Data Analyst",
+  "Revenue Analyst",
+  // Operations, Finance & HR
+  "Operations Manager",
+  "HR Manager",
+  "HR Specialist",
+  "Recruiter",
+  "Finance Manager",
+  "Accountant",
+  "Financial Analyst",
+  "Chief of Staff",
+  "Executive Assistant",
+  "Legal Counsel",
+  "IT Administrator",
+  // Catch-all
+  "Other / General Application",
+];
+
 export async function POST(req: NextRequest) {
   const ip = getClientIp(req);
 
@@ -50,17 +132,6 @@ export async function POST(req: NextRequest) {
       );
 
     // ── Allowlist validation on role ──────────────────────────────────────
-    // All 7 open positions from the hiring guide + general application
-    const allowedRoles = [
-      "Senior Full-Stack Engineer",
-      "Frontend Engineer",
-      "Backend Engineer",
-      "Mobile Engineer (React Native / Expo)",
-      "Desktop Engineer (Tauri / Electron)",
-      "DevOps / SRE Engineer",
-      "Data Engineer / Analytics Engineer",
-      "Other / General Application",
-    ];
     if (!allowedRoles.includes(body.role)) {
       return NextResponse.json({ error: "Invalid role selection" }, { status: 400 });
     }

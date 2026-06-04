@@ -15,24 +15,137 @@ import {
   Linkedin,
 } from "lucide-react";
 
-// ─── All open roles from the hiring guide (excluding internal Founder/Lead) ──
-const roles = [
-  "Senior Full-Stack Engineer",
-  "Frontend Engineer",
-  "Backend Engineer",
-  "Mobile Engineer (React Native / Expo)",
-  "Desktop Engineer (Tauri / Electron)",
-  "DevOps / SRE Engineer",
-  "Data Engineer / Analytics Engineer",
-  "Other / General Application",
+// ─── All roles from the Employees DB ─────────────────────────────────────────
+// Grouped by category for the select dropdown
+const roleGroups = [
+  {
+    label: "Engineering — Modulifyr / Virtual",
+    roles: [
+      "Full-Stack Engineer",
+      "Frontend Engineer",
+      "Backend Engineer",
+      "DevOps Engineer",
+      "Cloud Infrastructure Engineer",
+      "Security Engineer",
+      "QA Engineer",
+      "Solutions Architect",
+      "Technical Lead",
+      "Engineering Manager",
+    ],
+  },
+  {
+    label: "Game Development — Speedline",
+    roles: [
+      "Gameplay Programmer",
+      "Engine Programmer",
+      "AI Programmer",
+      "Tools Programmer",
+      "Graphics Programmer",
+    ],
+  },
+  {
+    label: "Art & Visual — Speedline",
+    roles: [
+      "Concept Artist",
+      "3D Artist",
+      "Animator",
+      "Technical Artist",
+      "VFX Artist",
+    ],
+  },
+  {
+    label: "Design — Modulifyr / Virtual",
+    roles: [
+      "UX Designer",
+      "UI Designer",
+      "Product Designer",
+      "UX Researcher",
+      "Design Lead",
+    ],
+  },
+  {
+    label: "Game Design — Speedline",
+    roles: [
+      "Game Designer",
+      "Level Designer",
+      "Narrative Designer",
+      "Systems Designer",
+      "QA Tester",
+    ],
+  },
+  {
+    label: "Audio — Speedline",
+    roles: ["Audio Designer", "Composer"],
+  },
+  {
+    label: "Product Management",
+    roles: [
+      "Product Manager",
+      "Senior Product Manager",
+      "Technical Project Manager",
+      "Project Manager",
+    ],
+  },
+  {
+    label: "Marketing & Growth",
+    roles: [
+      "Growth Marketer",
+      "Digital Marketing Manager",
+      "Content Strategist",
+      "SEO Specialist",
+      "Paid Acquisition Specialist",
+      "Brand Manager",
+      "Community Manager",
+      "Publishing Manager",
+    ],
+  },
+  {
+    label: "Sales & Client Success",
+    roles: [
+      "Business Development Manager",
+      "Sales Executive",
+      "Pre-Sales Engineer",
+      "Account Manager",
+      "Client Onboarding Specialist",
+      "Customer Success Manager",
+      "Technical Support Engineer",
+      "Customer Support Specialist",
+    ],
+  },
+  {
+    label: "Data & Analytics",
+    roles: ["Data Analyst", "Revenue Analyst"],
+  },
+  {
+    label: "Operations, Finance & HR",
+    roles: [
+      "Operations Manager",
+      "HR Manager",
+      "HR Specialist",
+      "Recruiter",
+      "Finance Manager",
+      "Accountant",
+      "Financial Analyst",
+      "Chief of Staff",
+      "Executive Assistant",
+      "Legal Counsel",
+      "IT Administrator",
+    ],
+  },
 ];
 
-// Quick-click badges shown above the form (first 4 most likely roles)
+// Flat list of all roles — used for the allowed roles validation on the API side
+// (keep this in sync with submit-application/route.ts)
+const allRoles = roleGroups.flatMap((g) => g.roles).concat(["Other / General Application"]);
+
+// Quick-click featured roles shown above the form
 const featuredRoles = [
-  "Senior Full-Stack Engineer",
-  "DevOps / SRE Engineer",
-  "Frontend Engineer",
-  "Backend Engineer",
+  "Full-Stack Engineer",
+  "Gameplay Programmer",
+  "UX Designer",
+  "Growth Marketer",
+  "Product Manager",
+  "DevOps Engineer",
 ];
 
 interface FormState {
@@ -73,6 +186,20 @@ export function JobApplicationForm() {
   const handleSubmit = async (e: React.MouseEvent) => {
     e.preventDefault();
 
+    // Validate email format
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+      setErrorMsg("Please enter a valid email address.");
+      setStatus("error");
+      return;
+    }
+
+    // Validate phone number format (optional)
+    if (form.phone && !/^\d{10,15}$/.test(form.phone)) {
+      setErrorMsg("Please enter a valid phone number.");
+      setStatus("error");
+      return;
+    }
+
     if (!form.name || !form.email || !form.role || !form.skills || !form.cover_note) {
       setErrorMsg("Please fill in all required fields.");
       setStatus("error");
@@ -112,8 +239,9 @@ export function JobApplicationForm() {
               Application Received
             </h1>
             <p className="text-text-secondary text-lg leading-relaxed">
-              Thanks for applying to Modulifyr. You'll receive a confirmation email shortly. We
-              review every application and will be in touch within 5–7 business days.
+              Thanks for applying. We review every application and will be in touch within 5–7
+              business days. If you're a strong fit, we'll schedule a short call to talk through
+              your role and what you'd be working on.
             </p>
           </div>
           <Button variant="outline" onClick={() => setStatus("idle")}>
@@ -126,29 +254,15 @@ export function JobApplicationForm() {
 
   return (
     <div className="flex w-full flex-col">
-      <section className="bg-brand-navy py-20 text-white">
-        <div className="container-custom">
-          <div className="max-w-3xl">
-            <span className="text-brand-teal mb-4 block text-xs font-bold tracking-widest uppercase">
-              Join the Team
-            </span>
-            <h1 className="font-heading mb-6 text-4xl font-bold md:text-5xl">
-              Build the Future of <span className="text-brand-orange">Modular Systems</span>
-            </h1>
-            <p className="text-text-muted text-xl leading-relaxed">
-              We're a small, focused team of engineers obsessed with clean architecture. If you
-              share that obsession, we'd love to hear from you.
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* Quick-click role badges */}
       <section className="bg-bg-secondary border-border-base border-b py-12">
         <div className="container-custom">
+          <p className="text-text-muted mb-5 text-xs font-bold tracking-widest uppercase">
+            Quick-select your role category:
+          </p>
           <div className="flex flex-wrap items-center gap-3">
             <span className="text-text-muted mr-2 flex items-center gap-2 text-xs font-bold tracking-widest uppercase">
-              <Briefcase className="h-4 w-4" /> Open Positions:
+              <Briefcase className="h-4 w-4" /> Featured Openings:
             </span>
             {featuredRoles.map((role) => (
               <span
@@ -164,7 +278,7 @@ export function JobApplicationForm() {
               </span>
             ))}
             <span className="text-text-muted text-xs italic">
-              + {roles.length - featuredRoles.length} more in the form below
+              + {allRoles.length - featuredRoles.length} more in the dropdown below
             </span>
           </div>
         </div>
@@ -173,6 +287,7 @@ export function JobApplicationForm() {
       <section className="bg-bg-light py-20">
         <div className="container-custom">
           <div className="grid grid-cols-1 gap-16 lg:grid-cols-3">
+            {/* ── Form ── */}
             <div className="lg:col-span-2">
               <div className="border-border-base rounded-3xl border bg-white p-8 shadow-sm md:p-12">
                 {status === "error" && (
@@ -182,7 +297,7 @@ export function JobApplicationForm() {
                   </div>
                 )}
 
-                {/* Section 01 */}
+                {/* 01 — Personal */}
                 <div className="mb-10">
                   <h2 className="text-text-muted border-border-base mb-6 border-b pb-3 text-xs font-bold tracking-widest uppercase">
                     01 — Personal Information
@@ -237,21 +352,31 @@ export function JobApplicationForm() {
                         value={form.role}
                         onChange={handleChange}
                         className="border-border-base bg-bg-light text-text-primary focus:border-brand-teal focus:ring-brand-teal/10 cursor-pointer appearance-none rounded-xl border px-4 py-3 text-sm transition-all focus:ring-2 focus:outline-none"
+                        aria-label="Select a role"
                       >
                         <option value="" disabled>
                           Select a role
                         </option>
-                        {roles.map((r) => (
-                          <option key={r} value={r}>
-                            {r}
-                          </option>
+                        {roleGroups.map((group) => (
+                          <optgroup key={group.label} label={group.label}>
+                            {group.roles.map((r) => (
+                              <option key={r} value={r}>
+                                {r}
+                              </option>
+                            ))}
+                          </optgroup>
                         ))}
+                        <optgroup label="Other">
+                          <option value="Other / General Application">
+                            Other / General Application
+                          </option>
+                        </optgroup>
                       </select>
                     </div>
                   </div>
                 </div>
 
-                {/* Section 02 */}
+                {/* 02 — Skills & Links */}
                 <div className="mb-10">
                   <h2 className="text-text-muted border-border-base mb-6 border-b pb-3 text-xs font-bold tracking-widest uppercase">
                     02 — Skills & Profile Links
@@ -266,7 +391,7 @@ export function JobApplicationForm() {
                         name="skills"
                         value={form.skills}
                         onChange={handleChange}
-                        placeholder="e.g. React, TypeScript, Node.js, PostgreSQL, AWS"
+                        placeholder="e.g. React, TypeScript, Node.js — or Unity, C#, Game Design — or Figma, UX Research"
                         maxLength={500}
                         className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:border-brand-teal focus:ring-brand-teal/10 rounded-xl border px-4 py-3 text-sm transition-all focus:ring-2 focus:outline-none"
                       />
@@ -302,18 +427,19 @@ export function JobApplicationForm() {
                   </div>
                 </div>
 
-                {/* Section 03 */}
+                {/* 03 — Cover */}
                 <div className="mb-10">
                   <h2 className="text-text-muted border-border-base mb-6 border-b pb-3 text-xs font-bold tracking-widest uppercase">
-                    03 — Cover Note
+                    03 — Why You Want In
                   </h2>
                   <div className="flex flex-col gap-2">
                     <label className="text-brand-navy text-sm font-semibold">
-                      Why Modulifyr? <span className="text-brand-orange">*</span>
+                      Tell us about yourself and why you're applying{" "}
+                      <span className="text-brand-orange">*</span>
                     </label>
                     <p className="text-text-muted mb-2 text-xs">
-                      Tell us about your background, what excites you about modular systems, and
-                      what you'd bring to the team.
+                      What draws you to this division and role? What have you built or done that's
+                      relevant? How much time can you commit per week?
                     </p>
                     <textarea
                       name="cover_note"
@@ -321,7 +447,7 @@ export function JobApplicationForm() {
                       onChange={handleChange}
                       rows={6}
                       maxLength={5000}
-                      placeholder="I've been working with modular architectures for X years... What draws me to Modulifyr is..."
+                      placeholder="I'm a [background] with [X years / recent graduate / currently studying]. What drew me to Modulifyr is... I can commit roughly X hours per week..."
                       className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:border-brand-teal focus:ring-brand-teal/10 resize-none rounded-xl border px-4 py-3 text-sm transition-all focus:ring-2 focus:outline-none"
                     />
                     <p className="text-text-muted text-right text-xs">
@@ -376,22 +502,23 @@ export function JobApplicationForm() {
               </div>
             </div>
 
-            {/* Sidebar */}
+            {/* ── Sidebar ── */}
             <div className="flex flex-col gap-6">
               <div className="bg-brand-navy rounded-3xl p-8 text-white">
-                <h3 className="font-heading mb-2 text-xl font-bold">Life at Modulifyr</h3>
+                <h3 className="font-heading mb-2 text-xl font-bold">Working at Modulifyr</h3>
                 <p className="text-text-muted mb-6 text-sm leading-relaxed">
-                  We're a small, focused team that values depth over breadth. You'll work on real
-                  enterprise systems that matter to real businesses in Nepal and internationally.
+                  Pre-launch, bootstrapped, and entirely volunteer-run. If you join now, you're
+                  part of building the company itself — not just working inside it.
                 </p>
                 <div className="space-y-4">
                   {[
+                    "Own entire functions, not sub-tasks",
+                    "Three real products across three divisions",
                     "Architecture-first engineering culture",
-                    "Real enterprise systems, not demos",
-                    "Birtamode HQ + remote flexibility",
-                    "Direct collaboration with lead architect",
-                    "Long-term projects, not short sprints",
-                    "Skill development with senior mentorship",
+                    "Birtamode HQ — remote-first globally",
+                    "Direct access to founder from day one",
+                    "Structured company: documentation, processes, standards",
+                    "Be here before it's obvious",
                   ].map((item) => (
                     <div key={item} className="flex items-center gap-3">
                       <CheckCircle2 className="text-brand-teal h-4 w-4 shrink-0" />
@@ -401,28 +528,24 @@ export function JobApplicationForm() {
                 </div>
               </div>
 
-              {/* All roles reference */}
+              {/* All role categories */}
               <div className="bg-bg-secondary border-border-base rounded-3xl border p-8">
-                <h3 className="font-heading text-brand-navy mb-3 text-sm font-bold tracking-widest uppercase">
-                  All Open Positions
+                <h3 className="font-heading text-brand-navy mb-4 text-sm font-bold tracking-widest uppercase">
+                  All Role Categories
                 </h3>
-                <ul className="space-y-2">
-                  {roles.filter((r) => r !== "Other / General Application").map((r) => (
-                    <li
-                      key={r}
-                      className={`cursor-pointer rounded-lg px-3 py-2 text-xs font-semibold transition-colors ${
-                        form.role === r
-                          ? "bg-brand-orange/10 text-brand-orange"
-                          : "text-text-secondary hover:bg-bg-light"
-                      }`}
-                      onClick={() => setForm((prev) => ({ ...prev, role: r }))}
+                <div className="space-y-1.5">
+                  {roleGroups.map((g) => (
+                    <div
+                      key={g.label}
+                      className="text-text-secondary text-xs leading-snug"
                     >
-                      → {r}
-                    </li>
+                      <span className="text-brand-navy font-semibold">{g.label}:</span>{" "}
+                      {g.roles.length} positions
+                    </div>
                   ))}
-                </ul>
+                </div>
                 <p className="text-text-muted mt-4 text-xs">
-                  Click any role to pre-fill the dropdown above.
+                  All roles are volunteer / unpaid at this stage.
                 </p>
               </div>
 

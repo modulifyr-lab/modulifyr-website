@@ -4,16 +4,13 @@ import { useState, useEffect } from "react";
 import { X, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
-function getInitialVisibility(): boolean {
-  if (typeof window === "undefined") return false;
-  return !sessionStorage.getItem("modulifyr_startup_banner");
-}
-
 export function StartupBanner() {
-  const [visible, setVisible] = useState(getInitialVisibility);
+  const [visible, setVisible] = useState(false);
+  const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
-    // Sync document title or other side effects if needed
+    setIsHydrated(true);
+    setVisible(!sessionStorage.getItem("modulifyr_startup_banner"));
   }, []);
 
   const dismiss = () => {
@@ -21,7 +18,7 @@ export function StartupBanner() {
     setVisible(false);
   };
 
-  if (!visible) return null;
+  if (!isHydrated || !visible) return null;
 
   return (
     <div
