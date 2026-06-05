@@ -2,15 +2,15 @@
 
 @theme {
   --font-sans:
-    var(--font-inter), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
     "Segoe UI Symbol", "Noto Color Emoji";
-  --font-heading: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
 
   /* Brand Colors (Static) */
-  --color-brand-orange: #ff5a3c;
-  --color-brand-navy: #0e3448;
-  --color-brand-teal: #2f9bb3;
-  --color-brand-gold: #f2c14e;
+  --color-brand-orange: #E84530;
+  --color-brand-navy: #0D0D0D;
+  --color-brand-teal: #2B7FA8;
+  --color-brand-gold: #F5B52E;
 
   /* Dynamic Theme Colors */
   --color-bg-light: var(--bg-main);
