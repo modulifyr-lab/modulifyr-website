@@ -4,7 +4,7 @@ import Image from "next/image";
 export const metadata: Metadata = {
   title: "Selected Case Studies & Portfolio | Modulifyr",
   description:
-    "Case studies from Modulifyr's engineering work — modular ERP systems, custom platforms, and legacy modernisation projects for clients in Nepal and globally.",
+    "Case studies from Modulifyr's engineering work — modular ERP systems, custom platforms, and legacy modernisation projects.",
 };
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
@@ -18,8 +18,6 @@ import {
   Target,
 } from "lucide-react";
 
-// ─── Case study data ──────────────────────────────────────────────────────────
-
 const caseStudies = [
   {
     id: "planning-bord",
@@ -31,46 +29,16 @@ const caseStudies = [
     liveUrl: "https://the-planning-bord.vercel.app",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80",
     problem:
-      "The client was managing inventory, project tracking, HR, and finance across four separate tools with no shared data. Staff were manually reconciling records between systems every Friday — a process that took 3 hours and still produced mismatches. Each new team member needed to be onboarded to four separate tools.",
+      "The system needed to bring inventory, project tracking, HR, and finance into a single platform. Without a unified data layer, each function would require manual reconciliation and separate tooling — creating compounding maintenance overhead as the product grew.",
     architecture:
-      "We built a single modular platform where each function (inventory, HR, projects, finance) operates as a discrete module with clean data boundaries. Modules share a common data layer so inventory changes immediately reflect in finance reporting. The modular design meant the client's specific workflow automations could be added without touching unrelated modules.",
+      "Built as a single modular platform where each function (inventory, HR, projects, finance) operates as a discrete module with clean data boundaries. Modules share a common data layer so inventory changes immediately reflect in finance reporting. The modular design means new workflows can be added without touching unrelated modules.",
     outcome:
-      "Reduced the Friday reconciliation process from 3 hours to automated — zero manual effort. New staff onboarding dropped from multi-tool setup to one system. The client has since added two new modules (client portal, automated billing) without any rebuild of the existing platform.",
+      "A working ERP platform demonstrating our core architectural approach: modular, independently maintainable, and extensible. The Planning Bord is an active internal build — new modules are being added as the product evolves.",
     metrics: [
-      { label: "Manual reconciliation time", value: "3hrs → 0" },
-      { label: "Systems staff must learn", value: "4 → 1" },
-      { label: "Modules added post-launch", value: "2 without rebuild" },
+      { label: "Architecture pattern", value: "Modular" },
+      { label: "Platform type", value: "ERP" },
+      { label: "Status", value: "Active build" },
     ],
-  },
-];
-
-const nda = [
-  {
-    title: "Healthcare Platform — Compliance Module Swap",
-    type: "Healthcare / Nepal",
-    challenge:
-      "Six months into a build, national compliance requirements changed. The entire billing and data-handling approach needed to change.",
-    result:
-      "Because the system was modular from day one, the compliance-affected modules were replaced without touching anything else. No rebuild, no deadline crisis.",
-    quote: true,
-  },
-  {
-    title: "School ERP — Government Board Integration",
-    type: "Education / Nepal",
-    challenge:
-      "A school group needed their internal student records to generate reports in the exact format required by two different exam boards, which changed requirements annually.",
-    result:
-      "Built a reporting module that is maintained independently of student records. Board format changes are handled as module updates, not system changes.",
-    quote: false,
-  },
-  {
-    title: "Retail POS — Multi-branch Inventory",
-    type: "Retail / Nepal",
-    challenge:
-      "A retailer with four branches was running separate POS systems with no shared inventory view. Staff were calling between branches to check stock.",
-    result:
-      "Unified inventory module connected to all four branch POS systems. Real-time stock view across all locations. Built in 8 weeks on a fixed-fee pilot.",
-    quote: false,
   },
 ];
 
@@ -85,11 +53,11 @@ export default function WorkPage() {
               Proven Technical <span className="text-brand-orange">Execution</span>
             </h1>
             <p className="text-text-secondary mb-8 text-xl leading-relaxed">
-              Case studies documenting real problems, the architectural decisions we made, and what
-              actually happened. Not portfolio screenshots — engineering outcomes.
+              Our current portfolio reflects our internal builds and architectural approach. As we
+              take on client projects, documented case studies will be added here.
             </p>
             <div className="text-brand-teal flex items-center gap-4 text-sm font-semibold tracking-widest uppercase">
-              <ShieldCheck className="h-5 w-5" /> Most Enterprise Work Available Under NDA Only
+              <ShieldCheck className="h-5 w-5" /> Client Projects Available Under NDA After Engagement
             </div>
           </div>
         </div>
@@ -135,14 +103,14 @@ export default function WorkPage() {
                   </div>
                 </div>
 
-                {/* Outcome metrics */}
+                {/* Metrics */}
                 <div className="grid grid-cols-3 gap-4">
                   {cs.metrics.map((m, i) => (
                     <div
                       key={i}
                       className="bg-bg-secondary border-border-base rounded-2xl border p-5 text-center"
                     >
-                      <p className="text-brand-orange font-heading mb-1 text-lg leading-tight font-bold">
+                      <p className="text-brand-orange font-heading mb-1 text-sm leading-tight font-bold">
                         {m.value}
                       </p>
                       <p className="text-text-muted text-xs leading-tight">{m.label}</p>
@@ -199,62 +167,47 @@ export default function WorkPage() {
         </section>
       ))}
 
-      {/* NDA Case Studies */}
+      {/* Coming soon — honest placeholder instead of fabricated NDA studies */}
       <section className="bg-bg-secondary py-24">
         <div className="container-custom">
           <div className="mb-12">
-            <span className="text-text-muted mb-2 block text-xs font-bold tracking-widest uppercase">
-              Under NDA
-            </span>
             <h2 className="font-heading text-brand-navy mb-3 text-3xl font-bold">
-              Additional Work
+              Client Work
             </h2>
-            <p className="text-text-secondary max-w-xl">
-              Anonymised summaries of enterprise work. Full details available after NDA signing.
+            <p className="text-text-secondary max-w-xl text-lg leading-relaxed">
+              We are pre-launch and actively taking on our first client projects. Documented case
+              studies will be added here as engagements complete. If you want to be an early client,{" "}
+              <Link href="/request-proposal" className="text-brand-orange font-semibold hover:underline">
+                request a proposal
+              </Link>
+              .
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            {nda.map((item, i) => (
-              <div
-                key={i}
-                className="border-border-base flex flex-col gap-5 rounded-2xl border bg-white p-8"
-              >
-                <div>
-                  <p className="text-brand-orange mb-1 text-xs font-bold tracking-widest uppercase">
-                    {item.type}
-                  </p>
-                  <h3 className="font-heading text-brand-navy text-lg font-bold">{item.title}</h3>
-                </div>
-                <div className="flex flex-col gap-3">
-                  <div className="flex items-start gap-2">
-                    <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-red-400" />
-                    <p className="text-text-secondary text-xs leading-relaxed">{item.challenge}</p>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-green-500" />
-                    <p className="text-text-secondary text-xs leading-relaxed">{item.result}</p>
-                  </div>
-                </div>
-                {item.quote && (
-                  <p className="text-text-muted border-brand-orange border-l-2 pl-3 text-xs italic">
-                    "We swapped out the affected modules without touching anything else. No rebuild,
-                    no deadline crisis." — CTO
-                  </p>
-                )}
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-10 text-center">
-            <Link href="/request-proposal">
-              <Button variant="outline">Request Anonymised Architecture Samples</Button>
-            </Link>
+          <div className="border-border-base rounded-3xl border bg-white p-10 text-center max-w-2xl">
+            <div className="bg-brand-orange/10 mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full">
+              <CheckCircle2 className="text-brand-orange h-8 w-8" />
+            </div>
+            <h3 className="font-heading text-brand-navy mb-3 text-xl font-bold">
+              Technical Standards Available Now
+            </h3>
+            <p className="text-text-secondary text-sm leading-relaxed mb-6">
+              While client case studies are pending, our full engineering standards, architecture
+              patterns, and technical briefing are available for review.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link href="/about/technical-standards">
+                <Button>View Technical Standards</Button>
+              </Link>
+              <Link href="/contact">
+                <Button variant="outline">Speak with an Engineer</Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Dedicated Product Team — named offering, addresses market gap from research */}
+      {/* Dedicated Product Team */}
       <section className="bg-brand-navy py-24 text-white">
         <div className="container-custom">
           <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
@@ -338,11 +291,11 @@ export default function WorkPage() {
         <div className="container-custom text-center">
           <div className="mx-auto flex max-w-3xl flex-col gap-8">
             <h2 className="font-heading text-brand-navy text-3xl font-bold">
-              Need to see the thinking behind our code?
+              Want to see how we think about architecture?
             </h2>
             <p className="text-text-secondary text-lg leading-relaxed">
-              We can provide a live code walkthrough or detailed documentation for our public
-              samples under NDA.
+              We can walk through our technical standards, architecture patterns, and internal
+              system design with any serious prospect.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link href="/about/technical-standards">

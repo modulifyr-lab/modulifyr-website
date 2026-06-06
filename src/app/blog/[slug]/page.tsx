@@ -2,9 +2,17 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/Button";
-import { posts as staticPosts } from "../page";
+import { getPostBySlug, getAllPosts } from "@/lib/notion-blog";
+import { ArrowLeft, Clock, User } from "lucide-react";
 
-// ─── Defined locally so this file has no dependency on page.tsx exports ──────
+// ISR — revalidate every hour so Notion edits go live automatically
+export const revalidate = 3600;
+
+// Allow slugs not pre-built at build time (all Notion posts)
+export const dynamicParams = true;
+
+type Props = { params: Promise<{ slug: string }> };
+
 const categoryColors: Record<string, string> = {
   Architecture: "bg-brand-orange/10 text-brand-orange",
   Engineering: "bg-brand-navy/10 text-brand-navy",
@@ -13,128 +21,51 @@ const categoryColors: Record<string, string> = {
   DevOps: "bg-brand-teal/10 text-brand-teal",
   Strategy: "bg-brand-orange/10 text-brand-orange",
 };
-import { getPostBySlug } from "@/lib/notion-blog";
-import { ArrowLeft, ArrowRight, Clock, User } from "lucide-react";
-
-// ─── ISR — revalidate every hour so Notion edits go live automatically ────────
-export const revalidate = 3600;
-
-// ─── KEY FIX: allow slugs not in generateStaticParams (i.e. Notion posts) ────
-// Without this, Next.js returns 404 for ANY slug not pre-built at build time.
-export const dynamicParams = true;
-
-type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
-  return staticPosts.map((post) => ({ slug: post.slug }));
+  // No static posts — all content is from Notion
+  return [];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  // Try Notion first
   const notionPost = await getPostBySlug(slug);
-  if (notionPost) {
-    return {
-      title: `${notionPost.title} | Modulifyr Blog`,
-      description: notionPost.excerpt,
-      openGraph: {
-        title: notionPost.title,
-        description: notionPost.excerpt,
-        type: "article",
-        publishedTime: notionPost.dateISO,
-        authors: ["Modulifyr Engineering"],
-      },
-    };
-  }
-  // Fall back to static
-  const post = staticPosts.find((p) => p.slug === slug);
-  if (!post) return { title: "Post Not Found | Modulifyr" };
+  if (!notionPost) return { title: "Post Not Found | Modulifyr" };
   return {
-    title: `${post.title} | Modulifyr Blog`,
-    description: post.excerpt,
+    title: `${notionPost.title} | Modulifyr Blog`,
+    description: notionPost.excerpt,
     openGraph: {
-      title: post.title,
-      description: post.excerpt,
+      title: notionPost.title,
+      description: notionPost.excerpt,
       type: "article",
-      publishedTime: post.dateISO,
+      publishedTime: notionPost.dateISO,
       authors: ["Modulifyr Engineering"],
     },
   };
 }
 
-// ─── Render static post content (markdown-like → JSX) ────────────────────────
-function StaticContent({ content }: { content: string }) {
-  const sections = content
-    .trim()
-    .split("\n\n")
-    .filter(Boolean)
-    .map((block) => {
-      if (block.startsWith("**") && block.endsWith("**")) {
-        return { type: "heading", text: block.replace(/\*\*/g, "") };
-      }
-      return {
-        type: "paragraph",
-        text: block.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>"),
-      };
-    });
-
-  return (
-    <div className="space-y-5">
-      {sections.map((section, i) =>
-        section.type === "heading" ? (
-          <h2
-            key={i}
-            className="font-heading text-brand-navy mt-10 mb-3 text-2xl font-bold first:mt-0"
-          >
-            {section.text}
-          </h2>
-        ) : (
-          <p
-            key={i}
-            className="text-text-secondary leading-relaxed"
-            dangerouslySetInnerHTML={{ __html: section.text }}
-          />
-        )
-      )}
-    </div>
-  );
-}
-
-// ─── Render Notion HTML content ───────────────────────────────────────────────
+// Render Notion HTML content
 function NotionContent({ html }: { html: string }) {
   return <div className="notion-content space-y-2" dangerouslySetInnerHTML={{ __html: html }} />;
 }
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
 
-  // 1. Try to load from Notion
   const notionPost = await getPostBySlug(slug);
+  if (!notionPost) notFound();
 
-  // 2. Fall back to static
-  const staticPost = staticPosts.find((p) => p.slug === slug);
-
-  // 3. 404 if neither found
-  if (!notionPost && !staticPost) notFound();
-
-  const post = notionPost ?? staticPost!;
-
-  // Navigation (based on static list order — works for both modes)
-  const currentIndex = staticPosts.findIndex((p) => p.slug === slug);
-  const prev = currentIndex > 0 ? staticPosts[currentIndex - 1] : null;
-  const next =
-    currentIndex >= 0 && currentIndex < staticPosts.length - 1
-      ? staticPosts[currentIndex + 1]
-      : null;
+  // Fetch all posts for sidebar "More Articles"
+  const allPosts = await getAllPosts();
+  const otherPosts = allPosts.filter((p) => p.slug !== slug).slice(0, 4);
 
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: post.title,
-    description: post.excerpt,
-    datePublished: post.dateISO,
-    dateModified: post.dateISO,
+    headline: notionPost.title,
+    description: notionPost.excerpt,
+    datePublished: notionPost.dateISO,
+    dateModified: notionPost.dateISO,
     author: {
       "@type": "Organization",
       name: "Modulifyr Engineering",
@@ -158,7 +89,7 @@ export default async function BlogPostPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
 
-      {/* ── Header ── */}
+      {/* Header */}
       <section className="bg-brand-navy py-20 text-white">
         <div className="container-custom max-w-4xl">
           <Link
@@ -169,20 +100,20 @@ export default async function BlogPostPage({ params }: Props) {
           </Link>
           <span
             className={`mb-6 inline-block rounded-full px-3 py-1 text-xs font-bold ${
-              categoryColors[post.category] ?? "bg-white/10 text-white"
+              categoryColors[notionPost.category] ?? "bg-white/10 text-white"
             }`}
           >
-            {post.category}
+            {notionPost.category}
           </span>
           <h1 className="font-heading mb-6 text-3xl leading-tight font-bold md:text-5xl">
-            {post.title}
+            {notionPost.title}
           </h1>
           <div className="text-text-muted flex items-center gap-4 text-sm">
             <span className="flex items-center gap-1.5">
-              <Clock className="h-4 w-4" /> {post.readTime}
+              <Clock className="h-4 w-4" /> {notionPost.readTime}
             </span>
             <span>·</span>
-            <time dateTime={post.dateISO}>{post.date}</time>
+            <time dateTime={notionPost.dateISO}>{notionPost.date}</time>
             <span>·</span>
             <span className="flex items-center gap-1.5">
               <User className="h-4 w-4" /> Modulifyr Engineering Team
@@ -191,23 +122,18 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
       </section>
 
-      {/* ── Content ── */}
+      {/* Content */}
       <section className="bg-bg-light py-16">
         <div className="container-custom">
           <div className="mx-auto grid max-w-6xl grid-cols-1 gap-16 lg:grid-cols-4">
             <article className="lg:col-span-3">
               <div className="border-border-base rounded-3xl border bg-white p-8 md:p-12">
-                {/* Excerpt / lede */}
+                {/* Excerpt */}
                 <p className="text-text-secondary border-border-base mb-8 border-b pb-8 text-xl leading-relaxed font-medium italic">
-                  {post.excerpt}
+                  {notionPost.excerpt}
                 </p>
 
-                {/* Content — Notion HTML or static markdown */}
-                {notionPost ? (
-                  <NotionContent html={notionPost.contentHtml} />
-                ) : (
-                  <StaticContent content={(staticPost as (typeof staticPosts)[0]).content} />
-                )}
+                <NotionContent html={notionPost.contentHtml} />
 
                 {/* Author footer */}
                 <div className="border-border-base mt-12 flex items-center gap-4 border-t pt-8">
@@ -223,42 +149,17 @@ export default async function BlogPostPage({ params }: Props) {
                 </div>
               </div>
 
-              {/* Prev / Next navigation */}
-              <div className="mt-8 grid grid-cols-2 gap-4">
-                {prev ? (
-                  <Link
-                    href={`/blog/${prev.slug}`}
-                    className="group border-border-base hover:border-brand-orange rounded-2xl border bg-white p-5 transition-colors"
-                  >
-                    <div className="text-text-muted mb-1 flex items-center gap-1 text-xs">
-                      <ArrowLeft className="h-3 w-3" /> Previous
-                    </div>
-                    <p className="text-brand-navy group-hover:text-brand-orange line-clamp-2 text-sm font-bold transition-colors">
-                      {prev.title}
-                    </p>
-                  </Link>
-                ) : (
-                  <div />
-                )}
-                {next ? (
-                  <Link
-                    href={`/blog/${next.slug}`}
-                    className="group border-border-base hover:border-brand-orange rounded-2xl border bg-white p-5 text-right transition-colors"
-                  >
-                    <div className="text-text-muted mb-1 flex items-center justify-end gap-1 text-xs">
-                      Next <ArrowRight className="h-3 w-3" />
-                    </div>
-                    <p className="text-brand-navy group-hover:text-brand-orange line-clamp-2 text-sm font-bold transition-colors">
-                      {next.title}
-                    </p>
-                  </Link>
-                ) : (
-                  <div />
-                )}
+              <div className="mt-8">
+                <Link
+                  href="/blog"
+                  className="group border-border-base hover:border-brand-orange rounded-2xl border bg-white p-5 inline-flex items-center gap-2 transition-colors text-sm font-medium text-text-secondary hover:text-brand-orange"
+                >
+                  <ArrowLeft className="h-4 w-4" /> Back to all articles
+                </Link>
               </div>
             </article>
 
-            {/* ── Sidebar ── */}
+            {/* Sidebar */}
             <aside className="flex flex-col gap-6">
               <div className="bg-brand-navy sticky top-28 rounded-3xl p-7 text-white">
                 <h3 className="font-heading mb-3 text-lg font-bold">Put this into practice</h3>
@@ -271,15 +172,13 @@ export default async function BlogPostPage({ params }: Props) {
                   </Button>
                 </Link>
               </div>
-              <div className="bg-bg-secondary border-border-base rounded-3xl border p-7">
-                <h3 className="font-heading text-brand-navy mb-3 text-sm font-bold">
-                  More Articles
-                </h3>
-                <div className="space-y-3">
-                  {staticPosts
-                    .filter((p) => p.slug !== slug)
-                    .slice(0, 4)
-                    .map((p) => (
+              {otherPosts.length > 0 && (
+                <div className="bg-bg-secondary border-border-base rounded-3xl border p-7">
+                  <h3 className="font-heading text-brand-navy mb-3 text-sm font-bold">
+                    More Articles
+                  </h3>
+                  <div className="space-y-3">
+                    {otherPosts.map((p) => (
                       <Link
                         key={p.slug}
                         href={`/blog/${p.slug}`}
@@ -288,8 +187,9 @@ export default async function BlogPostPage({ params }: Props) {
                         {p.title}
                       </Link>
                     ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </aside>
           </div>
         </div>

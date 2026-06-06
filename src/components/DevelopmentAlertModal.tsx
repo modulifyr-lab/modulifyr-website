@@ -9,11 +9,23 @@ export function DevelopmentAlertModal() {
 
   useEffect(() => {
     setMounted(true);
-    setVisible(!sessionStorage.getItem("modulifyr_development_alert"));
+    // localStorage so it only shows ONCE ever, not every browser session
+    try {
+      const dismissed = localStorage.getItem("modulifyr_dev_alert_dismissed");
+      if (!dismissed) {
+        setVisible(true);
+      }
+    } catch {
+      // localStorage unavailable — don't show modal
+    }
   }, []);
 
   const dismiss = () => {
-    sessionStorage.setItem("modulifyr_development_alert", "1");
+    try {
+      localStorage.setItem("modulifyr_dev_alert_dismissed", "1");
+    } catch {
+      // ignore
+    }
     setVisible(false);
   };
 
@@ -61,7 +73,7 @@ export function DevelopmentAlertModal() {
                 className="group flex w-full items-center justify-center gap-3 rounded-2xl bg-brand-navy px-8 py-4 font-heading text-lg font-bold text-white transition-all hover:bg-brand-navy/90 active:scale-[0.98]"
               >
                 I Understand
-                <X className="h-5 w-5 group-hover:rotate-90 transition-transform duration-300" />
+                <X className="h-5 w-5 transition-transform duration-300 group-hover:rotate-90" />
               </button>
             </div>
           </div>

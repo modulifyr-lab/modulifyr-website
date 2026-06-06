@@ -6,17 +6,23 @@ import { MapPin, Globe } from "lucide-react";
 
 export function RegionModal() {
   const { hasChosen, setRegion } = useRegion();
+  // Start as false — only show after we confirm localStorage has no saved choice
   const [visible, setVisible] = React.useState(false);
 
-  // Small delay so it doesn't flash on SSR hydration
   React.useEffect(() => {
-    if (!hasChosen) {
-      const t = setTimeout(() => setVisible(true), 600);
-      return () => clearTimeout(t);
-    }
+    // RegionProvider already reads localStorage on mount and sets hasChosen.
+    // We wait one tick to let that hydration settle, then check.
+    // No artificial delay — the provider's useEffect runs synchronously on mount.
+    const timer = setTimeout(() => {
+      if (!hasChosen) {
+        setVisible(true);
+      }
+    }, 100); // minimal tick — just enough to avoid SSR flash
+    return () => clearTimeout(timer);
   }, [hasChosen]);
 
-  if (!visible || hasChosen) return null;
+  // If user already chose (from a previous visit), never render
+  if (hasChosen || !visible) return null;
 
   const choose = (r: "nepal" | "international") => {
     setRegion(r);

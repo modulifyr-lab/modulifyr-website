@@ -18,33 +18,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/about/technical-standards`, changeFrequency: "monthly", priority: 0.6 },
     { url: `${base}/careers`, changeFrequency: "weekly", priority: 0.7 },
     { url: `${base}/resources`, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${base}/contact`, changeFrequency: "monthly", priority: 0.6 },
     { url: `${base}/privacy`, changeFrequency: "yearly", priority: 0.3 },
     { url: `${base}/terms`, changeFrequency: "yearly", priority: 0.3 },
 
-    // Blog posts — Nepal-focused posts get priority 0.9 (high local SEO value)
-    { url: `${base}/blog/custom-software-nepal-sme`, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${base}/blog/erp-schools-colleges-nepal`, changeFrequency: "monthly", priority: 0.9 },
-    { url: `${base}/blog/modular-vs-monolith`, changeFrequency: "monthly", priority: 0.7 },
-    {
-      url: `${base}/blog/legacy-modernization-playbook`,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    { url: `${base}/blog/api-design-patterns`, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${base}/blog/cost-of-technical-debt`, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${base}/blog/sre-for-startups`, changeFrequency: "monthly", priority: 0.6 },
-    {
-      url: `${base}/blog/react-server-components-enterprise`,
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
-
-    // Resource articles (non-PDF)
+    // Resource articles (non-PDF) — these are static so include them
     {
       url: `${base}/resources/micro-frontend-orchestration`,
       changeFrequency: "monthly",
       priority: 0.6,
     },
     { url: `${base}/resources/sre-best-practices`, changeFrequency: "monthly", priority: 0.6 },
+
+    // Blog posts are dynamically generated from Notion — not listed here.
+    // They will be indexed by Google via the /blog page and RSS feed.
   ];
 }

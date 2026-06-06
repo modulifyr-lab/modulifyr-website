@@ -133,22 +133,29 @@ export default function ResourcesPage() {
         </div>
       </section>
 
+      {/* CTA — replaces newsletter */}
       <section className="bg-brand-navy relative overflow-hidden py-24 text-white">
         <div className="container-custom relative z-10 max-w-2xl text-center">
           <h2 className="font-heading mb-6 text-3xl font-bold md:text-4xl">
-            Stay Updated with Our Technical Log
+            Want These Applied to Your System?
           </h2>
-          <p className="text-text-dim mb-10 text-lg">
-            Join our engineering community for monthly insights on modular architecture and system
-            design.
+          <p className="text-text-dim mb-10 text-lg leading-relaxed">
+            The patterns in these guides are what we apply to every project we build. If you're
+            evaluating a custom system, start with our technical standards or request a proposal.
           </p>
-          <div className="mx-auto flex max-w-md flex-col gap-4 sm:flex-row">
-            <input
-              type="email"
-              placeholder="Engineering Email"
-              className="focus:border-brand-orange flex-grow rounded-lg border border-white/20 bg-white/10 px-6 py-3 text-white placeholder:text-white/40 focus:outline-none"
-            />
-            <Button className="shrink-0">Subscribe</Button>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link href="/about/technical-standards">
+              <Button size="lg">View Technical Standards</Button>
+            </Link>
+            <Link href="/request-proposal">
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-white/30 text-white hover:bg-white/10"
+              >
+                Request Proposal
+              </Button>
+            </Link>
           </div>
         </div>
         <div className="bg-brand-teal/10 absolute top-0 right-0 -mt-48 -mr-48 h-96 w-96 rounded-full blur-[120px]" />

@@ -1,5 +1,4 @@
 import { getAllPosts } from "@/lib/notion-blog";
-import { posts as staticPosts } from "@/app/blog/page";
 
 const SITE_URL = "https://modulifyr.com";
 
@@ -12,11 +11,9 @@ function escXml(s: string) {
 }
 
 export async function GET() {
-  // Notion posts take priority; fall back to static
   const notionPosts = await getAllPosts();
-  const allPosts = notionPosts.length > 0 ? notionPosts : staticPosts;
 
-  const sorted = [...allPosts].sort(
+  const sorted = [...notionPosts].sort(
     (a, b) => new Date(b.dateISO).getTime() - new Date(a.dateISO).getTime()
   );
 
@@ -36,6 +33,10 @@ export async function GET() {
     })
     .join("\n\n  ");
 
+  const lastBuild = sorted[0]?.dateISO
+    ? new Date(sorted[0].dateISO).toUTCString()
+    : new Date().toUTCString();
+
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"
   xmlns:atom="http://www.w3.org/2005/Atom"
@@ -45,7 +46,7 @@ export async function GET() {
     <link>${SITE_URL}/blog</link>
     <description>Architecture decisions, engineering patterns, and practical perspectives from the Modulifyr team in Birtamode, Nepal.</description>
     <language>en-US</language>
-    <lastBuildDate>${new Date(sorted[0]?.dateISO ?? Date.now()).toUTCString()}</lastBuildDate>
+    <lastBuildDate>${lastBuild}</lastBuildDate>
     <managingEditor>contact@modulifyr.com (Modulifyr Engineering)</managingEditor>
     <ttl>1440</ttl>
     <atom:link href="${SITE_URL}/feed.xml" rel="self" type="application/rss+xml"/>

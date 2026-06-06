@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { DM_Sans, Syne } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { RegionProvider } from "@/components/RegionProvider";
@@ -11,11 +11,21 @@ import { StartupBanner } from "@/components/StartupBanner";
 import { DevelopmentAlertModal } from "@/components/DevelopmentAlertModal";
 import Script from "next/script";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const poppins = Poppins({
-  weight: ["400", "500", "600", "700", "800"],
+// ── Brand fonts ───────────────────────────────────────────────────────────────
+// DM Sans = body font  →  --font-dm-sans  →  --font-sans in globals.css
+// Syne    = heading font → --font-syne    →  --font-heading in globals.css
+// These variable names MUST match what globals.css @theme block references.
+
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  variable: "--font-poppins",
+  variable: "--font-dm-sans",
+  display: "swap",
+});
+
+const syne = Syne({
+  subsets: ["latin"],
+  variable: "--font-syne",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -168,7 +178,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* RSS autodiscovery — lets browsers and feed readers detect the blog feed */}
+        {/* RSS autodiscovery */}
         <link
           rel="alternate"
           type="application/rss+xml"
@@ -181,7 +191,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body
-        className={`${inter.variable} ${poppins.variable} font-sans antialiased transition-colors duration-300`}
+        className={`${dmSans.variable} ${syne.variable} font-sans antialiased transition-colors duration-300`}
         style={{ overflowY: "auto" }}
       >
         <noscript>
@@ -213,7 +223,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </RegionProvider>
         </ThemeProvider>
 
-        {/* ── Google Tag Manager ───────────────────────────────────────── */}
+        {/* Google Tag Manager */}
         <Script
           id="gtm-script"
           strategy="afterInteractive"
@@ -222,7 +232,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
 
-        {/* ── Crisp Live Chat ──────────────────────────────────────────── */}
+        {/* Crisp Live Chat */}
         <Script
           id="crisp-chat"
           strategy="afterInteractive"
@@ -231,7 +241,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
 
-        {/* ── CookieHub Consent Banner ─────────────────────────────────── */}
+        {/* CookieHub Consent Banner */}
         <Script
           id="cookiehub"
           strategy="afterInteractive"

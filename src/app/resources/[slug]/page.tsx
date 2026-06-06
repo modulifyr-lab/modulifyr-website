@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/Button";
 import { resources } from "../page";
 import { ArrowLeft, ArrowRight, Clock } from "lucide-react";
 
-type Props = { params: { slug: string } };
+// Fixed: Next.js 15 requires params as Promise<>
+type Props = { params: Promise<{ slug: string }> };
 
 const articleContent: Record<string, string> = {
   "micro-frontend-orchestration": `
@@ -83,7 +84,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const resource = resources.find((r) => r.slug === params.slug);
+  const { slug } = await params;
+  const resource = resources.find((r) => r.slug === slug);
   if (!resource) return { title: "Resource Not Found | Modulifyr" };
   return {
     title: `${resource.title} | Modulifyr Resources`,
@@ -91,11 +93,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function ResourceArticlePage({ params }: Props) {
-  const resource = resources.find((r) => r.slug === params.slug && !r.isPdf);
+export default async function ResourceArticlePage({ params }: Props) {
+  const { slug } = await params;
+  const resource = resources.find((r) => r.slug === slug && !r.isPdf);
   if (!resource) notFound();
 
-  const content = articleContent[params.slug];
+  const content = articleContent[slug];
   if (!content) notFound();
 
   const sections = content
@@ -109,7 +112,7 @@ export default function ResourceArticlePage({ params }: Props) {
       return { type: "paragraph", text: block.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>") };
     });
 
-  const otherArticles = resources.filter((r) => r.slug !== params.slug && !r.isPdf);
+  const otherArticles = resources.filter((r) => r.slug !== slug && !r.isPdf);
 
   return (
     <div className="flex w-full flex-col">
@@ -172,7 +175,7 @@ export default function ResourceArticlePage({ params }: Props) {
               <div className="bg-brand-navy sticky top-28 rounded-3xl p-7 text-white">
                 <h3 className="font-heading mb-3 text-lg font-bold">Put This Into Practice</h3>
                 <p className="text-text-muted mb-5 text-sm leading-relaxed">
-                  Work with our engineers to apply these patterns in your organization.
+                  Work with our engineers to apply these patterns in your organisation.
                 </p>
                 <Link href="/request-proposal">
                   <Button className="w-full" size="sm">
