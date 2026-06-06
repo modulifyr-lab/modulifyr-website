@@ -16,6 +16,8 @@ import {
   Coffee,
   Gamepad2,
   ShoppingBag,
+  ExternalLink,
+  Linkedin,
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
@@ -31,7 +33,7 @@ const founderSchema = {
   "@type": "Person",
   "@id": "https://modulifyr.com/#founder",
   name: "Rijan Mainali",
-  jobTitle: "Founder & Lead Engineer",
+  jobTitle: "Founder & CEO",
   image: "https://modulifyr.com/rijan-mainali.jpg",
   worksFor: {
     "@type": "Organization",
@@ -69,6 +71,58 @@ const values = [
   },
 ];
 
+// ─── Team members ─────────────────────────────────────────────────────────────
+const teamMembers = [
+  {
+    name: "Rijan M",
+    fullName: "Rijan Mainali",
+    title: "Founder & CEO",
+    linkedin: "https://www.linkedin.com/in/rijan-mainali/",
+    portfolio: "https://rijanmainali.vercel.app",
+    isFounder: true,
+  },
+  {
+    name: "Aadash L",
+    fullName: "Aadash L",
+    title: "Backend Engineer",
+    linkedin: null,
+    portfolio: null,
+    isFounder: false,
+  },
+  {
+    name: "Malika R",
+    fullName: "Malika R",
+    title: "Backend Engineer",
+    linkedin: "https://www.linkedin.com/in/mallika-razbanshi-78b506414",
+    portfolio: null,
+    isFounder: false,
+  },
+  {
+    name: "Ishak L",
+    fullName: "Ishak L",
+    title: "Narrative Designer",
+    linkedin: "https://www.linkedin.com/in/ishak-limbu-b3b48b414/",
+    portfolio: null,
+    isFounder: false,
+  },
+  {
+    name: "Roshan K",
+    fullName: "Roshan K",
+    title: "Engine Programmer",
+    linkedin: "https://www.linkedin.com/in/roshan-khanal-a8a619414",
+    portfolio: null,
+    isFounder: false,
+  },
+  {
+    name: "Sumina L",
+    fullName: "Sumina L",
+    title: "UI/UX Artist",
+    linkedin: null,
+    portfolio: null,
+    isFounder: false,
+  },
+];
+
 // ─── Division summaries shown in the open positions card ─────────────────────
 const divisionRoles = [
   {
@@ -96,6 +150,21 @@ const divisionRoles = [
     examples: "Engineers, Growth, Product, Customer Success",
   },
 ];
+
+// ─── Initials avatar ──────────────────────────────────────────────────────────
+function Initials({ name }: { name: string }) {
+  const parts = name.trim().split(" ");
+  const letters = parts
+    .slice(0, 2)
+    .map((p) => p[0])
+    .join("")
+    .toUpperCase();
+  return (
+    <div className="bg-brand-navy flex h-full w-full items-center justify-center">
+      <span className="font-heading text-2xl font-bold text-white">{letters}</span>
+    </div>
+  );
+}
 
 export default function AboutPage() {
   return (
@@ -168,16 +237,16 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Founder / Team ─────────────────────────────────────────────────── */}
+      {/* ── Team ───────────────────────────────────────────────────────────── */}
       <section className="py-24" id="team">
         <div className="container-custom">
           <div className="mb-16 flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
             <div className="flex max-w-2xl flex-col gap-4">
               <h2 className="font-heading text-brand-navy text-4xl font-bold">The Team</h2>
               <p className="text-text-secondary text-lg">
-                Right now, Modulifyr is one person. One founder, one city, one conviction — that the
-                businesses around us deserve software built specifically for how they work. We're
-                actively building the team across all three divisions.
+                Six people building three divisions from the ground up. Everyone here is a
+                volunteer at this stage — including the founder. We're also actively expanding
+                across all three divisions.
               </p>
             </div>
             {/* Active hiring badge */}
@@ -192,105 +261,176 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2">
-            {/* Founder card */}
-            <article
-              aria-label="Rijan Mainali — Founder & Lead Engineer"
-              className="bg-brand-navy flex flex-col gap-6 rounded-3xl p-8"
-            >
-              <div className="flex items-center gap-5">
-                {/* ── FOUNDER PHOTO ── */}
-                <div className="ring-brand-orange/40 relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl ring-2">
-                  <Image
-                    src="/rijan-mainali.jpg"
-                    alt="Rijan Mainali, Founder of Modulifyr"
-                    fill
-                    sizes="80px"
-                    className="object-cover object-top"
-                    priority
-                  />
-                </div>
-                <div>
-                  <h3 className="font-heading text-xl font-bold text-white">Rijan Mainali</h3>
-                  <p className="text-brand-orange text-sm font-semibold">
-                    Founder &amp; Lead Engineer
-                  </p>
-                  <p className="text-text-muted mt-1 flex items-center gap-1 text-xs">
-                    <MapPin className="h-3 w-3" aria-hidden="true" />
-                    Birtamode, Jhapa, Nepal
-                  </p>
-                </div>
-              </div>
-
-              <p className="text-text-muted text-sm leading-relaxed">
-                Built Modulifyr from scratch — no funding, no team, just conviction and code. Every
-                system we ship is designed, architected, and delivered from Birtamode. The goal is
-                simple: give businesses in Nepal and beyond software that actually works the way
-                they work.
-              </p>
-
-              <div className="mt-2 grid grid-cols-3 gap-3">
-                {[
-                  { icon: Coffee, label: "Late nights" },
-                  { icon: Globe, label: "Global reach" },
-                  { icon: Zap, label: "Ships fast" },
-                ].map((item, i) => (
-                  <div
-                    key={i}
-                    className="rounded-xl border border-white/10 bg-white/5 p-3 text-center"
-                  >
-                    <item.icon
-                      className="text-brand-teal mx-auto mb-1.5 h-4 w-4"
-                      aria-hidden="true"
-                    />
-                    <p className="text-text-muted text-xs">{item.label}</p>
+          {/* ── Team grid ── */}
+          <div className="mb-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {teamMembers.map((member, idx) => (
+              <article
+                key={idx}
+                aria-label={`${member.fullName} — ${member.title}`}
+                className={`border-border-base group relative flex flex-col gap-5 rounded-3xl border bg-white p-7 transition-shadow hover:shadow-md ${member.isFounder ? "border-t-brand-orange border-t-4" : ""}`}
+              >
+                {/* Avatar + name row */}
+                <div className="flex items-center gap-4">
+                  <div className="ring-border-base relative h-14 w-14 shrink-0 overflow-hidden rounded-2xl ring-1">
+                    {member.isFounder ? (
+                      <Image
+                        src="/rijan-mainali.jpg"
+                        alt={`${member.fullName}, ${member.title} at Modulifyr`}
+                        fill
+                        sizes="56px"
+                        className="object-cover object-top"
+                        priority
+                      />
+                    ) : (
+                      <Initials name={member.name} />
+                    )}
                   </div>
-                ))}
-              </div>
-            </article>
+                  <div>
+                    {/* Name — clickable if portfolio exists, plain otherwise */}
+                    {member.portfolio ? (
+                      <a
+                        href={member.portfolio}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-heading text-brand-navy group/link inline-flex items-center gap-1.5 font-bold transition-colors hover:text-brand-orange"
+                      >
+                        {member.fullName}
+                        <ExternalLink className="h-3 w-3 opacity-0 transition-opacity group-hover/link:opacity-100" aria-hidden="true" />
+                      </a>
+                    ) : (
+                      <p className="font-heading text-brand-navy font-bold">{member.fullName}</p>
+                    )}
+                    <p className="text-brand-orange mt-0.5 text-xs font-semibold">
+                      {member.title}
+                    </p>
+                    {member.isFounder && (
+                      <p className="text-text-muted mt-0.5 flex items-center gap-1 text-xs">
+                        <MapPin className="h-3 w-3" aria-hidden="true" />
+                        Birtamode, Jhapa, Nepal
+                      </p>
+                    )}
+                  </div>
+                </div>
 
-            {/* Open positions — three divisions */}
-            <div className="bg-bg-secondary border-border-base rounded-3xl border p-8">
-              <p className="text-text-muted mb-5 text-xs font-bold tracking-widest uppercase">
-                Open Positions — Volunteer / Collaborator
-              </p>
-              <div className="space-y-3">
-                {divisionRoles.map((div, i) => (
-                  <div
-                    key={i}
-                    className="border-border-base flex items-start justify-between gap-4 rounded-xl border bg-white px-4 py-4"
-                  >
-                    <div className="flex items-start gap-3">
-                      <div className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${div.bg}`}>
-                        <div.icon className={`h-4 w-4 ${div.color}`} aria-hidden="true" />
-                      </div>
-                      <div>
-                        <p className="text-brand-navy text-sm font-bold">{div.division}</p>
-                        <p className="text-text-muted text-[10px] font-semibold tracking-wide uppercase">
-                          {div.tagline}
-                        </p>
-                        <p className="text-text-muted mt-1 text-xs">{div.examples}</p>
-                      </div>
-                    </div>
-                    <Link
-                      href="/careers"
-                      aria-label={`View openings in ${div.division}`}
-                      className="text-brand-orange flex shrink-0 items-center gap-1 text-xs font-bold hover:underline"
+                {/* Founder blurb */}
+                {member.isFounder && (
+                  <p className="text-text-muted text-xs leading-relaxed">
+                    Built Modulifyr from scratch — no funding, no team, just conviction and code.
+                    Every system we ship is designed, architected, and delivered from Birtamode.
+                  </p>
+                )}
+
+                {/* Action links */}
+                <div className="mt-auto flex items-center gap-3">
+                  {/* LinkedIn */}
+                  {member.linkedin ? (
+                    <a
+                      href={member.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${member.fullName} on LinkedIn`}
+                      className="border-border-base text-text-muted hover:border-brand-teal hover:text-brand-teal flex h-8 w-8 items-center justify-center rounded-lg border transition-colors"
                     >
-                      Apply <ArrowRight className="h-3 w-3" aria-hidden="true" />
-                    </Link>
+                      <Linkedin className="h-3.5 w-3.5" aria-hidden="true" />
+                    </a>
+                  ) : (
+                    <span
+                      aria-label="No LinkedIn profile"
+                      title="No LinkedIn profile"
+                      className="border-border-base text-text-muted flex h-8 w-8 cursor-not-allowed items-center justify-center rounded-lg border opacity-30"
+                    >
+                      <Linkedin className="h-3.5 w-3.5" aria-hidden="true" />
+                    </span>
+                  )}
+
+                  {/* Portfolio */}
+                  {member.portfolio ? (
+                    <a
+                      href={member.portfolio}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${member.fullName}'s portfolio`}
+                      className="border-border-base text-text-muted hover:border-brand-orange hover:text-brand-orange flex h-8 w-8 items-center justify-center rounded-lg border transition-colors"
+                    >
+                      <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+                    </a>
+                  ) : (
+                    <span
+                      aria-label="No portfolio"
+                      title="No portfolio"
+                      className="border-border-base text-text-muted flex h-8 w-8 cursor-not-allowed items-center justify-center rounded-lg border opacity-30"
+                    >
+                      <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+                    </span>
+                  )}
+
+                  {/* Founder extras */}
+                  {member.isFounder && (
+                    <div className="ml-auto grid grid-cols-3 gap-2">
+                      {[
+                        { icon: Coffee, label: "Late nights" },
+                        { icon: Globe, label: "Global reach" },
+                        { icon: Zap, label: "Ships fast" },
+                      ].map((item, i) => (
+                        <div
+                          key={i}
+                          className="border-border-base rounded-lg border bg-white/60 p-2 text-center"
+                        >
+                          <item.icon
+                            className="text-brand-teal mx-auto mb-0.5 h-3 w-3"
+                            aria-hidden="true"
+                          />
+                          <p className="text-text-muted text-[9px] leading-tight">{item.label}</p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+
+          {/* ── Open positions card ── */}
+          <div className="bg-bg-secondary border-border-base rounded-3xl border p-8">
+            <p className="text-text-muted mb-5 text-xs font-bold tracking-widest uppercase">
+              Open Positions — Volunteer / Collaborator
+            </p>
+            <div className="space-y-3">
+              {divisionRoles.map((div, i) => (
+                <div
+                  key={i}
+                  className="border-border-base flex items-start justify-between gap-4 rounded-xl border bg-white px-4 py-4"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${div.bg}`}>
+                      <div.icon className={`h-4 w-4 ${div.color}`} aria-hidden="true" />
+                    </div>
+                    <div>
+                      <p className="text-brand-navy text-sm font-bold">{div.division}</p>
+                      <p className="text-text-muted text-[10px] font-semibold tracking-wide uppercase">
+                        {div.tagline}
+                      </p>
+                      <p className="text-text-muted mt-1 text-xs">{div.examples}</p>
+                    </div>
                   </div>
-                ))}
-              </div>
-              <p className="text-text-muted mt-4 text-xs leading-relaxed">
-                All positions are unpaid volunteer roles at this stage. Full role list and
-                application on the{" "}
-                <Link href="/careers" className="text-brand-orange font-semibold hover:underline">
-                  careers page
-                </Link>
-                .
-              </p>
+                  <Link
+                    href="/careers"
+                    aria-label={`View openings in ${div.division}`}
+                    className="text-brand-orange flex shrink-0 items-center gap-1 text-xs font-bold hover:underline"
+                  >
+                    Apply <ArrowRight className="h-3 w-3" aria-hidden="true" />
+                  </Link>
+                </div>
+              ))}
             </div>
+            <p className="text-text-muted mt-4 text-xs leading-relaxed">
+              All positions are unpaid volunteer roles at this stage. Full role list and
+              application on the{" "}
+              <Link href="/careers" className="text-brand-orange font-semibold hover:underline">
+                careers page
+              </Link>
+              .
+            </p>
           </div>
         </div>
       </section>
