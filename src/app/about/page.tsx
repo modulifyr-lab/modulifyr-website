@@ -85,7 +85,7 @@ const teamMembers = [
     name: "Aadash L",
     fullName: "Aadash L",
     title: "Backend Engineer",
-    linkedin: null,
+    linkedin: "https://www.linkedin.com/in/aadesh-limbu-b637a8414",
     portfolio: null,
     isFounder: false,
   },
