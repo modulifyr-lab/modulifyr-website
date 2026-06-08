@@ -117,7 +117,7 @@ const teamMembers = [
     name: "Sumina L",
     fullName: "Sumina L",
     title: "UI/UX Artist",
-    linkedin: null,
+    linkedin: "https://www.linkedin.com/in/sumina-laksam29",
     portfolio: null,
     isFounder: false,
   },
