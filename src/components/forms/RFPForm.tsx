@@ -18,42 +18,27 @@ import {
 
 const industries = ["Education", "Commerce", "Healthcare", "IT", "Retail", "Services", "Other"];
 
-// ─── Project types = the 8 packages from pricing-packaging.md ────────────────
+// ─── Project types = the 3 active packages + coming soon ────────────────
 const projectTypes = [
   "Strategy Sprint (Discovery) — 1–2 weeks",
   "Launch Kit (Static Website) — 1–3 weeks",
-  "Product MVP (Web App) — 4–10 weeks",
-  "Internal Ops System (Internal Tool) — 3–8 weeks",
   "Automation Layer (Integrations & Automation) — 1–6 weeks",
-  "Modernization Sprint (Legacy Refactoring) — 4–16 weeks",
-  "Platform Setup (Infrastructure & SRE) — 1–4 weeks",
-  "Engineering Retainer (Dedicated Team) — Monthly",
-  "Not Sure Yet — Help me decide",
+  "Not sure yet — help me decide",
 ];
 
-// ─── Budget options aligned to the 8 packages ────────────────────────────────
+// ─── Budget options aligned to the 3 active packages ────────────────────────────────
 const budgetsNepal = [
-  "NPR 2,00,000 – 6,60,000 · Strategy Sprint (Discovery)",
-  "NPR 3,30,000 – 10,60,000 · Launch Kit (Static Website)",
-  "NPR 10,60,000 – 39,80,000 · Internal Ops System",
-  "NPR 4,00,000 – 26,50,000 · Automation Layer",
-  "NPR 6,60,000 – 33,20,000 · Platform Setup (Infrastructure)",
-  "NPR 15,90,000 – 59,60,000 · Product MVP (Web App)",
-  "NPR 19,90,000 – 1,06,00,000+ · Modernization Sprint",
-  "NPR 5,30,000 – 23,90,000+ /mo · Engineering Retainer",
-  "Not Sure Yet",
+  "NPR 40,000 – 1,05,000 · Strategy Sprint (Discovery)",
+  "NPR 10,000 – 90,000 · Launch Kit (Static Website)",
+  "NPR 40,000 – 2,65,000 · Automation Layer",
+  "Not sure yet",
 ];
 
 const budgetsInternational = [
-  "$1,500 – $5,000 · Strategy Sprint (Discovery)",
-  "$2,500 – $8,000 · Launch Kit (Static Website)",
-  "$8,000 – $30,000 · Internal Ops System",
-  "$3,000 – $20,000 · Automation Layer",
-  "$5,000 – $25,000 · Platform Setup (Infrastructure)",
-  "$12,000 – $45,000 · Product MVP (Web App)",
-  "$15,000 – $80,000+ · Modernization Sprint",
-  "$4,000 – $18,000+ /mo · Engineering Retainer",
-  "Not Sure Yet",
+  "$300 – $800 · Strategy Sprint (Discovery)",
+  "$80 – $700 · Launch Kit (Static Website)",
+  "$300 – $2,000 · Automation Layer",
+  "Not sure yet",
 ];
 
 interface FormState {
@@ -472,24 +457,14 @@ export function RFPForm() {
                 <div className="space-y-2">
                   {(isNepal
                     ? [
-                        { name: "Strategy Sprint", price: "NPR 2L – 6.6L" },
-                        { name: "Launch Kit", price: "NPR 3.3L – 10.6L" },
-                        { name: "Internal Ops System", price: "NPR 10.6L – 39.8L" },
-                        { name: "Automation Layer", price: "NPR 4L – 26.5L" },
-                        { name: "Platform Setup", price: "NPR 6.6L – 33.2L" },
-                        { name: "Product MVP", price: "NPR 15.9L – 59.6L" },
-                        { name: "Modernization Sprint", price: "NPR 19.9L – 1Cr+" },
-                        { name: "Engineering Retainer", price: "NPR 5.3L – 23.9L /mo" },
+                        { name: "Strategy Sprint", price: "NPR 40,000 – 1,05,000" },
+                        { name: "Launch Kit", price: "NPR 10,000 – 90,000" },
+                        { name: "Automation Layer", price: "NPR 40,000 – 2,65,000" },
                       ]
                     : [
-                        { name: "Strategy Sprint", price: "$1,500 – $5,000" },
-                        { name: "Launch Kit", price: "$2,500 – $8,000" },
-                        { name: "Internal Ops System", price: "$8,000 – $30,000" },
-                        { name: "Automation Layer", price: "$3,000 – $20,000" },
-                        { name: "Platform Setup", price: "$5,000 – $25,000" },
-                        { name: "Product MVP", price: "$12,000 – $45,000" },
-                        { name: "Modernization Sprint", price: "$15,000 – $80,000+" },
-                        { name: "Engineering Retainer", price: "$4,000 – $18,000+ /mo" },
+                        { name: "Strategy Sprint", price: "$300 – $800" },
+                        { name: "Launch Kit", price: "$80 – $700" },
+                        { name: "Automation Layer", price: "$300 – $2,000" },
                       ]
                   ).map((pkg) => (
                     <div

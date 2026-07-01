@@ -29,8 +29,8 @@ const packagesNepal = [
     icon: Search,
     internalName: "Discovery Sprint",
     clientName: "Strategy Sprint",
-    price: "NPR 2,00,000 – 6,60,000",
-    subprice: "approx. $1,500–$5,000",
+    price: "NPR 40,000 – 1,05,000",
+    subprice: "approx. $300–$800",
     duration: "1–2 Weeks",
     desc: "For new clients, unclear scope, architecture decisions, and system rescues.",
     features: [
@@ -39,16 +39,18 @@ const packagesNepal = [
       "Scope definition & roadmap",
       "Tech stack recommendation",
     ],
-    cta: "Start Discovery",
+    cta: "Read More",
+    link: "/services/strategy-sprint",
     highlight: false,
     bestFor: "New projects / unclear scope",
+    comingSoon: false,
   },
   {
     icon: Globe,
     internalName: "Static Website Package",
     clientName: "Launch Kit",
-    price: "NPR 3,30,000 – 10,60,000",
-    subprice: "approx. $2,500–$8,000",
+    price: "NPR 10,000 – 90,000",
+    subprice: "approx. $80–$700",
     duration: "1–3 Weeks",
     desc: "Landing pages, marketing sites, brochure sites, and documentation.",
     features: [
@@ -57,9 +59,11 @@ const packagesNepal = [
       "Content editing flow",
       "Cloudflare Pages / Vercel deploy",
     ],
-    cta: "Request Launch Kit",
+    cta: "Read More",
+    link: "/services/launch-kit",
     highlight: false,
     bestFor: "Marketing & content sites",
+    comingSoon: false,
   },
   {
     icon: Layers,
@@ -78,6 +82,7 @@ const packagesNepal = [
     cta: "Build Your MVP",
     highlight: true,
     bestFor: "SaaS & product teams",
+    comingSoon: true,
   },
   {
     icon: LayoutGrid,
@@ -96,13 +101,14 @@ const packagesNepal = [
     cta: "Build Internal Tool",
     highlight: false,
     bestFor: "Operational teams",
+    comingSoon: true,
   },
   {
     icon: Settings,
     internalName: "Integrations & Automation",
     clientName: "Automation Layer",
-    price: "NPR 4,00,000 – 26,50,000",
-    subprice: "approx. $3,000–$20,000",
+    price: "NPR 40,000 – 2,65,000",
+    subprice: "approx. $300–$2,000",
     duration: "1–6 Weeks",
     desc: "API development, workflow automation, data sync, and system-to-system connections.",
     features: [
@@ -111,9 +117,11 @@ const packagesNepal = [
       "Monitoring & error handling",
       "Third-party integrations",
     ],
-    cta: "Automate Workflows",
+    cta: "Read More",
+    link: "/services/automation-layer",
     highlight: false,
     bestFor: "Integration-focused",
+    comingSoon: false,
   },
   {
     icon: RefreshCw,
@@ -132,6 +140,7 @@ const packagesNepal = [
     cta: "Modernise Your Stack",
     highlight: false,
     bestFor: "Legacy systems",
+    comingSoon: true,
   },
   {
     icon: Cloud,
@@ -150,6 +159,7 @@ const packagesNepal = [
     cta: "Set Up Platform",
     highlight: false,
     bestFor: "Cloud-native teams",
+    comingSoon: true,
   },
   {
     icon: Users,
@@ -168,6 +178,7 @@ const packagesNepal = [
     cta: "Start Retainer",
     highlight: false,
     bestFor: "Ongoing product work",
+    comingSoon: true,
   },
 ];
 
@@ -176,7 +187,7 @@ const packagesInternational = [
     icon: Search,
     internalName: "Discovery Sprint",
     clientName: "Strategy Sprint",
-    price: "$1,500 – $5,000",
+    price: "$300 – $800",
     subprice: "USD · fixed fee",
     duration: "1–2 Weeks",
     desc: "For new clients, unclear scope, architecture decisions, and system rescues.",
@@ -186,15 +197,17 @@ const packagesInternational = [
       "Scope definition & roadmap",
       "Tech stack recommendation",
     ],
-    cta: "Start Discovery",
+    cta: "Read More",
+    link: "/services/strategy-sprint",
     highlight: false,
     bestFor: "New projects / unclear scope",
+    comingSoon: false,
   },
   {
     icon: Globe,
     internalName: "Static Website Package",
     clientName: "Launch Kit",
-    price: "$2,500 – $8,000",
+    price: "$80 – $700",
     subprice: "USD · fixed fee",
     duration: "1–3 Weeks",
     desc: "Landing pages, marketing sites, brochure sites, and documentation.",
@@ -204,9 +217,11 @@ const packagesInternational = [
       "Content editing flow",
       "Cloudflare Pages / Vercel deploy",
     ],
-    cta: "Request Launch Kit",
+    cta: "Read More",
+    link: "/services/launch-kit",
     highlight: false,
     bestFor: "Marketing & content sites",
+    comingSoon: false,
   },
   {
     icon: Layers,
@@ -225,6 +240,7 @@ const packagesInternational = [
     cta: "Build Your MVP",
     highlight: true,
     bestFor: "SaaS & product teams",
+    comingSoon: true,
   },
   {
     icon: LayoutGrid,
@@ -243,12 +259,13 @@ const packagesInternational = [
     cta: "Build Internal Tool",
     highlight: false,
     bestFor: "Operational teams",
+    comingSoon: true,
   },
   {
     icon: Settings,
     internalName: "Integrations & Automation",
     clientName: "Automation Layer",
-    price: "$3,000 – $20,000",
+    price: "$300 – $2,000",
     subprice: "USD · fixed fee",
     duration: "1–6 Weeks",
     desc: "API development, workflow automation, data sync, and system-to-system connections.",
@@ -258,9 +275,11 @@ const packagesInternational = [
       "Monitoring & error handling",
       "Third-party integrations",
     ],
-    cta: "Automate Workflows",
+    cta: "Read More",
+    link: "/services/automation-layer",
     highlight: false,
     bestFor: "Integration-focused",
+    comingSoon: false,
   },
   {
     icon: RefreshCw,
@@ -279,6 +298,7 @@ const packagesInternational = [
     cta: "Modernise Your Stack",
     highlight: false,
     bestFor: "Legacy systems",
+    comingSoon: true,
   },
   {
     icon: Cloud,
@@ -297,6 +317,7 @@ const packagesInternational = [
     cta: "Set Up Platform",
     highlight: false,
     bestFor: "Cloud-native teams",
+    comingSoon: true,
   },
   {
     icon: Users,
@@ -315,6 +336,7 @@ const packagesInternational = [
     cta: "Start Retainer",
     highlight: false,
     bestFor: "Ongoing product work",
+    comingSoon: true,
   },
 ];
 
@@ -412,12 +434,25 @@ export default function PricingPage() {
               <Card
                 key={idx}
                 className={`relative flex h-full flex-col transition-all ${
-                  pkg.highlight
+                  pkg.highlight && !pkg.comingSoon
                     ? "border-brand-orange z-10 shadow-xl hover:shadow-2xl lg:col-span-2"
                     : "hover:border-brand-navy"
                 }`}
               >
-                {pkg.highlight && (
+                {/* Coming Soon overlay */}
+                {pkg.comingSoon && (
+                  <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 rounded-2xl bg-white/85 backdrop-blur-[2px]">
+                    <span className="bg-brand-navy rounded-full px-4 py-1.5 text-xs font-bold tracking-widest text-white uppercase">
+                      Coming Soon
+                    </span>
+                    <p className="text-text-muted max-w-[160px] text-center text-xs leading-relaxed">
+                      On our roadmap. Reach out to be notified when it launches.
+                    </p>
+                  </div>
+                )}
+
+                {/* Most Popular badge — only when available */}
+                {pkg.highlight && !pkg.comingSoon && (
                   <div className="bg-brand-orange absolute top-0 right-8 -translate-y-1/2 rounded-full px-3 py-1 text-[10px] font-bold tracking-widest text-white uppercase">
                     Most Popular
                   </div>
@@ -456,15 +491,19 @@ export default function PricingPage() {
                   ))}
                 </ul>
 
-                <Link href="/request-proposal" className="w-full">
-                  <Button
-                    variant={pkg.highlight ? "primary" : "outline"}
-                    className="group w-full justify-between text-sm"
-                  >
-                    {pkg.cta}
-                    <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                </Link>
+                {pkg.comingSoon ? (
+                  <div className="w-full"></div>
+                ) : (
+                  <Link href={pkg.link || "/request-proposal"} className="w-full">
+                    <Button
+                      variant={pkg.highlight && !pkg.comingSoon ? "primary" : "outline"}
+                      className="group w-full justify-between text-sm"
+                    >
+                      {pkg.cta}
+                      <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </Button>
+                  </Link>
+                )}
               </Card>
             ))}
           </div>

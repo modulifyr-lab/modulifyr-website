@@ -15,6 +15,7 @@ export const translations: Record<Language, Record<string, string>> = {
   en: {
     // Navbar
     "nav.services": "Services",
+    "nav.pricing": "Pricing",
     "nav.process": "Process",
     "nav.industries": "Industries",
     "nav.work": "Work",
@@ -121,6 +122,7 @@ export const translations: Record<Language, Record<string, string>> = {
 
   ne: {
     "nav.services": "सेवाहरू",
+    "nav.pricing": "मूल्य निर्धारण",
     "nav.process": "प्रक्रिया",
     "nav.industries": "उद्योगहरू",
     "nav.work": "काम",

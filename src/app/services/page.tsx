@@ -19,6 +19,7 @@ import {
   Download,
   LayoutGrid,
   Wrench,
+  ChevronRight,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -37,9 +38,11 @@ const services = [
       "Delivery roadmap",
     ],
     timeline: "1–2 weeks",
-    price: "$1,500–$5,000",
-    size: "New clients / unclear scope",
+    price: "$300–$800",
+    size: "New projects / unclear scope",
     badge: null,
+    comingSoon: false,
+    link: "/services/strategy-sprint",
   },
   {
     icon: Globe,
@@ -55,45 +58,11 @@ const services = [
       "Global CDN deployment",
     ],
     timeline: "1–3 weeks",
-    price: "$2,500–$8,000",
+    price: "$80–$700",
     size: "Marketing & content sites",
     badge: null,
-  },
-  {
-    icon: Layers,
-    color: "text-brand-orange",
-    bg: "bg-brand-orange/10",
-    internalName: "Web App MVP Package",
-    clientName: "Product MVP",
-    desc: "SaaS MVPs, portals, dashboards, and client-facing systems. Includes authentication, database setup, core workflows, admin screens, a QA pass, and launch support.",
-    deliverables: [
-      "Auth & database setup",
-      "Core workflows & admin panel",
-      "QA pass & launch support",
-      "Production deployment",
-    ],
-    timeline: "4–10 weeks",
-    price: "$12,000–$45,000",
-    size: "SaaS & product teams",
-    badge: "Most Popular",
-  },
-  {
-    icon: LayoutGrid,
-    color: "text-brand-teal",
-    bg: "bg-brand-teal/10",
-    internalName: "Internal Tool Package",
-    clientName: "Internal Ops System",
-    desc: "Operations systems, approval flows, HR tools, and CRM-like internal apps. Roles and permissions, CRUD workflows, reporting screens, audit trails, and integrations.",
-    deliverables: [
-      "Roles & permissions",
-      "CRUD workflows & reporting",
-      "Audit trail basics",
-      "Integrations when needed",
-    ],
-    timeline: "3–8 weeks",
-    price: "$8,000–$30,000",
-    size: "Operational teams",
-    badge: null,
+    comingSoon: false,
+    link: "/services/launch-kit",
   },
   {
     icon: Settings,
@@ -109,9 +78,39 @@ const services = [
       "System-to-system connections",
     ],
     timeline: "1–6 weeks",
-    price: "$3,000–$20,000",
+    price: "$300–$2,000",
     size: "Integration-focused",
     badge: null,
+    comingSoon: false,
+    link: "/services/automation-layer",
+  },
+  {
+    icon: Layers,
+    color: "text-brand-orange",
+    bg: "bg-brand-orange/10",
+    internalName: "Web App MVP Package",
+    clientName: "Product MVP",
+    desc: "SaaS MVPs, portals, dashboards, and client-facing systems.",
+    deliverables: [],
+    timeline: "",
+    price: "Coming Soon",
+    size: "SaaS & product teams",
+    badge: null,
+    comingSoon: true,
+  },
+  {
+    icon: LayoutGrid,
+    color: "text-brand-teal",
+    bg: "bg-brand-teal/10",
+    internalName: "Internal Tool Package",
+    clientName: "Internal Ops System",
+    desc: "Operations systems, approval flows, HR tools, and CRM-like internal apps.",
+    deliverables: [],
+    timeline: "",
+    price: "Coming Soon",
+    size: "Operational teams",
+    badge: null,
+    comingSoon: true,
   },
   {
     icon: RefreshCw,
@@ -119,17 +118,13 @@ const services = [
     bg: "bg-brand-teal/10",
     internalName: "Modernization / Refactoring Package",
     clientName: "Modernization Sprint",
-    desc: "Legacy systems, performance issues, cloud migration, and modular cleanup. Code audit, refactor plan, modularisation, performance optimisation, and risk reduction — with zero downtime.",
-    deliverables: [
-      "Code audit & refactor plan",
-      "Modularisation & migration steps",
-      "Performance optimisation",
-      "Risk reduction documentation",
-    ],
-    timeline: "4–16 weeks",
-    price: "$15,000–$80,000+",
+    desc: "Legacy systems, performance issues, cloud migration, and modular cleanup.",
+    deliverables: [],
+    timeline: "",
+    price: "Coming Soon",
     size: "Orgs with legacy debt",
     badge: null,
+    comingSoon: true,
   },
   {
     icon: Cloud,
@@ -137,17 +132,13 @@ const services = [
     bg: "bg-brand-orange/10",
     internalName: "Infrastructure & SRE Setup",
     clientName: "Platform Setup",
-    desc: "Cloud setup, CI/CD, security hardening, and release automation. Includes cloud environment setup, infrastructure as code, logging, monitoring, and a secrets/security baseline.",
-    deliverables: [
-      "Cloud environment & IaC (Terraform)",
-      "CI/CD pipelines (GitHub Actions)",
-      "Logging, monitoring & alerting",
-      "Secrets & security baseline",
-    ],
-    timeline: "1–4 weeks",
-    price: "$5,000–$25,000",
+    desc: "Cloud setup, CI/CD, security hardening, and release automation.",
+    deliverables: [],
+    timeline: "",
+    price: "Coming Soon",
     size: "Cloud-native teams",
     badge: null,
+    comingSoon: true,
   },
   {
     icon: Users,
@@ -155,17 +146,13 @@ const services = [
     bg: "bg-brand-teal/10",
     internalName: "Dedicated Product Team Retainer",
     clientName: "Engineering Retainer",
-    desc: "For clients that want ongoing engineering capacity. Fixed monthly capacity, codebase ownership continuity, roadmap execution, and monthly reporting — no feature-level SOW every time.",
-    deliverables: [
-      "Fixed monthly engineering capacity",
-      "Codebase ownership continuity",
-      "Roadmap execution & reporting",
-      "1 Senior Full-Stack + 1 specialist",
-    ],
-    timeline: "Monthly · 3-month min",
-    price: "$4,000–$18,000+ /mo",
+    desc: "For clients that want ongoing engineering capacity.",
+    deliverables: [],
+    timeline: "",
+    price: "Coming Soon",
     size: "Startups & scale-ups",
-    badge: "Market Gap Offering",
+    badge: null,
+    comingSoon: true,
   },
 ];
 
@@ -235,7 +222,19 @@ export default function ServicesPage() {
                 key={idx}
                 className={`hover:border-t-brand-orange relative flex h-full flex-col border-t-4 border-t-transparent ${service.badge ? "ring-brand-orange/30 ring-2" : ""}`}
               >
-                {service.badge && (
+                {/* Coming Soon overlay */}
+                {service.comingSoon && (
+                  <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 rounded-2xl bg-white/85 backdrop-blur-[2px]">
+                    <span className="bg-brand-navy rounded-full px-4 py-1.5 text-[10px] font-bold tracking-widest text-white uppercase">
+                      Coming Soon
+                    </span>
+                    <p className="text-text-muted max-w-[160px] text-center text-xs leading-relaxed">
+                      On our roadmap. Reach out to be notified when it launches.
+                    </p>
+                  </div>
+                )}
+
+                {service.badge && !service.comingSoon && (
                   <div className="bg-brand-orange absolute top-0 left-8 -translate-y-1/2 rounded-full px-3 py-1 text-[10px] font-bold tracking-widest text-white uppercase">
                     {service.badge}
                   </div>
@@ -257,32 +256,41 @@ export default function ServicesPage() {
 
                 <CardDescription className="mb-6 flex-grow">{service.desc}</CardDescription>
 
-                <div className="border-border-base space-y-5 border-t pt-6">
-                  <div>
-                    <span className="text-text-muted mb-2 block text-xs font-bold tracking-wider uppercase">
-                      Key Deliverables
-                    </span>
-                    <ul className="grid grid-cols-1 gap-1.5">
-                      {service.deliverables.map((item, i) => (
-                        <li key={i} className="text-text-secondary flex items-start gap-2 text-sm">
-                          <Zap className="text-brand-gold mt-0.5 h-3 w-3 shrink-0" /> {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="flex items-center justify-between">
+                {!service.comingSoon && (
+                  <div className="border-border-base space-y-5 border-t pt-6">
                     <div>
-                      <p className="text-brand-orange font-heading text-lg font-bold">
-                        {service.price}
-                      </p>
-                      <p className="text-text-muted text-xs">{service.timeline}</p>
+                      <span className="text-text-muted mb-2 block text-xs font-bold tracking-wider uppercase">
+                        Key Deliverables
+                      </span>
+                      <ul className="grid grid-cols-1 gap-1.5">
+                        {service.deliverables.map((item, i) => (
+                          <li key={i} className="text-text-secondary flex items-start gap-2 text-sm">
+                            <Zap className="text-brand-gold mt-0.5 h-3 w-3 shrink-0" /> {item}
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                    <span className="bg-bg-secondary text-brand-navy rounded px-2 py-1 text-xs font-semibold">
-                      {service.size}
-                    </span>
+
+                    <div className="flex items-center justify-between mb-4">
+                      <div>
+                        <p className="text-brand-orange font-heading text-lg font-bold">
+                          {service.price}
+                        </p>
+                        <p className="text-text-muted text-xs">{service.timeline}</p>
+                      </div>
+                      <span className="bg-bg-secondary text-brand-navy rounded px-2 py-1 text-xs font-semibold">
+                        {service.size}
+                      </span>
+                    </div>
+
+                    <Link href={service.link || "/request-proposal"} className="w-full">
+                      <Button variant="outline" className="group w-full justify-between text-sm">
+                        Read More
+                        <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      </Button>
+                    </Link>
                   </div>
-                </div>
+                )}
               </Card>
             ))}
           </div>
