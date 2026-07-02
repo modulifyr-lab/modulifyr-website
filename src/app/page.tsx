@@ -336,7 +336,7 @@ export default function Home() {
                     </span>
                   ))}
                 </div>
-                <Button className="w-fit">View Project Case Study</Button>
+                <Link href="/work"><Button className="w-fit">View Project Case Study</Button></Link>
                 <p className="text-text-muted text-sm italic">
                   Additional enterprise systems available under NDA.
                 </p>

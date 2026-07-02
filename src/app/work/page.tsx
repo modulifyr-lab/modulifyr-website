@@ -220,8 +220,9 @@ export default function WorkPage() {
               </h2>
               <p className="text-text-muted leading-relaxed">
                 Most Nepal IT firms sell project-based work. We also offer a dedicated team model:
-                2–3 engineers embedded in your product long-term, operating as an extension of your
-                own team. Monthly retainer, no re-scoping overhead, no handoff risk.
+                a focused engineering team embedded in your product long-term, operating as an
+                extension of your own team. Monthly retainer, no re-scoping overhead, no handoff
+                risk
               </p>
               <p className="text-text-muted text-sm leading-relaxed">
                 Best suited for startups and scale-ups that have a working product and need reliable
@@ -231,7 +232,7 @@ export default function WorkPage() {
                 {[
                   { label: "Engagement type", val: "Monthly retainer" },
                   { label: "Minimum term", val: "3 months" },
-                  { label: "Team size", val: "2–4 engineers" },
+                  { label: "Team size", val: "Scoped per project" },,
                   { label: "Onboarding", val: "2 weeks" },
                 ].map((item, i) => (
                   <div key={i} className="rounded-xl border border-white/10 bg-white/5 p-4">

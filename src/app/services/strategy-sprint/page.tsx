@@ -1,52 +1,99 @@
 "use client";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
-import { CheckCircle2, Clock, Search, ChevronRight } from "lucide-react";
+import {
+  CheckCircle2,
+  Clock,
+  Search,
+  ChevronRight,
+  XCircle,
+  AlertCircle,
+  FileText,
+  Map,
+  Layers,
+} from "lucide-react";
 import Link from "next/link";
 import { useRegion } from "@/components/RegionProvider";
 
 const tiers = [
   {
-    name: "Tier 1",
+    name: "Tier 1 — Basic Scoping",
     priceNepal: "NPR 40,000 – 66,000",
     priceInternational: "$300 – $500",
-    duration: "3–5 days",
-    description: "Single scope, ideal for small projects with clear objectives.",
-    features: [
-      "1 async workshop",
-      "Basic requirements document",
-      "High-level roadmap",
-      "Scope definition",
+    duration: "3–5 business days",
+    bestFor: "Single product or feature with a relatively clear scope",
+    description:
+      "You have a rough idea of what you need and want it structured before committing to a build. We scope it, document it, and hand you a roadmap you can act on.",
+    included: [
+      "1 async discovery session — written brief or single call",
+      "Requirements document covering goals, constraints, and assumptions",
+      "High-level tech stack recommendation with reasoning",
+      "Simple phased roadmap — phases only, no hour estimates",
+    ],
+    notIncluded: [
+      "Architecture diagrams or system blueprints",
+      "Risk analysis document",
+      "Multiple stakeholder sessions",
     ],
     highlight: false,
   },
   {
-    name: "Tier 2",
+    name: "Tier 2 — Full Discovery",
     priceNepal: "NPR 66,000 – 86,000",
     priceInternational: "$500 – $650",
     duration: "1 week",
-    description: "Multi-feature scope, perfect for medium-sized projects.",
-    features: [
-      "2–3 calls",
-      "Architecture blueprint",
-      "Phased roadmap with estimates",
-      "Tech stack recommendation",
+    bestFor: "Multi-feature projects or systems with 2–4 moving parts",
+    description:
+      "Scope is partially defined but needs a proper blueprint before building. We run structured sessions, map the architecture, and produce a roadmap any developer can build from.",
+    included: [
+      "2–3 structured discovery calls or workshops",
+      "Detailed requirements breakdown per feature area",
+      "Architecture blueprint with system and component diagram",
+      "Tech stack recommendation with justification",
+      "Phased roadmap with rough time estimates per phase",
+    ],
+    notIncluded: [
+      "Risk analysis document",
+      "Legacy system audit",
+      "More than 3 stakeholder sessions",
     ],
     highlight: true,
   },
   {
-    name: "Tier 3",
+    name: "Tier 3 — Complex Architecture",
     priceNepal: "NPR 86,000 – 1,05,000",
     priceInternational: "$650 – $800",
     duration: "1–2 weeks",
-    description: "Large/unclear/legacy scope, comprehensive discovery.",
-    features: [
-      "Full workshop series",
-      "Complete architecture + risk analysis",
-      "Integration mapping",
-      "Detailed delivery plan",
+    bestFor: "Large, unclear, legacy, or multi-team scope",
+    description:
+      "You are dealing with a large unknown — multiple systems, legacy constraints, or competing stakeholder requirements. We map all of it before a single line of code.",
+    included: [
+      "Full workshop series — 3 to 5 sessions across stakeholders",
+      "Complete architecture blueprint",
+      "Integration mapping across all connected systems",
+      "Risk analysis and mitigation plan",
+      "Detailed phased roadmap with dependencies and sequencing",
     ],
+    notIncluded: [],
     highlight: false,
+  },
+];
+
+const whatYouOwnAfter = [
+  {
+    icon: FileText,
+    label: "Requirements document",
+    desc: "Written, structured, shareable with any team or investor",
+  },
+  {
+    icon: Map,
+    label: "Delivery roadmap",
+    desc: "Phased plan with clear sequencing — not a vague list of features",
+  },
+  {
+    icon: Layers,
+    label: "Architecture blueprint",
+    desc: "Tier 2 and 3 only — system diagram you own and can build from",
   },
 ];
 
@@ -70,8 +117,48 @@ export default function StrategySprintPage() {
               Strategy Sprint
             </h1>
             <p className="text-text-muted text-xl leading-relaxed">
-              Clarify your requirements, define your architecture, and get a clear roadmap before any build begins. Choose the tier that matches your project scope.
+              Most projects fail because scope was never properly defined. A Strategy Sprint gives
+              you a requirements document, architecture blueprint, and phased roadmap before any
+              code is written — so you know exactly what you are building and what it will cost.
             </p>
+            <div className="mt-8 flex flex-wrap gap-4">
+              <Link href="/request-proposal">
+                <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90">
+                  Request a Strategy Sprint
+                </Button>
+              </Link>
+              <Link href="/contact">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-white/30 text-white hover:bg-white/10"
+                >
+                  Ask a Question First
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* What you own after */}
+      <section className="bg-bg-secondary border-border-base border-b py-12">
+        <div className="container-custom">
+          <p className="text-text-muted mb-8 text-xs font-bold tracking-widest uppercase">
+            What you own after the sprint
+          </p>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            {whatYouOwnAfter.map((item, i) => (
+              <div key={i} className="flex gap-4">
+                <div className="bg-brand-orange/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
+                  <item.icon className="text-brand-orange h-5 w-5" />
+                </div>
+                <div>
+                  <h3 className="text-brand-navy mb-1 text-sm font-bold">{item.label}</h3>
+                  <p className="text-text-secondary text-sm leading-relaxed">{item.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -79,76 +166,157 @@ export default function StrategySprintPage() {
       {/* Tiers */}
       <section className="py-24">
         <div className="container-custom">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-            {tiers.map((tier, idx) => (
+          <div className="mb-12">
+            <h2 className="font-heading text-brand-navy mb-3 text-3xl font-bold">
+              Three Tiers — Priced by Complexity
+            </h2>
+            <p className="text-text-secondary max-w-2xl text-sm leading-relaxed">
+              Price increases with scope complexity and deliverable count. Not sure which fits?
+              Describe your project in a contact message — we will tell you.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+            {tiers.map((tier, i) => (
               <Card
-                key={idx}
-                className={`relative flex h-full flex-col ${
+                key={i}
+                className={`relative flex flex-col gap-5 ${
                   tier.highlight
-                    ? "border-brand-orange ring-brand-orange/20 ring-2"
-                    : "hover:border-brand-navy"
+                    ? "border-brand-orange shadow-xl ring-1 ring-brand-orange/20"
+                    : ""
                 }`}
               >
                 {tier.highlight && (
-                  <div className="bg-brand-orange absolute top-0 right-8 -translate-y-1/2 rounded-full px-3 py-1 text-[10px] font-bold tracking-widest text-white uppercase">
-                    Most Popular
+                  <div className="bg-brand-orange absolute top-0 left-8 -translate-y-1/2 rounded-full px-3 py-1 text-[10px] font-bold tracking-widest text-white uppercase">
+                    Most Common
                   </div>
                 )}
 
-                <h3 className="font-heading text-brand-navy mb-2 text-2xl font-bold">
-                  {tier.name}
-                </h3>
-
-                <div className="mb-4">
-                  <div className="font-heading text-brand-navy text-3xl font-bold">
+                <div>
+                  <h3 className="text-brand-navy mb-1 text-base font-bold">{tier.name}</h3>
+                  <div className="font-heading text-brand-orange text-2xl font-bold">
                     {isNepal ? tier.priceNepal : tier.priceInternational}
                   </div>
-                  <div className="text-brand-teal mt-1 flex items-center gap-1.5 text-sm font-semibold uppercase">
-                    <Clock className="h-4 w-4" /> {tier.duration}
+                  <div className="text-brand-teal mt-1 flex items-center gap-1.5 text-xs font-semibold uppercase">
+                    <Clock className="h-3 w-3" /> {tier.duration}
                   </div>
                 </div>
 
-                <p className="text-text-secondary mb-6 flex-grow text-sm leading-relaxed">
-                  {tier.description}
+                <p className="text-text-muted border-border-base border-t pt-3 text-xs font-semibold uppercase tracking-wider">
+                  Best for: {tier.bestFor}
                 </p>
 
-                <ul className="mb-8 space-y-3">
-                  {tier.features.map((feature, i) => (
-                    <li key={i} className="text-text-secondary flex items-start gap-2 text-sm">
-                      <CheckCircle2 className="text-brand-teal mt-0.5 h-5 w-5 shrink-0" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
+                <p className="text-text-secondary text-sm leading-relaxed">{tier.description}</p>
 
-                <Link href="/request-proposal" className="w-full">
-                  <Button
-                    variant={tier.highlight ? "primary" : "outline"}
-                    className="group w-full justify-between text-sm"
-                  >
-                    Get Started
-                    <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                </Link>
+                <div>
+                  <p className="text-brand-navy mb-3 text-xs font-bold uppercase tracking-widest">
+                    Included
+                  </p>
+                  <ul className="space-y-2">
+                    {tier.included.map((d, j) => (
+                      <li key={j} className="text-text-secondary flex items-start gap-2 text-sm">
+                        <CheckCircle2 className="text-brand-teal mt-0.5 h-4 w-4 shrink-0" />
+                        {d}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {tier.notIncluded.length > 0 && (
+                  <div>
+                    <p className="text-text-muted mb-3 text-xs font-bold uppercase tracking-widest">
+                      Not included
+                    </p>
+                    <ul className="space-y-2">
+                      {tier.notIncluded.map((d, j) => (
+                        <li key={j} className="text-text-muted flex items-start gap-2 text-xs">
+                          <XCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-gray-300" />
+                          {d}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                <div className="mt-auto pt-2">
+                  <Link href="/request-proposal" className="w-full">
+                    <Button
+                      variant={tier.highlight ? "primary" : "outline"}
+                      className="group w-full justify-between"
+                    >
+                      Request This Tier
+                      <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </Button>
+                  </Link>
+                </div>
               </Card>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-bg-secondary py-24">
+      {/* Third-party disclaimer */}
+      <section className="bg-bg-secondary py-12">
         <div className="container-custom">
-          <div className="flex flex-col items-center gap-8 text-center">
-            <h2 className="font-heading text-brand-navy text-3xl font-bold md:text-4xl">
-              Not sure which tier is right for you?
-            </h2>
-            <p className="text-text-secondary max-w-2xl text-lg leading-relaxed">
-              Reach out and we'll help you choose the perfect tier for your project.
+          <div className="border-border-base max-w-3xl rounded-2xl border bg-white p-8">
+            <div className="mb-4 flex items-start gap-3">
+              <AlertCircle className="text-brand-orange mt-0.5 h-5 w-5 shrink-0" />
+              <h3 className="text-brand-navy font-bold">What you are responsible for</h3>
+            </div>
+            <ul className="space-y-2 text-sm text-text-secondary">
+              <li className="flex items-start gap-2">
+                <ChevronRight className="text-brand-orange mt-0.5 h-4 w-4 shrink-0" />
+                Access to relevant stakeholders during the sprint window — delays on your end
+                extend the timeline
+              </li>
+              <li className="flex items-start gap-2">
+                <ChevronRight className="text-brand-orange mt-0.5 h-4 w-4 shrink-0" />
+                Any existing documentation, system diagrams, or business process docs you want
+                incorporated
+              </li>
+              <li className="flex items-start gap-2">
+                <ChevronRight className="text-brand-orange mt-0.5 h-4 w-4 shrink-0" />
+                Timely responses during discovery — a sprint cannot run one direction for days
+                then reverse
+              </li>
+            </ul>
+            <p className="text-text-muted border-border-base mt-6 border-t pt-4 text-xs leading-relaxed">
+              <strong className="text-brand-navy">
+                Third-party tool costs are entirely your responsibility.
+              </strong>{" "}
+              Modulifyr does not cover, pay for, or manage costs for any external platforms —
+              including but not limited to Vercel, Netlify, any domain registrar, n8n cloud,
+              Supabase, any SaaS subscription, or API usage fees. These are direct client costs,
+              billed to and owned by the client.
             </p>
-            <Link href="/contact">
-              <Button size="lg">Contact Us</Button>
-            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-24">
+        <div className="container-custom">
+          <div className="bg-brand-navy max-w-3xl rounded-3xl p-12 text-white">
+            <h2 className="font-heading mb-3 text-2xl font-bold">Not sure which tier fits?</h2>
+            <p className="text-text-muted mb-8 text-sm leading-relaxed">
+              Describe your project briefly. We will tell you which tier is appropriate and why —
+              no commitment required.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Link href="/contact">
+                <Button className="bg-brand-orange hover:bg-brand-orange/90">
+                  Describe Your Project
+                </Button>
+              </Link>
+              <Link href="/services">
+                <Button
+                  variant="outline"
+                  className="border-white/30 text-white hover:bg-white/10"
+                >
+                  Back to All Services
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>

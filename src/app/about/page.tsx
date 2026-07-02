@@ -244,9 +244,8 @@ export default function AboutPage() {
             <div className="flex max-w-2xl flex-col gap-4">
               <h2 className="font-heading text-brand-navy text-4xl font-bold">The Team</h2>
               <p className="text-text-secondary text-lg">
-                Six people building three divisions from the ground up. Everyone here is a
-                volunteer at this stage — including the founder. We're also actively expanding
-                across all three divisions.
+                Six people building three divisions from the ground up — consultancy, game studio,
+                and consumer software. Early stage, expanding across all three.
               </p>
             </div>
             {/* Active hiring badge */}

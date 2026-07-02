@@ -212,10 +212,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <RegionProvider>
             <LanguageProvider>
               <RegionModal />
-              <DevelopmentAlertModal />
               <Navbar />
               <main id="main-content" className="min-h-screen pt-20">
-                <StartupBanner />
                 {children}
               </main>
               <Footer />
