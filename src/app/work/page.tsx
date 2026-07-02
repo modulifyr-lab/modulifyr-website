@@ -232,7 +232,7 @@ export default function WorkPage() {
                 {[
                   { label: "Engagement type", val: "Monthly retainer" },
                   { label: "Minimum term", val: "3 months" },
-                  { label: "Team size", val: "Scoped per project" },,
+                  { label: "Team size", val: "Scoped per project" },
                   { label: "Onboarding", val: "2 weeks" },
                 ].map((item, i) => (
                   <div key={i} className="rounded-xl border border-white/10 bg-white/5 p-4">
