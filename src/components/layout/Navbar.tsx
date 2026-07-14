@@ -11,6 +11,9 @@ import LanguageSwitcher from "@/contexts/LanguageSwitcher";
 
 const NAV_LINKS = [
   { href: "/services",   key: "nav.services" },
+  { href: "/services/strategy-sprint", key: "Strategy Sprint" },
+  { href: "/services/launch-kit", key: "Launch Kit" },
+  { href: "/services/automation-layer", key: "Automation Layer" },
   { href: "/process",    key: "nav.process" },
   { href: "/industries", key: "nav.industries" },
   { href: "/work",       key: "nav.work" },

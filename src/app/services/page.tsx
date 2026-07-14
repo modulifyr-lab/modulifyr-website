@@ -186,10 +186,8 @@ export default function ServicesPage() {
             <section className="py-24">
                 <div className="container-custom text-center">
                     <blockquote className="max-w-4xl mx-auto text-2xl md:text-3xl text-brand-navy leading-relaxed font-heading">
-                        "We were six months into a healthcare platform build when our compliance requirements shifted completely. Because the system was modular from day one, we swapped out the affected modules without touching anything else. No rebuild, no deadline crisis, no emergency budget."
+                        "We're building our foundation, not buying fake praise. Be one of Modulifyr's first 5 founding clients and lock in our bootstrapper pricing while we scale our early portfolio."
                     </blockquote>
-                    <p className="mt-8 font-bold text-text-secondary uppercase tracking-widest text-sm">— CTO, Kathmandu-based Health Startup (identity withheld under NDA)</p>
-                    <p className="mt-2 text-xs text-text-muted italic">Reference available on request after NDA signing</p>
                 </div>
             </section>
         </div>
