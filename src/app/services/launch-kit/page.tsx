@@ -18,12 +18,12 @@ import { useRegion } from "@/components/RegionProvider";
 const tiers = [
   {
     name: "Tier 1 — Essential",
-    priceNepal: "NPR 10,000 – 20,000",
-    priceInternational: "$80 – $150",
+    priceNepal: "NPR 2,500 – 10,000",
+    priceInternational: "$20 – 80",
     duration: "7–10 business days",
     bestFor: "Validation pages, waitlists, single-event sites, simple portfolios",
-    description:
-      "You need a clean, functional single page live fast. No animation, no complexity — structured layout, clear call to action, mobile responsive. You provide all text and assets.",
+    descriptionNepal: "A professionally designed landing page to launch your idea in 7–10 days.",
+    descriptionInternational: "Professional landing page built for speed – get online quickly.",
     included: [
       "1–3 responsive pages",
       "Clean structural layout — no animations",
@@ -45,12 +45,12 @@ const tiers = [
   },
   {
     name: "Tier 2 — Business",
-    priceNepal: "NPR 20,000 – 53,000",
-    priceInternational: "$150 – $400",
+    priceNepal: "NPR 12,000 – 30,000",
+    priceInternational: "$100 – 240",
     duration: "2–3 weeks",
     bestFor: "Service businesses, agencies, professional portfolios, small corporate sites",
-    description:
-      "Up to 10 pages with polished UI and soft motion — scroll reveals, hover states, smooth transitions. Two prototype reviews before any code is written so the direction is locked before build.",
+    descriptionNepal: "Full‑featured website with a CMS – easy to manage and update.",
+    descriptionInternational: "Dynamic website with CMS integration – no SLA required.",
     included: [
       "4–10 responsive pages",
       "Soft animations — scroll reveals, hover states, smooth scroll",
@@ -75,12 +75,12 @@ const tiers = [
   },
   {
     name: "Tier 3 — Premium",
-    priceNepal: "NPR 53,000 – 90,000",
-    priceInternational: "$400 – $700",
+    priceNepal: "NPR 38,000 – 55,000",
+    priceInternational: "$300 – 450",
     duration: "3–4 weeks",
     bestFor: "Brands that need a high-end digital presence with full motion design",
-    description:
-      "Up to 20 pages with full custom animation — scroll-triggered sequences, background motion, and advanced interactions. Four Figma prototypes reviewed and locked before build begins.",
+    descriptionNepal: "Website plus third‑party integrations (CRM, email, analytics).",
+    descriptionInternational: "Comprehensive website with API integrations and scalable architecture.",
     included: [
       "11–20 responsive pages",
       "Full animation — scroll-triggered sequences, background motion, micro-interactions",
@@ -91,7 +91,7 @@ const tiers = [
       "Booking/scheduling embed (e.g. Calendly) if needed — client's own account",
       "Full SEO meta structure across all pages",
       "Analytics integration setup — platform subscription paid by client",
-      "Performance-optimized asset delivery",
+      "Performance-optimised asset delivery",
       "Deployment-ready handoff",
     ],
     notIncluded: [
@@ -101,6 +101,42 @@ const tiers = [
       "Custom 3D modeling or video production",
       "Custom server infrastructure, databases, or persistent user data storage",
     ],
+    highlight: false,
+  },
+  {
+    name: "Tier 4 — Enterprise Launch",
+    priceNepal: "NPR 62,000 – 88,000",
+    priceInternational: "$500 – 700",
+    duration: "4–5 weeks",
+    bestFor: "Enterprise launches requiring procurement-ready documentation",
+    descriptionNepal: "Complete launch suite including social setup, SEO basics, and analytics.",
+    descriptionInternational: "Full launch suite with procurement‑ready SOWs and optional SLA support.",
+    included: [
+      "20+ responsive pages",
+      "Full animation — scroll-triggered sequences, background motion, micro-interactions",
+      "5+ high-fidelity interactive Figma prototypes covering all key flows",
+      "4 comprehensive revision rounds throughout design and build",
+      "Multiple contact/inquiry forms with validation, connected to a form-handling service",
+      "Multiple lightweight interactive elements — e.g. multi-step forms, quote calculators, dynamic filtering — powered by third-party tools or stateless functions, no custom server or database required",
+      "Booking/scheduling embed (e.g. Calendly) if needed — client's own account",
+      "Full SEO meta structure across all pages",
+      "Analytics integration setup — platform subscription paid by client",
+      "Performance-optimised asset delivery",
+      "Social media profile setup and basic optimisation",
+      "SEO basics implementation",
+      "Analytics dashboard configuration",
+      "Procurement-ready SOWs",
+      "Optional SLA support available",
+      "Deployment-ready handoff",
+    ],
+    notIncluded: [
+      "Copywriting — all text must be provided by client",
+      "Domain purchase or hosting subscription",
+      "Analytics platform subscription",
+      "Custom 3D modeling or video production",
+      "Custom server infrastructure, databases, or persistent user data storage",
+    ],
+    highlight: false,
   },
 ];
 
@@ -227,7 +263,9 @@ export default function LaunchKitPage() {
                   Best for: {tier.bestFor}
                 </p>
 
-                <p className="text-text-secondary text-sm leading-relaxed">{tier.description}</p>
+                <p className="text-text-secondary text-sm leading-relaxed">
+                  {isNepal ? tier.descriptionNepal : tier.descriptionInternational}
+                </p>
 
                 <div>
                   <p className="text-brand-navy mb-3 text-xs font-bold uppercase tracking-widest">
@@ -258,7 +296,7 @@ export default function LaunchKitPage() {
                 </div>
 
                 <div className="mt-auto pt-2">
-                  <Link href="/request-proposal" className="w-full">
+                  <Link href={`/request-proposal?pkg=launch-kit&tier=${i + 1}`} className="w-full">
                     <Button
                       variant={tier.highlight ? "primary" : "outline"}
                       className="group w-full justify-between"

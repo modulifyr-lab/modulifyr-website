@@ -18,12 +18,12 @@ import { useRegion } from "@/components/RegionProvider";
 const tiers = [
   {
     name: "Tier 1 — Basic Connection",
-    priceNepal: "NPR 40,000 – 80,000",
-    priceInternational: "$300 – $600",
+    priceNepal: "NPR 25,000",
+    priceInternational: "$200",
     duration: "1–2 weeks",
     bestFor: "Two systems that need to talk — simple trigger and action flows",
-    description:
-      "You have two platforms that currently require manual data entry between them. We build the connection, document it, and hand it over. No complex logic, no bidirectional sync.",
+    descriptionNepal: "Automate a single repetitive workflow to save hours every week.",
+    descriptionInternational: "Automate one key workflow – simple, effective, and reliable.",
     included: [
       "2 systems connected",
       "Simple trigger → action flow — e.g. form submission creates a record elsewhere",
@@ -41,12 +41,12 @@ const tiers = [
   },
   {
     name: "Tier 2 — Multi-System Sync",
-    priceNepal: "NPR 80,000 – 1,60,000",
-    priceInternational: "$600 – $1,200",
+    priceNepal: "NPR 50,000 – 1,00,000",
+    priceInternational: "$400 – 800",
     duration: "2–4 weeks",
     bestFor: "3 to 5 systems that need reliable data sync with error recovery",
-    description:
-      "Multiple systems that need to stay in sync, including cases where data flows in both directions. Built with retry logic so temporary failures self-recover without manual intervention.",
+    descriptionNepal: "Connect multiple workflows for end‑to‑end process automation.",
+    descriptionInternational: "Multi‑workflow automation with robust error handling.",
     included: [
       "3–5 systems connected",
       "Bidirectional sync where required",
@@ -65,12 +65,12 @@ const tiers = [
   },
   {
     name: "Tier 3 — Complex Pipeline",
-    priceNepal: "NPR 1,60,000 – 2,65,000",
-    priceInternational: "$1,200 – $2,000",
+    priceNepal: "NPR 1,15,000 – 1,50,000",
+    priceInternational: "$900 – 1,200",
     duration: "4–6 weeks",
     bestFor: "6+ systems or flows with conditional logic and branching",
-    description:
-      "Large-scale integration work — multiple systems with complex conditional flows, branching logic, and strict reliability requirements. Built with full error handling and a monitoring setup.",
+    descriptionNepal: "Full automation of your entire operational process – from lead to delivery.",
+    descriptionInternational: "Enterprise automation suite with SLA‑guaranteed uptime and PO acceptance.",
     included: [
       "6 or more systems connected, or highly complex logic in fewer systems",
       "Multi-directional flows with conditional branching",
@@ -82,6 +82,31 @@ const tiers = [
       "Custom monitoring dashboard UI — monitoring is tool-based, not a built interface",
       "Subscriptions to any connected platform",
       "Ongoing maintenance beyond the build — handled separately",
+    ],
+    highlight: false,
+  },
+  {
+    name: "Tier 4 — Enterprise Automation",
+    priceNepal: "NPR 1,90,000 – 2,50,000",
+    priceInternational: "$1,500 – 2,000",
+    duration: "6–8 weeks",
+    bestFor: "Enterprise-scale automation requiring dedicated support and SLAs",
+    descriptionNepal: "Custom enterprise‑grade automation with full integration and ongoing optimisation.",
+    descriptionInternational: "Complete enterprise solution with dedicated support, SLAs, and procurement compliance.",
+    included: [
+      "Unlimited systems connected, or highly complex logic across many systems",
+      "Multi-directional flows with advanced conditional branching",
+      "Full error handling with alerting, context, and automated recovery",
+      "Monitoring setup with custom dashboards and alerting rules",
+      "Comprehensive documentation covering all flows, error states, and recovery steps",
+      "SLA-backed uptime guarantees",
+      "Procurement-compliant documentation and SOWs",
+      "Dedicated support channel during business hours",
+      "Ongoing optimization and maintenance included for 3 months",
+    ],
+    notIncluded: [
+      "Subscriptions to any connected platform",
+      "Custom UI development beyond monitoring dashboards",
     ],
     highlight: false,
   },
@@ -202,7 +227,9 @@ export default function AutomationLayerPage() {
                   Best for: {tier.bestFor}
                 </p>
 
-                <p className="text-text-secondary text-sm leading-relaxed">{tier.description}</p>
+                <p className="text-text-secondary text-sm leading-relaxed">
+                  {isNepal ? tier.descriptionNepal : tier.descriptionInternational}
+                </p>
 
                 <div>
                   <p className="text-brand-navy mb-3 text-xs font-bold uppercase tracking-widest">
@@ -233,7 +260,7 @@ export default function AutomationLayerPage() {
                 </div>
 
                 <div className="mt-auto pt-2">
-                  <Link href="/request-proposal" className="w-full">
+                  <Link href={`/request-proposal?pkg=automation-layer&tier=${i + 1}`} className="w-full">
                     <Button
                       variant={tier.highlight ? "primary" : "outline"}
                       className="group w-full justify-between"

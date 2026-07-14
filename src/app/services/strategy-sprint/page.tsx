@@ -18,12 +18,12 @@ import { useRegion } from "@/components/RegionProvider";
 const tiers = [
   {
     name: "Tier 1 — Basic Scoping",
-    priceNepal: "NPR 40,000 – 66,000",
-    priceInternational: "$300 – $500",
+    priceNepal: "NPR 15,000 – 45,000",
+    priceInternational: "$100 – 300",
     duration: "3–5 business days",
     bestFor: "Single product or feature with a relatively clear scope",
-    description:
-      "You have a rough idea of what you need and want it structured before committing to a build. We scope it, document it, and hand you a roadmap you can act on.",
+    descriptionNepal: "Get a clear strategic roadmap tailored to your business – fast and focused.",
+    descriptionInternational: "Rapid strategic planning to align your product vision with market needs.",
     included: [
       "1 async discovery session — written brief or single call",
       "Requirements document covering goals, constraints, and assumptions",
@@ -39,12 +39,12 @@ const tiers = [
   },
   {
     name: "Tier 2 — Full Discovery",
-    priceNepal: "NPR 66,000 – 86,000",
-    priceInternational: "$500 – $650",
+    priceNepal: "NPR 53,000 – 75,000",
+    priceInternational: "$320 – 450",
     duration: "1 week",
     bestFor: "Multi-feature projects or systems with 2–4 moving parts",
-    description:
-      "Scope is partially defined but needs a proper blueprint before building. We run structured sessions, map the architecture, and produce a roadmap any developer can build from.",
+    descriptionNepal: "Map user journeys and identify key opportunities for your product.",
+    descriptionInternational: "Strategic user‑flow mapping with actionable insights.",
     included: [
       "2–3 structured discovery calls or workshops",
       "Detailed requirements breakdown per feature area",
@@ -61,18 +61,38 @@ const tiers = [
   },
   {
     name: "Tier 3 — Complex Architecture",
-    priceNepal: "NPR 86,000 – 1,05,000",
-    priceInternational: "$650 – $800",
+    priceNepal: "NPR 84,000 – 1,00,000",
+    priceInternational: "$500 – 600",
     duration: "1–2 weeks",
     bestFor: "Large, unclear, legacy, or multi-team scope",
-    description:
-      "You are dealing with a large unknown — multiple systems, legacy constraints, or competing stakeholder requirements. We map all of it before a single line of code.",
+    descriptionNepal: "Comprehensive strategy covering market positioning, feature prioritisation, and go‑to‑market.",
+    descriptionInternational: "Full strategic package including competitive analysis and feature prioritisation.",
     included: [
       "Full workshop series — 3 to 5 sessions across stakeholders",
       "Complete architecture blueprint",
       "Integration mapping across all connected systems",
       "Risk analysis and mitigation plan",
       "Detailed phased roadmap with dependencies and sequencing",
+    ],
+    notIncluded: [],
+    highlight: false,
+  },
+  {
+    name: "Tier 4 — Enterprise Strategy",
+    priceNepal: "NPR 1,09,000 – 1,35,000",
+    priceInternational: "$650 – 800",
+    duration: "2–3 weeks",
+    bestFor: "Enterprise-scale initiatives requiring SLA-backed delivery",
+    descriptionNepal: "All‑in‑one strategy with a detailed implementation plan to hit the ground running.",
+    descriptionInternational: "Enterprise‑grade strategy with SLA‑backed delivery and procurement‑friendly documentation.",
+    included: [
+      "Full workshop series — 5+ sessions across all stakeholders",
+      "Complete architecture blueprint with technical specifications",
+      "Integration mapping across all connected systems",
+      "Risk analysis and mitigation plan",
+      "Detailed phased roadmap with dependencies, sequencing, and resource estimates",
+      "SLA-backed delivery commitments",
+      "Procurement-friendly documentation and SOWs",
     ],
     notIncluded: [],
     highlight: false,
@@ -206,7 +226,9 @@ export default function StrategySprintPage() {
                   Best for: {tier.bestFor}
                 </p>
 
-                <p className="text-text-secondary text-sm leading-relaxed">{tier.description}</p>
+                <p className="text-text-secondary text-sm leading-relaxed">
+                  {isNepal ? tier.descriptionNepal : tier.descriptionInternational}
+                </p>
 
                 <div>
                   <p className="text-brand-navy mb-3 text-xs font-bold uppercase tracking-widest">
@@ -239,7 +261,7 @@ export default function StrategySprintPage() {
                 )}
 
                 <div className="mt-auto pt-2">
-                  <Link href="/request-proposal" className="w-full">
+                  <Link href={`/request-proposal?pkg=strategy-sprint&tier=${i + 1}`} className="w-full">
                     <Button
                       variant={tier.highlight ? "primary" : "outline"}
                       className="group w-full justify-between"

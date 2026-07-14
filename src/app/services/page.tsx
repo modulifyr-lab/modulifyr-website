@@ -38,7 +38,6 @@ const services = [
       "Delivery roadmap",
     ],
     timeline: "1–2 weeks",
-    price: "$300–$800",
     size: "New projects / unclear scope",
     badge: null,
     comingSoon: false,
@@ -58,7 +57,6 @@ const services = [
       "Global CDN deployment",
     ],
     timeline: "1–3 weeks",
-    price: "$80–$700",
     size: "Marketing & content sites",
     badge: null,
     comingSoon: false,
@@ -78,7 +76,6 @@ const services = [
       "System-to-system connections",
     ],
     timeline: "1–6 weeks",
-    price: "$300–$2,000",
     size: "Integration-focused",
     badge: null,
     comingSoon: false,
@@ -93,7 +90,6 @@ const services = [
     desc: "SaaS MVPs, portals, dashboards, and client-facing systems.",
     deliverables: [],
     timeline: "",
-    price: "Coming Soon",
     size: "SaaS & product teams",
     badge: null,
     comingSoon: true,
@@ -107,7 +103,6 @@ const services = [
     desc: "Operations systems, approval flows, HR tools, and CRM-like internal apps.",
     deliverables: [],
     timeline: "",
-    price: "Coming Soon",
     size: "Operational teams",
     badge: null,
     comingSoon: true,
@@ -121,7 +116,6 @@ const services = [
     desc: "Legacy systems, performance issues, cloud migration, and modular cleanup.",
     deliverables: [],
     timeline: "",
-    price: "Coming Soon",
     size: "Orgs with legacy debt",
     badge: null,
     comingSoon: true,
@@ -135,7 +129,6 @@ const services = [
     desc: "Cloud setup, CI/CD, security hardening, and release automation.",
     deliverables: [],
     timeline: "",
-    price: "Coming Soon",
     size: "Cloud-native teams",
     badge: null,
     comingSoon: true,
@@ -149,7 +142,6 @@ const services = [
     desc: "For clients that want ongoing engineering capacity.",
     deliverables: [],
     timeline: "",
-    price: "Coming Soon",
     size: "Startups & scale-ups",
     badge: null,
     comingSoon: true,
@@ -271,24 +263,12 @@ export default function ServicesPage() {
                       </ul>
                     </div>
 
-                    <div className="flex items-center justify-between mb-4">
-                      <div>
-                        <p className="text-brand-orange font-heading text-lg font-bold">
-                          {service.price}
-                        </p>
-                        <p className="text-text-muted text-xs">{service.timeline}</p>
-                      </div>
+                    <div className="mb-4">
                       <span className="bg-bg-secondary text-brand-navy rounded px-2 py-1 text-xs font-semibold">
                         {service.size}
                       </span>
+                      <p className="text-text-muted text-xs mt-1">{service.timeline}</p>
                     </div>
-
-                    <Link href={service.link || "/request-proposal"} className="w-full">
-                      <Button variant="outline" className="group w-full justify-between text-sm">
-                        Read More
-                        <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                      </Button>
-                    </Link>
                   </div>
                 )}
               </Card>
@@ -375,18 +355,11 @@ export default function ServicesPage() {
 
       <section className="py-24">
         <div className="container-custom text-center">
-          <blockquote className="text-brand-navy font-heading mx-auto max-w-4xl text-2xl leading-relaxed md:text-3xl">
-            "We were six months into a healthcare platform build when our compliance requirements
-            shifted completely. Because the system was modular from day one, we swapped out the
-            affected modules without touching anything else. No rebuild, no deadline crisis, no
-            emergency budget."
-          </blockquote>
-          <p className="text-text-secondary mt-8 text-sm font-bold tracking-widest uppercase">
-            — CTO, Kathmandu-based Health Startup (identity withheld under NDA)
-          </p>
-          <p className="text-text-muted mt-2 text-xs italic">
-            Reference available on request after NDA signing
-          </p>
+          <div className="bg-brand-navy/5 border-border-base rounded-3xl border p-12 max-w-3xl mx-auto">
+            <p className="text-brand-navy font-heading text-xl leading-relaxed mb-4">
+              "We're building our foundation, not buying fake praise. Be one of Modulifyr's first 5 founding clients and lock in our bootstrapper pricing while we scale our early portfolio."
+            </p>
+          </div>
         </div>
       </section>
     </div>

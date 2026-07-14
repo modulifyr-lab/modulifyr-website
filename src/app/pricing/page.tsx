@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import {
@@ -22,15 +23,65 @@ import {
 import Link from "next/link";
 import { useRegion } from "@/components/RegionProvider";
 
-// ─── All 8 packages ───────────────────────────────────────────────────────────
+// ─── Sunset Trigger Configuration ─────────────────────────────────────────────
+// Hardcoded toggle - set to true when sunset trigger fires (5 engagements or 2027-01-15)
+const SUNSET_TRIGGERED = false;
 
-const packagesNepal = [
+// ─── Current Pricing (pre-sunset) ─────────────────────────────────────────────
+const currentPricing = {
+  nepal: {
+    strategySprint: ["NPR 17,000 – 50,000", "NPR 53,000 – 75,000", "NPR 84,000 – 1,00,000", "NPR 1,09,000 – 1,35,000"],
+    launchKit: ["NPR 3,300 – 13,500", "NPR 17,000 – 40,000", "NPR 50,000 – 75,000", "NPR 84,000 – 1,17,000"],
+    automationLayer: ["NPR 33,500", "NPR 67,000 – 1,34,000", "NPR 1,50,000 – 2,00,000", "NPR 2,50,000 – 3,35,000"],
+  },
+  international: {
+    strategySprint: ["$100 – 300", "$320 – 450", "$500 – 600", "$650 – 800"],
+    launchKit: ["$20 – 80", "$100 – 240", "$300 – 450", "$500 – 700"],
+    automationLayer: ["$200", "$400 – 800", "$900 – 1,200", "$1,500 – 2,000"],
+  },
+};
+
+// ─── Sunset Pricing (post-trigger) ────────────────────────────────────────────
+const sunsetPricing = {
+  nepal: {
+    strategySprint: ["NPR 84,000 – 1,20,000", "NPR 1,25,000 – 1,60,000", "NPR 1,65,000 – 2,10,000", "NPR 2,30,000 – 2,95,000"],
+    launchKit: ["NPR 13,500 – 25,000", "NPR 33,000 – 75,000", "NPR 84,000 – 1,34,000", "NPR 1,25,000 – 2,00,000"],
+    automationLayer: ["NPR 84,000 – 1,00,000", "NPR 1,00,000 – 2,00,000", "NPR 2,00,000 – 3,00,000", "NPR 3,35,000 – 5,00,000"],
+  },
+  international: {
+    strategySprint: ["$150 – 500", "$500 – 750", "$800 – 1,000", "$1,000 – 1,400"],
+    launchKit: ["$80 – 150", "$200 – 450", "$500 – 800", "$750 – 1,200"],
+    automationLayer: ["$400 – 500", "$600 – 1,200", "$1,200 – 1,800", "$2,000 – 3,000"],
+  },
+};
+
+// ─── Package Configs (3 active + 5 coming soon) ──────────────────────────────
+type PackageKey = "strategySprint" | "launchKit" | "automationLayer" | "productMVP" | "internalOps" | "modernization" | "platformSetup" | "engineeringRetainer";
+
+interface PackageConfig {
+  key: PackageKey;
+  icon: React.ComponentType<{ className?: string }>;
+  internalName: string;
+  clientName: string;
+  price?: string;
+  subprice?: string;
+  duration?: string;
+  desc: string;
+  features: string[];
+  cta: string;
+  link?: string;
+  highlight?: boolean;
+  bestFor: string;
+  comingSoon: boolean;
+  tierNames?: string[];
+}
+
+const packageConfigs: PackageConfig[] = [
   {
+    key: "strategySprint",
     icon: Search,
     internalName: "Discovery Sprint",
     clientName: "Strategy Sprint",
-    price: "NPR 40,000 – 1,05,000",
-    subprice: "approx. $300–$800",
     duration: "1–2 Weeks",
     desc: "For new clients, unclear scope, architecture decisions, and system rescues.",
     features: [
@@ -39,18 +90,18 @@ const packagesNepal = [
       "Scope definition & roadmap",
       "Tech stack recommendation",
     ],
-    cta: "Read More",
+    cta: "View Tiers",
     link: "/services/strategy-sprint",
     highlight: false,
     bestFor: "New projects / unclear scope",
     comingSoon: false,
+    tierNames: ["Tier 1 — Basic Scoping", "Tier 2 — Full Discovery", "Tier 3 — Complex Architecture", "Tier 4 — Enterprise Strategy"],
   },
   {
+    key: "launchKit",
     icon: Globe,
     internalName: "Static Website Package",
     clientName: "Launch Kit",
-    price: "NPR 10,000 – 90,000",
-    subprice: "approx. $80–$700",
     duration: "1–3 Weeks",
     desc: "Landing pages, marketing sites, brochure sites, and documentation.",
     features: [
@@ -59,13 +110,35 @@ const packagesNepal = [
       "Content editing flow",
       "Cloudflare Pages / Vercel deploy",
     ],
-    cta: "Read More",
+    cta: "View Tiers",
     link: "/services/launch-kit",
     highlight: false,
     bestFor: "Marketing & content sites",
     comingSoon: false,
+    tierNames: ["Tier 1 — Essential", "Tier 2 — Business", "Tier 3 — Premium", "Tier 4 — Enterprise Launch"],
   },
   {
+    key: "automationLayer",
+    icon: Settings,
+    internalName: "Integrations & Automation",
+    clientName: "Automation Layer",
+    duration: "1–6 Weeks",
+    desc: "API development, workflow automation, data sync, and system-to-system connections.",
+    features: [
+      "API implementation & webhooks",
+      "Sync jobs & retry logic",
+      "Monitoring & error handling",
+      "Third-party integrations",
+    ],
+    cta: "View Tiers",
+    link: "/services/automation-layer",
+    highlight: false,
+    bestFor: "Integration-focused",
+    comingSoon: false,
+    tierNames: ["Tier 1 — Basic Connection", "Tier 2 — Multi-System Sync", "Tier 3 — Complex Pipeline", "Tier 4 — Enterprise Automation"],
+  },
+  {
+    key: "productMVP",
     icon: Layers,
     internalName: "Web App MVP Package",
     clientName: "Product MVP",
@@ -85,6 +158,7 @@ const packagesNepal = [
     comingSoon: true,
   },
   {
+    key: "internalOps",
     icon: LayoutGrid,
     internalName: "Internal Tool Package",
     clientName: "Internal Ops System",
@@ -104,26 +178,7 @@ const packagesNepal = [
     comingSoon: true,
   },
   {
-    icon: Settings,
-    internalName: "Integrations & Automation",
-    clientName: "Automation Layer",
-    price: "NPR 40,000 – 2,65,000",
-    subprice: "approx. $300–$2,000",
-    duration: "1–6 Weeks",
-    desc: "API development, workflow automation, data sync, and system-to-system connections.",
-    features: [
-      "API implementation & webhooks",
-      "Sync jobs & retry logic",
-      "Monitoring & error handling",
-      "Third-party integrations",
-    ],
-    cta: "Read More",
-    link: "/services/automation-layer",
-    highlight: false,
-    bestFor: "Integration-focused",
-    comingSoon: false,
-  },
-  {
+    key: "modernization",
     icon: RefreshCw,
     internalName: "Modernization / Refactoring",
     clientName: "Modernization Sprint",
@@ -143,6 +198,7 @@ const packagesNepal = [
     comingSoon: true,
   },
   {
+    key: "platformSetup",
     icon: Cloud,
     internalName: "Infrastructure & SRE Setup",
     clientName: "Platform Setup",
@@ -162,6 +218,7 @@ const packagesNepal = [
     comingSoon: true,
   },
   {
+    key: "engineeringRetainer",
     icon: Users,
     internalName: "Dedicated Product Team Retainer",
     clientName: "Engineering Retainer",
@@ -182,163 +239,59 @@ const packagesNepal = [
   },
 ];
 
-const packagesInternational = [
-  {
-    icon: Search,
-    internalName: "Discovery Sprint",
-    clientName: "Strategy Sprint",
-    price: "$300 – $800",
-    subprice: "USD · fixed fee",
-    duration: "1–2 Weeks",
-    desc: "For new clients, unclear scope, architecture decisions, and system rescues.",
-    features: [
-      "Workshops & requirement breakdown",
-      "Architecture blueprint",
-      "Scope definition & roadmap",
-      "Tech stack recommendation",
-    ],
-    cta: "Read More",
-    link: "/services/strategy-sprint",
-    highlight: false,
-    bestFor: "New projects / unclear scope",
-    comingSoon: false,
-  },
-  {
-    icon: Globe,
-    internalName: "Static Website Package",
-    clientName: "Launch Kit",
-    price: "$80 – $700",
-    subprice: "USD · fixed fee",
-    duration: "1–3 Weeks",
-    desc: "Landing pages, marketing sites, brochure sites, and documentation.",
-    features: [
-      "4–8 responsive pages",
-      "SEO basics & analytics",
-      "Content editing flow",
-      "Cloudflare Pages / Vercel deploy",
-    ],
-    cta: "Read More",
-    link: "/services/launch-kit",
-    highlight: false,
-    bestFor: "Marketing & content sites",
-    comingSoon: false,
-  },
-  {
-    icon: Layers,
-    internalName: "Web App MVP Package",
-    clientName: "Product MVP",
-    price: "$12,000 – $45,000",
-    subprice: "USD · fixed fee",
-    duration: "4–10 Weeks",
-    desc: "SaaS MVPs, portals, dashboards, and client-facing product systems.",
-    features: [
-      "Authentication & database setup",
-      "Core workflows & admin panel",
-      "QA pass & launch support",
-      "Production deployment",
-    ],
-    cta: "Build Your MVP",
-    highlight: true,
-    bestFor: "SaaS & product teams",
-    comingSoon: true,
-  },
-  {
-    icon: LayoutGrid,
-    internalName: "Internal Tool Package",
-    clientName: "Internal Ops System",
-    price: "$8,000 – $30,000",
-    subprice: "USD · fixed fee",
-    duration: "3–8 Weeks",
-    desc: "Operations systems, approval flows, HR tools, and internal CRM-like apps.",
-    features: [
-      "Roles & permissions system",
-      "CRUD workflows & reporting",
-      "Audit trail basics",
-      "Integrations when needed",
-    ],
-    cta: "Build Internal Tool",
-    highlight: false,
-    bestFor: "Operational teams",
-    comingSoon: true,
-  },
-  {
-    icon: Settings,
-    internalName: "Integrations & Automation",
-    clientName: "Automation Layer",
-    price: "$300 – $2,000",
-    subprice: "USD · fixed fee",
-    duration: "1–6 Weeks",
-    desc: "API development, workflow automation, data sync, and system-to-system connections.",
-    features: [
-      "API implementation & webhooks",
-      "Sync jobs & retry logic",
-      "Monitoring & error handling",
-      "Third-party integrations",
-    ],
-    cta: "Read More",
-    link: "/services/automation-layer",
-    highlight: false,
-    bestFor: "Integration-focused",
-    comingSoon: false,
-  },
-  {
-    icon: RefreshCw,
-    internalName: "Modernization / Refactoring",
-    clientName: "Modernization Sprint",
-    price: "$15,000 – $80,000+",
-    subprice: "USD · fixed fee",
-    duration: "4–16 Weeks",
-    desc: "Legacy systems, performance issues, cloud migration, and modular cleanup.",
-    features: [
-      "Code audit & refactor plan",
-      "Modularisation & migration",
-      "Performance optimisation",
-      "Zero-downtime approach",
-    ],
-    cta: "Modernise Your Stack",
-    highlight: false,
-    bestFor: "Legacy systems",
-    comingSoon: true,
-  },
-  {
-    icon: Cloud,
-    internalName: "Infrastructure & SRE Setup",
-    clientName: "Platform Setup",
-    price: "$5,000 – $25,000",
-    subprice: "USD · fixed fee",
-    duration: "1–4 Weeks",
-    desc: "Cloud setup, CI/CD pipelines, security hardening, and release automation.",
-    features: [
-      "Cloud environment & Terraform IaC",
-      "GitHub Actions CI/CD",
-      "Logging, monitoring & alerting",
-      "Secrets & security baseline",
-    ],
-    cta: "Set Up Platform",
-    highlight: false,
-    bestFor: "Cloud-native teams",
-    comingSoon: true,
-  },
-  {
-    icon: Users,
-    internalName: "Dedicated Product Team Retainer",
-    clientName: "Engineering Retainer",
-    price: "$4,000 – $18,000+ /mo",
-    subprice: "USD · monthly",
-    duration: "Monthly · 3-month min",
-    desc: "Fixed monthly engineering capacity, codebase ownership, and roadmap execution.",
-    features: [
-      "1 Senior Full-Stack + 1 specialist",
-      "Codebase ownership continuity",
-      "Monthly roadmap execution",
-      "No SOW per feature",
-    ],
-    cta: "Start Retainer",
-    highlight: false,
-    bestFor: "Ongoing product work",
-    comingSoon: true,
-  },
-];
+// ─── Active Pricing Getter ────────────────────────────────────────────────────
+function getActivePricing(region: "nepal" | "international", pkg: PackageKey): string[] {
+  const source = SUNSET_TRIGGERED ? sunsetPricing : currentPricing;
+  return source[region][pkg as "strategySprint" | "launchKit" | "automationLayer"] ?? [];
+}
+
+// ─── Build Package Objects for Rendering ──────────────────────────────────────
+interface PackageForRender {
+  key: string;
+  icon: React.ComponentType<{ className?: string }>;
+  internalName: string;
+  clientName: string;
+  price?: string;
+  subprice?: string;
+  duration?: string;
+  desc: string;
+  features: string[];
+  cta: string;
+  link?: string;
+  highlight?: boolean;
+  bestFor: string;
+  comingSoon: boolean;
+  tierNames?: string[];
+  tierPrices?: string[];
+  isTiered?: boolean;
+}
+
+function buildPackages(region: "nepal" | "international", isSunset: boolean): PackageForRender[] {
+  return packageConfigs.map((cfg) => {
+    if (cfg.comingSoon) {
+      return {
+        ...cfg,
+        tierPrices: [],
+        isTiered: false,
+      };
+    }
+
+    const tierPrices = getActivePricing(region, cfg.key);
+    const currencySymbol = region === "nepal" ? "NPR" : "$";
+    const subprice = region === "nepal" 
+      ? `approx. ${tierPrices[0].replace("NPR", "$")}–${tierPrices[3].replace("NPR", "$")}`
+      : `USD · fixed fee`;
+
+    return {
+      ...cfg,
+      tierPrices,
+      tierNames: cfg.tierNames,
+      isTiered: true,
+      price: `${currencySymbol} ${tierPrices[0].replace(currencySymbol, "").trim()} – ${currencySymbol} ${tierPrices[3].replace(currencySymbol, "").trim()}`,
+      subprice,
+    };
+  });
+}
 
 const engagementModels = [
   {
@@ -364,11 +317,11 @@ const engagementModels = [
 ];
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
-
 export default function PricingPage() {
   const { region, setRegion } = useRegion();
   const isNepal = region === "nepal";
-  const packages = isNepal ? packagesNepal : packagesInternational;
+  const [showSunset, setShowSunset] = useState(false);
+  const packages = buildPackages(isNepal ? "nepal" : "international", SUNSET_TRIGGERED || showSunset);
 
   return (
     <div className="flex w-full flex-col">
@@ -426,6 +379,26 @@ export default function PricingPage() {
         </div>
       </section>
 
+      {/* Sunset Toggle Banner */}
+      <section className={`bg-brand-orange/10 border-border-base border-y py-4 ${SUNSET_TRIGGERED || showSunset ? "block" : "hidden"}`}>
+        <div className="container-custom flex items-center justify-between">
+          <span className="text-brand-navy font-bold">
+            {SUNSET_TRIGGERED ? "⚠ Sunset pricing active — showing post-trigger rates" : "⚠ Sunset pricing preview — showing post-trigger rates"}
+          </span>
+          <div className="flex items-center gap-4">
+            <span className="text-text-muted text-sm">
+              Triggered: {SUNSET_TRIGGERED ? "Yes" : "No"} (5 engagements or 2027-01-15)
+            </span>
+            <button
+              onClick={() => setShowSunset(!showSunset)}
+              className="text-brand-orange text-sm font-medium hover:underline"
+            >
+              {showSunset ? "Show current pricing" : "Show sunset pricing"}
+            </button>
+          </div>
+        </div>
+      </section>
+
       {/* All 8 packages */}
       <section className="relative overflow-hidden py-24">
         <div className="container-custom">
@@ -451,7 +424,7 @@ export default function PricingPage() {
                   </div>
                 )}
 
-                {/* Most Popular badge — only when available */}
+                {/* Most Popular badge */}
                 {pkg.highlight && !pkg.comingSoon && (
                   <div className="bg-brand-orange absolute top-0 right-8 -translate-y-1/2 rounded-full px-3 py-1 text-[10px] font-bold tracking-widest text-white uppercase">
                     Most Popular
@@ -470,31 +443,35 @@ export default function PricingPage() {
                   </div>
                 </div>
 
-                <div className="mb-4">
-                  <div className="font-heading text-brand-navy text-xl font-bold">{pkg.price}</div>
-                  <div className="text-text-muted text-xs">{pkg.subprice}</div>
-                  <div className="text-brand-teal mt-1 flex items-center gap-1.5 text-xs font-semibold uppercase">
-                    <Clock className="h-3 w-3" /> {pkg.duration}
+                {pkg.isTiered && pkg.tierNames && pkg.tierPrices ? (
+                  // Tiered pricing display
+                  <div className="mb-4 space-y-2 flex-grow">
+                    {pkg.tierNames.map((tierName, i) => (
+                      <div key={i} className="bg-bg-secondary rounded-xl p-3">
+                        <div className="flex items-center justify-between">
+                          <span className="text-brand-navy text-sm font-semibold">{tierName}</span>
+                          <span className="font-heading text-brand-orange text-lg font-bold">
+                            {pkg.tierPrices![i]}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                </div>
-
-                <p className="text-text-secondary mb-5 flex-grow text-sm leading-relaxed">
-                  {pkg.desc}
-                </p>
-
-                <ul className="mb-6 space-y-2.5">
-                  {pkg.features.map((f, i) => (
-                    <li key={i} className="text-text-secondary flex items-start gap-2.5 text-xs">
-                      <CheckCircle2 className="text-brand-teal mt-0.5 h-3.5 w-3.5 shrink-0" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
+                ) : (
+                  // Simple pricing for coming soon packages
+                  <div className="mb-4">
+                    <div className="font-heading text-brand-navy text-xl font-bold">{pkg.price}</div>
+                    <div className="text-text-muted text-xs">{pkg.subprice}</div>
+                    <div className="text-brand-teal mt-1 flex items-center gap-1.5 text-xs font-semibold uppercase">
+                      <Clock className="h-3 w-3" /> {pkg.duration}
+                    </div>
+                  </div>
+                )}
 
                 {pkg.comingSoon ? (
                   <div className="w-full"></div>
                 ) : (
-                  <Link href={pkg.link || "/request-proposal"} className="w-full">
+                  <Link href={pkg.link || "/request-proposal"} className="w-full mt-auto">
                     <Button
                       variant={pkg.highlight && !pkg.comingSoon ? "primary" : "outline"}
                       className="group w-full justify-between text-sm"

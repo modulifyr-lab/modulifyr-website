@@ -21,10 +21,10 @@ import {
 const caseStudies = [
   {
     id: "planning-bord",
-    label: "Public Case Study",
+    label: "Proprietary Alpha Build",
     labelColor: "text-brand-orange",
     title: "The Planning Bord",
-    subtitle: "Comprehensive ERP System",
+    subtitle: "Internal R&D Project — Comprehensive ERP System",
     tags: ["React", "Vercel", "TailwindCSS", "Modular Architecture"],
     liveUrl: "https://the-planning-bord.vercel.app",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80",
@@ -37,7 +37,7 @@ const caseStudies = [
     metrics: [
       { label: "Architecture pattern", value: "Modular" },
       { label: "Platform type", value: "ERP" },
-      { label: "Status", value: "Active build" },
+      { label: "Status", value: "Active internal build" },
     ],
   },
 ];
