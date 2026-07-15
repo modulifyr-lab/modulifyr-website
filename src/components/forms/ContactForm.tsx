@@ -178,7 +178,7 @@ export function ContactForm() {
                     Province No. 1, Nepal
                   </p>
                   <a
-                    href="https://maps.google.com/maps?q=Birtamode,+Jhapa,+Nepal"
+                    href="https://www.google.com/maps/search/?api=1&query=Modulifyr+Engineering"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-brand-orange mt-2 flex items-center gap-1 text-sm font-bold hover:underline"

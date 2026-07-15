@@ -15,7 +15,7 @@ const NAV_LINKS = [
   { href: "/process", key: "nav.process" },
   { href: "/industries", key: "nav.industries" },
   { href: "/work", key: "nav.work" },
-  { href: "/resources", key: "nav.resources" },
+  { href: "/career", key: "nav.career" },
   { href: "/about", key: "nav.about" },
   { href: "/contact", key: "nav.contact" },
 ];
