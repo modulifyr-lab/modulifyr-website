@@ -29,9 +29,9 @@ const syne = Syne({
 });
 
 export const metadata: Metadata = {
-  title: "Modulifyr | Custom Software Systems & Modular Architecture",
+  title: "2026 Custom Software Systems Built to Scale | Modulifyr",
   description:
-    "Modulifyr designs and builds modular software systems for organizations requiring flexibility, scalability, and long-term reliability. Custom software development company based in Birtamode, Nepal serving businesses globally.",
+    "Modulifyr builds scalable custom software, ERP platforms, and automation systems for growing organizations in Nepal and worldwide.",
   authors: [{ name: "Modulifyr Engineering" }],
   keywords: [
     "custom software development Nepal",
@@ -95,6 +95,7 @@ export const metadata: Metadata = {
     icon: [{ url: "/favicon.ico", sizes: "128x128", type: "image/x-icon" }],
   },
   alternates: {
+    canonical: "https://modulifyr.com",
     types: {
       "application/rss+xml": [
         {
@@ -170,6 +171,60 @@ const schemaOrg = {
         "Cloud Infrastructure",
       ],
       sameAs: ["https://linkedin.com/company/modulifyr", "https://github.com/modulifyr-lab"],
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://modulifyr.com/#webpage",
+      url: "https://modulifyr.com",
+      name: "2026 Custom Software Systems Built to Scale | Modulifyr",
+      description:
+        "Modulifyr builds scalable custom software, ERP platforms, and automation systems for growing organizations in Nepal and worldwide.",
+      isPartOf: { "@id": "https://modulifyr.com/#website" },
+      about: { "@id": "https://modulifyr.com/#organization" },
+      primaryImageOfPage: {
+        "@type": "ImageObject",
+        url: "https://modulifyr.com/og-image.png",
+        width: 1200,
+        height: 630,
+      },
+      datePublished: "2025-01-01",
+      dateModified: "2026-07-23",
+      author: { "@id": "https://modulifyr.com/#founder" },
+    },
+    {
+      "@type": "Article",
+      "@id": "https://modulifyr.com/#article",
+      headline: "2026 Custom Software Systems Built to Scale",
+      description:
+        "A concise overview of Modulifyr's modular software development, ERP, automation, and modernization services.",
+      image: "https://modulifyr.com/og-image.png",
+      mainEntityOfPage: { "@id": "https://modulifyr.com/#webpage" },
+      datePublished: "2025-01-01",
+      dateModified: "2026-07-23",
+      author: { "@id": "https://modulifyr.com/#founder" },
+      publisher: { "@id": "https://modulifyr.com/#organization" },
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://modulifyr.com/#faq",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What does Modulifyr build?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Modulifyr designs and builds custom software systems, ERP platforms, workflow automation, integrations, and modernization projects.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Where does Modulifyr work with clients?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Modulifyr is based in Birtamode, Nepal and works with organizations in Nepal and worldwide through remote collaboration.",
+          },
+        },
+      ],
     },
     {
       "@type": "WebSite",
