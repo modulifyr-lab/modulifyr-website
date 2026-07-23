@@ -25,15 +25,19 @@ export default function Home() {
           <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
             <div className="flex max-w-2xl flex-col gap-8">
               <h1 className="font-heading text-foreground text-5xl leading-[1.1] font-bold tracking-tight md:text-7xl">
-                Custom Software Systems <span className="text-brand-orange">Built to Scale</span>{" "}
-                With Your Organization
+                2026 Custom Software Systems{" "}
+                <span className="text-brand-orange">Built to Scale</span>
               </h1>
               <p className="text-text-secondary text-lg leading-relaxed md:text-xl">
-                Modulifyr designs and builds modular software systems for organizations that require
-                flexibility, scalability, and long-term reliability. We partner with companies
-                worldwide and in Birtamode, Nepal to architect and deliver software tailored to
-                their operations.
+                Modulifyr builds custom software systems for growing organizations. Our team helps
+                companies in Nepal and worldwide replace rigid tools with scalable ERP platforms,
+                workflow automation, integrations, and modern digital infrastructure.
               </p>
+              <div className="border-border-base bg-background/80 text-text-muted flex flex-wrap gap-x-4 gap-y-2 rounded-2xl border px-4 py-3 text-sm">
+                <span>By Rijan Mainali, Founder &amp; Lead Engineer</span>
+                <span>Published Jan 1, 2025</span>
+                <span>Updated Jul 23, 2026</span>
+              </div>
               <div className="mt-2 flex flex-wrap gap-4">
                 <Link href="/request-proposal">
                   <Button size="lg">Request Proposal</Button>
@@ -101,14 +105,13 @@ export default function Home() {
                 Built for organizations that need systems that evolve — not generic software.
               </h2>
               <p className="text-text-secondary text-xl leading-relaxed">
-                Many businesses rely on rigid software that cannot adapt as their operations grow.
-                Modulifyr takes a different approach. We design systems using modular architecture so
-                that new functionality, integrations, and workflows can evolve over time without
-                rebuilding the entire platform.
+                Many businesses rely on rigid software that cannot adapt as work changes. Modulifyr
+                takes a different approach. We design modular systems so teams can add features,
+                integrations, and workflows over time. As a result, your platform can grow without a
+                full rebuild.
               </p>
               <p className="text-brand-orange mt-4 text-lg font-semibold italic">
-                "Our work focuses on building long-term digital infrastructure rather than short-term
-                software products."
+                "We build long-term digital infrastructure, not short-term software products."
               </p>
             </div>
           </Reveal>
@@ -148,8 +151,8 @@ export default function Home() {
                 </div>
                 <CardTitle>Custom Software Development</CardTitle>
                 <CardDescription>
-                  Design and development of tailored systems aligned with your workflows, data
-                  structures, and operational processes.
+                  We design and build tailored systems that match your workflows, data, and daily
+                  operations.
                 </CardDescription>
               </Card>
             </Reveal>
@@ -161,7 +164,7 @@ export default function Home() {
                 </div>
                 <CardTitle>System Architecture</CardTitle>
                 <CardDescription>
-                  Design scalable architectures that allow software to evolve as your organization
+                  We design scalable architecture so your software can evolve as your organization
                   grows.
                 </CardDescription>
               </Card>
@@ -174,7 +177,7 @@ export default function Home() {
                 </div>
                 <CardTitle>Integrations & Automation</CardTitle>
                 <CardDescription>
-                  Connect internal tools, APIs, databases, and third-party platforms into unified
+                  We connect internal tools, APIs, databases, and third-party platforms into unified
                   workflows.
                 </CardDescription>
               </Card>
@@ -187,7 +190,8 @@ export default function Home() {
                 </div>
                 <CardTitle>Modernization & Rebuilds</CardTitle>
                 <CardDescription>
-                  Replace legacy systems with modern, scalable platforms built for future expansion.
+                  We replace legacy systems with modern platforms that are easier to maintain and
+                  expand.
                 </CardDescription>
               </Card>
             </Reveal>
@@ -267,8 +271,7 @@ export default function Home() {
                 Industries We Serve
               </h2>
               <p className="text-text-alt text-lg">
-                Our modular architecture approach adapts to the operational requirements of different
-                industries.
+                Our modular approach adapts to the daily needs of teams in different industries.
               </p>
             </div>
           </Reveal>
@@ -313,7 +316,9 @@ export default function Home() {
                     <span className="text-brand-orange text-sm font-bold tracking-widest uppercase">
                       Featured Case Study
                     </span>
-                    <h3 className="font-heading text-2xl font-bold text-white">The Planning Bord</h3>
+                    <h3 className="font-heading text-2xl font-bold text-white">
+                      The Planning Bord
+                    </h3>
                   </div>
                 </div>
               </div>
@@ -322,9 +327,9 @@ export default function Home() {
               <div className="flex flex-col gap-6">
                 <h2 className="font-heading text-foreground text-4xl font-bold">Selected Work</h2>
                 <p className="text-text-alt text-lg leading-relaxed">
-                  <span className="text-foreground font-bold">The Planning Bord</span> is a
-                  comprehensive ERP system that brings inventory, HR, projects, finance, and
-                  automation into one powerful platform. Built for modern teams who move fast.
+                  <span className="text-foreground font-bold">The Planning Bord</span> is an ERP
+                  system for inventory, HR, projects, finance, and automation. It gives modern teams
+                  one clear platform for daily work.
                 </p>
                 <div className="mb-4 flex flex-wrap gap-2">
                   {["React", "Vercel", "Modern UI Architecture"].map((tag) => (
@@ -336,7 +341,9 @@ export default function Home() {
                     </span>
                   ))}
                 </div>
-                <Link href="/work"><Button className="w-fit">View Project Case Study</Button></Link>
+                <Link href="/work">
+                  <Button className="w-fit">View Project Case Study</Button>
+                </Link>
                 <p className="text-text-muted text-sm italic">
                   Additional enterprise systems available under NDA.
                 </p>
@@ -355,8 +362,8 @@ export default function Home() {
                 Planning a system for your organization?
               </h2>
               <p className="text-xl leading-relaxed opacity-90">
-                Whether you're building new digital infrastructure or replacing legacy systems,
-                Modulifyr can help design and build a scalable solution tailored to your organization.
+                Building new digital infrastructure? Replacing legacy systems? Modulifyr can design
+                and build a scalable solution tailored to your organization.
               </p>
               <div className="mt-4 flex flex-wrap justify-center gap-4">
                 <Link href="/request-proposal">
