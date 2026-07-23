@@ -8,16 +8,19 @@ export function DevelopmentAlertModal() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-    // localStorage so it only shows ONCE ever, not every browser session
-    try {
-      const dismissed = localStorage.getItem("modulifyr_dev_alert_dismissed");
-      if (!dismissed) {
-        setVisible(true);
+    const timer = window.setTimeout(() => {
+      setMounted(true);
+      // localStorage so it only shows ONCE ever, not every browser session
+      try {
+        const dismissed = localStorage.getItem("modulifyr_dev_alert_dismissed");
+        if (!dismissed) {
+          setVisible(true);
+        }
+      } catch {
+        // localStorage unavailable — don't show modal
       }
-    } catch {
-      // localStorage unavailable — don't show modal
-    }
+    }, 0);
+    return () => window.clearTimeout(timer);
   }, []);
 
   const dismiss = () => {
@@ -55,14 +58,14 @@ export function DevelopmentAlertModal() {
 
           <div className="p-8">
             <div className="space-y-4 text-left">
-              <p className="text-lg font-semibold text-brand-navy">
+              <p className="text-brand-navy text-lg font-semibold">
                 This website and our associated business are currently in active development.
               </p>
               <p className="text-gray-700">
                 Our platform is not yet ready for public use. We are still working hard to prepare
                 everything for our official launch.
               </p>
-              <p className="text-xl font-bold text-brand-orange">
+              <p className="text-brand-orange text-xl font-bold">
                 Please do NOT place any orders or submit any transactions at this time.
               </p>
             </div>
@@ -70,7 +73,7 @@ export function DevelopmentAlertModal() {
             <div className="mt-8">
               <button
                 onClick={dismiss}
-                className="group flex w-full items-center justify-center gap-3 rounded-2xl bg-brand-navy px-8 py-4 font-heading text-lg font-bold text-white transition-all hover:bg-brand-navy/90 active:scale-[0.98]"
+                className="group bg-brand-navy font-heading hover:bg-brand-navy/90 flex w-full items-center justify-center gap-3 rounded-2xl px-8 py-4 text-lg font-bold text-white transition-all active:scale-[0.98]"
               >
                 I Understand
                 <X className="h-5 w-5 transition-transform duration-300 group-hover:rotate-90" />

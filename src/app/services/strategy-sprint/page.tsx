@@ -14,16 +14,17 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useRegion } from "@/components/RegionProvider";
+import { formatTierPrice } from "@/lib/pricing";
 
 const tiers = [
   {
     name: "Tier 1 — Basic Scoping",
-    priceNepal: "NPR 15,000 – 45,000",
-    priceInternational: "$100 – 300",
+    tierKey: "tier1_basicScoping",
     duration: "3–5 business days",
     bestFor: "Single product or feature with a relatively clear scope",
     descriptionNepal: "Get a clear strategic roadmap tailored to your business – fast and focused.",
-    descriptionInternational: "Rapid strategic planning to align your product vision with market needs.",
+    descriptionInternational:
+      "Rapid strategic planning to align your product vision with market needs.",
     included: [
       "1 async discovery session — written brief or single call",
       "Requirements document covering goals, constraints, and assumptions",
@@ -39,8 +40,7 @@ const tiers = [
   },
   {
     name: "Tier 2 — Full Discovery",
-    priceNepal: "NPR 53,000 – 75,000",
-    priceInternational: "$320 – 450",
+    tierKey: "tier2_fullDiscovery",
     duration: "1 week",
     bestFor: "Multi-feature projects or systems with 2–4 moving parts",
     descriptionNepal: "Map user journeys and identify key opportunities for your product.",
@@ -61,12 +61,13 @@ const tiers = [
   },
   {
     name: "Tier 3 — Complex Architecture",
-    priceNepal: "NPR 84,000 – 1,00,000",
-    priceInternational: "$500 – 600",
+    tierKey: "tier3_complexArchitecture",
     duration: "1–2 weeks",
     bestFor: "Large, unclear, legacy, or multi-team scope",
-    descriptionNepal: "Comprehensive strategy covering market positioning, feature prioritisation, and go‑to‑market.",
-    descriptionInternational: "Full strategic package including competitive analysis and feature prioritisation.",
+    descriptionNepal:
+      "Comprehensive strategy covering market positioning, feature prioritisation, and go‑to‑market.",
+    descriptionInternational:
+      "Full strategic package including competitive analysis and feature prioritisation.",
     included: [
       "Full workshop series — 3 to 5 sessions across stakeholders",
       "Complete architecture blueprint",
@@ -79,12 +80,13 @@ const tiers = [
   },
   {
     name: "Tier 4 — Enterprise Strategy",
-    priceNepal: "NPR 1,09,000 – 1,35,000",
-    priceInternational: "$650 – 800",
+    tierKey: "tier4_enterpriseStrategy",
     duration: "2–3 weeks",
     bestFor: "Enterprise-scale initiatives requiring SLA-backed delivery",
-    descriptionNepal: "All‑in‑one strategy with a detailed implementation plan to hit the ground running.",
-    descriptionInternational: "Enterprise‑grade strategy with SLA‑backed delivery and procurement‑friendly documentation.",
+    descriptionNepal:
+      "All‑in‑one strategy with a detailed implementation plan to hit the ground running.",
+    descriptionInternational:
+      "Enterprise‑grade strategy with SLA‑backed delivery and procurement‑friendly documentation.",
     included: [
       "Full workshop series — 5+ sessions across all stakeholders",
       "Complete architecture blueprint with technical specifications",
@@ -97,7 +99,7 @@ const tiers = [
     notIncluded: [],
     highlight: false,
   },
-];
+] as const;
 
 const whatYouOwnAfter = [
   {
@@ -119,7 +121,7 @@ const whatYouOwnAfter = [
 
 export default function StrategySprintPage() {
   const { region } = useRegion();
-  const isNepal = region === "nepal";
+  const activeRegion = region;
 
   return (
     <div className="flex w-full flex-col">
@@ -128,14 +130,12 @@ export default function StrategySprintPage() {
         <div className="container-custom">
           <div className="max-w-3xl">
             <div className="mb-4 flex items-center gap-2">
-              <Search className="h-6 w-6 text-brand-orange" />
+              <Search className="text-brand-orange h-6 w-6" />
               <span className="text-brand-orange text-xs font-bold tracking-widest uppercase">
                 Discovery & Strategy
               </span>
             </div>
-            <h1 className="font-heading mb-6 text-4xl font-bold md:text-6xl">
-              Strategy Sprint
-            </h1>
+            <h1 className="font-heading mb-6 text-4xl font-bold md:text-6xl">Strategy Sprint</h1>
             <p className="text-text-muted text-xl leading-relaxed">
               Most projects fail because scope was never properly defined. A Strategy Sprint gives
               you a requirements document, architecture blueprint, and phased roadmap before any
@@ -201,9 +201,7 @@ export default function StrategySprintPage() {
               <Card
                 key={i}
                 className={`relative flex flex-col gap-5 ${
-                  tier.highlight
-                    ? "border-brand-orange shadow-xl ring-1 ring-brand-orange/20"
-                    : ""
+                  tier.highlight ? "border-brand-orange ring-brand-orange/20 shadow-xl ring-1" : ""
                 }`}
               >
                 {tier.highlight && (
@@ -215,23 +213,25 @@ export default function StrategySprintPage() {
                 <div>
                   <h3 className="text-brand-navy mb-1 text-base font-bold">{tier.name}</h3>
                   <div className="font-heading text-brand-orange text-2xl font-bold">
-                    {isNepal ? tier.priceNepal : tier.priceInternational}
+                    {activeRegion
+                      ? formatTierPrice("strategySprint", tier.tierKey, activeRegion)
+                      : "Select region for pricing"}
                   </div>
                   <div className="text-brand-teal mt-1 flex items-center gap-1.5 text-xs font-semibold uppercase">
                     <Clock className="h-3 w-3" /> {tier.duration}
                   </div>
                 </div>
 
-                <p className="text-text-muted border-border-base border-t pt-3 text-xs font-semibold uppercase tracking-wider">
+                <p className="text-text-muted border-border-base border-t pt-3 text-xs font-semibold tracking-wider uppercase">
                   Best for: {tier.bestFor}
                 </p>
 
                 <p className="text-text-secondary text-sm leading-relaxed">
-                  {isNepal ? tier.descriptionNepal : tier.descriptionInternational}
+                  {tier.descriptionInternational}
                 </p>
 
                 <div>
-                  <p className="text-brand-navy mb-3 text-xs font-bold uppercase tracking-widest">
+                  <p className="text-brand-navy mb-3 text-xs font-bold tracking-widest uppercase">
                     Included
                   </p>
                   <ul className="space-y-2">
@@ -246,7 +246,7 @@ export default function StrategySprintPage() {
 
                 {tier.notIncluded.length > 0 && (
                   <div>
-                    <p className="text-text-muted mb-3 text-xs font-bold uppercase tracking-widest">
+                    <p className="text-text-muted mb-3 text-xs font-bold tracking-widest uppercase">
                       Not included
                     </p>
                     <ul className="space-y-2">
@@ -261,7 +261,10 @@ export default function StrategySprintPage() {
                 )}
 
                 <div className="mt-auto pt-2">
-                  <Link href={`/request-proposal?pkg=strategy-sprint&tier=${i + 1}`} className="w-full">
+                  <Link
+                    href={`/request-proposal?pkg=strategy-sprint&tier=${i + 1}`}
+                    className="w-full"
+                  >
                     <Button
                       variant={tier.highlight ? "primary" : "outline"}
                       className="group w-full justify-between"
@@ -285,11 +288,11 @@ export default function StrategySprintPage() {
               <AlertCircle className="text-brand-orange mt-0.5 h-5 w-5 shrink-0" />
               <h3 className="text-brand-navy font-bold">What you are responsible for</h3>
             </div>
-            <ul className="space-y-2 text-sm text-text-secondary">
+            <ul className="text-text-secondary space-y-2 text-sm">
               <li className="flex items-start gap-2">
                 <ChevronRight className="text-brand-orange mt-0.5 h-4 w-4 shrink-0" />
-                Access to relevant stakeholders during the sprint window — delays on your end
-                extend the timeline
+                Access to relevant stakeholders during the sprint window — delays on your end extend
+                the timeline
               </li>
               <li className="flex items-start gap-2">
                 <ChevronRight className="text-brand-orange mt-0.5 h-4 w-4 shrink-0" />
@@ -298,8 +301,8 @@ export default function StrategySprintPage() {
               </li>
               <li className="flex items-start gap-2">
                 <ChevronRight className="text-brand-orange mt-0.5 h-4 w-4 shrink-0" />
-                Timely responses during discovery — a sprint cannot run one direction for days
-                then reverse
+                Timely responses during discovery — a sprint cannot run one direction for days then
+                reverse
               </li>
             </ul>
             <p className="text-text-muted border-border-base mt-6 border-t pt-4 text-xs leading-relaxed">
@@ -321,8 +324,8 @@ export default function StrategySprintPage() {
           <div className="bg-brand-navy max-w-3xl rounded-3xl p-12 text-white">
             <h2 className="font-heading mb-3 text-2xl font-bold">Not sure which tier fits?</h2>
             <p className="text-text-muted mb-8 text-sm leading-relaxed">
-              Describe your project briefly. We will tell you which tier is appropriate and why —
-              no commitment required.
+              Describe your project briefly. We will tell you which tier is appropriate and why — no
+              commitment required.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link href="/contact">
@@ -331,10 +334,7 @@ export default function StrategySprintPage() {
                 </Button>
               </Link>
               <Link href="/services">
-                <Button
-                  variant="outline"
-                  className="border-white/30 text-white hover:bg-white/10"
-                >
+                <Button variant="outline" className="border-white/30 text-white hover:bg-white/10">
                   Back to All Services
                 </Button>
               </Link>

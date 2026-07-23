@@ -6,15 +6,11 @@
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/Button";
 import { useRegion } from "@/components/RegionProvider";
-import {
-  CheckCircle2,
-  AlertCircle,
-  Loader2,
-  ArrowRight,
-  ShieldCheck,
-  Globe,
-  MapPin,
-} from "lucide-react";
+import { RegionSelector } from "@/components/RegionSelector";
+import { formatTierPrice } from "@/lib/pricing";
+import { REGIONS } from "@/lib/regions";
+import type { Region } from "@/lib/regions";
+import { CheckCircle2, AlertCircle, Loader2, ArrowRight, ShieldCheck, Globe } from "lucide-react";
 
 const industries = ["Education", "Commerce", "Healthcare", "IT", "Retail", "Services", "Other"];
 
@@ -26,67 +22,66 @@ const projectTypes = [
   "Not sure yet — help me decide",
 ];
 
-// ─── Tier definitions for each package ────────────────────────────────────
-const tierData = {
+const projectPricing = {
   "Strategy Sprint (Discovery) — 1–2 weeks": {
-    nepal: [
-      "NPR 15,000 – 45,000 · Tier 1 — Basic Scoping",
-      "NPR 53,000 – 75,000 · Tier 2 — Full Discovery",
-      "NPR 84,000 – 1,00,000 · Tier 3 — Complex Architecture",
-      "NPR 1,09,000 – 1,35,000 · Tier 4 — Enterprise Strategy",
+    packageKey: "strategySprint",
+    tierKeys: [
+      "tier1_basicScoping",
+      "tier2_fullDiscovery",
+      "tier3_complexArchitecture",
+      "tier4_enterpriseStrategy",
     ],
-    international: [
-      "$100 – 300 · Tier 1 — Basic Scoping",
-      "$320 – 450 · Tier 2 — Full Discovery",
-      "$500 – 600 · Tier 3 — Complex Architecture",
-      "$650 – 800 · Tier 4 — Enterprise Strategy",
+    tierNames: [
+      "Tier 1 — Basic Scoping",
+      "Tier 2 — Full Discovery",
+      "Tier 3 — Complex Architecture",
+      "Tier 4 — Enterprise Strategy",
     ],
   },
   "Launch Kit (Static Website) — 1–3 weeks": {
-    nepal: [
-      "NPR 2,500 – 10,000 · Tier 1 — Essential",
-      "NPR 12,000 – 30,000 · Tier 2 — Business",
-      "NPR 38,000 – 55,000 · Tier 3 — Premium",
-      "NPR 62,000 – 88,000 · Tier 4 — Enterprise Launch",
-    ],
-    international: [
-      "$20 – 80 · Tier 1 — Essential",
-      "$100 – 240 · Tier 2 — Business",
-      "$300 – 450 · Tier 3 — Premium",
-      "$500 – 700 · Tier 4 — Enterprise Launch",
+    packageKey: "launchKit",
+    tierKeys: ["tier1_essential", "tier2_business", "tier3_premium", "tier4_enterpriseLaunch"],
+    tierNames: [
+      "Tier 1 — Essential",
+      "Tier 2 — Business",
+      "Tier 3 — Premium",
+      "Tier 4 — Enterprise Launch",
     ],
   },
   "Automation Layer (Integrations & Automation) — 1–6 weeks": {
-    nepal: [
-      "NPR 25,000 · Tier 1 — Basic Connection",
-      "NPR 50,000 – 1,00,000 · Tier 2 — Multi-System Sync",
-      "NPR 1,15,000 – 1,50,000 · Tier 3 — Complex Pipeline",
-      "NPR 1,90,000 – 2,50,000 · Tier 4 — Enterprise Automation",
+    packageKey: "automationLayer",
+    tierKeys: [
+      "tier1_basicConnection",
+      "tier2_multiSystemSync",
+      "tier3_complexPipeline",
+      "tier4_enterpriseAutomation",
     ],
-    international: [
-      "$200 · Tier 1 — Basic Connection",
-      "$400 – 800 · Tier 2 — Multi-System Sync",
-      "$900 – 1,200 · Tier 3 — Complex Pipeline",
-      "$1,500 – 2,000 · Tier 4 — Enterprise Automation",
+    tierNames: [
+      "Tier 1 — Basic Connection",
+      "Tier 2 — Multi-System Sync",
+      "Tier 3 — Complex Pipeline",
+      "Tier 4 — Enterprise Automation",
     ],
   },
-};
+} as const;
 
-// ─── Budget fallback for "Not sure yet" ────────────────────────────────────
-const fallbackBudgets = {
-  nepal: [
-    "NPR 15,000 – 1,35,000 · Strategy Sprint (Discovery)",
-    "NPR 2,500 – 88,000 · Launch Kit (Static Website)",
-    "NPR 25,000 – 2,50,000 · Automation Layer",
+function buildTierBudgets(projectType: string, region: Exclude<Region, null>): string[] {
+  const config = projectPricing[projectType as keyof typeof projectPricing];
+  if (!config) return buildFallbackBudgets(region);
+  return config.tierKeys.map(
+    (tierKey, index) =>
+      `${formatTierPrice(config.packageKey, tierKey, region)} · ${config.tierNames[index]}`
+  );
+}
+
+function buildFallbackBudgets(region: Exclude<Region, null>): string[] {
+  return [
+    `${formatTierPrice("strategySprint", "tier1_basicScoping", region)} – ${formatTierPrice("strategySprint", "tier4_enterpriseStrategy", region)} · Strategy Sprint (Discovery)`,
+    `${formatTierPrice("launchKit", "tier1_essential", region)} – ${formatTierPrice("launchKit", "tier4_enterpriseLaunch", region)} · Launch Kit (Static Website)`,
+    `${formatTierPrice("automationLayer", "tier1_basicConnection", region)} – ${formatTierPrice("automationLayer", "tier4_enterpriseAutomation", region)} · Automation Layer`,
     "Not sure yet",
-  ],
-  international: [
-    "$100 – 800 · Strategy Sprint (Discovery)",
-    "$20 – 700 · Launch Kit (Static Website)",
-    "$200 – 2,000 · Automation Layer",
-    "Not sure yet",
-  ],
-};
+  ];
+}
 
 interface FormState {
   name: string;
@@ -113,12 +108,12 @@ const initialForm: FormState = {
 };
 
 export function RFPForm() {
-  const { region, setRegion } = useRegion();
-  const isNepal = region === "nepal";
-  
+  const { region } = useRegion();
+  const activeRegion = region;
+
   // Parse URL params from window.location.search on client side
   const [searchParams, setSearchParams] = useState<URLSearchParams>(new URLSearchParams());
-  
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       setSearchParams(new URLSearchParams(window.location.search));
@@ -140,24 +135,15 @@ export function RFPForm() {
 
     if (pkg) {
       // Find matching project type
-      const matchedType = projectTypes.find((p) =>
-        p.toLowerCase().includes(pkg.toLowerCase())
-      );
+      const matchedType = projectTypes.find((p) => p.toLowerCase().includes(pkg.toLowerCase()));
       if (matchedType) {
         setForm((prev) => ({ ...prev, project_type: matchedType }));
-        const tierOptions = tierData[matchedType as keyof typeof tierData];
-        if (tierOptions) {
-          setBudgets(isNepal ? tierOptions.nepal : tierOptions.international);
-        }
+        if (activeRegion) setBudgets(buildTierBudgets(matchedType, activeRegion));
         if (tier) {
           // Try to find matching tier
-          const tierList = isNepal
-            ? tierData[matchedType as keyof typeof tierData]?.nepal
-            : tierData[matchedType as keyof typeof tierData]?.international;
+          const tierList = activeRegion ? buildTierBudgets(matchedType, activeRegion) : [];
           if (tierList) {
-            const matchedTier = tierList.find((t) =>
-              t.toLowerCase().includes(tier.toLowerCase())
-            );
+            const matchedTier = tierList.find((t) => t.toLowerCase().includes(tier.toLowerCase()));
             if (matchedTier) {
               setForm((prev) => ({ ...prev, budget: matchedTier }));
             }
@@ -166,38 +152,28 @@ export function RFPForm() {
       }
     } else {
       // Default to fallback budgets
-      setBudgets(isNepal ? fallbackBudgets.nepal : fallbackBudgets.international);
+      setBudgets(activeRegion ? buildFallbackBudgets(activeRegion) : []);
     }
-  }, [searchParams, isNepal]);
+  }, [searchParams, activeRegion]);
 
   // Update budgets when project_type changes
   useEffect(() => {
     if (form.project_type && form.project_type !== prevProjectType.current) {
       prevProjectType.current = form.project_type;
-      const tierOptions = tierData[form.project_type as keyof typeof tierData];
-      if (tierOptions) {
-        setBudgets(isNepal ? tierOptions.nepal : tierOptions.international);
-      } else {
-        setBudgets(isNepal ? fallbackBudgets.nepal : fallbackBudgets.international);
-      }
+      setBudgets(activeRegion ? buildTierBudgets(form.project_type, activeRegion) : []);
       // Reset budget when package changes
       setForm((prev) => ({ ...prev, budget: "" }));
     }
-  }, [form.project_type, isNepal]);
+  }, [form.project_type, activeRegion]);
 
   // Update budgets when region changes
   useEffect(() => {
     if (prevRegion.current !== region) {
       prevRegion.current = region;
-      if (form.project_type && tierData[form.project_type as keyof typeof tierData]) {
-        const tierOptions = tierData[form.project_type as keyof typeof tierData];
-        setBudgets(isNepal ? tierOptions.nepal : tierOptions.international);
-      } else {
-        setBudgets(isNepal ? fallbackBudgets.nepal : fallbackBudgets.international);
-      }
+      setBudgets(activeRegion ? buildTierBudgets(form.project_type, activeRegion) : []);
       setForm((f) => ({ ...f, budget: "" }));
     }
-  }, [region, form.project_type]);
+  }, [region, activeRegion, form.project_type]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -231,8 +207,8 @@ export function RFPForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...form,
-          region: isNepal ? "Nepal / South Asia" : "International",
-          region_code: isNepal ? "nepal" : "international",
+          region: activeRegion ? REGIONS[activeRegion].label : "Not selected",
+          region_code: activeRegion ?? "not_selected",
         }),
       });
       const data = await res.json();
@@ -317,30 +293,7 @@ export function RFPForm() {
           <span className="text-text-muted text-xs font-semibold tracking-widest uppercase">
             Budget shown for:
           </span>
-          <div className="flex gap-2">
-            <button
-              type="button"
-              onClick={() => setRegion("nepal")}
-              className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-bold transition-all ${
-                isNepal
-                  ? "border-brand-orange bg-brand-orange/10 text-brand-orange"
-                  : "border-border-base text-text-secondary hover:border-brand-orange/40 bg-white"
-              }`}
-            >
-              <MapPin className="h-3 w-3" /> Nepal / South Asia (NPR)
-            </button>
-            <button
-              type="button"
-              onClick={() => setRegion("international")}
-              className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-bold transition-all ${
-                !isNepal
-                  ? "border-brand-teal bg-brand-teal/10 text-brand-teal"
-                  : "border-border-base text-text-secondary hover:border-brand-teal/40 bg-white"
-              }`}
-            >
-              <Globe className="h-3 w-3" /> International (USD)
-            </button>
-          </div>
+          <RegionSelector />
         </div>
       </div>
 
@@ -363,10 +316,34 @@ export function RFPForm() {
                   </h2>
                   <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
                     {[
-                      { label: "Full Name", name: "name", type: "text", placeholder: "Your full name", required: true },
-                      { label: "Company / Organization", name: "company", type: "text", placeholder: "Your company name", required: true },
-                      { label: "Work Email", name: "email", type: "email", placeholder: "you@company.com", required: true },
-                      { label: "Phone", name: "phone", type: "tel", placeholder: "+977 98XXXXXXXX", required: false },
+                      {
+                        label: "Full Name",
+                        name: "name",
+                        type: "text",
+                        placeholder: "Your full name",
+                        required: true,
+                      },
+                      {
+                        label: "Company / Organization",
+                        name: "company",
+                        type: "text",
+                        placeholder: "Your company name",
+                        required: true,
+                      },
+                      {
+                        label: "Work Email",
+                        name: "email",
+                        type: "email",
+                        placeholder: "you@company.com",
+                        required: true,
+                      },
+                      {
+                        label: "Phone",
+                        name: "phone",
+                        type: "tel",
+                        placeholder: "+977 98XXXXXXXX",
+                        required: false,
+                      },
                     ].map((f) => (
                       <div key={f.name} className="flex flex-col gap-2">
                         <label className="text-brand-navy text-sm font-semibold">
@@ -444,16 +421,10 @@ export function RFPForm() {
                     <div className="flex flex-col gap-2 md:col-span-2">
                       <div className="flex items-center justify-between">
                         <label className="text-brand-navy text-sm font-semibold">
-                          Budget Range ({isNepal ? "NPR" : "USD"}){" "}
+                          Budget Range (
+                          {activeRegion ? REGIONS[activeRegion].currency : "select region"}){" "}
                           <span className="text-brand-orange">*</span>
                         </label>
-                        <button
-                          type="button"
-                          onClick={() => setRegion(isNepal ? "international" : "nepal")}
-                          className="text-brand-orange text-xs font-medium hover:underline"
-                        >
-                          Switch to {isNepal ? "USD" : "NPR"}
-                        </button>
                       </div>
                       <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3">
                         {budgets.map((b) => (
@@ -557,9 +528,21 @@ export function RFPForm() {
                 <h3 className="font-heading mb-6 text-xl font-bold">What to Expect</h3>
                 <div className="space-y-6">
                   {[
-                    { step: "01", title: "Review", desc: "We read every submission carefully and research your organisation." },
-                    { step: "02", title: "Discovery Call", desc: "A 30-min call with our lead architect to align on requirements." },
-                    { step: "03", title: "Proposal", desc: "Structured technical proposal, architecture diagram, and cost estimate." },
+                    {
+                      step: "01",
+                      title: "Review",
+                      desc: "We read every submission carefully and research your organisation.",
+                    },
+                    {
+                      step: "02",
+                      title: "Discovery Call",
+                      desc: "A 30-min call with our lead architect to align on requirements.",
+                    },
+                    {
+                      step: "03",
+                      title: "Proposal",
+                      desc: "Structured technical proposal, architecture diagram, and cost estimate.",
+                    },
                   ].map((item) => (
                     <div key={item.step} className="flex gap-4">
                       <span className="text-brand-orange font-heading text-lg font-bold">
@@ -580,16 +563,25 @@ export function RFPForm() {
                   Package Price Guide
                 </h3>
                 <div className="space-y-2">
-                  {(isNepal
+                  {(activeRegion
                     ? [
-                        { name: "Strategy Sprint", price: "NPR 15,000 – 1,35,000" },
-                        { name: "Launch Kit", price: "NPR 2,500 – 88,000" },
-                        { name: "Automation Layer", price: "NPR 25,000 – 2,50,000" },
+                        {
+                          name: "Strategy Sprint",
+                          price: `${formatTierPrice("strategySprint", "tier1_basicScoping", activeRegion)} – ${formatTierPrice("strategySprint", "tier4_enterpriseStrategy", activeRegion)}`,
+                        },
+                        {
+                          name: "Launch Kit",
+                          price: `${formatTierPrice("launchKit", "tier1_essential", activeRegion)} – ${formatTierPrice("launchKit", "tier4_enterpriseLaunch", activeRegion)}`,
+                        },
+                        {
+                          name: "Automation Layer",
+                          price: `${formatTierPrice("automationLayer", "tier1_basicConnection", activeRegion)} – ${formatTierPrice("automationLayer", "tier4_enterpriseAutomation", activeRegion)}`,
+                        },
                       ]
                     : [
-                        { name: "Strategy Sprint", price: "$100 – 800" },
-                        { name: "Launch Kit", price: "$20 – 700" },
-                        { name: "Automation Layer", price: "$200 – 2,000" },
+                        { name: "Strategy Sprint", price: "Select region for pricing" },
+                        { name: "Launch Kit", price: "Select region for pricing" },
+                        { name: "Automation Layer", price: "Select region for pricing" },
                       ]
                   ).map((pkg) => (
                     <div

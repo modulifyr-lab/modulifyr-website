@@ -7,9 +7,9 @@ import { RegionModal } from "@/components/RegionModal";
 import { LanguageProvider } from "@/components/LanguageContext";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { StartupBanner } from "@/components/StartupBanner";
-import { DevelopmentAlertModal } from "@/components/DevelopmentAlertModal";
 import Script from "next/script";
+import { cookies } from "next/headers";
+import { isRegion, REGION_COOKIE } from "@/lib/regions";
 
 // ── Brand fonts ───────────────────────────────────────────────────────────────
 // DM Sans = body font  →  --font-dm-sans  →  --font-sans in globals.css
@@ -125,9 +125,15 @@ const schemaOrg = {
         "Custom modular software systems for small and medium-sized businesses in education, healthcare, retail, commerce, and IT.",
       address: {
         "@type": "PostalAddress",
+        streetAddress: "JXXQ+4G",
         addressLocality: "Birtamode",
         addressRegion: "Jhapa",
         addressCountry: "NP",
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: 26.6478125,
+        longitude: 87.9888125,
       },
       contactPoint: {
         "@type": "ContactPoint",
@@ -135,7 +141,7 @@ const schemaOrg = {
         contactType: "sales",
         availableLanguage: ["English", "Nepali"],
       },
-      areaServed: "Worldwide",
+      areaServed: ["US", "GB", "CA", "AU", "NP", "EU"],
       foundingDate: "2025",
       foundingLocation: {
         "@type": "Place",
@@ -150,6 +156,7 @@ const schemaOrg = {
         worksFor: { "@id": "https://modulifyr.com/#organization" },
         address: {
           "@type": "PostalAddress",
+          streetAddress: "JXXQ+4G",
           addressLocality: "Birtamode",
           addressRegion: "Jhapa",
           addressCountry: "NP",
@@ -174,7 +181,10 @@ const schemaOrg = {
   ],
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const cookieRegion = (await cookies()).get(REGION_COOKIE)?.value;
+  const initialRegion = isRegion(cookieRegion) ? cookieRegion : null;
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -209,7 +219,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           enableSystem
           disableTransitionOnChange
         >
-          <RegionProvider>
+          <RegionProvider initialRegion={initialRegion}>
             <LanguageProvider>
               <RegionModal />
               <Navbar />

@@ -14,12 +14,12 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useRegion } from "@/components/RegionProvider";
+import { formatTierPrice } from "@/lib/pricing";
 
 const tiers = [
   {
     name: "Tier 1 — Basic Connection",
-    priceNepal: "NPR 25,000",
-    priceInternational: "$200",
+    tierKey: "tier1_basicConnection",
     duration: "1–2 weeks",
     bestFor: "Two systems that need to talk — simple trigger and action flows",
     descriptionNepal: "Automate a single repetitive workflow to save hours every week.",
@@ -41,8 +41,7 @@ const tiers = [
   },
   {
     name: "Tier 2 — Multi-System Sync",
-    priceNepal: "NPR 50,000 – 1,00,000",
-    priceInternational: "$400 – 800",
+    tierKey: "tier2_multiSystemSync",
     duration: "2–4 weeks",
     bestFor: "3 to 5 systems that need reliable data sync with error recovery",
     descriptionNepal: "Connect multiple workflows for end‑to‑end process automation.",
@@ -65,12 +64,12 @@ const tiers = [
   },
   {
     name: "Tier 3 — Complex Pipeline",
-    priceNepal: "NPR 1,15,000 – 1,50,000",
-    priceInternational: "$900 – 1,200",
+    tierKey: "tier3_complexPipeline",
     duration: "4–6 weeks",
     bestFor: "6+ systems or flows with conditional logic and branching",
     descriptionNepal: "Full automation of your entire operational process – from lead to delivery.",
-    descriptionInternational: "Enterprise automation suite with SLA‑guaranteed uptime and PO acceptance.",
+    descriptionInternational:
+      "Enterprise automation suite with SLA‑guaranteed uptime and PO acceptance.",
     included: [
       "6 or more systems connected, or highly complex logic in fewer systems",
       "Multi-directional flows with conditional branching",
@@ -87,12 +86,13 @@ const tiers = [
   },
   {
     name: "Tier 4 — Enterprise Automation",
-    priceNepal: "NPR 1,90,000 – 2,50,000",
-    priceInternational: "$1,500 – 2,000",
+    tierKey: "tier4_enterpriseAutomation",
     duration: "6–8 weeks",
     bestFor: "Enterprise-scale automation requiring dedicated support and SLAs",
-    descriptionNepal: "Custom enterprise‑grade automation with full integration and ongoing optimisation.",
-    descriptionInternational: "Complete enterprise solution with dedicated support, SLAs, and procurement compliance.",
+    descriptionNepal:
+      "Custom enterprise‑grade automation with full integration and ongoing optimisation.",
+    descriptionInternational:
+      "Complete enterprise solution with dedicated support, SLAs, and procurement compliance.",
     included: [
       "Unlimited systems connected, or highly complex logic across many systems",
       "Multi-directional flows with advanced conditional branching",
@@ -110,17 +110,25 @@ const tiers = [
     ],
     highlight: false,
   },
-];
+] as const;
 
 const whatWeConnect = [
   { icon: GitMerge, label: "APIs & webhooks", desc: "REST, GraphQL, or webhook-based connections" },
-  { icon: RefreshCw, label: "Data sync jobs", desc: "Scheduled or event-driven sync between platforms" },
-  { icon: Activity, label: "n8n workflows", desc: "Visual workflow automation — n8n subscription paid by client" },
+  {
+    icon: RefreshCw,
+    label: "Data sync jobs",
+    desc: "Scheduled or event-driven sync between platforms",
+  },
+  {
+    icon: Activity,
+    label: "n8n workflows",
+    desc: "Visual workflow automation — n8n subscription paid by client",
+  },
 ];
 
 export default function AutomationLayerPage() {
   const { region } = useRegion();
-  const isNepal = region === "nepal";
+  const activeRegion = region;
 
   return (
     <div className="flex w-full flex-col">
@@ -129,14 +137,12 @@ export default function AutomationLayerPage() {
         <div className="container-custom">
           <div className="max-w-3xl">
             <div className="mb-4 flex items-center gap-2">
-              <Settings className="h-6 w-6 text-brand-orange" />
+              <Settings className="text-brand-orange h-6 w-6" />
               <span className="text-brand-orange text-xs font-bold tracking-widest uppercase">
                 Integrations & Automation
               </span>
             </div>
-            <h1 className="font-heading mb-6 text-4xl font-bold md:text-6xl">
-              Automation Layer
-            </h1>
+            <h1 className="font-heading mb-6 text-4xl font-bold md:text-6xl">Automation Layer</h1>
             <p className="text-text-muted text-xl leading-relaxed">
               Connect your systems, eliminate manual data entry, and build reliable flows between
               platforms. Three tiers based on how many systems are involved and how complex the
@@ -192,8 +198,8 @@ export default function AutomationLayerPage() {
               Three Tiers — Priced by System Count and Complexity
             </h2>
             <p className="text-text-secondary max-w-2xl text-sm leading-relaxed">
-              The main drivers of price are how many systems are connected and how complex the
-              logic needs to be. Not sure where your project lands? Describe it and we will advise.
+              The main drivers of price are how many systems are connected and how complex the logic
+              needs to be. Not sure where your project lands? Describe it and we will advise.
             </p>
           </div>
 
@@ -202,9 +208,7 @@ export default function AutomationLayerPage() {
               <Card
                 key={i}
                 className={`relative flex flex-col gap-5 ${
-                  tier.highlight
-                    ? "border-brand-orange shadow-xl ring-1 ring-brand-orange/20"
-                    : ""
+                  tier.highlight ? "border-brand-orange ring-brand-orange/20 shadow-xl ring-1" : ""
                 }`}
               >
                 {tier.highlight && (
@@ -216,23 +220,25 @@ export default function AutomationLayerPage() {
                 <div>
                   <h3 className="text-brand-navy mb-1 text-base font-bold">{tier.name}</h3>
                   <div className="font-heading text-brand-orange text-2xl font-bold">
-                    {isNepal ? tier.priceNepal : tier.priceInternational}
+                    {activeRegion
+                      ? formatTierPrice("automationLayer", tier.tierKey, activeRegion)
+                      : "Select region for pricing"}
                   </div>
                   <div className="text-brand-teal mt-1 flex items-center gap-1.5 text-xs font-semibold uppercase">
                     <Clock className="h-3 w-3" /> {tier.duration}
                   </div>
                 </div>
 
-                <p className="text-text-muted border-border-base border-t pt-3 text-xs font-semibold uppercase tracking-wider">
+                <p className="text-text-muted border-border-base border-t pt-3 text-xs font-semibold tracking-wider uppercase">
                   Best for: {tier.bestFor}
                 </p>
 
                 <p className="text-text-secondary text-sm leading-relaxed">
-                  {isNepal ? tier.descriptionNepal : tier.descriptionInternational}
+                  {tier.descriptionInternational}
                 </p>
 
                 <div>
-                  <p className="text-brand-navy mb-3 text-xs font-bold uppercase tracking-widest">
+                  <p className="text-brand-navy mb-3 text-xs font-bold tracking-widest uppercase">
                     Included
                   </p>
                   <ul className="space-y-2">
@@ -246,7 +252,7 @@ export default function AutomationLayerPage() {
                 </div>
 
                 <div>
-                  <p className="text-text-muted mb-3 text-xs font-bold uppercase tracking-widest">
+                  <p className="text-text-muted mb-3 text-xs font-bold tracking-widest uppercase">
                     Not included
                   </p>
                   <ul className="space-y-2">
@@ -260,7 +266,10 @@ export default function AutomationLayerPage() {
                 </div>
 
                 <div className="mt-auto pt-2">
-                  <Link href={`/request-proposal?pkg=automation-layer&tier=${i + 1}`} className="w-full">
+                  <Link
+                    href={`/request-proposal?pkg=automation-layer&tier=${i + 1}`}
+                    className="w-full"
+                  >
                     <Button
                       variant={tier.highlight ? "primary" : "outline"}
                       className="group w-full justify-between"
@@ -284,11 +293,11 @@ export default function AutomationLayerPage() {
               <AlertCircle className="text-brand-orange mt-0.5 h-5 w-5 shrink-0" />
               <h3 className="text-brand-navy font-bold">What you are responsible for</h3>
             </div>
-            <ul className="space-y-2 text-sm text-text-secondary">
+            <ul className="text-text-secondary space-y-2 text-sm">
               <li className="flex items-start gap-2">
                 <ChevronRight className="text-brand-orange mt-0.5 h-4 w-4 shrink-0" />
-                API credentials, access tokens, and admin access to all systems being connected —
-                we cannot build integrations without this
+                API credentials, access tokens, and admin access to all systems being connected — we
+                cannot build integrations without this
               </li>
               <li className="flex items-start gap-2">
                 <ChevronRight className="text-brand-orange mt-0.5 h-4 w-4 shrink-0" />
@@ -331,10 +340,7 @@ export default function AutomationLayerPage() {
                 </Button>
               </Link>
               <Link href="/services">
-                <Button
-                  variant="outline"
-                  className="border-white/30 text-white hover:bg-white/10"
-                >
+                <Button variant="outline" className="border-white/30 text-white hover:bg-white/10">
                   Back to All Services
                 </Button>
               </Link>

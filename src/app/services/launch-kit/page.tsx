@@ -1,25 +1,15 @@
 "use client";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
-import {
-  CheckCircle2,
-  Clock,
-  Globe,
-  ChevronRight,
-  XCircle,
-  AlertCircle,
-  Figma,
-  RefreshCw,
-  Smartphone,
-} from "lucide-react";
+import { CheckCircle2, Clock, Globe, ChevronRight, XCircle, AlertCircle } from "lucide-react";
 import Link from "next/link";
 import { useRegion } from "@/components/RegionProvider";
+import { formatTierPrice } from "@/lib/pricing";
 
 const tiers = [
   {
     name: "Tier 1 — Essential",
-    priceNepal: "NPR 2,500 – 10,000",
-    priceInternational: "$20 – 80",
+    tierKey: "tier1_essential",
     duration: "7–10 business days",
     bestFor: "Validation pages, waitlists, single-event sites, simple portfolios",
     descriptionNepal: "A professionally designed landing page to launch your idea in 7–10 days.",
@@ -45,8 +35,7 @@ const tiers = [
   },
   {
     name: "Tier 2 — Business",
-    priceNepal: "NPR 12,000 – 30,000",
-    priceInternational: "$100 – 240",
+    tierKey: "tier2_business",
     duration: "2–3 weeks",
     bestFor: "Service businesses, agencies, professional portfolios, small corporate sites",
     descriptionNepal: "Full‑featured website with a CMS – easy to manage and update.",
@@ -75,12 +64,12 @@ const tiers = [
   },
   {
     name: "Tier 3 — Premium",
-    priceNepal: "NPR 38,000 – 55,000",
-    priceInternational: "$300 – 450",
+    tierKey: "tier3_premium",
     duration: "3–4 weeks",
     bestFor: "Brands that need a high-end digital presence with full motion design",
     descriptionNepal: "Website plus third‑party integrations (CRM, email, analytics).",
-    descriptionInternational: "Comprehensive website with API integrations and scalable architecture.",
+    descriptionInternational:
+      "Comprehensive website with API integrations and scalable architecture.",
     included: [
       "11–20 responsive pages",
       "Full animation — scroll-triggered sequences, background motion, micro-interactions",
@@ -105,12 +94,12 @@ const tiers = [
   },
   {
     name: "Tier 4 — Enterprise Launch",
-    priceNepal: "NPR 62,000 – 88,000",
-    priceInternational: "$500 – 700",
+    tierKey: "tier4_enterpriseLaunch",
     duration: "4–5 weeks",
     bestFor: "Enterprise launches requiring procurement-ready documentation",
     descriptionNepal: "Complete launch suite including social setup, SEO basics, and analytics.",
-    descriptionInternational: "Full launch suite with procurement‑ready SOWs and optional SLA support.",
+    descriptionInternational:
+      "Full launch suite with procurement‑ready SOWs and optional SLA support.",
     included: [
       "20+ responsive pages",
       "Full animation — scroll-triggered sequences, background motion, micro-interactions",
@@ -138,7 +127,7 @@ const tiers = [
     ],
     highlight: false,
   },
-];
+] as const;
 
 const animationGuide = [
   { tier: "Tier 1", motion: "None", example: "Static layout, no movement" },
@@ -156,7 +145,7 @@ const animationGuide = [
 
 export default function LaunchKitPage() {
   const { region } = useRegion();
-  const isNepal = region === "nepal";
+  const activeRegion = region;
 
   return (
     <div className="flex w-full flex-col">
@@ -165,7 +154,7 @@ export default function LaunchKitPage() {
         <div className="container-custom">
           <div className="max-w-3xl">
             <div className="mb-4 flex items-center gap-2">
-              <Globe className="h-6 w-6 text-brand-teal" />
+              <Globe className="text-brand-teal h-6 w-6" />
               <span className="text-brand-teal text-xs font-bold tracking-widest uppercase">
                 Static Websites & Landing Pages
               </span>
@@ -238,9 +227,7 @@ export default function LaunchKitPage() {
               <Card
                 key={i}
                 className={`relative flex flex-col gap-5 ${
-                  tier.highlight
-                    ? "border-brand-orange shadow-xl ring-1 ring-brand-orange/20"
-                    : ""
+                  tier.highlight ? "border-brand-orange ring-brand-orange/20 shadow-xl ring-1" : ""
                 }`}
               >
                 {tier.highlight && (
@@ -252,23 +239,25 @@ export default function LaunchKitPage() {
                 <div>
                   <h3 className="text-brand-navy mb-1 text-base font-bold">{tier.name}</h3>
                   <div className="font-heading text-brand-orange text-2xl font-bold">
-                    {isNepal ? tier.priceNepal : tier.priceInternational}
+                    {activeRegion
+                      ? formatTierPrice("launchKit", tier.tierKey, activeRegion)
+                      : "Select region for pricing"}
                   </div>
                   <div className="text-brand-teal mt-1 flex items-center gap-1.5 text-xs font-semibold uppercase">
                     <Clock className="h-3 w-3" /> {tier.duration}
                   </div>
                 </div>
 
-                <p className="text-text-muted border-border-base border-t pt-3 text-xs font-semibold uppercase tracking-wider">
+                <p className="text-text-muted border-border-base border-t pt-3 text-xs font-semibold tracking-wider uppercase">
                   Best for: {tier.bestFor}
                 </p>
 
                 <p className="text-text-secondary text-sm leading-relaxed">
-                  {isNepal ? tier.descriptionNepal : tier.descriptionInternational}
+                  {tier.descriptionInternational}
                 </p>
 
                 <div>
-                  <p className="text-brand-navy mb-3 text-xs font-bold uppercase tracking-widest">
+                  <p className="text-brand-navy mb-3 text-xs font-bold tracking-widest uppercase">
                     Included
                   </p>
                   <ul className="space-y-2">
@@ -282,7 +271,7 @@ export default function LaunchKitPage() {
                 </div>
 
                 <div>
-                  <p className="text-text-muted mb-3 text-xs font-bold uppercase tracking-widest">
+                  <p className="text-text-muted mb-3 text-xs font-bold tracking-widest uppercase">
                     Not included
                   </p>
                   <ul className="space-y-2">
@@ -320,7 +309,7 @@ export default function LaunchKitPage() {
               <AlertCircle className="text-brand-orange mt-0.5 h-5 w-5 shrink-0" />
               <h3 className="text-brand-navy font-bold">What you are responsible for</h3>
             </div>
-            <ul className="space-y-2 text-sm text-text-secondary">
+            <ul className="text-text-secondary space-y-2 text-sm">
               <li className="flex items-start gap-2">
                 <ChevronRight className="text-brand-orange mt-0.5 h-4 w-4 shrink-0" />
                 All written copy — page text, headlines, CTAs, and any other content must be
@@ -354,8 +343,8 @@ export default function LaunchKitPage() {
           <div className="bg-brand-navy max-w-3xl rounded-3xl p-12 text-white">
             <h2 className="font-heading mb-3 text-2xl font-bold">Ready to start?</h2>
             <p className="text-text-muted mb-8 text-sm leading-relaxed">
-              Tell us your page count, what content you have ready, and your target launch date.
-              We will confirm the right tier and timeline.
+              Tell us your page count, what content you have ready, and your target launch date. We
+              will confirm the right tier and timeline.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link href="/request-proposal">
@@ -364,10 +353,7 @@ export default function LaunchKitPage() {
                 </Button>
               </Link>
               <Link href="/services">
-                <Button
-                  variant="outline"
-                  className="border-white/30 text-white hover:bg-white/10"
-                >
+                <Button variant="outline" className="border-white/30 text-white hover:bg-white/10">
                   Back to All Services
                 </Button>
               </Link>
