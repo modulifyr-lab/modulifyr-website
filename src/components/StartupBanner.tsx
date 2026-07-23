@@ -9,8 +9,11 @@ export function StartupBanner() {
   const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
-    setIsHydrated(true);
-    setVisible(!sessionStorage.getItem("modulifyr_startup_banner"));
+    const timer = window.setTimeout(() => {
+      setIsHydrated(true);
+      setVisible(!sessionStorage.getItem("modulifyr_startup_banner"));
+    }, 0);
+    return () => window.clearTimeout(timer);
   }, []);
 
   const dismiss = () => {

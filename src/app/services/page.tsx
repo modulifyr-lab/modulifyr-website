@@ -19,7 +19,6 @@ import {
   Download,
   LayoutGrid,
   Wrench,
-  ChevronRight,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -256,7 +255,10 @@ export default function ServicesPage() {
                       </span>
                       <ul className="grid grid-cols-1 gap-1.5">
                         {service.deliverables.map((item, i) => (
-                          <li key={i} className="text-text-secondary flex items-start gap-2 text-sm">
+                          <li
+                            key={i}
+                            className="text-text-secondary flex items-start gap-2 text-sm"
+                          >
                             <Zap className="text-brand-gold mt-0.5 h-3 w-3 shrink-0" /> {item}
                           </li>
                         ))}
@@ -267,7 +269,7 @@ export default function ServicesPage() {
                       <span className="bg-bg-secondary text-brand-navy rounded px-2 py-1 text-xs font-semibold">
                         {service.size}
                       </span>
-                      <p className="text-text-muted text-xs mt-1">{service.timeline}</p>
+                      <p className="text-text-muted mt-1 text-xs">{service.timeline}</p>
                     </div>
                   </div>
                 )}
@@ -355,9 +357,11 @@ export default function ServicesPage() {
 
       <section className="py-24">
         <div className="container-custom text-center">
-          <div className="bg-brand-navy/5 border-border-base rounded-3xl border p-12 max-w-3xl mx-auto">
-            <p className="text-brand-navy font-heading text-xl leading-relaxed mb-4">
-              "We're building our foundation, not buying fake praise. Be one of Modulifyr's first 5 founding clients and lock in our bootstrapper pricing while we scale our early portfolio."
+          <div className="bg-brand-navy/5 border-border-base mx-auto max-w-3xl rounded-3xl border p-12">
+            <p className="text-brand-navy font-heading mb-4 text-xl leading-relaxed">
+              "We're building our foundation, not buying fake praise. Be one of Modulifyr's first 5
+              founding clients and lock in our bootstrapper pricing while we scale our early
+              portfolio."
             </p>
           </div>
         </div>

@@ -11,7 +11,6 @@ import {
   FileText,
   BarChart4,
   RefreshCw,
-  MapPin,
   Globe,
   Search,
   Layers,
@@ -22,41 +21,25 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useRegion } from "@/components/RegionProvider";
+import { RegionSelector } from "@/components/RegionSelector";
+import { formatTierPrice } from "@/lib/pricing";
+import { REGIONS } from "@/lib/regions";
+import type { Region } from "@/lib/regions";
 
 // ─── Sunset Trigger Configuration ─────────────────────────────────────────────
 // Hardcoded toggle - set to true when sunset trigger fires (5 engagements or 2027-01-15)
 const SUNSET_TRIGGERED = false;
 
-// ─── Current Pricing (pre-sunset) ─────────────────────────────────────────────
-const currentPricing = {
-  nepal: {
-    strategySprint: ["NPR 17,000 – 50,000", "NPR 53,000 – 75,000", "NPR 84,000 – 1,00,000", "NPR 1,09,000 – 1,35,000"],
-    launchKit: ["NPR 3,300 – 13,500", "NPR 17,000 – 40,000", "NPR 50,000 – 75,000", "NPR 84,000 – 1,17,000"],
-    automationLayer: ["NPR 33,500", "NPR 67,000 – 1,34,000", "NPR 1,50,000 – 2,00,000", "NPR 2,50,000 – 3,35,000"],
-  },
-  international: {
-    strategySprint: ["$100 – 300", "$320 – 450", "$500 – 600", "$650 – 800"],
-    launchKit: ["$20 – 80", "$100 – 240", "$300 – 450", "$500 – 700"],
-    automationLayer: ["$200", "$400 – 800", "$900 – 1,200", "$1,500 – 2,000"],
-  },
-};
-
-// ─── Sunset Pricing (post-trigger) ────────────────────────────────────────────
-const sunsetPricing = {
-  nepal: {
-    strategySprint: ["NPR 84,000 – 1,20,000", "NPR 1,25,000 – 1,60,000", "NPR 1,65,000 – 2,10,000", "NPR 2,30,000 – 2,95,000"],
-    launchKit: ["NPR 13,500 – 25,000", "NPR 33,000 – 75,000", "NPR 84,000 – 1,34,000", "NPR 1,25,000 – 2,00,000"],
-    automationLayer: ["NPR 84,000 – 1,00,000", "NPR 1,00,000 – 2,00,000", "NPR 2,00,000 – 3,00,000", "NPR 3,35,000 – 5,00,000"],
-  },
-  international: {
-    strategySprint: ["$150 – 500", "$500 – 750", "$800 – 1,000", "$1,000 – 1,400"],
-    launchKit: ["$80 – 150", "$200 – 450", "$500 – 800", "$750 – 1,200"],
-    automationLayer: ["$400 – 500", "$600 – 1,200", "$1,200 – 1,800", "$2,000 – 3,000"],
-  },
-};
-
 // ─── Package Configs (3 active + 5 coming soon) ──────────────────────────────
-type PackageKey = "strategySprint" | "launchKit" | "automationLayer" | "productMVP" | "internalOps" | "modernization" | "platformSetup" | "engineeringRetainer";
+type PackageKey =
+  | "strategySprint"
+  | "launchKit"
+  | "automationLayer"
+  | "productMVP"
+  | "internalOps"
+  | "modernization"
+  | "platformSetup"
+  | "engineeringRetainer";
 
 interface PackageConfig {
   key: PackageKey;
@@ -95,7 +78,12 @@ const packageConfigs: PackageConfig[] = [
     highlight: false,
     bestFor: "New projects / unclear scope",
     comingSoon: false,
-    tierNames: ["Tier 1 — Basic Scoping", "Tier 2 — Full Discovery", "Tier 3 — Complex Architecture", "Tier 4 — Enterprise Strategy"],
+    tierNames: [
+      "Tier 1 — Basic Scoping",
+      "Tier 2 — Full Discovery",
+      "Tier 3 — Complex Architecture",
+      "Tier 4 — Enterprise Strategy",
+    ],
   },
   {
     key: "launchKit",
@@ -115,7 +103,12 @@ const packageConfigs: PackageConfig[] = [
     highlight: false,
     bestFor: "Marketing & content sites",
     comingSoon: false,
-    tierNames: ["Tier 1 — Essential", "Tier 2 — Business", "Tier 3 — Premium", "Tier 4 — Enterprise Launch"],
+    tierNames: [
+      "Tier 1 — Essential",
+      "Tier 2 — Business",
+      "Tier 3 — Premium",
+      "Tier 4 — Enterprise Launch",
+    ],
   },
   {
     key: "automationLayer",
@@ -135,15 +128,18 @@ const packageConfigs: PackageConfig[] = [
     highlight: false,
     bestFor: "Integration-focused",
     comingSoon: false,
-    tierNames: ["Tier 1 — Basic Connection", "Tier 2 — Multi-System Sync", "Tier 3 — Complex Pipeline", "Tier 4 — Enterprise Automation"],
+    tierNames: [
+      "Tier 1 — Basic Connection",
+      "Tier 2 — Multi-System Sync",
+      "Tier 3 — Complex Pipeline",
+      "Tier 4 — Enterprise Automation",
+    ],
   },
   {
     key: "productMVP",
     icon: Layers,
     internalName: "Web App MVP Package",
     clientName: "Product MVP",
-    price: "NPR 15,90,000 – 59,60,000",
-    subprice: "approx. $12,000–$45,000",
     duration: "4–10 Weeks",
     desc: "SaaS MVPs, portals, dashboards, and client-facing product systems.",
     features: [
@@ -162,8 +158,6 @@ const packageConfigs: PackageConfig[] = [
     icon: LayoutGrid,
     internalName: "Internal Tool Package",
     clientName: "Internal Ops System",
-    price: "NPR 10,60,000 – 39,80,000",
-    subprice: "approx. $8,000–$30,000",
     duration: "3–8 Weeks",
     desc: "Operations systems, approval flows, HR tools, and internal CRM-like apps.",
     features: [
@@ -182,8 +176,6 @@ const packageConfigs: PackageConfig[] = [
     icon: RefreshCw,
     internalName: "Modernization / Refactoring",
     clientName: "Modernization Sprint",
-    price: "NPR 19,90,000 – 1,06,00,000+",
-    subprice: "approx. $15,000–$80,000+",
     duration: "4–16 Weeks",
     desc: "Legacy systems, performance issues, cloud migration, and modular cleanup.",
     features: [
@@ -202,8 +194,6 @@ const packageConfigs: PackageConfig[] = [
     icon: Cloud,
     internalName: "Infrastructure & SRE Setup",
     clientName: "Platform Setup",
-    price: "NPR 6,60,000 – 33,20,000",
-    subprice: "approx. $5,000–$25,000",
     duration: "1–4 Weeks",
     desc: "Cloud setup, CI/CD pipelines, security hardening, and release automation.",
     features: [
@@ -222,8 +212,6 @@ const packageConfigs: PackageConfig[] = [
     icon: Users,
     internalName: "Dedicated Product Team Retainer",
     clientName: "Engineering Retainer",
-    price: "NPR 5,30,000 – 23,90,000+ /mo",
-    subprice: "approx. $4,000–$18,000+ /mo",
     duration: "Monthly · 3-month min",
     desc: "Fixed monthly engineering capacity, codebase ownership, and roadmap execution.",
     features: [
@@ -240,9 +228,26 @@ const packageConfigs: PackageConfig[] = [
 ];
 
 // ─── Active Pricing Getter ────────────────────────────────────────────────────
-function getActivePricing(region: "nepal" | "international", pkg: PackageKey): string[] {
-  const source = SUNSET_TRIGGERED ? sunsetPricing : currentPricing;
-  return source[region][pkg as "strategySprint" | "launchKit" | "automationLayer"] ?? [];
+const activeTierKeys = {
+  strategySprint: [
+    "tier1_basicScoping",
+    "tier2_fullDiscovery",
+    "tier3_complexArchitecture",
+    "tier4_enterpriseStrategy",
+  ],
+  launchKit: ["tier1_essential", "tier2_business", "tier3_premium", "tier4_enterpriseLaunch"],
+  automationLayer: [
+    "tier1_basicConnection",
+    "tier2_multiSystemSync",
+    "tier3_complexPipeline",
+    "tier4_enterpriseAutomation",
+  ],
+} as const;
+
+type ActivePackageKey = keyof typeof activeTierKeys;
+
+function getActivePricing(region: Exclude<Region, null>, pkg: ActivePackageKey): string[] {
+  return activeTierKeys[pkg].map((tierKey) => formatTierPrice(pkg, tierKey, region));
 }
 
 // ─── Build Package Objects for Rendering ──────────────────────────────────────
@@ -266,29 +271,28 @@ interface PackageForRender {
   isTiered?: boolean;
 }
 
-function buildPackages(region: "nepal" | "international", isSunset: boolean): PackageForRender[] {
+function buildPackages(region: Region): PackageForRender[] {
   return packageConfigs.map((cfg) => {
-    if (cfg.comingSoon) {
+    if (cfg.comingSoon || !region || !(cfg.key in activeTierKeys)) {
       return {
         ...cfg,
+        price: cfg.comingSoon ? "Pricing to be announced" : undefined,
+        subprice: cfg.comingSoon
+          ? "Select a region now; localized pricing will appear when this package launches."
+          : undefined,
         tierPrices: [],
         isTiered: false,
       };
     }
 
-    const tierPrices = getActivePricing(region, cfg.key);
-    const currencySymbol = region === "nepal" ? "NPR" : "$";
-    const subprice = region === "nepal" 
-      ? `approx. ${tierPrices[0].replace("NPR", "$")}–${tierPrices[3].replace("NPR", "$")}`
-      : `USD · fixed fee`;
-
+    const tierPrices = getActivePricing(region, cfg.key as ActivePackageKey);
     return {
       ...cfg,
       tierPrices,
       tierNames: cfg.tierNames,
       isTiered: true,
-      price: `${currencySymbol} ${tierPrices[0].replace(currencySymbol, "").trim()} – ${currencySymbol} ${tierPrices[3].replace(currencySymbol, "").trim()}`,
-      subprice,
+      price: `${tierPrices[0]} – ${tierPrices[tierPrices.length - 1]}`,
+      subprice: `${REGIONS[region].currency} · fixed fee`,
     };
   });
 }
@@ -319,9 +323,8 @@ const engagementModels = [
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function PricingPage() {
   const { region, setRegion } = useRegion();
-  const isNepal = region === "nepal";
   const [showSunset, setShowSunset] = useState(false);
-  const packages = buildPackages(isNepal ? "nepal" : "international", SUNSET_TRIGGERED || showSunset);
+  const packages = buildPackages(region);
 
   return (
     <div className="flex w-full flex-col">
@@ -348,42 +351,25 @@ export default function PricingPage() {
             <span className="text-text-muted text-sm font-bold tracking-widest uppercase">
               Showing prices for:
             </span>
-            <div className="flex gap-3">
-              <button
-                onClick={() => setRegion("nepal")}
-                className={`flex items-center gap-2 rounded-xl border-2 px-4 py-2 text-sm font-semibold transition-all ${
-                  isNepal
-                    ? "border-brand-orange bg-brand-orange/10 text-brand-orange"
-                    : "border-border-base text-text-secondary hover:border-brand-orange/50 bg-white"
-                }`}
-              >
-                <MapPin className="h-4 w-4" /> Nepal / South Asia (NPR)
-              </button>
-              <button
-                onClick={() => setRegion("international")}
-                className={`flex items-center gap-2 rounded-xl border-2 px-4 py-2 text-sm font-semibold transition-all ${
-                  !isNepal
-                    ? "border-brand-teal bg-brand-teal/10 text-brand-teal"
-                    : "border-border-base text-text-secondary hover:border-brand-teal/50 bg-white"
-                }`}
-              >
-                <Globe className="h-4 w-4" /> International (USD)
-              </button>
-            </div>
+            <RegionSelector />
             <span className="text-text-muted text-xs italic">
-              {isNepal
-                ? "Rates calibrated for the Nepal and South Asian market"
-                : "Rates reflect global mid-market agency standards"}
+              {region
+                ? `Rates shown in ${REGIONS[region].currency} for ${REGIONS[region].label}`
+                : "Select a region to load localized pricing"}
             </span>
           </div>
         </div>
       </section>
 
       {/* Sunset Toggle Banner */}
-      <section className={`bg-brand-orange/10 border-border-base border-y py-4 ${SUNSET_TRIGGERED || showSunset ? "block" : "hidden"}`}>
+      <section
+        className={`bg-brand-orange/10 border-border-base border-y py-4 ${SUNSET_TRIGGERED || showSunset ? "block" : "hidden"}`}
+      >
         <div className="container-custom flex items-center justify-between">
           <span className="text-brand-navy font-bold">
-            {SUNSET_TRIGGERED ? "⚠ Sunset pricing active — showing post-trigger rates" : "⚠ Sunset pricing preview — showing post-trigger rates"}
+            {SUNSET_TRIGGERED
+              ? "⚠ Sunset pricing active — showing post-trigger rates"
+              : "⚠ Sunset pricing preview — showing post-trigger rates"}
           </span>
           <div className="flex items-center gap-4">
             <span className="text-text-muted text-sm">
@@ -445,7 +431,7 @@ export default function PricingPage() {
 
                 {pkg.isTiered && pkg.tierNames && pkg.tierPrices ? (
                   // Tiered pricing display
-                  <div className="mb-4 space-y-2 flex-grow">
+                  <div className="mb-4 flex-grow space-y-2">
                     {pkg.tierNames.map((tierName, i) => (
                       <div key={i} className="bg-bg-secondary rounded-xl p-3">
                         <div className="flex items-center justify-between">
@@ -460,7 +446,9 @@ export default function PricingPage() {
                 ) : (
                   // Simple pricing for coming soon packages
                   <div className="mb-4">
-                    <div className="font-heading text-brand-navy text-xl font-bold">{pkg.price}</div>
+                    <div className="font-heading text-brand-navy text-xl font-bold">
+                      {pkg.price}
+                    </div>
                     <div className="text-text-muted text-xs">{pkg.subprice}</div>
                     <div className="text-brand-teal mt-1 flex items-center gap-1.5 text-xs font-semibold uppercase">
                       <Clock className="h-3 w-3" /> {pkg.duration}
@@ -471,7 +459,7 @@ export default function PricingPage() {
                 {pkg.comingSoon ? (
                   <div className="w-full"></div>
                 ) : (
-                  <Link href={pkg.link || "/request-proposal"} className="w-full mt-auto">
+                  <Link href={pkg.link || "/request-proposal"} className="mt-auto w-full">
                     <Button
                       variant={pkg.highlight && !pkg.comingSoon ? "primary" : "outline"}
                       className="group w-full justify-between text-sm"
@@ -490,10 +478,10 @@ export default function PricingPage() {
               All figures are indicative ranges. Final pricing confirmed in a written SOW after
               discovery.{" "}
               <button
-                onClick={() => setRegion(isNepal ? "international" : "nepal")}
+                onClick={() => setRegion(null)}
                 className="text-brand-orange font-semibold hover:underline"
               >
-                Switch to {isNepal ? "international USD pricing" : "Nepal NPR pricing"}
+                Choose a different pricing region
               </button>
             </p>
           </div>

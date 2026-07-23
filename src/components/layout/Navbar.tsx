@@ -8,6 +8,7 @@ import { useTheme } from "next-themes";
 import { Sun, Moon, Menu, X } from "lucide-react";
 import { useLanguage } from "@/components/LanguageContext";
 import LanguageSwitcher from "@/contexts/LanguageSwitcher";
+import { RegionSelector } from "@/components/RegionSelector";
 
 const NAV_LINKS = [
   { href: "/services", key: "nav.services" },
@@ -120,6 +121,7 @@ export function Navbar() {
           {/* ── Desktop right controls ─────────────────────────────────── */}
           <div className="hidden items-center gap-3 lg:flex">
             <LanguageSwitcher />
+            <RegionSelector compact />
             <div className="border-border-base flex items-center gap-3 border-l pl-4">
               {mounted && (
                 <button
@@ -202,6 +204,9 @@ export function Navbar() {
           })}
           <div className="border-border-base border-t pt-2">
             <LanguageSwitcher />
+          </div>
+          <div className="border-border-base border-t pt-4">
+            <RegionSelector />
           </div>
           <Link href="/request-proposal">
             <button
