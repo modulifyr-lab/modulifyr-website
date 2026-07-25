@@ -291,7 +291,7 @@ export default function CareersPage() {
             </h1>
 
             <p className="text-text-muted mb-6 max-w-3xl text-xl leading-relaxed">
-              Modulifyr is a pre-launch software company operating across three divisions. We're
+              Modulifyr is a software company operating across three divisions. We're
               building the consultancy, the game studio, and the software storefront simultaneously
               — and we're hiring across all three. Everyone here is a volunteer, including the
               founder. No salaries yet. Real work, real systems, real ownership.
