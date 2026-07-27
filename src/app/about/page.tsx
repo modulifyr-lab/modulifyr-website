@@ -82,8 +82,17 @@ const teamMembers = [
     isFounder: true,
   },
   {
+    name: "Rojeena M",
+    fullName: "Rojeena Maharjan",
+    title: "Marketing Manager",
+    quote: "Believe in yourself, stay true to who you are, and keep growing every day.",
+    linkedin: "https://www.linkedin.com/in/rojeena-maharjan-a73b6b265/",
+    portfolio: null,
+    isFounder: false,
+  },
+  {
     name: "Aadash L",
-    fullName: "Aadash L",
+    fullName: "Aadash Limbu",
     title: "Backend Engineer",
     linkedin: "https://www.linkedin.com/in/aadesh-limbu-b637a8414",
     portfolio: null,
@@ -91,7 +100,7 @@ const teamMembers = [
   },
   {
     name: "Malika R",
-    fullName: "Malika R",
+    fullName: "Malika Razbanshi",
     title: "Backend Engineer",
     linkedin: "https://www.linkedin.com/in/mallika-razbanshi-78b506414",
     portfolio: null,
@@ -99,7 +108,7 @@ const teamMembers = [
   },
   {
     name: "Ishak L",
-    fullName: "Ishak L",
+    fullName: "Ishak Limbu",
     title: "Narrative Designer",
     linkedin: "https://www.linkedin.com/in/ishak-limbu-b3b48b414/",
     portfolio: null,
@@ -107,7 +116,7 @@ const teamMembers = [
   },
   {
     name: "Roshan K",
-    fullName: "Roshan K",
+    fullName: "Roshan Khanal",
     title: "Engine Programmer",
     linkedin: "https://www.linkedin.com/in/roshan-khanal-a8a619414",
     portfolio: null,
@@ -115,7 +124,7 @@ const teamMembers = [
   },
   {
     name: "Sumina L",
-    fullName: "Sumina L",
+    fullName: "Sumina Laksam",
     title: "UI/UX Artist",
     linkedin: "https://www.linkedin.com/in/sumina-laksam29",
     portfolio: null,
