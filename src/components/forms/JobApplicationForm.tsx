@@ -19,7 +19,7 @@ import {
 // Grouped by category for the select dropdown
 const roleGroups = [
   {
-    label: "Engineering — Modulifyr / Virtual",
+    label: "Engineering — Modulifyr / Modullex",
     roles: [
       "Full-Stack Engineer",
       "Frontend Engineer",
@@ -34,7 +34,7 @@ const roleGroups = [
     ],
   },
   {
-    label: "Game Development — Speedline",
+    label: "Game Development — Onyxlabs",
     roles: [
       "Gameplay Programmer",
       "Engine Programmer",
@@ -44,7 +44,7 @@ const roleGroups = [
     ],
   },
   {
-    label: "Art & Visual — Speedline",
+    label: "Art & Visual — Onyxlabs",
     roles: [
       "Concept Artist",
       "3D Artist",
@@ -54,7 +54,7 @@ const roleGroups = [
     ],
   },
   {
-    label: "Design — Modulifyr / Virtual",
+    label: "Design — Modulifyr / Modullex",
     roles: [
       "UX Designer",
       "UI Designer",
@@ -64,7 +64,7 @@ const roleGroups = [
     ],
   },
   {
-    label: "Game Design — Speedline",
+    label: "Game Design — Onyxlabs",
     roles: [
       "Game Designer",
       "Level Designer",
@@ -74,7 +74,7 @@ const roleGroups = [
     ],
   },
   {
-    label: "Audio — Speedline",
+    label: "Audio — Onyxlabs",
     roles: ["Audio Designer", "Composer"],
   },
   {

@@ -18,7 +18,7 @@ import {
 export const metadata: Metadata = {
   title: "Careers | Modulifyr — Volunteer & Collaborator Openings",
   description:
-    "Join Modulifyr as a volunteer or collaborator. We are building three divisions from the ground up: a B2B software consultancy, a Unity game studio (Speedline), and a B2C software storefront (Virtual). No salaries yet — real work, real ownership.",
+    "Join Modulifyr as a volunteer or collaborator. We are building three divisions from the ground up: a B2B software consultancy, a Unity game studio (Onyxlabs), and a B2C software storefront (Modullex). No salaries yet — real work, real ownership.",
 };
 
 // ─── Division definitions ─────────────────────────────────────────────────────
@@ -35,24 +35,24 @@ const divisions = [
     desc: "The core division. We design and build modular software systems for businesses in Nepal and internationally — ERPs, dashboards, portals, APIs, and infrastructure. TypeScript-first, architecture-forward, and built to last.",
   },
   {
-    id: "speedline",
+    id: "onyxlabs",
     icon: Gamepad2,
     color: "text-brand-orange",
     bg: "bg-brand-orange/10",
     border: "border-brand-orange/30",
-    name: "Modulifyr Speedline",
+    name: "Onyxlabs (a division of Modulifyr Enterprise Pvt. Ltd.)",
     tagline: "Desktop Game Studio (Unity / C#)",
     desc: "Our game studio division. We build and ship desktop games via Steam and Paddle. If you've ever wanted to work on a real game project from the ground floor — design, art, code, audio, publishing — this is where you do it.",
   },
   {
-    id: "virtual",
+    id: "modullex",
     icon: ShoppingBag,
     color: "text-brand-gold",
     bg: "bg-brand-gold/20",
     border: "border-brand-gold/30",
-    name: "Modulifyr Virtual",
+    name: "Modullex",
     tagline: "B2C Consumer Software Storefront",
-    desc: "Our consumer-facing storefront at virtual.modulifyr.com. We publish and sell consumer software products directly to individuals. Needs marketing, growth, product, and engineering talent.",
+    desc: "Our consumer-facing storefront at modullex.modulifyr.com. We publish and sell consumer software products directly to individuals under the Modullex brand. Needs marketing, growth, product, and engineering talent.",
   },
 ];
 
@@ -62,7 +62,7 @@ const roleGroups = [
   {
     icon: Code2,
     category: "Engineering",
-    divisions: ["Modulifyr", "Modulifyr Virtual"],
+    divisions: ["Modulifyr", "Modullex"],
     color: "text-brand-teal",
     bg: "bg-brand-teal/10",
     roles: [
@@ -83,7 +83,7 @@ const roleGroups = [
   {
     icon: Gamepad2,
     category: "Game Development",
-    divisions: ["Modulifyr Speedline"],
+    divisions: ["Onyxlabs"],
     color: "text-brand-orange",
     bg: "bg-brand-orange/10",
     roles: [
@@ -99,7 +99,7 @@ const roleGroups = [
   {
     icon: Paintbrush,
     category: "Art & Design",
-    divisions: ["Modulifyr Speedline", "Modulifyr", "Modulifyr Virtual"],
+    divisions: ["Onyxlabs", "Modulifyr", "Modullex"],
     color: "text-pink-500",
     bg: "bg-pink-500/10",
     roles: [
@@ -116,12 +116,12 @@ const roleGroups = [
       "User Researcher",
     ],
     what:
-      "Figma for product design. For Speedline: full creative pipeline from concept to in-engine assets.",
+      "Figma for product design. For Onyxlabs: full creative pipeline from concept to in-engine assets.",
   },
   {
     icon: Building2,
     category: "Game Design",
-    divisions: ["Modulifyr Speedline"],
+    divisions: ["Onyxlabs"],
     color: "text-brand-orange",
     bg: "bg-brand-orange/10",
     roles: [
@@ -136,7 +136,7 @@ const roleGroups = [
   {
     icon: Users,
     category: "Audio",
-    divisions: ["Modulifyr Speedline"],
+    divisions: ["Onyxlabs"],
     color: "text-amber-500",
     bg: "bg-amber-500/10",
     roles: ["Audio Designer", "Composer"],
@@ -146,7 +146,7 @@ const roleGroups = [
   {
     icon: Briefcase,
     category: "Product Management",
-    divisions: ["Modulifyr", "Modulifyr Virtual", "Modulifyr Speedline"],
+    divisions: ["Modulifyr", "Modullex", "Onyxlabs"],
     color: "text-green-600",
     bg: "bg-green-600/10",
     roles: ["Product Manager", "Senior Product Manager", "Technical Project Manager", "Project Manager"],
@@ -156,7 +156,7 @@ const roleGroups = [
   {
     icon: Megaphone,
     category: "Marketing & Growth",
-    divisions: ["Modulifyr", "Modulifyr Virtual", "Modulifyr Speedline"],
+    divisions: ["Modulifyr", "Modullex", "Onyxlabs"],
     color: "text-brand-orange",
     bg: "bg-brand-orange/10",
     roles: [
@@ -194,7 +194,7 @@ const roleGroups = [
   {
     icon: BarChart2,
     category: "Data & Analytics",
-    divisions: ["Modulifyr", "Modulifyr Virtual"],
+    divisions: ["Modulifyr", "Modullex"],
     color: "text-brand-teal",
     bg: "bg-brand-teal/10",
     roles: ["Data Analyst", "Revenue Analyst"],

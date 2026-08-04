@@ -91,17 +91,19 @@ const teamMembers = [
     isFounder: false,
   },
   {
-    name: "Aadash L",
-    fullName: "Aadash Limbu",
+    name: "Aadesh L",
+    fullName: "Aadesh Limbu",
     title: "Backend Engineer",
+    subtext: "Specializes in high-performance REST APIs & database optimization.",
     linkedin: "https://www.linkedin.com/in/aadesh-limbu-b637a8414",
     portfolio: null,
     isFounder: false,
   },
   {
-    name: "Malika R",
-    fullName: "Malika Razbanshi",
+    name: "Mallika R",
+    fullName: "Mallika Razbanshi",
     title: "Backend Engineer",
+    subtext: "Specializes in secure data structures & scalable cloud integrations.",
     linkedin: "https://www.linkedin.com/in/mallika-razbanshi-78b506414",
     portfolio: null,
     isFounder: false,
@@ -144,15 +146,15 @@ const divisionRoles = [
   },
   {
     icon: Gamepad2,
-    division: "Modulifyr Speedline",
-    tagline: "Desktop Game Studio (Unity / C#)",
+    division: "Onyxlabs",
+    tagline: "Desktop Game Studio (Unity / C#) — a division of Modulifyr Enterprise Pvt. Ltd.",
     color: "text-brand-orange",
     bg: "bg-brand-orange/10",
     examples: "Programmers, Artists, Game Designers, Audio",
   },
   {
     icon: ShoppingBag,
-    division: "Modulifyr Virtual",
+    division: "Modullex",
     tagline: "B2C Software Storefront",
     color: "text-brand-gold",
     bg: "bg-brand-gold/20",
@@ -311,6 +313,16 @@ export default function AboutPage() {
                     <p className="text-brand-orange mt-0.5 text-xs font-semibold">
                       {member.title}
                     </p>
+                    {"subtext" in member && member.subtext && (
+                      <p className="text-text-muted mt-1 text-xs leading-relaxed">
+                        {member.subtext}
+                      </p>
+                    )}
+                    {"quote" in member && member.quote && (
+                      <p className="text-text-muted mt-1 text-xs leading-relaxed italic">
+                        "{member.quote}"
+                      </p>
+                    )}
                     {member.isFounder && (
                       <p className="text-text-muted mt-0.5 flex items-center gap-1 text-xs">
                         <MapPin className="h-3 w-3" aria-hidden="true" />

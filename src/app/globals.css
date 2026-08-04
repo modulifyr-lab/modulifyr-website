@@ -277,3 +277,15 @@ h6 {
   background-color: rgba(255, 255, 255, 0.08);
   color: var(--color-brand-teal);
 }
+
+/* ── Disable third-party CookieHub styles ─────────────────────────────────── */
+.ch2,
+.ch2-container,
+.ch2-block,
+.ch2-theme-default,
+div[class*="ch2-"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}

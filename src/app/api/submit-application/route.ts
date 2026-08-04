@@ -16,13 +16,13 @@ const allowedRoles = [
   "Solutions Architect",
   "Technical Lead",
   "Engineering Manager",
-  // Game Dev — Speedline
+  // Game Dev — Onyxlabs
   "Gameplay Programmer",
   "Engine Programmer",
   "AI Programmer",
   "Tools Programmer",
   "Graphics Programmer",
-  // Art — Speedline
+  // Art — Onyxlabs
   "Concept Artist",
   "3D Artist",
   "Animator",
@@ -34,13 +34,13 @@ const allowedRoles = [
   "Product Designer",
   "UX Researcher",
   "Design Lead",
-  // Game Design — Speedline
+  // Game Design — Onyxlabs
   "Game Designer",
   "Level Designer",
   "Narrative Designer",
   "Systems Designer",
   "QA Tester",
-  // Audio — Speedline
+  // Audio — Onyxlabs
   "Audio Designer",
   "Composer",
   // Product Management
