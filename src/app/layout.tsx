@@ -7,6 +7,7 @@ import { RegionModal } from "@/components/RegionModal";
 import { LanguageProvider } from "@/components/LanguageContext";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { CookieConsentBanner } from "@/components/CookieConsentBanner";
 import Script from "next/script";
 import { cookies } from "next/headers";
 import { isRegion, REGION_COOKIE } from "@/lib/regions";
@@ -113,8 +114,8 @@ const schemaOrg = {
     {
       "@type": "Organization",
       "@id": "https://modulifyr.com/#organization",
-      name: "Modulifyr",
-      alternateName: "Modulifyr Lab",
+      name: "Modulifyr Enterprise Pvt. Ltd.",
+      alternateName: "Modulifyr",
       url: "https://modulifyr.com",
       logo: {
         "@type": "ImageObject",
@@ -126,7 +127,7 @@ const schemaOrg = {
         "Custom modular software systems for small and medium-sized businesses in education, healthcare, retail, commerce, and IT.",
       address: {
         "@type": "PostalAddress",
-        streetAddress: "JXXQ+4G",
+        streetAddress: "Ward 1, Gauri Tol",
         addressLocality: "Birtamode",
         addressRegion: "Jhapa",
         addressCountry: "NP",
@@ -146,7 +147,7 @@ const schemaOrg = {
       foundingDate: "2025",
       foundingLocation: {
         "@type": "Place",
-        name: "Birtamode, Jhapa, Nepal",
+        name: "Birtamode, Ward 1, Gauri Tol, Jhapa, Nepal",
       },
       founder: {
         "@type": "Person",
@@ -157,7 +158,7 @@ const schemaOrg = {
         worksFor: { "@id": "https://modulifyr.com/#organization" },
         address: {
           "@type": "PostalAddress",
-          streetAddress: "JXXQ+4G",
+          streetAddress: "Ward 1, Gauri Tol",
           addressLocality: "Birtamode",
           addressRegion: "Jhapa",
           addressCountry: "NP",
@@ -277,6 +278,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <RegionProvider initialRegion={initialRegion}>
             <LanguageProvider>
               <RegionModal />
+              <CookieConsentBanner />
               <Navbar />
               <main id="main-content" className="min-h-screen pt-20">
                 {children}
@@ -302,13 +304,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           dangerouslySetInnerHTML={{
             __html: `window.$crisp=[];window.CRISP_WEBSITE_ID="cb4cf5d8-e26a-408e-8bd0-5ed3a98c1022";(function(){var d=document;var s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();`,
           }}
-        />
-
-        {/* CookieHub Consent Banner */}
-        <Script
-          id="cookiehub"
-          strategy="afterInteractive"
-          src="https://cdn.cookiehub.eu/c2/ed0faa37.js"
         />
       </body>
     </html>

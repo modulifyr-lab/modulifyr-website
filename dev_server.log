@@ -1,0 +1,19 @@
+$ next dev
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.2:3000
+
+✓ Starting...
+✓ Ready in 2.7s
+ GET /about 200 in 3.3s (compile: 1632ms, render: 1642ms)
+⨯ upstream image response failed for https://images.unsplash.com/photo-1544806342-99999bc0420b?auto=format&fit=crop&q=80&w=2670 404
+ GET /careers 200 in 954ms (compile: 69ms, render: 886ms)
+ GET /contact 200 in 475ms (compile: 328ms, render: 146ms)
+ GET /about 200 in 436ms (compile: 14ms, render: 422ms)
+⨯ upstream image response failed for https://images.unsplash.com/photo-1544806342-99999bc0420b?auto=format&fit=crop&q=80&w=2670 404
+ GET /careers 200 in 621ms (compile: 12ms, render: 609ms)
+ GET /contact 200 in 289ms (compile: 19ms, render: 269ms)
+ GET /about 200 in 1039ms (compile: 7ms, render: 1032ms)
+⨯ upstream image response failed for https://images.unsplash.com/photo-1544806342-99999bc0420b?auto=format&fit=crop&q=80&w=2670 404
+ GET /careers 200 in 470ms (compile: 4ms, render: 465ms)
+ GET /contact 200 in 143ms (compile: 5ms, render: 139ms)

@@ -20,7 +20,7 @@ export function Footer() {
             </Link>
             <p className="text-text-muted max-w-xs text-sm leading-relaxed">
               Custom modular software systems for SMBs that have outgrown off-the-shelf tools. Based
-              in JXXQ+4G, Birtamode, Jhapa, Nepal. Building for clients worldwide.
+              in Birtamode, Ward 1, Gauri Tol, Jhapa, Nepal. Building for clients worldwide.
             </p>
           </div>
 
@@ -70,7 +70,7 @@ export function Footer() {
           {/* Column 3: Contact */}
           <div className="flex flex-col gap-4">
             <h4 className="font-heading font-semibold text-white">Contact</h4>
-            <p className="text-text-muted text-sm">JXXQ+4G, Birtamode, Jhapa, Nepal</p>
+            <p className="text-text-muted text-sm">Birtamode, Ward 1, Gauri Tol, Jhapa, Nepal</p>
             <a
               href="mailto:contact@modulifyr.com"
               className="text-text-muted hover:text-brand-orange text-sm transition-colors"
@@ -91,8 +91,7 @@ export function Footer() {
 
         <div className="text-text-muted mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs sm:flex-row">
           <span>
-            © {new Date().getFullYear()} Modulifyr. All rights reserved. JXXQ+4G, Birtamode, Jhapa,
-            Nepal.
+            © {new Date().getFullYear()} Modulifyr Enterprise Pvt. Ltd. All rights reserved.
           </span>
           <span>Custom software development for businesses in Nepal and worldwide.</span>
         </div>

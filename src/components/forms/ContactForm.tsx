@@ -171,14 +171,14 @@ export function ContactForm() {
                 <div className="flex flex-col gap-2">
                   <h4 className="font-heading text-brand-navy text-xl font-bold">Our Office</h4>
                   <p className="text-text-secondary text-sm leading-relaxed">
-                    Modulifyr Engineering
+                    Modulifyr Enterprise Pvt. Ltd.
                     <br />
-                    Birtamode, Jhapa
+                    Birtamode, Ward 1, Gauri Tol
                     <br />
-                    Province No. 1, Nepal
+                    Jhapa, Nepal
                   </p>
                   <a
-                    href="https://www.google.com/maps/search/?api=1&query=Modulifyr+Engineering"
+                    href="https://www.google.com/maps/search/?api=1&query=Modulifyr+Enterprise+Pvt.+Ltd."
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-brand-orange mt-2 flex items-center gap-1 text-sm font-bold hover:underline"
@@ -388,8 +388,8 @@ export function ContactForm() {
         <div className="container-custom">
           <div className="border-border-base h-96 w-full overflow-hidden rounded-3xl border shadow-sm">
             <iframe
-              title="Modulifyr Office Location — Birtamode, Jhapa, Nepal"
-              src="https://maps.google.com/maps?q=Birtamode,+Jhapa,+Nepal&t=&z=13&ie=UTF8&iwloc=&output=embed"
+              title="Modulifyr Office Location — Birtamode, Ward 1, Gauri Tol, Jhapa, Nepal"
+              src="https://maps.google.com/maps?q=Birtamode,+Ward+1,+Gauri+Tol,+Jhapa,+Nepal&t=&z=13&ie=UTF8&iwloc=&output=embed"
               width="100%"
               height="100%"
               style={{ border: 0 }}
@@ -399,7 +399,7 @@ export function ContactForm() {
             />
           </div>
           <p className="text-text-muted mt-3 text-center text-xs">
-            Modulifyr Engineering · Birtamode, Jhapa, Province No. 1, Nepal
+            Modulifyr Enterprise Pvt. Ltd. · Birtamode, Ward 1, Gauri Tol, Jhapa, Nepal
           </p>
         </div>
       </section>

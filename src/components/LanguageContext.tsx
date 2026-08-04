@@ -32,7 +32,7 @@ export const translations: Record<Language, Record<string, string>> = {
     // Home hero
     "home.hero.headline": "Custom Software Systems Built to Scale With Your Organization",
     "home.hero.sub":
-      "Modulifyr designs and builds modular software systems for organizations that require flexibility, scalability, and long-term reliability. We partner with companies worldwide and in Birtamode, Nepal to architect and deliver software tailored to their operations.",
+      "Modulifyr designs and builds modular software systems for organizations that require flexibility, scalability, and long-term reliability. We partner with companies worldwide and in Birtamode, Ward 1, Gauri Tol, Jhapa, Nepal to architect and deliver software tailored to their operations.",
     "home.hero.cta_primary": "Request Proposal",
     "home.hero.cta_secondary": "Book Discovery Call",
     "home.hero.badge_nda": "NDA available",
@@ -98,7 +98,7 @@ export const translations: Record<Language, Record<string, string>> = {
 
     // Footer
     "footer.tagline":
-      "Custom modular software systems for SMBs that have outgrown off-the-shelf tools. Based in Birtamode, Jhapa, Nepal. Building for clients worldwide.",
+      "Custom modular software systems for SMBs that have outgrown off-the-shelf tools. Based in Birtamode, Ward 1, Gauri Tol, Jhapa, Nepal. Building for clients worldwide.",
     "footer.company": "Company",
     "footer.about": "About",
     "footer.work": "Work",
@@ -111,12 +111,17 @@ export const translations: Record<Language, Record<string, string>> = {
     "footer.pricing": "Pricing",
     "footer.industries": "Industries",
     "footer.contact_heading": "Contact",
-    "footer.location": "Birtamode, Jhapa, Nepal",
+    "footer.location": "Birtamode, Ward 1, Gauri Tol, Jhapa, Nepal",
     "footer.response_time": "Response within 1 business day",
     "footer.privacy": "Privacy Policy",
     "footer.terms": "Terms",
-    "footer.copyright": "© 2026 Modulifyr. All rights reserved. Birtamode, Jhapa, Nepal.",
+    "footer.copyright": "© 2026 Modulifyr Enterprise Pvt. Ltd. All rights reserved.",
     "footer.tagline_short": "Custom software development for businesses in Nepal and worldwide.",
+    "cookie.banner.title": "About cookies on this site",
+    "cookie.banner.text": "We use cookies to collect and analyse information on site performance and usage to improve your experience.",
+    "cookie.banner.accept": "Allow all cookies",
+    "cookie.banner.deny": "Deny all",
+    "cookie.banner.learn_more": "Learn more",
   },
 
   ne: {
@@ -202,12 +207,17 @@ export const translations: Record<Language, Record<string, string>> = {
     "footer.pricing": "मूल्य निर्धारण",
     "footer.industries": "उद्योगहरू",
     "footer.contact_heading": "सम्पर्क",
-    "footer.location": "बिर्तामोड, झापा, नेपाल",
+    "footer.location": "बिर्तामोड, वडा नं. १, गौरी टोल, झापा, नेपाल",
     "footer.response_time": "१ कार्य दिनभित्र जवाफ",
     "footer.privacy": "गोपनीयता नीति",
     "footer.terms": "सर्तहरू",
-    "footer.copyright": "© २०२६ Modulifyr। सर्वाधिकार सुरक्षित। बिर्तामोड, झापा, नेपाल।",
+    "footer.copyright": "© २०२६ Modulifyr Enterprise Pvt. Ltd. सर्वाधिकार सुरक्षित।",
     "footer.tagline_short": "नेपाल र विश्वभरका व्यवसायहरूका लागि कस्टम सफ्टवेयर विकास।",
+    "cookie.banner.title": "यस साइटमा कुकीहरू बारे",
+    "cookie.banner.text": "तपाईंको अनुभव सुधार गर्न साइटको प्रदर्शन र प्रयोगको बारेमा जानकारी संकलन र विश्लेषण गर्न हामी कुकीहरू प्रयोग गर्दछौं।",
+    "cookie.banner.accept": "सबै कुकीहरू स्वीकार गर्नुहोस्",
+    "cookie.banner.deny": "सबै अस्वीकार गर्नुहोस्",
+    "cookie.banner.learn_more": "थप जान्नुहोस्",
   },
 };
 

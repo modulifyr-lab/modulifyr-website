@@ -54,7 +54,7 @@ const sections = [
   },
   {
     title: "12. Contact",
-    body: "For questions about these Terms, contact us at contact@modulifyr.com. Address: Modulifyr Engineering, Birtamode, Jhapa, Province No. 1, Nepal. Response time: within 5 business days.",
+    body: "For questions about these Terms, contact us at contact@modulifyr.com. Address: Modulifyr Enterprise Pvt. Ltd., Birtamode, Ward 1, Gauri Tol, Jhapa, Nepal. Response time: within 5 business days.",
   },
 ];
 
@@ -101,8 +101,8 @@ export default function TermsPage() {
             <div className="lg:col-span-3">
               <div className="border-border-base rounded-3xl border bg-white p-8 md:p-12">
                 <p className="text-text-secondary border-border-base mb-10 border-b pb-8 leading-relaxed">
-                  Please read these Terms carefully before engaging with Modulifyr. They establish
-                  the legal framework for all interactions between you and Modulifyr Engineering.
+                  Please read these Terms carefully before engaging with Modulifyr Enterprise Pvt. Ltd. They establish
+                  the legal framework for all interactions between you and Modulifyr Enterprise Pvt. Ltd.
                 </p>
 
                 <div className="space-y-10">

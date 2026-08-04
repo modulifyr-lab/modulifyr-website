@@ -146,7 +146,7 @@ const sections = [
       { heading: "Email", text: "contact@modulifyr.com" },
       {
         heading: "Address",
-        text: "Modulifyr Engineering, Birtamode, Jhapa, Province No. 1, Nepal",
+        text: "Modulifyr Enterprise Pvt. Ltd., Birtamode, Ward 1, Gauri Tol, Jhapa, Nepal",
       },
       { heading: "Response Time", text: "Within 5 business days." },
     ],
@@ -198,7 +198,7 @@ export default function PrivacyPage() {
             <div className="lg:col-span-3">
               <div className="border-border-base rounded-3xl border bg-white p-8 md:p-12">
                 <p className="text-text-secondary border-border-base mb-10 border-b pb-8 leading-relaxed">
-                  Modulifyr ("we", "us", "our") is committed to protecting your privacy. This policy
+                  Modulifyr Enterprise Pvt. Ltd. ("we", "us", "our") is committed to protecting your privacy. This policy
                   applies to all information collected through our website at{" "}
                   <span className="text-brand-teal font-medium">modulifyr.com</span> and any related
                   services or communications.
