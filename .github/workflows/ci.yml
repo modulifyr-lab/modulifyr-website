@@ -41,9 +41,9 @@ jobs:
         run: bun run lint
 
       - name: Security audit
-        run: bun pm audit
+        run: bun pm scan
         # Fails the build if any high or critical vulnerabilities are found.
-        # Run local auditing or bun pm audit --help for options if needed.
+        # Run local auditing or bun pm scan --help for options if needed.
         continue-on-error: false
 
       - name: Run tests
