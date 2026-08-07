@@ -30,7 +30,7 @@ export function CookieConsentBanner() {
     <div
       role="complementary"
       aria-label="Cookie consent"
-      className="fixed bottom-6 left-6 right-6 z-[99] max-w-xl md:left-auto md:right-6"
+      className="fixed right-6 bottom-6 left-6 z-[99] max-w-xl md:right-6 md:left-auto"
     >
       <div className="border-border-base rounded-3xl border bg-white p-6 shadow-2xl dark:bg-zinc-900">
         <div className="flex flex-col gap-4">
@@ -45,8 +45,8 @@ export function CookieConsentBanner() {
               <p className="text-text-secondary mt-1 text-xs leading-relaxed dark:text-zinc-400">
                 {t("cookie.banner.text")}{" "}
                 <Link
-                  href="/privacy"
-                  className="text-brand-orange hover:underline font-semibold"
+                  href="/cookie-policy"
+                  className="text-brand-orange font-semibold hover:underline"
                 >
                   {t("cookie.banner.learn_more")}
                 </Link>
@@ -62,11 +62,7 @@ export function CookieConsentBanner() {
             >
               {t("cookie.banner.deny")}
             </Button>
-            <Button
-              onClick={() => handleConsent(true)}
-              size="sm"
-              className="text-xs"
-            >
+            <Button onClick={() => handleConsent(true)} size="sm" className="text-xs">
               {t("cookie.banner.accept")}
             </Button>
           </div>
