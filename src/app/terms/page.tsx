@@ -101,8 +101,9 @@ export default function TermsPage() {
             <div className="lg:col-span-3">
               <div className="border-border-base rounded-3xl border bg-white p-8 md:p-12">
                 <p className="text-text-secondary border-border-base mb-10 border-b pb-8 leading-relaxed">
-                  Please read these Terms carefully before engaging with Modulifyr Enterprise Pvt. Ltd. They establish
-                  the legal framework for all interactions between you and Modulifyr Enterprise Pvt. Ltd.
+                  Please read these Terms carefully before engaging with Modulifyr Enterprise Pvt.
+                  Ltd. They establish the legal framework for all interactions between you and
+                  Modulifyr Enterprise Pvt. Ltd.
                 </p>
 
                 <div className="space-y-10">
@@ -126,6 +127,12 @@ export default function TermsPage() {
                   className="text-brand-teal text-sm font-medium hover:underline"
                 >
                   Privacy Policy →
+                </Link>
+                <Link
+                  href="/cookie-policy"
+                  className="text-brand-teal text-sm font-medium hover:underline"
+                >
+                  Cookie Policy →
                 </Link>
                 <Link
                   href="/contact"
