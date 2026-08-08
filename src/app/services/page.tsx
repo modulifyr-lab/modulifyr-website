@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Custom Software Development Services | Modulifyr Nepal",
   description:
     "Modulifyr offers Discovery Sprints, Web App MVPs, Internal Tools, Integrations, Modernization, Infrastructure Setup, and dedicated Engineering Retainers for businesses in Nepal and globally.",
+  alternates: {
+    canonical: "/services",
+  },
 };
 import { Card, CardTitle, CardDescription } from "@/components/ui/Card";
 import {

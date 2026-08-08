@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Request a Technical Proposal",
   description:
     "Submit your project requirements to receive a structured technical proposal, architecture plan, and cost estimate from Modulifyr.",
+  alternates: {
+    canonical: "/request-proposal",
+  },
 };
 
 // RegionProvider is NOT needed here — layout.tsx already wraps the full app.

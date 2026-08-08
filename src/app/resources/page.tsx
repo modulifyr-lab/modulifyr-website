@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "Engineering Resources & Whitepapers",
   description:
     "Explore Modulifyr's collection of engineering guides, modular architecture whitepapers, and technical case studies.",
+  alternates: {
+    canonical: "/resources",
+  },
 };
 
 export const resources = [

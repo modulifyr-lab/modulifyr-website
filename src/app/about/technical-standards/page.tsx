@@ -18,6 +18,9 @@ export const metadata: Metadata = {
   title: "Our Technical Standards | Modulifyr",
   description:
     "The engineering standards, code quality requirements, security practices, and delivery protocols Modulifyr applies to every project.",
+  alternates: {
+    canonical: "/about/technical-standards",
+  },
 };
 
 const standards = [

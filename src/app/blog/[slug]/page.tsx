@@ -34,6 +34,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${notionPost.title} | Modulifyr Blog`,
     description: notionPost.excerpt,
+    alternates: {
+      canonical: `/blog/${slug}`,
+    },
     openGraph: {
       title: notionPost.title,
       description: notionPost.excerpt,
