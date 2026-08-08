@@ -4,6 +4,12 @@ $ next dev
 - Network:       http://192.168.0.2:3000
 
 ✓ Starting...
-✓ Ready in 1107ms
+✓ Ready in 1116ms
 ○ Compiling / ...
- GET / 200 in 12.3s (compile: 10.8s, render: 1463ms)
+ GET / 200 in 6.2s (compile: 5.0s, render: 1169ms)
+ GET / 200 in 406ms (compile: 6ms, render: 400ms)
+ GET /cookie-policy 200 in 936ms (compile: 854ms, render: 82ms)
+ GET /privacy 200 in 679ms (compile: 579ms, render: 101ms)
+ GET /cookie-policy 200 in 67ms (compile: 4ms, render: 63ms)
+ GET /terms 200 in 717ms (compile: 663ms, render: 54ms)
+ GET /cookie-policy 200 in 62ms (compile: 3ms, render: 58ms)
