@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Terms of Service | Modulifyr",
   description:
     "Modulifyr's terms of service governing website use and engagement with our software development services.",
+  alternates: {
+    canonical: "/terms",
+  },
 };
 
 const sections = [

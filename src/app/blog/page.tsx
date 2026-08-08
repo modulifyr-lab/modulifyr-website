@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: "Engineering Blog | Modulifyr — Software Insights for Nepal & Beyond",
   description:
     "Technical insights, architecture patterns, and practical engineering perspectives from the Modulifyr team in Birtamode, Nepal.",
+  alternates: {
+    canonical: "/blog",
+  },
 };
 
 // ISR — revalidate every hour; Make webhook handles instant updates

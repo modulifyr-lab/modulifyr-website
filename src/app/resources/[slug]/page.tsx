@@ -90,6 +90,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${resource.title} | Modulifyr Resources`,
     description: resource.description,
+    alternates: {
+      canonical: `/resources/${slug}`,
+    },
   };
 }
 

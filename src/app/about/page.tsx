@@ -25,6 +25,9 @@ export const metadata: Metadata = {
   title: "About Modulifyr | Rijan Mainali — Founder, Birtamode Nepal",
   description:
     "Modulifyr is a software development company founded by Rijan Mainali in Birtamode, Nepal. We build modular, scalable systems for SMBs in education, healthcare, retail, and commerce.",
+  alternates: {
+    canonical: "/about",
+  },
 };
 
 // ─── Schema.org — Person page-level override ──────────────────────────────────

@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Selected Case Studies & Portfolio | Modulifyr",
   description:
     "Case studies from Modulifyr's engineering work — modular ERP systems, custom platforms, and legacy modernisation projects.",
+  alternates: {
+    canonical: "/work",
+  },
 };
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";

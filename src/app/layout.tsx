@@ -30,6 +30,7 @@ const syne = Syne({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://modulifyr.com"),
   title: "2026 Custom Software Systems Built to Scale | Modulifyr",
   description:
     "Modulifyr builds scalable custom software, ERP platforms, and automation systems for growing organizations in Nepal and worldwide.",
@@ -96,11 +97,11 @@ export const metadata: Metadata = {
     icon: [{ url: "/favicon.ico", sizes: "128x128", type: "image/x-icon" }],
   },
   alternates: {
-    canonical: "https://modulifyr.com",
+    canonical: "/",
     types: {
       "application/rss+xml": [
         {
-          url: "https://modulifyr.com/feed.xml",
+          url: "/feed.xml",
           title: "Modulifyr Engineering Blog",
         },
       ],
@@ -127,7 +128,7 @@ const schemaOrg = {
         "Custom modular software systems for small and medium-sized businesses in education, healthcare, retail, commerce, and IT.",
       address: {
         "@type": "PostalAddress",
-        streetAddress: "Ward 1, Gauri Tol",
+        streetAddress: "Gauri Tol, Ward 1",
         addressLocality: "Birtamode",
         addressRegion: "Jhapa",
         addressCountry: "NP",
@@ -158,7 +159,7 @@ const schemaOrg = {
         worksFor: { "@id": "https://modulifyr.com/#organization" },
         address: {
           "@type": "PostalAddress",
-          streetAddress: "Ward 1, Gauri Tol",
+          streetAddress: "Gauri Tol, Ward 1",
           addressLocality: "Birtamode",
           addressRegion: "Jhapa",
           addressCountry: "NP",
@@ -171,7 +172,17 @@ const schemaOrg = {
         "Legacy System Modernization",
         "Cloud Infrastructure",
       ],
-      sameAs: ["https://linkedin.com/company/modulifyr", "https://github.com/modulifyr-lab"],
+      sameAs: [
+        "https://www.instagram.com/modulifyr/",
+        "https://x.com/modulifyr",
+        "https://web.facebook.com/profile.php?id=61591920842310",
+        "https://www.linkedin.com/company/modulifyr/",
+        "https://clutch.co/profile/modulifyr",
+        "https://github.com/Modulifyr",
+        "https://themanifest.com/company/modulifyr",
+        "https://rocketreach.co/modulifyr-profile_b6410cbccbf776ff",
+        "https://www.trustpilot.com/review/modulifyr.com"
+      ],
     },
     {
       "@type": "WebPage",

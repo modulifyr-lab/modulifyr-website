@@ -4,6 +4,9 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Cookie Policy | Modulifyr",
   description: "Modulifyr's cookie policy — what cookies we use, why, and how to control them.",
+  alternates: {
+    canonical: "/cookie-policy",
+  },
 };
 
 const sections = [
