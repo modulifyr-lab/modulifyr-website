@@ -4,6 +4,11 @@ $ next dev
 - Network:       http://192.168.0.2:3000
 
 ✓ Starting...
-✓ Ready in 1107ms
-○ Compiling / ...
- GET / 200 in 12.3s (compile: 10.8s, render: 1463ms)
+✓ Ready in 1534ms
+○ Compiling /services/strategy-sprint ...
+ GET /services/strategy-sprint 200 in 6.2s (compile: 5.4s, render: 757ms)
+ GET /services/strategy-sprint 200 in 208ms (compile: 11ms, render: 197ms)
+ GET /services/launch-kit 200 in 1372ms (compile: 855ms, render: 516ms)
+ GET /services/strategy-sprint 200 in 187ms (compile: 6ms, render: 181ms)
+ GET /services/launch-kit 200 in 191ms (compile: 5ms, render: 186ms)
+ GET /services/automation-layer 200 in 1630ms (compile: 1290ms, render: 340ms)
