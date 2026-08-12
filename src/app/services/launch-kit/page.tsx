@@ -4,7 +4,12 @@ import { Button } from "@/components/ui/Button";
 import { CheckCircle2, Clock, Globe, ChevronRight, XCircle, AlertCircle } from "lucide-react";
 import Link from "next/link";
 import { useRegion } from "@/components/RegionProvider";
-import { formatTierPrice } from "@/lib/pricing";
+import {
+  formatTierPriceStandard,
+  formatTierPriceFounding,
+  FOUNDING_SLOTS_REMAINING,
+  formatManagedHostingPrice,
+} from "@/lib/pricing";
 
 const tiers = [
   {
@@ -238,12 +243,30 @@ export default function LaunchKitPage() {
 
                 <div>
                   <h3 className="text-brand-navy mb-1 text-base font-bold">{tier.name}</h3>
-                  <div className="font-heading text-brand-orange text-2xl font-bold">
-                    {activeRegion
-                      ? formatTierPrice("launchKit", tier.tierKey, activeRegion)
-                      : "Select region for pricing"}
-                  </div>
-                  <div className="text-brand-teal mt-1 flex items-center gap-1.5 text-xs font-semibold uppercase">
+                  {activeRegion ? (
+                    FOUNDING_SLOTS_REMAINING > 0 ? (
+                      <div className="flex flex-col gap-1">
+                        <div className="text-text-muted text-xs line-through">
+                          {formatTierPriceStandard("launchKit", tier.tierKey, activeRegion)}
+                        </div>
+                        <div className="font-heading text-brand-orange text-2xl font-bold">
+                          {formatTierPriceFounding("launchKit", tier.tierKey, activeRegion)}
+                        </div>
+                        <div className="text-text-muted text-[11px] mt-0.5">
+                          Founding client pricing — {FOUNDING_SLOTS_REMAINING} spots remaining.
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="font-heading text-brand-orange text-2xl font-bold">
+                        {formatTierPriceStandard("launchKit", tier.tierKey, activeRegion)}
+                      </div>
+                    )
+                  ) : (
+                    <div className="text-text-muted text-sm font-semibold">
+                      Select region for pricing
+                    </div>
+                  )}
+                  <div className="text-brand-teal mt-2 flex items-center gap-1.5 text-xs font-semibold uppercase">
                     <Clock className="h-3 w-3" /> {tier.duration}
                   </div>
                 </div>
@@ -297,6 +320,87 @@ export default function LaunchKitPage() {
                 </div>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Managed Hosting & Maintenance Add-On Section */}
+      <section className="bg-bg-secondary border-border-base border-y py-24">
+        <div className="container-custom">
+          <div className="mx-auto max-w-4xl">
+            <div className="mb-12">
+              <span className="text-brand-orange mb-3 block text-xs font-bold tracking-widest uppercase">
+                Add-On Service
+              </span>
+              <h2 className="font-heading text-brand-navy mb-4 text-3xl font-bold">
+                Managed Hosting & Maintenance
+              </h2>
+              <p className="text-text-secondary text-base leading-relaxed">
+                Once your site is live, you can manage hosting yourself or hand it to us. If you
+                manage it, we'll give you clear setup instructions. If you'd rather not deal with
+                it, we handle deployment, uptime monitoring, and fixes for a monthly fee.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+              <div className="flex flex-col justify-center">
+                <div className="space-y-6">
+                  <div className="flex gap-4">
+                    <div className="bg-brand-orange/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
+                      <CheckCircle2 className="text-brand-orange h-5 w-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-brand-navy font-bold text-sm mb-1">Ownership First</h4>
+                      <p className="text-text-secondary text-sm leading-relaxed">
+                        You always own your domain. Nothing about this arrangement changes that —
+                        you can move hosting elsewhere at any time.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4">
+                    <div className="bg-brand-orange/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
+                      <CheckCircle2 className="text-brand-orange h-5 w-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-brand-navy font-bold text-sm mb-1">Itemized Costs</h4>
+                      <p className="text-text-secondary text-sm leading-relaxed">
+                        Two separate charges, both itemized on your invoice: the exact cost of any
+                        third-party subscription (Vercel, hosting, etc.) with no markup, and our
+                        management fee for the ongoing work.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="border-border-base rounded-2xl border bg-white p-8 shadow-sm">
+                <h3 className="text-brand-navy font-bold text-lg mb-4">Management Fee Range</h3>
+                <div className="font-heading text-brand-orange text-3xl font-bold mb-2">
+                  {activeRegion ? formatManagedHostingPrice(activeRegion) : "Select region for pricing"}
+                  <span className="text-text-muted text-sm font-normal"> / month</span>
+                </div>
+                <p className="text-text-muted text-xs leading-relaxed mb-6">
+                  *This fee is separate from third-party subscription costs.
+                </p>
+
+                <div className="border-t border-border-base pt-6">
+                  <h4 className="text-brand-navy font-bold text-xs tracking-wider uppercase mb-3">
+                    Invoice Line Items Example:
+                  </h4>
+                  <ul className="space-y-2 text-xs text-text-secondary">
+                    <li className="flex justify-between py-1 border-b border-dashed border-border-base">
+                      <span>Vercel Pro Subscription (Passthrough)</span>
+                      <span className="font-semibold text-brand-navy">Exact Cost (No Markup)</span>
+                    </li>
+                    <li className="flex justify-between py-1">
+                      <span>Modulifyr Managed Hosting & Maintenance</span>
+                      <span className="font-semibold text-brand-navy">Management Fee</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

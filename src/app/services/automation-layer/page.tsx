@@ -14,7 +14,11 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useRegion } from "@/components/RegionProvider";
-import { formatTierPrice } from "@/lib/pricing";
+import {
+  formatTierPriceStandard,
+  formatTierPriceFounding,
+  FOUNDING_SLOTS_REMAINING,
+} from "@/lib/pricing";
 
 const tiers = [
   {
@@ -219,12 +223,30 @@ export default function AutomationLayerPage() {
 
                 <div>
                   <h3 className="text-brand-navy mb-1 text-base font-bold">{tier.name}</h3>
-                  <div className="font-heading text-brand-orange text-2xl font-bold">
-                    {activeRegion
-                      ? formatTierPrice("automationLayer", tier.tierKey, activeRegion)
-                      : "Select region for pricing"}
-                  </div>
-                  <div className="text-brand-teal mt-1 flex items-center gap-1.5 text-xs font-semibold uppercase">
+                  {activeRegion ? (
+                    FOUNDING_SLOTS_REMAINING > 0 ? (
+                      <div className="flex flex-col gap-1">
+                        <div className="text-text-muted text-xs line-through">
+                          {formatTierPriceStandard("automationLayer", tier.tierKey, activeRegion)}
+                        </div>
+                        <div className="font-heading text-brand-orange text-2xl font-bold">
+                          {formatTierPriceFounding("automationLayer", tier.tierKey, activeRegion)}
+                        </div>
+                        <div className="text-text-muted text-[11px] mt-0.5">
+                          Founding client pricing — {FOUNDING_SLOTS_REMAINING} spots remaining.
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="font-heading text-brand-orange text-2xl font-bold">
+                        {formatTierPriceStandard("automationLayer", tier.tierKey, activeRegion)}
+                      </div>
+                    )
+                  ) : (
+                    <div className="text-text-muted text-sm font-semibold">
+                      Select region for pricing
+                    </div>
+                  )}
+                  <div className="text-brand-teal mt-2 flex items-center gap-1.5 text-xs font-semibold uppercase">
                     <Clock className="h-3 w-3" /> {tier.duration}
                   </div>
                 </div>
