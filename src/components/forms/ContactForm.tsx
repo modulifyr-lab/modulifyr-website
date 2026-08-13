@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import * as React from "react";
 import Link from "next/link";
+import Reveal from "@/components/ui/Reveal";
 
 interface FormState {
   name: string;
@@ -94,13 +95,17 @@ export function ContactForm() {
       <section className="border-border-base border-b bg-white py-24">
         <div className="container-custom">
           <div className="max-w-3xl">
-            <h1 className="font-heading text-brand-navy mb-6 text-4xl font-bold md:text-6xl">
-              Let's Talk About <span className="text-brand-orange">Your Project</span>
-            </h1>
-            <p className="text-text-secondary text-xl leading-relaxed">
-              Whether you have a clear spec or just a problem you're trying to solve, reach out.
-              We'll tell you honestly whether we can help and what it would take.
-            </p>
+            <Reveal variant="fade-up">
+              <h1 className="font-heading text-brand-navy mb-6 text-4xl font-bold md:text-6xl text-brand-navy">
+                Let's Talk About <span className="text-brand-orange">Your Project</span>
+              </h1>
+            </Reveal>
+            <Reveal variant="fade-up" delay={100}>
+              <p className="text-text-secondary text-xl leading-relaxed">
+                Whether you have a clear spec or just a problem you're trying to solve, reach out.
+                We'll tell you honestly whether we can help and what it would take.
+              </p>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -111,262 +116,282 @@ export function ContactForm() {
             {/* Left: Contact Info */}
             <div className="flex flex-col gap-12">
               <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-                <div className="flex flex-col gap-4">
-                  <div className="bg-brand-navy/10 flex h-10 w-10 items-center justify-center rounded-lg">
-                    <Mail className="text-brand-navy h-5 w-5" />
+                <Reveal variant="fade-scale" delay={100}>
+                  <div className="flex flex-col gap-4">
+                    <div className="bg-brand-navy/10 flex h-10 w-10 items-center justify-center rounded-lg">
+                      <Mail className="text-brand-navy h-5 w-5" />
+                    </div>
+                    <h4 className="font-heading text-brand-navy text-lg font-bold">Email Us</h4>
+                    <p className="text-text-secondary text-sm">Direct engineering inquiries:</p>
+                    <a
+                      href="mailto:contact@modulifyr.com"
+                      className="text-brand-orange text-lg font-bold hover:underline"
+                    >
+                      contact@modulifyr.com
+                    </a>
                   </div>
-                  <h4 className="font-heading text-brand-navy text-lg font-bold">Email Us</h4>
-                  <p className="text-text-secondary text-sm">Direct engineering inquiries:</p>
-                  <a
-                    href="mailto:contact@modulifyr.com"
-                    className="text-brand-orange text-lg font-bold hover:underline"
-                  >
-                    contact@modulifyr.com
-                  </a>
-                </div>
-                <div className="flex flex-col gap-4">
-                  <div className="bg-brand-navy/10 flex h-10 w-10 items-center justify-center rounded-lg">
-                    <Phone className="text-brand-navy h-5 w-5" />
+                </Reveal>
+                <Reveal variant="fade-scale" delay={150}>
+                  <div className="flex flex-col gap-4">
+                    <div className="bg-brand-navy/10 flex h-10 w-10 items-center justify-center rounded-lg">
+                      <Phone className="text-brand-navy h-5 w-5" />
+                    </div>
+                    <h4 className="font-heading text-brand-navy text-lg font-bold">Call Us</h4>
+                    <p className="text-text-secondary text-sm">Mon – Fri, 9am – 6pm NPT:</p>
+                    <a
+                      href="tel:+9779764478571"
+                      className="text-brand-orange text-lg font-bold hover:underline"
+                    >
+                      +977 9764478571
+                    </a>
                   </div>
-                  <h4 className="font-heading text-brand-navy text-lg font-bold">Call Us</h4>
-                  <p className="text-text-secondary text-sm">Mon – Fri, 9am – 6pm NPT:</p>
-                  <a
-                    href="tel:+9779764478571"
-                    className="text-brand-orange text-lg font-bold hover:underline"
-                  >
-                    +977 9764478571
-                  </a>
-                </div>
+                </Reveal>
               </div>
 
               {/* Cal.com booking card */}
-              <div className="border-brand-teal/30 bg-brand-teal/5 flex items-start gap-6 rounded-3xl border p-8">
-                <div className="bg-brand-teal/10 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl">
-                  <Calendar className="text-brand-teal h-6 w-6" />
+              <Reveal variant="fade-scale" delay={200}>
+                <div className="border-brand-teal/30 bg-brand-teal/5 flex items-start gap-6 rounded-3xl border p-8 h-full">
+                  <div className="bg-brand-teal/10 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl">
+                    <Calendar className="text-brand-teal h-6 w-6" />
+                  </div>
+                  <div className="flex flex-col gap-3">
+                    <h4 className="font-heading text-brand-navy text-xl font-bold">
+                      Prefer a Call First?
+                    </h4>
+                    <p className="text-text-secondary text-sm leading-relaxed">
+                      Book a free discovery call directly in our calendar. Pick a time that works for
+                      you — no back-and-forth needed.
+                    </p>
+                    <a
+                      href="https://cal.eu/modulifyr/booking"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Button className="w-fit" size="sm">
+                        Book a Discovery Call <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </a>
+                  </div>
                 </div>
-                <div className="flex flex-col gap-3">
-                  <h4 className="font-heading text-brand-navy text-xl font-bold">
-                    Prefer a Call First?
-                  </h4>
-                  <p className="text-text-secondary text-sm leading-relaxed">
-                    Book a free discovery call directly in our calendar. Pick a time that works for
-                    you — no back-and-forth needed.
-                  </p>
-                  <a
-                    href="https://cal.eu/modulifyr/booking"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Button className="w-fit" size="sm">
-                      Book a Discovery Call <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </a>
-                </div>
-              </div>
+              </Reveal>
 
-              <div className="border-border-base flex items-start gap-6 rounded-3xl border bg-white p-8 shadow-sm">
-                <div className="bg-brand-orange/10 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl">
-                  <MapPin className="text-brand-orange h-6 w-6" />
+              <Reveal variant="fade-scale" delay={250}>
+                <div className="border-border-base flex items-start gap-6 rounded-3xl border bg-white p-8 shadow-sm">
+                  <div className="bg-brand-orange/10 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl">
+                    <MapPin className="text-brand-orange h-6 w-6" />
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <h4 className="font-heading text-brand-navy text-xl font-bold">Our Office</h4>
+                    <p className="text-text-secondary text-sm leading-relaxed">
+                      Modulifyr Enterprise Pvt. Ltd.
+                      <br />
+                      Birtamode, Ward 1, Gauri Tol
+                      <br />
+                      Jhapa, Nepal
+                    </p>
+                    <a
+                      href="https://www.google.com/maps/search/?api=1&query=Modulifyr+Enterprise+Pvt.+Ltd."
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-brand-orange mt-2 flex items-center gap-1 text-sm font-bold hover:underline"
+                    >
+                      Get Directions <ArrowRight className="ml-1 h-4 w-4" />
+                    </a>
+                  </div>
                 </div>
-                <div className="flex flex-col gap-2">
-                  <h4 className="font-heading text-brand-navy text-xl font-bold">Our Office</h4>
-                  <p className="text-text-secondary text-sm leading-relaxed">
-                    Modulifyr Enterprise Pvt. Ltd.
-                    <br />
-                    Birtamode, Ward 1, Gauri Tol
-                    <br />
-                    Jhapa, Nepal
-                  </p>
-                  <a
-                    href="https://www.google.com/maps/search/?api=1&query=Modulifyr+Enterprise+Pvt.+Ltd."
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-brand-orange mt-2 flex items-center gap-1 text-sm font-bold hover:underline"
-                  >
-                    Get Directions <ArrowRight className="ml-1 h-4 w-4" />
-                  </a>
-                </div>
-              </div>
+              </Reveal>
 
               <div className="flex flex-col gap-6">
-                <h4 className="font-heading text-brand-navy font-bold">Follow Our Work</h4>
+                <Reveal variant="fade-up">
+                  <h4 className="font-heading text-brand-navy font-bold">Follow Our Work</h4>
+                </Reveal>
                 <div className="flex gap-4">
-                  <Link
-                    href="https://www.linkedin.com/company/modulifyr/"
-                    className="border-border-base hover:bg-brand-navy flex h-12 w-12 items-center justify-center rounded-full border transition-colors hover:text-white"
-                  >
-                    <Linkedin className="h-5 w-5" />
-                  </Link>
-                  <Link
-                    href="https://x.com/modulifyr"
-                    className="border-border-base hover:bg-brand-navy flex h-12 w-12 items-center justify-center rounded-full border transition-colors hover:text-white"
-                  >
-                    <Twitter className="h-5 w-5" />
-                  </Link>
-                  <Link
-                    href="https://github.com/Modulifyr"
-                    className="border-border-base hover:bg-brand-navy flex h-12 w-12 items-center justify-center rounded-full border transition-colors hover:text-white"
-                  >
-                    <Github className="h-5 w-5" />
-                  </Link>
+                  <Reveal variant="fade-scale" delay={100}>
+                    <Link
+                      href="https://www.linkedin.com/company/modulifyr/"
+                      className="border-border-base hover:bg-brand-navy flex h-12 w-12 items-center justify-center rounded-full border transition-colors hover:text-white"
+                    >
+                      <Linkedin className="h-5 w-5" />
+                    </Link>
+                  </Reveal>
+                  <Reveal variant="fade-scale" delay={150}>
+                    <Link
+                      href="https://x.com/modulifyr"
+                      className="border-border-base hover:bg-brand-navy flex h-12 w-12 items-center justify-center rounded-full border transition-colors hover:text-white"
+                    >
+                      <Twitter className="h-5 w-5" />
+                    </Link>
+                  </Reveal>
+                  <Reveal variant="fade-scale" delay={200}>
+                    <Link
+                      href="https://github.com/Modulifyr"
+                      className="border-border-base hover:bg-brand-navy flex h-12 w-12 items-center justify-center rounded-full border transition-colors hover:text-white"
+                    >
+                      <Github className="h-5 w-5" />
+                    </Link>
+                  </Reveal>
                 </div>
               </div>
 
-              <div className="bg-brand-navy flex flex-col gap-4 rounded-3xl p-8 text-white">
-                <div className="flex items-center gap-3">
-                  <Clock className="text-brand-gold h-5 w-5" />
-                  <span className="font-bold">NPT (UTC+5:45) — Works in Your Timezone</span>
+              <Reveal variant="fade-scale" delay={300}>
+                <div className="bg-brand-navy flex flex-col gap-4 rounded-3xl p-8 text-white">
+                  <div className="flex items-center gap-3">
+                    <Clock className="text-brand-gold h-5 w-5" />
+                    <span className="font-bold">NPT (UTC+5:45) — Works in Your Timezone</span>
+                  </div>
+                  <p className="text-text-muted text-xs leading-relaxed">
+                    Nepal Standard Time gives us natural working hour overlap with both European
+                    mornings and Asian business hours.
+                  </p>
                 </div>
-                <p className="text-text-muted text-xs leading-relaxed">
-                  Nepal Standard Time gives us natural working hour overlap with both European
-                  mornings and Asian business hours.
-                </p>
-              </div>
+              </Reveal>
             </div>
 
             {/* Right: Form */}
             <div className="flex flex-col gap-8">
-              <Card className="border-t-brand-teal border-t-8 p-8 shadow-xl md:p-12">
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <h2 className="font-heading text-brand-navy mb-4 text-2xl font-bold">
-                    Send a Message
-                  </h2>
+              <Reveal variant="fade-scale" delay={150}>
+                <Card className="border-t-brand-teal border-t-8 p-8 shadow-xl md:p-12 h-full">
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <h2 className="font-heading text-brand-navy mb-4 text-2xl font-bold">
+                      Send a Message
+                    </h2>
 
-                  {status === "error" && (
-                    <div className="flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-4">
-                      <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-red-500" />
-                      <p className="text-sm text-red-700">{errorMsg}</p>
-                    </div>
-                  )}
-
-                  <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                    <div className="space-y-2">
-                      <label
-                        htmlFor="contact-name"
-                        className="text-brand-navy font-heading text-sm font-bold"
-                      >
-                        Your Name <span className="text-brand-orange">*</span>
-                      </label>
-                      <input
-                        id="contact-name"
-                        type="text"
-                        name="name"
-                        value={form.name}
-                        onChange={handleChange}
-                        placeholder="Full Name"
-                        required
-                        maxLength={200}
-                        className="border-border-base bg-background placeholder:text-text-dim focus-visible:ring-brand-orange text-foreground flex h-12 w-full rounded-lg border px-4 py-2 text-base transition-all focus-visible:ring-2 focus-visible:outline-none disabled:opacity-50"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label
-                        htmlFor="contact-email"
-                        className="text-brand-navy font-heading text-sm font-bold"
-                      >
-                        Your Email <span className="text-brand-orange">*</span>
-                      </label>
-                      <input
-                        id="contact-email"
-                        type="email"
-                        name="email"
-                        value={form.email}
-                        onChange={handleChange}
-                        placeholder="email@company.com"
-                        required
-                        className="border-border-base bg-background placeholder:text-text-dim focus-visible:ring-brand-orange text-foreground flex h-12 w-full rounded-lg border px-4 py-2 text-base transition-all focus-visible:ring-2 focus-visible:outline-none disabled:opacity-50"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="contact-subject"
-                      className="text-brand-navy font-heading text-sm font-bold"
-                    >
-                      Subject <span className="text-brand-orange">*</span>
-                    </label>
-                    <input
-                      id="contact-subject"
-                      type="text"
-                      name="subject"
-                      value={form.subject}
-                      onChange={handleChange}
-                      placeholder="How can we help?"
-                      required
-                      maxLength={300}
-                      className="border-border-base bg-background placeholder:text-text-dim focus-visible:ring-brand-orange text-foreground flex h-12 w-full rounded-lg border px-4 py-2 text-base transition-all focus-visible:ring-2 focus-visible:outline-none disabled:opacity-50"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="contact-message"
-                      className="text-brand-navy font-heading text-sm font-bold"
-                    >
-                      Message <span className="text-brand-orange">*</span>
-                    </label>
-                    <textarea
-                      id="contact-message"
-                      name="message"
-                      value={form.message}
-                      onChange={handleChange}
-                      placeholder="Tell us about your project or question..."
-                      required
-                      maxLength={5000}
-                      className="border-border-base bg-background placeholder:text-text-dim focus-visible:ring-brand-orange text-foreground flex min-h-[150px] w-full resize-none rounded-lg border px-4 py-3 text-base transition-all focus-visible:ring-2 focus-visible:outline-none disabled:opacity-50"
-                    />
-                    <p className="text-text-muted text-right text-xs">{form.message.length}/5000</p>
-                  </div>
-
-                  {/* Honeypot */}
-                  <div
-                    aria-hidden="true"
-                    style={{
-                      position: "absolute",
-                      left: "-9999px",
-                      width: "1px",
-                      height: "1px",
-                      overflow: "hidden",
-                    }}
-                  >
-                    <label htmlFor="contact-website">Website</label>
-                    <input
-                      id="contact-website"
-                      type="text"
-                      name="website"
-                      value={form.website}
-                      onChange={handleChange}
-                      tabIndex={-1}
-                      autoComplete="off"
-                    />
-                  </div>
-
-                  <div className="bg-bg-secondary flex items-center gap-3 rounded-lg p-4">
-                    <ShieldCheck className="text-brand-teal h-5 w-5 shrink-0" />
-                    <span className="text-text-secondary text-[10px] leading-tight italic">
-                      All communication is treated as confidential. We can sign an NDA before any
-                      technical discussion.
-                    </span>
-                  </div>
-
-                  <Button
-                    type="submit"
-                    disabled={status === "loading"}
-                    className="h-14 w-full text-lg"
-                  >
-                    {status === "loading" ? (
-                      <>
-                        <Loader2 className="mr-2 h-5 w-5 animate-spin" /> Sending...
-                      </>
-                    ) : (
-                      <>
-                        Send Message <ArrowRight className="ml-2 h-5 w-5" />
-                      </>
+                    {status === "error" && (
+                      <div className="flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-4">
+                        <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-red-500" />
+                        <p className="text-sm text-red-700">{errorMsg}</p>
+                      </div>
                     )}
-                  </Button>
-                </form>
-              </Card>
+
+                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                      <div className="space-y-2">
+                        <label
+                          htmlFor="contact-name"
+                          className="text-brand-navy font-heading text-sm font-bold"
+                        >
+                          Your Name <span className="text-brand-orange">*</span>
+                        </label>
+                        <input
+                          id="contact-name"
+                          type="text"
+                          name="name"
+                          value={form.name}
+                          onChange={handleChange}
+                          placeholder="Full Name"
+                          required
+                          maxLength={200}
+                          className="border-border-base bg-background placeholder:text-text-dim focus-visible:ring-brand-orange text-foreground flex h-12 w-full rounded-lg border px-4 py-2 text-base transition-all focus-visible:ring-2 focus-visible:outline-none disabled:opacity-50"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <label
+                          htmlFor="contact-email"
+                          className="text-brand-navy font-heading text-sm font-bold"
+                        >
+                          Your Email <span className="text-brand-orange">*</span>
+                        </label>
+                        <input
+                          id="contact-email"
+                          type="email"
+                          name="email"
+                          value={form.email}
+                          onChange={handleChange}
+                          placeholder="email@company.com"
+                          required
+                          className="border-border-base bg-background placeholder:text-text-dim focus-visible:ring-brand-orange text-foreground flex h-12 w-full rounded-lg border px-4 py-2 text-base transition-all focus-visible:ring-2 focus-visible:outline-none disabled:opacity-50"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <label
+                        htmlFor="contact-subject"
+                        className="text-brand-navy font-heading text-sm font-bold"
+                      >
+                        Subject <span className="text-brand-orange">*</span>
+                      </label>
+                      <input
+                        id="contact-subject"
+                        type="text"
+                        name="subject"
+                        value={form.subject}
+                        onChange={handleChange}
+                        placeholder="How can we help?"
+                        required
+                        maxLength={300}
+                        className="border-border-base bg-background placeholder:text-text-dim focus-visible:ring-brand-orange text-foreground flex h-12 w-full rounded-lg border px-4 py-2 text-base transition-all focus-visible:ring-2 focus-visible:outline-none disabled:opacity-50"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <label
+                        htmlFor="contact-message"
+                        className="text-brand-navy font-heading text-sm font-bold"
+                      >
+                        Message <span className="text-brand-orange">*</span>
+                      </label>
+                      <textarea
+                        id="contact-message"
+                        name="message"
+                        value={form.message}
+                        onChange={handleChange}
+                        placeholder="Tell us about your project or question..."
+                        required
+                        maxLength={5000}
+                        className="border-border-base bg-background placeholder:text-text-dim focus-visible:ring-brand-orange text-foreground flex min-h-[150px] w-full resize-none rounded-lg border px-4 py-3 text-base transition-all focus-visible:ring-2 focus-visible:outline-none disabled:opacity-50"
+                      />
+                      <p className="text-text-muted text-right text-xs">{form.message.length}/5000</p>
+                    </div>
+
+                    {/* Honeypot */}
+                    <div
+                      aria-hidden="true"
+                      style={{
+                        position: "absolute",
+                        left: "-9999px",
+                        width: "1px",
+                        height: "1px",
+                        overflow: "hidden",
+                      }}
+                    >
+                      <label htmlFor="contact-website">Website</label>
+                      <input
+                        id="contact-website"
+                        type="text"
+                        name="website"
+                        value={form.website}
+                        onChange={handleChange}
+                        tabIndex={-1}
+                        autoComplete="off"
+                      />
+                    </div>
+
+                    <div className="bg-bg-secondary flex items-center gap-3 rounded-lg p-4">
+                      <ShieldCheck className="text-brand-teal h-5 w-5 shrink-0" />
+                      <span className="text-text-secondary text-[10px] leading-tight italic">
+                        All communication is treated as confidential. We can sign an NDA before any
+                        technical discussion.
+                      </span>
+                    </div>
+
+                    <Button
+                      type="submit"
+                      disabled={status === "loading"}
+                      className="h-14 w-full text-lg animate-in"
+                    >
+                      {status === "loading" ? (
+                        <>
+                          <Loader2 className="mr-2 h-5 w-5 animate-spin" /> Sending...
+                        </>
+                      ) : (
+                        <>
+                          Send Message <ArrowRight className="ml-2 h-5 w-5" />
+                        </>
+                      )}
+                    </Button>
+                  </form>
+                </Card>
+              </Reveal>
               <div className="px-4 text-center">
                 <p className="text-text-secondary text-sm">
                   Have a detailed project brief? Use our structured{" "}
@@ -386,18 +411,20 @@ export function ContactForm() {
 
       <section className="px-4 py-12 md:px-0">
         <div className="container-custom">
-          <div className="border-border-base h-96 w-full overflow-hidden rounded-3xl border shadow-sm">
-            <iframe
-              title="Modulifyr Office Location — Birtamode, Ward 1, Gauri Tol, Jhapa, Nepal"
-              src="https://maps.google.com/maps?q=Birtamode,+Ward+1,+Gauri+Tol,+Jhapa,+Nepal&t=&z=13&ie=UTF8&iwloc=&output=embed"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          </div>
+          <Reveal variant="fade-scale">
+            <div className="border-border-base h-96 w-full overflow-hidden rounded-3xl border shadow-sm">
+              <iframe
+                title="Modulifyr Office Location — Birtamode, Ward 1, Gauri Tol, Jhapa, Nepal"
+                src="https://maps.google.com/maps?q=Birtamode,+Ward+1,+Gauri+Tol,+Jhapa,+Nepal&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+          </Reveal>
           <p className="text-text-muted mt-3 text-center text-xs">
             Modulifyr Enterprise Pvt. Ltd. · Birtamode, Ward 1, Gauri Tol, Jhapa, Nepal
           </p>

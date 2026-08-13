@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/Button";
 import { Card, CardTitle } from "@/components/ui/Card";
 import { ArrowRight, Clock } from "lucide-react";
 import { getAllPosts } from "@/lib/notion-blog";
+import Reveal from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
   title: "Engineering Blog | Modulifyr — Software Insights for Nepal & Beyond",
@@ -48,17 +49,23 @@ export default async function BlogPage() {
       <section className="bg-bg-secondary border-border-base border-b py-24">
         <div className="container-custom">
           <div className="max-w-3xl">
-            <span className="text-brand-orange mb-4 block text-xs font-bold tracking-widest uppercase">
-              Technical Log
-            </span>
-            <h1 className="font-heading text-brand-navy mb-6 text-4xl font-bold md:text-6xl">
-              Engineering <span className="text-brand-orange">Insights</span>
-            </h1>
-            <p className="text-text-secondary text-xl leading-relaxed">
-              Architecture decisions, engineering patterns, and practical perspectives from the
-              Modulifyr team — including what we've learned building custom software for businesses
-              in Nepal.
-            </p>
+            <Reveal variant="fade-scale">
+              <span className="text-brand-orange mb-4 block text-xs font-bold tracking-widest uppercase">
+                Technical Log
+              </span>
+            </Reveal>
+            <Reveal variant="fade-up" delay={100}>
+              <h1 className="font-heading text-brand-navy mb-6 text-4xl font-bold md:text-6xl text-brand-navy">
+                Engineering <span className="text-brand-orange">Insights</span>
+              </h1>
+            </Reveal>
+            <Reveal variant="fade-up" delay={200}>
+              <p className="text-text-secondary text-xl leading-relaxed">
+                Architecture decisions, engineering patterns, and practical perspectives from the
+                Modulifyr team — including what we've learned building custom software for businesses
+                in Nepal.
+              </p>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -67,40 +74,54 @@ export default async function BlogPage() {
       {featured && (
         <section className="bg-bg-light border-border-base border-b py-16">
           <div className="container-custom">
-            <p className="text-brand-orange mb-6 text-xs font-bold tracking-widest uppercase">
-              Featured Post
-            </p>
+            <Reveal variant="fade-scale">
+              <p className="text-brand-orange mb-6 text-xs font-bold tracking-widest uppercase">
+                Featured Post
+              </p>
+            </Reveal>
             <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
-              <div className="bg-brand-navy relative flex aspect-video items-center justify-center overflow-hidden rounded-3xl">
-                <div className="from-brand-navy via-brand-navy/90 to-brand-teal/30 absolute inset-0 bg-gradient-to-br" />
-                <div className="relative z-10 p-8 text-center">
-                  <p className="text-brand-teal text-sm font-bold tracking-widest uppercase">
-                    Engineering Series
-                  </p>
+              <Reveal variant="fade-scale" delay={100}>
+                <div className="bg-brand-navy relative flex aspect-video items-center justify-center overflow-hidden rounded-3xl">
+                  <div className="from-brand-navy via-brand-navy/90 to-brand-teal/30 absolute inset-0 bg-gradient-to-br" />
+                  <div className="relative z-10 p-8 text-center">
+                    <p className="text-brand-teal text-sm font-bold tracking-widest uppercase">
+                      Engineering Series
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </Reveal>
               <div className="flex flex-col gap-5">
-                <span
-                  className={`w-fit rounded-full px-3 py-1 text-xs font-bold ${categoryColors[featured.category] ?? "bg-bg-secondary text-text-muted"}`}
-                >
-                  {featured.category}
-                </span>
-                <h2 className="font-heading text-brand-navy text-3xl leading-tight font-bold">
-                  {featured.title}
-                </h2>
-                <p className="text-text-secondary leading-relaxed">{featured.excerpt}</p>
-                <div className="text-text-muted flex items-center gap-4 text-xs">
-                  <span className="flex items-center gap-1">
-                    <Clock className="h-3 w-3" /> {featured.readTime}
+                <Reveal variant="fade-scale" delay={100}>
+                  <span
+                    className={`w-fit rounded-full px-3 py-1 text-xs font-bold ${categoryColors[featured.category] ?? "bg-bg-secondary text-text-muted"}`}
+                  >
+                    {featured.category}
                   </span>
-                  <span>{featured.date}</span>
-                </div>
-                <Link href={`/blog/${featured.slug}`}>
-                  <Button className="group w-fit">
-                    Read Article{" "}
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                </Link>
+                </Reveal>
+                <Reveal variant="fade-up" delay={150}>
+                  <h2 className="font-heading text-brand-navy text-3xl leading-tight font-bold text-brand-navy">
+                    {featured.title}
+                  </h2>
+                </Reveal>
+                <Reveal variant="fade-up" delay={200}>
+                  <p className="text-text-secondary leading-relaxed">{featured.excerpt}</p>
+                </Reveal>
+                <Reveal variant="fade-up" delay={250}>
+                  <div className="text-text-muted flex items-center gap-4 text-xs">
+                    <span className="flex items-center gap-1">
+                      <Clock className="h-3 w-3" /> {featured.readTime}
+                    </span>
+                    <span>{featured.date}</span>
+                  </div>
+                </Reveal>
+                <Reveal variant="fade-up" delay={300}>
+                  <Link href={`/blog/${featured.slug}`}>
+                    <Button className="group w-fit">
+                      Read Article{" "}
+                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </Button>
+                  </Link>
+                </Reveal>
               </div>
             </div>
           </div>
@@ -121,36 +142,37 @@ export default async function BlogPage() {
           ) : (
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
               {rest.map((post, idx) => (
-                <Link
-                  key={`${post.slug}-${idx}`}
-                  href={`/blog/${post.slug}`}
-                  className="group block"
-                >
-                  <Card className="flex h-full flex-col group-hover:-translate-y-2">
-                    <span
-                      className={`mb-4 w-fit rounded-full px-3 py-1 text-xs font-bold ${categoryColors[post.category] || "bg-bg-secondary text-text-muted"}`}
-                    >
-                      {post.category}
-                    </span>
-                    <CardTitle className="group-hover:text-brand-orange mb-3 text-lg leading-snug transition-colors">
-                      {post.title}
-                    </CardTitle>
-                    <p className="text-text-secondary mb-4 flex-grow text-sm leading-relaxed">
-                      {post.excerpt}
-                    </p>
-                    <div className="border-border-base mt-auto flex items-center justify-between border-t pt-4">
-                      <div className="text-text-muted flex items-center gap-3 text-xs">
-                        <span className="flex items-center gap-1">
-                          <Clock className="h-3 w-3" /> {post.readTime}
-                        </span>
-                        <span>{post.date}</span>
-                      </div>
-                      <span className="text-brand-orange flex items-center gap-1 text-xs font-bold">
-                        Read <ArrowRight className="h-3 w-3" />
+                <Reveal key={`${post.slug}-${idx}`} variant="fade-up" delay={idx * 100}>
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="group block h-full"
+                  >
+                    <Card className="flex h-full flex-col group-hover:-translate-y-2">
+                      <span
+                        className={`mb-4 w-fit rounded-full px-3 py-1 text-xs font-bold ${categoryColors[post.category] || "bg-bg-secondary text-text-muted"}`}
+                      >
+                        {post.category}
                       </span>
-                    </div>
-                  </Card>
-                </Link>
+                      <CardTitle className="group-hover:text-brand-orange mb-3 text-lg leading-snug transition-colors">
+                        {post.title}
+                      </CardTitle>
+                      <p className="text-text-secondary mb-4 flex-grow text-sm leading-relaxed">
+                        {post.excerpt}
+                      </p>
+                      <div className="border-border-base mt-auto flex items-center justify-between border-t pt-4">
+                        <div className="text-text-muted flex items-center gap-3 text-xs">
+                          <span className="flex items-center gap-1">
+                            <Clock className="h-3 w-3" /> {post.readTime}
+                          </span>
+                          <span>{post.date}</span>
+                        </div>
+                        <span className="text-brand-orange flex items-center gap-1 text-xs font-bold">
+                          Read <ArrowRight className="h-3 w-3" />
+                        </span>
+                      </div>
+                    </Card>
+                  </Link>
+                </Reveal>
               ))}
             </div>
           )}
