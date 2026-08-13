@@ -3,6 +3,11 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Card, CardTitle, CardDescription } from "@/components/ui/Card";
 import Reveal from "@/components/ui/Reveal";
+import GradientMesh from "@/components/ui/GradientMesh";
+import Magnetic from "@/components/ui/Magnetic";
+import Marquee from "@/components/ui/Marquee";
+import HomeNetworkWrapper from "@/components/ui/HomeNetworkWrapper";
+
 import {
   Code2,
   Layers,
@@ -52,6 +57,7 @@ export default function Home() {
       />
       {/* 1. HERO SECTION */}
       <section className="bg-bg-light relative overflow-hidden py-16 md:py-24">
+        <GradientMesh />
         <div className="container-custom">
           <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
             <div className="flex max-w-2xl flex-col gap-8">
@@ -71,12 +77,16 @@ export default function Home() {
               </div>
               <div className="mt-2 flex flex-wrap gap-4">
                 <Link href="/request-proposal">
-                  <Button size="lg">Request Proposal</Button>
+                  <Magnetic radius={8}>
+                    <Button size="lg">Request Proposal</Button>
+                  </Magnetic>
                 </Link>
                 <Link href="/contact">
-                  <Button variant="outline" size="lg">
-                    Book Discovery Call
-                  </Button>
+                  <Magnetic radius={8}>
+                    <Button variant="outline" size="lg">
+                      Book Discovery Call
+                    </Button>
+                  </Magnetic>
                 </Link>
               </div>
               <div className="text-text-muted mt-4 flex items-center gap-4 text-sm">
@@ -91,37 +101,7 @@ export default function Home() {
             </div>
 
             <div className="relative hidden lg:block">
-              {/*
-                FIX: Removed animate-pulse and animate-bounce.
-                CSS animations on page load contribute to TBT (Total Blocking Time)
-                and cause continuous repaints that hurt performance scores.
-                Replaced with static decorative elements — visually similar, zero perf cost.
-              */}
-              <div className="relative mx-auto aspect-square w-full max-w-lg">
-                <div className="bg-brand-orange/10 absolute top-0 left-0 h-32 w-32 rounded-2xl" />
-                <div className="bg-brand-navy/5 absolute right-0 bottom-0 h-48 w-48 rounded-[40px]" />
-                <div className="bg-background border-border-base absolute top-1/2 left-1/2 flex h-80 w-80 -translate-x-1/2 -translate-y-1/2 flex-col gap-6 rounded-3xl border p-8 shadow-2xl">
-                  <div className="bg-brand-orange flex h-16 w-16 items-center justify-center rounded-xl">
-                    <Layers className="h-8 w-8 text-white" />
-                  </div>
-                  <div className="flex flex-col gap-3">
-                    <div className="bg-border-base h-4 w-3/4 rounded-full" />
-                    <div className="bg-border-base h-4 w-1/2 rounded-full opacity-60" />
-                  </div>
-                  <div className="mt-auto grid grid-cols-3 gap-2">
-                    <div className="bg-brand-teal/40 h-2 rounded-full" />
-                    <div className="bg-brand-gold/40 h-2 rounded-full" />
-                    <div className="bg-brand-orange/40 h-2 rounded-full" />
-                  </div>
-                </div>
-                {/* Floating modules — static, no animation */}
-                <div className="bg-brand-navy absolute top-10 right-10 flex h-24 w-24 items-center justify-center rounded-2xl shadow-xl">
-                  <Cpu className="h-10 w-10 text-white" />
-                </div>
-                <div className="bg-brand-gold absolute bottom-10 left-10 flex h-20 w-20 items-center justify-center rounded-full shadow-xl">
-                  <Globe className="text-brand-navy h-8 w-8" />
-                </div>
-              </div>
+              <HomeNetworkWrapper />
             </div>
           </div>
         </div>
@@ -148,6 +128,19 @@ export default function Home() {
           </Reveal>
         </div>
       </section>
+
+      {/* CAPABILITY TICKER */}
+      <Marquee
+        items={[
+          "ERP Systems",
+          "Workflow Automation",
+          "API Integrations",
+          "Modular Architecture",
+          "Custom Software",
+          "Legacy Rebuilds"
+        ]}
+        speed={25}
+      />
 
       {/* 3. WHAT WE DO (SERVICES) */}
       <section className="py-24">

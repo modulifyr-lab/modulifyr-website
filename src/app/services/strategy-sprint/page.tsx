@@ -1,4 +1,6 @@
 "use client";
+
+import * as React from "react";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import {
@@ -19,6 +21,7 @@ import {
   formatTierPriceFounding,
   FOUNDING_SLOTS_REMAINING,
 } from "@/lib/pricing";
+import Reveal from "@/components/ui/Reveal";
 
 const tiers = [
   {
@@ -123,6 +126,9 @@ const whatYouOwnAfter = [
   },
 ];
 
+// Custom 3D Tilt Card (if needed, but restricted on pricing tiers per instruction)
+// Remember: Pricing page and pricing-tier-like sections should not use too much tilt to keep readability clean, but we can have soft fade-ups/reveals.
+
 export default function StrategySprintPage() {
   const { region } = useRegion();
   const activeRegion = region;
@@ -133,34 +139,42 @@ export default function StrategySprintPage() {
       <section className="bg-brand-navy py-24 text-white">
         <div className="container-custom">
           <div className="max-w-3xl">
-            <div className="mb-4 flex items-center gap-2">
-              <Search className="text-brand-orange h-6 w-6" />
-              <span className="text-brand-orange text-xs font-bold tracking-widest uppercase">
-                Discovery & Strategy
-              </span>
-            </div>
-            <h1 className="font-heading mb-6 text-4xl font-bold md:text-6xl">Strategy Sprint</h1>
-            <p className="text-text-muted text-xl leading-relaxed">
-              Most projects fail because scope was never properly defined. A Strategy Sprint gives
-              you a requirements document, architecture blueprint, and phased roadmap before any
-              code is written — so you know exactly what you are building and what it will cost.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Link href="/request-proposal">
-                <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90">
-                  Request a Strategy Sprint
-                </Button>
-              </Link>
-              <Link href="/contact">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-white/30 text-white hover:bg-white/10"
-                >
-                  Ask a Question First
-                </Button>
-              </Link>
-            </div>
+            <Reveal variant="fade-scale">
+              <div className="mb-4 flex items-center gap-2">
+                <Search className="text-brand-orange h-6 w-6" />
+                <span className="text-brand-orange text-xs font-bold tracking-widest uppercase">
+                  Discovery & Strategy
+                </span>
+              </div>
+            </Reveal>
+            <Reveal variant="fade-up" delay={100}>
+              <h1 className="font-heading mb-6 text-4xl font-bold md:text-6xl text-white">Strategy Sprint</h1>
+            </Reveal>
+            <Reveal variant="fade-up" delay={200}>
+              <p className="text-text-muted text-xl leading-relaxed">
+                Most projects fail because scope was never properly defined. A Strategy Sprint gives
+                you a requirements document, architecture blueprint, and phased roadmap before any
+                code is written — so you know exactly what you are building and what it will cost.
+              </p>
+            </Reveal>
+            <Reveal variant="fade-up" delay={300}>
+              <div className="mt-8 flex flex-wrap gap-4">
+                <Link href="/request-proposal">
+                  <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90">
+                    Request a Strategy Sprint
+                  </Button>
+                </Link>
+                <Link href="/contact">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-white/30 text-white hover:bg-white/10"
+                  >
+                    Ask a Question First
+                  </Button>
+                </Link>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -173,15 +187,17 @@ export default function StrategySprintPage() {
           </p>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {whatYouOwnAfter.map((item, i) => (
-              <div key={i} className="flex gap-4">
-                <div className="bg-brand-orange/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
-                  <item.icon className="text-brand-orange h-5 w-5" />
+              <Reveal key={i} variant="fade-scale" delay={i * 100}>
+                <div className="flex gap-4 h-full">
+                  <div className="bg-brand-orange/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
+                    <item.icon className="text-brand-orange h-5 w-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-brand-navy mb-1 text-sm font-bold">{item.label}</h3>
+                    <p className="text-text-secondary text-sm leading-relaxed">{item.desc}</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-brand-navy mb-1 text-sm font-bold">{item.label}</h3>
-                  <p className="text-text-secondary text-sm leading-relaxed">{item.desc}</p>
-                </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -191,112 +207,117 @@ export default function StrategySprintPage() {
       <section className="py-24">
         <div className="container-custom">
           <div className="mb-12">
-            <h2 className="font-heading text-brand-navy mb-3 text-3xl font-bold">
-              Three Tiers — Priced by Complexity
-            </h2>
-            <p className="text-text-secondary max-w-2xl text-sm leading-relaxed">
-              Price increases with scope complexity and deliverable count. Not sure which fits?
-              Describe your project in a contact message — we will tell you.
-            </p>
+            <Reveal variant="fade-up">
+              <h2 className="font-heading text-brand-navy mb-3 text-3xl font-bold">
+                Four Tiers — Priced by Complexity
+              </h2>
+            </Reveal>
+            <Reveal variant="fade-up" delay={100}>
+              <p className="text-text-secondary max-w-2xl text-sm leading-relaxed">
+                Price increases with scope complexity and deliverable count. Not sure which fits?
+                Describe your project in a contact message — we will tell you.
+              </p>
+            </Reveal>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             {tiers.map((tier, i) => (
-              <Card
-                key={i}
-                className={`relative flex flex-col gap-5 ${
-                  tier.highlight ? "border-brand-orange ring-brand-orange/20 shadow-xl ring-1" : ""
-                }`}
-              >
-                {tier.highlight && (
-                  <div className="bg-brand-orange absolute top-0 left-8 -translate-y-1/2 rounded-full px-3 py-1 text-[10px] font-bold tracking-widest text-white uppercase">
-                    Most Common
-                  </div>
-                )}
-
-                <div>
-                  <h3 className="text-brand-navy mb-1 text-base font-bold">{tier.name}</h3>
-                  {activeRegion ? (
-                    FOUNDING_SLOTS_REMAINING > 0 ? (
-                      <div className="flex flex-col gap-1">
-                        <div className="text-text-muted text-xs line-through">
-                          {formatTierPriceStandard("strategySprint", tier.tierKey, activeRegion)}
-                        </div>
-                        <div className="font-heading text-brand-orange text-2xl font-bold">
-                          {formatTierPriceFounding("strategySprint", tier.tierKey, activeRegion)}
-                        </div>
-                        <div className="text-text-muted text-[11px] mt-0.5">
-                          Founding client pricing — {FOUNDING_SLOTS_REMAINING} spots remaining.
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="font-heading text-brand-orange text-2xl font-bold">
-                        {formatTierPriceStandard("strategySprint", tier.tierKey, activeRegion)}
-                      </div>
-                    )
-                  ) : (
-                    <div className="text-text-muted text-sm font-semibold">
-                      Select region for pricing
+              <Reveal key={i} variant="fade-up" delay={i * 80}>
+                <Card
+                  className={`relative flex flex-col gap-5 h-full ${
+                    tier.highlight ? "border-brand-orange ring-brand-orange/20 shadow-xl ring-1" : ""
+                  }`}
+                >
+                  {tier.highlight && (
+                    <div className="bg-brand-orange absolute top-0 left-8 -translate-y-1/2 rounded-full px-3 py-1 text-[10px] font-bold tracking-widest text-white uppercase">
+                      Most Common
                     </div>
                   )}
-                  <div className="text-brand-teal mt-2 flex items-center gap-1.5 text-xs font-semibold uppercase">
-                    <Clock className="h-3 w-3" /> {tier.duration}
-                  </div>
-                </div>
 
-                <p className="text-text-muted border-border-base border-t pt-3 text-xs font-semibold tracking-wider uppercase">
-                  Best for: {tier.bestFor}
-                </p>
-
-                <p className="text-text-secondary text-sm leading-relaxed">
-                  {tier.descriptionInternational}
-                </p>
-
-                <div>
-                  <p className="text-brand-navy mb-3 text-xs font-bold tracking-widest uppercase">
-                    Included
-                  </p>
-                  <ul className="space-y-2">
-                    {tier.included.map((d, j) => (
-                      <li key={j} className="text-text-secondary flex items-start gap-2 text-sm">
-                        <CheckCircle2 className="text-brand-teal mt-0.5 h-4 w-4 shrink-0" />
-                        {d}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {tier.notIncluded.length > 0 && (
                   <div>
-                    <p className="text-text-muted mb-3 text-xs font-bold tracking-widest uppercase">
-                      Not included
+                    <h3 className="text-brand-navy mb-1 text-base font-bold">{tier.name}</h3>
+                    {activeRegion ? (
+                      FOUNDING_SLOTS_REMAINING > 0 ? (
+                        <div className="flex flex-col gap-1">
+                          <div className="text-text-muted text-xs line-through">
+                            {formatTierPriceStandard("strategySprint", tier.tierKey, activeRegion)}
+                          </div>
+                          <div className="font-heading text-brand-orange text-2xl font-bold">
+                            {formatTierPriceFounding("strategySprint", tier.tierKey, activeRegion)}
+                          </div>
+                          <div className="text-text-muted text-[11px] mt-0.5">
+                            Founding client pricing — {FOUNDING_SLOTS_REMAINING} spots remaining.
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="font-heading text-brand-orange text-2xl font-bold">
+                          {formatTierPriceStandard("strategySprint", tier.tierKey, activeRegion)}
+                        </div>
+                      )
+                    ) : (
+                      <div className="text-text-muted text-sm font-semibold">
+                        Select region for pricing
+                      </div>
+                    )}
+                    <div className="text-brand-teal mt-2 flex items-center gap-1.5 text-xs font-semibold uppercase">
+                      <Clock className="h-3 w-3" /> {tier.duration}
+                    </div>
+                  </div>
+
+                  <p className="text-text-muted border-border-base border-t pt-3 text-xs font-semibold tracking-wider uppercase">
+                    Best for: {tier.bestFor}
+                  </p>
+
+                  <p className="text-text-secondary text-sm leading-relaxed">
+                    {tier.descriptionInternational}
+                  </p>
+
+                  <div>
+                    <p className="text-brand-navy mb-3 text-xs font-bold tracking-widest uppercase">
+                      Included
                     </p>
                     <ul className="space-y-2">
-                      {tier.notIncluded.map((d, j) => (
-                        <li key={j} className="text-text-muted flex items-start gap-2 text-xs">
-                          <XCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-gray-300" />
+                      {tier.included.map((d, j) => (
+                        <li key={j} className="text-text-secondary flex items-start gap-2 text-sm">
+                          <CheckCircle2 className="text-brand-teal mt-0.5 h-4 w-4 shrink-0" />
                           {d}
                         </li>
                       ))}
                     </ul>
                   </div>
-                )}
 
-                <div className="mt-auto pt-2">
-                  <Link
-                    href={`/request-proposal?pkg=strategy-sprint&tier=${i + 1}`}
-                    className="w-full"
-                  >
-                    <Button
-                      variant={tier.highlight ? "primary" : "outline"}
-                      className="group w-full justify-between"
+                  {tier.notIncluded.length > 0 && (
+                    <div>
+                      <p className="text-text-muted mb-3 text-xs font-bold tracking-widest uppercase">
+                        Not included
+                      </p>
+                      <ul className="space-y-2">
+                        {tier.notIncluded.map((d, j) => (
+                          <li key={j} className="text-text-muted flex items-start gap-2 text-xs">
+                            <XCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-gray-300" />
+                            {d}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  <div className="mt-auto pt-2">
+                    <Link
+                      href={`/request-proposal?pkg=strategy-sprint&tier=${i + 1}`}
+                      className="w-full"
                     >
-                      Request This Tier
-                      <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </Button>
-                  </Link>
-                </div>
-              </Card>
+                      <Button
+                        variant={tier.highlight ? "primary" : "outline"}
+                        className="group w-full justify-between"
+                      >
+                        Request This Tier
+                        <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      </Button>
+                    </Link>
+                  </div>
+                </Card>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -305,63 +326,67 @@ export default function StrategySprintPage() {
       {/* Third-party disclaimer */}
       <section className="bg-bg-secondary py-12">
         <div className="container-custom">
-          <div className="border-border-base max-w-3xl rounded-2xl border bg-white p-8">
-            <div className="mb-4 flex items-start gap-3">
-              <AlertCircle className="text-brand-orange mt-0.5 h-5 w-5 shrink-0" />
-              <h3 className="text-brand-navy font-bold">What you are responsible for</h3>
+          <Reveal variant="fade-scale">
+            <div className="border-border-base max-w-3xl rounded-2xl border bg-white p-8">
+              <div className="mb-4 flex items-start gap-3">
+                <AlertCircle className="text-brand-orange mt-0.5 h-5 w-5 shrink-0" />
+                <h3 className="text-brand-navy font-bold">What you are responsible for</h3>
+              </div>
+              <ul className="text-text-secondary space-y-2 text-sm">
+                <li className="flex items-start gap-2">
+                  <ChevronRight className="text-brand-orange mt-0.5 h-4 w-4 shrink-0" />
+                  Access to relevant stakeholders during the sprint window — delays on your end extend
+                  the timeline
+                </li>
+                <li className="flex items-start gap-2">
+                  <ChevronRight className="text-brand-orange mt-0.5 h-4 w-4 shrink-0" />
+                  Any existing documentation, system diagrams, or business process docs you want
+                  incorporated
+                </li>
+                <li className="flex items-start gap-2">
+                  <ChevronRight className="text-brand-orange mt-0.5 h-4 w-4 shrink-0" />
+                  Timely responses during discovery — a sprint cannot run one direction for days then
+                  reverse
+                </li>
+              </ul>
+              <p className="text-text-muted border-border-base mt-6 border-t pt-4 text-xs leading-relaxed">
+                <strong className="text-brand-navy">
+                  Third-party tool costs are entirely your responsibility.
+                </strong>{" "}
+                Modulifyr does not cover, pay for, or manage costs for any external platforms —
+                including but not limited to Vercel, Netlify, any domain registrar, n8n cloud,
+                Supabase, any SaaS subscription, or API usage fees. These are direct client costs,
+                billed to and owned by the client.
+              </p>
             </div>
-            <ul className="text-text-secondary space-y-2 text-sm">
-              <li className="flex items-start gap-2">
-                <ChevronRight className="text-brand-orange mt-0.5 h-4 w-4 shrink-0" />
-                Access to relevant stakeholders during the sprint window — delays on your end extend
-                the timeline
-              </li>
-              <li className="flex items-start gap-2">
-                <ChevronRight className="text-brand-orange mt-0.5 h-4 w-4 shrink-0" />
-                Any existing documentation, system diagrams, or business process docs you want
-                incorporated
-              </li>
-              <li className="flex items-start gap-2">
-                <ChevronRight className="text-brand-orange mt-0.5 h-4 w-4 shrink-0" />
-                Timely responses during discovery — a sprint cannot run one direction for days then
-                reverse
-              </li>
-            </ul>
-            <p className="text-text-muted border-border-base mt-6 border-t pt-4 text-xs leading-relaxed">
-              <strong className="text-brand-navy">
-                Third-party tool costs are entirely your responsibility.
-              </strong>{" "}
-              Modulifyr does not cover, pay for, or manage costs for any external platforms —
-              including but not limited to Vercel, Netlify, any domain registrar, n8n cloud,
-              Supabase, any SaaS subscription, or API usage fees. These are direct client costs,
-              billed to and owned by the client.
-            </p>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* CTA */}
       <section className="py-24">
         <div className="container-custom">
-          <div className="bg-brand-navy max-w-3xl rounded-3xl p-12 text-white">
-            <h2 className="font-heading mb-3 text-2xl font-bold">Not sure which tier fits?</h2>
-            <p className="text-text-muted mb-8 text-sm leading-relaxed">
-              Describe your project briefly. We will tell you which tier is appropriate and why — no
-              commitment required.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Link href="/contact">
-                <Button className="bg-brand-orange hover:bg-brand-orange/90">
-                  Describe Your Project
-                </Button>
-              </Link>
-              <Link href="/services">
-                <Button variant="outline" className="border-white/30 text-white hover:bg-white/10">
-                  Back to All Services
-                </Button>
-              </Link>
+          <Reveal variant="fade-scale">
+            <div className="bg-brand-navy max-w-3xl rounded-3xl p-12 text-white">
+              <h2 className="font-heading mb-3 text-2xl font-bold text-white">Not sure which tier fits?</h2>
+              <p className="text-text-muted mb-8 text-sm leading-relaxed">
+                Describe your project briefly. We will tell you which tier is appropriate and why — no
+                commitment required.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Link href="/contact">
+                  <Button className="bg-brand-orange hover:bg-brand-orange/90">
+                    Describe Your Project
+                  </Button>
+                </Link>
+                <Link href="/services">
+                  <Button variant="outline" className="border-white/30 text-white hover:bg-white/10">
+                    Back to All Services
+                  </Button>
+                </Link>
+              </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
     </div>

@@ -289,3 +289,46 @@ div[class*="ch2-"] {
   opacity: 0 !important;
   pointer-events: none !important;
 }
+
+/* ── CSS Scroll Parallax (Phase 2) ────────────────────────────────────────── */
+@keyframes scroll-parallax-up {
+  from { transform: translateY(12px); }
+  to { transform: translateY(-12px); }
+}
+
+@keyframes scroll-parallax-down {
+  from { transform: translateY(-12px); }
+  to { transform: translateY(12px); }
+}
+
+@keyframes scroll-parallax-subtle-up {
+  from { transform: translateY(6px); }
+  to { transform: translateY(-6px); }
+}
+
+.parallax-up {
+  animation: scroll-parallax-up linear both;
+  animation-timeline: scroll();
+  animation-range: cover 0% cover 100%;
+}
+
+.parallax-down {
+  animation: scroll-parallax-down linear both;
+  animation-timeline: scroll();
+  animation-range: cover 0% cover 100%;
+}
+
+.parallax-subtle-up {
+  animation: scroll-parallax-subtle-up linear both;
+  animation-timeline: scroll();
+  animation-range: cover 0% cover 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .parallax-up,
+  .parallax-down,
+  .parallax-subtle-up {
+    animation: none !important;
+    transform: none !important;
+  }
+}
