@@ -27,7 +27,7 @@ import Magnetic from "@/components/ui/Magnetic";
 import GradientMesh from "@/components/ui/GradientMesh";
 
 interface ValueItem {
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<{ className?: string }>;
   title: string;
   desc: string;
 }
@@ -44,7 +44,7 @@ interface TeamMember {
 }
 
 interface DivisionRole {
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<{ className?: string }>;
   division: string;
   tagline: string;
   color: string;

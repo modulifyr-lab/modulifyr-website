@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
+import { Group } from "three";
 import { Layers, Cpu, Globe } from "lucide-react";
 
 // Standard Static Fallback JSX
@@ -37,7 +38,7 @@ export function StaticFallback() {
 
 // 3D Orbiting Network Mesh Component
 function NetworkGroup() {
-  const groupRef = React.useRef<any>(null);
+  const groupRef = React.useRef<Group>(null);
   const mouse = React.useRef({ x: 0, y: 0 });
 
   // 6 nodes representing modular architecture components
@@ -146,7 +147,7 @@ export default function NetworkScene() {
           window.WebGLRenderingContext &&
           (canvas.getContext("webgl") || canvas.getContext("experimental-webgl"))
         );
-      } catch (e) {
+      } catch {
         return false;
       }
     };

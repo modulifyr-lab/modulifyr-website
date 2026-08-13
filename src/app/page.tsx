@@ -15,7 +15,6 @@ import {
   RefreshCw,
   Search,
   PenTool,
-  Cpu,
   Globe,
   ShieldCheck,
   ArrowRight,
