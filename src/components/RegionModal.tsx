@@ -56,7 +56,7 @@ export function RegionModal() {
                   {code}
                 </div>
                 <div>
-                  <p className="font-heading text-brand-navy text-sm font-bold dark:text-white">
+                  <p className="font-heading text-foreground text-sm font-bold dark:text-white">
                     {REGIONS[code].label}
                   </p>
                   <p className="text-text-muted mt-0.5 text-xs">

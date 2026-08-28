@@ -161,7 +161,7 @@ export default function TechnicalStandardsPage() {
       <section className="bg-bg-light py-24">
         <div className="container-custom">
           <div className="mb-16 max-w-3xl">
-            <h2 className="font-heading text-brand-navy mb-4 text-3xl font-bold md:text-4xl">
+            <h2 className="font-heading text-foreground mb-4 text-3xl font-bold md:text-4xl">
               Six Pillars of Engineering Quality
             </h2>
             <p className="text-text-secondary text-lg leading-relaxed">
@@ -183,7 +183,7 @@ export default function TechnicalStandardsPage() {
                   >
                     <std.icon className={`h-6 w-6 ${std.color}`} />
                   </div>
-                  <h3 className="font-heading text-brand-navy text-xl font-bold">{std.title}</h3>
+                  <h3 className="font-heading text-foreground text-xl font-bold">{std.title}</h3>
                 </div>
                 <ul className="space-y-3">
                   {std.items.map((item, j) => (
@@ -206,7 +206,7 @@ export default function TechnicalStandardsPage() {
       <section className="bg-bg-secondary py-24">
         <div className="container-custom">
           <div className="mb-12 max-w-3xl">
-            <h2 className="font-heading text-brand-navy mb-4 text-3xl font-bold">
+            <h2 className="font-heading text-foreground mb-4 text-3xl font-bold">
               Performance Benchmarks
             </h2>
             <p className="text-text-secondary text-lg leading-relaxed">
@@ -225,7 +225,7 @@ export default function TechnicalStandardsPage() {
                 key={i}
                 className={`border-border-base grid grid-cols-3 items-center border-b px-8 py-5 ${i % 2 === 1 ? "bg-bg-light" : ""}`}
               >
-                <span className="text-brand-navy text-sm font-medium">{row.metric}</span>
+                <span className="text-foreground text-sm font-medium">{row.metric}</span>
                 <span className="text-brand-orange font-heading text-center font-bold">
                   {row.target}
                 </span>
@@ -241,7 +241,7 @@ export default function TechnicalStandardsPage() {
         <div className="container-custom">
           <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-2">
             <div>
-              <h2 className="font-heading text-brand-navy mb-6 text-3xl font-bold">
+              <h2 className="font-heading text-foreground mb-6 text-3xl font-bold">
                 Modular Architecture Principles
               </h2>
               <p className="text-text-secondary mb-8 leading-relaxed">
@@ -277,7 +277,7 @@ export default function TechnicalStandardsPage() {
                       </span>
                     </div>
                     <div>
-                      <span className="text-brand-navy text-sm font-bold">
+                      <span className="text-foreground text-sm font-bold">
                         {item.layer} Layer:{" "}
                       </span>
                       <span className="text-text-secondary text-sm leading-relaxed">
@@ -317,7 +317,7 @@ export default function TechnicalStandardsPage() {
                 className="bg-bg-secondary border-border-base rounded-3xl border p-8"
                 id="download"
               >
-                <h3 className="font-heading text-brand-navy mb-3 font-bold">
+                <h3 className="font-heading text-foreground mb-3 font-bold">
                   Technical Briefing PDF
                 </h3>
                 <p className="text-text-secondary mb-5 text-sm leading-relaxed">

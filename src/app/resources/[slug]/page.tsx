@@ -158,7 +158,7 @@ export default async function ResourceArticlePage({ params }: Props) {
                     section.type === "heading" ? (
                       <h2
                         key={i}
-                        className="font-heading text-brand-navy mt-10 mb-3 text-2xl font-bold first:mt-0"
+                        className="font-heading text-foreground mt-10 mb-3 text-2xl font-bold first:mt-0"
                       >
                         {section.text}
                       </h2>
@@ -188,7 +188,7 @@ export default async function ResourceArticlePage({ params }: Props) {
               </div>
               {otherArticles.length > 0 && (
                 <div className="bg-bg-secondary border-border-base rounded-3xl border p-7">
-                  <h3 className="font-heading text-brand-navy mb-3 text-sm font-bold">
+                  <h3 className="font-heading text-foreground mb-3 text-sm font-bold">
                     More Resources
                   </h3>
                   <div className="space-y-3">

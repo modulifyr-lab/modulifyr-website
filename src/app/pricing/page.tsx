@@ -334,7 +334,7 @@ export default function PricingPage() {
         <div className="container-custom">
           <div className="max-w-4xl">
             <Reveal variant="fade-up">
-              <h1 className="font-heading text-brand-navy mb-6 text-4xl font-bold md:text-6xl">
+              <h1 className="font-heading text-foreground mb-6 text-4xl font-bold md:text-6xl">
                 Simple Packages, <span className="text-brand-orange">Transparent Prices</span>
               </h1>
             </Reveal>
@@ -371,7 +371,7 @@ export default function PricingPage() {
         className={`bg-brand-orange/10 border-border-base border-y py-4 ${SUNSET_TRIGGERED || showSunset ? "block" : "hidden"}`}
       >
         <div className="container-custom flex items-center justify-between">
-          <span className="text-brand-navy font-bold">
+          <span className="text-foreground font-bold">
             {SUNSET_TRIGGERED
               ? "⚠ Sunset pricing active — showing post-trigger rates"
               : "⚠ Sunset pricing preview — showing post-trigger rates"}
@@ -428,7 +428,7 @@ export default function PricingPage() {
                       <pkg.icon className="text-brand-orange h-5 w-5" />
                     </div>
                     <div>
-                      <h3 className="text-brand-navy text-sm font-bold">{pkg.clientName}</h3>
+                      <h3 className="text-foreground text-sm font-bold">{pkg.clientName}</h3>
                       <p className="text-text-muted text-[10px] font-medium tracking-wider uppercase">
                         {pkg.internalName}
                       </p>
@@ -440,8 +440,8 @@ export default function PricingPage() {
                     <div className="mb-4 flex-grow space-y-2">
                       {pkg.tierNames.map((tierName, i) => (
                         <div key={i} className="bg-bg-secondary rounded-xl p-3">
-                          <div className="flex items-center justify-between">
-                            <span className="text-brand-navy text-sm font-semibold">{tierName}</span>
+                          <div className="flex flex-col gap-0.5">
+                            <span className="text-foreground text-sm font-semibold">{tierName}</span>
                             <span className="font-heading text-brand-orange text-lg font-bold">
                               {pkg.tierPrices![i]}
                             </span>
@@ -452,7 +452,7 @@ export default function PricingPage() {
                   ) : (
                     // Simple pricing for coming soon packages
                     <div className="mb-4">
-                      <div className="font-heading text-brand-navy text-xl font-bold">
+                      <div className="font-heading text-foreground text-xl font-bold">
                         {pkg.price}
                       </div>
                       <div className="text-text-muted text-xs">{pkg.subprice}</div>
@@ -500,7 +500,7 @@ export default function PricingPage() {
       <section className="bg-bg-secondary py-16">
         <div className="container-custom">
           <Reveal variant="fade-up">
-            <h2 className="font-heading text-brand-navy mb-8 text-2xl font-bold">
+            <h2 className="font-heading text-foreground mb-8 text-2xl font-bold">
               Not sure which package to start with?
             </h2>
           </Reveal>
@@ -527,7 +527,7 @@ export default function PricingPage() {
                   <p className="text-text-muted mb-2 text-xs font-bold tracking-widest uppercase">
                     If…
                   </p>
-                  <p className="text-brand-navy mb-3 font-semibold">{item.q}</p>
+                  <p className="text-foreground mb-3 font-semibold">{item.q}</p>
                   <p className="text-brand-orange text-sm font-bold">→ {item.a}</p>
                 </div>
               </Reveal>
@@ -541,7 +541,7 @@ export default function PricingPage() {
         <div className="container-custom">
           <div className="mx-auto mb-16 max-w-2xl px-4 text-center">
             <Reveal variant="fade-scale">
-              <h2 className="font-heading text-brand-navy mb-4 text-3xl font-bold md:text-4xl">
+              <h2 className="font-heading text-foreground mb-4 text-3xl font-bold md:text-4xl">
                 Flexible Engagement Models
               </h2>
             </Reveal>
@@ -558,7 +558,7 @@ export default function PricingPage() {
                   className="border-border-base flex flex-col gap-4 rounded-2xl border bg-white p-8 h-full"
                 >
                   <model.icon className="text-brand-orange h-8 w-8" />
-                  <h4 className="font-heading text-brand-navy font-bold">{model.title}</h4>
+                  <h4 className="font-heading text-foreground font-bold">{model.title}</h4>
                   <p className="text-text-muted text-xs leading-relaxed">{model.desc}</p>
                 </div>
               </Reveal>

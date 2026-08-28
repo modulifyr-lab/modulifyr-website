@@ -46,7 +46,7 @@ export function DevelopmentAlertModal() {
         <div className="dark:bg-bg-dark border-brand-orange w-full max-w-2xl overflow-hidden rounded-3xl border-4 bg-white shadow-2xl">
           <div className="bg-brand-navy px-8 py-8 text-center">
             <div className="bg-brand-orange mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full">
-              <AlertTriangle className="text-brand-navy h-8 w-8" />
+              <AlertTriangle className="text-foreground h-8 w-8" />
             </div>
             <h2
               id="development-alert-title"
@@ -58,7 +58,7 @@ export function DevelopmentAlertModal() {
 
           <div className="p-8">
             <div className="space-y-4 text-left">
-              <p className="text-brand-navy text-lg font-semibold">
+              <p className="text-foreground text-lg font-semibold">
                 This website and our associated business are currently in active development.
               </p>
               <p className="text-gray-700">

@@ -19,7 +19,7 @@ import {
 // Grouped by category for the select dropdown
 const roleGroups = [
   {
-    label: "Engineering — Modulifyr / Modullex",
+    label: "Engineering",
     roles: [
       "Full-Stack Engineer",
       "Frontend Engineer",
@@ -34,27 +34,7 @@ const roleGroups = [
     ],
   },
   {
-    label: "Game Development — Onyxlabs",
-    roles: [
-      "Gameplay Programmer",
-      "Engine Programmer",
-      "AI Programmer",
-      "Tools Programmer",
-      "Graphics Programmer",
-    ],
-  },
-  {
-    label: "Art & Visual — Onyxlabs",
-    roles: [
-      "Concept Artist",
-      "3D Artist",
-      "Animator",
-      "Technical Artist",
-      "VFX Artist",
-    ],
-  },
-  {
-    label: "Design — Modulifyr / Modullex",
+    label: "Design",
     roles: [
       "UX Designer",
       "UI Designer",
@@ -62,20 +42,6 @@ const roleGroups = [
       "UX Researcher",
       "Design Lead",
     ],
-  },
-  {
-    label: "Game Design — Onyxlabs",
-    roles: [
-      "Game Designer",
-      "Level Designer",
-      "Narrative Designer",
-      "Systems Designer",
-      "QA Tester",
-    ],
-  },
-  {
-    label: "Audio — Onyxlabs",
-    roles: ["Audio Designer", "Composer"],
   },
   {
     label: "Product Management",
@@ -141,7 +107,6 @@ const allRoles = roleGroups.flatMap((g) => g.roles).concat(["Other / General App
 // Quick-click featured roles shown above the form
 const featuredRoles = [
   "Full-Stack Engineer",
-  "Gameplay Programmer",
   "UX Designer",
   "Growth Marketer",
   "Product Manager",
@@ -235,7 +200,7 @@ export function JobApplicationForm() {
             <CheckCircle2 className="text-brand-teal h-10 w-10" />
           </div>
           <div>
-            <h1 className="font-heading text-brand-navy mb-4 text-4xl font-bold">
+            <h1 className="font-heading text-foreground mb-4 text-4xl font-bold">
               Application Received
             </h1>
             <p className="text-text-secondary text-lg leading-relaxed">
@@ -270,7 +235,7 @@ export function JobApplicationForm() {
                 className={`border-border-base cursor-pointer rounded-full border px-4 py-2 text-xs font-semibold transition-colors ${
                   form.role === role
                     ? "border-brand-orange bg-brand-orange/10 text-brand-orange"
-                    : "bg-white text-brand-navy hover:border-brand-orange"
+                    : "bg-white text-foreground hover:border-brand-orange"
                 }`}
                 onClick={() => setForm((prev) => ({ ...prev, role }))}
               >
@@ -304,7 +269,7 @@ export function JobApplicationForm() {
                   </h2>
                   <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
                     <div className="flex flex-col gap-2">
-                      <label className="text-brand-navy text-sm font-semibold">
+                      <label className="text-foreground text-sm font-semibold">
                         Full Name <span className="text-brand-orange">*</span>
                       </label>
                       <input
@@ -318,7 +283,7 @@ export function JobApplicationForm() {
                       />
                     </div>
                     <div className="flex flex-col gap-2">
-                      <label className="text-brand-navy text-sm font-semibold">
+                      <label className="text-foreground text-sm font-semibold">
                         Email <span className="text-brand-orange">*</span>
                       </label>
                       <input
@@ -331,7 +296,7 @@ export function JobApplicationForm() {
                       />
                     </div>
                     <div className="flex flex-col gap-2">
-                      <label className="text-brand-navy text-sm font-semibold">
+                      <label className="text-foreground text-sm font-semibold">
                         Phone <span className="text-text-muted font-normal">(Optional)</span>
                       </label>
                       <input
@@ -344,7 +309,7 @@ export function JobApplicationForm() {
                       />
                     </div>
                     <div className="flex flex-col gap-2">
-                      <label className="text-brand-navy text-sm font-semibold">
+                      <label className="text-foreground text-sm font-semibold">
                         Role Applying For <span className="text-brand-orange">*</span>
                       </label>
                       <select
@@ -383,7 +348,7 @@ export function JobApplicationForm() {
                   </h2>
                   <div className="flex flex-col gap-5">
                     <div className="flex flex-col gap-2">
-                      <label className="text-brand-navy text-sm font-semibold">
+                      <label className="text-foreground text-sm font-semibold">
                         Key Skills <span className="text-brand-orange">*</span>
                       </label>
                       <input
@@ -398,7 +363,7 @@ export function JobApplicationForm() {
                     </div>
                     <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
                       <div className="flex flex-col gap-2">
-                        <label className="text-brand-navy flex items-center gap-2 text-sm font-semibold">
+                        <label className="text-foreground flex items-center gap-2 text-sm font-semibold">
                           <Github className="h-4 w-4" /> Portfolio / GitHub
                         </label>
                         <input
@@ -411,7 +376,7 @@ export function JobApplicationForm() {
                         />
                       </div>
                       <div className="flex flex-col gap-2">
-                        <label className="text-brand-navy flex items-center gap-2 text-sm font-semibold">
+                        <label className="text-foreground flex items-center gap-2 text-sm font-semibold">
                           <Linkedin className="h-4 w-4" /> LinkedIn Profile
                         </label>
                         <input
@@ -433,7 +398,7 @@ export function JobApplicationForm() {
                     03 — Why You Want In
                   </h2>
                   <div className="flex flex-col gap-2">
-                    <label className="text-brand-navy text-sm font-semibold">
+                    <label className="text-foreground text-sm font-semibold">
                       Tell us about yourself and why you're applying{" "}
                       <span className="text-brand-orange">*</span>
                     </label>
@@ -513,7 +478,6 @@ export function JobApplicationForm() {
                 <div className="space-y-4">
                   {[
                     "Own entire functions, not sub-tasks",
-                    "Three real products across three divisions",
                     "Architecture-first engineering culture",
                     "Birtamode HQ — remote-first globally",
                     "Direct access to founder from day one",
@@ -530,7 +494,7 @@ export function JobApplicationForm() {
 
               {/* All role categories */}
               <div className="bg-bg-secondary border-border-base rounded-3xl border p-8">
-                <h3 className="font-heading text-brand-navy mb-4 text-sm font-bold tracking-widest uppercase">
+                <h3 className="font-heading text-foreground mb-4 text-sm font-bold tracking-widest uppercase">
                   All Role Categories
                 </h3>
                 <div className="space-y-1.5">
@@ -539,7 +503,7 @@ export function JobApplicationForm() {
                       key={g.label}
                       className="text-text-secondary text-xs leading-snug"
                     >
-                      <span className="text-brand-navy font-semibold">{g.label}:</span>{" "}
+                      <span className="text-foreground font-semibold">{g.label}:</span>{" "}
                       {g.roles.length} positions
                     </div>
                   ))}
@@ -550,7 +514,7 @@ export function JobApplicationForm() {
               </div>
 
               <div className="bg-bg-secondary border-border-base rounded-3xl border p-8">
-                <h3 className="font-heading text-brand-navy mb-3 text-sm font-bold tracking-widest uppercase">
+                <h3 className="font-heading text-foreground mb-3 text-sm font-bold tracking-widest uppercase">
                   Questions?
                 </h3>
                 <p className="text-text-secondary text-sm leading-relaxed">

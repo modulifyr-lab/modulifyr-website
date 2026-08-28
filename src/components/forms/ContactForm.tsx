@@ -96,7 +96,7 @@ export function ContactForm() {
         <div className="container-custom">
           <div className="max-w-3xl">
             <Reveal variant="fade-up">
-              <h1 className="font-heading text-brand-navy mb-6 text-4xl font-bold md:text-6xl text-brand-navy">
+              <h1 className="font-heading text-foreground mb-6 text-4xl font-bold md:text-6xl text-foreground">
                 Let's Talk About <span className="text-brand-orange">Your Project</span>
               </h1>
             </Reveal>
@@ -119,9 +119,9 @@ export function ContactForm() {
                 <Reveal variant="fade-scale" delay={100}>
                   <div className="flex flex-col gap-4">
                     <div className="bg-brand-navy/10 flex h-10 w-10 items-center justify-center rounded-lg">
-                      <Mail className="text-brand-navy h-5 w-5" />
+                      <Mail className="text-foreground h-5 w-5" />
                     </div>
-                    <h4 className="font-heading text-brand-navy text-lg font-bold">Email Us</h4>
+                    <h4 className="font-heading text-foreground text-lg font-bold">Email Us</h4>
                     <p className="text-text-secondary text-sm">Direct engineering inquiries:</p>
                     <a
                       href="mailto:contact@modulifyr.com"
@@ -134,9 +134,9 @@ export function ContactForm() {
                 <Reveal variant="fade-scale" delay={150}>
                   <div className="flex flex-col gap-4">
                     <div className="bg-brand-navy/10 flex h-10 w-10 items-center justify-center rounded-lg">
-                      <Phone className="text-brand-navy h-5 w-5" />
+                      <Phone className="text-foreground h-5 w-5" />
                     </div>
-                    <h4 className="font-heading text-brand-navy text-lg font-bold">Call Us</h4>
+                    <h4 className="font-heading text-foreground text-lg font-bold">Call Us</h4>
                     <p className="text-text-secondary text-sm">Mon – Fri, 9am – 6pm NPT:</p>
                     <a
                       href="tel:+9779764478571"
@@ -155,7 +155,7 @@ export function ContactForm() {
                     <Calendar className="text-brand-teal h-6 w-6" />
                   </div>
                   <div className="flex flex-col gap-3">
-                    <h4 className="font-heading text-brand-navy text-xl font-bold">
+                    <h4 className="font-heading text-foreground text-xl font-bold">
                       Prefer a Call First?
                     </h4>
                     <p className="text-text-secondary text-sm leading-relaxed">
@@ -181,7 +181,7 @@ export function ContactForm() {
                     <MapPin className="text-brand-orange h-6 w-6" />
                   </div>
                   <div className="flex flex-col gap-2">
-                    <h4 className="font-heading text-brand-navy text-xl font-bold">Our Office</h4>
+                    <h4 className="font-heading text-foreground text-xl font-bold">Our Office</h4>
                     <p className="text-text-secondary text-sm leading-relaxed">
                       Modulifyr Enterprise Pvt. Ltd.
                       <br />
@@ -203,7 +203,7 @@ export function ContactForm() {
 
               <div className="flex flex-col gap-6">
                 <Reveal variant="fade-up">
-                  <h4 className="font-heading text-brand-navy font-bold">Follow Our Work</h4>
+                  <h4 className="font-heading text-foreground font-bold">Follow Our Work</h4>
                 </Reveal>
                 <div className="flex gap-4">
                   <Reveal variant="fade-scale" delay={100}>
@@ -252,7 +252,7 @@ export function ContactForm() {
               <Reveal variant="fade-scale" delay={150}>
                 <Card className="border-t-brand-teal border-t-8 p-8 shadow-xl md:p-12 h-full">
                   <form onSubmit={handleSubmit} className="space-y-6">
-                    <h2 className="font-heading text-brand-navy mb-4 text-2xl font-bold">
+                    <h2 className="font-heading text-foreground mb-4 text-2xl font-bold">
                       Send a Message
                     </h2>
 
@@ -267,7 +267,7 @@ export function ContactForm() {
                       <div className="space-y-2">
                         <label
                           htmlFor="contact-name"
-                          className="text-brand-navy font-heading text-sm font-bold"
+                          className="text-foreground font-heading text-sm font-bold"
                         >
                           Your Name <span className="text-brand-orange">*</span>
                         </label>
@@ -286,7 +286,7 @@ export function ContactForm() {
                       <div className="space-y-2">
                         <label
                           htmlFor="contact-email"
-                          className="text-brand-navy font-heading text-sm font-bold"
+                          className="text-foreground font-heading text-sm font-bold"
                         >
                           Your Email <span className="text-brand-orange">*</span>
                         </label>
@@ -306,7 +306,7 @@ export function ContactForm() {
                     <div className="space-y-2">
                       <label
                         htmlFor="contact-subject"
-                        className="text-brand-navy font-heading text-sm font-bold"
+                        className="text-foreground font-heading text-sm font-bold"
                       >
                         Subject <span className="text-brand-orange">*</span>
                       </label>
@@ -326,7 +326,7 @@ export function ContactForm() {
                     <div className="space-y-2">
                       <label
                         htmlFor="contact-message"
-                        className="text-brand-navy font-heading text-sm font-bold"
+                        className="text-foreground font-heading text-sm font-bold"
                       >
                         Message <span className="text-brand-orange">*</span>
                       </label>

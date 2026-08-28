@@ -171,7 +171,7 @@ export default function CookiePolicyPage() {
                 <div className="space-y-10">
                   {sections.map((section, i) => (
                     <div key={i} id={`s${i}`} className="scroll-mt-28">
-                      <h2 className="font-heading text-brand-navy mb-5 text-xl font-bold">
+                      <h2 className="font-heading text-foreground mb-5 text-xl font-bold">
                         {section.title}
                       </h2>
                       <div className="space-y-4">
@@ -179,7 +179,7 @@ export default function CookiePolicyPage() {
                           <div key={j} className="flex gap-3">
                             <div className="bg-brand-orange mt-2 h-2 w-2 shrink-0 rounded-full" />
                             <div>
-                              <span className="text-brand-navy text-sm font-semibold">
+                              <span className="text-foreground text-sm font-semibold">
                                 {item.heading}:{" "}
                               </span>
                               <span className="text-text-secondary text-sm leading-relaxed">

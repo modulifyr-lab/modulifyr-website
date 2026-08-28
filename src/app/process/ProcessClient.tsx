@@ -82,7 +82,7 @@ export default function ProcessClient() {
         <div className="container-custom">
           <div className="max-w-3xl">
             <Reveal variant="fade-up">
-              <h1 className="font-heading text-brand-navy mb-6 text-4xl font-bold md:text-6xl">
+              <h1 className="font-heading text-foreground mb-6 text-4xl font-bold md:text-6xl">
                 Transparency Through <span className="text-brand-orange">Process</span>
               </h1>
             </Reveal>
@@ -109,7 +109,7 @@ export default function ProcessClient() {
                       <div className="bg-brand-orange flex h-12 w-12 items-center justify-center rounded-full text-xl font-bold text-white">
                         {idx + 1}
                       </div>
-                      <h2 className="font-heading text-brand-navy text-2xl font-bold md:text-3xl">
+                      <h2 className="font-heading text-foreground text-2xl font-bold md:text-3xl">
                         {step.title}
                       </h2>
                     </div>
@@ -129,7 +129,7 @@ export default function ProcessClient() {
                     <div className="border-border-base rounded-3xl border bg-white p-8 shadow-sm transition-shadow group-hover:shadow-md h-full">
                       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
                         <div className="flex flex-col gap-4">
-                          <h3 className="font-heading text-brand-navy border-border-base border-b pb-2 text-lg font-bold">
+                          <h3 className="font-heading text-foreground border-border-base border-b pb-2 text-lg font-bold">
                             Technical Detail
                           </h3>
                           <p className="text-text-secondary text-sm leading-relaxed">{step.details}</p>
@@ -138,7 +138,7 @@ export default function ProcessClient() {
                           </div>
                         </div>
                         <div className="flex flex-col gap-4">
-                          <h3 className="font-heading text-brand-navy border-border-base border-b pb-2 text-lg font-bold">
+                          <h3 className="font-heading text-foreground border-border-base border-b pb-2 text-lg font-bold">
                             Core Deliverables
                           </h3>
                           <ul className="space-y-3">
@@ -235,7 +235,7 @@ export default function ProcessClient() {
         <div className="container-custom text-center">
           <div className="mx-auto flex max-w-3xl flex-col items-center gap-8">
             <Reveal variant="fade-up">
-              <h2 className="font-heading text-brand-navy text-4xl font-bold">
+              <h2 className="font-heading text-foreground text-4xl font-bold">
                 Ready to start discovery?
               </h2>
             </Reveal>

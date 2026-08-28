@@ -184,7 +184,7 @@ export default function Home() {
             <Reveal delay={100}>
               <Card>
                 <div className="bg-brand-navy/10 mb-6 flex h-14 w-14 items-center justify-center rounded-xl">
-                  <Layers className="text-brand-navy h-7 w-7" />
+                  <Layers className="text-foreground h-7 w-7" />
                 </div>
                 <CardTitle>System Architecture</CardTitle>
                 <CardDescription>

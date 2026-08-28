@@ -236,7 +236,7 @@ export function RFPForm() {
                 <CheckCircle2 className="text-brand-teal h-10 w-10" />
               </div>
               <div>
-                <h1 className="font-heading text-brand-navy mb-4 text-4xl font-bold">
+                <h1 className="font-heading text-foreground mb-4 text-4xl font-bold">
                   Request Received
                 </h1>
                 <p className="text-text-secondary text-lg leading-relaxed">
@@ -356,7 +356,7 @@ export function RFPForm() {
                         },
                       ].map((f) => (
                         <div key={f.name} className="flex flex-col gap-2">
-                          <label className="text-brand-navy text-sm font-semibold">
+                          <label className="text-foreground text-sm font-semibold">
                             {f.label}{" "}
                             {f.required ? (
                               <span className="text-brand-orange">*</span>
@@ -385,7 +385,7 @@ export function RFPForm() {
                     <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
                       {/* Industry */}
                       <div className="flex flex-col gap-2">
-                        <label className="text-brand-navy text-sm font-semibold">
+                        <label className="text-foreground text-sm font-semibold">
                           Industry <span className="text-brand-orange">*</span>
                         </label>
                         <select
@@ -407,7 +407,7 @@ export function RFPForm() {
 
                       {/* Package / Project Type */}
                       <div className="flex flex-col gap-2">
-                        <label className="text-brand-navy text-sm font-semibold">
+                        <label className="text-foreground text-sm font-semibold">
                           Package / Project Type <span className="text-brand-orange">*</span>
                         </label>
                         <select
@@ -430,7 +430,7 @@ export function RFPForm() {
                       {/* Budget — full width, card grid */}
                       <div className="flex flex-col gap-2 md:col-span-2">
                         <div className="flex items-center justify-between">
-                          <label className="text-brand-navy text-sm font-semibold">
+                          <label className="text-foreground text-sm font-semibold">
                             Budget Range (
                             {activeRegion ? REGIONS[activeRegion].currency : "select region"}){" "}
                             <span className="text-brand-orange">*</span>
@@ -462,7 +462,7 @@ export function RFPForm() {
                       03 — Project Brief
                     </h2>
                     <div className="flex flex-col gap-2">
-                      <label className="text-brand-navy text-sm font-semibold">
+                      <label className="text-foreground text-sm font-semibold">
                         Describe your project <span className="text-brand-orange">*</span>
                       </label>
                       <p className="text-text-muted mb-2 text-xs">
@@ -573,7 +573,7 @@ export function RFPForm() {
               {/* Package reference card */}
               <Reveal variant="fade-scale" delay={200}>
                 <div className="bg-bg-secondary border-border-base rounded-3xl border p-8">
-                  <h3 className="font-heading text-brand-navy mb-4 text-sm font-bold tracking-widest uppercase">
+                  <h3 className="font-heading text-foreground mb-4 text-sm font-bold tracking-widest uppercase">
                     Package Price Guide
                   </h3>
                   <div className="space-y-2">
@@ -615,7 +615,7 @@ export function RFPForm() {
 
               <Reveal variant="fade-scale" delay={250}>
                 <div className="bg-bg-secondary border-border-base rounded-3xl border p-8">
-                  <h3 className="font-heading text-brand-navy mb-4 font-bold">
+                  <h3 className="font-heading text-foreground mb-4 font-bold">
                     Prefer to talk first?
                   </h3>
                   <p className="text-text-secondary mb-6 text-sm leading-relaxed">
@@ -633,7 +633,7 @@ export function RFPForm() {
                 <div className="bg-brand-teal/5 border-brand-teal/20 flex items-start gap-3 rounded-2xl border p-5">
                   <ShieldCheck className="text-brand-teal mt-0.5 h-5 w-5 shrink-0" />
                   <p className="text-text-secondary text-xs leading-relaxed">
-                    <strong className="text-brand-navy">NDA Available.</strong> All information shared
+                    <strong className="text-foreground">NDA Available.</strong> All information shared
                     is treated confidentially. We can sign an NDA before any technical discussion.
                   </p>
                 </div>

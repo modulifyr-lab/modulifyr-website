@@ -26,7 +26,7 @@ export const posts = staticPosts;
 
 const categoryColors: Record<string, string> = {
   Architecture: "bg-brand-orange/10 text-brand-orange",
-  Engineering: "bg-brand-navy/10 text-brand-navy",
+  Engineering: "bg-brand-navy/10 text-foreground",
   Backend: "bg-brand-teal/10 text-brand-teal",
   Frontend: "bg-brand-gold/20 text-amber-700",
   DevOps: "bg-brand-teal/10 text-brand-teal",
@@ -55,7 +55,7 @@ export default async function BlogPage() {
               </span>
             </Reveal>
             <Reveal variant="fade-up" delay={100}>
-              <h1 className="font-heading text-brand-navy mb-6 text-4xl font-bold md:text-6xl text-brand-navy">
+              <h1 className="font-heading text-foreground mb-6 text-4xl font-bold md:text-6xl text-foreground">
                 Engineering <span className="text-brand-orange">Insights</span>
               </h1>
             </Reveal>
@@ -99,7 +99,7 @@ export default async function BlogPage() {
                   </span>
                 </Reveal>
                 <Reveal variant="fade-up" delay={150}>
-                  <h2 className="font-heading text-brand-navy text-3xl leading-tight font-bold text-brand-navy">
+                  <h2 className="font-heading text-foreground text-3xl leading-tight font-bold text-foreground">
                     {featured.title}
                   </h2>
                 </Reveal>
