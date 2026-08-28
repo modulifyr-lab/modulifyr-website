@@ -96,7 +96,7 @@ export function ContactForm() {
         <div className="container-custom">
           <div className="max-w-3xl">
             <Reveal variant="fade-up">
-              <h1 className="font-heading text-foreground mb-6 text-4xl font-bold md:text-6xl text-foreground">
+              <h1 className="font-heading text-foreground text-foreground mb-6 text-4xl font-bold md:text-6xl">
                 Let's Talk About <span className="text-brand-orange">Your Project</span>
               </h1>
             </Reveal>
@@ -150,7 +150,7 @@ export function ContactForm() {
 
               {/* Cal.com booking card */}
               <Reveal variant="fade-scale" delay={200}>
-                <div className="border-brand-teal/30 bg-brand-teal/5 flex items-start gap-6 rounded-3xl border p-8 h-full">
+                <div className="border-brand-teal/30 bg-brand-teal/5 flex h-full items-start gap-6 rounded-3xl border p-8">
                   <div className="bg-brand-teal/10 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl">
                     <Calendar className="text-brand-teal h-6 w-6" />
                   </div>
@@ -159,8 +159,8 @@ export function ContactForm() {
                       Prefer a Call First?
                     </h4>
                     <p className="text-text-secondary text-sm leading-relaxed">
-                      Book a free discovery call directly in our calendar. Pick a time that works for
-                      you — no back-and-forth needed.
+                      Book a free discovery call directly in our calendar. Pick a time that works
+                      for you — no back-and-forth needed.
                     </p>
                     <a
                       href="https://cal.eu/modulifyr/booking"
@@ -250,7 +250,7 @@ export function ContactForm() {
             {/* Right: Form */}
             <div className="flex flex-col gap-8">
               <Reveal variant="fade-scale" delay={150}>
-                <Card className="border-t-brand-teal border-t-8 p-8 shadow-xl md:p-12 h-full">
+                <Card className="border-t-brand-teal h-full border-t-8 p-8 shadow-xl md:p-12">
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <h2 className="font-heading text-foreground mb-4 text-2xl font-bold">
                       Send a Message
@@ -340,7 +340,9 @@ export function ContactForm() {
                         maxLength={5000}
                         className="border-border-base bg-background placeholder:text-text-dim focus-visible:ring-brand-orange text-foreground flex min-h-[150px] w-full resize-none rounded-lg border px-4 py-3 text-base transition-all focus-visible:ring-2 focus-visible:outline-none disabled:opacity-50"
                       />
-                      <p className="text-text-muted text-right text-xs">{form.message.length}/5000</p>
+                      <p className="text-text-muted text-right text-xs">
+                        {form.message.length}/5000
+                      </p>
                     </div>
 
                     {/* Honeypot */}
@@ -377,7 +379,7 @@ export function ContactForm() {
                     <Button
                       type="submit"
                       disabled={status === "loading"}
-                      className="h-14 w-full text-lg animate-in"
+                      className="animate-in h-14 w-full text-lg"
                     >
                       {status === "loading" ? (
                         <>
@@ -412,16 +414,14 @@ export function ContactForm() {
       <section className="px-4 py-12 md:px-0">
         <div className="container-custom">
           <Reveal variant="fade-scale">
-            <div className="border-border-base h-96 w-full overflow-hidden rounded-3xl border shadow-sm">
+            <div className="relative h-100 w-full overflow-hidden rounded-2xl">
               <iframe
-                title="Modulifyr Office Location — Birtamode, Ward 1, Gauri Tol, Jhapa, Nepal"
-                src="https://maps.google.com/maps?q=Birtamode,+Ward+1,+Gauri+Tol,+Jhapa,+Nepal&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3389.577180171271!2d87.9888125!3d26.6478125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39e5baf5bbac5971%3A0x86a3d3bd5197a0f0!2sJXXQ%2B4G%2C%20Birtamod!5e1!3m2!1sen!2snp!4v1787901012956!5m2!1sen!2snp"
+                className="h-full w-full border-0"
                 allowFullScreen
                 loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
+                referrerPolicy="strict-origin-when-cross-origin"
+                title="Modulifyr Location - Birtamod"
               />
             </div>
           </Reveal>
