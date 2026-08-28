@@ -414,7 +414,7 @@ export function ContactForm() {
       <section className="px-4 py-12 md:px-0">
         <div className="container-custom">
           <Reveal variant="fade-scale">
-            <div className="relative h-[400px] w-full overflow-hidden rounded-2xl">
+            <div className="relative h-100 w-full overflow-hidden rounded-2xl">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3389.577180171271!2d87.9888125!3d26.6478125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39e5baf5bbac5971%3A0x86a3d3bd5197a0f0!2sJXXQ%2B4G%2C%20Birtamod!5e1!3m2!1sen!2snp!4v1787901012956!5m2!1sen!2snp"
                 className="h-full w-full border-0"
