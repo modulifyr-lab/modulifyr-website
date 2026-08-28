@@ -29,7 +29,7 @@ export function StaticFallback() {
         <Cpu className="h-10 w-10 text-white" />
       </div>
       <div className="bg-brand-gold absolute bottom-10 left-10 flex h-20 w-20 items-center justify-center rounded-full shadow-xl parallax-down">
-        <Globe className="text-brand-navy h-8 w-8" />
+        <Globe className="text-foreground h-8 w-8" />
       </div>
     </div>
   );

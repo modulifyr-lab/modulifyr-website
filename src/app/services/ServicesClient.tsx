@@ -226,19 +226,19 @@ export default function ServicesClient() {
             <div className="flex items-center gap-2">
               <Wrench className="text-brand-orange h-4 w-4" />
               <span className="text-text-secondary">
-                <span className="text-brand-navy font-bold">Fixed fee</span> when scope is clear
+                <span className="text-foreground font-bold">Fixed fee</span> when scope is clear
               </span>
             </div>
             <div className="flex items-center gap-2">
               <RefreshCw className="text-brand-teal h-4 w-4" />
               <span className="text-text-secondary">
-                <span className="text-brand-navy font-bold">Retainer</span> when work is ongoing
+                <span className="text-foreground font-bold">Retainer</span> when work is ongoing
               </span>
             </div>
             <div className="flex items-center gap-2">
               <Search className="text-brand-orange h-4 w-4" />
               <span className="text-text-secondary">
-                <span className="text-brand-navy font-bold">Discovery first</span> when scope is
+                <span className="text-foreground font-bold">Discovery first</span> when scope is
                 uncertain
               </span>
             </div>
@@ -307,7 +307,7 @@ export default function ServicesClient() {
                       </div>
 
                       <div className="mb-4">
-                        <span className="bg-bg-secondary text-brand-navy rounded px-2 py-1 text-xs font-semibold">
+                        <span className="bg-bg-secondary text-foreground rounded px-2 py-1 text-xs font-semibold">
                           {service.size}
                         </span>
                         <p className="text-text-muted mt-1 text-xs">{service.timeline}</p>
@@ -346,7 +346,7 @@ export default function ServicesClient() {
         <div className="container-custom">
           <div className="mb-8 max-w-2xl">
             <Reveal variant="fade-up">
-              <h2 className="font-heading text-brand-navy mb-2 text-2xl font-bold">
+              <h2 className="font-heading text-foreground mb-2 text-2xl font-bold">
                 How We Name Our Packages
               </h2>
             </Reveal>
@@ -369,7 +369,7 @@ export default function ServicesClient() {
                   className={`border-border-base grid grid-cols-2 border-b px-6 py-4 last:border-0 ${i % 2 === 1 ? "bg-bg-light" : ""}`}
                 >
                   <span className="text-text-secondary text-sm">{s.internalName}</span>
-                  <span className="text-brand-navy text-sm font-semibold">{s.clientName}</span>
+                  <span className="text-foreground text-sm font-semibold">{s.clientName}</span>
                 </div>
               ))}
             </div>
@@ -382,7 +382,7 @@ export default function ServicesClient() {
           <Reveal variant="fade-scale">
             <div className="border-border-base flex flex-col items-center justify-between gap-12 rounded-3xl border bg-white p-8 shadow-xl md:flex-row md:p-16">
               <div className="flex max-w-xl flex-col gap-6 text-center md:text-left">
-                <h2 className="font-heading text-brand-navy text-3xl font-bold md:text-4xl">
+                <h2 className="font-heading text-foreground text-3xl font-bold md:text-4xl">
                   Not sure which package fits?
                 </h2>
                 <p className="text-text-secondary text-lg leading-relaxed">
@@ -431,7 +431,7 @@ export default function ServicesClient() {
         <div className="container-custom text-center">
           <Reveal variant="fade-scale">
             <div className="bg-brand-navy/5 border-border-base mx-auto max-w-3xl rounded-3xl border p-12">
-              <p className="text-brand-navy font-heading mb-4 text-xl leading-relaxed">
+              <p className="text-foreground font-heading mb-4 text-xl leading-relaxed">
                 "We're building our foundation, not buying fake praise. Be one of Modulifyr's first 5
                 founding clients and lock in our bootstrapper pricing while we scale our early
                 portfolio."

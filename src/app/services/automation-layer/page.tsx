@@ -197,7 +197,7 @@ export default function AutomationLayerPage() {
                     <item.icon className="text-brand-orange h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="text-brand-navy mb-1 text-sm font-bold">{item.label}</h3>
+                    <h3 className="text-foreground mb-1 text-sm font-bold">{item.label}</h3>
                     <p className="text-text-secondary text-sm leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
@@ -212,7 +212,7 @@ export default function AutomationLayerPage() {
         <div className="container-custom">
           <div className="mb-12">
             <Reveal variant="fade-up">
-              <h2 className="font-heading text-brand-navy mb-3 text-3xl font-bold">
+              <h2 className="font-heading text-foreground mb-3 text-3xl font-bold">
                 Four Tiers — Priced by System Count and Complexity
               </h2>
             </Reveal>
@@ -239,7 +239,7 @@ export default function AutomationLayerPage() {
                   )}
 
                   <div>
-                    <h3 className="text-brand-navy mb-1 text-base font-bold">{tier.name}</h3>
+                    <h3 className="text-foreground mb-1 text-base font-bold">{tier.name}</h3>
                     {activeRegion ? (
                       FOUNDING_SLOTS_REMAINING > 0 ? (
                         <div className="flex flex-col gap-1">
@@ -277,7 +277,7 @@ export default function AutomationLayerPage() {
                   </p>
 
                   <div>
-                    <p className="text-brand-navy mb-3 text-xs font-bold tracking-widest uppercase">
+                    <p className="text-foreground mb-3 text-xs font-bold tracking-widest uppercase">
                       Included
                     </p>
                     <ul className="space-y-2">
@@ -332,7 +332,7 @@ export default function AutomationLayerPage() {
             <div className="border-border-base max-w-3xl rounded-2xl border bg-white p-8">
               <div className="mb-4 flex items-start gap-3">
                 <AlertCircle className="text-brand-orange mt-0.5 h-5 w-5 shrink-0" />
-                <h3 className="text-brand-navy font-bold">What you are responsible for</h3>
+                <h3 className="text-foreground font-bold">What you are responsible for</h3>
               </div>
               <ul className="text-text-secondary space-y-2 text-sm">
                 <li className="flex items-start gap-2">
@@ -351,7 +351,7 @@ export default function AutomationLayerPage() {
                 </li>
               </ul>
               <p className="text-text-muted border-border-base mt-6 border-t pt-4 text-xs leading-relaxed">
-                <strong className="text-brand-navy">
+                <strong className="text-foreground">
                   Third-party tool costs are entirely your responsibility.
                 </strong>{" "}
                 Modulifyr does not cover, pay for, or manage subscriptions to any platform being

@@ -16,33 +16,12 @@ const allowedRoles = [
   "Solutions Architect",
   "Technical Lead",
   "Engineering Manager",
-  // Game Dev — Onyxlabs
-  "Gameplay Programmer",
-  "Engine Programmer",
-  "AI Programmer",
-  "Tools Programmer",
-  "Graphics Programmer",
-  // Art — Onyxlabs
-  "Concept Artist",
-  "3D Artist",
-  "Animator",
-  "Technical Artist",
-  "VFX Artist",
   // Product Design
   "UX Designer",
   "UI Designer",
   "Product Designer",
   "UX Researcher",
   "Design Lead",
-  // Game Design — Onyxlabs
-  "Game Designer",
-  "Level Designer",
-  "Narrative Designer",
-  "Systems Designer",
-  "QA Tester",
-  // Audio — Onyxlabs
-  "Audio Designer",
-  "Composer",
   // Product Management
   "Product Manager",
   "Senior Product Manager",

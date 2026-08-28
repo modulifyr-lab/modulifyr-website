@@ -4,7 +4,7 @@ import CareersClient from "./CareersClient";
 export const metadata: Metadata = {
   title: "Careers | Modulifyr — Volunteer & Collaborator Openings",
   description:
-    "Join Modulifyr as a volunteer or collaborator. We are building three divisions from the ground up: a B2B software consultancy, a Unity game studio (Onyxlabs), and a B2C software storefront (Modullex). No salaries yet — real work, real ownership.",
+    "Join Modulifyr as a volunteer or collaborator. We're building a B2B software consultancy from the ground up. No salaries yet — real work, real ownership.",
   alternates: {
     canonical: "/careers",
   },

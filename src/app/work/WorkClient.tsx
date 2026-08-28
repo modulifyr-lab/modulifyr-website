@@ -100,7 +100,7 @@ export default function WorkClient() {
         <div className="container-custom">
           <div className="max-w-3xl">
             <Reveal variant="fade-up">
-              <h1 className="font-heading text-brand-navy mb-6 text-4xl font-bold md:text-6xl">
+              <h1 className="font-heading text-foreground mb-6 text-4xl font-bold md:text-6xl">
                 Proven Technical <span className="text-brand-orange">Execution</span>
               </h1>
             </Reveal>
@@ -130,7 +130,7 @@ export default function WorkClient() {
                 </span>
               </Reveal>
               <Reveal variant="fade-up" delay={100}>
-                <h2 className="font-heading text-brand-navy text-4xl font-bold">{cs.title}</h2>
+                <h2 className="font-heading text-foreground text-4xl font-bold">{cs.title}</h2>
               </Reveal>
               <Reveal variant="fade-up" delay={150}>
                 <p className="text-text-muted text-sm font-semibold tracking-widest uppercase">
@@ -201,7 +201,7 @@ export default function WorkClient() {
                       <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-red-100 bg-red-50">
                         <AlertTriangle className="h-4 w-4 text-red-500" />
                       </div>
-                      <h3 className="font-heading text-brand-navy font-bold">The Problem</h3>
+                      <h3 className="font-heading text-foreground font-bold">The Problem</h3>
                     </div>
                     <p className="text-text-secondary pl-11 text-sm leading-relaxed">{cs.problem}</p>
                   </div>
@@ -213,7 +213,7 @@ export default function WorkClient() {
                       <div className="bg-brand-teal/10 border-brand-teal/20 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border">
                         <Layers className="text-brand-teal h-4 w-4" />
                       </div>
-                      <h3 className="font-heading text-brand-navy font-bold">
+                      <h3 className="font-heading text-foreground font-bold">
                         The Architecture Decision
                       </h3>
                     </div>
@@ -229,7 +229,7 @@ export default function WorkClient() {
                       <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-green-100 bg-green-50">
                         <Target className="h-4 w-4 text-green-600" />
                       </div>
-                      <h3 className="font-heading text-brand-navy font-bold">The Outcome</h3>
+                      <h3 className="font-heading text-foreground font-bold">The Outcome</h3>
                     </div>
                     <p className="text-text-secondary pl-11 text-sm leading-relaxed">{cs.outcome}</p>
                   </div>
@@ -245,7 +245,7 @@ export default function WorkClient() {
         <div className="container-custom">
           <div className="mb-12">
             <Reveal variant="fade-up">
-              <h2 className="font-heading text-brand-navy mb-3 text-3xl font-bold">
+              <h2 className="font-heading text-foreground mb-3 text-3xl font-bold">
                 Client Work
               </h2>
             </Reveal>
@@ -266,7 +266,7 @@ export default function WorkClient() {
               <div className="bg-brand-orange/10 mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full">
                 <CheckCircle2 className="text-brand-orange h-8 w-8" />
               </div>
-              <h3 className="font-heading text-brand-navy mb-3 text-xl font-bold">
+              <h3 className="font-heading text-foreground mb-3 text-xl font-bold">
                 Technical Standards Available Now
               </h3>
               <p className="text-text-secondary text-sm leading-relaxed mb-6">
@@ -385,7 +385,7 @@ export default function WorkClient() {
         <div className="container-custom text-center">
           <div className="mx-auto flex max-w-3xl flex-col gap-8">
             <Reveal variant="fade-up">
-              <h2 className="font-heading text-brand-navy text-3xl font-bold">
+              <h2 className="font-heading text-foreground text-3xl font-bold">
                 Want to see how we think about architecture?
               </h2>
             </Reveal>

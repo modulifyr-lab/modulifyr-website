@@ -39,7 +39,7 @@ export function CookieConsentBanner() {
               <Shield className="h-5 w-5" />
             </div>
             <div className="flex-1">
-              <h4 className="font-heading text-brand-navy text-sm font-bold dark:text-white">
+              <h4 className="font-heading text-foreground text-sm font-bold dark:text-white">
                 {t("cookie.banner.title")}
               </h4>
               <p className="text-text-secondary mt-1 text-xs leading-relaxed dark:text-zinc-400">

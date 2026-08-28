@@ -66,7 +66,7 @@ const iconMap: Record<string, React.ReactNode> = {
   layers: <Layers className="text-brand-orange h-6 w-6" />,
   terminal: <Terminal className="text-brand-teal h-6 w-6" />,
   book: <BookOpen className="text-brand-gold h-6 w-6" />,
-  filebox: <FileBox className="text-brand-navy dark:text-brand-teal h-6 w-6" />,
+  filebox: <FileBox className="text-foreground dark:text-brand-teal h-6 w-6" />,
 };
 
 export default function ResourcesPage() {

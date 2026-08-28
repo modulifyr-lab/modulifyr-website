@@ -212,7 +212,7 @@ export default function IndustriesClient() {
                           <industry.icon className={`h-7 w-7 ${industry.color}`} />
                         </div>
                         <div>
-                          <h2 className="font-heading text-brand-navy text-2xl font-bold">
+                          <h2 className="font-heading text-foreground text-2xl font-bold">
                             {industry.name}
                           </h2>
                           <p className="text-text-muted mt-1 text-xs font-semibold tracking-widest uppercase">
@@ -258,7 +258,7 @@ export default function IndustriesClient() {
         <div className="container-custom">
           <div className="mx-auto max-w-3xl text-center">
             <Reveal variant="fade-up">
-              <h2 className="font-heading text-brand-navy mb-6 text-3xl font-bold">
+              <h2 className="font-heading text-foreground mb-6 text-3xl font-bold">
                 Don't see your industry?
               </h2>
             </Reveal>

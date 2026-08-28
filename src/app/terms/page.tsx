@@ -112,7 +112,7 @@ export default function TermsPage() {
                 <div className="space-y-10">
                   {sections.map((section, i) => (
                     <div key={i} id={`t${i}`} className="scroll-mt-28">
-                      <h2 className="font-heading text-brand-navy mb-4 text-xl font-bold">
+                      <h2 className="font-heading text-foreground mb-4 text-xl font-bold">
                         {section.title}
                       </h2>
                       <p className="text-text-secondary text-sm leading-relaxed">{section.body}</p>

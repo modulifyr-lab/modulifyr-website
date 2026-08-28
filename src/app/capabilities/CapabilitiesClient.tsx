@@ -280,7 +280,7 @@ export default function CapabilitiesClient() {
                   <p className="text-text-muted mb-1 text-[10px] font-bold tracking-widest uppercase">
                     {item.label}
                   </p>
-                  <p className="text-brand-navy text-sm font-bold">{item.val}</p>
+                  <p className="text-foreground text-sm font-bold">{item.val}</p>
                 </div>
               </Reveal>
             ))}
@@ -311,7 +311,7 @@ export default function CapabilitiesClient() {
         <div className="container-custom">
           <Reveal variant="fade-up">
             <div className="mb-16 max-w-3xl">
-              <h2 className="font-heading text-brand-navy mb-4 text-3xl font-bold md:text-4xl">
+              <h2 className="font-heading text-foreground mb-4 text-3xl font-bold md:text-4xl">
                 Recommended Stack by Product Type
               </h2>
               <p className="text-text-secondary text-lg leading-relaxed">
@@ -335,7 +335,7 @@ export default function CapabilitiesClient() {
                         <product.icon className={`h-6 w-6 ${product.color}`} />
                       </div>
                       <div>
-                        <h3 className="font-heading text-brand-navy text-xl font-bold">
+                        <h3 className="font-heading text-foreground text-xl font-bold">
                           {product.type}
                         </h3>
                         <p className="text-text-muted text-sm">{product.useCases}</p>
@@ -362,7 +362,7 @@ export default function CapabilitiesClient() {
                         className={`border-border-base grid grid-cols-3 border-t px-5 py-3 ${i % 2 === 0 ? "bg-white" : "bg-bg-light"}`}
                       >
                         <span className="text-text-muted text-xs font-semibold">{row.layer}</span>
-                        <span className="text-brand-navy text-xs font-bold">{row.choice}</span>
+                        <span className="text-foreground text-xs font-bold">{row.choice}</span>
                         <span className="text-text-muted hidden text-xs md:block">{row.note}</span>
                       </div>
                     ))}
@@ -380,7 +380,7 @@ export default function CapabilitiesClient() {
           <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-2">
             <Reveal variant="fade-up">
               <div>
-                <h2 className="font-heading text-brand-navy mb-6 text-3xl font-bold">
+                <h2 className="font-heading text-foreground mb-6 text-3xl font-bold">
                   Infrastructure & Delivery
                 </h2>
                 <p className="text-text-secondary mb-8 leading-relaxed">
@@ -394,7 +394,7 @@ export default function CapabilitiesClient() {
                       className={`border-border-base flex items-center justify-between border-b px-6 py-4 last:border-0 ${i % 2 === 1 ? "bg-bg-light" : ""}`}
                     >
                       <span className="text-text-muted text-sm font-semibold">{row.layer}</span>
-                      <span className="text-brand-navy text-sm font-bold">{row.choice}</span>
+                      <span className="text-foreground text-sm font-bold">{row.choice}</span>
                     </div>
                   ))}
                 </div>
@@ -404,7 +404,7 @@ export default function CapabilitiesClient() {
             <div className="flex flex-col gap-6">
               <Reveal variant="fade-scale">
                 <div className="border-border-base rounded-2xl border bg-white p-7">
-                  <h3 className="font-heading text-brand-navy mb-2 font-bold">Delivery Pipeline</h3>
+                  <h3 className="font-heading text-foreground mb-2 font-bold">Delivery Pipeline</h3>
                   <div className="mt-4 flex flex-wrap gap-2">
                     {["Pull request", "Lint", "Test", "Build", "Security checks", "Deploy"].map(
                       (step, i) => (
@@ -424,7 +424,7 @@ export default function CapabilitiesClient() {
                 <Reveal variant="fade-up" delay={100}>
                   <div className="flex flex-col gap-6 h-full">
                     <ShieldCheck className="text-brand-teal h-12 w-12" />
-                    <h3 className="font-heading text-brand-navy text-lg font-bold">Security-First</h3>
+                    <h3 className="font-heading text-foreground text-lg font-bold">Security-First</h3>
                     <p className="text-text-secondary text-sm leading-relaxed">
                       OWASP review on every production system. Secrets via env vars. HTTPS + HSTS
                       enforced.
@@ -434,7 +434,7 @@ export default function CapabilitiesClient() {
                 <Reveal variant="fade-up" delay={200}>
                   <div className="flex flex-col gap-6 h-full">
                     <Lock className="text-brand-orange h-12 w-12" />
-                    <h3 className="font-heading text-brand-navy text-lg font-bold">Data Privacy</h3>
+                    <h3 className="font-heading text-foreground text-lg font-bold">Data Privacy</h3>
                     <p className="text-text-secondary text-sm leading-relaxed">
                       PII handled with highest standards of confidentiality. Data flow diagrams
                       required for all PII systems.
@@ -444,7 +444,7 @@ export default function CapabilitiesClient() {
                 <Reveal variant="fade-up" delay={300}>
                   <div className="flex flex-col gap-6 h-full">
                     <FileCode className="text-brand-gold h-12 w-12" />
-                    <h3 className="font-heading text-brand-navy text-lg font-bold">99.9% SLA</h3>
+                    <h3 className="font-heading text-foreground text-lg font-bold">99.9% SLA</h3>
                     <p className="text-text-secondary text-sm leading-relaxed">
                       Tiered support agreements and uptime SLAs for critical systems. Incident
                       runbooks required.
@@ -462,7 +462,7 @@ export default function CapabilitiesClient() {
         <div className="container-custom">
           <Reveal variant="fade-up">
             <div className="mb-10 max-w-2xl">
-              <h2 className="font-heading text-brand-navy mb-3 text-3xl font-bold">
+              <h2 className="font-heading text-foreground mb-3 text-3xl font-bold">
                 What We Avoid by Default
               </h2>
               <p className="text-text-secondary leading-relaxed">
@@ -485,7 +485,7 @@ export default function CapabilitiesClient() {
                 >
                   <div className="flex items-center gap-2">
                     <XCircle className="h-4 w-4 shrink-0 text-red-400" />
-                    <span className="text-brand-navy text-sm font-semibold">{row.tech}</span>
+                    <span className="text-foreground text-sm font-semibold">{row.tech}</span>
                   </div>
                   <span className="text-text-secondary text-sm">{row.reason}</span>
                   <div className="flex items-center gap-2">
@@ -503,7 +503,7 @@ export default function CapabilitiesClient() {
       <section className="bg-bg-secondary py-16">
         <div className="container-custom">
           <Reveal variant="fade-up">
-            <h2 className="font-heading text-brand-navy mb-6 text-2xl font-bold">
+            <h2 className="font-heading text-foreground mb-6 text-2xl font-bold">
               Quick Decision Matrix
             </h2>
           </Reveal>

@@ -6,8 +6,6 @@ import {
   CheckCircle2,
   XCircle,
   Code2,
-  Gamepad2,
-  ShoppingBag,
   Globe2,
   Briefcase,
   Paintbrush,
@@ -27,27 +25,7 @@ const divisions = [
     border: "border-brand-teal/30",
     name: "Modulifyr",
     tagline: "B2B Custom Software Consultancy",
-    desc: "The core division. We design and build modular software systems for businesses in Nepal and internationally — ERPs, dashboards, portals, APIs, and infrastructure. TypeScript-first, architecture-forward, and built to last.",
-  },
-  {
-    id: "onyxlabs",
-    icon: Gamepad2,
-    color: "text-brand-orange",
-    bg: "bg-brand-orange/10",
-    border: "border-brand-orange/30",
-    name: "Onyxlabs (a division of Modulifyr Enterprise Pvt. Ltd.)",
-    tagline: "Desktop Game Studio (Unity / C#)",
-    desc: "Our game studio division. We build and ship desktop games via Steam and Paddle. If you've ever wanted to work on a real game project from the ground floor — design, art, code, audio, publishing — this is where you do it.",
-  },
-  {
-    id: "modullex",
-    icon: ShoppingBag,
-    color: "text-brand-gold",
-    bg: "bg-brand-gold/20",
-    border: "border-brand-gold/30",
-    name: "Modullex",
-    tagline: "B2C Consumer Software Storefront",
-    desc: "Our consumer-facing storefront at modullex.modulifyr.com. We publish and sell consumer software products directly to individuals under the Modullex brand. Needs marketing, growth, product, and engineering talent.",
+    desc: "We design and build modular software systems for businesses in Nepal and internationally — ERPs, dashboards, portals, APIs, and infrastructure. TypeScript-first, architecture-forward, and built to last.",
   },
 ];
 
@@ -55,7 +33,7 @@ const roleGroups = [
   {
     icon: Code2,
     category: "Engineering",
-    divisions: ["Modulifyr", "Modullex"],
+    divisions: ["Modulifyr"],
     color: "text-brand-teal",
     bg: "bg-brand-teal/10",
     roles: [
@@ -74,25 +52,9 @@ const roleGroups = [
       "React / Next.js, TypeScript, NestJS, PostgreSQL, Prisma. You'll own complete modules — not tickets.",
   },
   {
-    icon: Gamepad2,
-    category: "Game Development",
-    divisions: ["Onyxlabs"],
-    color: "text-brand-orange",
-    bg: "bg-brand-orange/10",
-    roles: [
-      "Gameplay Programmer (Unity / C#)",
-      "Engine Programmer",
-      "AI Programmer",
-      "Tools Programmer",
-      "Graphics Programmer",
-    ],
-    what:
-      "Unity + C# primary stack. Steam and Paddle distribution. You'll help design and ship actual games.",
-  },
-  {
     icon: Paintbrush,
     category: "Art & Design",
-    divisions: ["Onyxlabs", "Modulifyr", "Modullex"],
+    divisions: ["Modulifyr"],
     color: "text-pink-500",
     bg: "bg-pink-500/10",
     roles: [
@@ -101,45 +63,15 @@ const roleGroups = [
       "Product Designer",
       "UX Researcher",
       "Design Lead",
-      "Concept Artist",
-      "3D Artist",
-      "Animator",
-      "Technical Artist",
-      "VFX Artist",
       "User Researcher",
     ],
     what:
-      "Figma for product design. For Onyxlabs: full creative pipeline from concept to in-engine assets.",
-  },
-  {
-    icon: Building2,
-    category: "Game Design",
-    divisions: ["Onyxlabs"],
-    color: "text-brand-orange",
-    bg: "bg-brand-orange/10",
-    roles: [
-      "Game Designer",
-      "Level Designer",
-      "Narrative Designer",
-      "Systems Designer",
-    ],
-    what:
-      "Own game feel, progression, world, and story. Real creative authority on titles we're shipping.",
-  },
-  {
-    icon: Users,
-    category: "Audio",
-    divisions: ["Onyxlabs"],
-    color: "text-amber-500",
-    bg: "bg-amber-500/10",
-    roles: ["Audio Designer", "Composer"],
-    what:
-      "Sound design and original music for desktop games. Full creative freedom on the audio direction.",
+      "Figma for product design and design systems across client projects.",
   },
   {
     icon: Briefcase,
     category: "Product Management",
-    divisions: ["Modulifyr", "Modullex", "Onyxlabs"],
+    divisions: ["Modulifyr"],
     color: "text-green-600",
     bg: "bg-green-600/10",
     roles: ["Product Manager", "Senior Product Manager", "Technical Project Manager", "Project Manager"],
@@ -149,7 +81,7 @@ const roleGroups = [
   {
     icon: Megaphone,
     category: "Marketing & Growth",
-    divisions: ["Modulifyr", "Modullex", "Onyxlabs"],
+    divisions: ["Modulifyr"],
     color: "text-brand-orange",
     bg: "bg-brand-orange/10",
     roles: [
@@ -187,7 +119,7 @@ const roleGroups = [
   {
     icon: BarChart2,
     category: "Data & Analytics",
-    divisions: ["Modulifyr", "Modullex"],
+    divisions: ["Modulifyr"],
     color: "text-brand-teal",
     bg: "bg-brand-teal/10",
     roles: ["Data Analyst", "Revenue Analyst"],
@@ -333,17 +265,16 @@ export default function CareersClient() {
 
             <Reveal variant="fade-up" delay={100}>
               <h1 className="font-heading mb-6 text-4xl font-bold leading-tight md:text-6xl text-white">
-                Build Three Companies.{" "}
+                Build Modulifyr.{" "}
                 <span className="text-brand-orange">From Zero.</span>
               </h1>
             </Reveal>
 
             <Reveal variant="fade-up" delay={200}>
               <p className="text-text-muted mb-6 max-w-3xl text-xl leading-relaxed">
-                Modulifyr is a software company operating across three divisions. We're
-                building the consultancy, the game studio, and the software storefront simultaneously
-                — and we're hiring across all three. Everyone here is a volunteer, including the
-                founder. No salaries yet. Real work, real systems, real ownership.
+                Modulifyr is a software consultancy built to deliver high-quality, architecture-first
+                systems. Everyone here is a volunteer, including the founder. No salaries yet.
+                Real work, real systems, real ownership.
               </p>
             </Reveal>
 
@@ -360,33 +291,32 @@ export default function CareersClient() {
         <div className="bg-brand-teal/5 absolute bottom-0 left-1/3 h-64 w-64 rounded-full blur-3xl" />
       </section>
 
-      {/* ── Three Divisions ───────────────────────────────────────────────── */}
+      {/* ── What We're Building ───────────────────────────────────────────── */}
       <section className="bg-bg-secondary border-border-base border-b py-20">
         <div className="container-custom">
-          <div className="mb-12">
+          <div className="mb-8">
             <Reveal variant="fade-up">
-              <h2 className="font-heading text-brand-navy mb-3 text-3xl font-bold">
-                Three Divisions, One Team
+              <h2 className="font-heading text-foreground mb-3 text-3xl font-bold">
+                What We're Building
               </h2>
             </Reveal>
             <Reveal variant="fade-up" delay={100}>
               <p className="text-text-secondary max-w-2xl text-lg leading-relaxed">
-                When you apply, tell us which division interests you most. You can work across
-                multiple if your skills span them.
+                Modulifyr is focused on delivering custom B2B software engineering and infrastructure solutions.
               </p>
             </Reveal>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-            {divisions.map((div, i) => (
-              <Reveal key={div.id} variant="fade-up" delay={i * 100}>
+          <div className="max-w-3xl">
+            {divisions.map((div) => (
+              <Reveal key={div.id} variant="fade-up" delay={100}>
                 <div
-                  className={`border-border-base rounded-3xl border bg-white p-8 transition-shadow hover:shadow-lg ${div.border} border-t-4 h-full`}
+                  className={`border-border-base rounded-3xl border bg-white p-8 transition-shadow hover:shadow-lg ${div.border} border-t-4`}
                 >
                   <div className={`h-14 w-14 ${div.bg} mb-5 flex items-center justify-center rounded-2xl`}>
                     <div.icon className={`h-7 w-7 ${div.color}`} />
                   </div>
-                  <h3 className="font-heading text-brand-navy mb-1 text-xl font-bold">{div.name}</h3>
+                  <h3 className="font-heading text-foreground mb-1 text-xl font-bold">{div.name}</h3>
                   <p className={`mb-4 text-xs font-bold tracking-widest uppercase ${div.color}`}>
                     {div.tagline}
                   </p>
@@ -404,7 +334,7 @@ export default function CareersClient() {
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
             <div>
               <Reveal variant="fade-up">
-                <h2 className="font-heading text-brand-navy mb-3 text-3xl font-bold">
+                <h2 className="font-heading text-foreground mb-3 text-3xl font-bold">
                   What This Actually Is
                 </h2>
               </Reveal>
@@ -464,7 +394,7 @@ export default function CareersClient() {
 
               <Reveal variant="fade-scale" delay={250}>
                 <div className="bg-bg-secondary border-border-base rounded-3xl border p-8">
-                  <h3 className="font-heading text-brand-navy mb-3 text-sm font-bold tracking-widest uppercase">
+                  <h3 className="font-heading text-foreground mb-3 text-sm font-bold tracking-widest uppercase">
                     Time Commitment
                   </h3>
                   <p className="text-text-secondary text-sm leading-relaxed">
@@ -489,7 +419,7 @@ export default function CareersClient() {
               </p>
             </Reveal>
             <Reveal variant="fade-up" delay={100}>
-              <h2 className="font-heading text-brand-navy mb-4 text-3xl font-bold md:text-4xl">
+              <h2 className="font-heading text-foreground mb-4 text-3xl font-bold md:text-4xl">
                 Every Role We Need
               </h2>
             </Reveal>
@@ -514,7 +444,7 @@ export default function CareersClient() {
                           <group.icon className={`h-6 w-6 ${group.color}`} />
                         </div>
                         <div>
-                          <h3 className="font-heading text-brand-navy text-xl font-bold">
+                          <h3 className="font-heading text-foreground text-xl font-bold">
                             {group.category}
                           </h3>
                           <div className="mt-1 flex flex-wrap gap-1.5">
@@ -562,7 +492,7 @@ export default function CareersClient() {
         <div className="container-custom">
           <div className="mb-8">
             <Reveal variant="fade-up">
-              <h2 className="font-heading text-brand-navy text-2xl font-bold">
+              <h2 className="font-heading text-foreground text-2xl font-bold">
                 What We Look For in Every Role
               </h2>
             </Reveal>
@@ -580,7 +510,7 @@ export default function CareersClient() {
                 <div
                   className="border-border-base rounded-xl border bg-white p-5 text-center h-full flex items-center justify-center"
                 >
-                  <p className="text-brand-navy text-sm font-bold">{item}</p>
+                  <p className="text-foreground text-sm font-bold">{item}</p>
                 </div>
               </Reveal>
             ))}

@@ -15,7 +15,7 @@ type Props = { params: Promise<{ slug: string }> };
 
 const categoryColors: Record<string, string> = {
   Architecture: "bg-brand-orange/10 text-brand-orange",
-  Engineering: "bg-brand-navy/10 text-brand-navy",
+  Engineering: "bg-brand-navy/10 text-foreground",
   Backend: "bg-brand-teal/10 text-brand-teal",
   Frontend: "bg-brand-gold/20 text-amber-700",
   DevOps: "bg-brand-teal/10 text-brand-teal",
@@ -144,7 +144,7 @@ export default async function BlogPostPage({ params }: Props) {
                     <User className="text-brand-orange h-5 w-5" />
                   </div>
                   <div>
-                    <p className="text-brand-navy text-sm font-bold">Modulifyr Engineering Team</p>
+                    <p className="text-foreground text-sm font-bold">Modulifyr Engineering Team</p>
                     <p className="text-text-muted text-xs">
                       Birtamode, Ward 1, Gauri Tol, Jhapa, Nepal · modulifyr.com
                     </p>
@@ -177,7 +177,7 @@ export default async function BlogPostPage({ params }: Props) {
               </div>
               {otherPosts.length > 0 && (
                 <div className="bg-bg-secondary border-border-base rounded-3xl border p-7">
-                  <h3 className="font-heading text-brand-navy mb-3 text-sm font-bold">
+                  <h3 className="font-heading text-foreground mb-3 text-sm font-bold">
                     More Articles
                   </h3>
                   <div className="space-y-3">

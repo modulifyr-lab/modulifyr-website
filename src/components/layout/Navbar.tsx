@@ -8,7 +8,6 @@ import { useTheme } from "next-themes";
 import { Sun, Moon, Menu, X } from "lucide-react";
 import { useLanguage } from "@/components/LanguageContext";
 import LanguageSwitcher from "@/contexts/LanguageSwitcher";
-import { RegionSelector } from "@/components/RegionSelector";
 
 const NAV_LINKS = [
   { href: "/services", key: "nav.services" },
@@ -78,7 +77,7 @@ export function Navbar() {
       <nav
         role="navigation"
         aria-label="Main navigation"
-        className={`fixed top-0 right-0 left-0 z-50 flex h-20 items-center transition-all duration-300 ${scrolled ? "bg-background/95 border-border-base border-b shadow-sm backdrop-blur-md" : "bg-transparent"}`}
+        className={`fixed top-0 right-0 left-0 z-50 flex h-20 items-center border-b backdrop-blur-md transition-all duration-300 ${scrolled ? "bg-background/95 border-border-base shadow-sm" : "bg-background/70 border-transparent"}`}
       >
         <div className="container-custom flex w-full items-center justify-between">
           {/* Logo */}
@@ -95,7 +94,7 @@ export function Navbar() {
               height={40}
               className="h-10 w-10 object-contain dark:invert"
             />
-            <span className="font-heading text-brand-navy dark:text-foreground hidden text-xl font-bold tracking-tight sm:block">
+            <span className="font-heading text-foreground hidden text-xl font-bold tracking-tight sm:block">
               Modulifyr
             </span>
           </Link>
@@ -121,7 +120,6 @@ export function Navbar() {
           {/* ── Desktop right controls ─────────────────────────────────── */}
           <div className="hidden items-center gap-3 lg:flex">
             <LanguageSwitcher />
-            <RegionSelector compact />
             <div className="border-border-base flex items-center gap-3 border-l pl-4">
               {mounted && (
                 <button
@@ -204,9 +202,6 @@ export function Navbar() {
           })}
           <div className="border-border-base border-t pt-2">
             <LanguageSwitcher />
-          </div>
-          <div className="border-border-base border-t pt-4">
-            <RegionSelector />
           </div>
           <Link href="/request-proposal">
             <button
