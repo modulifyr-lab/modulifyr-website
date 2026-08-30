@@ -100,7 +100,7 @@ const teamMembers: TeamMember[] = [
   {
     name: "Lijala T",
     fullName: "Lijala Tuladhar",
-    title: "UI/UX Designer"",
+    title: "UI/UX Designer",
     department: "UI/UX Design",
     linkedin: "https://www.linkedin.com/in/lijala-tuladhar/",
     portfolio: null,
