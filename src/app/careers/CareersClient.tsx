@@ -347,7 +347,7 @@ export default function CareersClient() {
               </Reveal>
               <div className="space-y-3">
                 {honest.map((item, i) => (
-                  <Reveal key={i} variant="fade-up" delay={150 + i * 50}>
+                  <Reveal key={item.text} variant="fade-up" delay={150 + i * 50}>
                     <div className="flex items-start gap-3">
                       {item.good ? (
                         <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-green-500" />
@@ -436,7 +436,7 @@ export default function CareersClient() {
 
           <div className="space-y-6">
             {roleGroups.map((group, i) => (
-              <Reveal key={i} variant="fade-up" delay={i * 80}>
+              <Reveal key={group.category} variant="fade-up" delay={i * 80}>
                 <TiltCard className="h-full">
                   <div className="border-border-base h-full rounded-3xl border bg-white p-8 transition-shadow hover:shadow-md">
                     <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
@@ -509,7 +509,7 @@ export default function CareersClient() {
               "Documents decisions",
               "Thinks in systems",
             ].map((item, i) => (
-              <Reveal key={i} variant="fade-scale" delay={i * 80}>
+              <Reveal key={item} variant="fade-scale" delay={i * 80}>
                 <div className="border-border-base flex h-full items-center justify-center rounded-xl border bg-white p-5 text-center">
                   <p className="text-foreground text-sm font-bold">{item}</p>
                 </div>

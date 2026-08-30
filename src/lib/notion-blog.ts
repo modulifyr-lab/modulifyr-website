@@ -260,7 +260,14 @@ export async function getAllPosts(): Promise<BlogPost[]> {
       return [];
     }
     const data = (await res.json()) as { results?: NotionPage[] };
-    return (data.results ?? []).map(pageToPost).filter((p) => p.slug && p.title);
+    const posts: BlogPost[] = [];
+    for (const page of data.results ?? []) {
+      const post = pageToPost(page);
+      if (post.slug && post.title) {
+        posts.push(post);
+      }
+    }
+    return posts;
   } catch (err) {
     console.warn("[notion-blog] getAllPosts failed", err);
     return [];

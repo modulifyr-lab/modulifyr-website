@@ -41,7 +41,6 @@ export default function GradientMesh() {
         style={{
           backgroundColor: "var(--color-brand-orange)",
           animation: "blob-one 20s infinite ease-in-out",
-          willChange: "transform",
         }}
       />
 
@@ -50,7 +49,6 @@ export default function GradientMesh() {
         style={{
           backgroundColor: "var(--color-brand-teal)",
           animation: "blob-two 25s infinite ease-in-out",
-          willChange: "transform",
         }}
       />
 
@@ -59,7 +57,6 @@ export default function GradientMesh() {
         style={{
           backgroundColor: "var(--color-brand-gold)",
           animation: "blob-three 22s infinite ease-in-out",
-          willChange: "transform",
         }}
       />
     </div>

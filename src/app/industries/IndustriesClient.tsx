@@ -201,7 +201,7 @@ export default function IndustriesClient() {
         <div className="container-custom">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
             {industries.map((industry, idx) => (
-              <Reveal key={idx} variant="fade-up" delay={idx * 100}>
+              <Reveal key={industry.name} variant="fade-up" delay={idx * 100}>
                 <TiltCard className="h-full">
                   <Card className="h-full overflow-hidden p-0">
                     <div className="flex h-full flex-col p-8 md:p-10">
@@ -228,9 +228,9 @@ export default function IndustriesClient() {
                           Common Use Cases
                         </p>
                         <ul className="space-y-2">
-                          {industry.useCases.map((uc, i) => (
+                          {industry.useCases.map((uc) => (
                             <li
-                              key={i}
+                              key={uc}
                               className="text-text-secondary flex items-center gap-2 text-sm"
                             >
                               <Zap className="text-brand-gold h-3 w-3 shrink-0" /> {uc}

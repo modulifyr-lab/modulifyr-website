@@ -295,9 +295,9 @@ export default function ServicesClient() {
                           Key Deliverables
                         </span>
                         <ul className="grid grid-cols-1 gap-1.5">
-                          {service.deliverables.map((item, i) => (
+                          {service.deliverables.map((item) => (
                             <li
-                              key={i}
+                              key={item}
                               className="text-text-secondary flex items-start gap-2 text-sm"
                             >
                               <Zap className="text-brand-gold mt-0.5 h-3 w-3 shrink-0" /> {item}
@@ -328,7 +328,7 @@ export default function ServicesClient() {
               );
 
               return (
-                <Reveal key={idx} variant="fade-up" delay={idx * 100}>
+                <Reveal key={service.internalName} variant="fade-up" delay={idx * 100}>
                   {service.comingSoon ? (
                     <div className="h-full">{cardContent}</div>
                   ) : (
@@ -365,7 +365,7 @@ export default function ServicesClient() {
               </div>
               {services.map((s, i) => (
                 <div
-                  key={i}
+                  key={s.internalName}
                   className={`border-border-base grid grid-cols-2 border-b px-6 py-4 last:border-0 ${i % 2 === 1 ? "bg-bg-light" : ""}`}
                 >
                   <span className="text-text-secondary text-sm">{s.internalName}</span>
@@ -411,8 +411,8 @@ export default function ServicesClient() {
                   { label: "Cloud-Native", val: "Focused" },
                   { label: "Security", val: "Audited" },
                   { label: "Scale", val: "Ready" },
-                ].map((stat, i) => (
-                  <div key={i} className="bg-bg-secondary rounded-2xl p-6 text-center">
+                ].map((stat) => (
+                  <div key={stat.label} className="bg-bg-secondary rounded-2xl p-6 text-center">
                     <div className="text-brand-orange font-heading mb-1 text-xl font-bold">
                       {stat.val}
                     </div>

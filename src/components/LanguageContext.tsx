@@ -243,21 +243,25 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     document.documentElement.lang = language === "ne" ? "ne" : "en";
   }, [language]);
 
-  const setLanguage = (lang: Language) => {
+  const setLanguage = React.useCallback((lang: Language) => {
     setLanguageState(lang);
     localStorage.setItem("modulifyr_lang", lang);
     document.documentElement.lang = lang === "ne" ? "ne" : "en";
-  };
+  }, []);
 
-  const t = (key: string): string => {
-    return translations[language][key] ?? translations["en"][key] ?? key;
-  };
-
-  return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
-      {children}
-    </LanguageContext.Provider>
+  const t = React.useCallback(
+    (key: string): string => {
+      return translations[language][key] ?? translations["en"][key] ?? key;
+    },
+    [language]
   );
+
+  const contextValue = React.useMemo(
+    () => ({ language, setLanguage, t }),
+    [language, setLanguage, t]
+  );
+
+  return <LanguageContext.Provider value={contextValue}>{children}</LanguageContext.Provider>;
 }
 
 export function useLanguage() {

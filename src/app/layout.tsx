@@ -72,7 +72,7 @@ export const metadata: Metadata = {
     title: "Modulifyr | Custom Software Systems Built to Scale",
     description:
       "Engineering tailored modular software solutions for businesses across Nepal and worldwide. Based in Birtamode, Jhapa.",
-    url: "https://modulifyr.com",
+    url: "/",
     siteName: "Modulifyr",
     locale: "en_US",
     images: [
@@ -264,7 +264,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrg) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrg).replace(/</g, "\\u003c") }}
         />
         {/* Google Tag Manager */}
         <Script
@@ -282,10 +282,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe
+            title="Google Tag Manager"
             src="https://www.googletagmanager.com/ns.html?id=GTM-NXGSWMQ5"
             height="0"
             width="0"
             style={{ display: "none", visibility: "hidden" }}
+            sandbox="allow-scripts allow-same-origin"
           />
         </noscript>
 
