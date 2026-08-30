@@ -30,7 +30,6 @@ export function Navbar() {
   const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    // eslint-disable-next-line
     setMounted(true);
   }, []);
 
@@ -41,7 +40,6 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
-    // eslint-disable-next-line
     setMenuOpen(false);
   }, [pathname]);
 
