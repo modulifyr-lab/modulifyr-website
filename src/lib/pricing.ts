@@ -227,16 +227,23 @@ export const pricing = FOUNDING_SLOTS_REMAINING > 0 ? pricingFounding : pricingS
 export type PackagePricingKey = keyof typeof pricingStandard;
 export type PriceValue = number | readonly [number, number];
 export type TierPricingKey<T extends PackagePricingKey> = keyof (typeof pricingStandard)[T];
-export const pricingReviewReminder =
-  "Re-check static FX spot rates every 1–3 months and regenerate src/lib/pricing.ts if USD conversion has drifted.";
+const numberFormatterCache: Record<string, Intl.NumberFormat> = {};
+
+function getNumberFormatter(locale: string, currency: string): Intl.NumberFormat {
+  const key = `${locale}-${currency}`;
+  if (!numberFormatterCache[key]) {
+    numberFormatterCache[key] = new Intl.NumberFormat(locale, {
+      style: "currency",
+      currency,
+      maximumFractionDigits: 0,
+    });
+  }
+  return numberFormatterCache[key];
+}
 
 export function formatCurrencyValue(value: number, region: Exclude<Region, null>): string {
   const { locale, currency } = REGIONS[region];
-  return new Intl.NumberFormat(locale, {
-    style: "currency",
-    currency,
-    maximumFractionDigits: 0,
-  }).format(value);
+  return getNumberFormatter(locale, currency).format(value);
 }
 
 export function formatPrice(value: PriceValue, region: Exclude<Region, null>): string {

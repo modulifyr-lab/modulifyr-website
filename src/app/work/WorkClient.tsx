@@ -171,7 +171,7 @@ export default function WorkClient() {
                 {/* Metrics */}
                 <div className="grid grid-cols-3 gap-4">
                   {cs.metrics.map((m, i) => (
-                    <Reveal key={i} variant="fade-scale" delay={150 + i * 50}>
+                    <Reveal key={m.label} variant="fade-scale" delay={150 + i * 50}>
                       <div className="bg-bg-secondary border-border-base h-full rounded-2xl border p-5 text-center">
                         <p className="text-brand-orange font-heading mb-1 text-sm leading-tight font-bold">
                           {m.value}
@@ -328,7 +328,7 @@ export default function WorkClient() {
                   { label: "Team size", val: "Scoped per project" },
                   { label: "Onboarding", val: "2 weeks" },
                 ].map((item, i) => (
-                  <Reveal key={i} variant="fade-scale" delay={250 + i * 50}>
+                  <Reveal key={item.label} variant="fade-scale" delay={250 + i * 50}>
                     <div className="h-full rounded-xl border border-white/10 bg-white/5 p-4">
                       <p className="text-text-muted text-xs">{item.label}</p>
                       <p className="mt-0.5 font-bold text-white">{item.val}</p>
@@ -372,8 +372,8 @@ export default function WorkClient() {
                       project: "Variable by milestone",
                       team: "Fixed monthly cost",
                     },
-                  ].map((row, i) => (
-                    <div key={i} className="grid grid-cols-3 gap-3 text-xs">
+                  ].map((row) => (
+                    <div key={row.label} className="grid grid-cols-3 gap-3 text-xs">
                       <span className="text-text-muted font-semibold">{row.label}</span>
                       <span className="rounded bg-red-500/10 px-2 py-1 text-center text-red-300/80">
                         {row.project}

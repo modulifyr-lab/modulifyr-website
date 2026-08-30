@@ -73,9 +73,8 @@ export function Navbar() {
 
       {/* ── Navbar ─────────────────────────────────────────────────────── */}
       <nav
-        role="navigation"
         aria-label="Main navigation"
-        className={`fixed top-0 right-0 left-0 z-50 flex h-20 items-center border-b backdrop-blur-md transition-all duration-300 ${scrolled ? "bg-background/95 border-border-base shadow-sm" : "bg-background/70 border-transparent"}`}
+        className={`fixed top-0 right-0 left-0 z-50 flex h-20 items-center border-b backdrop-blur-md transition-colors duration-300 ${scrolled ? "bg-background/95 border-border-base shadow-sm" : "bg-background/70 border-transparent"}`}
       >
         <div className="container-custom flex w-full items-center justify-between">
           {/* Logo */}

@@ -4,6 +4,7 @@
 // NOTE: No ratelimit imports here — rate limiting is handled server-side in the API route.
 
 import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { useRegion } from "@/components/RegionProvider";
 import { RegionSelector } from "@/components/RegionSelector";
@@ -249,9 +250,9 @@ export function RFPForm() {
                 <Button onClick={() => setStatus("idle")} variant="outline">
                   Submit Another Request
                 </Button>
-                <Button>
-                  <a href="/process">View Our Process</a>
-                </Button>
+                <Link href="/process">
+                  <Button>View Our Process</Button>
+                </Link>
               </div>
             </div>
           </div>
@@ -325,55 +326,71 @@ export function RFPForm() {
                       01 — Contact Information
                     </h2>
                     <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-                      {[
-                        {
-                          label: "Full Name",
-                          name: "name",
-                          type: "text",
-                          placeholder: "Your full name",
-                          required: true,
-                        },
-                        {
-                          label: "Company / Organization",
-                          name: "company",
-                          type: "text",
-                          placeholder: "Your company name",
-                          required: true,
-                        },
-                        {
-                          label: "Work Email",
-                          name: "email",
-                          type: "email",
-                          placeholder: "you@company.com",
-                          required: true,
-                        },
-                        {
-                          label: "Phone",
-                          name: "phone",
-                          type: "tel",
-                          placeholder: "+977 98XXXXXXXX",
-                          required: false,
-                        },
-                      ].map((f) => (
-                        <div key={f.name} className="flex flex-col gap-2">
-                          <label className="text-foreground text-sm font-semibold">
-                            {f.label}{" "}
-                            {f.required ? (
-                              <span className="text-brand-orange">*</span>
-                            ) : (
-                              <span className="text-text-muted font-normal">(Optional)</span>
-                            )}
-                          </label>
-                          <input
-                            type={f.type}
-                            name={f.name}
-                            value={form[f.name as keyof FormState]}
-                            onChange={handleChange}
-                            placeholder={f.placeholder}
-                            className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:border-brand-orange focus:ring-brand-orange/10 rounded-xl border px-4 py-3 text-sm transition-all focus:ring-2 focus:outline-none"
-                          />
-                        </div>
-                      ))}
+                      <div className="flex flex-col gap-2">
+                        <label htmlFor="rfp-name" className="text-foreground text-sm font-semibold">
+                          Full Name <span className="text-brand-orange">*</span>
+                        </label>
+                        <input
+                          id="rfp-name"
+                          type="text"
+                          name="name"
+                          value={form.name}
+                          onChange={handleChange}
+                          placeholder="Your full name"
+                          className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:border-brand-orange focus:ring-brand-orange/10 rounded-xl border px-4 py-3 text-sm transition-colors focus:ring-2 focus:outline-none"
+                        />
+                      </div>
+                      <div className="flex flex-col gap-2">
+                        <label
+                          htmlFor="rfp-company"
+                          className="text-foreground text-sm font-semibold"
+                        >
+                          Company / Organization <span className="text-brand-orange">*</span>
+                        </label>
+                        <input
+                          id="rfp-company"
+                          type="text"
+                          name="company"
+                          value={form.company}
+                          onChange={handleChange}
+                          placeholder="Your company name"
+                          className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:border-brand-orange focus:ring-brand-orange/10 rounded-xl border px-4 py-3 text-sm transition-colors focus:ring-2 focus:outline-none"
+                        />
+                      </div>
+                      <div className="flex flex-col gap-2">
+                        <label
+                          htmlFor="rfp-email"
+                          className="text-foreground text-sm font-semibold"
+                        >
+                          Work Email <span className="text-brand-orange">*</span>
+                        </label>
+                        <input
+                          id="rfp-email"
+                          type="email"
+                          name="email"
+                          value={form.email}
+                          onChange={handleChange}
+                          placeholder="you@company.com"
+                          className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:border-brand-orange focus:ring-brand-orange/10 rounded-xl border px-4 py-3 text-sm transition-colors focus:ring-2 focus:outline-none"
+                        />
+                      </div>
+                      <div className="flex flex-col gap-2">
+                        <label
+                          htmlFor="rfp-phone"
+                          className="text-foreground text-sm font-semibold"
+                        >
+                          Phone <span className="text-text-muted font-normal">(Optional)</span>
+                        </label>
+                        <input
+                          id="rfp-phone"
+                          type="tel"
+                          name="phone"
+                          value={form.phone}
+                          onChange={handleChange}
+                          placeholder="+977 98XXXXXXXX"
+                          className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:border-brand-orange focus:ring-brand-orange/10 rounded-xl border px-4 py-3 text-sm transition-colors focus:ring-2 focus:outline-none"
+                        />
+                      </div>
                     </div>
                   </div>
 
@@ -385,14 +402,18 @@ export function RFPForm() {
                     <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
                       {/* Industry */}
                       <div className="flex flex-col gap-2">
-                        <label className="text-foreground text-sm font-semibold">
+                        <label
+                          htmlFor="rfp-industry"
+                          className="text-foreground text-sm font-semibold"
+                        >
                           Industry <span className="text-brand-orange">*</span>
                         </label>
                         <select
+                          id="rfp-industry"
                           name="industry"
                           value={form.industry}
                           onChange={handleChange}
-                          className="border-border-base bg-bg-light text-text-primary focus:border-brand-orange focus:ring-brand-orange/10 cursor-pointer appearance-none rounded-xl border px-4 py-3 text-sm transition-all focus:ring-2 focus:outline-none"
+                          className="border-border-base bg-bg-light text-text-primary focus:border-brand-orange focus:ring-brand-orange/10 cursor-pointer appearance-none rounded-xl border px-4 py-3 text-sm transition-colors focus:ring-2 focus:outline-none"
                         >
                           <option value="" disabled>
                             Select your industry
@@ -407,14 +428,18 @@ export function RFPForm() {
 
                       {/* Package / Project Type */}
                       <div className="flex flex-col gap-2">
-                        <label className="text-foreground text-sm font-semibold">
+                        <label
+                          htmlFor="rfp-project-type"
+                          className="text-foreground text-sm font-semibold"
+                        >
                           Package / Project Type <span className="text-brand-orange">*</span>
                         </label>
                         <select
+                          id="rfp-project-type"
                           name="project_type"
                           value={form.project_type}
                           onChange={handleChange}
-                          className="border-border-base bg-bg-light text-text-primary focus:border-brand-orange focus:ring-brand-orange/10 cursor-pointer appearance-none rounded-xl border px-4 py-3 text-sm transition-all focus:ring-2 focus:outline-none"
+                          className="border-border-base bg-bg-light text-text-primary focus:border-brand-orange focus:ring-brand-orange/10 cursor-pointer appearance-none rounded-xl border px-4 py-3 text-sm transition-colors focus:ring-2 focus:outline-none"
                         >
                           <option value="" disabled>
                             Select a package
@@ -462,7 +487,10 @@ export function RFPForm() {
                       03 — Project Brief
                     </h2>
                     <div className="flex flex-col gap-2">
-                      <label className="text-foreground text-sm font-semibold">
+                      <label
+                        htmlFor="rfp-message"
+                        className="text-foreground text-sm font-semibold"
+                      >
                         Describe your project <span className="text-brand-orange">*</span>
                       </label>
                       <p className="text-text-muted mb-2 text-xs">
@@ -470,13 +498,14 @@ export function RFPForm() {
                         like.
                       </p>
                       <textarea
+                        id="rfp-message"
                         name="message"
                         value={form.message}
                         onChange={handleChange}
                         rows={6}
                         maxLength={8000}
                         placeholder="We currently use [system X] for [workflow Y]. The main challenge is... We need a solution that..."
-                        className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:border-brand-orange focus:ring-brand-orange/10 resize-none rounded-xl border px-4 py-3 text-sm transition-all focus:ring-2 focus:outline-none"
+                        className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:border-brand-orange focus:ring-brand-orange/10 resize-none rounded-xl border px-4 py-3 text-sm transition-colors focus:ring-2 focus:outline-none"
                       />
                       <p className="text-text-muted text-right text-xs">
                         {form.message.length}/8000
@@ -526,9 +555,9 @@ export function RFPForm() {
                   </Button>
                   <p className="text-text-muted mt-4 text-center text-xs">
                     By submitting, you agree to our{" "}
-                    <a href="/privacy" className="text-brand-teal hover:underline">
+                    <Link href="/privacy" className="text-brand-teal hover:underline">
                       Privacy Policy
-                    </a>
+                    </Link>
                     . We respond within 24 hours.
                   </p>
                 </div>
@@ -623,11 +652,11 @@ export function RFPForm() {
                   <p className="text-text-secondary mb-6 text-sm leading-relaxed">
                     Book a free 15-minute discovery call directly with our lead architect.
                   </p>
-                  <a href="/contact">
+                  <Link href="/contact">
                     <Button variant="outline" className="w-full">
                       Book Discovery Call
                     </Button>
-                  </a>
+                  </Link>
                 </div>
               </Reveal>
 

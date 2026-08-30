@@ -37,7 +37,7 @@ export default function AboutPage() {
       {/* Page-level founder schema */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(founderSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(founderSchema).replace(/</g, "\\u003c") }}
       />
       <AboutClient />
     </>

@@ -85,6 +85,14 @@ function NetworkGroup() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
+  const linePositions = React.useMemo(() => {
+    return connections.map(([startIdx, endIdx]) => {
+      const start = nodes[startIdx].pos;
+      const end = nodes[endIdx].pos;
+      return new Float32Array([...start, ...end]);
+    });
+  }, [nodes, connections]);
+
   useFrame((state, delta) => {
     if (!groupRef.current) return;
 
@@ -98,9 +106,10 @@ function NetworkGroup() {
     const targetY = isTouch ? 0 : mouse.current.x * 0.35;
     const targetX = isTouch ? 0 : -mouse.current.y * 0.25;
 
-    // Smooth LERP follow
-    groupRef.current.rotation.y += (targetY - groupRef.current.rotation.y) * 0.06;
-    groupRef.current.rotation.x += (targetX - groupRef.current.rotation.x) * 0.06;
+    // Smooth LERP follow using delta
+    const lerpFactor = Math.min(dt * 3.6, 1.0);
+    groupRef.current.rotation.y += (targetY - groupRef.current.rotation.y) * lerpFactor;
+    groupRef.current.rotation.x += (targetX - groupRef.current.rotation.x) * lerpFactor;
   });
 
   return (
@@ -116,25 +125,19 @@ function NetworkGroup() {
       ))}
 
       {/* 2. Connection lines */}
-      {connections.map(([startIdx, endIdx], i) => {
-        const start = nodes[startIdx].pos;
-        const end = nodes[endIdx].pos;
-
-        // Define simple lines
-        return (
-          <line key={i}>
-            <bufferGeometry>
-              <bufferAttribute
-                attach="attributes-position"
-                args={[new Float32Array([...start, ...end]), 3]}
-                count={2}
-                itemSize={3}
-              />
-            </bufferGeometry>
-            <lineBasicMaterial color="#475569" opacity={0.35} transparent linewidth={1} />
-          </line>
-        );
-      })}
+      {linePositions.map((posArray, i) => (
+        <line key={i}>
+          <bufferGeometry>
+            <bufferAttribute
+              attach="attributes-position"
+              args={[posArray, 3]}
+              count={2}
+              itemSize={3}
+            />
+          </bufferGeometry>
+          <lineBasicMaterial color="#475569" opacity={0.35} transparent linewidth={1} />
+        </line>
+      ))}
     </group>
   );
 }

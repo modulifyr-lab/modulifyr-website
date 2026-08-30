@@ -273,7 +273,7 @@ export default function CapabilitiesClient() {
               { label: "Deployment", val: "Cloud-native, observable" },
               { label: "Docs", val: "Notion-first, diagram-heavy" },
             ].map((item, i) => (
-              <Reveal key={i} variant="fade-scale" delay={i * 80}>
+              <Reveal key={item.label} variant="fade-scale" delay={i * 80}>
                 <div className="border-border-base h-full rounded-xl border bg-white p-4 text-center">
                   <p className="text-text-muted mb-1 text-[10px] font-bold tracking-widest uppercase">
                     {item.label}
@@ -321,7 +321,7 @@ export default function CapabilitiesClient() {
 
           <div className="space-y-12">
             {stackByType.map((product, idx) => (
-              <Reveal key={idx} variant="fade-up" delay={idx * 50}>
+              <Reveal key={product.type} variant="fade-up" delay={idx * 50}>
                 <TiltCard className="border-border-base rounded-3xl border bg-white p-8 transition-shadow hover:shadow-md md:p-10">
                   <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
                     <div className="flex items-center gap-4">
@@ -354,7 +354,7 @@ export default function CapabilitiesClient() {
                     </div>
                     {product.stack.map((row, i) => (
                       <div
-                        key={i}
+                        key={row.layer}
                         className={`border-border-base grid grid-cols-3 border-t px-5 py-3 ${i % 2 === 0 ? "bg-white" : "bg-bg-light"}`}
                       >
                         <span className="text-text-muted text-xs font-semibold">{row.layer}</span>
@@ -386,7 +386,7 @@ export default function CapabilitiesClient() {
                 <div className="border-border-base overflow-hidden rounded-2xl border bg-white">
                   {infra.map((row, i) => (
                     <div
-                      key={i}
+                      key={row.layer}
                       className={`border-border-base flex items-center justify-between border-b px-6 py-4 last:border-0 ${i % 2 === 1 ? "bg-bg-light" : ""}`}
                     >
                       <span className="text-text-muted text-sm font-semibold">{row.layer}</span>
@@ -404,7 +404,7 @@ export default function CapabilitiesClient() {
                   <div className="mt-4 flex flex-wrap gap-2">
                     {["Pull request", "Lint", "Test", "Build", "Security checks", "Deploy"].map(
                       (step, i) => (
-                        <div key={i} className="flex items-center gap-2">
+                        <div key={step} className="flex items-center gap-2">
                           <span className="bg-brand-orange/10 text-brand-orange rounded-full px-3 py-1 text-xs font-bold">
                             {step}
                           </span>
@@ -478,7 +478,7 @@ export default function CapabilitiesClient() {
               </div>
               {avoidList.map((row, i) => (
                 <div
-                  key={i}
+                  key={row.tech}
                   className={`border-border-base grid grid-cols-3 items-center border-b px-6 py-4 last:border-0 ${i % 2 === 1 ? "bg-bg-light" : ""}`}
                 >
                   <div className="flex items-center gap-2">
@@ -515,7 +515,7 @@ export default function CapabilitiesClient() {
               { q: "Need APIs / integrations", a: "NestJS" },
               { q: "Need reporting / ETL", a: "PostgreSQL + Python" },
             ].map((item, i) => (
-              <Reveal key={i} variant="fade-scale" delay={i * 50}>
+              <Reveal key={item.q} variant="fade-scale" delay={i * 50}>
                 <div className="border-border-base flex h-full items-center justify-between rounded-xl border bg-white px-5 py-4">
                   <span className="text-text-secondary text-sm">{item.q}</span>
                   <span className="text-brand-orange ml-4 shrink-0 text-sm font-bold">

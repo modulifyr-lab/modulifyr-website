@@ -46,6 +46,7 @@ export function ContactForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (status === "loading") return;
     setStatus("loading");
     setErrorMsg("");
     try {
@@ -280,7 +281,7 @@ export function ContactForm() {
                           placeholder="Full Name"
                           required
                           maxLength={200}
-                          className="border-border-base bg-background placeholder:text-text-dim focus-visible:ring-brand-orange text-foreground flex h-12 w-full rounded-lg border px-4 py-2 text-base transition-all focus-visible:ring-2 focus-visible:outline-none disabled:opacity-50"
+                          className="border-border-base bg-background placeholder:text-text-dim focus-visible:ring-brand-orange text-foreground flex h-12 w-full rounded-lg border px-4 py-2 text-base transition-colors focus-visible:ring-2 focus-visible:outline-none disabled:opacity-50"
                         />
                       </div>
                       <div className="space-y-2">
@@ -422,6 +423,7 @@ export function ContactForm() {
                 loading="lazy"
                 referrerPolicy="strict-origin-when-cross-origin"
                 title="Modulifyr Location - Birtamod"
+                sandbox="allow-scripts allow-same-origin"
               />
             </div>
           </Reveal>

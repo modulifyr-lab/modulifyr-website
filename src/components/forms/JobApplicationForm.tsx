@@ -224,8 +224,9 @@ export function JobApplicationForm() {
               <Briefcase className="h-4 w-4" /> Featured Openings:
             </span>
             {featuredRoles.map((role) => (
-              <span
+              <button
                 key={role}
+                type="button"
                 className={`border-border-base cursor-pointer rounded-full border px-4 py-2 text-xs font-semibold transition-colors ${
                   form.role === role
                     ? "border-brand-orange bg-brand-orange/10 text-brand-orange"
@@ -234,7 +235,7 @@ export function JobApplicationForm() {
                 onClick={() => setForm((prev) => ({ ...prev, role }))}
               >
                 {role}
-              </span>
+              </button>
             ))}
             <span className="text-text-muted text-xs italic">
               + {allRoles.length - featuredRoles.length} more in the dropdown below
@@ -263,54 +264,58 @@ export function JobApplicationForm() {
                   </h2>
                   <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
                     <div className="flex flex-col gap-2">
-                      <label className="text-foreground text-sm font-semibold">
+                      <label htmlFor="job-name" className="text-foreground text-sm font-semibold">
                         Full Name <span className="text-brand-orange">*</span>
                       </label>
                       <input
+                        id="job-name"
                         type="text"
                         name="name"
                         value={form.name}
                         onChange={handleChange}
                         placeholder="Your full name"
                         maxLength={200}
-                        className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:border-brand-teal focus:ring-brand-teal/10 rounded-xl border px-4 py-3 text-sm transition-all focus:ring-2 focus:outline-none"
+                        className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:border-brand-teal focus:ring-brand-teal/10 rounded-xl border px-4 py-3 text-sm transition-colors focus:ring-2 focus:outline-none"
                       />
                     </div>
                     <div className="flex flex-col gap-2">
-                      <label className="text-foreground text-sm font-semibold">
+                      <label htmlFor="job-email" className="text-foreground text-sm font-semibold">
                         Email <span className="text-brand-orange">*</span>
                       </label>
                       <input
+                        id="job-email"
                         type="email"
                         name="email"
                         value={form.email}
                         onChange={handleChange}
                         placeholder="you@email.com"
-                        className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:border-brand-teal focus:ring-brand-teal/10 rounded-xl border px-4 py-3 text-sm transition-all focus:ring-2 focus:outline-none"
+                        className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:border-brand-teal focus:ring-brand-teal/10 rounded-xl border px-4 py-3 text-sm transition-colors focus:ring-2 focus:outline-none"
                       />
                     </div>
                     <div className="flex flex-col gap-2">
-                      <label className="text-foreground text-sm font-semibold">
+                      <label htmlFor="job-phone" className="text-foreground text-sm font-semibold">
                         Phone <span className="text-text-muted font-normal">(Optional)</span>
                       </label>
                       <input
+                        id="job-phone"
                         type="tel"
                         name="phone"
                         value={form.phone}
                         onChange={handleChange}
                         placeholder="+977 98XXXXXXXX"
-                        className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:border-brand-teal focus:ring-brand-teal/10 rounded-xl border px-4 py-3 text-sm transition-all focus:ring-2 focus:outline-none"
+                        className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:border-brand-teal focus:ring-brand-teal/10 rounded-xl border px-4 py-3 text-sm transition-colors focus:ring-2 focus:outline-none"
                       />
                     </div>
                     <div className="flex flex-col gap-2">
-                      <label className="text-foreground text-sm font-semibold">
+                      <label htmlFor="job-role" className="text-foreground text-sm font-semibold">
                         Role Applying For <span className="text-brand-orange">*</span>
                       </label>
                       <select
+                        id="job-role"
                         name="role"
                         value={form.role}
                         onChange={handleChange}
-                        className="border-border-base bg-bg-light text-text-primary focus:border-brand-teal focus:ring-brand-teal/10 cursor-pointer appearance-none rounded-xl border px-4 py-3 text-sm transition-all focus:ring-2 focus:outline-none"
+                        className="border-border-base bg-bg-light text-text-primary focus:border-brand-teal focus:ring-brand-teal/10 cursor-pointer appearance-none rounded-xl border px-4 py-3 text-sm transition-colors focus:ring-2 focus:outline-none"
                         aria-label="Select a role"
                       >
                         <option value="" disabled>
@@ -342,44 +347,53 @@ export function JobApplicationForm() {
                   </h2>
                   <div className="flex flex-col gap-5">
                     <div className="flex flex-col gap-2">
-                      <label className="text-foreground text-sm font-semibold">
+                      <label htmlFor="job-skills" className="text-foreground text-sm font-semibold">
                         Key Skills <span className="text-brand-orange">*</span>
                       </label>
                       <input
+                        id="job-skills"
                         type="text"
                         name="skills"
                         value={form.skills}
                         onChange={handleChange}
                         placeholder="e.g. React, TypeScript, Node.js — or Unity, C#, Game Design — or Figma, UX Research"
                         maxLength={500}
-                        className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:border-brand-teal focus:ring-brand-teal/10 rounded-xl border px-4 py-3 text-sm transition-all focus:ring-2 focus:outline-none"
+                        className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:border-brand-teal focus:ring-brand-teal/10 rounded-xl border px-4 py-3 text-sm transition-colors focus:ring-2 focus:outline-none"
                       />
                     </div>
                     <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
                       <div className="flex flex-col gap-2">
-                        <label className="text-foreground flex items-center gap-2 text-sm font-semibold">
+                        <label
+                          htmlFor="job-portfolio"
+                          className="text-foreground flex items-center gap-2 text-sm font-semibold"
+                        >
                           <Github className="h-4 w-4" /> Portfolio / GitHub
                         </label>
                         <input
+                          id="job-portfolio"
                           type="url"
                           name="portfolio_url"
                           value={form.portfolio_url}
                           onChange={handleChange}
                           placeholder="https://github.com/yourhandle"
-                          className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:border-brand-teal focus:ring-brand-teal/10 rounded-xl border px-4 py-3 text-sm transition-all focus:ring-2 focus:outline-none"
+                          className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:border-brand-teal focus:ring-brand-teal/10 rounded-xl border px-4 py-3 text-sm transition-colors focus:ring-2 focus:outline-none"
                         />
                       </div>
                       <div className="flex flex-col gap-2">
-                        <label className="text-foreground flex items-center gap-2 text-sm font-semibold">
+                        <label
+                          htmlFor="job-linkedin"
+                          className="text-foreground flex items-center gap-2 text-sm font-semibold"
+                        >
                           <Linkedin className="h-4 w-4" /> LinkedIn Profile
                         </label>
                         <input
+                          id="job-linkedin"
                           type="url"
                           name="linkedin_url"
                           value={form.linkedin_url}
                           onChange={handleChange}
                           placeholder="https://linkedin.com/in/yourname"
-                          className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:border-brand-teal focus:ring-brand-teal/10 rounded-xl border px-4 py-3 text-sm transition-all focus:ring-2 focus:outline-none"
+                          className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:border-brand-teal focus:ring-brand-teal/10 rounded-xl border px-4 py-3 text-sm transition-colors focus:ring-2 focus:outline-none"
                         />
                       </div>
                     </div>
@@ -392,7 +406,10 @@ export function JobApplicationForm() {
                     03 — Why You Want In
                   </h2>
                   <div className="flex flex-col gap-2">
-                    <label className="text-foreground text-sm font-semibold">
+                    <label
+                      htmlFor="job-cover-note"
+                      className="text-foreground text-sm font-semibold"
+                    >
                       Tell us about yourself and why you're applying{" "}
                       <span className="text-brand-orange">*</span>
                     </label>
@@ -401,13 +418,14 @@ export function JobApplicationForm() {
                       relevant? How much time can you commit per week?
                     </p>
                     <textarea
+                      id="job-cover-note"
                       name="cover_note"
                       value={form.cover_note}
                       onChange={handleChange}
                       rows={6}
                       maxLength={5000}
                       placeholder="I'm a [background] with [X years / recent graduate / currently studying]. What drew me to Modulifyr is... I can commit roughly X hours per week..."
-                      className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:border-brand-teal focus:ring-brand-teal/10 resize-none rounded-xl border px-4 py-3 text-sm transition-all focus:ring-2 focus:outline-none"
+                      className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:border-brand-teal focus:ring-brand-teal/10 resize-none rounded-xl border px-4 py-3 text-sm transition-colors focus:ring-2 focus:outline-none"
                     />
                     <p className="text-text-muted text-right text-xs">
                       {form.cover_note.length}/5000

@@ -61,11 +61,12 @@ export function RegionProvider({
     persistRegion(r);
   }, []);
 
-  return (
-    <RegionContext.Provider value={{ region, setRegion, hasChosen }}>
-      {children}
-    </RegionContext.Provider>
+  const contextValue = React.useMemo(
+    () => ({ region, setRegion, hasChosen }),
+    [region, setRegion, hasChosen]
   );
+
+  return <RegionContext.Provider value={contextValue}>{children}</RegionContext.Provider>;
 }
 
 export function useRegion() {

@@ -328,7 +328,7 @@ export default function AboutClient() {
           </Reveal>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
             {values.map((val, idx) => (
-              <Reveal key={idx} variant="fade-scale" delay={idx * 100}>
+              <Reveal key={val.title} variant="fade-scale" delay={idx * 100}>
                 <div className="border-border-base bg-bg-light flex h-full flex-col items-center gap-4 rounded-2xl border p-8 text-center">
                   <div className="bg-bg-secondary flex h-12 w-12 items-center justify-center rounded-xl">
                     <val.icon className="text-brand-orange h-6 w-6" aria-hidden="true" />
@@ -523,9 +523,9 @@ export default function AboutClient() {
                                   { icon: Coffee, label: "Late nights" },
                                   { icon: Globe, label: "Global reach" },
                                   { icon: Zap, label: "Ships fast" },
-                                ].map((item, i) => (
+                                ].map((item) => (
                                   <div
-                                    key={i}
+                                    key={item.label}
                                     className="border-border-base rounded-lg border bg-white/60 p-2 text-center"
                                   >
                                     <item.icon
@@ -556,9 +556,9 @@ export default function AboutClient() {
                 Open Positions — Volunteer / Collaborator
               </p>
               <div className="space-y-3">
-                {divisionRoles.map((div, i) => (
+                {divisionRoles.map((div) => (
                   <div
-                    key={i}
+                    key={div.division}
                     className="border-border-base bg-bg-light flex items-start justify-between gap-4 rounded-xl border px-4 py-4"
                   >
                     <div className="flex items-start gap-3">
@@ -622,7 +622,7 @@ export default function AboutClient() {
                   { icon: Globe, text: "Remote-first — apply from anywhere" },
                   { icon: Users, text: "Direct access to founder from day one" },
                 ].map((item, i) => (
-                  <Reveal key={i} variant="rotate-in" delay={i * 100}>
+                  <Reveal key={item.text} variant="rotate-in" delay={i * 100}>
                     <div className="flex h-full items-start gap-3 rounded-xl bg-white/5 p-4">
                       <item.icon
                         className="text-brand-gold mt-0.5 h-4 w-4 shrink-0"
