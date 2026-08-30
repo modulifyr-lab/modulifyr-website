@@ -44,26 +44,3 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Revalidation failed" }, { status: 500 });
   }
 }
-
-// GET for easy manual testing from browser
-export async function GET(req: NextRequest) {
-  const secret = req.nextUrl.searchParams.get("secret");
-  if (!secret || secret !== process.env.REVALIDATION_SECRET) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
-  const slug = req.nextUrl.searchParams.get("slug");
-
-  revalidatePath("/blog");
-  revalidatePath("/feed.xml");
-
-  if (slug) {
-    revalidatePath(`/blog/${slug}`);
-  }
-
-  return NextResponse.json({
-    revalidated: true,
-    slug: slug ?? "all",
-    timestamp: new Date().toISOString(),
-  });
-}

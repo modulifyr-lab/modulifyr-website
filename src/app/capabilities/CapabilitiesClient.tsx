@@ -120,7 +120,7 @@ const stackByType = [
       { layer: "Auth", choice: "Auth.js / Better Auth", note: "Choose per project needs" },
       { layer: "Email", choice: "Resend + React Email", note: "Transactional and product emails" },
       { layer: "Deployment", choice: "Vercel / AWS", note: "Based on client control needs" },
-      { layer: "Observability", choice: "Sentry", note: "Errors and performance" },
+      { layer: "Observability", choice: "Better Stack", note: "Errors, logs, and uptime monitoring" },
     ],
     useCases: "SaaS platforms, dashboards, ERPs, portals, internal systems, admin tools.",
   },
@@ -233,7 +233,7 @@ const infra = [
   { layer: "Containers", choice: "Docker" },
   { layer: "CI/CD", choice: "GitHub Actions" },
   { layer: "IaC", choice: "Terraform" },
-  { layer: "Monitoring", choice: "Sentry" },
+  { layer: "Monitoring", choice: "Better Stack" },
   { layer: "Cloud", choice: "AWS / GCP / Azure / Vercel" },
   { layer: "Repo hygiene", choice: "Dependabot, linting, audits" },
 ];
@@ -297,7 +297,7 @@ export default function CapabilitiesClient() {
           "Prisma",
           "Expo",
           "Tauri",
-          "Sentry",
+          "Vercel",
           "Docker",
           "TailwindCSS",
         ]}

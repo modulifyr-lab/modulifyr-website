@@ -29,7 +29,6 @@
     "@notionhq/client": "^5.12.0",
     "@react-three/drei": "^10.7.8",
     "@react-three/fiber": "^9.7.0",
-    "@sentry/nextjs": "^10.43.0",
     "@upstash/ratelimit": "^2.0.8",
     "@upstash/redis": "^1.37.0",
     "@vercel/og": "^0.11.1",
