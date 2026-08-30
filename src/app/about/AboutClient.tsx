@@ -39,6 +39,7 @@ interface TeamMember {
   isFounder: boolean;
   subtext?: string;
   quote?: string;
+  message?: string;
 }
 
 interface DivisionRole {
@@ -78,21 +79,23 @@ const teamMembers: TeamMember[] = [
   {
     name: "Rijan M",
     fullName: "Rijan Mainali",
-    title: "CEO",
+    title: "CEO & Founder",
     department: "Leadership",
     linkedin: "https://www.linkedin.com/in/rijan-mainali/",
     portfolio: "https://rijanmainali.vercel.app",
     isFounder: true,
+    message: "Building software systems that scale seamlessly and stand the test of time.",
   },
   // UI/UX Design
   {
     name: "Dikshya B",
     fullName: "Dikshya Bhattarai",
-    title: "",
+    title: "UI/UX Designer",
     department: "UI/UX Design",
     linkedin: null,
     portfolio: null,
     isFounder: false,
+    message: "Crafting intuitive user experiences with clarity and detail.",
   },
   {
     name: "Lijala T",
@@ -432,12 +435,17 @@ export default function AboutClient() {
                                   {member.title}
                                 </p>
                               )}
-                              {"subtext" in member && member.subtext && (
+                              {member.message && (
+                                <p className="text-text-muted mt-1 text-xs leading-relaxed italic">
+                                  "{member.message}"
+                                </p>
+                              )}
+                              {member.subtext && (
                                 <p className="text-text-muted mt-1 text-xs leading-relaxed">
                                   {member.subtext}
                                 </p>
                               )}
-                              {"quote" in member && member.quote && (
+                              {member.quote && (
                                 <p className="text-text-muted mt-1 text-xs leading-relaxed italic">
                                   "{member.quote}"
                                 </p>
