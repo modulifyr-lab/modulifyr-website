@@ -92,7 +92,7 @@ const teamMembers: TeamMember[] = [
     fullName: "Dikshya Bhattarai",
     title: "UI/UX Designer",
     department: "UI/UX Design",
-    linkedin: https://www.linkedin.com/in/dikshya-bhattarai-528107308/,
+    linkedin: "https://www.linkedin.com/in/dikshya-bhattarai-528107308/",
     portfolio: null,
     isFounder: false,
     message: "My approach to design is centered on understanding users, solving problems, and creating simple, effective digital experiences.",
