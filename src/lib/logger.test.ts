@@ -24,7 +24,7 @@ describe("logger", () => {
   it("logger.info outputs valid JSON to console.log", () => {
     logger.info("test message", { key: "value" });
     expect(consoleSpy.log).toHaveBeenCalledOnce();
-    const output = consoleSpy.log.mock.calls[0][0];
+    const output = consoleSpy.log.mock.calls[0][0] as string;
     const parsed = JSON.parse(output);
     expect(parsed.level).toBe("info");
     expect(parsed.msg).toBe("test message");
@@ -35,7 +35,7 @@ describe("logger", () => {
   it("logger.warn outputs valid JSON to console.warn", () => {
     logger.warn("warning message");
     expect(consoleSpy.warn).toHaveBeenCalledOnce();
-    const parsed = JSON.parse(consoleSpy.warn.mock.calls[0][0]);
+    const parsed = JSON.parse(consoleSpy.warn.mock.calls[0][0] as string);
     expect(parsed.level).toBe("warn");
     expect(parsed.msg).toBe("warning message");
   });
@@ -43,14 +43,14 @@ describe("logger", () => {
   it("logger.error outputs valid JSON to console.error", () => {
     logger.error("error message", { code: 500 });
     expect(consoleSpy.error).toHaveBeenCalledOnce();
-    const parsed = JSON.parse(consoleSpy.error.mock.calls[0][0]);
+    const parsed = JSON.parse(consoleSpy.error.mock.calls[0][0] as string);
     expect(parsed.level).toBe("error");
     expect(parsed.code).toBe(500);
   });
 
   it("includes env field in all log entries", () => {
     logger.info("with env");
-    const parsed = JSON.parse(consoleSpy.log.mock.calls[0][0]);
+    const parsed = JSON.parse(consoleSpy.log.mock.calls[0][0] as string);
     expect(parsed.env).toBeDefined();
   });
 
