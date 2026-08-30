@@ -110,7 +110,7 @@ const teamMembers: TeamMember[] = [
   {
     name: "Shreesha S",
     fullName: "Shreesha Shrestha",
-    title: "UI/UX Designer"",
+    title: "UI/UX Designer",
     department: "UI/UX Design",
     linkedin: "http://www.linkedin.com/in/shreesha-shrestha-939385219",
     portfolio: null,
