@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import * as React from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
@@ -9,9 +9,9 @@ import type { Group } from "three";
 export function StaticFallback() {
   return (
     <div className="relative mx-auto aspect-square w-full max-w-lg">
-      <div className="bg-brand-orange/10 absolute top-0 left-0 h-32 w-32 rounded-2xl parallax-up" />
-      <div className="bg-brand-navy/5 absolute right-0 bottom-0 h-48 w-48 rounded-[40px] parallax-down" />
-      <div className="bg-background border-border-base absolute top-1/2 left-1/2 flex h-80 w-80 -translate-x-1/2 -translate-y-1/2 flex-col gap-6 rounded-3xl border p-8 shadow-2xl parallax-subtle-up">
+      <div className="bg-brand-orange/10 parallax-up absolute top-0 left-0 h-32 w-32 rounded-2xl" />
+      <div className="bg-brand-navy/5 parallax-down absolute right-0 bottom-0 h-48 w-48 rounded-[40px]" />
+      <div className="bg-background border-border-base parallax-subtle-up absolute top-1/2 left-1/2 flex h-80 w-80 -translate-x-1/2 -translate-y-1/2 flex-col gap-6 rounded-3xl border p-8 shadow-2xl">
         <div className="bg-brand-orange flex h-16 w-16 items-center justify-center rounded-xl">
           <Layers className="h-8 w-8 text-white" />
         </div>
@@ -26,10 +26,10 @@ export function StaticFallback() {
         </div>
       </div>
       {/* Floating modules */}
-      <div className="bg-brand-navy absolute top-10 right-10 flex h-24 w-24 items-center justify-center rounded-2xl shadow-xl parallax-up">
+      <div className="bg-brand-navy parallax-up absolute top-10 right-10 flex h-24 w-24 items-center justify-center rounded-2xl shadow-xl">
         <Cpu className="h-10 w-10 text-white" />
       </div>
-      <div className="bg-brand-gold absolute bottom-10 left-10 flex h-20 w-20 items-center justify-center rounded-full shadow-xl parallax-down">
+      <div className="bg-brand-gold parallax-down absolute bottom-10 left-10 flex h-20 w-20 items-center justify-center rounded-full shadow-xl">
         <Globe className="text-foreground h-8 w-8" />
       </div>
     </div>
@@ -42,30 +42,40 @@ function NetworkGroup() {
   const mouse = React.useRef({ x: 0, y: 0 });
 
   // 6 nodes representing modular architecture components
-  const nodes = React.useMemo(() => [
-    { pos: [-1.4, 1.0, 0.2] },
-    { pos: [1.4, -0.6, 0.4] },
-    { pos: [0.2, -1.2, -0.6] },
-    { pos: [1.0, 1.2, -0.8] },
-    { pos: [-1.0, -1.0, 0.8] },
-    { pos: [0.0, 0.1, 1.1] },
-  ], []);
+  const nodes = React.useMemo(
+    () => [
+      { pos: [-1.4, 1.0, 0.2] },
+      { pos: [1.4, -0.6, 0.4] },
+      { pos: [0.2, -1.2, -0.6] },
+      { pos: [1.0, 1.2, -0.8] },
+      { pos: [-1.0, -1.0, 0.8] },
+      { pos: [0.0, 0.1, 1.1] },
+    ],
+    []
+  );
 
   // Set up connection lines between nodes
-  const connections = React.useMemo(() => [
-    [0, 1], [0, 3], [0, 4], [0, 5],
-    [1, 2], [1, 3], [1, 5],
-    [2, 4], [2, 5],
-    [3, 5], [4, 5]
-  ], []);
+  const connections = React.useMemo(
+    () => [
+      [0, 1],
+      [0, 3],
+      [0, 4],
+      [0, 5],
+      [1, 2],
+      [1, 3],
+      [1, 5],
+      [2, 4],
+      [2, 5],
+      [3, 5],
+      [4, 5],
+    ],
+    []
+  );
 
   React.useEffect(() => {
     // Track mouse coordinates on desktop
     const handleMouseMove = (e: MouseEvent) => {
-      if (
-        window.matchMedia("(pointer: coarse)").matches ||
-        "ontouchstart" in window
-      ) {
+      if (window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window) {
         return; // Disable mouse-tilt on touch devices
       }
       mouse.current.x = (e.clientX / window.innerWidth) * 2 - 1;

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import * as React from "react";
 import Image from "next/image";
@@ -95,7 +95,8 @@ const teamMembers: TeamMember[] = [
     linkedin: "https://www.linkedin.com/in/dikshya-bhattarai-528107308/",
     portfolio: null,
     isFounder: false,
-    message: "My approach to design is centered on understanding users, solving problems, and creating simple, effective digital experiences.",
+    message:
+      "My approach to design is centered on understanding users, solving problems, and creating simple, effective digital experiences.",
   },
   {
     name: "Lijala T",
@@ -115,12 +116,13 @@ const teamMembers: TeamMember[] = [
     linkedin: "http://www.linkedin.com/in/shreesha-shrestha-939385219",
     portfolio: null,
     isFounder: false,
-    message: "I design for clarity in complexity. Every screen I design earns trust — usable today, scalable tomorrow, consistent always",
+    message:
+      "I design for clarity in complexity. Every screen I design earns trust — usable today, scalable tomorrow, consistent always",
   },
   {
     name: "Sumina L",
     fullName: "Sumina Lakshyam",
-    title: "UI/UX Designer"",
+    title: "UI/UX Designer",
     department: "UI/UX Design",
     linkedin: null,
     portfolio: null,
@@ -173,7 +175,7 @@ const teamMembers: TeamMember[] = [
     linkedin: "https://www.linkedin.com/in/saurab-shrestha-30b705259/",
     portfolio: "https://merofolio.netlify.app/",
     isFounder: false,
-    message: "Growing through every project and challenge"
+    message: "Growing through every project and challenge",
   },
   {
     name: "Aadesh L",
@@ -327,9 +329,7 @@ export default function AboutClient() {
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
             {values.map((val, idx) => (
               <Reveal key={idx} variant="fade-scale" delay={idx * 100}>
-                <div
-                  className="border-border-base flex h-full flex-col items-center gap-4 rounded-2xl border bg-bg-light p-8 text-center"
-                >
+                <div className="border-border-base bg-bg-light flex h-full flex-col items-center gap-4 rounded-2xl border p-8 text-center">
                   <div className="bg-bg-secondary flex h-12 w-12 items-center justify-center rounded-xl">
                     <val.icon className="text-brand-orange h-6 w-6" aria-hidden="true" />
                   </div>
@@ -392,7 +392,7 @@ export default function AboutClient() {
                       <Reveal key={member.fullName} variant="fade-up" delay={idx * 80}>
                         <TiltArticle
                           aria-label={`${member.fullName}${member.title ? ` — ${member.title}` : ""}`}
-                          className={`border-border-base group relative flex h-full flex-col gap-5 rounded-3xl border bg-bg-light p-7 transition-shadow hover:shadow-md ${member.isFounder ? "border-t-brand-orange border-t-4" : ""}`}
+                          className={`border-border-base group bg-bg-light relative flex h-full flex-col gap-5 rounded-3xl border p-7 transition-shadow hover:shadow-md ${member.isFounder ? "border-t-brand-orange border-t-4" : ""}`}
                         >
                           {/* Avatar + name row */}
                           <div className="flex items-center gap-4">
@@ -417,13 +417,18 @@ export default function AboutClient() {
                                   href={member.portfolio}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="font-heading text-foreground group/link inline-flex items-center gap-1.5 font-bold transition-colors hover:text-brand-orange"
+                                  className="font-heading text-foreground group/link hover:text-brand-orange inline-flex items-center gap-1.5 font-bold transition-colors"
                                 >
                                   {member.fullName}
-                                  <ExternalLink className="h-3 w-3 opacity-0 transition-opacity group-hover/link:opacity-100" aria-hidden="true" />
+                                  <ExternalLink
+                                    className="h-3 w-3 opacity-0 transition-opacity group-hover/link:opacity-100"
+                                    aria-hidden="true"
+                                  />
                                 </a>
                               ) : (
-                                <p className="font-heading text-foreground font-bold">{member.fullName}</p>
+                                <p className="font-heading text-foreground font-bold">
+                                  {member.fullName}
+                                </p>
                               )}
                               {member.title && (
                                 <p className="text-brand-orange mt-0.5 text-xs font-semibold">
@@ -457,8 +462,9 @@ export default function AboutClient() {
                           {/* Founder blurb */}
                           {member.isFounder && (
                             <p className="text-text-muted text-xs leading-relaxed">
-                              Built Modulifyr from scratch — no funding, no team, just conviction and code.
-                              Every system we ship is designed, architected, and delivered from Birtamode.
+                              Built Modulifyr from scratch — no funding, no team, just conviction
+                              and code. Every system we ship is designed, architected, and delivered
+                              from Birtamode.
                             </p>
                           )}
 
@@ -526,7 +532,9 @@ export default function AboutClient() {
                                       className="text-brand-teal mx-auto mb-0.5 h-3 w-3"
                                       aria-hidden="true"
                                     />
-                                    <p className="text-text-muted text-[9px] leading-tight">{item.label}</p>
+                                    <p className="text-text-muted text-[9px] leading-tight">
+                                      {item.label}
+                                    </p>
                                   </div>
                                 ))}
                               </div>
@@ -551,10 +559,12 @@ export default function AboutClient() {
                 {divisionRoles.map((div, i) => (
                   <div
                     key={i}
-                    className="border-border-base flex items-start justify-between gap-4 rounded-xl border bg-bg-light px-4 py-4"
+                    className="border-border-base bg-bg-light flex items-start justify-between gap-4 rounded-xl border px-4 py-4"
                   >
                     <div className="flex items-start gap-3">
-                      <div className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${div.bg}`}>
+                      <div
+                        className={`mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${div.bg}`}
+                      >
                         <div.icon className={`h-4 w-4 ${div.color}`} aria-hidden="true" />
                       </div>
                       <div>
@@ -589,7 +599,7 @@ export default function AboutClient() {
       </section>
 
       {/* ── Join the team ──────────────────────────────────────────────────── */}
-      <section className="bg-brand-navy py-24 text-white relative">
+      <section className="bg-brand-navy relative py-24 text-white">
         <GradientMesh />
         <div className="container-custom relative z-10">
           <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
@@ -663,13 +673,13 @@ export default function AboutClient() {
                   </h3>
                 </div>
                 <p className="text-text-secondary text-lg leading-relaxed">
-                  We're based in Birtamode, one of the fastest-growing business hubs in eastern Nepal.
-                  We serve clients across Nepal and work remotely with organizations internationally.
-                  Our timezone (NPT, UTC+5:45) gives us natural overlap with European morning hours
-                  and Asian business hours.
+                  We're based in Birtamode, one of the fastest-growing business hubs in eastern
+                  Nepal. We serve clients across Nepal and work remotely with organizations
+                  internationally. Our timezone (NPT, UTC+5:45) gives us natural overlap with
+                  European morning hours and Asian business hours.
                 </p>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  <div className="border-border-base flex items-start gap-3 rounded-xl border bg-bg-light p-4">
+                  <div className="border-border-base bg-bg-light flex items-start gap-3 rounded-xl border p-4">
                     <Wifi className="text-brand-teal mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
                     <div>
                       <p className="text-foreground mb-0.5 text-xs font-bold">
@@ -680,7 +690,7 @@ export default function AboutClient() {
                       </p>
                     </div>
                   </div>
-                  <div className="border-border-base flex items-start gap-3 rounded-xl border bg-bg-light p-4">
+                  <div className="border-border-base bg-bg-light flex items-start gap-3 rounded-xl border p-4">
                     <Zap className="text-brand-teal mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
                     <div>
                       <p className="text-foreground mb-0.5 text-xs font-bold">Backup Power</p>
@@ -702,7 +712,7 @@ export default function AboutClient() {
                   alt="Nepal landscape"
                   fill
                   sizes="320px"
-                  className="object-cover parallax-subtle-up scale-110"
+                  className="parallax-subtle-up scale-110 object-cover"
                 />
               </div>
             </div>

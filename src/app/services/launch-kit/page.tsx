@@ -170,7 +170,9 @@ export default function LaunchKitPage() {
               </div>
             </Reveal>
             <Reveal variant="fade-up" delay={100}>
-              <h1 className="font-heading mb-6 text-4xl font-bold md:text-6xl text-white">Launch Kit</h1>
+              <h1 className="font-heading mb-6 text-4xl font-bold text-white md:text-6xl">
+                Launch Kit
+              </h1>
             </Reveal>
             <Reveal variant="fade-up" delay={200}>
               <p className="text-text-muted text-xl leading-relaxed">
@@ -209,9 +211,7 @@ export default function LaunchKitPage() {
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             {animationGuide.map((row, i) => (
               <Reveal key={i} variant="fade-scale" delay={i * 100}>
-                <div
-                  className="border-border-base flex items-start gap-4 rounded-xl border bg-white p-5 h-full"
-                >
+                <div className="border-border-base flex h-full items-start gap-4 rounded-xl border bg-white p-5">
                   <div className="bg-brand-navy flex h-8 w-8 shrink-0 items-center justify-center rounded-lg">
                     <span className="text-[10px] font-bold text-white">T{i + 1}</span>
                   </div>
@@ -247,8 +247,10 @@ export default function LaunchKitPage() {
             {tiers.map((tier, i) => (
               <Reveal key={i} variant="fade-up" delay={i * 80}>
                 <Card
-                  className={`relative flex flex-col gap-5 h-full ${
-                    tier.highlight ? "border-brand-orange ring-brand-orange/20 shadow-xl ring-1" : ""
+                  className={`relative flex h-full flex-col gap-5 ${
+                    tier.highlight
+                      ? "border-brand-orange ring-brand-orange/20 shadow-xl ring-1"
+                      : ""
                   }`}
                 >
                   {tier.highlight && (
@@ -268,7 +270,7 @@ export default function LaunchKitPage() {
                           <div className="font-heading text-brand-orange text-2xl font-bold">
                             {formatTierPriceFounding("launchKit", tier.tierKey, activeRegion)}
                           </div>
-                          <div className="text-text-muted text-[11px] mt-0.5">
+                          <div className="text-text-muted mt-0.5 text-[11px]">
                             Founding client pricing — {FOUNDING_SLOTS_REMAINING} spots remaining.
                           </div>
                         </div>
@@ -324,7 +326,10 @@ export default function LaunchKitPage() {
                   </div>
 
                   <div className="mt-auto pt-2">
-                    <Link href={`/request-proposal?pkg=launch-kit&tier=${i + 1}`} className="w-full">
+                    <Link
+                      href={`/request-proposal?pkg=launch-kit&tier=${i + 1}`}
+                      className="w-full"
+                    >
                       <Button
                         variant={tier.highlight ? "primary" : "outline"}
                         className="group w-full justify-between"
@@ -352,7 +357,7 @@ export default function LaunchKitPage() {
                 </span>
               </Reveal>
               <Reveal variant="fade-up" delay={100}>
-                <h2 className="font-heading text-foreground mb-4 text-3xl font-bold text-foreground">
+                <h2 className="font-heading text-foreground text-foreground mb-4 text-3xl font-bold">
                   Managed Hosting & Maintenance
                 </h2>
               </Reveal>
@@ -374,7 +379,7 @@ export default function LaunchKitPage() {
                         <CheckCircle2 className="text-brand-orange h-5 w-5" />
                       </div>
                       <div>
-                        <h4 className="text-foreground font-bold text-sm mb-1">Ownership First</h4>
+                        <h4 className="text-foreground mb-1 text-sm font-bold">Ownership First</h4>
                         <p className="text-text-secondary text-sm leading-relaxed">
                           You always own your domain. Nothing about this arrangement changes that —
                           you can move hosting elsewhere at any time.
@@ -389,7 +394,7 @@ export default function LaunchKitPage() {
                         <CheckCircle2 className="text-brand-orange h-5 w-5" />
                       </div>
                       <div>
-                        <h4 className="text-foreground font-bold text-sm mb-1">Itemized Costs</h4>
+                        <h4 className="text-foreground mb-1 text-sm font-bold">Itemized Costs</h4>
                         <p className="text-text-secondary text-sm leading-relaxed">
                           Two separate charges, both itemized on your invoice: the exact cost of any
                           third-party subscription (Vercel, hosting, etc.) with no markup, and our
@@ -403,27 +408,31 @@ export default function LaunchKitPage() {
 
               <Reveal variant="fade-scale" delay={200}>
                 <div className="border-border-base rounded-2xl border bg-white p-8 shadow-sm">
-                  <h3 className="text-foreground font-bold text-lg mb-4">Management Fee Range</h3>
-                  <div className="font-heading text-brand-orange text-3xl font-bold mb-2">
-                    {activeRegion ? formatManagedHostingPrice(activeRegion) : "Select region for pricing"}
+                  <h3 className="text-foreground mb-4 text-lg font-bold">Management Fee Range</h3>
+                  <div className="font-heading text-brand-orange mb-2 text-3xl font-bold">
+                    {activeRegion
+                      ? formatManagedHostingPrice(activeRegion)
+                      : "Select region for pricing"}
                     <span className="text-text-muted text-sm font-normal"> / month</span>
                   </div>
-                  <p className="text-text-muted text-xs leading-relaxed mb-6">
+                  <p className="text-text-muted mb-6 text-xs leading-relaxed">
                     *This fee is separate from third-party subscription costs.
                   </p>
 
-                  <div className="border-t border-border-base pt-6">
-                    <h4 className="text-foreground font-bold text-xs tracking-wider uppercase mb-3">
+                  <div className="border-border-base border-t pt-6">
+                    <h4 className="text-foreground mb-3 text-xs font-bold tracking-wider uppercase">
                       Invoice Line Items Example:
                     </h4>
-                    <ul className="space-y-2 text-xs text-text-secondary">
-                      <li className="flex justify-between py-1 border-b border-dashed border-border-base">
+                    <ul className="text-text-secondary space-y-2 text-xs">
+                      <li className="border-border-base flex justify-between border-b border-dashed py-1">
                         <span>Vercel Pro Subscription (Passthrough)</span>
-                        <span className="font-semibold text-foreground">Exact Cost (No Markup)</span>
+                        <span className="text-foreground font-semibold">
+                          Exact Cost (No Markup)
+                        </span>
                       </li>
                       <li className="flex justify-between py-1">
                         <span>Modulifyr Managed Hosting & Maintenance</span>
-                        <span className="font-semibold text-foreground">Management Fee</span>
+                        <span className="text-foreground font-semibold">Management Fee</span>
                       </li>
                     </ul>
                   </div>
@@ -479,8 +488,8 @@ export default function LaunchKitPage() {
             <div className="bg-brand-navy max-w-3xl rounded-3xl p-12 text-white">
               <h2 className="font-heading mb-3 text-2xl font-bold text-white">Ready to start?</h2>
               <p className="text-text-muted mb-8 text-sm leading-relaxed">
-                Tell us your page count, what content you have ready, and your target launch date. We
-                will confirm the right tier and timeline.
+                Tell us your page count, what content you have ready, and your target launch date.
+                We will confirm the right tier and timeline.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link href="/request-proposal">
@@ -489,7 +498,10 @@ export default function LaunchKitPage() {
                   </Button>
                 </Link>
                 <Link href="/services">
-                  <Button variant="outline" className="border-white/30 text-white hover:bg-white/10">
+                  <Button
+                    variant="outline"
+                    className="border-white/30 text-white hover:bg-white/10"
+                  >
                     Back to All Services
                   </Button>
                 </Link>

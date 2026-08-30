@@ -340,9 +340,9 @@ export default function PricingPage() {
             </Reveal>
             <Reveal variant="fade-up" delay={100}>
               <p className="text-text-secondary max-w-2xl text-xl leading-relaxed">
-                Eight clearly defined packages covering everything from a 1-week discovery sprint to a
-                full ongoing engineering retainer. Fixed fees when scope is clear; retainer when work
-                is ongoing.
+                Eight clearly defined packages covering everything from a 1-week discovery sprint to
+                a full ongoing engineering retainer. Fixed fees when scope is clear; retainer when
+                work is ongoing.
               </p>
             </Reveal>
           </div>
@@ -441,7 +441,9 @@ export default function PricingPage() {
                       {pkg.tierNames.map((tierName, i) => (
                         <div key={i} className="bg-bg-secondary rounded-xl p-3">
                           <div className="flex flex-col gap-0.5">
-                            <span className="text-foreground text-sm font-semibold">{tierName}</span>
+                            <span className="text-foreground text-sm font-semibold">
+                              {tierName}
+                            </span>
                             <span className="font-heading text-brand-orange text-lg font-bold">
                               {pkg.tierPrices![i]}
                             </span>
@@ -523,7 +525,7 @@ export default function PricingPage() {
               },
             ].map((item, i) => (
               <Reveal key={i} variant="fade-scale" delay={i * 100}>
-                <div className={`border-l-4 ${item.color} rounded-xl bg-white p-6 h-full`}>
+                <div className={`border-l-4 ${item.color} h-full rounded-xl bg-white p-6`}>
                   <p className="text-text-muted mb-2 text-xs font-bold tracking-widest uppercase">
                     If…
                   </p>
@@ -554,9 +556,7 @@ export default function PricingPage() {
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
             {engagementModels.map((model, i) => (
               <Reveal key={i} variant="fade-scale" delay={i * 100}>
-                <div
-                  className="border-border-base flex flex-col gap-4 rounded-2xl border bg-white p-8 h-full"
-                >
+                <div className="border-border-base flex h-full flex-col gap-4 rounded-2xl border bg-white p-8">
                   <model.icon className="text-brand-orange h-8 w-8" />
                   <h4 className="font-heading text-foreground font-bold">{model.title}</h4>
                   <p className="text-text-muted text-xs leading-relaxed">{model.desc}</p>

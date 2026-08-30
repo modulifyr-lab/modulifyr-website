@@ -181,7 +181,7 @@ const schemaOrg = {
         "https://github.com/Modulifyr",
         "https://themanifest.com/company/modulifyr",
         "https://rocketreach.co/modulifyr-profile_b6410cbccbf776ff",
-        "https://www.trustpilot.com/review/modulifyr.com"
+        "https://www.trustpilot.com/review/modulifyr.com",
       ],
     },
     {
@@ -307,7 +307,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             </LanguageProvider>
           </RegionProvider>
         </ThemeProvider>
-
       </body>
     </html>
   );

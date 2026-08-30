@@ -272,7 +272,7 @@ export function RFPForm() {
               </span>
             </Reveal>
             <Reveal variant="fade-up" delay={100}>
-              <h1 className="font-heading mb-6 text-4xl font-bold md:text-6xl text-white">
+              <h1 className="font-heading mb-6 text-4xl font-bold text-white md:text-6xl">
                 Tell Us About Your <span className="text-brand-orange">System</span>
               </h1>
             </Reveal>
@@ -478,7 +478,9 @@ export function RFPForm() {
                         placeholder="We currently use [system X] for [workflow Y]. The main challenge is... We need a solution that..."
                         className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:border-brand-orange focus:ring-brand-orange/10 resize-none rounded-xl border px-4 py-3 text-sm transition-all focus:ring-2 focus:outline-none"
                       />
-                      <p className="text-text-muted text-right text-xs">{form.message.length}/8000</p>
+                      <p className="text-text-muted text-right text-xs">
+                        {form.message.length}/8000
+                      </p>
                     </div>
                   </div>
 
@@ -536,7 +538,7 @@ export function RFPForm() {
             {/* Sidebar */}
             <div className="flex flex-col gap-6">
               <Reveal variant="fade-scale" delay={150}>
-                <div className="bg-brand-navy rounded-3xl p-8 text-white h-full">
+                <div className="bg-brand-navy h-full rounded-3xl p-8 text-white">
                   <h3 className="font-heading mb-6 text-xl font-bold">What to Expect</h3>
                   <div className="space-y-6">
                     {[
@@ -633,8 +635,9 @@ export function RFPForm() {
                 <div className="bg-brand-teal/5 border-brand-teal/20 flex items-start gap-3 rounded-2xl border p-5">
                   <ShieldCheck className="text-brand-teal mt-0.5 h-5 w-5 shrink-0" />
                   <p className="text-text-secondary text-xs leading-relaxed">
-                    <strong className="text-foreground">NDA Available.</strong> All information shared
-                    is treated confidentially. We can sign an NDA before any technical discussion.
+                    <strong className="text-foreground">NDA Available.</strong> All information
+                    shared is treated confidentially. We can sign an NDA before any technical
+                    discussion.
                   </p>
                 </div>
               </Reveal>

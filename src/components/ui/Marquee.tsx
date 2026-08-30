@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import * as React from "react";
 
@@ -13,9 +13,14 @@ export default function Marquee({ items, direction = "left", speed = 25 }: Marqu
   const duplicatedItems = [...items, ...items, ...items];
 
   return (
-    <div className="relative w-full overflow-hidden bg-bg-secondary border-y border-border-base py-5 pointer-events-auto" aria-hidden="true">
+    <div
+      className="bg-bg-secondary border-border-base pointer-events-auto relative w-full overflow-hidden border-y py-5"
+      aria-hidden="true"
+    >
       {/* Local styles for smooth rendering and clean fallback */}
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
         @keyframes marquee-ltr {
           0% { transform: translateX(-33.3333%); }
           100% { transform: translateX(0%); }
@@ -42,7 +47,9 @@ export default function Marquee({ items, direction = "left", speed = 25 }: Marqu
             gap: 1.5rem !important;
           }
         }
-      `}} />
+      `,
+        }}
+      />
 
       <div
         className="marquee-inner"
@@ -53,7 +60,7 @@ export default function Marquee({ items, direction = "left", speed = 25 }: Marqu
         {duplicatedItems.map((item, index) => (
           <div
             key={index}
-            className="flex items-center gap-3 shrink-0 whitespace-nowrap text-foreground font-heading text-sm md:text-base font-bold uppercase tracking-wider opacity-75 hover:opacity-100 transition-opacity"
+            className="text-foreground font-heading flex shrink-0 items-center gap-3 text-sm font-bold tracking-wider whitespace-nowrap uppercase opacity-75 transition-opacity hover:opacity-100 md:text-base"
           >
             <span>{item}</span>
             <span className="text-brand-orange text-lg">✦</span>

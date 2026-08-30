@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
@@ -72,7 +72,8 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       const card = internalRef.current;
       if (!card) return;
 
-      card.style.transition = "transform 0.2s ease-out, box-shadow 0.2s ease-out, border-color 0.2s ease-out";
+      card.style.transition =
+        "transform 0.2s ease-out, box-shadow 0.2s ease-out, border-color 0.2s ease-out";
       card.style.setProperty("--tilt-rx", "0deg");
       card.style.setProperty("--tilt-ry", "0deg");
       card.style.setProperty("--magnetic-tx", "0px");

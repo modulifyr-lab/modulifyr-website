@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import * as React from "react";
 import { JobApplicationForm } from "@/components/forms/JobApplicationForm";
@@ -48,8 +48,7 @@ const roleGroups = [
       "Technical Lead",
       "Engineering Manager",
     ],
-    what:
-      "React / Next.js, TypeScript, NestJS, PostgreSQL, Prisma. You'll own complete modules — not tickets.",
+    what: "React / Next.js, TypeScript, NestJS, PostgreSQL, Prisma. You'll own complete modules — not tickets.",
   },
   {
     icon: Paintbrush,
@@ -65,8 +64,7 @@ const roleGroups = [
       "Design Lead",
       "User Researcher",
     ],
-    what:
-      "Figma for product design and design systems across client projects.",
+    what: "Figma for product design and design systems across client projects.",
   },
   {
     icon: Briefcase,
@@ -74,9 +72,13 @@ const roleGroups = [
     divisions: ["Modulifyr"],
     color: "text-green-600",
     bg: "bg-green-600/10",
-    roles: ["Product Manager", "Senior Product Manager", "Technical Project Manager", "Project Manager"],
-    what:
-      "Define what we build and why. Own the roadmap, coordinate cross-functional work, keep delivery clean.",
+    roles: [
+      "Product Manager",
+      "Senior Product Manager",
+      "Technical Project Manager",
+      "Project Manager",
+    ],
+    what: "Define what we build and why. Own the roadmap, coordinate cross-functional work, keep delivery clean.",
   },
   {
     icon: Megaphone,
@@ -94,8 +96,7 @@ const roleGroups = [
       "Community Manager",
       "Publishing Manager",
     ],
-    what:
-      "We have zero marketing operations. This is a blank slate. Own the entire function from scratch.",
+    what: "We have zero marketing operations. This is a blank slate. Own the entire function from scratch.",
   },
   {
     icon: Users,
@@ -113,8 +114,7 @@ const roleGroups = [
       "Technical Support Engineer",
       "Customer Support Specialist",
     ],
-    what:
-      "Help us land our first clients and keep them. Own the full client relationship from first contact to success.",
+    what: "Help us land our first clients and keep them. Own the full client relationship from first contact to success.",
   },
   {
     icon: BarChart2,
@@ -123,8 +123,7 @@ const roleGroups = [
     color: "text-brand-teal",
     bg: "bg-brand-teal/10",
     roles: ["Data Analyst", "Revenue Analyst"],
-    what:
-      "Build the analytics foundation from zero. No existing dashboards, no existing data pipelines. You start it.",
+    what: "Build the analytics foundation from zero. No existing dashboards, no existing data pipelines. You start it.",
   },
   {
     icon: Building2,
@@ -145,8 +144,7 @@ const roleGroups = [
       "Legal Counsel",
       "IT Administrator",
     ],
-    what:
-      "Build the company's backbone: people operations, financial tracking, legal hygiene, and internal systems.",
+    what: "Build the company's backbone: people operations, financial tracking, legal hygiene, and internal systems.",
   },
 ];
 
@@ -245,7 +243,6 @@ function TiltCard({
 export default function CareersClient() {
   return (
     <div className="flex w-full flex-col">
-
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
       <section className="bg-brand-navy relative overflow-hidden py-24 text-white">
         <div className="container-custom relative z-10">
@@ -264,17 +261,16 @@ export default function CareersClient() {
             </Reveal>
 
             <Reveal variant="fade-up" delay={100}>
-              <h1 className="font-heading mb-6 text-4xl font-bold leading-tight md:text-6xl text-white">
-                Build Modulifyr.{" "}
-                <span className="text-brand-orange">From Zero.</span>
+              <h1 className="font-heading mb-6 text-4xl leading-tight font-bold text-white md:text-6xl">
+                Build Modulifyr. <span className="text-brand-orange">From Zero.</span>
               </h1>
             </Reveal>
 
             <Reveal variant="fade-up" delay={200}>
               <p className="text-text-muted mb-6 max-w-3xl text-xl leading-relaxed">
-                Modulifyr is a software consultancy built to deliver high-quality, architecture-first
-                systems. Everyone here is a volunteer, including the founder. No salaries yet.
-                Real work, real systems, real ownership.
+                Modulifyr is a software consultancy built to deliver high-quality,
+                architecture-first systems. Everyone here is a volunteer, including the founder. No
+                salaries yet. Real work, real systems, real ownership.
               </p>
             </Reveal>
 
@@ -302,7 +298,8 @@ export default function CareersClient() {
             </Reveal>
             <Reveal variant="fade-up" delay={100}>
               <p className="text-text-secondary max-w-2xl text-lg leading-relaxed">
-                Modulifyr is focused on delivering custom B2B software engineering and infrastructure solutions.
+                Modulifyr is focused on delivering custom B2B software engineering and
+                infrastructure solutions.
               </p>
             </Reveal>
           </div>
@@ -313,10 +310,14 @@ export default function CareersClient() {
                 <div
                   className={`border-border-base rounded-3xl border bg-white p-8 transition-shadow hover:shadow-lg ${div.border} border-t-4`}
                 >
-                  <div className={`h-14 w-14 ${div.bg} mb-5 flex items-center justify-center rounded-2xl`}>
+                  <div
+                    className={`h-14 w-14 ${div.bg} mb-5 flex items-center justify-center rounded-2xl`}
+                  >
                     <div.icon className={`h-7 w-7 ${div.color}`} />
                   </div>
-                  <h3 className="font-heading text-foreground mb-1 text-xl font-bold">{div.name}</h3>
+                  <h3 className="font-heading text-foreground mb-1 text-xl font-bold">
+                    {div.name}
+                  </h3>
                   <p className={`mb-4 text-xs font-bold tracking-widest uppercase ${div.color}`}>
                     {div.tagline}
                   </p>
@@ -340,8 +341,8 @@ export default function CareersClient() {
               </Reveal>
               <Reveal variant="fade-up" delay={100}>
                 <p className="text-text-secondary mb-8 leading-relaxed">
-                  We're not going to dress this up. Here's exactly what working at Modulifyr looks like
-                  right now — the good and the not-yet-good.
+                  We're not going to dress this up. Here's exactly what working at Modulifyr looks
+                  like right now — the good and the not-yet-good.
                 </p>
               </Reveal>
               <div className="space-y-3">
@@ -369,24 +370,26 @@ export default function CareersClient() {
             <div className="flex flex-col gap-6">
               <Reveal variant="fade-scale" delay={150}>
                 <div className="bg-brand-navy rounded-3xl p-8 text-white">
-                  <h3 className="font-heading mb-4 text-xl font-bold text-white">Who This Is For</h3>
+                  <h3 className="font-heading mb-4 text-xl font-bold text-white">
+                    Who This Is For
+                  </h3>
                   <div className="space-y-4 text-sm leading-relaxed text-white/80">
                     <p>
-                      Students and recent graduates who want real work to put in their portfolio — not
-                      mock projects.
+                      Students and recent graduates who want real work to put in their portfolio —
+                      not mock projects.
                     </p>
                     <p>
-                      Experienced people in full-time roles who have evenings or weekends and want to
-                      build something serious outside of their job.
+                      Experienced people in full-time roles who have evenings or weekends and want
+                      to build something serious outside of their job.
                     </p>
                     <p>
                       People between roles who want to stay sharp, contribute to a real company, and
                       be present for the moment it becomes something.
                     </p>
                     <p>
-                      Anyone who cares more about the quality of the work than immediate compensation
-                      — and who understands that pre-launch companies are built by people who show up
-                      before it's obvious.
+                      Anyone who cares more about the quality of the work than immediate
+                      compensation — and who understands that pre-launch companies are built by
+                      people who show up before it's obvious.
                     </p>
                   </div>
                 </div>
@@ -398,8 +401,8 @@ export default function CareersClient() {
                     Time Commitment
                   </h3>
                   <p className="text-text-secondary text-sm leading-relaxed">
-                    We don't require full-time hours. We ask for consistency. Whether that's 10 hours
-                    a week or 40, tell us what you can commit to and we'll structure your role
+                    We don't require full-time hours. We ask for consistency. Whether that's 10
+                    hours a week or 40, tell us what you can commit to and we'll structure your role
                     accordingly. Part-time contributors are as welcome as those going all in.
                   </p>
                 </div>
@@ -435,12 +438,12 @@ export default function CareersClient() {
             {roleGroups.map((group, i) => (
               <Reveal key={i} variant="fade-up" delay={i * 80}>
                 <TiltCard className="h-full">
-                  <div
-                    className="border-border-base rounded-3xl border bg-white p-8 transition-shadow hover:shadow-md h-full"
-                  >
+                  <div className="border-border-base h-full rounded-3xl border bg-white p-8 transition-shadow hover:shadow-md">
                     <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
                       <div className="flex items-center gap-4">
-                        <div className={`h-12 w-12 ${group.bg} flex shrink-0 items-center justify-center rounded-2xl`}>
+                        <div
+                          className={`h-12 w-12 ${group.bg} flex shrink-0 items-center justify-center rounded-2xl`}
+                        >
                           <group.icon className={`h-6 w-6 ${group.color}`} />
                         </div>
                         <div>
@@ -507,9 +510,7 @@ export default function CareersClient() {
               "Thinks in systems",
             ].map((item, i) => (
               <Reveal key={i} variant="fade-scale" delay={i * 80}>
-                <div
-                  className="border-border-base rounded-xl border bg-white p-5 text-center h-full flex items-center justify-center"
-                >
+                <div className="border-border-base flex h-full items-center justify-center rounded-xl border bg-white p-5 text-center">
                   <p className="text-foreground text-sm font-bold">{item}</p>
                 </div>
               </Reveal>

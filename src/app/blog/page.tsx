@@ -55,15 +55,15 @@ export default async function BlogPage() {
               </span>
             </Reveal>
             <Reveal variant="fade-up" delay={100}>
-              <h1 className="font-heading text-foreground mb-6 text-4xl font-bold md:text-6xl text-foreground">
+              <h1 className="font-heading text-foreground text-foreground mb-6 text-4xl font-bold md:text-6xl">
                 Engineering <span className="text-brand-orange">Insights</span>
               </h1>
             </Reveal>
             <Reveal variant="fade-up" delay={200}>
               <p className="text-text-secondary text-xl leading-relaxed">
                 Architecture decisions, engineering patterns, and practical perspectives from the
-                Modulifyr team — including what we've learned building custom software for businesses
-                in Nepal.
+                Modulifyr team — including what we've learned building custom software for
+                businesses in Nepal.
               </p>
             </Reveal>
           </div>
@@ -99,7 +99,7 @@ export default async function BlogPage() {
                   </span>
                 </Reveal>
                 <Reveal variant="fade-up" delay={150}>
-                  <h2 className="font-heading text-foreground text-3xl leading-tight font-bold text-foreground">
+                  <h2 className="font-heading text-foreground text-foreground text-3xl leading-tight font-bold">
                     {featured.title}
                   </h2>
                 </Reveal>
@@ -133,20 +133,17 @@ export default async function BlogPage() {
         <div className="container-custom">
           {allPosts.length === 0 ? (
             <div className="py-24 text-center">
-              <p className="text-text-muted text-lg">
-                No posts published yet. Check back soon.
-              </p>
+              <p className="text-text-muted text-lg">No posts published yet. Check back soon.</p>
             </div>
           ) : rest.length === 0 ? (
-            <p className="text-text-muted py-12 text-center">Only one post so far. More coming soon.</p>
+            <p className="text-text-muted py-12 text-center">
+              Only one post so far. More coming soon.
+            </p>
           ) : (
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
               {rest.map((post, idx) => (
                 <Reveal key={`${post.slug}-${idx}`} variant="fade-up" delay={idx * 100}>
-                  <Link
-                    href={`/blog/${post.slug}`}
-                    className="group block h-full"
-                  >
+                  <Link href={`/blog/${post.slug}`} className="group block h-full">
                     <Card className="flex h-full flex-col group-hover:-translate-y-2">
                       <span
                         className={`mb-4 w-fit rounded-full px-3 py-1 text-xs font-bold ${categoryColors[post.category] || "bg-bg-secondary text-text-muted"}`}

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import * as React from "react";
 import Image from "next/image";
@@ -112,7 +112,8 @@ export default function WorkClient() {
             </Reveal>
             <Reveal variant="fade-up" delay={200}>
               <div className="text-brand-teal flex items-center gap-4 text-sm font-semibold tracking-widest uppercase">
-                <ShieldCheck className="h-5 w-5" /> Client Projects Available Under NDA After Engagement
+                <ShieldCheck className="h-5 w-5" /> Client Projects Available Under NDA After
+                Engagement
               </div>
             </Reveal>
           </div>
@@ -150,7 +151,7 @@ export default function WorkClient() {
                       fill
                       priority
                       sizes="(max-width: 1024px) 100vw, 50vw"
-                      className="object-cover transition-transform duration-700 group-hover:scale-105 parallax-subtle-up"
+                      className="parallax-subtle-up object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                     <div className="from-brand-navy/70 absolute inset-0 flex items-end bg-gradient-to-t to-transparent p-8">
                       <div className="flex flex-wrap gap-2">
@@ -171,9 +172,7 @@ export default function WorkClient() {
                 <div className="grid grid-cols-3 gap-4">
                   {cs.metrics.map((m, i) => (
                     <Reveal key={i} variant="fade-scale" delay={150 + i * 50}>
-                      <div
-                        className="bg-bg-secondary border-border-base rounded-2xl border p-5 text-center h-full"
-                      >
+                      <div className="bg-bg-secondary border-border-base h-full rounded-2xl border p-5 text-center">
                         <p className="text-brand-orange font-heading mb-1 text-sm leading-tight font-bold">
                           {m.value}
                         </p>
@@ -203,7 +202,9 @@ export default function WorkClient() {
                       </div>
                       <h3 className="font-heading text-foreground font-bold">The Problem</h3>
                     </div>
-                    <p className="text-text-secondary pl-11 text-sm leading-relaxed">{cs.problem}</p>
+                    <p className="text-text-secondary pl-11 text-sm leading-relaxed">
+                      {cs.problem}
+                    </p>
                   </div>
                 </Reveal>
 
@@ -231,7 +232,9 @@ export default function WorkClient() {
                       </div>
                       <h3 className="font-heading text-foreground font-bold">The Outcome</h3>
                     </div>
-                    <p className="text-text-secondary pl-11 text-sm leading-relaxed">{cs.outcome}</p>
+                    <p className="text-text-secondary pl-11 text-sm leading-relaxed">
+                      {cs.outcome}
+                    </p>
                   </div>
                 </Reveal>
               </div>
@@ -245,15 +248,17 @@ export default function WorkClient() {
         <div className="container-custom">
           <div className="mb-12">
             <Reveal variant="fade-up">
-              <h2 className="font-heading text-foreground mb-3 text-3xl font-bold">
-                Client Work
-              </h2>
+              <h2 className="font-heading text-foreground mb-3 text-3xl font-bold">Client Work</h2>
             </Reveal>
             <Reveal variant="fade-up" delay={100}>
               <p className="text-text-secondary max-w-xl text-lg leading-relaxed">
                 We are pre-launch and actively taking on our first client projects. Documented case
-                studies will be added here as engagements complete. If you want to be an early client,{" "}
-                <Link href="/request-proposal" className="text-brand-orange font-semibold hover:underline">
+                studies will be added here as engagements complete. If you want to be an early
+                client,{" "}
+                <Link
+                  href="/request-proposal"
+                  className="text-brand-orange font-semibold hover:underline"
+                >
                   request a proposal
                 </Link>
                 .
@@ -262,14 +267,14 @@ export default function WorkClient() {
           </div>
 
           <Reveal variant="fade-scale" delay={150}>
-            <div className="border-border-base rounded-3xl border bg-white p-10 text-center max-w-2xl">
+            <div className="border-border-base max-w-2xl rounded-3xl border bg-white p-10 text-center">
               <div className="bg-brand-orange/10 mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full">
                 <CheckCircle2 className="text-brand-orange h-8 w-8" />
               </div>
               <h3 className="font-heading text-foreground mb-3 text-xl font-bold">
                 Technical Standards Available Now
               </h3>
-              <p className="text-text-secondary text-sm leading-relaxed mb-6">
+              <p className="text-text-secondary mb-6 text-sm leading-relaxed">
                 While client case studies are pending, our full engineering standards, architecture
                 patterns, and technical briefing are available for review.
               </p>
@@ -311,8 +316,9 @@ export default function WorkClient() {
               </Reveal>
               <Reveal variant="fade-up" delay={200}>
                 <p className="text-text-muted text-sm leading-relaxed">
-                  Best suited for startups and scale-ups that have a working product and need reliable
-                  ongoing engineering capacity without the cost and overhead of hiring locally.
+                  Best suited for startups and scale-ups that have a working product and need
+                  reliable ongoing engineering capacity without the cost and overhead of hiring
+                  locally.
                 </p>
               </Reveal>
               <div className="grid grid-cols-2 gap-4">
@@ -323,7 +329,7 @@ export default function WorkClient() {
                   { label: "Onboarding", val: "2 weeks" },
                 ].map((item, i) => (
                   <Reveal key={i} variant="fade-scale" delay={250 + i * 50}>
-                    <div className="rounded-xl border border-white/10 bg-white/5 p-4 h-full">
+                    <div className="h-full rounded-xl border border-white/10 bg-white/5 p-4">
                       <p className="text-text-muted text-xs">{item.label}</p>
                       <p className="mt-0.5 font-bold text-white">{item.val}</p>
                     </div>
@@ -361,7 +367,11 @@ export default function WorkClient() {
                       project: "Handoff at project end",
                       team: "Continuous ownership",
                     },
-                    { label: "Budget", project: "Variable by milestone", team: "Fixed monthly cost" },
+                    {
+                      label: "Budget",
+                      project: "Variable by milestone",
+                      team: "Fixed monthly cost",
+                    },
                   ].map((row, i) => (
                     <div key={i} className="grid grid-cols-3 gap-3 text-xs">
                       <span className="text-text-muted font-semibold">{row.label}</span>

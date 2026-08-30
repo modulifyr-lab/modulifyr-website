@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import * as React from "react";
 import {
@@ -88,8 +88,8 @@ export default function ProcessClient() {
             </Reveal>
             <Reveal variant="fade-up" delay={100}>
               <p className="text-text-secondary text-xl leading-relaxed">
-                We remove buyer risk by following a repeatable, engineering-first delivery model. From
-                initial discovery to long-term support, your project is managed with surgical
+                We remove buyer risk by following a repeatable, engineering-first delivery model.
+                From initial discovery to long-term support, your project is managed with surgical
                 precision.
               </p>
             </Reveal>
@@ -115,25 +115,27 @@ export default function ProcessClient() {
                     </div>
                   </Reveal>
                   <Reveal variant="fade-up" delay={idx * 100 + 50}>
-                    <div className="text-brand-teal flex items-center gap-2 text-sm font-semibold tracking-widest uppercase mt-2">
+                    <div className="text-brand-teal mt-2 flex items-center gap-2 text-sm font-semibold tracking-widest uppercase">
                       <Clock className="h-4 w-4" /> {step.duration}
                     </div>
                   </Reveal>
                   <Reveal variant="fade-up" delay={idx * 100 + 100}>
-                    <p className="text-text-secondary leading-relaxed mt-2">{step.desc}</p>
+                    <p className="text-text-secondary mt-2 leading-relaxed">{step.desc}</p>
                   </Reveal>
                 </div>
 
                 <div className="lg:w-2/3">
                   <Reveal variant="fade-scale" delay={idx * 100 + 120}>
-                    <div className="border-border-base rounded-3xl border bg-white p-8 shadow-sm transition-shadow group-hover:shadow-md h-full">
+                    <div className="border-border-base h-full rounded-3xl border bg-white p-8 shadow-sm transition-shadow group-hover:shadow-md">
                       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
                         <div className="flex flex-col gap-4">
                           <h3 className="font-heading text-foreground border-border-base border-b pb-2 text-lg font-bold">
                             Technical Detail
                           </h3>
-                          <p className="text-text-secondary text-sm leading-relaxed">{step.details}</p>
-                          <div className="text-text-muted mt-auto flex items-center gap-2 text-xs italic pt-4">
+                          <p className="text-text-secondary text-sm leading-relaxed">
+                            {step.details}
+                          </p>
+                          <div className="text-text-muted mt-auto flex items-center gap-2 pt-4 text-xs italic">
                             <ShieldCheck className="h-4 w-4" /> Professional NDA & Agreement Covered
                           </div>
                         </div>
@@ -247,7 +249,11 @@ export default function ProcessClient() {
             </Reveal>
             <Reveal variant="fade-scale" delay={200}>
               <div className="flex flex-wrap justify-center gap-4">
-                <a href="https://cal.eu/modulifyr/booking" target="_blank" rel="noopener noreferrer">
+                <a
+                  href="https://cal.eu/modulifyr/booking"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <Button size="lg" className="flex items-center gap-2">
                     <Calendar className="h-5 w-5" /> Schedule Discovery Call
                   </Button>
