@@ -41,10 +41,15 @@ jobs:
         run: bun run lint
 
       - name: Security audit
-        run: bun pm scan || true
-        # Fails the build if any high or critical vulnerabilities are found.
-        # Run local auditing or bun pm scan --help for options if needed.
-        continue-on-error: true
+        run: bun audit --audit-level=high
+        # Fails the build (non-zero exit) if any HIGH or CRITICAL severity
+        # vulnerability is found in dependencies. This step is NOT allowed
+        # to be suppressed with `|| true` or `continue-on-error: true` —
+        # if a specific advisory is confirmed to be a false positive or an
+        # accepted risk, ignore that exact advisory explicitly instead:
+        #   bun audit --audit-level=high --ignore CVE-XXXX-YYYYY
+        # To review everything including low/moderate locally, run:
+        #   bun audit
 
       - name: Run tests
         run: bun test
