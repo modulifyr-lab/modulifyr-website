@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import * as React from "react";
 import Link from "next/link";
@@ -181,7 +181,7 @@ export default function IndustriesClient() {
               </span>
             </Reveal>
             <Reveal variant="fade-up" delay={100}>
-              <h1 className="font-heading mb-8 text-4xl font-bold md:text-6xl text-white">
+              <h1 className="font-heading mb-8 text-4xl font-bold text-white md:text-6xl">
                 Modular Architecture <span className="text-brand-orange">Across Industries</span>
               </h1>
             </Reveal>
@@ -203,8 +203,8 @@ export default function IndustriesClient() {
             {industries.map((industry, idx) => (
               <Reveal key={idx} variant="fade-up" delay={idx * 100}>
                 <TiltCard className="h-full">
-                  <Card className="overflow-hidden p-0 h-full">
-                    <div className="p-8 md:p-10 flex flex-col h-full">
+                  <Card className="h-full overflow-hidden p-0">
+                    <div className="flex h-full flex-col p-8 md:p-10">
                       <div className="mb-6 flex items-start gap-5">
                         <div
                           className={`h-14 w-14 ${industry.bg} flex shrink-0 items-center justify-center rounded-2xl`}
@@ -229,13 +229,16 @@ export default function IndustriesClient() {
                         </p>
                         <ul className="space-y-2">
                           {industry.useCases.map((uc, i) => (
-                            <li key={i} className="text-text-secondary flex items-center gap-2 text-sm">
+                            <li
+                              key={i}
+                              className="text-text-secondary flex items-center gap-2 text-sm"
+                            >
                               <Zap className="text-brand-gold h-3 w-3 shrink-0" /> {uc}
                             </li>
                           ))}
                         </ul>
                       </div>
-                      <div className="border-border-base flex items-center justify-between border-t pt-4 mt-auto">
+                      <div className="border-border-base mt-auto flex items-center justify-between border-t pt-4">
                         <span className="text-text-muted text-xs italic">{industry.clients}</span>
                         <Link href="/request-proposal">
                           <Button size="sm" variant="outline" className="group text-xs">

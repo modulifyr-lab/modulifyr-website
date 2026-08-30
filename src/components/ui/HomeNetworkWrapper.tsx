@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import * as React from "react";
 import dynamic from "next/dynamic";
@@ -8,9 +8,9 @@ import { Layers, Cpu, Globe } from "lucide-react";
 export function StaticFallback() {
   return (
     <div className="relative mx-auto aspect-square w-full max-w-lg">
-      <div className="bg-brand-orange/10 absolute top-0 left-0 h-32 w-32 rounded-2xl parallax-up" />
-      <div className="bg-brand-navy/5 absolute right-0 bottom-0 h-48 w-48 rounded-[40px] parallax-down" />
-      <div className="bg-background border-border-base absolute top-1/2 left-1/2 flex h-80 w-80 -translate-x-1/2 -translate-y-1/2 flex-col gap-6 rounded-3xl border p-8 shadow-2xl parallax-subtle-up">
+      <div className="bg-brand-orange/10 parallax-up absolute top-0 left-0 h-32 w-32 rounded-2xl" />
+      <div className="bg-brand-navy/5 parallax-down absolute right-0 bottom-0 h-48 w-48 rounded-[40px]" />
+      <div className="bg-background border-border-base parallax-subtle-up absolute top-1/2 left-1/2 flex h-80 w-80 -translate-x-1/2 -translate-y-1/2 flex-col gap-6 rounded-3xl border p-8 shadow-2xl">
         <div className="bg-brand-orange flex h-16 w-16 items-center justify-center rounded-xl">
           <Layers className="h-8 w-8 text-white" />
         </div>
@@ -25,10 +25,10 @@ export function StaticFallback() {
         </div>
       </div>
       {/* Floating modules */}
-      <div className="bg-brand-navy absolute top-10 right-10 flex h-24 w-24 items-center justify-center rounded-2xl shadow-xl parallax-up">
+      <div className="bg-brand-navy parallax-up absolute top-10 right-10 flex h-24 w-24 items-center justify-center rounded-2xl shadow-xl">
         <Cpu className="h-10 w-10 text-white" />
       </div>
-      <div className="bg-brand-gold absolute bottom-10 left-10 flex h-20 w-20 items-center justify-center rounded-full shadow-xl parallax-down">
+      <div className="bg-brand-gold parallax-down absolute bottom-10 left-10 flex h-20 w-20 items-center justify-center rounded-full shadow-xl">
         <Globe className="text-foreground h-8 w-8" />
       </div>
     </div>

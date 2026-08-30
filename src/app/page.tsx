@@ -24,10 +24,10 @@ export default function Home() {
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "Modulifyr",
-    "url": "https://modulifyr.com",
-    "logo": "https://modulifyr.com/company-logo.png",
-    "sameAs": [
+    name: "Modulifyr",
+    url: "https://modulifyr.com",
+    logo: "https://modulifyr.com/company-logo.png",
+    sameAs: [
       "https://www.instagram.com/modulifyr/",
       "https://x.com/modulifyr",
       "https://web.facebook.com/profile.php?id=61591920842310",
@@ -36,15 +36,15 @@ export default function Home() {
       "https://github.com/Modulifyr",
       "https://themanifest.com/company/modulifyr",
       "https://rocketreach.co/modulifyr-profile_b6410cbccbf776ff",
-      "https://www.trustpilot.com/review/modulifyr.com"
+      "https://www.trustpilot.com/review/modulifyr.com",
     ],
-    "address": {
+    address: {
       "@type": "PostalAddress",
-      "streetAddress": "Gauri Tol, Ward 1",
-      "addressLocality": "Birtamode",
-      "addressRegion": "Jhapa",
-      "addressCountry": "NP"
-    }
+      streetAddress: "Gauri Tol, Ward 1",
+      addressLocality: "Birtamode",
+      addressRegion: "Jhapa",
+      addressCountry: "NP",
+    },
   };
 
   return (
@@ -136,7 +136,7 @@ export default function Home() {
           "API Integrations",
           "Modular Architecture",
           "Custom Software",
-          "Legacy Rebuilds"
+          "Legacy Rebuilds",
         ]}
         speed={25}
       />

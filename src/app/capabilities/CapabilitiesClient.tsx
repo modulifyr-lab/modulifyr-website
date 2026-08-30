@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import * as React from "react";
 import { Button } from "@/components/ui/Button";
@@ -274,9 +274,7 @@ export default function CapabilitiesClient() {
               { label: "Docs", val: "Notion-first, diagram-heavy" },
             ].map((item, i) => (
               <Reveal key={i} variant="fade-scale" delay={i * 80}>
-                <div
-                  className="border-border-base rounded-xl border bg-white p-4 text-center h-full"
-                >
+                <div className="border-border-base h-full rounded-xl border bg-white p-4 text-center">
                   <p className="text-text-muted mb-1 text-[10px] font-bold tracking-widest uppercase">
                     {item.label}
                   </p>
@@ -301,7 +299,7 @@ export default function CapabilitiesClient() {
           "Tauri",
           "Sentry",
           "Docker",
-          "TailwindCSS"
+          "TailwindCSS",
         ]}
         speed={20}
       />
@@ -324,9 +322,7 @@ export default function CapabilitiesClient() {
           <div className="space-y-12">
             {stackByType.map((product, idx) => (
               <Reveal key={idx} variant="fade-up" delay={idx * 50}>
-                <TiltCard
-                  className="border-border-base rounded-3xl border bg-white p-8 md:p-10 transition-shadow hover:shadow-md"
-                >
+                <TiltCard className="border-border-base rounded-3xl border bg-white p-8 transition-shadow hover:shadow-md md:p-10">
                   <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
                     <div className="flex items-center gap-4">
                       <div
@@ -422,9 +418,11 @@ export default function CapabilitiesClient() {
 
               <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
                 <Reveal variant="fade-up" delay={100}>
-                  <div className="flex flex-col gap-6 h-full">
+                  <div className="flex h-full flex-col gap-6">
                     <ShieldCheck className="text-brand-teal h-12 w-12" />
-                    <h3 className="font-heading text-foreground text-lg font-bold">Security-First</h3>
+                    <h3 className="font-heading text-foreground text-lg font-bold">
+                      Security-First
+                    </h3>
                     <p className="text-text-secondary text-sm leading-relaxed">
                       OWASP review on every production system. Secrets via env vars. HTTPS + HSTS
                       enforced.
@@ -432,7 +430,7 @@ export default function CapabilitiesClient() {
                   </div>
                 </Reveal>
                 <Reveal variant="fade-up" delay={200}>
-                  <div className="flex flex-col gap-6 h-full">
+                  <div className="flex h-full flex-col gap-6">
                     <Lock className="text-brand-orange h-12 w-12" />
                     <h3 className="font-heading text-foreground text-lg font-bold">Data Privacy</h3>
                     <p className="text-text-secondary text-sm leading-relaxed">
@@ -442,7 +440,7 @@ export default function CapabilitiesClient() {
                   </div>
                 </Reveal>
                 <Reveal variant="fade-up" delay={300}>
-                  <div className="flex flex-col gap-6 h-full">
+                  <div className="flex h-full flex-col gap-6">
                     <FileCode className="text-brand-gold h-12 w-12" />
                     <h3 className="font-heading text-foreground text-lg font-bold">99.9% SLA</h3>
                     <p className="text-text-secondary text-sm leading-relaxed">
@@ -518,9 +516,7 @@ export default function CapabilitiesClient() {
               { q: "Need reporting / ETL", a: "PostgreSQL + Python" },
             ].map((item, i) => (
               <Reveal key={i} variant="fade-scale" delay={i * 50}>
-                <div
-                  className="border-border-base flex items-center justify-between rounded-xl border bg-white px-5 py-4 h-full"
-                >
+                <div className="border-border-base flex h-full items-center justify-between rounded-xl border bg-white px-5 py-4">
                   <span className="text-text-secondary text-sm">{item.q}</span>
                   <span className="text-brand-orange ml-4 shrink-0 text-sm font-bold">
                     → {item.a}
@@ -545,7 +541,10 @@ export default function CapabilitiesClient() {
           </Reveal>
           <Reveal variant="fade-scale" delay={150}>
             <a href="/downloads/modulifyr-technical-briefing.pdf" download>
-              <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 group text-white">
+              <Button
+                size="lg"
+                className="bg-brand-orange hover:bg-brand-orange/90 group text-white"
+              >
                 Download Technical PDF{" "}
                 <Download className="ml-2 h-5 w-5 transition-transform group-hover:translate-y-0.5" />
               </Button>

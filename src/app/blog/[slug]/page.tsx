@@ -155,7 +155,7 @@ export default async function BlogPostPage({ params }: Props) {
               <div className="mt-8">
                 <Link
                   href="/blog"
-                  className="group border-border-base hover:border-brand-orange rounded-2xl border bg-white p-5 inline-flex items-center gap-2 transition-colors text-sm font-medium text-text-secondary hover:text-brand-orange"
+                  className="group border-border-base hover:border-brand-orange text-text-secondary hover:text-brand-orange inline-flex items-center gap-2 rounded-2xl border bg-white p-5 text-sm font-medium transition-colors"
                 >
                   <ArrowLeft className="h-4 w-4" /> Back to all articles
                 </Link>

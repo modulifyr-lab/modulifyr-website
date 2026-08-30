@@ -152,7 +152,9 @@ export default function AutomationLayerPage() {
               </div>
             </Reveal>
             <Reveal variant="fade-up" delay={100}>
-              <h1 className="font-heading mb-6 text-4xl font-bold md:text-6xl text-white">Automation Layer</h1>
+              <h1 className="font-heading mb-6 text-4xl font-bold text-white md:text-6xl">
+                Automation Layer
+              </h1>
             </Reveal>
             <Reveal variant="fade-up" delay={200}>
               <p className="text-text-muted text-xl leading-relaxed">
@@ -192,7 +194,7 @@ export default function AutomationLayerPage() {
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {whatWeConnect.map((item, i) => (
               <Reveal key={i} variant="fade-scale" delay={i * 100}>
-                <div className="flex gap-4 h-full">
+                <div className="flex h-full gap-4">
                   <div className="bg-brand-orange/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
                     <item.icon className="text-brand-orange h-5 w-5" />
                   </div>
@@ -218,8 +220,9 @@ export default function AutomationLayerPage() {
             </Reveal>
             <Reveal variant="fade-up" delay={100}>
               <p className="text-text-secondary max-w-2xl text-sm leading-relaxed">
-                The main drivers of price are how many systems are connected and how complex the logic
-                needs to be. Not sure where your project lands? Describe it and we will advise.
+                The main drivers of price are how many systems are connected and how complex the
+                logic needs to be. Not sure where your project lands? Describe it and we will
+                advise.
               </p>
             </Reveal>
           </div>
@@ -228,8 +231,10 @@ export default function AutomationLayerPage() {
             {tiers.map((tier, i) => (
               <Reveal key={i} variant="fade-up" delay={i * 80}>
                 <Card
-                  className={`relative flex flex-col gap-5 h-full ${
-                    tier.highlight ? "border-brand-orange ring-brand-orange/20 shadow-xl ring-1" : ""
+                  className={`relative flex h-full flex-col gap-5 ${
+                    tier.highlight
+                      ? "border-brand-orange ring-brand-orange/20 shadow-xl ring-1"
+                      : ""
                   }`}
                 >
                   {tier.highlight && (
@@ -249,7 +254,7 @@ export default function AutomationLayerPage() {
                           <div className="font-heading text-brand-orange text-2xl font-bold">
                             {formatTierPriceFounding("automationLayer", tier.tierKey, activeRegion)}
                           </div>
-                          <div className="text-text-muted text-[11px] mt-0.5">
+                          <div className="text-text-muted mt-0.5 text-[11px]">
                             Founding client pricing — {FOUNDING_SLOTS_REMAINING} spots remaining.
                           </div>
                         </div>
@@ -337,8 +342,8 @@ export default function AutomationLayerPage() {
               <ul className="text-text-secondary space-y-2 text-sm">
                 <li className="flex items-start gap-2">
                   <ChevronRight className="text-brand-orange mt-0.5 h-4 w-4 shrink-0" />
-                  API credentials, access tokens, and admin access to all systems being connected — we
-                  cannot build integrations without this
+                  API credentials, access tokens, and admin access to all systems being connected —
+                  we cannot build integrations without this
                 </li>
                 <li className="flex items-start gap-2">
                   <ChevronRight className="text-brand-orange mt-0.5 h-4 w-4 shrink-0" />
@@ -373,8 +378,8 @@ export default function AutomationLayerPage() {
                 Not sure which tier covers your setup?
               </h2>
               <p className="text-text-muted mb-8 text-sm leading-relaxed">
-                List the systems you need connected and what data needs to move between them. We will
-                tell you which tier fits and whether your setup has any scope complications.
+                List the systems you need connected and what data needs to move between them. We
+                will tell you which tier fits and whether your setup has any scope complications.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link href="/contact">
@@ -383,7 +388,10 @@ export default function AutomationLayerPage() {
                   </Button>
                 </Link>
                 <Link href="/services">
-                  <Button variant="outline" className="border-white/30 text-white hover:bg-white/10">
+                  <Button
+                    variant="outline"
+                    className="border-white/30 text-white hover:bg-white/10"
+                  >
                     Back to All Services
                   </Button>
                 </Link>

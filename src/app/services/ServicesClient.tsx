@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import * as React from "react";
 import Link from "next/link";
@@ -205,7 +205,7 @@ export default function ServicesClient() {
         <div className="container-custom">
           <div className="max-w-3xl">
             <Reveal variant="fade-up">
-              <h1 className="font-heading mb-6 text-4xl font-bold md:text-6xl text-white">
+              <h1 className="font-heading mb-6 text-4xl font-bold text-white md:text-6xl">
                 Services Built Around <span className="text-brand-orange">Your Operations</span>
               </h1>
             </Reveal>
@@ -289,7 +289,7 @@ export default function ServicesClient() {
                   <CardDescription className="mb-6 flex-grow">{service.desc}</CardDescription>
 
                   {!service.comingSoon && (
-                    <div className="border-border-base space-y-5 border-t pt-6 mt-auto">
+                    <div className="border-border-base mt-auto space-y-5 border-t pt-6">
                       <div>
                         <span className="text-text-muted mb-2 block text-xs font-bold tracking-wider uppercase">
                           Key Deliverables
@@ -352,8 +352,8 @@ export default function ServicesClient() {
             </Reveal>
             <Reveal variant="fade-up" delay={100}>
               <p className="text-text-secondary text-sm leading-relaxed">
-                We use plain client-facing names in proposals and quotes. Below is the full reference
-                so your team always knows which package maps to which deliverable set.
+                We use plain client-facing names in proposals and quotes. Below is the full
+                reference so your team always knows which package maps to which deliverable set.
               </p>
             </Reveal>
           </div>
@@ -387,9 +387,9 @@ export default function ServicesClient() {
                 </h2>
                 <p className="text-text-secondary text-lg leading-relaxed">
                   Start with a{" "}
-                  <span className="text-brand-orange font-bold">Strategy Sprint (Discovery)</span>. In
-                  1–2 weeks we'll map your requirements, recommend the right package, and give you a
-                  fixed-fee estimate — before you commit to anything larger.
+                  <span className="text-brand-orange font-bold">Strategy Sprint (Discovery)</span>.
+                  In 1–2 weeks we'll map your requirements, recommend the right package, and give
+                  you a fixed-fee estimate — before you commit to anything larger.
                 </p>
                 <div className="flex flex-wrap justify-center gap-4 md:justify-start">
                   <Link href="/request-proposal">
@@ -432,8 +432,8 @@ export default function ServicesClient() {
           <Reveal variant="fade-scale">
             <div className="bg-brand-navy/5 border-border-base mx-auto max-w-3xl rounded-3xl border p-12">
               <p className="text-foreground font-heading mb-4 text-xl leading-relaxed">
-                "We're building our foundation, not buying fake praise. Be one of Modulifyr's first 5
-                founding clients and lock in our bootstrapper pricing while we scale our early
+                "We're building our foundation, not buying fake praise. Be one of Modulifyr's first
+                5 founding clients and lock in our bootstrapper pricing while we scale our early
                 portfolio."
               </p>
             </div>

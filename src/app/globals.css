@@ -2,15 +2,15 @@
 
 @theme {
   --font-sans:
-    var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol", "Noto Color Emoji";
+    var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-heading: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
 
   /* Brand Colors (Static) */
-  --color-brand-orange: #E84530;
-  --color-brand-navy: #0D0D0D;
-  --color-brand-teal: #2B7FA8;
-  --color-brand-gold: #F5B52E;
+  --color-brand-orange: #e84530;
+  --color-brand-navy: #0d0d0d;
+  --color-brand-teal: #2b7fa8;
+  --color-brand-gold: #f5b52e;
 
   /* Dynamic Theme Colors */
   --color-bg-light: var(--bg-main);
@@ -292,18 +292,30 @@ div[class*="ch2-"] {
 
 /* ── CSS Scroll Parallax (Phase 2) ────────────────────────────────────────── */
 @keyframes scroll-parallax-up {
-  from { transform: translateY(12px); }
-  to { transform: translateY(-12px); }
+  from {
+    transform: translateY(12px);
+  }
+  to {
+    transform: translateY(-12px);
+  }
 }
 
 @keyframes scroll-parallax-down {
-  from { transform: translateY(-12px); }
-  to { transform: translateY(12px); }
+  from {
+    transform: translateY(-12px);
+  }
+  to {
+    transform: translateY(12px);
+  }
 }
 
 @keyframes scroll-parallax-subtle-up {
-  from { transform: translateY(6px); }
-  to { transform: translateY(-6px); }
+  from {
+    transform: translateY(6px);
+  }
+  to {
+    transform: translateY(-6px);
+  }
 }
 
 .parallax-up {

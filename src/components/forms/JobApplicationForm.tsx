@@ -35,13 +35,7 @@ const roleGroups = [
   },
   {
     label: "Design",
-    roles: [
-      "UX Designer",
-      "UI Designer",
-      "Product Designer",
-      "UX Researcher",
-      "Design Lead",
-    ],
+    roles: ["UX Designer", "UI Designer", "Product Designer", "UX Researcher", "Design Lead"],
   },
   {
     label: "Product Management",
@@ -235,7 +229,7 @@ export function JobApplicationForm() {
                 className={`border-border-base cursor-pointer rounded-full border px-4 py-2 text-xs font-semibold transition-colors ${
                   form.role === role
                     ? "border-brand-orange bg-brand-orange/10 text-brand-orange"
-                    : "bg-white text-foreground hover:border-brand-orange"
+                    : "text-foreground hover:border-brand-orange bg-white"
                 }`}
                 onClick={() => setForm((prev) => ({ ...prev, role }))}
               >
@@ -472,8 +466,8 @@ export function JobApplicationForm() {
               <div className="bg-brand-navy rounded-3xl p-8 text-white">
                 <h3 className="font-heading mb-2 text-xl font-bold">Working at Modulifyr</h3>
                 <p className="text-text-muted mb-6 text-sm leading-relaxed">
-                  Pre-launch, bootstrapped, and entirely volunteer-run. If you join now, you're
-                  part of building the company itself — not just working inside it.
+                  Pre-launch, bootstrapped, and entirely volunteer-run. If you join now, you're part
+                  of building the company itself — not just working inside it.
                 </p>
                 <div className="space-y-4">
                   {[
@@ -499,10 +493,7 @@ export function JobApplicationForm() {
                 </h3>
                 <div className="space-y-1.5">
                   {roleGroups.map((g) => (
-                    <div
-                      key={g.label}
-                      className="text-text-secondary text-xs leading-snug"
-                    >
+                    <div key={g.label} className="text-text-secondary text-xs leading-snug">
                       <span className="text-foreground font-semibold">{g.label}:</span>{" "}
                       {g.roles.length} positions
                     </div>

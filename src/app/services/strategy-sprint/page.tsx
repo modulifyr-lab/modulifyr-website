@@ -148,7 +148,9 @@ export default function StrategySprintPage() {
               </div>
             </Reveal>
             <Reveal variant="fade-up" delay={100}>
-              <h1 className="font-heading mb-6 text-4xl font-bold md:text-6xl text-white">Strategy Sprint</h1>
+              <h1 className="font-heading mb-6 text-4xl font-bold text-white md:text-6xl">
+                Strategy Sprint
+              </h1>
             </Reveal>
             <Reveal variant="fade-up" delay={200}>
               <p className="text-text-muted text-xl leading-relaxed">
@@ -188,7 +190,7 @@ export default function StrategySprintPage() {
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {whatYouOwnAfter.map((item, i) => (
               <Reveal key={i} variant="fade-scale" delay={i * 100}>
-                <div className="flex gap-4 h-full">
+                <div className="flex h-full gap-4">
                   <div className="bg-brand-orange/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
                     <item.icon className="text-brand-orange h-5 w-5" />
                   </div>
@@ -224,8 +226,10 @@ export default function StrategySprintPage() {
             {tiers.map((tier, i) => (
               <Reveal key={i} variant="fade-up" delay={i * 80}>
                 <Card
-                  className={`relative flex flex-col gap-5 h-full ${
-                    tier.highlight ? "border-brand-orange ring-brand-orange/20 shadow-xl ring-1" : ""
+                  className={`relative flex h-full flex-col gap-5 ${
+                    tier.highlight
+                      ? "border-brand-orange ring-brand-orange/20 shadow-xl ring-1"
+                      : ""
                   }`}
                 >
                   {tier.highlight && (
@@ -245,7 +249,7 @@ export default function StrategySprintPage() {
                           <div className="font-heading text-brand-orange text-2xl font-bold">
                             {formatTierPriceFounding("strategySprint", tier.tierKey, activeRegion)}
                           </div>
-                          <div className="text-text-muted text-[11px] mt-0.5">
+                          <div className="text-text-muted mt-0.5 text-[11px]">
                             Founding client pricing — {FOUNDING_SLOTS_REMAINING} spots remaining.
                           </div>
                         </div>
@@ -335,8 +339,8 @@ export default function StrategySprintPage() {
               <ul className="text-text-secondary space-y-2 text-sm">
                 <li className="flex items-start gap-2">
                   <ChevronRight className="text-brand-orange mt-0.5 h-4 w-4 shrink-0" />
-                  Access to relevant stakeholders during the sprint window — delays on your end extend
-                  the timeline
+                  Access to relevant stakeholders during the sprint window — delays on your end
+                  extend the timeline
                 </li>
                 <li className="flex items-start gap-2">
                   <ChevronRight className="text-brand-orange mt-0.5 h-4 w-4 shrink-0" />
@@ -345,8 +349,8 @@ export default function StrategySprintPage() {
                 </li>
                 <li className="flex items-start gap-2">
                   <ChevronRight className="text-brand-orange mt-0.5 h-4 w-4 shrink-0" />
-                  Timely responses during discovery — a sprint cannot run one direction for days then
-                  reverse
+                  Timely responses during discovery — a sprint cannot run one direction for days
+                  then reverse
                 </li>
               </ul>
               <p className="text-text-muted border-border-base mt-6 border-t pt-4 text-xs leading-relaxed">
@@ -368,10 +372,12 @@ export default function StrategySprintPage() {
         <div className="container-custom">
           <Reveal variant="fade-scale">
             <div className="bg-brand-navy max-w-3xl rounded-3xl p-12 text-white">
-              <h2 className="font-heading mb-3 text-2xl font-bold text-white">Not sure which tier fits?</h2>
+              <h2 className="font-heading mb-3 text-2xl font-bold text-white">
+                Not sure which tier fits?
+              </h2>
               <p className="text-text-muted mb-8 text-sm leading-relaxed">
-                Describe your project briefly. We will tell you which tier is appropriate and why — no
-                commitment required.
+                Describe your project briefly. We will tell you which tier is appropriate and why —
+                no commitment required.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link href="/contact">
@@ -380,7 +386,10 @@ export default function StrategySprintPage() {
                   </Button>
                 </Link>
                 <Link href="/services">
-                  <Button variant="outline" className="border-white/30 text-white hover:bg-white/10">
+                  <Button
+                    variant="outline"
+                    className="border-white/30 text-white hover:bg-white/10"
+                  >
                     Back to All Services
                   </Button>
                 </Link>
