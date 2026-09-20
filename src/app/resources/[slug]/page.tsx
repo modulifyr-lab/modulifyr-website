@@ -196,7 +196,7 @@ export default async function ResourceArticlePage({ params }: Props) {
                       <Link
                         key={r.slug}
                         href={`/resources/${r.slug}`}
-                        className="text-text-secondary hover:text-brand-orange flex items-center gap-2 text-sm transition-colors"
+                        className="text-text-secondary hover:text-[#2D738D] flex items-center gap-2 text-sm transition-colors"
                       >
                         <ArrowRight className="h-3 w-3 shrink-0" />
                         {r.title}

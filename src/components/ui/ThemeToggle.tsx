@@ -30,7 +30,7 @@ export function ThemeToggle() {
       className="hover:bg-bg-secondary h-10 w-10 rounded-full transition-colors"
       aria-label="Toggle Theme"
     >
-      <Sun className="text-brand-orange h-5 w-5 scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
+      <Sun className="text-[#2D738D] h-5 w-5 scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
       <Moon className="text-brand-teal absolute h-5 w-5 scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
     </Button>
   );

@@ -183,7 +183,7 @@ export default function LaunchKitPage() {
             <Reveal variant="fade-up" delay={300}>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link href="/request-proposal">
-                  <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90">
+                  <Button size="lg" className="bg-[#2D738D] hover:bg-[#235b70]">
                     Request a Launch Kit
                   </Button>
                 </Link>
@@ -249,12 +249,12 @@ export default function LaunchKitPage() {
                 <Card
                   className={`relative flex h-full flex-col gap-5 ${
                     tier.highlight
-                      ? "border-brand-orange ring-brand-orange/20 shadow-xl ring-1"
+                      ? "border-[#2D738D] ring-[#2D738D]/20 shadow-xl ring-1"
                       : ""
                   }`}
                 >
                   {tier.highlight && (
-                    <div className="bg-brand-orange absolute top-0 left-8 -translate-y-1/2 rounded-full px-3 py-1 text-[10px] font-bold tracking-widest text-white uppercase">
+                    <div className="bg-[#2D738D] absolute top-0 left-8 -translate-y-1/2 rounded-full px-3 py-1 text-[10px] font-bold tracking-widest text-white uppercase">
                       Most Common
                     </div>
                   )}
@@ -267,7 +267,7 @@ export default function LaunchKitPage() {
                           <div className="text-text-muted text-xs line-through">
                             {formatTierPriceStandard("launchKit", tier.tierKey, activeRegion)}
                           </div>
-                          <div className="font-heading text-brand-orange text-2xl font-bold">
+                          <div className="font-heading text-[#2D738D] text-2xl font-bold">
                             {formatTierPriceFounding("launchKit", tier.tierKey, activeRegion)}
                           </div>
                           <div className="text-text-muted mt-0.5 text-[11px]">
@@ -275,7 +275,7 @@ export default function LaunchKitPage() {
                           </div>
                         </div>
                       ) : (
-                        <div className="font-heading text-brand-orange text-2xl font-bold">
+                        <div className="font-heading text-[#2D738D] text-2xl font-bold">
                           {formatTierPriceStandard("launchKit", tier.tierKey, activeRegion)}
                         </div>
                       )
@@ -352,7 +352,7 @@ export default function LaunchKitPage() {
           <div className="mx-auto max-w-4xl">
             <div className="mb-12">
               <Reveal variant="fade-scale">
-                <span className="text-brand-orange mb-3 block text-xs font-bold tracking-widest uppercase">
+                <span className="text-[#2D738D] mb-3 block text-xs font-bold tracking-widest uppercase">
                   Add-On Service
                 </span>
               </Reveal>
@@ -375,8 +375,8 @@ export default function LaunchKitPage() {
                 <div className="space-y-6">
                   <Reveal variant="fade-up" delay={200}>
                     <div className="flex gap-4">
-                      <div className="bg-brand-orange/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
-                        <CheckCircle2 className="text-brand-orange h-5 w-5" />
+                      <div className="bg-[#2D738D]/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
+                        <CheckCircle2 className="text-[#2D738D] h-5 w-5" />
                       </div>
                       <div>
                         <h4 className="text-foreground mb-1 text-sm font-bold">Ownership First</h4>
@@ -390,8 +390,8 @@ export default function LaunchKitPage() {
 
                   <Reveal variant="fade-up" delay={250}>
                     <div className="flex gap-4">
-                      <div className="bg-brand-orange/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
-                        <CheckCircle2 className="text-brand-orange h-5 w-5" />
+                      <div className="bg-[#2D738D]/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
+                        <CheckCircle2 className="text-[#2D738D] h-5 w-5" />
                       </div>
                       <div>
                         <h4 className="text-foreground mb-1 text-sm font-bold">Itemized Costs</h4>
@@ -409,7 +409,7 @@ export default function LaunchKitPage() {
               <Reveal variant="fade-scale" delay={200}>
                 <div className="border-border-base rounded-2xl border bg-white p-8 shadow-sm">
                   <h3 className="text-foreground mb-4 text-lg font-bold">Management Fee Range</h3>
-                  <div className="font-heading text-brand-orange mb-2 text-3xl font-bold">
+                  <div className="font-heading text-[#2D738D] mb-2 text-3xl font-bold">
                     {activeRegion
                       ? formatManagedHostingPrice(activeRegion)
                       : "Select region for pricing"}
@@ -449,21 +449,21 @@ export default function LaunchKitPage() {
           <Reveal variant="fade-scale">
             <div className="border-border-base max-w-3xl rounded-2xl border bg-white p-8">
               <div className="mb-4 flex items-start gap-3">
-                <AlertCircle className="text-brand-orange mt-0.5 h-5 w-5 shrink-0" />
+                <AlertCircle className="text-[#2D738D] mt-0.5 h-5 w-5 shrink-0" />
                 <h3 className="text-foreground font-bold">What you are responsible for</h3>
               </div>
               <ul className="text-text-secondary space-y-2 text-sm">
                 <li className="flex items-start gap-2">
-                  <ChevronRight className="text-brand-orange mt-0.5 h-4 w-4 shrink-0" />
+                  <ChevronRight className="text-[#2D738D] mt-0.5 h-4 w-4 shrink-0" />
                   All written copy — page text, headlines, CTAs, and any other content must be
                   provided by you before build begins
                 </li>
                 <li className="flex items-start gap-2">
-                  <ChevronRight className="text-brand-orange mt-0.5 h-4 w-4 shrink-0" />
+                  <ChevronRight className="text-[#2D738D] mt-0.5 h-4 w-4 shrink-0" />
                   All image and media assets — photos, logos, icons, and brand files
                 </li>
                 <li className="flex items-start gap-2">
-                  <ChevronRight className="text-brand-orange mt-0.5 h-4 w-4 shrink-0" />
+                  <ChevronRight className="text-[#2D738D] mt-0.5 h-4 w-4 shrink-0" />
                   Timely feedback during revision rounds — delays extend the delivery timeline
                 </li>
               </ul>
@@ -493,7 +493,7 @@ export default function LaunchKitPage() {
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link href="/request-proposal">
-                  <Button className="bg-brand-orange hover:bg-brand-orange/90">
+                  <Button className="bg-[#2D738D] hover:bg-[#235b70]">
                     Request a Launch Kit
                   </Button>
                 </Link>

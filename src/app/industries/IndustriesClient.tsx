@@ -20,8 +20,8 @@ const industries = [
   {
     icon: GraduationCap,
     name: "Education",
-    color: "text-brand-orange",
-    bg: "bg-brand-orange/10",
+    color: "text-[#2D738D]",
+    bg: "bg-[#2D738D]/10",
     tagline: "Scalable platforms for learning institutions",
     desc: "From student information systems to e-learning platforms, we build modular infrastructure that adapts as institutions grow. Our systems support enrollment management, curriculum delivery, assessment, and reporting.",
     useCases: [
@@ -52,8 +52,8 @@ const industries = [
   {
     icon: Heart,
     name: "Healthcare",
-    color: "text-brand-orange",
-    bg: "bg-brand-orange/10",
+    color: "text-[#2D738D]",
+    bg: "bg-[#2D738D]/10",
     tagline: "Secure systems for clinical operations",
     desc: "We design healthcare software with security and compliance at the foundation. Patient management, scheduling, billing, and clinical workflow systems built to handle sensitive data with the utmost care.",
     useCases: [
@@ -84,8 +84,8 @@ const industries = [
   {
     icon: Store,
     name: "Retail",
-    color: "text-brand-orange",
-    bg: "bg-brand-orange/10",
+    color: "text-[#2D738D]",
+    bg: "bg-[#2D738D]/10",
     tagline: "Modern retail operations platforms",
     desc: "Replace outdated POS and inventory systems with modular retail infrastructure. We build point-of-sale, stock management, customer loyalty, and supplier integration systems for modern retail environments.",
     useCases: [
@@ -176,13 +176,13 @@ export default function IndustriesClient() {
         <div className="container-custom">
           <div className="max-w-4xl">
             <Reveal variant="fade-scale">
-              <span className="text-brand-orange mb-4 block text-xs font-bold tracking-widest uppercase">
+              <span className="text-[#2D738D] mb-4 block text-xs font-bold tracking-widest uppercase">
                 Sector Coverage
               </span>
             </Reveal>
             <Reveal variant="fade-up" delay={100}>
               <h1 className="font-heading mb-8 text-4xl font-bold text-white md:text-6xl">
-                Modular Architecture <span className="text-brand-orange">Across Industries</span>
+                Modular Architecture <span className="text-[#2D738D]">Across Industries</span>
               </h1>
             </Reveal>
             <Reveal variant="fade-up" delay={200}>

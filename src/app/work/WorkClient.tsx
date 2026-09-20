@@ -19,7 +19,7 @@ const caseStudies = [
   {
     id: "planning-bord",
     label: "Proprietary Alpha Build",
-    labelColor: "text-brand-orange",
+    labelColor: "text-[#2D738D]",
     title: "The Planning Bord",
     subtitle: "Internal R&D Project — Comprehensive ERP System",
     tags: ["React", "Vercel", "TailwindCSS", "Modular Architecture"],
@@ -101,7 +101,7 @@ export default function WorkClient() {
           <div className="max-w-3xl">
             <Reveal variant="fade-up">
               <h1 className="font-heading text-foreground mb-6 text-4xl font-bold md:text-6xl">
-                Proven Technical <span className="text-brand-orange">Execution</span>
+                Proven Technical <span className="text-[#2D738D]">Execution</span>
               </h1>
             </Reveal>
             <Reveal variant="fade-up" delay={100}>
@@ -173,7 +173,7 @@ export default function WorkClient() {
                   {cs.metrics.map((m, i) => (
                     <Reveal key={m.label} variant="fade-scale" delay={150 + i * 50}>
                       <div className="bg-bg-secondary border-border-base h-full rounded-2xl border p-5 text-center">
-                        <p className="text-brand-orange font-heading mb-1 text-sm leading-tight font-bold">
+                        <p className="text-[#2D738D] font-heading mb-1 text-sm leading-tight font-bold">
                           {m.value}
                         </p>
                         <p className="text-text-muted text-xs leading-tight">{m.label}</p>
@@ -257,7 +257,7 @@ export default function WorkClient() {
                 client,{" "}
                 <Link
                   href="/request-proposal"
-                  className="text-brand-orange font-semibold hover:underline"
+                  className="text-[#2D738D] font-semibold hover:underline"
                 >
                   request a proposal
                 </Link>
@@ -268,8 +268,8 @@ export default function WorkClient() {
 
           <Reveal variant="fade-scale" delay={150}>
             <div className="border-border-base max-w-2xl rounded-3xl border bg-white p-10 text-center">
-              <div className="bg-brand-orange/10 mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full">
-                <CheckCircle2 className="text-brand-orange h-8 w-8" />
+              <div className="bg-[#2D738D]/10 mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full">
+                <CheckCircle2 className="text-[#2D738D] h-8 w-8" />
               </div>
               <h3 className="font-heading text-foreground mb-3 text-xl font-bold">
                 Technical Standards Available Now
@@ -297,13 +297,13 @@ export default function WorkClient() {
           <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
             <div className="flex flex-col gap-6">
               <Reveal variant="fade-scale">
-                <span className="bg-brand-orange/20 text-brand-orange w-fit rounded-full px-3 py-1 text-xs font-bold tracking-widest uppercase">
+                <span className="bg-[#2D738D]/20 text-[#2D738D] w-fit rounded-full px-3 py-1 text-xs font-bold tracking-widest uppercase">
                   Available Engagement Model
                 </span>
               </Reveal>
               <Reveal variant="fade-up" delay={100}>
                 <h2 className="font-heading text-3xl font-bold md:text-4xl">
-                  Dedicated <span className="text-brand-orange">Product Team</span>
+                  Dedicated <span className="text-[#2D738D]">Product Team</span>
                 </h2>
               </Reveal>
               <Reveal variant="fade-up" delay={150}>
@@ -338,7 +338,7 @@ export default function WorkClient() {
               </div>
               <Reveal variant="fade-up" delay={450}>
                 <Link href="/request-proposal" className="w-fit">
-                  <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90">
+                  <Button size="lg" className="bg-[#2D738D] hover:bg-[#235b70]">
                     Discuss Dedicated Team <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>

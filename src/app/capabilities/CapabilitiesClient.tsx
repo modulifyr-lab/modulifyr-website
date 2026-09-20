@@ -76,8 +76,8 @@ const stackByType = [
   {
     type: "Static Website",
     icon: Layout,
-    color: "text-brand-orange",
-    bg: "bg-brand-orange/10",
+    color: "text-[#2D738D]",
+    bg: "bg-[#2D738D]/10",
     primary: "Astro",
     notes: "Preferred for content sites and low-JS delivery",
     stack: [
@@ -127,8 +127,8 @@ const stackByType = [
   {
     type: "Mobile App",
     icon: Smartphone,
-    color: "text-brand-orange",
-    bg: "bg-brand-orange/10",
+    color: "text-[#2D738D]",
+    bg: "bg-[#2D738D]/10",
     primary: "Expo (React Native)",
     notes: "Single codebase for iOS & Android",
     stack: [
@@ -168,8 +168,8 @@ const stackByType = [
   {
     type: "Backend / API / Automation",
     icon: Server,
-    color: "text-brand-orange",
-    bg: "bg-brand-orange/10",
+    color: "text-[#2D738D]",
+    bg: "bg-[#2D738D]/10",
     primary: "NestJS + TypeScript",
     notes: "Structured, scalable, maintainable",
     stack: [
@@ -247,7 +247,7 @@ export default function CapabilitiesClient() {
           <div className="max-w-4xl">
             <Reveal variant="fade-up">
               <h1 className="font-heading mb-6 text-4xl font-bold md:text-6xl">
-                TypeScript Is the <span className="text-brand-orange">Spine of the Company</span>
+                TypeScript Is the <span className="text-[#2D738D]">Spine of the Company</span>
               </h1>
             </Reveal>
             <Reveal variant="fade-up" delay={100}>
@@ -405,7 +405,7 @@ export default function CapabilitiesClient() {
                     {["Pull request", "Lint", "Test", "Build", "Security checks", "Deploy"].map(
                       (step, i) => (
                         <div key={step} className="flex items-center gap-2">
-                          <span className="bg-brand-orange/10 text-brand-orange rounded-full px-3 py-1 text-xs font-bold">
+                          <span className="bg-[#2D738D]/10 text-[#2D738D] rounded-full px-3 py-1 text-xs font-bold">
                             {step}
                           </span>
                           {i < 5 && <span className="text-text-muted text-xs">→</span>}
@@ -431,7 +431,7 @@ export default function CapabilitiesClient() {
                 </Reveal>
                 <Reveal variant="fade-up" delay={200}>
                   <div className="flex h-full flex-col gap-6">
-                    <Lock className="text-brand-orange h-12 w-12" />
+                    <Lock className="text-[#2D738D] h-12 w-12" />
                     <h3 className="font-heading text-foreground text-lg font-bold">Data Privacy</h3>
                     <p className="text-text-secondary text-sm leading-relaxed">
                       PII handled with highest standards of confidentiality. Data flow diagrams
@@ -518,7 +518,7 @@ export default function CapabilitiesClient() {
               <Reveal key={item.q} variant="fade-scale" delay={i * 50}>
                 <div className="border-border-base flex h-full items-center justify-between rounded-xl border bg-white px-5 py-4">
                   <span className="text-text-secondary text-sm">{item.q}</span>
-                  <span className="text-brand-orange ml-4 shrink-0 text-sm font-bold">
+                  <span className="text-[#2D738D] ml-4 shrink-0 text-sm font-bold">
                     → {item.a}
                   </span>
                 </div>
@@ -543,7 +543,7 @@ export default function CapabilitiesClient() {
             <a href="/downloads/modulifyr-technical-briefing.pdf" download>
               <Button
                 size="lg"
-                className="bg-brand-orange hover:bg-brand-orange/90 group text-white"
+                className="bg-[#2D738D] hover:bg-[#235b70] group text-white"
               >
                 Download Technical PDF{" "}
                 <Download className="ml-2 h-5 w-5 transition-transform group-hover:translate-y-0.5" />

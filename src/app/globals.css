@@ -4,13 +4,15 @@
   --font-sans:
     var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-heading: var(--font-syne), ui-sans-serif, system-ui, sans-serif;
+  --font-heading:
+    var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-inter:
+    var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
-  /* Brand Colors (Static) */
-  --color-brand-orange: #e84530;
-  --color-brand-navy: #0d0d0d;
-  --color-brand-teal: #2b7fa8;
-  --color-brand-gold: #f5b52e;
+  /* Static Brand Colors */
+  --color-brand-teal: #2d738d;
+  --color-brand-navy: #0f1724;
+  --color-brand-teal-light: #b8e0e9;
 
   /* Dynamic Theme Colors */
   --color-bg-light: var(--bg-main);
@@ -37,6 +39,10 @@
 
   --background: var(--bg-main);
   --foreground: var(--text-main);
+
+  /* Radial glow accent & perspective grid gradients */
+  --gradient-primary: radial-gradient(circle, #b8e0e9 0%, #2d738d 100%);
+  --gradient-grid: linear-gradient(180deg, rgba(64, 158, 183, 0.1) 0%, #2a4f60 100%);
 }
 
 .dark {
@@ -50,13 +56,11 @@
 
   --background: var(--bg-main);
   --foreground: var(--text-main);
+
+  --gradient-primary: radial-gradient(circle, rgba(184, 224, 233, 0.25) 0%, rgba(45, 115, 141, 0.4) 100%);
+  --gradient-grid: linear-gradient(180deg, rgba(64, 158, 183, 0.15) 0%, rgba(42, 79, 96, 0.6) 100%);
 }
 
-/* ── Scroll fix ─────────────────────────────────────────────────────────────
-   Force scrolling on the html element so the mobile menu's
-   document.body.style.overflow = "hidden" can never permanently lock the page.
-   The html element scroll is the source of truth.
-──────────────────────────────────────────────────────────────────────────── */
 html {
   overflow-y: scroll;
   scroll-behavior: smooth;
@@ -81,7 +85,7 @@ h5,
 h6 {
   font-family: var(--font-heading);
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .container-custom {
@@ -90,6 +94,92 @@ h6 {
   margin-right: auto;
   padding-left: 20px;
   padding-right: 20px;
+}
+
+/* ── Typography Utility Tokens ───────────────────────────────────────────── */
+.text-display {
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.text-h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.text-h2 {
+  font-size: clamp(2.25rem, 5vw, 3.75rem);
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.text-h3 {
+  font-size: clamp(1.875rem, 4vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.text-h4 {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.text-h5 {
+  font-size: clamp(1.25rem, 2.5vw, 1.875rem);
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.text-h6 {
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.text-subhead {
+  font-size: 1.25rem;
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.text-body1 {
+  font-size: 1.125rem;
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.text-body2 {
+  font-size: 1rem;
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.text-caption1 {
+  font-size: 0.875rem;
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.text-caption2 {
+  font-size: 0.75rem;
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.text-special1 {
+  font-family: var(--font-inter);
+  font-size: 0.875rem;
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.text-special2 {
+  font-size: 0.75rem;
+  line-height: 1.1;
+  letter-spacing: 0;
 }
 
 /* ── Notion content styles ────────────────────────────────────────────────── */
@@ -116,7 +206,6 @@ h6 {
   color: var(--foreground);
   margin-top: 2.5rem;
   margin-bottom: 1rem;
-  letter-spacing: -0.02em;
 }
 
 .notion-h2 {
@@ -126,7 +215,6 @@ h6 {
   color: var(--foreground);
   margin-top: 2rem;
   margin-bottom: 0.75rem;
-  letter-spacing: -0.02em;
 }
 
 .notion-h3 {
@@ -159,7 +247,7 @@ h6 {
 }
 
 .notion-pre {
-  background-color: var(--bg-deep, #0f1724);
+  background-color: var(--bg-deep);
   border-radius: 0.75rem;
   padding: 1.25rem 1.5rem;
   overflow-x: auto;
@@ -182,11 +270,11 @@ h6 {
   padding: 0.125rem 0.375rem;
   font-size: 0.875em;
   font-family: "Fira Code", "Cascadia Code", "Consolas", monospace;
-  color: var(--color-brand-orange);
+  color: var(--color-brand-teal);
 }
 
 .notion-quote {
-  border-left: 4px solid var(--color-brand-orange);
+  border-left: 4px solid var(--color-brand-teal);
   margin: 1.5rem 0;
   padding: 0.75rem 1.25rem;
   color: var(--text-alt);
@@ -244,38 +332,7 @@ h6 {
 }
 
 .notion-link:hover {
-  color: var(--color-brand-orange);
-}
-
-.notion-video-wrapper {
-  position: relative;
-  padding-bottom: 56.25%;
-  height: 0;
-  overflow: hidden;
-  border-radius: 0.75rem;
-  margin: 1.5rem 0;
-  border: 1px solid var(--border-main);
-}
-
-.notion-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-
-/* Dark mode adjustments */
-.dark .notion-h1,
-.dark .notion-h2,
-.dark .notion-h3 {
-  color: var(--text-main);
-}
-
-.dark .notion-content code:not(.notion-code) {
-  background-color: rgba(255, 255, 255, 0.08);
-  color: var(--color-brand-teal);
+  color: #1d4ed8;
 }
 
 /* ── Disable third-party CookieHub styles ─────────────────────────────────── */
@@ -288,59 +345,4 @@ div[class*="ch2-"] {
   visibility: hidden !important;
   opacity: 0 !important;
   pointer-events: none !important;
-}
-
-/* ── CSS Scroll Parallax (Phase 2) ────────────────────────────────────────── */
-@keyframes scroll-parallax-up {
-  from {
-    transform: translateY(12px);
-  }
-  to {
-    transform: translateY(-12px);
-  }
-}
-
-@keyframes scroll-parallax-down {
-  from {
-    transform: translateY(-12px);
-  }
-  to {
-    transform: translateY(12px);
-  }
-}
-
-@keyframes scroll-parallax-subtle-up {
-  from {
-    transform: translateY(6px);
-  }
-  to {
-    transform: translateY(-6px);
-  }
-}
-
-.parallax-up {
-  animation: scroll-parallax-up linear both;
-  animation-timeline: scroll();
-  animation-range: cover 0% cover 100%;
-}
-
-.parallax-down {
-  animation: scroll-parallax-down linear both;
-  animation-timeline: scroll();
-  animation-range: cover 0% cover 100%;
-}
-
-.parallax-subtle-up {
-  animation: scroll-parallax-subtle-up linear both;
-  animation-timeline: scroll();
-  animation-range: cover 0% cover 100%;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .parallax-up,
-  .parallax-down,
-  .parallax-subtle-up {
-    animation: none !important;
-    transform: none !important;
-  }
 }

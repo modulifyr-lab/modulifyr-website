@@ -63,7 +63,7 @@ export const resources = [
 ];
 
 const iconMap: Record<string, React.ReactNode> = {
-  layers: <Layers className="text-brand-orange h-6 w-6" />,
+  layers: <Layers className="text-[#2D738D] h-6 w-6" />,
   terminal: <Terminal className="text-brand-teal h-6 w-6" />,
   book: <BookOpen className="text-brand-gold h-6 w-6" />,
   filebox: <FileBox className="text-foreground dark:text-brand-teal h-6 w-6" />,
@@ -76,7 +76,7 @@ export default function ResourcesPage() {
         <div className="container-custom">
           <div className="max-w-3xl">
             <h1 className="font-heading text-foreground mb-6 text-4xl font-bold md:text-6xl">
-              Engineering <span className="text-brand-orange">Knowledge</span> Base
+              Engineering <span className="text-[#2D738D]">Knowledge</span> Base
             </h1>
             <p className="text-text-alt text-xl leading-relaxed">
               Open-source guides, technical whitepapers, and strategic frameworks developed by
@@ -95,14 +95,14 @@ export default function ResourcesPage() {
                 className="group border-border-base bg-background p-8 transition-all hover:shadow-lg"
               >
                 <div className="mb-6 flex items-start justify-between">
-                  <div className="bg-bg-secondary border-border-base group-hover:bg-brand-orange/10 group-hover:border-brand-orange/20 rounded-xl border p-3 transition-colors">
+                  <div className="bg-bg-secondary border-border-base group-hover:bg-[#2D738D]/10 group-hover:border-[#2D738D]/20 rounded-xl border p-3 transition-colors">
                     {iconMap[res.icon]}
                   </div>
                   <span className="text-text-dim bg-bg-secondary rounded-full px-3 py-1 text-[10px] font-bold tracking-widest uppercase">
                     {res.type}
                   </span>
                 </div>
-                <CardTitle className="text-foreground group-hover:text-brand-orange mb-4 text-2xl transition-colors">
+                <CardTitle className="text-foreground group-hover:text-[#2D738D] mb-4 text-2xl transition-colors">
                   {res.title}
                 </CardTitle>
                 <p className="text-text-alt mb-8 leading-relaxed">{res.description}</p>
@@ -113,7 +113,7 @@ export default function ResourcesPage() {
                       <Button
                         variant="ghost"
                         size="sm"
-                        className="text-brand-orange hover:text-brand-orange/80 flex h-auto items-center gap-2 p-0 hover:bg-transparent hover:underline"
+                        className="text-[#2D738D] hover:text-[#2D738D]/80 flex h-auto items-center gap-2 p-0 hover:bg-transparent hover:underline"
                       >
                         Download <Download className="h-4 w-4" />
                       </Button>
@@ -123,7 +123,7 @@ export default function ResourcesPage() {
                       <Button
                         variant="ghost"
                         size="sm"
-                        className="text-brand-orange hover:text-brand-orange/80 h-auto p-0 hover:bg-transparent hover:underline"
+                        className="text-[#2D738D] hover:text-[#2D738D]/80 h-auto p-0 hover:bg-transparent hover:underline"
                       >
                         Read More <ArrowRight className="ml-2 h-4 w-4" />
                       </Button>

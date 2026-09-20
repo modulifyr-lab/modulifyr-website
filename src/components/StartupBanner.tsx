@@ -27,15 +27,15 @@ export function StartupBanner() {
     <div
       role="banner"
       aria-label="Startup announcement"
-      className="bg-brand-navy border-brand-orange/30 sticky top-20 z-40 w-full border-b"
+      className="bg-brand-navy border-[#2D738D]/30 sticky top-20 z-40 w-full border-b"
     >
       <div className="container-custom flex items-center justify-between gap-4 py-2.5">
         <div className="hidden shrink-0 items-center gap-2 sm:flex">
           <span className="relative flex h-2 w-2">
-            <span className="bg-brand-orange absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" />
-            <span className="bg-brand-orange relative inline-flex h-2 w-2 rounded-full" />
+            <span className="bg-[#2D738D] absolute inline-flex h-full w-full animate-ping rounded-full opacity-75" />
+            <span className="bg-[#2D738D] relative inline-flex h-2 w-2 rounded-full" />
           </span>
-          <span className="text-brand-orange text-[10px] font-bold tracking-[0.18em] uppercase">
+          <span className="text-[#2D738D] text-[10px] font-bold tracking-[0.18em] uppercase">
             Just launched
           </span>
         </div>
@@ -47,7 +47,7 @@ export function StartupBanner() {
           <span className="text-brand-gold font-semibold">collaborators</span>.{" "}
           <Link
             href="/careers"
-            className="text-brand-orange hover:text-brand-orange/80 decoration-brand-orange/40 inline-flex items-center gap-1 font-bold underline underline-offset-2 transition-colors duration-150"
+            className="text-[#2D738D] hover:text-[#2D738D]/80 decoration-[#2D738D]/40 inline-flex items-center gap-1 font-bold underline underline-offset-2 transition-colors duration-150"
           >
             Interested? Apply inside
             <ArrowRight className="h-3 w-3 shrink-0" />

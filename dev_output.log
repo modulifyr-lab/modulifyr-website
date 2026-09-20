@@ -1,0 +1,67 @@
+$ next dev
+▲ Next.js 16.2.12 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.2:3000
+✓ Ready in 511ms
+
+○ Compiling / ...
+ GET / 200 in 5.7s (next.js: 4.6s, application-code: 1131ms)
+ GET /services 200 in 899ms (next.js: 737ms, application-code: 162ms)
+ GET /pricing 200 in 1379ms (next.js: 941ms, application-code: 438ms)
+[browser] Encountered a script tag while rendering React component. Scripts inside React components are never executed when rendering on the client. Consider using template tag instead (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template).
+[browser] Uncaught Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <RedirectBoundary>
+      <RedirectErrorBoundary router={{...}}>
+        <InnerLayoutRouter url="/pricing" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>
+          <SegmentViewNode type="page" pagePath="src/pricin...">
+            <SegmentTrieNode>
+            <ClientPageRoot Component={function PricingPage} serverProvidedParams={{...}}>
+              <PricingPage params={Promise} searchParams={Promise}>
+                <div className="flex w-ful...">
+                  <section>
+                  <section className="py-24 bg-b...">
+                    <div className="container-...">
+                      <div className="space-y-8">
+                        <div>
+                        <div className="grid grid-...">
+                          <div className="bg-bg-main...">
+                            <div className="space-y-4">
+                              <span>
+                              <div className="text-h4 font-extrabold text-foreground">
++                               NPR 20,000 – NPR 28,000
+-                               नेरू २०,००० – नेरू २८,०००
+                              ...
+                            ...
+                          ...
+                      ...
+                  ...
+          ...
+        ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at div (<anonymous>)
+    at <unknown> (src/app/pricing/page.tsx:139:27)
+    at Array.map (<anonymous>)
+    at <unknown> (src/app/pricing/page.tsx:125:32)
+    at Array.map (<anonymous>)
+    at PricingPage (src/app/pricing/page.tsx:94:27)
+  137 |                             {tier.name}
+  138 |                           </span>
+> 139 |                           <div className="text-h4 font-extrabold text-foreground">
+      |                           ^
+  140 |                             {priceString}
+  141 |                           </div>
+  142 |                           <p className="text-body2 text-text-alt leading-relaxed">
+ GET /contact 200 in 803ms (next.js: 638ms, application-code: 164ms)

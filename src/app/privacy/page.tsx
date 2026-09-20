@@ -188,7 +188,7 @@ export default function PrivacyPage() {
                     <a
                       key={i}
                       href={`#s${i}`}
-                      className="text-text-secondary hover:text-brand-orange hover:border-brand-orange border-l-2 border-transparent py-1.5 pl-3 text-sm transition-colors"
+                      className="text-text-secondary hover:text-[#2D738D] hover:border-[#2D738D] border-l-2 border-transparent py-1.5 pl-3 text-sm transition-colors"
                     >
                       {s.title.replace(/^\d+\. /, "")}
                     </a>
@@ -216,7 +216,7 @@ export default function PrivacyPage() {
                       <div className="space-y-4">
                         {section.body.map((item, j) => (
                           <div key={j} className="flex gap-3">
-                            <div className="bg-brand-orange mt-2 h-2 w-2 shrink-0 rounded-full" />
+                            <div className="bg-[#2D738D] mt-2 h-2 w-2 shrink-0 rounded-full" />
                             <div>
                               <span className="text-foreground text-sm font-semibold">
                                 {item.heading}:{" "}

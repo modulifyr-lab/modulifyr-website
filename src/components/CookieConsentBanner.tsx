@@ -35,7 +35,7 @@ export function CookieConsentBanner() {
       <div className="border-border-base rounded-3xl border bg-white p-6 shadow-2xl dark:bg-zinc-900">
         <div className="flex flex-col gap-4">
           <div className="flex items-start gap-3">
-            <div className="bg-brand-orange/10 text-brand-orange flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
+            <div className="bg-[#2D738D]/10 text-[#2D738D] flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
               <Shield className="h-5 w-5" />
             </div>
             <div className="flex-1">
@@ -46,7 +46,7 @@ export function CookieConsentBanner() {
                 {t("cookie.banner.text")}{" "}
                 <Link
                   href="/cookie-policy"
-                  className="text-brand-orange font-semibold hover:underline"
+                  className="text-[#2D738D] font-semibold hover:underline"
                 >
                   {t("cookie.banner.learn_more")}
                 </Link>

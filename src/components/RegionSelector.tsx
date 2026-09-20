@@ -14,7 +14,7 @@ export function RegionSelector({ compact = false }: { compact?: boolean }) {
         aria-label="Select pricing region"
         value={region ?? ""}
         onChange={(e) => setRegion(e.target.value as Exclude<Region, null>)}
-        className="border-border-base bg-background text-foreground focus-visible:outline-brand-orange dark:text-foreground rounded-lg border px-2 py-2 text-xs font-bold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+        className="border-border-base bg-background text-foreground focus-visible:outline-[#2D738D] dark:text-foreground rounded-lg border px-2 py-2 text-xs font-bold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
       >
         <option value="" disabled>
           Choose
