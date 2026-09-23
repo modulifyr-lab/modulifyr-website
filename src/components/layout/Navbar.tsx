@@ -6,8 +6,6 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { Sun, Moon, Menu, X, ChevronDown, Globe } from "lucide-react";
-import { useLanguage } from "@/components/LanguageContext";
-import LanguageSwitcher from "@/contexts/LanguageSwitcher";
 import { RegionSelector } from "@/components/RegionSelector";
 
 interface NavDropdownItem {
@@ -57,12 +55,10 @@ const NAV_GROUPS: NavGroup[] = [
 export function Navbar() {
   const pathname = usePathname();
   const { resolvedTheme, setTheme } = useTheme();
-  const { t } = useLanguage();
   const [mounted, setMounted] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [utilityOpen, setUtilityOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -79,7 +75,6 @@ export function Navbar() {
   useEffect(() => {
     setMenuOpen(false);
     setActiveDropdown(null);
-    setUtilityOpen(false);
   }, [pathname]);
 
   // Click outside to close dropdowns
@@ -87,7 +82,6 @@ export function Navbar() {
     const handleClickOutside = (e: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
         setActiveDropdown(null);
-        setUtilityOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -98,7 +92,6 @@ export function Navbar() {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setActiveDropdown(null);
-        setUtilityOpen(false);
         if (menuOpen) {
           setMenuOpen(false);
           menuButtonRef.current?.focus();
@@ -126,7 +119,7 @@ export function Navbar() {
         href="#main-content"
         className="bg-[#2D738D] sr-only fixed top-2 left-2 z-[100] rounded-lg px-4 py-2 text-sm font-bold text-white focus:not-sr-only focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
       >
-        {t("nav.skip_to_content")}
+        Skip to main content
       </a>
 
       <nav
@@ -244,50 +237,24 @@ export function Navbar() {
             })}
           </div>
 
-          {/* ── Desktop Right Controls (Secondary utility cluster + CTA) ─── */}
+          {/* ── Desktop Right Controls (Theme toggle, Region selector, CTA) ─── */}
           <div className="hidden items-center gap-4 lg:flex">
-            {/* Utility cluster trigger */}
-            <div className="relative">
+            {mounted && (
               <button
                 type="button"
-                onClick={() => setUtilityOpen(!utilityOpen)}
-                aria-label="Settings, region and language"
-                className="text-text-alt hover:bg-bg-alt hover:text-foreground inline-flex h-9 items-center gap-1.5 rounded-lg border border-border-main px-2.5 text-xs font-semibold transition-colors"
+                onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+                aria-label="Toggle Theme"
+                className="text-foreground hover:bg-bg-alt inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border-main transition-colors"
               >
-                <Globe className="h-4 w-4" />
-                <span>Preferences</span>
+                {resolvedTheme === "dark" ? (
+                  <Sun className="h-4 w-4" />
+                ) : (
+                  <Moon className="h-4 w-4" />
+                )}
               </button>
+            )}
 
-              {/* Utility Dropdown menu */}
-              {utilityOpen && (
-                <div className="bg-bg-main border-border-main absolute right-0 top-full mt-2 w-60 rounded-xl border p-3 shadow-lg flex flex-col gap-3">
-                  <div className="flex items-center justify-between text-xs font-semibold text-text-alt pb-2 border-b border-border-main">
-                    <span>Preferences</span>
-                    {mounted && (
-                      <button
-                        onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-                        className="p-1 rounded-md hover:bg-bg-alt text-foreground"
-                        aria-label={t("nav.toggle_theme")}
-                      >
-                        {resolvedTheme === "dark" ? (
-                          <Sun className="h-4 w-4" />
-                        ) : (
-                          <Moon className="h-4 w-4" />
-                        )}
-                      </button>
-                    )}
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <span className="text-caption2 font-semibold text-text-dim uppercase">Region & Currency</span>
-                    <RegionSelector compact={false} />
-                  </div>
-                  <div className="flex flex-col gap-2 pt-2 border-t border-border-main">
-                    <span className="text-caption2 font-semibold text-text-dim uppercase">Language</span>
-                    <LanguageSwitcher />
-                  </div>
-                </div>
-              )}
-            </div>
+            <RegionSelector compact={true} />
 
             {/* CTA Button: Contact Us */}
             <Link href="/contact">
@@ -304,8 +271,9 @@ export function Navbar() {
           <div className="flex items-center gap-3 lg:hidden">
             {mounted && (
               <button
+                type="button"
                 onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-                aria-label={t("nav.toggle_theme")}
+                aria-label="Toggle Theme"
                 className="text-foreground hover:bg-bg-alt inline-flex h-10 w-10 items-center justify-center rounded-lg transition-colors"
               >
                 {resolvedTheme === "dark" ? (
@@ -316,11 +284,12 @@ export function Navbar() {
               </button>
             )}
             <button
+              type="button"
               ref={menuButtonRef}
               onClick={() => setMenuOpen(!menuOpen)}
               aria-expanded={menuOpen}
               aria-controls="mobile-menu"
-              aria-label={menuOpen ? t("nav.close_menu") : t("nav.open_menu")}
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
               className="text-foreground p-2 rounded-lg"
             >
               {menuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -374,11 +343,10 @@ export function Navbar() {
 
           <div className="flex flex-col gap-3 py-2">
             <span className="text-text-dim text-xs font-bold tracking-wider uppercase">
-              Preferences
+              Region / Currency
             </span>
             <div className="flex items-center justify-between">
               <RegionSelector compact={false} />
-              <LanguageSwitcher />
             </div>
           </div>
 
