@@ -1,18 +1,23 @@
 "use client";
 
-import Image from "next/image";
+interface CapabilityTag {
+  name: string;
+}
 
-const CLIENT_PARTNER_LOGOS = [
-  { name: "Global Operations", label: "Enterprise Software" },
-  { name: "Apex Logistics", label: "Supply Chain" },
-  { name: "MedTech Systems", label: "Healthcare Solutions" },
-  { name: "EduCloud Nepal", label: "Education Systems" },
-  { name: "RetailFlow POS", label: "Commerce & Retail" },
-  { name: "Horizon Finance", label: "Fintech & Billing" },
+const DEFAULT_CAPABILITY_TAGS: CapabilityTag[] = [
+  { name: "CUSTOM SOFTWARE" },
+  { name: "ERP SYSTEMS" },
+  { name: "WORKFLOW AUTOMATION" },
+  { name: "LEGACY REBUILDS" },
+  { name: "API INTEGRATION" },
 ];
 
-export function LogoMarquee() {
-  const duplicatedLogos = [...CLIENT_PARTNER_LOGOS, ...CLIENT_PARTNER_LOGOS, ...CLIENT_PARTNER_LOGOS];
+interface LogoMarqueeProps {
+  tags?: CapabilityTag[];
+}
+
+export function LogoMarquee({ tags = DEFAULT_CAPABILITY_TAGS }: LogoMarqueeProps) {
+  const duplicatedLogos = [...tags, ...tags, ...tags];
 
   return (
     <div className="w-full overflow-hidden bg-bg-alt border-y border-border-main py-6 transition-colors duration-300">
@@ -38,17 +43,12 @@ export function LogoMarquee() {
         {duplicatedLogos.map((logo, idx) => (
           <div
             key={idx}
-            className="flex items-center gap-3 bg-bg-main border border-border-main/80 rounded-xl px-5 py-2.5 shadow-sm shrink-0"
+            className="flex items-center gap-2 bg-bg-main border border-border-main/80 rounded-full px-5 py-2 shadow-sm shrink-0"
           >
-            <div className="h-3 w-3 rounded-full bg-[#2D738D]" />
-            <div className="flex flex-col">
-              <span className="text-body2 font-bold text-foreground">
-                {logo.name}
-              </span>
-              <span className="text-caption2 font-semibold text-text-dim">
-                {logo.label}
-              </span>
-            </div>
+            <div className="h-2 w-2 rounded-full bg-[#2D738D]" />
+            <span className="text-caption1 font-bold tracking-wider text-foreground uppercase">
+              {logo.name}
+            </span>
           </div>
         ))}
       </div>

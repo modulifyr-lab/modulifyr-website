@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { Button } from "@/components/ui/Button";
 import { Card, CardTitle } from "@/components/ui/Card";
 import { ArrowRight, Clock } from "lucide-react";
 import { getAllPosts } from "@/lib/notion-blog";
