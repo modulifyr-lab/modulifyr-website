@@ -28,16 +28,16 @@ export function Footer() {
                   type="button"
                   className="bg-[#2D738D] hover:bg-[#235b70] text-white inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold transition-colors duration-100 ease-in cursor-pointer"
                 >
-                  Book Consultation
+                  Book a free Consultation Today
                   <ArrowUpRight className="h-4 w-4" />
                 </button>
               </Link>
-              <Link href="/request-proposal">
+              <Link href="/contact">
                 <button
                   type="button"
                   className="bg-bg-main border-border-main text-foreground hover:bg-bg-deep/10 inline-flex items-center gap-2 rounded-lg border px-5 py-3 text-sm font-semibold transition-colors duration-100 ease-in cursor-pointer"
                 >
-                  Contact Sales
+                  Request a Call Back
                 </button>
               </Link>
             </div>
