@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Syne } from "next/font/google";
+import { DM_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { RegionProvider } from "@/components/RegionProvider";
@@ -13,9 +13,8 @@ import { cookies } from "next/headers";
 import { isRegion, REGION_COOKIE } from "@/lib/regions";
 
 // ── Brand fonts ───────────────────────────────────────────────────────────────
-// DM Sans = body font  →  --font-dm-sans  →  --font-sans in globals.css
-// Syne    = heading font → --font-syne    →  --font-heading in globals.css
-// These variable names MUST match what globals.css @theme block references.
+// DM Sans = headline & body font → --font-dm-sans → --font-sans & --font-heading in globals.css
+// Inter   = Special 1 utility    → --font-inter   → --font-inter in globals.css
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -23,9 +22,9 @@ const dmSans = DM_Sans({
   display: "swap",
 });
 
-const syne = Syne({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-syne",
+  variable: "--font-inter",
   display: "swap",
 });
 
@@ -276,7 +275,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         />
       </head>
       <body
-        className={`${dmSans.variable} ${syne.variable} font-sans antialiased transition-colors duration-300`}
+        className={`${dmSans.variable} ${inter.variable} font-sans antialiased transition-colors duration-300`}
         style={{ overflowY: "auto" }}
       >
         {/* Google Tag Manager (noscript) */}

@@ -26,8 +26,8 @@ export const metadata: Metadata = {
 const standards = [
   {
     icon: Code2,
-    color: "text-brand-orange",
-    bg: "bg-brand-orange/10",
+    color: "text-[#2D738D]",
+    bg: "bg-[#2D738D]/10",
     title: "Code Quality",
     items: [
       "All code reviewed by a senior engineer before merging",
@@ -54,8 +54,8 @@ const standards = [
   },
   {
     icon: ShieldCheck,
-    color: "text-brand-orange",
-    bg: "bg-brand-orange/10",
+    color: "text-[#2D738D]",
+    bg: "bg-[#2D738D]/10",
     title: "Security Standards",
     items: [
       "OWASP Top 10 review conducted on every production system",
@@ -82,8 +82,8 @@ const standards = [
   },
   {
     icon: TestTube2,
-    color: "text-brand-orange",
-    bg: "bg-brand-orange/10",
+    color: "text-[#2D738D]",
+    bg: "bg-[#2D738D]/10",
     title: "Testing Protocol",
     items: [
       "Unit tests for all business logic with mocked dependencies",
@@ -130,7 +130,7 @@ export default function TechnicalStandardsPage() {
               Engineering Standards
             </span>
             <h1 className="font-heading mb-8 text-4xl leading-tight font-bold md:text-6xl">
-              The Standard Every <span className="text-brand-orange">Project Must Meet</span>
+              The Standard Every <span className="text-[#2D738D]">Project Must Meet</span>
             </h1>
             <p className="text-text-muted max-w-3xl text-xl leading-relaxed">
               These are not aspirational guidelines — they are minimum requirements applied to every
@@ -226,7 +226,7 @@ export default function TechnicalStandardsPage() {
                 className={`border-border-base grid grid-cols-3 items-center border-b px-8 py-5 ${i % 2 === 1 ? "bg-bg-light" : ""}`}
               >
                 <span className="text-foreground text-sm font-medium">{row.metric}</span>
-                <span className="text-brand-orange font-heading text-center font-bold">
+                <span className="text-[#2D738D] font-heading text-center font-bold">
                   {row.target}
                 </span>
                 <span className="text-text-muted text-right text-xs">{row.tool}</span>
@@ -271,8 +271,8 @@ export default function TechnicalStandardsPage() {
                     key={i}
                     className="bg-bg-secondary border-border-base flex gap-4 rounded-2xl border p-5"
                   >
-                    <div className="bg-brand-orange/10 mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg">
-                      <span className="text-brand-orange text-xs font-bold">
+                    <div className="bg-[#2D738D]/10 mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg">
+                      <span className="text-[#2D738D] text-xs font-bold">
                         {String(i + 1).padStart(2, "0")}
                       </span>
                     </div>
@@ -337,7 +337,7 @@ export default function TechnicalStandardsPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-brand-orange py-20 text-white">
+      <section className="bg-[#2D738D] py-20 text-white">
         <div className="container-custom flex flex-col items-center justify-between gap-8 md:flex-row">
           <div>
             <h2 className="font-heading mb-2 text-3xl font-bold">

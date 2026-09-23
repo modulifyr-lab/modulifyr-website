@@ -92,7 +92,7 @@ export default function TermsPage() {
                     <a
                       key={i}
                       href={`#t${i}`}
-                      className="text-text-secondary hover:text-brand-orange hover:border-brand-orange border-l-2 border-transparent py-1.5 pl-3 text-sm transition-colors"
+                      className="text-text-secondary hover:text-[#2D738D] hover:border-[#2D738D] border-l-2 border-transparent py-1.5 pl-3 text-sm transition-colors"
                     >
                       {s.title.replace(/^\d+\. /, "")}
                     </a>

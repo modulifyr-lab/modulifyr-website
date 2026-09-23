@@ -229,8 +229,8 @@ export function JobApplicationForm() {
                 type="button"
                 className={`border-border-base cursor-pointer rounded-full border px-4 py-2 text-xs font-semibold transition-colors ${
                   form.role === role
-                    ? "border-brand-orange bg-brand-orange/10 text-brand-orange"
-                    : "text-foreground hover:border-brand-orange bg-white"
+                    ? "border-[#2D738D] bg-[#2D738D]/10 text-[#2D738D]"
+                    : "text-foreground hover:border-[#2D738D] bg-white"
                 }`}
                 onClick={() => setForm((prev) => ({ ...prev, role }))}
               >
@@ -265,7 +265,7 @@ export function JobApplicationForm() {
                   <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
                     <div className="flex flex-col gap-2">
                       <label htmlFor="job-name" className="text-foreground text-sm font-semibold">
-                        Full Name <span className="text-brand-orange">*</span>
+                        Full Name <span className="text-[#2D738D]">*</span>
                       </label>
                       <input
                         id="job-name"
@@ -280,7 +280,7 @@ export function JobApplicationForm() {
                     </div>
                     <div className="flex flex-col gap-2">
                       <label htmlFor="job-email" className="text-foreground text-sm font-semibold">
-                        Email <span className="text-brand-orange">*</span>
+                        Email <span className="text-[#2D738D]">*</span>
                       </label>
                       <input
                         id="job-email"
@@ -308,7 +308,7 @@ export function JobApplicationForm() {
                     </div>
                     <div className="flex flex-col gap-2">
                       <label htmlFor="job-role" className="text-foreground text-sm font-semibold">
-                        Role Applying For <span className="text-brand-orange">*</span>
+                        Role Applying For <span className="text-[#2D738D]">*</span>
                       </label>
                       <select
                         id="job-role"
@@ -348,7 +348,7 @@ export function JobApplicationForm() {
                   <div className="flex flex-col gap-5">
                     <div className="flex flex-col gap-2">
                       <label htmlFor="job-skills" className="text-foreground text-sm font-semibold">
-                        Key Skills <span className="text-brand-orange">*</span>
+                        Key Skills <span className="text-[#2D738D]">*</span>
                       </label>
                       <input
                         id="job-skills"
@@ -411,7 +411,7 @@ export function JobApplicationForm() {
                       className="text-foreground text-sm font-semibold"
                     >
                       Tell us about yourself and why you're applying{" "}
-                      <span className="text-brand-orange">*</span>
+                      <span className="text-[#2D738D]">*</span>
                     </label>
                     <p className="text-text-muted mb-2 text-xs">
                       What draws you to this division and role? What have you built or done that's

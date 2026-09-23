@@ -63,7 +63,7 @@ export default function Marquee({ items, direction = "left", speed = 25 }: Marqu
             className="text-foreground font-heading flex shrink-0 items-center gap-3 text-sm font-bold tracking-wider whitespace-nowrap uppercase opacity-75 transition-opacity hover:opacity-100 md:text-base"
           >
             <span>{item}</span>
-            <span className="text-brand-orange text-lg">✦</span>
+            <span className="text-[#2D738D] text-lg">✦</span>
           </div>
         ))}
       </div>

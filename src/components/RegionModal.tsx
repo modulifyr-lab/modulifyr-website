@@ -35,8 +35,8 @@ export function RegionModal() {
       >
         <div className="dark:bg-bg-dark border-border-base w-full max-w-lg overflow-hidden rounded-3xl border bg-white shadow-2xl">
           <div className="bg-brand-navy px-8 py-8 text-center">
-            <div className="bg-brand-orange/20 mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl">
-              <Globe className="text-brand-orange h-6 w-6" />
+            <div className="bg-[#2D738D]/20 mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl">
+              <Globe className="text-[#2D738D] h-6 w-6" />
             </div>
             <h2 id="region-modal-title" className="font-heading mb-2 text-2xl font-bold text-white">
               Where are you based?
@@ -50,9 +50,9 @@ export function RegionModal() {
               <button
                 key={code}
                 onClick={() => choose(code)}
-                className="group border-border-base hover:border-brand-orange hover:bg-brand-orange/5 flex w-full items-center gap-4 rounded-2xl border-2 p-4 text-left transition-all"
+                className="group border-border-base hover:border-[#2D738D] hover:bg-[#2D738D]/5 flex w-full items-center gap-4 rounded-2xl border-2 p-4 text-left transition-all"
               >
-                <div className="bg-brand-orange/10 group-hover:bg-brand-orange/20 text-brand-orange flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-sm font-bold transition-colors">
+                <div className="bg-[#2D738D]/10 group-hover:bg-[#2D738D]/20 text-[#2D738D] flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-sm font-bold transition-colors">
                   {code}
                 </div>
                 <div>

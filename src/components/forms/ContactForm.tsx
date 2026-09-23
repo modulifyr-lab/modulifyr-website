@@ -1,47 +1,59 @@
 "use client";
 
-// src/components/forms/ContactForm.tsx
-// NOTE: No ratelimit imports here — rate limiting is handled server-side in the API route.
-
-import { Button } from "@/components/ui/Button";
-import { Card, CardTitle } from "@/components/ui/Card";
+import { useState } from "react";
+import Link from "next/link";
 import {
-  Mail,
-  Phone,
-  MapPin,
-  Linkedin,
-  Twitter,
-  Github,
-  ArrowRight,
-  Clock,
-  ShieldCheck,
   CheckCircle2,
   AlertCircle,
   Loader2,
-  Calendar,
+  ArrowRight,
+  ShieldCheck,
+  Clock,
+  DollarSign,
+  MapPin,
+  Globe,
+  Phone,
+  MessageSquare,
+  Mail,
 } from "lucide-react";
-import * as React from "react";
-import Link from "next/link";
-import Reveal from "@/components/ui/Reveal";
+import { ProcessSection } from "@/components/ui/ProcessSection";
 
 interface FormState {
   name: string;
   email: string;
   subject: string;
+  portfolio: string;
   message: string;
+  termsAgreed: boolean;
   website: string; // honeypot
 }
 
-const initialForm: FormState = { name: "", email: "", subject: "", message: "", website: "" };
+const initialForm: FormState = {
+  name: "",
+  email: "",
+  subject: "",
+  portfolio: "",
+  message: "",
+  termsAgreed: false,
+  website: "",
+};
 
 export function ContactForm() {
-  const [form, setForm] = React.useState<FormState>(initialForm);
-  const [submitted, setSubmitted] = React.useState(false);
-  const [status, setStatus] = React.useState<"idle" | "loading" | "error">("idle");
-  const [errorMsg, setErrorMsg] = React.useState("");
+  const [form, setForm] = useState<FormState>(initialForm);
+  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value, type } = e.target;
+    if (type === "checkbox") {
+      const target = e.target as HTMLInputElement;
+      setForm((prev) => ({ ...prev, [name]: target.checked }));
+    } else {
+      setForm((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -49,11 +61,18 @@ export function ContactForm() {
     if (status === "loading") return;
     setStatus("loading");
     setErrorMsg("");
+
     try {
       const res = await fetch("/api/submit-contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          subject: form.subject || "Discovery Call Inquiry",
+          message: `${form.message}\n\nPortfolio/Ref: ${form.portfolio}`,
+          website: form.website,
+        }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Submission failed");
@@ -71,365 +90,329 @@ export function ContactForm() {
     }
   };
 
-  if (submitted) {
-    return (
-      <div className="container-custom flex min-h-[60vh] items-center justify-center py-24">
-        <Card className="animate-in fade-in zoom-in w-full max-w-xl p-16 text-center duration-500">
-          <div className="bg-brand-orange/10 mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-full">
-            <CheckCircle2 className="text-brand-orange h-10 w-10" />
-          </div>
-          <CardTitle className="mb-4 text-3xl">Message Sent</CardTitle>
-          <p className="text-text-secondary mb-8 leading-relaxed">
-            Thanks for reaching out. Someone from our team will get back to you within one business
-            day.
-          </p>
-          <Button onClick={() => setSubmitted(false)} variant="outline">
-            Send Another Message
-          </Button>
-        </Card>
-      </div>
-    );
-  }
-
   return (
-    <div className="bg-bg-light flex w-full flex-col">
-      <section className="border-border-base border-b bg-white py-24">
+    <div className="flex w-full flex-col">
+      {/* ── 1. HERO & BOOKING FORM SECTION ─────────────────────────────────── */}
+      <section className="bg-bg-main py-20 md:py-28 border-b border-border-main transition-colors duration-300">
         <div className="container-custom">
-          <div className="max-w-3xl">
-            <Reveal variant="fade-up">
-              <h1 className="font-heading text-foreground text-foreground mb-6 text-4xl font-bold md:text-6xl">
-                Let's Talk About <span className="text-brand-orange">Your Project</span>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            {/* Left Hero Details */}
+            <div className="lg:col-span-6 space-y-6">
+              <span className="text-caption1 font-bold text-[#2D738D] tracking-wider uppercase">
+                GET IN TOUCH
+              </span>
+              <h1 className="text-h1 font-bold text-foreground leading-[1.1]">
+                Let&apos;s Talk About Your Project.
               </h1>
-            </Reveal>
-            <Reveal variant="fade-up" delay={100}>
-              <p className="text-text-secondary text-xl leading-relaxed">
-                Whether you have a clear spec or just a problem you're trying to solve, reach out.
-                We'll tell you honestly whether we can help and what it would take.
+              <p className="text-body1 text-text-alt leading-relaxed">
+                Whether you have a clear spec or just a problem you&apos;re trying to solve, reach out.
+                We&apos;ll tell you honestly whether we can help and what it would take.
               </p>
-            </Reveal>
-          </div>
-        </div>
-      </section>
 
-      <section className="py-24">
-        <div className="container-custom">
-          <div className="grid grid-cols-1 gap-16 lg:grid-cols-2">
-            {/* Left: Contact Info */}
-            <div className="flex flex-col gap-12">
-              <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-                <Reveal variant="fade-scale" delay={100}>
-                  <div className="flex flex-col gap-4">
-                    <div className="bg-brand-navy/10 flex h-10 w-10 items-center justify-center rounded-lg">
-                      <Mail className="text-foreground h-5 w-5" />
-                    </div>
-                    <h4 className="font-heading text-foreground text-lg font-bold">Email Us</h4>
-                    <p className="text-text-secondary text-sm">Direct engineering inquiries:</p>
-                    <a
-                      href="mailto:contact@modulifyr.com"
-                      className="text-brand-orange text-lg font-bold hover:underline"
-                    >
-                      contact@modulifyr.com
-                    </a>
-                  </div>
-                </Reveal>
-                <Reveal variant="fade-scale" delay={150}>
-                  <div className="flex flex-col gap-4">
-                    <div className="bg-brand-navy/10 flex h-10 w-10 items-center justify-center rounded-lg">
-                      <Phone className="text-foreground h-5 w-5" />
-                    </div>
-                    <h4 className="font-heading text-foreground text-lg font-bold">Call Us</h4>
-                    <p className="text-text-secondary text-sm">Mon – Fri, 9am – 6pm NPT:</p>
-                    <a
-                      href="tel:+9779764478571"
-                      className="text-brand-orange text-lg font-bold hover:underline"
-                    >
-                      +977 9764478571
-                    </a>
-                  </div>
-                </Reveal>
+              {/* Trust signals */}
+              <div className="flex flex-wrap items-center gap-6 text-caption1 font-semibold text-text-alt pt-2">
+                <span className="flex items-center gap-1.5">
+                  <Clock className="h-4 w-4 text-[#2D738D]" /> Response within 24 hours
+                </span>
+                <span>•</span>
+                <span className="flex items-center gap-1.5">
+                  <DollarSign className="h-4 w-4 text-[#2D738D]" /> Transparent pricing
+                </span>
+                <span>•</span>
+                <span className="flex items-center gap-1.5">
+                  <CheckCircle2 className="h-4 w-4 text-[#2D738D]" /> No hidden cost
+                </span>
               </div>
 
-              {/* Cal.com booking card */}
-              <Reveal variant="fade-scale" delay={200}>
-                <div className="border-brand-teal/30 bg-brand-teal/5 flex h-full items-start gap-6 rounded-3xl border p-8">
-                  <div className="bg-brand-teal/10 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl">
-                    <Calendar className="text-brand-teal h-6 w-6" />
-                  </div>
-                  <div className="flex flex-col gap-3">
-                    <h4 className="font-heading text-foreground text-xl font-bold">
-                      Prefer a Call First?
-                    </h4>
-                    <p className="text-text-secondary text-sm leading-relaxed">
-                      Book a free discovery call directly in our calendar. Pick a time that works
-                      for you — no back-and-forth needed.
-                    </p>
-                    <a
-                      href="https://cal.eu/modulifyr/booking"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Button className="w-fit" size="sm">
-                        Book a Discovery Call <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
-                    </a>
-                  </div>
-                </div>
-              </Reveal>
-
-              <Reveal variant="fade-scale" delay={250}>
-                <div className="border-border-base flex items-start gap-6 rounded-3xl border bg-white p-8 shadow-sm">
-                  <div className="bg-brand-orange/10 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl">
-                    <MapPin className="text-brand-orange h-6 w-6" />
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <h4 className="font-heading text-foreground text-xl font-bold">Our Office</h4>
-                    <p className="text-text-secondary text-sm leading-relaxed">
-                      Modulifyr Enterprise Pvt. Ltd.
-                      <br />
-                      Birtamode, Ward 1, Gauri Tol
-                      <br />
-                      Jhapa, Nepal
-                    </p>
-                    <a
-                      href="https://www.google.com/maps/search/?api=1&query=Modulifyr+Enterprise+Pvt.+Ltd."
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-brand-orange mt-2 flex items-center gap-1 text-sm font-bold hover:underline"
-                    >
-                      Get Directions <ArrowRight className="ml-1 h-4 w-4" />
-                    </a>
-                  </div>
-                </div>
-              </Reveal>
-
-              <div className="flex flex-col gap-6">
-                <Reveal variant="fade-up">
-                  <h4 className="font-heading text-foreground font-bold">Follow Our Work</h4>
-                </Reveal>
-                <div className="flex gap-4">
-                  <Reveal variant="fade-scale" delay={100}>
-                    <Link
-                      href="https://www.linkedin.com/company/modulifyr/"
-                      className="border-border-base hover:bg-brand-navy flex h-12 w-12 items-center justify-center rounded-full border transition-colors hover:text-white"
-                    >
-                      <Linkedin className="h-5 w-5" />
-                    </Link>
-                  </Reveal>
-                  <Reveal variant="fade-scale" delay={150}>
-                    <Link
-                      href="https://x.com/modulifyr"
-                      className="border-border-base hover:bg-brand-navy flex h-12 w-12 items-center justify-center rounded-full border transition-colors hover:text-white"
-                    >
-                      <Twitter className="h-5 w-5" />
-                    </Link>
-                  </Reveal>
-                  <Reveal variant="fade-scale" delay={200}>
-                    <Link
-                      href="https://github.com/Modulifyr"
-                      className="border-border-base hover:bg-brand-navy flex h-12 w-12 items-center justify-center rounded-full border transition-colors hover:text-white"
-                    >
-                      <Github className="h-5 w-5" />
-                    </Link>
-                  </Reveal>
-                </div>
+              <div className="flex flex-wrap gap-4 pt-4">
+                <a href="#booking-form">
+                  <button
+                    type="button"
+                    className="bg-[#2D738D] hover:bg-[#235b70] text-white rounded-lg px-6 py-3 text-sm font-semibold transition-colors duration-100 ease-in cursor-pointer"
+                  >
+                    Book Discovery Call
+                  </button>
+                </a>
+                <Link href="/request-proposal">
+                  <button
+                    type="button"
+                    className="bg-bg-main border-border-main text-foreground hover:bg-bg-alt rounded-lg border px-6 py-3 text-sm font-semibold transition-colors duration-100 ease-in cursor-pointer"
+                  >
+                    Request Proposal
+                  </button>
+                </Link>
               </div>
-
-              <Reveal variant="fade-scale" delay={300}>
-                <div className="bg-brand-navy flex flex-col gap-4 rounded-3xl p-8 text-white">
-                  <div className="flex items-center gap-3">
-                    <Clock className="text-brand-gold h-5 w-5" />
-                    <span className="font-bold">NPT (UTC+5:45) — Works in Your Timezone</span>
-                  </div>
-                  <p className="text-text-muted text-xs leading-relaxed">
-                    Nepal Standard Time gives us natural working hour overlap with both European
-                    mornings and Asian business hours.
-                  </p>
-                </div>
-              </Reveal>
             </div>
 
-            {/* Right: Form */}
-            <div className="flex flex-col gap-8">
-              <Reveal variant="fade-scale" delay={150}>
-                <Card className="border-t-brand-teal h-full border-t-8 p-8 shadow-xl md:p-12">
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <h2 className="font-heading text-foreground mb-4 text-2xl font-bold">
-                      Send a Message
-                    </h2>
-
-                    {status === "error" && (
-                      <div className="flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-4">
-                        <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-red-500" />
-                        <p className="text-sm text-red-700">{errorMsg}</p>
-                      </div>
-                    )}
-
-                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                      <div className="space-y-2">
-                        <label
-                          htmlFor="contact-name"
-                          className="text-foreground font-heading text-sm font-bold"
-                        >
-                          Your Name <span className="text-brand-orange">*</span>
-                        </label>
-                        <input
-                          id="contact-name"
-                          type="text"
-                          name="name"
-                          value={form.name}
-                          onChange={handleChange}
-                          placeholder="Full Name"
-                          required
-                          maxLength={200}
-                          className="border-border-base bg-background placeholder:text-text-dim focus-visible:ring-brand-orange text-foreground flex h-12 w-full rounded-lg border px-4 py-2 text-base transition-colors focus-visible:ring-2 focus-visible:outline-none disabled:opacity-50"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <label
-                          htmlFor="contact-email"
-                          className="text-foreground font-heading text-sm font-bold"
-                        >
-                          Your Email <span className="text-brand-orange">*</span>
-                        </label>
-                        <input
-                          id="contact-email"
-                          type="email"
-                          name="email"
-                          value={form.email}
-                          onChange={handleChange}
-                          placeholder="email@company.com"
-                          required
-                          className="border-border-base bg-background placeholder:text-text-dim focus-visible:ring-brand-orange text-foreground flex h-12 w-full rounded-lg border px-4 py-2 text-base transition-all focus-visible:ring-2 focus-visible:outline-none disabled:opacity-50"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <label
-                        htmlFor="contact-subject"
-                        className="text-foreground font-heading text-sm font-bold"
-                      >
-                        Subject <span className="text-brand-orange">*</span>
-                      </label>
-                      <input
-                        id="contact-subject"
-                        type="text"
-                        name="subject"
-                        value={form.subject}
-                        onChange={handleChange}
-                        placeholder="How can we help?"
-                        required
-                        maxLength={300}
-                        className="border-border-base bg-background placeholder:text-text-dim focus-visible:ring-brand-orange text-foreground flex h-12 w-full rounded-lg border px-4 py-2 text-base transition-all focus-visible:ring-2 focus-visible:outline-none disabled:opacity-50"
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <label
-                        htmlFor="contact-message"
-                        className="text-foreground font-heading text-sm font-bold"
-                      >
-                        Message <span className="text-brand-orange">*</span>
-                      </label>
-                      <textarea
-                        id="contact-message"
-                        name="message"
-                        value={form.message}
-                        onChange={handleChange}
-                        placeholder="Tell us about your project or question..."
-                        required
-                        maxLength={5000}
-                        className="border-border-base bg-background placeholder:text-text-dim focus-visible:ring-brand-orange text-foreground flex min-h-[150px] w-full resize-none rounded-lg border px-4 py-3 text-base transition-all focus-visible:ring-2 focus-visible:outline-none disabled:opacity-50"
-                      />
-                      <p className="text-text-muted text-right text-xs">
-                        {form.message.length}/5000
-                      </p>
-                    </div>
-
-                    {/* Honeypot */}
-                    <div
-                      aria-hidden="true"
-                      style={{
-                        position: "absolute",
-                        left: "-9999px",
-                        width: "1px",
-                        height: "1px",
-                        overflow: "hidden",
-                      }}
-                    >
-                      <label htmlFor="contact-website">Website</label>
-                      <input
-                        id="contact-website"
-                        type="text"
-                        name="website"
-                        value={form.website}
-                        onChange={handleChange}
-                        tabIndex={-1}
-                        autoComplete="off"
-                      />
-                    </div>
-
-                    <div className="bg-bg-secondary flex items-center gap-3 rounded-lg p-4">
-                      <ShieldCheck className="text-brand-teal h-5 w-5 shrink-0" />
-                      <span className="text-text-secondary text-[10px] leading-tight italic">
-                        All communication is treated as confidential. We can sign an NDA before any
-                        technical discussion.
-                      </span>
-                    </div>
-
-                    <Button
-                      type="submit"
-                      disabled={status === "loading"}
-                      className="animate-in h-14 w-full text-lg"
-                    >
-                      {status === "loading" ? (
-                        <>
-                          <Loader2 className="mr-2 h-5 w-5 animate-spin" /> Sending...
-                        </>
-                      ) : (
-                        <>
-                          Send Message <ArrowRight className="ml-2 h-5 w-5" />
-                        </>
-                      )}
-                    </Button>
-                  </form>
-                </Card>
-              </Reveal>
-              <div className="px-4 text-center">
-                <p className="text-text-secondary text-sm">
-                  Have a detailed project brief? Use our structured{" "}
-                  <Link
-                    href="/request-proposal"
-                    className="text-brand-orange font-bold hover:underline"
-                  >
-                    Proposal Request Form
-                  </Link>{" "}
-                  instead.
+            {/* Right Booking Card Form */}
+            <div id="booking-form" className="lg:col-span-6 bg-bg-alt border-border-main rounded-2xl border p-8 shadow-lg space-y-6">
+              <div className="space-y-2">
+                <h2 className="text-h4 font-bold text-foreground">
+                  Book a Free Discovery Call
+                </h2>
+                <p className="text-body2 text-text-alt">
+                  Let&apos;s map the right approach for your project.
                 </p>
               </div>
+
+              {submitted ? (
+                <div className="bg-bg-main border border-border-main rounded-xl p-8 text-center space-y-4">
+                  <div className="h-12 w-12 rounded-full bg-[#2D738D]/10 text-[#2D738D] flex items-center justify-center mx-auto">
+                    <CheckCircle2 className="h-6 w-6" />
+                  </div>
+                  <h3 className="text-h5 font-bold text-foreground">Discovery Call Requested</h3>
+                  <p className="text-body2 text-text-alt">
+                    Thank you! We have received your inquiry and will reach out within 24 hours.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setSubmitted(false)}
+                    className="text-caption1 font-bold text-[#2D738D] hover:underline"
+                  >
+                    Submit another request
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  {status === "error" && (
+                    <div className="flex items-center gap-2 bg-red-50 text-red-700 border border-red-200 rounded-lg p-3 text-xs">
+                      <AlertCircle className="h-4 w-4 shrink-0" />
+                      <span>{errorMsg}</span>
+                    </div>
+                  )}
+
+                  <div className="space-y-1.5">
+                    <label htmlFor="contact-name" className="text-caption1 font-semibold text-foreground">
+                      Full Name *
+                    </label>
+                    <input
+                      id="contact-name"
+                      type="text"
+                      name="name"
+                      value={form.name}
+                      onChange={handleChange}
+                      placeholder="e.g. Rijan Mainali"
+                      required
+                      className="w-full bg-bg-main border-border-main rounded-lg border px-3.5 py-2.5 text-sm font-sans focus:outline-none focus:border-[#2D738D]"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label htmlFor="contact-email" className="text-caption1 font-semibold text-foreground">
+                      Email Address *
+                    </label>
+                    <input
+                      id="contact-email"
+                      type="email"
+                      name="email"
+                      value={form.email}
+                      onChange={handleChange}
+                      placeholder="e.g. contact@company.com"
+                      required
+                      className="w-full bg-bg-main border-border-main rounded-lg border px-3.5 py-2.5 text-sm font-sans focus:outline-none focus:border-[#2D738D]"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label htmlFor="contact-portfolio" className="text-caption1 font-semibold text-foreground">
+                      Portfolio / Website / Ref Link
+                    </label>
+                    <input
+                      id="contact-portfolio"
+                      type="text"
+                      name="portfolio"
+                      value={form.portfolio}
+                      onChange={handleChange}
+                      placeholder="Enter N/A if portfolio link is not available"
+                      className="w-full bg-bg-main border-border-main rounded-lg border px-3.5 py-2.5 text-sm font-sans focus:outline-none focus:border-[#2D738D]"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label htmlFor="contact-message" className="text-caption1 font-semibold text-foreground">
+                      Project Details / Questions *
+                    </label>
+                    <textarea
+                      id="contact-message"
+                      name="message"
+                      value={form.message}
+                      onChange={handleChange}
+                      placeholder="Briefly describe what you're building..."
+                      required
+                      rows={3}
+                      className="w-full bg-bg-main border-border-main rounded-lg border px-3.5 py-2.5 text-sm font-sans focus:outline-none focus:border-[#2D738D] resize-none"
+                    />
+                  </div>
+
+                  {/* Honeypot */}
+                  <div className="hidden" aria-hidden="true">
+                    <input
+                      type="text"
+                      name="website"
+                      value={form.website}
+                      onChange={handleChange}
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
+                  </div>
+
+                  {/* Terms checkbox */}
+                  <div className="flex items-center gap-2 pt-1">
+                    <input
+                      type="checkbox"
+                      id="termsAgreed"
+                      name="termsAgreed"
+                      checked={form.termsAgreed}
+                      onChange={handleChange}
+                      required
+                      className="rounded border-border-main text-[#2D738D] focus:ring-[#2D738D]"
+                    />
+                    <label htmlFor="termsAgreed" className="text-caption2 text-text-alt">
+                      By continuing, you agree to our Terms &amp; Policy
+                    </label>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={status === "loading"}
+                    className="bg-[#2D738D] hover:bg-[#235b70] text-white w-full rounded-lg py-3 text-sm font-semibold transition-colors duration-100 ease-in cursor-pointer flex items-center justify-center gap-2"
+                  >
+                    {status === "loading" ? (
+                      <>
+                        <Loader2 className="h-4 w-4 animate-spin" /> Submitting...
+                      </>
+                    ) : (
+                      <>
+                        Book Discovery Call <ArrowRight className="h-4 w-4" />
+                      </>
+                    )}
+                  </button>
+                </form>
+              )}
             </div>
           </div>
         </div>
       </section>
 
-      <section className="px-4 py-12 md:px-0">
-        <div className="container-custom">
-          <Reveal variant="fade-scale">
-            <div className="relative h-100 w-full overflow-hidden rounded-2xl">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3389.577180171271!2d87.9888125!3d26.6478125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39e5baf5bbac5971%3A0x86a3d3bd5197a0f0!2sJXXQ%2B4G%2C%20Birtamod!5e1!3m2!1sen!2snp!4v1787901012956!5m2!1sen!2snp"
-                className="h-full w-full border-0"
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="strict-origin-when-cross-origin"
-                title="Modulifyr Location - Birtamod"
-                sandbox="allow-scripts allow-same-origin"
-              />
+      {/* ── 2. WHERE WE WORK ──────────────────────────────────────────────── */}
+      <section className="py-24 bg-bg-alt/40 border-b border-border-main transition-colors duration-300">
+        <div className="container-custom space-y-12">
+          <div className="max-w-3xl space-y-3">
+            <span className="text-caption1 font-bold text-[#2D738D] tracking-wider uppercase">
+              LOCATION &amp; COLLABORATION
+            </span>
+            <h2 className="text-h2 font-bold text-foreground">
+              Our office &amp; global presence
+            </h2>
+            <p className="text-body1 text-text-alt">
+              One engineering hub in eastern Nepal. One connected team for businesses building
+              anywhere.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="bg-bg-main border-border-main rounded-2xl border p-8 space-y-4 shadow-sm">
+              <div className="h-10 w-10 rounded-xl bg-[#2D738D]/10 text-[#2D738D] flex items-center justify-center">
+                <MapPin className="h-5 w-5" />
+              </div>
+              <h3 className="text-h4 font-bold text-foreground">Birtamode HQ</h3>
+              <p className="text-body2 text-text-alt leading-relaxed">
+                Birtamode, Ward 1, Gauri Tol, Jhapa, Nepal
+              </p>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Modulifyr+Enterprise+Pvt.+Ltd."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-caption1 font-bold text-[#2D738D] hover:underline pt-2"
+              >
+                Get directions <ArrowRight className="h-3.5 w-3.5" />
+              </a>
             </div>
-          </Reveal>
-          <p className="text-text-muted mt-3 text-center text-xs">
-            Modulifyr Enterprise Pvt. Ltd. · Birtamode, Ward 1, Gauri Tol, Jhapa, Nepal
+
+            <div className="bg-bg-main border-border-main rounded-2xl border p-8 space-y-4 shadow-sm">
+              <div className="h-10 w-10 rounded-xl bg-[#2D738D]/10 text-[#2D738D] flex items-center justify-center">
+                <Globe className="h-5 w-5" />
+              </div>
+              <h3 className="text-h4 font-bold text-foreground">Working globally</h3>
+              <p className="text-body2 text-text-alt leading-relaxed">
+                We collaborate remotely with ambitious teams across Nepal, Asia, Europe, &amp; beyond.
+              </p>
+              <div className="text-caption1 font-semibold text-text-dim">
+                NPT (UTC+5:45) collaboration hours
+              </div>
+              <a
+                href="#booking-form"
+                className="inline-flex items-center gap-1.5 text-caption1 font-bold text-[#2D738D] hover:underline"
+              >
+                Book a discovery call <ArrowRight className="h-3.5 w-3.5" />
+              </a>
+            </div>
+          </div>
+
+          {/* Office Showcase Panel */}
+          <div className="bg-bg-main border-border-main rounded-2xl border p-8 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div className="space-y-2">
+              <span className="text-caption1 font-bold text-[#2D738D] tracking-wider uppercase">
+                MODULIFYR — ENGINEERING SYSTEMS THAT SCALE
+              </span>
+              <h3 className="text-h4 font-bold text-foreground">
+                Birtamode, Ward 1, Gauri Tol, Jhapa, Nepal
+              </h3>
+              <p className="text-body2 text-text-alt">
+                Mon–Fri, 9:00 AM–6:00 PM NPT • NPT (UTC+5:45) — natural overlap with both European
+                mornings &amp; Asian business hours.
+              </p>
+            </div>
+            <a href="#booking-form" className="shrink-0">
+              <button
+                type="button"
+                className="bg-[#2D738D] hover:bg-[#235b70] text-white rounded-lg px-6 py-3 text-sm font-semibold transition-colors duration-100 ease-in cursor-pointer"
+              >
+                Schedule Meeting
+              </button>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 3. 5-PHASE PROCESS RECAP ───────────────────────────────────────── */}
+      <ProcessSection />
+
+      {/* ── 4. NEED HELP RIGHT NOW BANNER ───────────────────────────────────── */}
+      <section className="py-20 bg-bg-main transition-colors duration-300">
+        <div className="container-custom max-w-3xl text-center space-y-8">
+          <h2 className="text-h2 font-bold text-foreground">
+            Need help right now?
+          </h2>
+          <p className="text-body1 text-text-alt leading-relaxed">
+            Talk directly with our team — no sales layer in between.
           </p>
+
+          <div className="flex flex-wrap justify-center gap-6 text-body2 font-semibold text-text-alt">
+            <a href="tel:+9779764478571" className="flex items-center gap-2 hover:text-[#2D738D] transition-colors">
+              <Phone className="h-4 w-4 text-[#2D738D]" /> Call our team
+            </a>
+            <span>•</span>
+            <a href="https://wa.me/9779764478571" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-[#2D738D] transition-colors">
+              <MessageSquare className="h-4 w-4 text-[#2D738D]" /> WhatsApp
+            </a>
+            <span>•</span>
+            <a href="mailto:contact@modulifyr.com" className="flex items-center gap-2 hover:text-[#2D738D] transition-colors">
+              <Mail className="h-4 w-4 text-[#2D738D]" /> Email us
+            </a>
+          </div>
+
+          <div className="pt-2">
+            <a href="#booking-form">
+              <button
+                type="button"
+                className="bg-[#2D738D] hover:bg-[#235b70] text-white rounded-lg px-8 py-3.5 text-base font-semibold transition-colors duration-100 ease-in cursor-pointer"
+              >
+                Talk to experts
+                <ArrowRight className="ml-2 h-4 w-4 inline" />
+              </button>
+            </a>
+          </div>
         </div>
       </section>
     </div>

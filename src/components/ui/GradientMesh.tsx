@@ -39,7 +39,7 @@ export default function GradientMesh() {
       <div
         className="animate-blob-1 absolute top-[-10%] left-[-10%] h-[50%] w-[50%] rounded-full opacity-10 blur-[120px]"
         style={{
-          backgroundColor: "var(--color-brand-orange)",
+          backgroundColor: "var(--color-[#2D738D])",
           animation: "blob-one 20s infinite ease-in-out",
         }}
       />

@@ -5,25 +5,21 @@ import { Button } from "@/components/ui/Button";
 import { getPostBySlug, getAllPosts } from "@/lib/notion-blog";
 import { ArrowLeft, Clock, User } from "lucide-react";
 
-// ISR — revalidate every hour so Notion edits go live automatically
 export const revalidate = 3600;
-
-// Allow slugs not pre-built at build time (all Notion posts)
 export const dynamicParams = true;
 
 type Props = { params: Promise<{ slug: string }> };
 
 const categoryColors: Record<string, string> = {
-  Architecture: "bg-brand-orange/10 text-brand-orange",
-  Engineering: "bg-brand-navy/10 text-foreground",
-  Backend: "bg-brand-teal/10 text-brand-teal",
-  Frontend: "bg-brand-gold/20 text-amber-700",
-  DevOps: "bg-brand-teal/10 text-brand-teal",
-  Strategy: "bg-brand-orange/10 text-brand-orange",
+  Architecture: "bg-[#2D738D]/10 text-[#2D738D]",
+  Engineering: "bg-bg-alt text-foreground",
+  Backend: "bg-[#2D738D]/10 text-[#2D738D]",
+  Frontend: "bg-bg-alt text-foreground",
+  DevOps: "bg-[#2D738D]/10 text-[#2D738D]",
+  Strategy: "bg-[#2D738D]/10 text-[#2D738D]",
 };
 
 export async function generateStaticParams() {
-  // No static posts — all content is from Notion
   return [];
 }
 
@@ -47,7 +43,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-// Render Notion HTML content
 function NotionContent({ html }: { html: string }) {
   return <div className="notion-content space-y-2" dangerouslySetInnerHTML={{ __html: html }} />;
 }
@@ -58,7 +53,6 @@ export default async function BlogPostPage({ params }: Props) {
   const notionPost = await getPostBySlug(slug);
   if (!notionPost) notFound();
 
-  // Fetch all posts for sidebar "More Articles"
   const allPosts = await getAllPosts();
   const otherPosts = allPosts.filter((p) => p.slug !== slug).slice(0, 4);
 
@@ -93,59 +87,57 @@ export default async function BlogPostPage({ params }: Props) {
       />
 
       {/* Header */}
-      <section className="bg-brand-navy py-20 text-white">
+      <section className="bg-bg-main border-b border-border-main py-20 transition-colors duration-300">
         <div className="container-custom max-w-4xl">
           <Link
             href="/blog"
-            className="text-text-muted hover:text-brand-teal mb-8 flex items-center gap-2 text-sm font-medium transition-colors"
+            className="text-text-alt hover:text-[#2D738D] mb-8 flex items-center gap-2 text-sm font-medium transition-colors"
           >
             <ArrowLeft className="h-4 w-4" /> Back to Blog
           </Link>
           <span
-            className={`mb-6 inline-block rounded-full px-3 py-1 text-xs font-bold ${
-              categoryColors[notionPost.category] ?? "bg-white/10 text-white"
+            className={`mb-6 inline-block rounded-full px-3 py-1 text-caption2 font-bold ${
+              categoryColors[notionPost.category] ?? "bg-bg-alt text-foreground"
             }`}
           >
             {notionPost.category}
           </span>
-          <h1 className="font-heading mb-6 text-3xl leading-tight font-bold md:text-5xl">
+          <h1 className="text-h2 font-bold text-foreground mb-6 leading-tight">
             {notionPost.title}
           </h1>
-          <div className="text-text-muted flex items-center gap-4 text-sm">
+          <div className="text-text-alt flex items-center gap-4 text-caption1">
             <span className="flex items-center gap-1.5">
-              <Clock className="h-4 w-4" /> {notionPost.readTime}
+              <Clock className="h-4 w-4 text-[#2D738D]" /> {notionPost.readTime}
             </span>
             <span>·</span>
             <time dateTime={notionPost.dateISO}>{notionPost.date}</time>
             <span>·</span>
             <span className="flex items-center gap-1.5">
-              <User className="h-4 w-4" /> Modulifyr Engineering Team
+              <User className="h-4 w-4 text-[#2D738D]" /> Modulifyr Engineering Team
             </span>
           </div>
         </div>
       </section>
 
       {/* Content */}
-      <section className="bg-bg-light py-16">
+      <section className="bg-bg-alt/30 py-16 transition-colors duration-300">
         <div className="container-custom">
           <div className="mx-auto grid max-w-6xl grid-cols-1 gap-16 lg:grid-cols-4">
             <article className="lg:col-span-3">
-              <div className="border-border-base rounded-3xl border bg-white p-8 md:p-12">
-                {/* Excerpt */}
-                <p className="text-text-secondary border-border-base mb-8 border-b pb-8 text-xl leading-relaxed font-medium italic">
+              <div className="bg-bg-main border-border-main rounded-2xl border p-8 md:p-12 shadow-sm">
+                <p className="text-body1 text-foreground border-border-main/60 mb-8 border-b pb-8 leading-relaxed font-medium italic">
                   {notionPost.excerpt}
                 </p>
 
                 <NotionContent html={notionPost.contentHtml} />
 
-                {/* Author footer */}
-                <div className="border-border-base mt-12 flex items-center gap-4 border-t pt-8">
-                  <div className="bg-brand-orange/10 flex h-10 w-10 items-center justify-center rounded-full">
-                    <User className="text-brand-orange h-5 w-5" />
+                <div className="border-border-main/60 mt-12 flex items-center gap-4 border-t pt-8">
+                  <div className="bg-[#2D738D]/10 text-[#2D738D] flex h-10 w-10 items-center justify-center rounded-full">
+                    <User className="h-5 w-5" />
                   </div>
                   <div>
                     <p className="text-foreground text-sm font-bold">Modulifyr Engineering Team</p>
-                    <p className="text-text-muted text-xs">
+                    <p className="text-text-dim text-xs">
                       Birtamode, Ward 1, Gauri Tol, Jhapa, Nepal · modulifyr.com
                     </p>
                   </div>
@@ -155,7 +147,7 @@ export default async function BlogPostPage({ params }: Props) {
               <div className="mt-8">
                 <Link
                   href="/blog"
-                  className="group border-border-base hover:border-brand-orange text-text-secondary hover:text-brand-orange inline-flex items-center gap-2 rounded-2xl border bg-white p-5 text-sm font-medium transition-colors"
+                  className="group border-border-main hover:border-[#2D738D] text-text-alt hover:text-[#2D738D] inline-flex items-center gap-2 rounded-xl border bg-bg-main p-4 text-sm font-medium transition-colors"
                 >
                   <ArrowLeft className="h-4 w-4" /> Back to all articles
                 </Link>
@@ -164,9 +156,9 @@ export default async function BlogPostPage({ params }: Props) {
 
             {/* Sidebar */}
             <aside className="flex flex-col gap-6">
-              <div className="bg-brand-navy sticky top-28 rounded-3xl p-7 text-white">
-                <h3 className="font-heading mb-3 text-lg font-bold">Put this into practice</h3>
-                <p className="text-text-muted mb-5 text-sm leading-relaxed">
+              <div className="bg-bg-alt border-border-main border sticky top-28 rounded-2xl p-7 text-foreground shadow-sm">
+                <h3 className="text-h5 font-bold mb-3">Put this into practice</h3>
+                <p className="text-text-alt mb-5 text-sm leading-relaxed">
                   We build custom systems for businesses in Nepal and globally.
                 </p>
                 <Link href="/request-proposal">
@@ -176,8 +168,8 @@ export default async function BlogPostPage({ params }: Props) {
                 </Link>
               </div>
               {otherPosts.length > 0 && (
-                <div className="bg-bg-secondary border-border-base rounded-3xl border p-7">
-                  <h3 className="font-heading text-foreground mb-3 text-sm font-bold">
+                <div className="bg-bg-main border-border-main rounded-2xl border p-7 shadow-sm">
+                  <h3 className="text-body1 font-bold text-foreground mb-3">
                     More Articles
                   </h3>
                   <div className="space-y-3">
@@ -185,7 +177,7 @@ export default async function BlogPostPage({ params }: Props) {
                       <Link
                         key={p.slug}
                         href={`/blog/${p.slug}`}
-                        className="text-text-secondary hover:text-brand-orange block text-sm leading-snug transition-colors"
+                        className="text-text-alt hover:text-[#2D738D] block text-sm leading-snug transition-colors"
                       >
                         {p.title}
                       </Link>

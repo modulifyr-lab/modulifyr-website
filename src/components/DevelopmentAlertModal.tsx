@@ -43,9 +43,9 @@ export function DevelopmentAlertModal() {
         aria-labelledby="development-alert-title"
         className="fixed inset-0 z-[201] flex items-center justify-center p-4"
       >
-        <div className="dark:bg-bg-dark border-brand-orange w-full max-w-2xl overflow-hidden rounded-3xl border-4 bg-white shadow-2xl">
+        <div className="dark:bg-bg-dark border-[#2D738D] w-full max-w-2xl overflow-hidden rounded-3xl border-4 bg-white shadow-2xl">
           <div className="bg-brand-navy px-8 py-8 text-center">
-            <div className="bg-brand-orange mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full">
+            <div className="bg-[#2D738D] mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full">
               <AlertTriangle className="text-foreground h-8 w-8" />
             </div>
             <h2
@@ -65,7 +65,7 @@ export function DevelopmentAlertModal() {
                 Our platform is not yet ready for public use. We are still working hard to prepare
                 everything for our official launch.
               </p>
-              <p className="text-brand-orange text-xl font-bold">
+              <p className="text-[#2D738D] text-xl font-bold">
                 Please do NOT place any orders or submit any transactions at this time.
               </p>
             </div>
