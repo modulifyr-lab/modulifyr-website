@@ -45,8 +45,8 @@ const PRINCIPLES = [
 const APPROACH_STEPS = [
   {
     number: "01",
-    title: "Discovery",
-    desc: "Understand your workflows and requirements before writing any code.",
+    title: "Understand First",
+    desc: "We learn the workflows, constraints, and problems before deciding what to build.",
   },
   {
     number: "02",
@@ -56,7 +56,7 @@ const APPROACH_STEPS = [
   {
     number: "03",
     title: "Evolve",
-    desc: "Build a foundation that can adapt as your needs change over time.",
+    desc: "Build a foundation that can adapt as your needs change.",
   },
 ];
 
@@ -75,8 +75,8 @@ const TEAM_MEMBERS: TeamMember[] = [
   {
     name: "Rijan M",
     fullName: "Rijan Mainali",
-    title: "CEO & Lead Engineer",
-    department: "CEO & Leadership",
+    title: "CEO & Founder",
+    department: "CEO",
     quote: "Building software systems that scale seamlessly and stand the test of time.",
     linkedin: "https://www.linkedin.com/in/rijan-mainali/",
     portfolio: "https://rijanmainali.vercel.app",
@@ -85,35 +85,67 @@ const TEAM_MEMBERS: TeamMember[] = [
   {
     name: "Dikshya B",
     fullName: "Dikshya Bhattarai",
-    title: "UI/UX Designer",
+    title: "UI UX Designer",
     department: "Design Team",
-    quote: "Creating simple, effective digital experiences for complex problems.",
+    quote: "My approach to design is centered on understanding users, solving problems, and creating simple, effective digital experiences.",
     linkedin: "https://www.linkedin.com/in/dikshya-bhattarai-528107308/",
+  },
+  {
+    name: "Shreesha S",
+    fullName: "Shreesha Shrestha",
+    title: "UI UX Designer",
+    department: "Design Team",
+    quote: "I design for clarity in complexity. Every screen I design earns trust — usable today, scalable tomorrow, consistent always.",
+    linkedin: "http://www.linkedin.com/in/shreesha-shrestha-939385219",
   },
   {
     name: "Lijala T",
     fullName: "Lijala Tuladhar",
-    title: "UI/UX Designer",
+    title: "UI UX Designer",
     department: "Design Team",
     quote: "Good design makes things feel effortless.",
     linkedin: "https://www.linkedin.com/in/lijala-tuladhar/",
   },
   {
-    name: "Shreesha S",
-    fullName: "Shreesha Shrestha",
-    title: "UI/UX Designer",
+    name: "Sumina L",
+    fullName: "Sumina Lakshyam",
+    title: "UI UX Designer",
     department: "Design Team",
-    quote: "Design for clarity in complexity.",
-    linkedin: "http://www.linkedin.com/in/shreesha-shrestha-939385219",
+    quote: "Designing intentional interfaces with focus on user empathy and accessibility.",
+    linkedin: "https://www.linkedin.com/company/modulifyr/",
   },
   {
     name: "Saurab S",
     fullName: "Saurab Shrestha",
     title: "Full-Stack Engineer",
     department: "Engineering",
-    quote: "Growing through every project and architectural challenge.",
+    quote: "Crafting scalable backend architectures and robust full-stack applications.",
     linkedin: "https://www.linkedin.com/in/saurab-shrestha-30b705259/",
     portfolio: "https://merofolio.netlify.app/",
+  },
+  {
+    name: "Aadesh L",
+    fullName: "Aadesh Loktam",
+    title: "Software Engineer",
+    department: "Engineering",
+    quote: "Building resilient systems through clean code and modern engineering standards.",
+    linkedin: "https://www.linkedin.com/company/modulifyr/",
+  },
+  {
+    name: "Karana D",
+    fullName: "Karana Dhungana",
+    title: "Business Development Specialist",
+    department: "Business Development",
+    quote: "Connecting business challenges with tailored digital engineering solutions.",
+    linkedin: "https://www.linkedin.com/company/modulifyr/",
+  },
+  {
+    name: "Karan K",
+    fullName: "Karan Khadka",
+    title: "Business Development Specialist",
+    department: "Business Development",
+    quote: "Fostering long-term client trust through transparent communication and value.",
+    linkedin: "https://www.linkedin.com/company/modulifyr/",
   },
   {
     name: "Sunish S",
@@ -122,6 +154,14 @@ const TEAM_MEMBERS: TeamMember[] = [
     department: "Business Development",
     quote: "Building genuine client partnerships through trust and transparency.",
     linkedin: "http://www.linkedin.com/in/sunish-shrestha",
+  },
+  {
+    name: "Samikshya K",
+    fullName: "Samikshya Khatri",
+    title: "Business Development Specialist",
+    department: "Business Development",
+    quote: "Helping organizations navigate digital transformation and system upgrades.",
+    linkedin: "https://www.linkedin.com/company/modulifyr/",
   },
 ];
 
@@ -139,25 +179,30 @@ const TECH_STACK = [
     category: "Backend",
     icon: Server,
     items: [
-      { name: "NestJS", label: "Enterprise Microservices" },
-      { name: "Prisma", label: "Type-Safe ORM" },
+      { name: "Hono", label: "Typesafe, edge-compatible API framework" },
+      { name: "Next.js", label: "API Routes / full-stack backend for React-based sites" },
     ],
   },
   {
-    category: "Database & Mobile",
+    category: "Database",
     icon: Database,
     items: [
-      { name: "PostgreSQL", label: "Relational & JSONB" },
-      { name: "Expo", label: "Cross-Platform Native" },
+      { name: "PostgreSQL", label: "Relational DB" },
+      { name: "MySQL", label: "Relational DB" },
+      { name: "SQLite", label: "Embedded DB" },
+      { name: "MariaDB", label: "Relational DB" },
+      { name: "MongoDB", label: "Document Store" },
+      { name: "Redis", label: "In-Memory Cache" },
     ],
   },
   {
     category: "Infrastructure",
     icon: Cloud,
     items: [
+      { name: "Vercel", label: "Edge Network" },
       { name: "AWS", label: "Cloud Primitive" },
-      { name: "Vercel", label: "Edge-Network" },
-      { name: "Docker", label: "Container Fabric" },
+      { name: "Render", label: "Cloud Platform" },
+      { name: "Docker", label: "Containerization" },
     ],
   },
 ];
@@ -172,7 +217,7 @@ export default function AboutClient() {
             ABOUT MODULIFYR
           </span>
           <h1 className="text-h1 font-bold text-foreground leading-[1.1]">
-            We Build the Systems That Keep Working.
+            We Build the Systems That <span className="text-[#6FA8B8]">Keep Working</span>.
           </h1>
           <p className="text-body1 text-text-alt max-w-2xl mx-auto leading-relaxed">
             We started Modulifyr after seeing businesses outgrow software faster than vendors could
@@ -185,15 +230,15 @@ export default function AboutClient() {
                 type="button"
                 className="bg-[#2D738D] hover:bg-[#235b70] text-white rounded-lg px-8 py-3.5 text-base font-semibold transition-colors duration-100 ease-in cursor-pointer"
               >
-                Talk to Experts
+                Book a free Consultation Today
               </button>
             </Link>
-            <Link href="/about/technical-standards">
+            <Link href="/services">
               <button
                 type="button"
                 className="bg-bg-main border-border-main text-foreground hover:bg-bg-alt rounded-lg border px-8 py-3.5 text-base font-semibold transition-colors duration-100 ease-in cursor-pointer"
               >
-                Our Technical Standards
+                Explore Packages
               </button>
             </Link>
           </div>

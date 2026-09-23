@@ -6,19 +6,22 @@ import { ArrowRight, Layers, Database, Cloud, ShieldCheck, Cpu, Zap } from "luci
 
 const INTEGRATION_GROUPS = [
   {
-    category: "Cloud Infrastructure & ERP",
+    category: "Business Ops & Communication",
     apps: [
-      { name: "PostgreSQL & JSONB", desc: "Primary relational storage", icon: Database },
-      { name: "AWS Primitive Cloud", desc: "Scalable cloud hosting", icon: Cloud },
-      { name: "Vercel Edge Network", desc: "Global edge deployment", icon: Zap },
+      { name: "Zoho", desc: "CRM & Business Suite", icon: Layers },
+      { name: "AWS", desc: "Cloud & Infrastructure", icon: Cloud },
+      { name: "3CX", desc: "Unified VoIP Communications", icon: Zap },
+      { name: "Microsoft Teams", desc: "Team Collaboration & Calls", icon: Layers },
+      { name: "Zoom", desc: "Video Meetings & Webinars", icon: Zap },
     ],
   },
   {
-    category: "Integrations & APIs",
+    category: "Productivity & Developer Tools",
     apps: [
-      { name: "n8n Workflow Automation", desc: "Custom webhooks & sync", icon: Layers },
-      { name: "Payment Gateways & POS", desc: "Local & regional billing", icon: ShieldCheck },
-      { name: "NestJS Microservices", desc: "Enterprise backend API", icon: Cpu },
+      { name: "Figma", desc: "Interface & Experience Design", icon: Layers },
+      { name: "GitHub", desc: "Code Repository & Actions CI", icon: Cpu },
+      { name: "Slack", desc: "Messaging & Notifications", icon: Zap },
+      { name: "Jira", desc: "Issue Tracking & Agile Sprints", icon: Database },
     ],
   },
 ];
@@ -59,7 +62,7 @@ export function IntegrationsShowcase() {
                   type="button"
                   className="bg-[#2D738D] hover:bg-[#235b70] text-white inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold transition-colors duration-100 ease-in cursor-pointer"
                 >
-                  Explore Automation Layer
+                  Explore Integration Solutions
                   <ArrowRight className="h-4 w-4" />
                 </button>
               </Link>

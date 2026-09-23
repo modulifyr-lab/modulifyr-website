@@ -20,8 +20,8 @@ import { ProcessSection } from "@/components/ui/ProcessSection";
 interface FormState {
   name: string;
   email: string;
-  subject: string;
-  portfolio: string;
+  phone: string;
+  interestedIn: string;
   message: string;
   termsAgreed: boolean;
   website: string; // honeypot
@@ -30,8 +30,8 @@ interface FormState {
 const initialForm: FormState = {
   name: "",
   email: "",
-  subject: "",
-  portfolio: "",
+  phone: "",
+  interestedIn: "",
   message: "",
   termsAgreed: false,
   website: "",
@@ -68,8 +68,8 @@ export function ContactForm() {
         body: JSON.stringify({
           name: form.name,
           email: form.email,
-          subject: form.subject || "Discovery Call Inquiry",
-          message: `${form.message}\n\nPortfolio/Ref: ${form.portfolio}`,
+          subject: `Discovery Call Inquiry - ${form.interestedIn || "General"}`,
+          message: `Phone: ${form.phone}\nInterested In: ${form.interestedIn}\n\nDetails: ${form.message}`,
           website: form.website,
         }),
       });
@@ -101,7 +101,7 @@ export function ContactForm() {
                 GET IN TOUCH
               </span>
               <h1 className="text-h1 font-bold text-foreground leading-[1.1]">
-                Let&apos;s Talk About Your Project.
+                Let&apos;s Talk About <span className="text-[#6FA8B8]">Your Project</span>.
               </h1>
               <p className="text-body1 text-text-alt leading-relaxed">
                 Whether you have a clear spec or just a problem you&apos;re trying to solve, reach out.
@@ -129,15 +129,15 @@ export function ContactForm() {
                     type="button"
                     className="bg-[#2D738D] hover:bg-[#235b70] text-white rounded-lg px-6 py-3 text-sm font-semibold transition-colors duration-100 ease-in cursor-pointer"
                   >
-                    Book Discovery Call
+                    Book a free Consultation Today
                   </button>
                 </a>
-                <Link href="/request-proposal">
+                <Link href="/services">
                   <button
                     type="button"
                     className="bg-bg-main border-border-main text-foreground hover:bg-bg-alt rounded-lg border px-6 py-3 text-sm font-semibold transition-colors duration-100 ease-in cursor-pointer"
                   >
-                    Request Proposal
+                    Explore Packages
                   </button>
                 </Link>
               </div>
@@ -190,7 +190,7 @@ export function ContactForm() {
                       name="name"
                       value={form.name}
                       onChange={handleChange}
-                      placeholder="e.g. Rijan Mainali"
+                      placeholder="Enter your full name"
                       required
                       className="w-full bg-bg-main border-border-main rounded-lg border px-3.5 py-2.5 text-sm font-sans focus:outline-none focus:border-[#2D738D]"
                     />
@@ -198,7 +198,7 @@ export function ContactForm() {
 
                   <div className="space-y-1.5">
                     <label htmlFor="contact-email" className="text-caption1 font-semibold text-foreground">
-                      Email Address *
+                      Email *
                     </label>
                     <input
                       id="contact-email"
@@ -206,41 +206,47 @@ export function ContactForm() {
                       name="email"
                       value={form.email}
                       onChange={handleChange}
-                      placeholder="e.g. contact@company.com"
+                      placeholder="example@gmail.com"
                       required
                       className="w-full bg-bg-main border-border-main rounded-lg border px-3.5 py-2.5 text-sm font-sans focus:outline-none focus:border-[#2D738D]"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label htmlFor="contact-portfolio" className="text-caption1 font-semibold text-foreground">
-                      Portfolio / Website / Ref Link
+                    <label htmlFor="contact-phone" className="text-caption1 font-semibold text-foreground">
+                      Phone number *
                     </label>
                     <input
-                      id="contact-portfolio"
-                      type="text"
-                      name="portfolio"
-                      value={form.portfolio}
+                      id="contact-phone"
+                      type="tel"
+                      name="phone"
+                      value={form.phone}
                       onChange={handleChange}
-                      placeholder="Enter N/A if portfolio link is not available"
+                      placeholder="9841222335"
+                      required
                       className="w-full bg-bg-main border-border-main rounded-lg border px-3.5 py-2.5 text-sm font-sans focus:outline-none focus:border-[#2D738D]"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label htmlFor="contact-message" className="text-caption1 font-semibold text-foreground">
-                      Project Details / Questions *
+                    <label htmlFor="contact-interested" className="text-caption1 font-semibold text-foreground">
+                      Interested In *
                     </label>
-                    <textarea
-                      id="contact-message"
-                      name="message"
-                      value={form.message}
-                      onChange={handleChange}
-                      placeholder="Briefly describe what you're building..."
+                    <select
+                      id="contact-interested"
+                      name="interestedIn"
+                      value={form.interestedIn}
+                      onChange={(e) => setForm((prev) => ({ ...prev, interestedIn: e.target.value }))}
                       required
-                      rows={3}
-                      className="w-full bg-bg-main border-border-main rounded-lg border px-3.5 py-2.5 text-sm font-sans focus:outline-none focus:border-[#2D738D] resize-none"
-                    />
+                      className="w-full bg-bg-main border-border-main rounded-lg border px-3.5 py-2.5 text-sm font-sans focus:outline-none focus:border-[#2D738D]"
+                    >
+                      <option value="" disabled>Select a service</option>
+                      <option value="Strategy Sprint">Strategy Sprint</option>
+                      <option value="Launch Kit">Launch Kit</option>
+                      <option value="Automation Layer">Automation Layer</option>
+                      <option value="Custom ERP / Software">Custom ERP / Software</option>
+                      <option value="Other Inquiries">Other Inquiries</option>
+                    </select>
                   </div>
 
                   {/* Honeypot */}
@@ -282,7 +288,7 @@ export function ContactForm() {
                       </>
                     ) : (
                       <>
-                        Book Discovery Call <ArrowRight className="h-4 w-4" />
+                        Get a Free Consultation <ArrowRight className="h-4 w-4" />
                       </>
                     )}
                   </button>
@@ -348,28 +354,43 @@ export function ContactForm() {
             </div>
           </div>
 
-          {/* Office Showcase Panel */}
-          <div className="bg-bg-main border-border-main rounded-2xl border p-8 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div className="space-y-2">
-              <span className="text-caption1 font-bold text-[#2D738D] tracking-wider uppercase">
-                MODULIFYR — ENGINEERING SYSTEMS THAT SCALE
+          {/* Live Google Map Container with Overlay */}
+          <div className="relative rounded-2xl border border-border-main overflow-hidden shadow-lg min-h-[400px]">
+            <iframe
+              title="Modulifyr Birtamode HQ Location Map"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3566.2366874987!2d87.9866238!3d26.6478125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39e5ba5555555555%3A0x123456789abcdef!2sBirtamode%201%2C%20Jhapa%2C%20Nepal!5e0!3m2!1sen!2snp!4v1700000000000!5m2!1sen!2snp"
+              width="100%"
+              height="450"
+              style={{ border: 0 }}
+              allowFullScreen={false}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="w-full h-full min-h-[450px]"
+            />
+
+            {/* Overlay Card */}
+            <div className="absolute bottom-6 left-6 right-6 md:right-auto md:max-w-md bg-bg-main/95 border border-border-main rounded-xl p-6 backdrop-blur-md shadow-xl space-y-3">
+              <span className="text-caption2 font-bold text-[#2D738D] tracking-wider uppercase block">
+                Modulifyr — Engineering systems that scale
               </span>
-              <h3 className="text-h4 font-bold text-foreground">
+              <h3 className="text-body1 font-bold text-foreground">
                 Birtamode, Ward 1, Gauri Tol, Jhapa, Nepal
               </h3>
-              <p className="text-body2 text-text-alt">
-                Mon–Fri, 9:00 AM–6:00 PM NPT • NPT (UTC+5:45) — natural overlap with both European
-                mornings &amp; Asian business hours.
+              <p className="text-caption1 text-text-alt">
+                Mon–Fri, 9:00 AM–6:00 PM NPT
               </p>
-            </div>
-            <a href="#booking-form" className="shrink-0">
-              <button
-                type="button"
-                className="bg-[#2D738D] hover:bg-[#235b70] text-white rounded-lg px-6 py-3 text-sm font-semibold transition-colors duration-100 ease-in cursor-pointer"
+              <p className="text-caption2 text-text-dim">
+                NPT (UTC+5:45) — natural overlap with both European mornings &amp; Asian business hours.
+              </p>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Birtamode+Ward+1+Gauri+Tol+Jhapa+Nepal"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-caption1 font-bold text-[#2D738D] hover:underline pt-1"
               >
-                Schedule Meeting
-              </button>
-            </a>
+                View map &amp; directions <ArrowRight className="h-3.5 w-3.5" />
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -401,14 +422,21 @@ export function ContactForm() {
             </a>
           </div>
 
-          <div className="pt-2">
+          <div className="flex flex-wrap justify-center gap-4 pt-2">
             <a href="#booking-form">
               <button
                 type="button"
                 className="bg-[#2D738D] hover:bg-[#235b70] text-white rounded-lg px-8 py-3.5 text-base font-semibold transition-colors duration-100 ease-in cursor-pointer"
               >
+                Free consultation
+              </button>
+            </a>
+            <a href="#booking-form">
+              <button
+                type="button"
+                className="bg-bg-main border-border-main text-foreground hover:bg-bg-alt rounded-lg border px-8 py-3.5 text-base font-semibold transition-colors duration-100 ease-in cursor-pointer"
+              >
                 Talk to experts
-                <ArrowRight className="ml-2 h-4 w-4 inline" />
               </button>
             </a>
           </div>

@@ -17,7 +17,7 @@ interface LogoMarqueeProps {
 }
 
 export function LogoMarquee({ tags = DEFAULT_CAPABILITY_TAGS }: LogoMarqueeProps) {
-  const duplicatedLogos = [...tags, ...tags, ...tags];
+  const duplicatedLogos = [...tags, ...tags, ...tags, ...tags];
 
   return (
     <div className="w-full overflow-hidden bg-bg-alt border-y border-border-main py-6 transition-colors duration-300">
@@ -26,10 +26,10 @@ export function LogoMarquee({ tags = DEFAULT_CAPABILITY_TAGS }: LogoMarqueeProps
           __html: `
             @keyframes logo-scroll {
               0% { transform: translateX(0); }
-              100% { transform: translateX(-33.333%); }
+              100% { transform: translateX(-50%); }
             }
             .animate-logo-marquee {
-              animation: logo-scroll 18s linear infinite;
+              animation: logo-scroll 25s linear infinite;
             }
             @media (prefers-reduced-motion: reduce) {
               .animate-logo-marquee {
@@ -39,16 +39,16 @@ export function LogoMarquee({ tags = DEFAULT_CAPABILITY_TAGS }: LogoMarqueeProps
           `,
         }}
       />
-      <div className="flex w-max items-center gap-12 animate-logo-marquee select-none">
+      <div className="flex w-max items-center gap-6 animate-logo-marquee select-none">
         {duplicatedLogos.map((logo, idx) => (
           <div
             key={idx}
-            className="flex items-center gap-2 bg-bg-main border border-border-main/80 rounded-full px-5 py-2 shadow-sm shrink-0"
+            className="flex items-center gap-3 bg-bg-main border border-border-main rounded-full px-5 py-2 shadow-sm shrink-0"
           >
-            <div className="h-2 w-2 rounded-full bg-[#2D738D]" />
-            <span className="text-caption1 font-bold tracking-wider text-foreground uppercase">
+            <span className="text-sm font-bold tracking-wider text-foreground uppercase">
               {logo.name}
             </span>
+            <span className="text-[#E8A33D] font-bold text-xs">·</span>
           </div>
         ))}
       </div>

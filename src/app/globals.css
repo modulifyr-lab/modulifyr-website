@@ -13,6 +13,8 @@
   --color-brand-teal: #2d738d;
   --color-brand-navy: #0f1724;
   --color-brand-teal-light: #b8e0e9;
+  --color-accent-amber: #e8a33d;
+  --color-accent-teal: #6fa8b8;
 
   /* Dynamic Theme Colors */
   --color-bg-light: var(--bg-main);
@@ -40,6 +42,10 @@
   --background: var(--bg-main);
   --foreground: var(--text-main);
 
+  /* Accent tokens */
+  --accent-amber: #e8a33d;
+  --accent-teal: #6fa8b8;
+
   /* Radial glow accent & perspective grid gradients */
   --gradient-primary: radial-gradient(circle, #b8e0e9 0%, #2d738d 100%);
   --gradient-grid: linear-gradient(180deg, rgba(64, 158, 183, 0.1) 0%, #2a4f60 100%);
@@ -56,6 +62,9 @@
 
   --background: var(--bg-main);
   --foreground: var(--text-main);
+
+  --accent-amber: #e8a33d;
+  --accent-teal: #6fa8b8;
 
   --gradient-primary: radial-gradient(circle, rgba(184, 224, 233, 0.25) 0%, rgba(45, 115, 141, 0.4) 100%);
   --gradient-grid: linear-gradient(180deg, rgba(64, 158, 183, 0.15) 0%, rgba(42, 79, 96, 0.6) 100%);
