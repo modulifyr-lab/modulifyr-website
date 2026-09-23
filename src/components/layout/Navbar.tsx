@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
-import { Sun, Moon, Menu, X, ChevronDown, Globe } from "lucide-react";
+import { Sun, Moon, Menu, X, ChevronDown } from "lucide-react";
 import { RegionSelector } from "@/components/RegionSelector";
 
 interface NavDropdownItem {
@@ -154,7 +154,6 @@ export function Navbar() {
           {/* ── Desktop Navigation Links (4 main items) ──────────────────────── */}
           <div className="hidden items-center gap-8 lg:flex" role="menubar">
             {NAV_GROUPS.map((group) => {
-              const isDropdown = Boolean(group.items);
               const isOpen = activeDropdown === group.name;
               const isDirectActive = group.href ? pathname === group.href : false;
               const isChildActive = group.items?.some(

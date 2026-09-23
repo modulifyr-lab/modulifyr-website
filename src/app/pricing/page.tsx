@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Compass, Layout, Workflow } from "lucide-react";
+import { ArrowRight, Compass, Layout, Workflow } from "lucide-react";
 import { useRegion } from "@/components/RegionProvider";
 import { RegionSelector } from "@/components/RegionSelector";
 import { formatTierPrice } from "@/lib/pricing";

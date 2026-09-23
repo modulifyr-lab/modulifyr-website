@@ -7,7 +7,6 @@ import {
   AlertCircle,
   Loader2,
   ArrowRight,
-  ShieldCheck,
   Clock,
   DollarSign,
   MapPin,
