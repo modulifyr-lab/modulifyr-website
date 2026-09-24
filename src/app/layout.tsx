@@ -5,7 +5,6 @@ import { RegionProvider } from "@/components/RegionProvider";
 import { RegionModal } from "@/components/RegionModal";
 import { LanguageProvider } from "@/components/LanguageContext";
 // import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
 import { CookieConsentBanner } from "@/components/CookieConsentBanner";
 import Script from "next/script";
 import { cookies } from "next/headers";
@@ -13,6 +12,7 @@ import { isRegion, REGION_COOKIE } from "@/lib/regions";
 
 import { DM_Sans, Syne, Inter } from "next/font/google";
 import { Navbar } from "../components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -282,8 +282,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         />
       </head>
       <body
-        className={`${syne.variable} ${syne.variable} font-sans antialiased transition-colors duration-300`}
-        style={{ overflowY: "auto" }}
+        className={`${dmSans.variable} ${syne.variable} ${inter.variable} font-sans antialiased transition-colors duration-300`}
       >
         {/* Google Tag Manager (noscript) */}
         <noscript>
