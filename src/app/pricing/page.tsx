@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Compass, Layout, Workflow } from "lucide-react";
+import { ArrowRight, Compass, Layout, Workflow } from "lucide-react";
 import { useRegion } from "@/components/RegionProvider";
 import { RegionSelector } from "@/components/RegionSelector";
 import { formatTierPrice } from "@/lib/pricing";
@@ -71,7 +71,7 @@ export default function PricingPage() {
             PRICING
           </span>
           <h1 className="text-h1 font-bold text-foreground leading-[1.1]">
-            Simple, Outcome-Based Pricing.
+            Simple, <span className="text-[#6FA8B8]">Outcome-Based</span> Pricing.
           </h1>
           <p className="text-body1 text-text-alt max-w-2xl mx-auto leading-relaxed">
             Fixed price ranges for every engagement. Confirm scope, pick a tier, know the cost before

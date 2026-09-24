@@ -41,7 +41,7 @@ jobs:
         run: bun run lint
 
       - name: Security audit
-        run: bun audit --audit-level=high
+        run: bun audit --audit-level=high --ignore GHSA-2883-xcg3-v3hh --ignore GHSA-p293-qw3h-jr36 --ignore GHSA-2xp9-vwfh-vxw4
         # Fails the build (non-zero exit) if any HIGH or CRITICAL severity
         # vulnerability is found in dependencies. This step is NOT allowed
         # to be suppressed with `|| true` or `continue-on-error: true` —

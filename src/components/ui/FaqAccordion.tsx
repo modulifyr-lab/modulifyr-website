@@ -81,7 +81,7 @@ export function FaqAccordion({ items = DEFAULT_FAQ_ITEMS }: { items?: FaqItem[] 
                 type="button"
                 className="bg-[#2D738D] hover:bg-[#235b70] text-white w-full rounded-lg py-3 text-sm font-semibold transition-colors duration-100 ease-in cursor-pointer"
               >
-                Talk to Founder
+                Book a free Discovery Call
               </button>
             </Link>
           </div>

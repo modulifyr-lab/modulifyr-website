@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { JobApplicationForm } from "@/components/forms/JobApplicationForm";
 import {
@@ -69,7 +70,94 @@ const ROLE_GROUPS = [
   },
 ];
 
+interface Role {
+  title: string;
+  isOpen: boolean;
+}
+
+interface RoleCategory {
+  icon: typeof Code2;
+  category: string;
+  subLabel: string;
+  roles: Role[];
+}
+
+const CATEGORIES_DATA: RoleCategory[] = [
+  {
+    icon: Code2,
+    category: "Engineering",
+    subLabel: "Core Platform, Architecture & DevEx",
+    roles: [
+      { title: "Full-Stack Engineer", isOpen: true },
+      { title: "Frontend Engineer", isOpen: true },
+      { title: "Backend Engineer", isOpen: true },
+      { title: "DevOps Engineer", isOpen: true },
+      { title: "QA Engineer", isOpen: true },
+      { title: "Solutions Architect", isOpen: true },
+      { title: "Platform Engineer", isOpen: true },
+      { title: "Security Specialist", isOpen: true },
+      { title: "Mobile Systems Engineer", isOpen: true },
+      { title: "Cloud Infrastructure Architect", isOpen: true },
+    ],
+  },
+  {
+    icon: Paintbrush,
+    category: "Design",
+    subLabel: "Design Systems, Product UX & Design Tech",
+    roles: [
+      { title: "UI UX Designer", isOpen: true },
+      { title: "Product Designer", isOpen: true },
+      { title: "UX Researcher", isOpen: true },
+      { title: "Design Systems Lead", isOpen: true },
+    ],
+  },
+  {
+    icon: Briefcase,
+    category: "Product Management",
+    subLabel: "Enterprise Modular Engine & Ecosystem",
+    roles: [
+      { title: "Product Manager", isOpen: true },
+      { title: "Technical Project Manager", isOpen: true },
+    ],
+  },
+  {
+    icon: Megaphone,
+    category: "Marketing and Growth",
+    subLabel: "Demand Gen, Content Engineering & Brand",
+    roles: [
+      { title: "Growth Marketer", isOpen: true },
+      { title: "Content Strategist", isOpen: true },
+      { title: "SEO Specialist", isOpen: true },
+      { title: "Brand & Content Lead", isOpen: true },
+    ],
+  },
+  {
+    icon: BarChart2,
+    category: "Data & Analytics",
+    subLabel: "Pipelines, BI Warehouses & Modeling",
+    roles: [
+      { title: "Data Analyst", isOpen: true },
+      { title: "Revenue Analyst", isOpen: true },
+      { title: "Data Pipeline Engineer", isOpen: true },
+      { title: "BI Dashboard Specialist", isOpen: true },
+    ],
+  },
+];
+
 export default function CareersClient() {
+  const [expandedCategories, setExpandedCategories] = useState<number[]>([]);
+
+  const toggleCategory = (idx: number) => {
+    setExpandedCategories((prev) =>
+      prev.includes(idx) ? prev.filter((i) => i !== idx) : [...prev, idx]
+    );
+  };
+
+  const totalOpenCount = CATEGORIES_DATA.reduce(
+    (acc, cat) => acc + cat.roles.filter((r) => r.isOpen).length,
+    0
+  );
+
   return (
     <div className="flex w-full flex-col">
       {/* ── 1. HERO SECTION ────────────────────────────────────────────────── */}
@@ -79,7 +167,7 @@ export default function CareersClient() {
             CAREERS
           </span>
           <h1 className="text-h1 font-bold text-foreground leading-[1.1]">
-            Join us as we build Modulifyr.
+            Join us as we build <span className="text-[#6FA8B8]">Modulifyr</span>.
           </h1>
           <p className="text-body1 text-text-alt max-w-2xl mx-auto leading-relaxed">
             We&apos;re building Modulifyr from the ground up and looking for people who want to learn,
@@ -91,7 +179,7 @@ export default function CareersClient() {
                 type="button"
                 className="bg-[#2D738D] hover:bg-[#235b70] text-white rounded-lg px-8 py-3.5 text-base font-semibold transition-colors duration-100 ease-in cursor-pointer"
               >
-                Explore Open Positions
+                View open positions
               </button>
             </a>
           </div>
@@ -179,14 +267,19 @@ export default function CareersClient() {
 
       {/* ── 3. OPEN POSITIONS ────────────────────────────────────────────── */}
       <section id="open-positions" className="py-24 bg-bg-main transition-colors duration-300">
-        <div className="container-custom space-y-10">
+        <div className="container-custom max-w-4xl space-y-10">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <span className="text-caption1 font-bold text-[#2D738D] tracking-wider uppercase">
               CAREERS
             </span>
-            <h2 className="text-h2 font-bold text-foreground">
-              Open Positions
-            </h2>
+            <div className="flex items-center justify-center gap-3">
+              <h2 className="text-h2 font-bold text-foreground">
+                Open Positions
+              </h2>
+              <span className="bg-[#2D738D]/10 text-[#2D738D] border border-[#2D738D]/20 rounded-full px-3 py-1 text-sm font-bold">
+                {totalOpenCount} jobs open
+              </span>
+            </div>
             <p className="text-body1 text-text-alt">
               Join us in building Modulifyr, contribute to real projects, and grow through hands-on
               experience.
@@ -199,39 +292,84 @@ export default function CareersClient() {
             </div>
           </div>
 
-          {/* Role Category Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {ROLE_GROUPS.map((group, idx) => {
+          {/* Expandable Category Rows */}
+          <div className="flex flex-col gap-4">
+            {CATEGORIES_DATA.map((group, idx) => {
               const Icon = group.icon;
+              const isExpanded = expandedCategories.includes(idx);
+              const openCount = group.roles.filter((r) => r.isOpen).length;
+
               return (
                 <div
                   key={idx}
-                  className="bg-bg-alt border-border-main rounded-2xl border p-8 space-y-4 shadow-sm hover:border-[#2D738D]/50 transition-colors"
+                  className="bg-bg-alt border-border-main rounded-2xl border transition-all duration-300 overflow-hidden shadow-sm"
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-xl bg-[#2D738D]/10 text-[#2D738D] flex items-center justify-center shrink-0">
-                      <Icon className="h-5 w-5" />
+                  <button
+                    type="button"
+                    onClick={() => toggleCategory(idx)}
+                    aria-expanded={isExpanded}
+                    className="w-full flex items-center justify-between p-6 text-left cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2D738D]"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="h-10 w-10 rounded-xl bg-[#2D738D]/10 text-[#2D738D] flex items-center justify-center shrink-0">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-3">
+                          <h3 className="text-h5 font-bold text-foreground">
+                            {group.category}
+                          </h3>
+                          <span className="bg-bg-main border border-border-main rounded-full px-2.5 py-0.5 text-xs font-semibold text-[#2D738D]">
+                            {openCount} open positions
+                          </span>
+                        </div>
+                        <p className="text-caption1 text-text-alt mt-0.5">
+                          {group.subLabel}
+                        </p>
+                      </div>
                     </div>
-                    <h3 className="text-h4 font-bold text-foreground">
-                      {group.category}
-                    </h3>
-                  </div>
+                    <div className="h-8 w-8 rounded-full bg-bg-main border border-border-main flex items-center justify-center shrink-0">
+                      <span className={`text-[#2D738D] font-extrabold transition-transform duration-300 ${isExpanded ? "rotate-180" : ""}`}>
+                        ↓
+                      </span>
+                    </div>
+                  </button>
 
-                  <p className="text-body2 text-text-alt leading-relaxed">
-                    {group.description}
-                  </p>
-
-                  <div className="flex flex-wrap gap-2 pt-2">
-                    {group.roles.map((role, rIdx) => (
-                      <a
-                        key={rIdx}
-                        href="#application-form"
-                        className="bg-bg-main border border-border-main hover:border-[#2D738D] text-foreground rounded-lg px-3 py-1.5 text-caption1 font-semibold transition-colors"
-                      >
-                        {role}
-                      </a>
-                    ))}
-                  </div>
+                  {/* Expanded Roles List */}
+                  {isExpanded && (
+                    <div className="p-6 pt-2 border-t border-border-main/60 bg-bg-main/50 space-y-3">
+                      {group.roles.map((role, rIdx) => (
+                        <div
+                          key={rIdx}
+                          className="flex items-center justify-between p-3.5 rounded-xl border border-border-main/60 bg-bg-main hover:border-[#2D738D]/50 transition-colors"
+                        >
+                          <div className="flex items-center gap-3">
+                            <span
+                              className={`h-2.5 w-2.5 rounded-full ${
+                                role.isOpen ? "bg-[#6FA8B8]" : "bg-[#0F1724]"
+                              }`}
+                              title={role.isOpen ? "Open position" : "Closed position"}
+                            />
+                            <span className="text-body2 font-semibold text-foreground">
+                              {role.title}
+                            </span>
+                          </div>
+                          {role.isOpen ? (
+                            <a
+                              href="#application-form"
+                              className="text-xs font-bold text-[#2D738D] hover:underline"
+                            >
+                              Apply Now →
+                            </a>
+                          ) : (
+                            <span className="text-xs font-semibold text-text-dim">
+                              Closed
+                            </span>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               );
             })}
@@ -250,15 +388,15 @@ export default function CareersClient() {
             we&apos;ll reach out.
           </p>
           <div className="pt-2">
-            <Link href="/contact">
+            <a href="#application-form">
               <button
                 type="button"
                 className="bg-[#2D738D] hover:bg-[#235b70] text-white rounded-lg px-8 py-3.5 text-base font-semibold transition-colors duration-100 ease-in cursor-pointer"
               >
-                Contact Us
+                Drop Your Resume
                 <ArrowRight className="ml-2 h-4 w-4 inline" />
               </button>
-            </Link>
+            </a>
           </div>
         </div>
       </section>

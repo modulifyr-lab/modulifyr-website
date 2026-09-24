@@ -24,6 +24,8 @@
   --color-brand-teal: #2d738d;
   --color-brand-navy: #0f1724;
   --color-brand-teal-light: #b8e0e9;
+  --color-accent-amber: #e8a33d;
+  --color-accent-teal: #6fa8b8;
 
   /* Dynamic Theme Colors */
   --color-bg-light: var(--bg-main);
@@ -123,6 +125,10 @@
 
   --background: var(--bg-main);
   --foreground: var(--text-main);
+
+  /* Accent tokens */
+  --accent-amber: #e8a33d;
+  --accent-teal: #6fa8b8;
 
   /* Radial glow accent & perspective grid gradients */
   --gradient-primary: radial-gradient(circle, #b8e0e9 0%, #2d738d 100%);

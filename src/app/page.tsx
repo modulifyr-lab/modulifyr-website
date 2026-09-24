@@ -60,7 +60,7 @@ export default function Home() {
           </span>
 
           <h1 className="text-h1 font-bold text-foreground leading-[1.1]">
-            Built Around Your Business. Built to Scale.
+            Built Around Your <span className="text-[#E8A33D]">Business</span>. Built to Scale.
           </h1>
 
           <p className="text-body1 text-text-alt max-w-2xl leading-relaxed">
@@ -204,7 +204,7 @@ export default function Home() {
                 type="button"
                 className="bg-bg-main border-border-main text-foreground hover:bg-bg-alt inline-flex items-center gap-2 rounded-lg border px-5 py-2.5 text-sm font-semibold transition-colors"
               >
-                View all
+                View All Articles
                 <ArrowRight className="h-4 w-4" />
               </button>
             </Link>
@@ -307,7 +307,9 @@ export default function Home() {
               <p className="text-body1 text-text-alt leading-relaxed">
                 The Planning Bord is an integrated ERP platform designed to bring essential
                 business operations into one connected system. It combines inventory, HR, project
-                management, finance, and automation in a unified platform.
+                management, finance, and automation in a unified platform. The solution helps modern
+                teams streamline daily workflows, improve visibility, and manage their operations
+                more efficiently.
               </p>
               <div className="pt-2">
                 <Link href="/work">
@@ -315,7 +317,7 @@ export default function Home() {
                     type="button"
                     className="bg-[#2D738D] hover:bg-[#235b70] text-white inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold transition-colors duration-100 ease-in cursor-pointer"
                   >
-                    Explore Case Study
+                    View Details
                     <ArrowRight className="h-4 w-4" />
                   </button>
                 </Link>
@@ -347,20 +349,20 @@ export default function Home() {
             Better technology starts here.
           </p>
           <div className="flex flex-wrap justify-center gap-4 pt-4">
-            <Link href="/contact">
+            <Link href="/request-proposal">
               <button
                 type="button"
                 className="bg-[#2D738D] hover:bg-[#235b70] text-white rounded-lg px-8 py-3.5 text-base font-semibold transition-colors duration-100 ease-in cursor-pointer"
               >
-                Schedule Discovery Call
+                Request a Proposal
               </button>
             </Link>
-            <Link href="/request-proposal">
+            <Link href="/contact">
               <button
                 type="button"
                 className="bg-bg-main border-border-main text-foreground hover:bg-bg-alt rounded-lg border px-8 py-3.5 text-base font-semibold transition-colors duration-100 ease-in cursor-pointer"
               >
-                Request Proposal
+                Schedule Discovery Call
               </button>
             </Link>
           </div>
