@@ -1,4 +1,4 @@
-# Modulifyr Website — Internal Engineering Docs
+# Modulifyr Website — Internal Engineering Docs.
 
 **Internal use only.** This is Modulifyr Enterprise's private production website repository. This README is written for our own developers with existing repo access — not for public contributors. Do not share setup details, environment variable names, or internal endpoint paths outside the team.
 
