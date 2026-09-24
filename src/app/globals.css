@@ -1,13 +1,24 @@
 @import "tailwindcss";
 
+@variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --font-sans:
+    var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  --font-heading: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-inter: var(--font-inter-family), ui-sans-serif, system-ui, sans-serif;
+
+  --font-syne: var(--font-syne-family), sans-serif;
+}
+
 @theme {
   --font-sans:
     var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-heading:
-    var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-inter:
-    var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-inter: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
   /* Static Brand Colors */
   --color-brand-teal: #2d738d;
@@ -26,6 +37,79 @@
   /* Transitions */
   --transition-timing-base: cubic-bezier(0.4, 0, 0.2, 1);
   --transition-duration-base: 300ms;
+
+  /* Figmas  */
+  /* Figma Colors */
+  --color-primary: #304778;
+  --color-on-primary: #ffffff;
+
+  --color-cta: #2d738d;
+  --color-on-cta: #ffffff;
+
+  --color-cta-container: #b8e0e9;
+  --color-on-cta-container: #00435a;
+
+  --color-tertiary: #461302;
+  --color-on-tertiary: #281900;
+
+  --color-tertiary-container: #ffdb88;
+  --color-on-tertiary-container: #5d3f00;
+
+  --color-accent-warm: #430709;
+  --color-on-accent-warm: #ffffff;
+
+  --color-error: #460909;
+  --color-on-error: #ffffff;
+
+  --color-error-container: #fee2e2;
+  --color-on-error-container: #93000a;
+
+  --color-background: #ffffff;
+  --color-on-background: #171c21;
+
+  --color-surface: #ffffff;
+  --color-surface-container: #f1f3f5;
+
+  --color-on-surface-variant: #41484d;
+
+  --color-outline: #ffffff;
+}
+
+/* Figma Dark theme */
+.dark {
+  --color-primary: #409eb7;
+  --color-on-primary: #f5f5f5;
+
+  --color-cta: #409eb7;
+  --color-on-cta: #00131a;
+
+  --color-cta-container: #0d3947;
+  --color-on-cta-container: #b8e0e9;
+
+  --color-tertiary: #461302;
+  --color-on-tertiary: #281900;
+
+  --color-tertiary-container: #5d3f00;
+  --color-on-tertiary-container: #ffdb88;
+
+  --color-accent-warm: #430709;
+  --color-on-accent-warm: #f5f5f5;
+
+  --color-error: #460909;
+  --color-on-error: #f5f5f5;
+
+  --color-error-container: #93000a;
+  --color-on-error-container: #fee2e2;
+
+  --color-background: #0f172a;
+  --color-on-background: #edf1f8;
+
+  --color-surface: #1b1f25;
+  --color-surface-container: #22262d;
+
+  --color-on-surface-variant: #c1c7ce;
+
+  --color-outline: #333a42;
 }
 
 :root {
@@ -46,7 +130,7 @@
 }
 
 .dark {
-  --bg-main: #0f1724;
+  --bg-main: #0f172a;
   --bg-alt: #1e293b;
   --bg-deep: #020617;
   --border-main: #334155;
@@ -57,7 +141,11 @@
   --background: var(--bg-main);
   --foreground: var(--text-main);
 
-  --gradient-primary: radial-gradient(circle, rgba(184, 224, 233, 0.25) 0%, rgba(45, 115, 141, 0.4) 100%);
+  --gradient-primary: radial-gradient(
+    circle,
+    rgba(184, 224, 233, 0.25) 0%,
+    rgba(45, 115, 141, 0.4) 100%
+  );
   --gradient-grid: linear-gradient(180deg, rgba(64, 158, 183, 0.15) 0%, rgba(42, 79, 96, 0.6) 100%);
 }
 

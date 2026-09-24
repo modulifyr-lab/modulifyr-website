@@ -1,26 +1,33 @@
 import type { Metadata } from "next";
-import { DM_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { RegionProvider } from "@/components/RegionProvider";
 import { RegionModal } from "@/components/RegionModal";
 import { LanguageProvider } from "@/components/LanguageContext";
-import { Navbar } from "@/components/layout/Navbar";
+// import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CookieConsentBanner } from "@/components/CookieConsentBanner";
 import Script from "next/script";
 import { cookies } from "next/headers";
 import { isRegion, REGION_COOKIE } from "@/lib/regions";
 
+import { DM_Sans, Syne, Inter } from "next/font/google";
+import { Navbar } from "../components/layout/Navbar";
+
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
+  subsets: ["latin"],
+});
+
+const syne = Syne({
+  variable: "--font-syne-family",
+  subsets: ["latin"],
+  weight: ["700"],
+});
+
 // ── Brand fonts ───────────────────────────────────────────────────────────────
 // DM Sans = headline & body font → --font-dm-sans → --font-sans & --font-heading in globals.css
 // Inter   = Special 1 utility    → --font-inter   → --font-inter in globals.css
-
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  variable: "--font-dm-sans",
-  display: "swap",
-});
 
 const inter = Inter({
   subsets: ["latin"],
@@ -275,7 +282,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         />
       </head>
       <body
-        className={`${dmSans.variable} ${inter.variable} font-sans antialiased transition-colors duration-300`}
+        className={`${syne.variable} ${syne.variable} font-sans antialiased transition-colors duration-300`}
         style={{ overflowY: "auto" }}
       >
         {/* Google Tag Manager (noscript) */}
