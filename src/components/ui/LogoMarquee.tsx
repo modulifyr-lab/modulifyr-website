@@ -20,17 +20,24 @@ export function LogoMarquee({ tags = DEFAULT_CAPABILITY_TAGS }: LogoMarqueeProps
   const duplicatedLogos = [...tags, ...tags, ...tags, ...tags];
 
   return (
-    <div className="w-full overflow-hidden bg-bg-alt border-y border-border-main py-6 transition-colors duration-300">
+    <div className="w-full overflow-hidden border-y border-[#334F90]/40 bg-[#334F9066] py-6 transition-colors duration-300">
       <style
         dangerouslySetInnerHTML={{
           __html: `
             @keyframes logo-scroll {
-              0% { transform: translateX(0); }
-              100% { transform: translateX(-50%); }
+              0% {
+                transform: translateX(0);
+              }
+
+              100% {
+                transform: translateX(-50%);
+              }
             }
+
             .animate-logo-marquee {
               animation: logo-scroll 25s linear infinite;
             }
+
             @media (prefers-reduced-motion: reduce) {
               .animate-logo-marquee {
                 animation: none !important;
@@ -39,16 +46,15 @@ export function LogoMarquee({ tags = DEFAULT_CAPABILITY_TAGS }: LogoMarqueeProps
           `,
         }}
       />
-      <div className="flex w-max items-center gap-6 animate-logo-marquee select-none">
+
+      <div className="animate-logo-marquee flex w-max items-center gap-6 select-none">
         {duplicatedLogos.map((logo, idx) => (
-          <div
-            key={idx}
-            className="flex items-center gap-3 bg-bg-main border border-border-main rounded-full px-5 py-2 shadow-sm shrink-0"
-          >
-            <span className="text-sm font-bold tracking-wider text-foreground uppercase">
+          <div key={idx} className="flex shrink-0 items-center gap-3">
+            <span className="text-md font-light tracking-widest text-white uppercase">
               {logo.name}
             </span>
-            <span className="text-[#E8A33D] font-bold text-xs">·</span>
+
+            <span className="text-accent-amber text-2xl font-bold">✦</span>
           </div>
         ))}
       </div>
