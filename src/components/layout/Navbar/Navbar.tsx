@@ -89,7 +89,7 @@ export function Navbar() {
       {/* Skip to content */}
       <a
         href="#main-content"
-        className="bg-cta text-on-cta focus-visible:outline-cta sr-only fixed top-2  z-100 rounded-lg py-2 text-sm font-bold focus:not-sr-only focus-visible:outline-2 focus-visible:outline-offset-2"
+        className="bg-cta text-on-cta focus-visible:outline-cta sr-only fixed top-2 z-100 rounded-lg py-2 text-sm font-bold focus:not-sr-only focus-visible:outline-2 focus-visible:outline-offset-2"
       >
         {t("nav.skip_to_content")}
       </a>
