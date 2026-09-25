@@ -12,7 +12,7 @@ interface FooterLinksProps {
 
 export function FooterLinks({ title, links }: FooterLinksProps) {
   return (
-    <div className="flex flex-col gap-4 lg:col-span-2">
+    <div className="flex flex-col gap-4 items-center">
       <h4 className="font-sans text-sm leading-[110%] font-normal tracking-normal text-[#FFC24B]">
         {title}
       </h4>

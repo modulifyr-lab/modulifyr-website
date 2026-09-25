@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export function FooterBrand() {
   return (
-    <div className="flex flex-col gap-5 pr-0 lg:col-span-4 lg:pr-8">
+    <div className="flex flex-col gap-5 pr-6">
       <Link href="/" className="flex items-center">
         <div className="flex items-center justify-center">
           <Image
@@ -20,7 +20,7 @@ export function FooterBrand() {
 
       <p className="max-w-sm text-justify text-sm leading-relaxed text-slate-400">
         Custom software systems for growing businesses. Modular ERP, automation, and integrations
-        built to scale — engineered for global clients.
+        built to scale — from Nepal, for clients worldwide.
       </p>
     </div>
   );

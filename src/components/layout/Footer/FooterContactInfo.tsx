@@ -15,7 +15,7 @@ const CONTACT_INFO = [
 
 export function FooterContactInfo() {
   return (
-    <div className="flex flex-col gap-4 lg:col-span-2">
+    <div className="flex flex-col gap-4">
       <h4 className="font-sans text-sm leading-[110%] font-normal tracking-normal text-[#FFC24B]">
         Contact
       </h4>
