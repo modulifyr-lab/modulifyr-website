@@ -145,8 +145,8 @@ export default function AutomationLayerPage() {
           <div className="max-w-3xl">
             <Reveal variant="fade-scale">
               <div className="mb-4 flex items-center gap-2">
-                <Settings className="text-[#2D738D] h-6 w-6" />
-                <span className="text-[#2D738D] text-xs font-bold tracking-widest uppercase">
+                <Settings className="h-6 w-6 text-[#2D738D]" />
+                <span className="text-xs font-bold tracking-widest text-[#2D738D] uppercase">
                   Integrations & Automation
                 </span>
               </div>
@@ -195,8 +195,8 @@ export default function AutomationLayerPage() {
             {whatWeConnect.map((item, i) => (
               <Reveal key={i} variant="fade-scale" delay={i * 100}>
                 <div className="flex h-full gap-4">
-                  <div className="bg-[#2D738D]/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
-                    <item.icon className="text-[#2D738D] h-5 w-5" />
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#2D738D]/10">
+                    <item.icon className="h-5 w-5 text-[#2D738D]" />
                   </div>
                   <div>
                     <h3 className="text-foreground mb-1 text-sm font-bold">{item.label}</h3>
@@ -232,13 +232,11 @@ export default function AutomationLayerPage() {
               <Reveal key={i} variant="fade-up" delay={i * 80}>
                 <Card
                   className={`relative flex h-full flex-col gap-5 ${
-                    tier.highlight
-                      ? "border-[#2D738D] ring-[#2D738D]/20 shadow-xl ring-1"
-                      : ""
+                    tier.highlight ? "border-[#2D738D] shadow-xl ring-1 ring-[#2D738D]/20" : ""
                   }`}
                 >
                   {tier.highlight && (
-                    <div className="bg-[#2D738D] absolute top-0 left-8 -translate-y-1/2 rounded-full px-3 py-1 text-[10px] font-bold tracking-widest text-white uppercase">
+                    <div className="absolute top-0 left-8 -translate-y-1/2 rounded-full bg-[#2D738D] px-3 py-1 text-[10px] font-bold tracking-widest text-white uppercase">
                       Most Common
                     </div>
                   )}
@@ -251,7 +249,7 @@ export default function AutomationLayerPage() {
                           <div className="text-text-muted text-xs line-through">
                             {formatTierPriceStandard("automationLayer", tier.tierKey, activeRegion)}
                           </div>
-                          <div className="font-heading text-[#2D738D] text-2xl font-bold">
+                          <div className="font-heading text-2xl font-bold text-[#2D738D]">
                             {formatTierPriceFounding("automationLayer", tier.tierKey, activeRegion)}
                           </div>
                           <div className="text-text-muted mt-0.5 text-[11px]">
@@ -259,7 +257,7 @@ export default function AutomationLayerPage() {
                           </div>
                         </div>
                       ) : (
-                        <div className="font-heading text-[#2D738D] text-2xl font-bold">
+                        <div className="font-heading text-2xl font-bold text-[#2D738D]">
                           {formatTierPriceStandard("automationLayer", tier.tierKey, activeRegion)}
                         </div>
                       )
@@ -336,22 +334,22 @@ export default function AutomationLayerPage() {
           <Reveal variant="fade-scale">
             <div className="border-border-base max-w-3xl rounded-2xl border bg-white p-8">
               <div className="mb-4 flex items-start gap-3">
-                <AlertCircle className="text-[#2D738D] mt-0.5 h-5 w-5 shrink-0" />
+                <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-[#2D738D]" />
                 <h3 className="text-foreground font-bold">What you are responsible for</h3>
               </div>
               <ul className="text-text-secondary space-y-2 text-sm">
                 <li className="flex items-start gap-2">
-                  <ChevronRight className="text-[#2D738D] mt-0.5 h-4 w-4 shrink-0" />
+                  <ChevronRight className="mt-0.5 h-4 w-4 shrink-0 text-[#2D738D]" />
                   API credentials, access tokens, and admin access to all systems being connected —
                   we cannot build integrations without this
                 </li>
                 <li className="flex items-start gap-2">
-                  <ChevronRight className="text-[#2D738D] mt-0.5 h-4 w-4 shrink-0" />
+                  <ChevronRight className="mt-0.5 h-4 w-4 shrink-0 text-[#2D738D]" />
                   Timely responses during the build window — blocked credentials or missing access
                   stall the entire project
                 </li>
                 <li className="flex items-start gap-2">
-                  <ChevronRight className="text-[#2D738D] mt-0.5 h-4 w-4 shrink-0" />
+                  <ChevronRight className="mt-0.5 h-4 w-4 shrink-0 text-[#2D738D]" />
                   Any documentation on the APIs or systems involved if available
                 </li>
               </ul>
@@ -383,9 +381,7 @@ export default function AutomationLayerPage() {
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link href="/contact">
-                  <Button className="bg-[#2D738D] hover:bg-[#235b70]">
-                    Describe Your Setup
-                  </Button>
+                  <Button className="bg-[#2D738D] hover:bg-[#235b70]">Describe Your Setup</Button>
                 </Link>
                 <Link href="/services">
                   <Button

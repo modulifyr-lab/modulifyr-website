@@ -131,7 +131,7 @@
   --accent-teal: #6fa8b8;
 
   /* Radial glow accent & perspective grid gradients */
-  --gradient-primary: radial-gradient(circle, #b8e0e9 0%, #2d738d 100%);
+  --gradient-primary: radial-gradient(circle, var(--color-cta-container) 0%, var(--color-cta) 100%);
   --gradient-grid: linear-gradient(180deg, rgba(64, 158, 183, 0.1) 0%, #2a4f60 100%);
 }
 

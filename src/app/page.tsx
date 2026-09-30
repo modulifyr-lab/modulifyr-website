@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { LogoMarquee } from "@/components/ui/LogoMarquee";
-import { ServicesSection } from "@/components/ui/ServicesSection";
 import { ProcessSection } from "@/components/ui/ProcessSection";
 import { IntegrationsShowcase } from "@/components/ui/IntegrationsShowcase";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
@@ -18,7 +17,8 @@ import {
   UserCheck,
   Eye,
 } from "lucide-react";
-import { HeroSection } from "@/components/sections/Hero";
+import { HeroSection } from "@/components/sections/LandingPage";
+import { ServicesSection } from "@/components/sections/LandingPage/ServiceSection";
 
 export default function Home() {
   const organizationSchema = {
