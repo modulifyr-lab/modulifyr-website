@@ -48,7 +48,7 @@ export const PROCESS_STEPS: ProcessStep[] = [
   },
 ];
 
-export function ProcessSection() {
+export function ProcessSections() {
   const [activeStep, setActiveStep] = useState<number>(0);
   const dwellTimerRef = useRef<NodeJS.Timeout | null>(null);
 
