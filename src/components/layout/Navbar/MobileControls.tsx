@@ -22,7 +22,8 @@ export function MobileControls({ menuOpen, onToggleMenu, menuButtonRef }: Mobile
         aria-label={t("nav.toggle_theme")}
         className="text-on-background hover:bg-surface-container inline-flex h-10 w-10 items-center justify-center rounded-lg transition-colors"
       >
-        {resolvedTheme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+        <Sun className="hidden h-5 w-5 dark:block" aria-hidden="true" />
+        <Moon className="block h-5 w-5 dark:hidden" aria-hidden="true" />
       </button>
 
       <button
