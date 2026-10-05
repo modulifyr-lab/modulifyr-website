@@ -15,7 +15,7 @@ import {
   MessageSquare,
   Mail,
 } from "lucide-react";
-import { ProcessSection } from "@/components/ui/ProcessSection";
+// import { ProcessSection } from "@/components/ui/ProcessSection";
 
 interface FormState {
   name: string;
@@ -409,7 +409,7 @@ export function ContactForm() {
       </section>
 
       {/* ── 3. 5-PHASE PROCESS RECAP ───────────────────────────────────────── */}
-      <ProcessSection />
+      {/* <ProcessSection /> */}
 
       {/* ── 4. NEED HELP RIGHT NOW BANNER ───────────────────────────────────── */}
       <section className="bg-bg-main py-20 transition-colors duration-300">
