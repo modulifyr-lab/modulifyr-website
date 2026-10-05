@@ -19,6 +19,7 @@ import {
 import { HeroSection } from "@/components/sections/LandingPage";
 import { ServicesSection } from "@/components/sections/LandingPage/ServiceSection";
 import { ProcessSection } from "@/components/sections/LandingPage/ProcessSection";
+import { WhyModulifyrSection } from "@/components/sections/LandingPage/Whymodulifyrsection";
 
 export default function Home() {
   const organizationSchema = {
@@ -61,68 +62,7 @@ export default function Home() {
       <LogoMarquee />
 
       {/* ── 2. WHY MODULIFYR ───────────────────────────────────────────────── */}
-      <section className="bg-bg-alt/60 border-border-main border-b py-24 transition-colors duration-300">
-        <div className="container-custom">
-          <div className="mx-auto mb-16 max-w-3xl space-y-3 text-center">
-            <span className="text-caption1 font-bold tracking-wider text-[#2D738D] uppercase">
-              WHY MODULIFYR
-            </span>
-            <h2 className="text-h2 text-foreground font-bold">
-              Because your business shouldn&apos;t have to adapt to a software.
-            </h2>
-            <p className="text-subhead text-text-alt">
-              Flexible systems, clear costs, and a transparent process.
-            </p>
-          </div>
-
-          {/* 4 Card Grid */}
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-            <div className="bg-bg-main border-border-main space-y-4 rounded-2xl border p-8 shadow-sm transition-colors hover:border-[#2D738D]/50">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#2D738D]/10 text-[#2D738D]">
-                <Layers className="h-6 w-6" />
-              </div>
-              <h3 className="text-h5 text-foreground font-bold">Modular by Design</h3>
-              <p className="text-body2 text-text-alt leading-relaxed">
-                Start with what you need today and add capabilities as your business grows, without
-                rebuilding from scratch.
-              </p>
-            </div>
-
-            <div className="bg-bg-main border-border-main space-y-4 rounded-2xl border p-8 shadow-sm transition-colors hover:border-[#2D738D]/50">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#2D738D]/10 text-[#2D738D]">
-                <CreditCard className="h-6 w-6" />
-              </div>
-              <h3 className="text-h5 text-foreground font-bold">Pay as we Build</h3>
-              <p className="text-body2 text-text-alt leading-relaxed">
-                Pay as work is delivered, so you can see progress, manage costs, and avoid large
-                upfront commitments.
-              </p>
-            </div>
-
-            <div className="bg-bg-main border-border-main space-y-4 rounded-2xl border p-8 shadow-sm transition-colors hover:border-[#2D738D]/50">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#2D738D]/10 text-[#2D738D]">
-                <UserCheck className="h-6 w-6" />
-              </div>
-              <h3 className="text-h5 text-foreground font-bold">Founder-led engineering</h3>
-              <p className="text-body2 text-text-alt leading-relaxed">
-                Work directly with the founder leading your project, with secure, maintainable code
-                tailored to your needs.
-              </p>
-            </div>
-
-            <div className="bg-bg-main border-border-main space-y-4 rounded-2xl border p-8 shadow-sm transition-colors hover:border-[#2D738D]/50">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#2D738D]/10 text-[#2D738D]">
-                <Eye className="h-6 w-6" />
-              </div>
-              <h3 className="text-h5 text-foreground font-bold">Transparent Process</h3>
-              <p className="text-body2 text-text-alt leading-relaxed">
-                Know what&apos;s being built, when it&apos;s happening, and what it costs at every
-                stage, with no surprises along the way.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <WhyModulifyrSection />
 
       {/* ── 3. SERVICES SECTION ───────────────────────────────────────────── */}
       <ServicesSection />
