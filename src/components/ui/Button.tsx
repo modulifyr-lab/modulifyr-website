@@ -1,9 +1,12 @@
 import * as React from "react";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "ghost" | "outline";
   size?: "sm" | "md" | "lg" | "icon";
+  href?: string;
+  external?: boolean;
 }
 
 const buttonVariants = {
@@ -20,19 +23,44 @@ const buttonSizes = {
   icon: "h-10 w-10 p-0",
 };
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = "primary", size = "md", ...props }, ref) => {
+const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
+  ({ className, variant = "primary", size = "md", href, external, children, ...props }, ref) => {
+    const combinedClasses = cn(
+      "inline-flex items-center justify-center rounded-lg font-sans transition-colors duration-100 ease-in disabled:pointer-events-none disabled:opacity-50 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2D738D]",
+      buttonVariants[variant],
+      buttonSizes[size],
+      className
+    );
+
+    if (href) {
+      if (external) {
+        return (
+          <a
+            ref={ref as React.Ref<HTMLAnchorElement>}
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={combinedClasses}
+          >
+            {children}
+          </a>
+        );
+      }
+      return (
+        <Link ref={ref as React.Ref<HTMLAnchorElement>} href={href} className={combinedClasses}>
+          {children}
+        </Link>
+      );
+    }
+
     return (
       <button
-        ref={ref}
-        className={cn(
-          "inline-flex items-center justify-center rounded-lg font-sans transition-colors duration-100 ease-in disabled:pointer-events-none disabled:opacity-50 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2D738D]",
-          buttonVariants[variant],
-          buttonSizes[size],
-          className
-        )}
+        ref={ref as React.Ref<HTMLButtonElement>}
+        className={combinedClasses}
         {...props}
-      />
+      >
+        {children}
+      </button>
     );
   }
 );

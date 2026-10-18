@@ -2,6 +2,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isRateLimited, getClientIp } from "@/lib/ratelimit";
 import logger from "@/lib/logger";
+import { forwardToWebhook } from "@/lib/webhook";
+import { REGION_CODES } from "@/lib/regions";
+
+export const maxDuration = 30;
 
 export async function POST(req: NextRequest) {
   const ip = getClientIp(req);
@@ -63,15 +67,25 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid industry selection" }, { status: 400 });
     }
 
-    // ── Send to Make webhook ──────────────────────────────────────────────
-    const webhookUrl = process.env.MAKE_PROPOSAL_WEBHOOK_URL;
-    if (!webhookUrl) {
-      logger.warn("MAKE_PROPOSAL_WEBHOOK_URL not set — skipping webhook");
-      return NextResponse.json(
-        { success: true, message: "Proposal request received" },
-        { status: 200 }
-      );
+    // ── Region code validation and normalization ───────────────────────────
+    const allowedRegionCodes: string[] = [...REGION_CODES, "not_selected"];
+    const incomingRegionCode = body.region_code ? String(body.region_code).trim() : "";
+    if (incomingRegionCode && !allowedRegionCodes.includes(incomingRegionCode)) {
+      return NextResponse.json({ error: "Invalid region" }, { status: 400 });
     }
+
+    const outgoingRegion =
+      incomingRegionCode === "NP" ? "Nepal / South Asia" : "International";
+    const outgoingRegionCode = incomingRegionCode === "NP" ? "nepal" : "international";
+    const outgoingRegionLabel =
+      body.region && String(body.region).trim() !== ""
+        ? String(body.region).trim()
+        : "Not selected";
+
+    const cleanedBudget = String(body.budget)
+      .replace(/,/g, "")
+      .replace(/\u00A0/g, " ")
+      .trim();
 
     const payload = {
       name: body.name.trim(),
@@ -80,21 +94,16 @@ export async function POST(req: NextRequest) {
       phone: body.phone?.trim() || "Not provided",
       industry: body.industry,
       project_type: body.project_type,
-      budget: (body.budget as string).replace(/,/g, ""),
+      budget: cleanedBudget,
       message: body.message.trim(),
-      region: body.region || "Not specified",
-      region_code: body.region_code || "unknown",
+      region: outgoingRegion,
+      region_code: outgoingRegionCode,
+      region_label: outgoingRegionLabel,
     };
 
-    const makeResponse = await fetch(webhookUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-
-    if (!makeResponse.ok) {
-      logger.error("Make webhook failed for proposal form", { status: makeResponse.status, ip });
-      return NextResponse.json({ error: "Failed to process submission" }, { status: 502 });
+    const result = await forwardToWebhook("PROPOSAL", payload, { ip });
+    if (!result.ok) {
+      return NextResponse.json({ error: result.error }, { status: result.status });
     }
 
     logger.info("Proposal form submitted successfully", {

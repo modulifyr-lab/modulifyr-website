@@ -7,7 +7,7 @@ export const REGIONS: Record<
   Exclude<Region, null>,
   { label: string; currency: "NPR" | "USD" | "GBP" | "CAD" | "AUD" | "EUR"; locale: string }
 > = {
-  NP: { label: "Nepal", currency: "NPR", locale: "ne-NP" },
+  NP: { label: "Nepal", currency: "NPR", locale: "en-IN" },
   US: { label: "United States", currency: "USD", locale: "en-US" },
   GB: { label: "United Kingdom", currency: "GBP", locale: "en-GB" },
   CA: { label: "Canada", currency: "CAD", locale: "en-CA" },
