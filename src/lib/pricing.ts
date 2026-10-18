@@ -296,3 +296,33 @@ export function formatManagedHostingPrice(region: Exclude<Region, null>): string
   const currency = REGIONS[region].currency;
   return formatPrice(managedHostingPricing[currency], region);
 }
+
+export function getPackageRange(
+  pkg: PackagePricingKey,
+  region: Exclude<Region, null>
+): readonly [number, number] {
+  const activeTable = FOUNDING_SLOTS_REMAINING > 0 ? pricingFounding : pricingStandard;
+  const currency = REGIONS[region].currency;
+  const pkgData = activeTable[pkg];
+
+  let min = Infinity;
+  let max = -Infinity;
+
+  for (const tierData of Object.values(pkgData)) {
+    const range = (tierData as Record<string, readonly [number, number]>)[currency];
+    if (range) {
+      if (range[0] < min) min = range[0];
+      if (range[1] > max) max = range[1];
+    }
+  }
+
+  return [min, max] as const;
+}
+
+export function formatPackageRange(
+  pkg: PackagePricingKey,
+  region: Exclude<Region, null>
+): string {
+  const range = getPackageRange(pkg, region);
+  return `${formatCurrencyValue(range[0], region)} – ${formatCurrencyValue(range[1], region)}`;
+}

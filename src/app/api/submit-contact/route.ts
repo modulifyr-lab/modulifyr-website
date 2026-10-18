@@ -2,6 +2,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isRateLimited, getClientIp } from "@/lib/ratelimit";
 import logger from "@/lib/logger";
+import { forwardToWebhook } from "@/lib/webhook";
+
+export const maxDuration = 30;
 
 export async function POST(req: NextRequest) {
   const ip = getClientIp(req);
@@ -49,13 +52,6 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
 
-    // ── Send to Make webhook ──────────────────────────────────────────────
-    const webhookUrl = process.env.MAKE_CONTACT_WEBHOOK_URL;
-    if (!webhookUrl) {
-      logger.warn("MAKE_CONTACT_WEBHOOK_URL not set — skipping webhook");
-      return NextResponse.json({ success: true, message: "Message received" }, { status: 200 });
-    }
-
     const payload = {
       name: body.name.trim(),
       email: body.email.trim().toLowerCase(),
@@ -63,15 +59,9 @@ export async function POST(req: NextRequest) {
       message: body.message.trim(),
     };
 
-    const makeResponse = await fetch(webhookUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-
-    if (!makeResponse.ok) {
-      logger.error("Make webhook failed for contact form", { status: makeResponse.status, ip });
-      return NextResponse.json({ error: "Failed to process submission" }, { status: 502 });
+    const result = await forwardToWebhook("CONTACT", payload, { ip });
+    if (!result.ok) {
+      return NextResponse.json({ error: result.error }, { status: result.status });
     }
 
     logger.info("Contact form submitted successfully", { email: payload.email, ip });

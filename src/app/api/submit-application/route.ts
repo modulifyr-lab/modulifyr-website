@@ -2,6 +2,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isRateLimited, getClientIp } from "@/lib/ratelimit";
 import logger from "@/lib/logger";
+import { forwardToWebhook } from "@/lib/webhook";
+
+export const maxDuration = 30;
 
 // ─── All allowed roles (must match JobApplicationForm.tsx role groups) ────────
 const allowedRoles = [
@@ -128,13 +131,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid LinkedIn URL" }, { status: 400 });
     }
 
-    // ── Send to Make webhook ──────────────────────────────────────────────
-    const webhookUrl = process.env.MAKE_JOB_WEBHOOK_URL;
-    if (!webhookUrl) {
-      logger.warn("MAKE_JOB_WEBHOOK_URL not set — skipping webhook");
-      return NextResponse.json({ success: true, message: "Application received" }, { status: 200 });
-    }
-
     const payload = {
       name: body.name.trim(),
       email: body.email.trim().toLowerCase(),
@@ -146,15 +142,9 @@ export async function POST(req: NextRequest) {
       cover_note: body.cover_note.trim(),
     };
 
-    const makeResponse = await fetch(webhookUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-
-    if (!makeResponse.ok) {
-      logger.error("Make webhook failed for job application", { status: makeResponse.status, ip });
-      return NextResponse.json({ error: "Failed to process submission" }, { status: 502 });
+    const result = await forwardToWebhook("JOB", payload, { ip });
+    if (!result.ok) {
+      return NextResponse.json({ error: result.error }, { status: result.status });
     }
 
     logger.info("Job application submitted successfully", {

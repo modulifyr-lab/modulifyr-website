@@ -1,3 +1,5 @@
+import React from "react";
+import Link from "next/link";
 import type { LucideIcon } from "lucide-react";
 
 interface ButtonProps {
@@ -7,6 +9,8 @@ interface ButtonProps {
   type?: "button" | "submit" | "reset";
   onClick?: () => void;
   className?: string;
+  href?: string;
+  external?: boolean;
 }
 
 export function Button({
@@ -16,6 +20,8 @@ export function Button({
   type = "button",
   onClick,
   className = "",
+  href,
+  external,
 }: ButtonProps) {
   const baseStyles =
     "inline-flex h-12 w-full max-w-72 cursor-pointer items-center justify-center gap-2 rounded-[28px] p-3 text-md font-semibold transition-all";
@@ -27,12 +33,33 @@ export function Button({
     outline: "border border-[#409EB7] text-[#409EB7] hover:bg-[#409EB7]/10",
   };
 
+  const combinedClasses = `${baseStyles} ${variants[variant]} ${className}`;
+
+  if (href) {
+    if (external) {
+      return (
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={combinedClasses}
+          onClick={onClick}
+        >
+          {Icon && <Icon className="h-4 w-4" />}
+          {children}
+        </a>
+      );
+    }
+    return (
+      <Link href={href} className={combinedClasses} onClick={onClick}>
+        {Icon && <Icon className="h-4 w-4" />}
+        {children}
+      </Link>
+    );
+  }
+
   return (
-    <button
-      type={type}
-      onClick={onClick}
-      className={`${baseStyles} ${variants[variant]} ${className}`}
-    >
+    <button type={type} onClick={onClick} className={combinedClasses}>
       {Icon && <Icon className="h-4 w-4" />}
       {children}
     </button>
