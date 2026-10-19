@@ -113,7 +113,7 @@ paths:
       requestBody:
         required: true
         content:
-          application/json:
+          multipart/form-data:
             schema:
               $ref: "#/components/schemas/JobApplicationRequest"
       responses:
@@ -275,7 +275,7 @@ components:
 
     JobApplicationRequest:
       type: object
-      required: [name, email, role, skills, cover_note]
+      required: [name, email, role, skills, cover_note, cv]
       properties:
         name:
           type: string
@@ -287,8 +287,9 @@ components:
           type: string
         role:
           type: string
-          description: One of the open roles listed on the careers page
-          example: "Senior Full-stack Engineer"
+          enum: [BDR / Growth Manager, Full-Stack Engineer, Brand & Content Lead, Other / General Application]
+          description: One of BDR / Growth Manager, Full-Stack Engineer, Brand & Content Lead, or Other / General Application
+          example: "Full-Stack Engineer"
         skills:
           type: string
           maxLength: 500
@@ -301,6 +302,10 @@ components:
         cover_note:
           type: string
           maxLength: 5000
+        cv:
+          type: string
+          format: binary
+          description: PDF, DOC or DOCX, maximum 3 MB
         website:
           type: string
           description: Honeypot field

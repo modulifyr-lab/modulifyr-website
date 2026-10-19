@@ -267,7 +267,7 @@ export default function WorkClient() {
           </div>
 
           <Reveal variant="fade-scale" delay={150}>
-            <div className="border-border-base max-w-2xl rounded-3xl border bg-white p-10 text-center">
+            <div className="border-border-base max-w-2xl rounded-3xl border bg-bg-alt p-10 text-center">
               <div className="bg-[#2D738D]/10 mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full">
                 <CheckCircle2 className="text-[#2D738D] h-8 w-8" />
               </div>

@@ -274,7 +274,7 @@ export default function CapabilitiesClient() {
               { label: "Docs", val: "Notion-first, diagram-heavy" },
             ].map((item, i) => (
               <Reveal key={item.label} variant="fade-scale" delay={i * 80}>
-                <div className="border-border-base h-full rounded-xl border bg-white p-4 text-center">
+                <div className="border-border-base h-full rounded-xl border bg-bg-alt p-4 text-center">
                   <p className="text-text-muted mb-1 text-[10px] font-bold tracking-widest uppercase">
                     {item.label}
                   </p>
@@ -322,7 +322,7 @@ export default function CapabilitiesClient() {
           <div className="space-y-12">
             {stackByType.map((product, idx) => (
               <Reveal key={product.type} variant="fade-up" delay={idx * 50}>
-                <TiltCard className="border-border-base rounded-3xl border bg-white p-8 transition-shadow hover:shadow-md md:p-10">
+                <TiltCard className="border-border-base rounded-3xl border bg-bg-alt p-8 transition-shadow hover:shadow-md md:p-10">
                   <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
                     <div className="flex items-center gap-4">
                       <div
@@ -347,7 +347,7 @@ export default function CapabilitiesClient() {
                   </div>
 
                   <div className="border-border-base overflow-hidden rounded-xl border">
-                    <div className="bg-bg-secondary grid grid-cols-3 px-5 py-2.5 text-xs font-bold tracking-widest text-gray-500 uppercase">
+                    <div className="bg-bg-secondary grid grid-cols-3 px-5 py-2.5 text-xs font-bold tracking-widest text-text-alt uppercase">
                       <span>Layer</span>
                       <span>Choice</span>
                       <span className="hidden md:block">Notes</span>
@@ -355,7 +355,7 @@ export default function CapabilitiesClient() {
                     {product.stack.map((row, i) => (
                       <div
                         key={row.layer}
-                        className={`border-border-base grid grid-cols-3 border-t px-5 py-3 ${i % 2 === 0 ? "bg-white" : "bg-bg-light"}`}
+                        className={`border-border-base grid grid-cols-3 border-t px-5 py-3 ${i % 2 === 0 ? "bg-bg-alt" : "bg-bg-light"}`}
                       >
                         <span className="text-text-muted text-xs font-semibold">{row.layer}</span>
                         <span className="text-foreground text-xs font-bold">{row.choice}</span>
@@ -383,7 +383,7 @@ export default function CapabilitiesClient() {
                   Standard tooling across all projects. Every deployment goes through the same
                   pipeline: lint → test → build → security checks → deploy.
                 </p>
-                <div className="border-border-base overflow-hidden rounded-2xl border bg-white">
+                <div className="border-border-base overflow-hidden rounded-2xl border bg-bg-alt">
                   {infra.map((row, i) => (
                     <div
                       key={row.layer}
@@ -399,7 +399,7 @@ export default function CapabilitiesClient() {
 
             <div className="flex flex-col gap-6">
               <Reveal variant="fade-scale">
-                <div className="border-border-base rounded-2xl border bg-white p-7">
+                <div className="border-border-base rounded-2xl border bg-bg-alt p-7">
                   <h3 className="font-heading text-foreground mb-2 font-bold">Delivery Pipeline</h3>
                   <div className="mt-4 flex flex-wrap gap-2">
                     {["Pull request", "Lint", "Test", "Build", "Security checks", "Deploy"].map(
@@ -470,7 +470,7 @@ export default function CapabilitiesClient() {
             </div>
           </Reveal>
           <Reveal variant="fade-scale" delay={100}>
-            <div className="border-border-base overflow-hidden rounded-2xl border bg-white">
+            <div className="border-border-base overflow-hidden rounded-2xl border bg-bg-alt">
               <div className="bg-brand-navy grid grid-cols-3 px-6 py-3 text-xs font-bold tracking-widest text-white uppercase">
                 <span>Technology</span>
                 <span>Why We Avoid It</span>
@@ -516,7 +516,7 @@ export default function CapabilitiesClient() {
               { q: "Need reporting / ETL", a: "PostgreSQL + Python" },
             ].map((item, i) => (
               <Reveal key={item.q} variant="fade-scale" delay={i * 50}>
-                <div className="border-border-base flex h-full items-center justify-between rounded-xl border bg-white px-5 py-4">
+                <div className="border-border-base flex h-full items-center justify-between rounded-xl border bg-bg-alt px-5 py-4">
                   <span className="text-text-secondary text-sm">{item.q}</span>
                   <span className="text-[#2D738D] ml-4 shrink-0 text-sm font-bold">
                     → {item.a}

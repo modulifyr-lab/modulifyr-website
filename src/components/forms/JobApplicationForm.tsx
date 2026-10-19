@@ -1,111 +1,36 @@
 "use client";
 
 // src/components/forms/JobApplicationForm.tsx
-// NOTE: No ratelimit imports here — rate limiting is handled server-side in the API route.
+// NOTE: Rate limiting is handled server-side in the API route.
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/Button";
 import {
   CheckCircle2,
   AlertCircle,
   Loader2,
   ArrowRight,
-  Briefcase,
   Github,
   Linkedin,
+  FileText,
 } from "lucide-react";
+import { CV_ACCEPT, CV_MAX_BYTES } from "@/lib/cv";
 
-// ─── All roles from the Employees DB ─────────────────────────────────────────
-// Grouped by category for the select dropdown
 const roleGroups = [
   {
-    label: "Engineering",
-    roles: [
-      "Full-Stack Engineer",
-      "Frontend Engineer",
-      "Backend Engineer",
-      "DevOps Engineer",
-      "Cloud Infrastructure Engineer",
-      "Security Engineer",
-      "QA Engineer",
-      "Solutions Architect",
-      "Technical Lead",
-      "Engineering Manager",
-    ],
-  },
-  {
-    label: "Design",
-    roles: ["UX Designer", "UI Designer", "Product Designer", "UX Researcher", "Design Lead"],
-  },
-  {
-    label: "Product Management",
-    roles: [
-      "Product Manager",
-      "Senior Product Manager",
-      "Technical Project Manager",
-      "Project Manager",
-    ],
-  },
-  {
-    label: "Marketing & Growth",
-    roles: [
-      "Growth Marketer",
-      "Digital Marketing Manager",
-      "Content Strategist",
-      "SEO Specialist",
-      "Paid Acquisition Specialist",
-      "Brand Manager",
-      "Community Manager",
-      "Publishing Manager",
-    ],
-  },
-  {
-    label: "Sales & Client Success",
-    roles: [
-      "Business Development Manager",
-      "Sales Executive",
-      "Pre-Sales Engineer",
-      "Account Manager",
-      "Client Onboarding Specialist",
-      "Customer Success Manager",
-      "Technical Support Engineer",
-      "Customer Support Specialist",
-    ],
-  },
-  {
-    label: "Data & Analytics",
-    roles: ["Data Analyst", "Revenue Analyst"],
-  },
-  {
-    label: "Operations, Finance & HR",
-    roles: [
-      "Operations Manager",
-      "HR Manager",
-      "HR Specialist",
-      "Recruiter",
-      "Finance Manager",
-      "Accountant",
-      "Financial Analyst",
-      "Chief of Staff",
-      "Executive Assistant",
-      "Legal Counsel",
-      "IT Administrator",
-    ],
+    label: "Open roles",
+    roles: ["BDR / Growth Manager", "Full-Stack Engineer", "Brand & Content Lead"],
   },
 ];
 
-// Flat list of all roles — used for the allowed roles validation on the API side
-// (keep this in sync with submit-application/route.ts)
-const allRoles = roleGroups.flatMap((g) => g.roles).concat(["Other / General Application"]);
-
-// Quick-click featured roles shown above the form
-const featuredRoles = [
+const allRoles = [
+  "BDR / Growth Manager",
   "Full-Stack Engineer",
-  "UX Designer",
-  "Growth Marketer",
-  "Product Manager",
-  "DevOps Engineer",
+  "Brand & Content Lead",
+  "Other / General Application",
 ];
+
+const featuredRoles = ["BDR / Growth Manager", "Full-Stack Engineer", "Brand & Content Lead"];
 
 interface FormState {
   name: string;
@@ -131,15 +56,32 @@ const initialForm: FormState = {
   website: "",
 };
 
-export function JobApplicationForm() {
+interface JobApplicationFormProps {
+  preselectedRole?: string;
+}
+
+export function JobApplicationForm({ preselectedRole }: JobApplicationFormProps) {
   const [form, setForm] = useState<FormState>(initialForm);
+  const [cvFile, setCvFile] = useState<File | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
+
+  useEffect(() => {
+    if (preselectedRole && allRoles.includes(preselectedRole)) {
+      setForm((prev) => ({ ...prev, role: preselectedRole }));
+    }
+  }, [preselectedRole]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null;
+    setCvFile(file);
   };
 
   const handleSubmit = async (e: React.MouseEvent) => {
@@ -165,19 +107,49 @@ export function JobApplicationForm() {
       return;
     }
 
+    if (!cvFile) {
+      setErrorMsg("Please attach your CV.");
+      setStatus("error");
+      return;
+    }
+
+    if (cvFile.size > CV_MAX_BYTES) {
+      setErrorMsg("The CV file is too large. Maximum size is 3 MB.");
+      setStatus("error");
+      return;
+    }
+
+    const rawName = cvFile.name || "";
+    const lastDotIndex = rawName.lastIndexOf(".");
+    const ext = lastDotIndex !== -1 ? rawName.slice(lastDotIndex + 1).toLowerCase() : "";
+    if (!["pdf", "doc", "docx"].includes(ext)) {
+      setErrorMsg("Please upload your CV as a PDF, DOC or DOCX file.");
+      setStatus("error");
+      return;
+    }
+
     setStatus("loading");
     setErrorMsg("");
 
     try {
+      const formData = new FormData();
+      Object.entries(form).forEach(([key, value]) => {
+        formData.append(key, value);
+      });
+      formData.append("cv", cvFile);
+
       const res = await fetch("/api/submit-application", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: formData,
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Something went wrong");
       setStatus("success");
       setForm(initialForm);
+      setCvFile(null);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
     } catch (err: unknown) {
       setStatus("error");
       setErrorMsg(
@@ -217,29 +189,23 @@ export function JobApplicationForm() {
       <section className="bg-bg-secondary border-border-base border-b py-12">
         <div className="container-custom">
           <p className="text-text-muted mb-5 text-xs font-bold tracking-widest uppercase">
-            Quick-select your role category:
+            Quick-select a role:
           </p>
           <div className="flex flex-wrap items-center gap-3">
-            <span className="text-text-muted mr-2 flex items-center gap-2 text-xs font-bold tracking-widest uppercase">
-              <Briefcase className="h-4 w-4" /> Featured Openings:
-            </span>
             {featuredRoles.map((role) => (
               <button
                 key={role}
                 type="button"
-                className={`border-border-base cursor-pointer rounded-full border px-4 py-2 text-xs font-semibold transition-colors ${
+                className={`cursor-pointer rounded-full border px-4 py-2 text-xs font-semibold transition-colors ${
                   form.role === role
                     ? "border-[#2D738D] bg-[#2D738D]/10 text-[#2D738D]"
-                    : "text-foreground hover:border-[#2D738D] bg-white"
+                    : "border-border-base bg-bg-main text-foreground hover:border-[#2D738D]"
                 }`}
                 onClick={() => setForm((prev) => ({ ...prev, role }))}
               >
                 {role}
               </button>
             ))}
-            <span className="text-text-muted text-xs italic">
-              + {allRoles.length - featuredRoles.length} more in the dropdown below
-            </span>
           </div>
         </div>
       </section>
@@ -249,7 +215,7 @@ export function JobApplicationForm() {
           <div className="grid grid-cols-1 gap-16 lg:grid-cols-3">
             {/* ── Form ── */}
             <div className="lg:col-span-2">
-              <div className="border-border-base rounded-3xl border bg-white p-8 shadow-sm md:p-12">
+              <div className="border-border-base bg-bg-alt rounded-3xl border p-8 shadow-sm md:p-12">
                 {status === "error" && (
                   <div className="mb-8 flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-4">
                     <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-red-500" />
@@ -346,6 +312,29 @@ export function JobApplicationForm() {
                     02 — Skills & Profile Links
                   </h2>
                   <div className="flex flex-col gap-5">
+                    {/* CV Field */}
+                    <div className="flex flex-col gap-2">
+                      <label htmlFor="job-cv" className="text-foreground text-sm font-semibold">
+                        CV / Resume <span className="text-[#2D738D]">*</span>
+                      </label>
+                      <p className="text-text-muted mb-2 text-xs">PDF, DOC or DOCX, up to 3 MB.</p>
+                      <input
+                        ref={fileInputRef}
+                        id="job-cv"
+                        type="file"
+                        name="cv"
+                        accept={CV_ACCEPT}
+                        onChange={handleFileChange}
+                        className="border-border-base bg-bg-light text-text-primary focus:border-brand-teal focus:ring-brand-teal/10 cursor-pointer rounded-xl border px-4 py-2.5 text-sm transition-colors file:mr-4 file:cursor-pointer file:rounded-lg file:border-0 file:bg-[#2D738D] file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white focus:ring-2 focus:outline-none"
+                      />
+                      {cvFile && (
+                        <p className="text-brand-teal flex items-center gap-1.5 text-xs font-medium">
+                          <FileText className="h-3.5 w-3.5" />
+                          {cvFile.name} ({(cvFile.size / (1024 * 1024)).toFixed(2)} MB)
+                        </p>
+                      )}
+                    </div>
+
                     <div className="flex flex-col gap-2">
                       <label htmlFor="job-skills" className="text-foreground text-sm font-semibold">
                         Key Skills <span className="text-[#2D738D]">*</span>
@@ -356,11 +345,12 @@ export function JobApplicationForm() {
                         name="skills"
                         value={form.skills}
                         onChange={handleChange}
-                        placeholder="e.g. React, TypeScript, Node.js — or Unity, C#, Game Design — or Figma, UX Research"
+                        placeholder="e.g. React, TypeScript, Node.js — or Outbound Sales, BDR, Growth — or Brand Strategy, Content Publishing"
                         maxLength={500}
                         className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:border-brand-teal focus:ring-brand-teal/10 rounded-xl border px-4 py-3 text-sm transition-colors focus:ring-2 focus:outline-none"
                       />
                     </div>
+
                     <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
                       <div className="flex flex-col gap-2">
                         <label
@@ -484,8 +474,9 @@ export function JobApplicationForm() {
               <div className="bg-brand-navy rounded-3xl p-8 text-white">
                 <h3 className="font-heading mb-2 text-xl font-bold">Working at Modulifyr</h3>
                 <p className="text-text-muted mb-6 text-sm leading-relaxed">
-                  Pre-launch, bootstrapped, and entirely volunteer-run. If you join now, you're part
-                  of building the company itself — not just working inside it.
+                  Pre-launch and bootstrapped. Contract roles are paid 20% of the revenue generated on
+                  your project or deal. If you join now, you are part of building the company
+                  itself.
                 </p>
                 <div className="space-y-4">
                   {[
@@ -504,21 +495,20 @@ export function JobApplicationForm() {
                 </div>
               </div>
 
-              {/* All role categories */}
+              {/* Open roles card */}
               <div className="bg-bg-secondary border-border-base rounded-3xl border p-8">
                 <h3 className="font-heading text-foreground mb-4 text-sm font-bold tracking-widest uppercase">
-                  All Role Categories
+                  Open Roles
                 </h3>
-                <div className="space-y-1.5">
-                  {roleGroups.map((g) => (
-                    <div key={g.label} className="text-text-secondary text-xs leading-snug">
-                      <span className="text-foreground font-semibold">{g.label}:</span>{" "}
-                      {g.roles.length} positions
+                <div className="space-y-2">
+                  {featuredRoles.map((r) => (
+                    <div key={r} className="text-foreground font-semibold text-xs leading-snug">
+                      {r}
                     </div>
                   ))}
                 </div>
                 <p className="text-text-muted mt-4 text-xs">
-                  All roles are volunteer / unpaid at this stage.
+                  All roles are contract work paid 20% of the revenue generated.
                 </p>
               </div>
 

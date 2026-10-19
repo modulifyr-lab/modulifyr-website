@@ -24,11 +24,6 @@ export const NAV_GROUPS: NavGroup[] = [
         description: "Who we are, principles & team",
       },
       {
-        label: "Careers",
-        href: "/careers",
-        description: "Join us in building Modulifyr",
-      },
-      {
         label: "Case Studies",
         href: "/work",
         description: "Featured projects & client outcomes",
@@ -56,7 +51,7 @@ export const NAV_GROUPS: NavGroup[] = [
     ],
   },
   {
-    name: "Contact",
-    href: "/contact",
+    name: "Careers",
+    href: "/careers",
   },
 ];

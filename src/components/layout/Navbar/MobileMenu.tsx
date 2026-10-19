@@ -67,11 +67,11 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
         </div>
 
         <Link
-          href="/request-proposal"
+          href="/contact"
           onClick={onClose}
           className="bg-cta text-on-cta hover:bg-cta/90 w-full rounded-lg py-3.5 text-center text-base font-semibold transition-colors"
         >
-          Request Proposal
+          Contact Us
         </Link>
       </nav>
     </div>

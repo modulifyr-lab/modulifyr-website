@@ -127,7 +127,7 @@ export default function ProcessClient() {
 
                 <div className="lg:w-2/3">
                   <Reveal variant="fade-scale" delay={idx * 100 + 120}>
-                    <div className="border-border-base h-full rounded-3xl border bg-white p-8 shadow-sm transition-shadow group-hover:shadow-md">
+                    <div className="border-border-base h-full rounded-3xl border bg-bg-alt p-8 shadow-sm transition-shadow group-hover:shadow-md">
                       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
                         <div className="flex flex-col gap-4">
                           <h3 className="font-heading text-foreground border-border-base border-b pb-2 text-lg font-bold">

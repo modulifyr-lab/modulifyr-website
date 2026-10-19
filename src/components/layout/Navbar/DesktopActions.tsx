@@ -7,8 +7,8 @@ export function DesktopActions() {
     <div className="hidden items-center gap-4 lg:flex">
       <ThemeToggle />
 
-      <Button href="/request-proposal" icon={Phone}>
-        Request Proposal
+      <Button href="/contact" icon={Phone}>
+        Contact Us
       </Button>
     </div>
   );
