@@ -50,7 +50,7 @@ describe("webhook library", () => {
 
   describe("forwardToWebhook", () => {
     it("unset URL with NODE_ENV=development returns ok: true", async () => {
-      process.env.NODE_ENV = "development";
+      (process.env as Record<string, string>).NODE_ENV = "development";
       const result = await forwardToWebhook("CONTACT", { test: true }, { ip: "127.0.0.1" });
 
       expect(result).toEqual({ ok: true });
@@ -61,7 +61,7 @@ describe("webhook library", () => {
     });
 
     it("unset URL with NODE_ENV=production returns status 503", async () => {
-      process.env.NODE_ENV = "production";
+      (process.env as Record<string, string>).NODE_ENV = "production";
       const result = await forwardToWebhook("CONTACT", { test: true }, { ip: "127.0.0.1" });
 
       expect(result).toEqual({
@@ -75,7 +75,7 @@ describe("webhook library", () => {
     });
 
     it("sends secret header only when N8N_WEBHOOK_SECRET is set", async () => {
-      process.env.NODE_ENV = "production";
+      (process.env as Record<string, string>).NODE_ENV = "production";
       process.env.N8N_CONTACT_WEBHOOK_URL = "https://n8n.example.com/webhook";
       process.env.N8N_WEBHOOK_SECRET = "my-secret-key";
 
@@ -101,7 +101,7 @@ describe("webhook library", () => {
     });
 
     it("does not send secret header when N8N_WEBHOOK_SECRET is unset", async () => {
-      process.env.NODE_ENV = "production";
+      (process.env as Record<string, string>).NODE_ENV = "production";
       process.env.N8N_CONTACT_WEBHOOK_URL = "https://n8n.example.com/webhook";
 
       const mockFetch = vi.fn().mockResolvedValue({
@@ -116,7 +116,7 @@ describe("webhook library", () => {
     });
 
     it("non-2xx response returns status 502", async () => {
-      process.env.NODE_ENV = "production";
+      (process.env as Record<string, string>).NODE_ENV = "production";
       process.env.N8N_CONTACT_WEBHOOK_URL = "https://n8n.example.com/webhook";
 
       global.fetch = vi.fn().mockResolvedValue({
@@ -139,7 +139,7 @@ describe("webhook library", () => {
     });
 
     it("thrown fetch error (network failure/timeout) returns status 504", async () => {
-      process.env.NODE_ENV = "production";
+      (process.env as Record<string, string>).NODE_ENV = "production";
       process.env.N8N_CONTACT_WEBHOOK_URL = "https://n8n.example.com/webhook";
 
       global.fetch = vi.fn().mockRejectedValue(new Error("Timeout"));
@@ -159,7 +159,7 @@ describe("webhook library", () => {
     });
 
     it("never logs the URL, secret, or payload text", async () => {
-      process.env.NODE_ENV = "production";
+      (process.env as Record<string, string>).NODE_ENV = "production";
       process.env.N8N_CONTACT_WEBHOOK_URL = "https://secret-domain.com/webhook";
       process.env.N8N_WEBHOOK_SECRET = "super-secret-token";
 
