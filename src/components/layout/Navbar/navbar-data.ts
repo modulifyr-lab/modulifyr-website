@@ -12,8 +12,8 @@ export interface NavGroup {
 
 export const NAV_GROUPS: NavGroup[] = [
   {
-    name: "Solution",
-    href: "/solutions",
+    name: "Services",
+    href: "/services",
   },
   {
     name: "Company",
@@ -41,10 +41,6 @@ export const NAV_GROUPS: NavGroup[] = [
     ],
   },
   {
-    name: "Pricing",
-    href: "/pricing",
-  },
-  {
     name: "Resources",
     items: [
       {
@@ -58,5 +54,9 @@ export const NAV_GROUPS: NavGroup[] = [
         description: "Insights on software architecture & tech",
       },
     ],
+  },
+  {
+    name: "Contact",
+    href: "/contact",
   },
 ];

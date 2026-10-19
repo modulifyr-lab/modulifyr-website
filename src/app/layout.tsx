@@ -4,8 +4,6 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { RegionProvider } from "@/components/RegionProvider";
 import { RegionModal } from "@/components/RegionModal";
 import { LanguageProvider } from "@/components/LanguageContext";
-// import { Navbar } from "@/components/layout/Navbar";
-import { CookieConsentBanner } from "@/components/CookieConsentBanner";
 import Script from "next/script";
 import { cookies } from "next/headers";
 import { isRegion, REGION_COOKIE } from "@/lib/regions";
@@ -305,7 +303,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <RegionProvider initialRegion={initialRegion}>
             <LanguageProvider>
               <RegionModal />
-              <CookieConsentBanner />
               <Navbar />
               <main id="main-content" className="min-h-screen pt-20">
                 {children}

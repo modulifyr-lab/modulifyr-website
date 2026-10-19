@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
+import { BOOKING_URL } from "@/lib/links";
 import { LogoMarquee } from "@/components/sections/LandingPage/LogoMarquee";
 import { IntegrationsShowcase } from "@/components/ui/IntegrationsShowcase";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
@@ -233,22 +234,19 @@ export default function Home() {
           <h2 className="text-display text-foreground font-extrabold">Ready To Build Together?</h2>
           <p className="text-subhead text-text-alt">Better technology starts here.</p>
           <div className="flex flex-wrap justify-center gap-4 pt-4">
-            <Link href="/request-proposal">
-              <button
-                type="button"
-                className="cursor-pointer rounded-lg bg-[#2D738D] px-8 py-3.5 text-base font-semibold text-white transition-colors duration-100 ease-in hover:bg-[#235b70]"
-              >
-                Request a Proposal
-              </button>
-            </Link>
-            <Link href="/contact">
-              <button
-                type="button"
-                className="bg-bg-main border-border-main text-foreground hover:bg-bg-alt cursor-pointer rounded-lg border px-8 py-3.5 text-base font-semibold transition-colors duration-100 ease-in"
-              >
-                Schedule Discovery Call
-              </button>
-            </Link>
+            <Button
+              href="/request-proposal"
+              className="cursor-pointer rounded-lg bg-[#2D738D] px-8 py-3.5 text-base font-semibold text-white transition-colors duration-100 ease-in hover:bg-[#235b70]"
+            >
+              Request a Proposal
+            </Button>
+            <Button
+              href={BOOKING_URL}
+              external
+              className="bg-bg-main border-border-main text-foreground hover:bg-bg-alt cursor-pointer rounded-lg border px-8 py-3.5 text-base font-semibold transition-colors duration-100 ease-in"
+            >
+              Schedule Discovery Call
+            </Button>
           </div>
         </div>
       </section>

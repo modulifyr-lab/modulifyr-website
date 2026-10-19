@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { ChevronDown, MessageSquare } from "lucide-react";
-import Link from "next/link";
+import { Button } from "@/components/ui/Button";
+import { BOOKING_URL } from "@/lib/links";
 
 export interface FaqItem {
   question: string;
@@ -76,14 +77,13 @@ export function FaqAccordion({ items = DEFAULT_FAQ_ITEMS }: { items?: FaqItem[] 
                 business.
               </p>
             </div>
-            <Link href="/contact" className="block">
-              <button
-                type="button"
-                className="bg-[#2D738D] hover:bg-[#235b70] text-white w-full rounded-lg py-3 text-sm font-semibold transition-colors duration-100 ease-in cursor-pointer"
-              >
-                Book a free Discovery Call
-              </button>
-            </Link>
+            <Button
+              href={BOOKING_URL}
+              external
+              className="bg-[#2D738D] hover:bg-[#235b70] text-white w-full rounded-lg py-3 text-sm font-semibold transition-colors duration-100 ease-in cursor-pointer justify-center"
+            >
+              Book a free Discovery Call
+            </Button>
           </div>
 
           {/* Right Column: Multi-Open Accordion Rows */}

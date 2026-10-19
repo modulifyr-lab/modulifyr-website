@@ -427,14 +427,3 @@ h6 {
   color: #1d4ed8;
 }
 
-/* ── Disable third-party CookieHub styles ─────────────────────────────────── */
-.ch2,
-.ch2-container,
-.ch2-block,
-.ch2-theme-default,
-div[class*="ch2-"] {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}

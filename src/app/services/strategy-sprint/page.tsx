@@ -161,20 +161,17 @@ export default function StrategySprintPage() {
             </Reveal>
             <Reveal variant="fade-up" delay={300}>
               <div className="mt-8 flex flex-wrap gap-4">
-                <Link href="/request-proposal">
-                  <Button size="lg" className="bg-[#2D738D] hover:bg-[#235b70]">
-                    Request a Strategy Sprint
-                  </Button>
-                </Link>
-                <Link href="/contact">
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="border-white/30 text-white hover:bg-white/10"
-                  >
-                    Ask a Question First
-                  </Button>
-                </Link>
+                <Button href="/request-proposal?pkg=strategy-sprint" size="lg" className="bg-[#2D738D] hover:bg-[#235b70]">
+                  Request a Strategy Sprint
+                </Button>
+                <Button
+                  href="/contact"
+                  size="lg"
+                  variant="outline"
+                  className="border-white/30 text-white hover:bg-white/10"
+                >
+                  Ask a Question First
+                </Button>
               </div>
             </Reveal>
           </div>
@@ -380,19 +377,16 @@ export default function StrategySprintPage() {
                 no commitment required.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Link href="/contact">
-                  <Button className="bg-[#2D738D] hover:bg-[#235b70]">
-                    Describe Your Project
-                  </Button>
-                </Link>
-                <Link href="/services">
-                  <Button
-                    variant="outline"
-                    className="border-white/30 text-white hover:bg-white/10"
-                  >
-                    Back to All Services
-                  </Button>
-                </Link>
+                <Button href="/request-proposal?pkg=strategy-sprint" className="bg-[#2D738D] hover:bg-[#235b70]">
+                  Describe Your Project
+                </Button>
+                <Button
+                  href="/services"
+                  variant="outline"
+                  className="border-white/30 text-white hover:bg-white/10"
+                >
+                  Back to All Services
+                </Button>
               </div>
             </div>
           </Reveal>

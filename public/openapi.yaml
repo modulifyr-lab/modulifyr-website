@@ -24,7 +24,7 @@ paths:
       tags: [Forms]
       summary: Submit a contact form message
       description: |
-        Accepts a contact form submission and forwards it to the Make webhook.
+        Accepts a contact form submission and forwards it to the n8n webhook.
         Rate limited to 5 requests per minute per IP.
       requestBody:
         required: true
@@ -63,13 +63,19 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+        "502":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "504":
+          $ref: "#/components/responses/ServiceUnavailable"
 
   /api/submit-proposal:
     post:
       tags: [Forms]
       summary: Submit a Request for Proposal (RFP)
       description: |
-        Accepts a structured project proposal submission and forwards to Make.
+        Accepts a structured project proposal submission and forwards to n8n.
         Rate limited to 5 requests per minute per IP.
       requestBody:
         required: true
@@ -90,13 +96,19 @@ paths:
           $ref: "#/components/responses/RateLimited"
         "500":
           $ref: "#/components/responses/InternalError"
+        "502":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "504":
+          $ref: "#/components/responses/ServiceUnavailable"
 
   /api/submit-application:
     post:
       tags: [Forms]
       summary: Submit a job application
       description: |
-        Accepts a job application and forwards to Make.
+        Accepts a job application and forwards to n8n.
         Rate limited to 3 requests per 5 minutes per IP.
       requestBody:
         required: true
@@ -117,13 +129,19 @@ paths:
           $ref: "#/components/responses/RateLimited"
         "500":
           $ref: "#/components/responses/InternalError"
+        "502":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "503":
+          $ref: "#/components/responses/ServiceUnavailable"
+        "504":
+          $ref: "#/components/responses/ServiceUnavailable"
 
   /api/revalidate:
     post:
       tags: [Internal]
-      summary: Trigger ISR revalidation (internal/Make only)
+      summary: Trigger ISR revalidation (internal/n8n only)
       description: |
-        Called by Make when a Notion blog post is published, updated, or deleted.
+        Called by n8n when a Notion blog post is published, updated, or deleted.
         Requires `x-revalidate-secret` header matching REVALIDATION_SECRET env var.
       security:
         - RevalidateSecret: []
@@ -165,6 +183,12 @@ components:
             $ref: "#/components/schemas/ErrorResponse"
     InternalError:
       description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    ServiceUnavailable:
+      description: Service temporarily unavailable or gateway error
       content:
         application/json:
           schema:
@@ -244,7 +268,7 @@ components:
           type: string
         region_code:
           type: string
-          enum: [nepal, international, unknown]
+          enum: [NP, US, GB, CA, AU, EU, not_selected]
         website:
           type: string
           description: Honeypot field
@@ -263,11 +287,8 @@ components:
           type: string
         role:
           type: string
-          enum:
-            - "Senior Full-stack Engineer (React / RSC)"
-            - "Cloud Infrastructure Engineer (SRE Focus)"
-            - "System Design Intern (Birtamode Office)"
-            - "Other / General Application"
+          description: One of the open roles listed on the careers page
+          example: "Senior Full-stack Engineer"
         skills:
           type: string
           maxLength: 500

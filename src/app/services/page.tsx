@@ -2,9 +2,9 @@ import { Metadata } from "next";
 import ServicesClient from "./ServicesClient";
 
 export const metadata: Metadata = {
-  title: "Custom Software Development Services | Modulifyr Nepal",
+  title: "Custom Software Services & Pricing | Modulifyr Nepal",
   description:
-    "Modulifyr offers Discovery Sprints, Web App MVPs, Internal Tools, Integrations, Modernization, Infrastructure Setup, and dedicated Engineering Retainers for businesses in Nepal and globally.",
+    "Three fixed-scope packages with published price ranges: Strategy Sprint, Launch Kit and Automation Layer. Built from Birtamode, Nepal for clients in Nepal and worldwide.",
   alternates: {
     canonical: "/services",
   },

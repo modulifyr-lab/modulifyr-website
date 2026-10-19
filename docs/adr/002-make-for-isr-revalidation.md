@@ -1,6 +1,6 @@
 # ADR 002 — Make (Integromat) for ISR On-Demand Revalidation
 
-**Status:** Accepted  
+**Status:** Superseded: the workflow runs on n8n (October 2026)
 **Date:** March 2026  
 **Author:** Rijan Mainali
 

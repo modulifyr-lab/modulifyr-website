@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const securityHeaders = [
-  { key: "X-Frame-Options", value: "SAMEORIGIN" }, // Changed from DENY — CookieHub uses iframes
+  { key: "X-Frame-Options", value: "SAMEORIGIN" }, // SAMEORIGIN lets the site frame its own pages
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
@@ -12,26 +12,23 @@ const securityHeaders = [
     value: [
       "default-src 'self'",
 
-      // Scripts: self + GTM + Google Analytics + Crisp + CookieHub
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://client.crisp.chat https://cdn.cookiehub.eu https://*.cookiehub.eu",
+      // Scripts: self + GTM + Google Analytics
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com",
 
-      // Styles: self + Google Fonts + Crisp + CookieHub
-      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://client.crisp.chat https://cdn.cookiehub.eu https://*.cookiehub.eu",
+      // Styles: self + Google Fonts
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
 
-      // Fonts: self + Google Fonts + Crisp + CookieHub
-      "font-src 'self' https://fonts.gstatic.com https://client.crisp.chat https://cdn.cookiehub.eu https://*.cookiehub.eu",
+      // Fonts: self + Google Fonts
+      "font-src 'self' https://fonts.gstatic.com",
 
-      // Images: self + Unsplash + Google Maps + Crisp + CookieHub + data URIs
-      "img-src 'self' https://images.unsplash.com https://maps.gstatic.com https://maps.googleapis.com https://client.crisp.chat https://image.crisp.chat https://storage.crisp.chat https://cdn.cookiehub.eu https://*.cookiehub.eu data: blob:",
+      // Images: self + Unsplash + Google Maps + data URIs
+      "img-src 'self' https://images.unsplash.com https://maps.gstatic.com https://maps.googleapis.com data: blob:",
 
-      // Frames: Google Maps + Crisp + CookieHub
-      "frame-src https://maps.google.com https://www.google.com https://game.crisp.chat https://cdn.cookiehub.eu https://*.cookiehub.eu",
+      // Frames: Google Maps
+      "frame-src https://maps.google.com https://www.google.com",
 
-      // Connections: self + Analytics + GTM + Crisp (incl. websocket) + CookieHub
-      "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://client.crisp.chat https://storage.crisp.chat wss://client.relay.crisp.chat wss://stream.relay.crisp.chat https://api.crisp.chat https://cdn.cookiehub.eu https://*.cookiehub.eu https://api.cookiehub.eu",
-
-      // Media: Crisp (voice messages)
-      "media-src 'self' https://client.crisp.chat",
+      // Connections: self + Analytics + GTM
+      "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com",
 
       "worker-src 'self' blob:",
     ].join("; "),
@@ -53,6 +50,26 @@ const nextConfig: NextConfig = {
       {
         source: "/(.*)",
         headers: securityHeaders,
+      },
+    ];
+  },
+
+  async redirects() {
+    return [
+      {
+        source: "/pricing",
+        destination: "/services",
+        permanent: true,
+      },
+      {
+        source: "/solutions",
+        destination: "/services",
+        permanent: true,
+      },
+      {
+        source: "/contact-us",
+        destination: "/contact",
+        permanent: true,
       },
     ];
   },

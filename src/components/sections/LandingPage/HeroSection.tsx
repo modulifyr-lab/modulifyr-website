@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { CheckCircle, Clock, DollarSign, FilePenLine, Globe } from "lucide-react";
 import { Button } from "@/components/Button";
+import { BOOKING_URL } from "@/lib/links";
 
 const PERSPECTIVE_GRID_SRC = "/Perspective-Grid.png";
 
@@ -95,13 +95,14 @@ export function HeroSection() {
         </div>
 
         {/* CTA */}
-        <div className="pt-4">
-          <Link href="/contact">
-            <Button className="bg-cta text-on-cta px-6 transition-colors duration-300 hover:opacity-90">
-              Request a Proposal
-              <FilePenLine className="ml-1 h-6 w-6" />
-            </Button>
-          </Link>
+        <div className="flex flex-wrap gap-3 pt-4">
+          <Button href="/request-proposal" className="bg-cta text-on-cta px-6 transition-colors duration-300 hover:opacity-90">
+            Request a Proposal
+            <FilePenLine className="ml-1 h-6 w-6" />
+          </Button>
+          <Button href={BOOKING_URL} external variant="outline" className="px-6 transition-colors duration-300">
+            Book a Discovery Call
+          </Button>
         </div>
 
         {/* Bottom Information */}

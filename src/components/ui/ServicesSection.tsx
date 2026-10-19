@@ -3,9 +3,14 @@
 import { useState, useRef } from "react";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, Compass, Layout, Workflow } from "lucide-react";
+import { useRegion } from "@/components/RegionProvider";
+import { formatPackageRange } from "@/lib/pricing";
+import type { PackagePricingKey } from "@/lib/pricing";
 
 export interface ServiceCardData {
   id: string;
+  slug: "strategy-sprint" | "launch-kit" | "automation-layer";
+  pkgKey: PackagePricingKey;
   title: string;
   subLabel: string;
   description: string;
@@ -17,6 +22,8 @@ export interface ServiceCardData {
 export const SERVICES_DATA: ServiceCardData[] = [
   {
     id: "strategy-sprint",
+    slug: "strategy-sprint",
+    pkgKey: "strategySprint",
     title: "Strategy Sprint",
     subLabel: "Discovery Sprint",
     description:
@@ -32,7 +39,9 @@ export const SERVICES_DATA: ServiceCardData[] = [
   },
   {
     id: "launch-kit",
-    title: "Launch Kit (Placeholder)",
+    slug: "launch-kit",
+    pkgKey: "launchKit",
+    title: "Launch Kit",
     subLabel: "Static Website Package",
     description:
       "Production-grade marketing and web systems built with modern web architecture and performance optimization.",
@@ -47,7 +56,9 @@ export const SERVICES_DATA: ServiceCardData[] = [
   },
   {
     id: "automation-layer",
-    title: "Automation Layer (Placeholder)",
+    slug: "automation-layer",
+    pkgKey: "automationLayer",
+    title: "Automation Layer",
     subLabel: "Integrations Package",
     description:
       "Connect existing software, legacy tools, and APIs into a streamlined, automated operational ecosystem.",
@@ -63,12 +74,14 @@ export const SERVICES_DATA: ServiceCardData[] = [
 ];
 
 export function ServicesSection() {
+  const { region } = useRegion();
+  const displayRegion = region ?? "US";
+
   const [activeCardIndex, setActiveCardIndex] = useState(0);
   const dwellTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const handlePointerEnter = (idx: number) => {
     if (dwellTimerRef.current) clearTimeout(dwellTimerRef.current);
-    // 0.8s dwell requirement to auto-advance to category
     dwellTimerRef.current = setTimeout(() => {
       setActiveCardIndex(idx);
     }, 800);
@@ -131,8 +144,21 @@ export function ServicesSection() {
                     </p>
                   </div>
 
+                  {/* Price Block */}
+                  <div className="space-y-1 py-3 border-y border-border-main/60">
+                    <span className="text-caption2 font-semibold text-text-dim uppercase tracking-wider block">
+                      Price range
+                    </span>
+                    <div className="text-h4 font-extrabold text-foreground">
+                      {formatPackageRange(service.pkgKey, displayRegion)}
+                    </div>
+                    <span className="text-caption2 text-text-dim block">
+                      Tier 1 to Tier 4. Indicative range; final price confirmed in a written SOW.
+                    </span>
+                  </div>
+
                   {/* Checklist */}
-                  <div className="space-y-2.5 pt-2 border-t border-border-main/60">
+                  <div className="space-y-2.5">
                     {service.checklist.map((item, cIdx) => (
                       <div key={cIdx} className="flex items-center gap-2.5 text-body2 text-foreground">
                         <CheckCircle2 className="h-4 w-4 text-[#2D738D] shrink-0" />
@@ -142,13 +168,21 @@ export function ServicesSection() {
                   </div>
                 </div>
 
-                {/* Footer Link */}
-                <div className="pt-8">
+                {/* Footer Links */}
+                <div className="pt-8 flex items-center justify-between">
                   <Link
                     href={service.link}
                     className="inline-flex items-center gap-2 text-body2 font-bold text-[#2D738D] hover:underline"
                   >
                     View Details
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+
+                  <Link
+                    href={`/request-proposal?pkg=${service.slug}`}
+                    className="inline-flex items-center gap-2 text-body2 font-bold text-[#2D738D] hover:underline"
+                  >
+                    Request a Proposal
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>

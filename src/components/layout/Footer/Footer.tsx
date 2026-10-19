@@ -10,8 +10,8 @@ const QUICK_LINKS = [
   { name: "About Us", href: "/about" },
   { name: "Services", href: "/services" },
   { name: "Case Studies", href: "/work" },
-  { name: "Pricing", href: "/pricing" },
-  { name: "Contact Us", href: "/contact-us" },
+  { name: "Careers", href: "/careers" },
+  { name: "Contact Us", href: "/contact" },
 ];
 
 export function Footer() {

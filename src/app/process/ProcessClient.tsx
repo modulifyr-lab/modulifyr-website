@@ -16,6 +16,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Card, CardTitle } from "@/components/ui/Card";
 import Reveal from "@/components/ui/Reveal";
+import { BOOKING_URL } from "@/lib/links";
 
 const steps = [
   {
@@ -201,11 +202,9 @@ export default function ProcessClient() {
                 </Reveal>
               </div>
               <Reveal variant="fade-up" delay={500}>
-                <Link href="/request-proposal">
-                  <Button size="lg" className="w-fit">
-                    Book a 15-Minute Pilot Briefing
-                  </Button>
-                </Link>
+                <Button href={BOOKING_URL} external size="lg" className="w-fit">
+                  Book a 15-Minute Pilot Briefing
+                </Button>
               </Reveal>
             </div>
 
@@ -249,20 +248,12 @@ export default function ProcessClient() {
             </Reveal>
             <Reveal variant="fade-scale" delay={200}>
               <div className="flex flex-wrap justify-center gap-4">
-                <a
-                  href="https://cal.eu/modulifyr/booking"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Button size="lg" className="flex items-center gap-2">
-                    <Calendar className="h-5 w-5" /> Schedule Discovery Call
-                  </Button>
-                </a>
-                <Link href="/request-proposal">
-                  <Button variant="outline" size="lg">
-                    Send Project RFP
-                  </Button>
-                </Link>
+                <Button href={BOOKING_URL} external size="lg" className="flex items-center gap-2">
+                  <Calendar className="h-5 w-5" /> Schedule Discovery Call
+                </Button>
+                <Button href="/request-proposal" variant="outline" size="lg">
+                  Send Project RFP
+                </Button>
               </div>
             </Reveal>
             <p className="text-text-muted text-xs">Average response time: &lt; 24 hours</p>

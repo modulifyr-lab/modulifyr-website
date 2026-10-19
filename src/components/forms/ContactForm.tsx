@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import {
   CheckCircle2,
   AlertCircle,
@@ -15,7 +14,8 @@ import {
   MessageSquare,
   Mail,
 } from "lucide-react";
-// import { ProcessSection } from "@/components/ui/ProcessSection";
+import { Button } from "@/components/ui/Button";
+import { BOOKING_URL } from "@/lib/links";
 
 interface FormState {
   name: string;
@@ -66,7 +66,7 @@ export function ContactForm() {
         body: JSON.stringify({
           name: form.name,
           email: form.email,
-          subject: `Discovery Call Inquiry - ${form.interestedIn || "General"}`,
+          subject: `Contact: ${form.interestedIn || "General"}`,
           message: `Phone: ${form.phone}\nInterested In: ${form.interestedIn}\n\nDetails: ${form.message}`,
           website: form.website,
         }),
@@ -122,34 +122,31 @@ export function ContactForm() {
               </div>
 
               <div className="flex flex-wrap gap-4 pt-4">
-                <a href="#booking-form">
-                  <button
-                    type="button"
-                    className="cursor-pointer rounded-lg bg-[#2D738D] px-6 py-3 text-sm font-semibold text-white transition-colors duration-100 ease-in hover:bg-[#235b70]"
-                  >
-                    Book a free Consultation Today
-                  </button>
-                </a>
-                <Link href="/services">
-                  <button
-                    type="button"
-                    className="bg-bg-main border-border-main text-foreground hover:bg-bg-alt cursor-pointer rounded-lg border px-6 py-3 text-sm font-semibold transition-colors duration-100 ease-in"
-                  >
-                    Explore Packages
-                  </button>
-                </Link>
+                <Button
+                  href={BOOKING_URL}
+                  external
+                  className="cursor-pointer rounded-lg bg-[#2D738D] px-6 py-3 text-sm font-semibold text-white transition-colors duration-100 ease-in hover:bg-[#235b70]"
+                >
+                  Book a Free Discovery Call
+                </Button>
+                <Button
+                  href="#contact-form"
+                  className="bg-bg-main border-border-main text-foreground hover:bg-bg-alt cursor-pointer rounded-lg border px-6 py-3 text-sm font-semibold transition-colors duration-100 ease-in"
+                >
+                  Send a Message
+                </Button>
               </div>
             </div>
 
             {/* Right Booking Card Form */}
             <div
-              id="booking-form"
+              id="contact-form"
               className="bg-bg-alt border-border-main space-y-6 rounded-2xl border p-8 shadow-lg lg:col-span-6"
             >
               <div className="space-y-2">
-                <h2 className="text-h4 text-foreground font-bold">Book a Free Discovery Call</h2>
+                <h2 className="text-h4 text-foreground font-bold">Send Us a Message</h2>
                 <p className="text-body2 text-text-alt">
-                  Let&apos;s map the right approach for your project.
+                  Tell us what you are working on and we will reply within 24 hours.
                 </p>
               </div>
 
@@ -158,16 +155,16 @@ export function ContactForm() {
                   <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#2D738D]/10 text-[#2D738D]">
                     <CheckCircle2 className="h-6 w-6" />
                   </div>
-                  <h3 className="text-h5 text-foreground font-bold">Discovery Call Requested</h3>
+                  <h3 className="text-h5 text-foreground font-bold">Message Sent</h3>
                   <p className="text-body2 text-text-alt">
-                    Thank you! We have received your inquiry and will reach out within 24 hours.
+                    Thank you. We received your message and will reply within 24 hours.
                   </p>
                   <button
                     type="button"
                     onClick={() => setSubmitted(false)}
                     className="text-caption1 font-bold text-[#2D738D] hover:underline"
                   >
-                    Submit another request
+                    Send another message
                   </button>
                 </div>
               ) : (
@@ -303,7 +300,7 @@ export function ContactForm() {
                       </>
                     ) : (
                       <>
-                        Get a Free Consultation <ArrowRight className="h-4 w-4" />
+                        Send Message <ArrowRight className="h-4 w-4" />
                       </>
                     )}
                   </button>
@@ -360,7 +357,9 @@ export function ContactForm() {
                 NPT (UTC+5:45) collaboration hours
               </div>
               <a
-                href="#booking-form"
+                href={BOOKING_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-caption1 inline-flex items-center gap-1.5 font-bold text-[#2D738D] hover:underline"
               >
                 Book a discovery call <ArrowRight className="h-3.5 w-3.5" />
@@ -445,22 +444,19 @@ export function ContactForm() {
           </div>
 
           <div className="flex flex-wrap justify-center gap-4 pt-2">
-            <a href="#booking-form">
-              <button
-                type="button"
-                className="cursor-pointer rounded-lg bg-[#2D738D] px-8 py-3.5 text-base font-semibold text-white transition-colors duration-100 ease-in hover:bg-[#235b70]"
-              >
-                Free consultation
-              </button>
-            </a>
-            <a href="#booking-form">
-              <button
-                type="button"
-                className="bg-bg-main border-border-main text-foreground hover:bg-bg-alt cursor-pointer rounded-lg border px-8 py-3.5 text-base font-semibold transition-colors duration-100 ease-in"
-              >
-                Talk to experts
-              </button>
-            </a>
+            <Button
+              href={BOOKING_URL}
+              external
+              className="cursor-pointer rounded-lg bg-[#2D738D] px-8 py-3.5 text-base font-semibold text-white transition-colors duration-100 ease-in hover:bg-[#235b70]"
+            >
+              Book a Discovery Call
+            </Button>
+            <Button
+              href="#contact-form"
+              className="bg-bg-main border-border-main text-foreground hover:bg-bg-alt cursor-pointer rounded-lg border px-8 py-3.5 text-base font-semibold transition-colors duration-100 ease-in"
+            >
+              Send a Message
+            </Button>
           </div>
         </div>
       </section>
