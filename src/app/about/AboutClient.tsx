@@ -18,6 +18,8 @@ import {
   Database,
   Cloud,
 } from "lucide-react";
+import { Button } from "@/components/ui/Button";
+import { BOOKING_URL } from "@/lib/links";
 
 const PRINCIPLES = [
   {
@@ -225,22 +227,19 @@ export default function AboutClient() {
             to change and maintain.
           </p>
           <div className="flex flex-wrap justify-center gap-4 pt-4">
-            <Link href="/contact">
-              <button
-                type="button"
-                className="bg-[#2D738D] hover:bg-[#235b70] text-white rounded-lg px-8 py-3.5 text-base font-semibold transition-colors duration-100 ease-in cursor-pointer"
-              >
-                Book a free Consultation Today
-              </button>
-            </Link>
-            <Link href="/services">
-              <button
-                type="button"
-                className="bg-bg-main border-border-main text-foreground hover:bg-bg-alt rounded-lg border px-8 py-3.5 text-base font-semibold transition-colors duration-100 ease-in cursor-pointer"
-              >
-                Explore Packages
-              </button>
-            </Link>
+            <Button
+              href={BOOKING_URL}
+              external
+              className="bg-[#2D738D] hover:bg-[#235b70] text-white rounded-lg px-8 py-3.5 text-base font-semibold transition-colors duration-100 ease-in cursor-pointer"
+            >
+              Book a free Consultation Today
+            </Button>
+            <Button
+              href="/services"
+              className="bg-bg-main border-border-main text-foreground hover:bg-bg-alt rounded-lg border px-8 py-3.5 text-base font-semibold transition-colors duration-100 ease-in cursor-pointer"
+            >
+              Explore Packages
+            </Button>
           </div>
         </div>
       </section>

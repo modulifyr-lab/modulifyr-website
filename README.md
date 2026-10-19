@@ -15,7 +15,7 @@ Built with Next.js 16, TypeScript, TailwindCSS v4, Notion as the blog CMS.
 | Package manager | **Bun** (not npm — `bun.lock` is the lockfile of record) |
 | Styling | TailwindCSS v4 |
 | CMS | Notion (blog posts via REST API) |
-| Webhooks | n8n (self-hosted on Render) — webhook env vars are named `MAKE_*` for legacy reasons only; they do not point at Make.com |
+| Webhooks | n8n (self-hosted on Render) — environment variables are `N8N_*` with legacy `MAKE_*` read as a fallback |
 | Rate Limiting | Upstash Redis (sliding window) |
 | Hosting | Vercel |
 | Analytics | Google Tag Manager |
@@ -44,10 +44,12 @@ There is currently no `.env.example` committed. Get the current `.env.local` val
 NOTION_API_KEY=
 NOTION_BLOG_DATABASE_ID=
 
-# ── n8n webhooks (var names kept as MAKE_* for legacy reasons — see Tech Stack table) ──
-MAKE_CONTACT_WEBHOOK_URL=
-MAKE_PROPOSAL_WEBHOOK_URL=
-MAKE_JOB_WEBHOOK_URL=
+# ── n8n webhooks ──
+N8N_CONTACT_WEBHOOK_URL=
+N8N_PROPOSAL_WEBHOOK_URL=
+N8N_JOB_WEBHOOK_URL=
+N8N_WEBHOOK_SECRET=
+# Note: Legacy MAKE_* environment variable names are still read as a fallback and will be removed later.
 
 # ── Revalidation (ISR on-demand, triggered by n8n on Notion blog changes) ──
 REVALIDATION_SECRET=

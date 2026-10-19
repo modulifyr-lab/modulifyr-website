@@ -1,5 +1,5 @@
 // src/app/api/revalidate/route.ts
-// Called by Make when a blog post is published, updated, OR deleted in Notion.
+// Called by n8n when a blog post is published, updated, OR deleted in Notion.
 // Triggers Next.js ISR on-demand revalidation so changes go live immediately.
 
 import { NextRequest, NextResponse } from "next/server";

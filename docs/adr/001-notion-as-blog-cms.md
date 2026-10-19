@@ -22,7 +22,7 @@ Use Notion as the CMS, fetching posts via the official Notion REST API at build/
 
 - **Zero additional tooling cost** — Notion is already used for internal project management
 - **Non-technical editor friendly** — content can be updated by the founder without touching code
-- **ISR + on-demand revalidation** — content goes live immediately via Make webhook, not on next deploy
+- **ISR + on-demand revalidation** — content goes live immediately via n8n webhook, not on next deploy
 - **Structured data** — Notion database properties (Slug, Status, Category) provide clean typed metadata
 
 ## Consequences

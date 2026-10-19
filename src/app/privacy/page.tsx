@@ -20,7 +20,7 @@ const sections = [
       },
       {
         heading: "Usage Data",
-        text: "Technical information about how you access our website including IP address, browser type, device type, pages visited, and time on site. This is collected via standard web analytics.",
+        text: "Technical information about how you access our website including IP address, browser type, device type, pages visited, and traffic sources. Google Tag Manager measures site usage, and our hosting provider processes standard request logs (IP address, browser type, requested pages, and request timestamp).",
       },
       {
         heading: "Communication Data",
@@ -87,7 +87,7 @@ const sections = [
       },
       {
         heading: "Analytics",
-        text: "If analytics tools are used, they are configured to anonymize IP addresses and respect Do Not Track signals.",
+        text: "We use Google Tag Manager to measure site usage (pages viewed, traffic sources, device and browser type) when a page opens. Visitors can block analytics measurement via browser settings or content blockers.",
       },
     ],
   },
@@ -169,7 +169,7 @@ export default function PrivacyPage() {
             <p className="text-text-muted text-lg leading-relaxed">
               How Modulifyr collects, uses, and protects your information.
             </p>
-            <p className="text-text-muted mt-3 text-sm">Last Updated: March 2026</p>
+            <p className="text-text-muted mt-3 text-sm">Last Updated: October 2026</p>
           </div>
         </div>
       </section>

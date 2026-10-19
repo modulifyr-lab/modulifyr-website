@@ -1,5 +1,6 @@
 import { Button } from "@/components/Button";
 import { Phone } from "lucide-react";
+import { BOOKING_URL } from "@/lib/links";
 
 export function FooterBook() {
   return (
@@ -14,9 +15,11 @@ export function FooterBook() {
       </div>
 
       <div className="mt-2 flex flex-col gap-3 pt-2">
-        <Button>Book a Free Consultation Today</Button>
+        <Button href={BOOKING_URL} external>
+          Book a Free Consultation Today
+        </Button>
 
-        <Button variant="outline" icon={Phone}>
+        <Button href="/contact#contact-form" variant="outline" icon={Phone}>
           Request a Call Back
         </Button>
       </div>

@@ -40,8 +40,17 @@ jobs:
       - name: Lint (ESLint)
         run: bun run lint
 
+      # Ignored advisories (dev-only dependencies with no non-breaking fix available):
+      # - GHSA-2883-xcg3-v3hh: esbuild (dev-only dependency, no fix available without breaking build)
+      # - GHSA-p293-qw3h-jr36: esbuild (dev-only dependency, no fix available without breaking build)
+      # - GHSA-2xp9-vwfh-vxw4: esbuild (dev-only dependency, no fix available without breaking build)
+      # - GHSA-qhr7-859c-m2p7: brace-expansion (dev-only dependency via eslint/lint-staged, no fix available)
+      # - GHSA-6j4f-fj2g-mc7p: brace-expansion (dev-only dependency via eslint/lint-staged, no fix available)
+      # - GHSA-vfj7-8cjw-p6xm: braces (dev-only dependency via eslint/lint-staged, fix breaks the build)
+      # - GHSA-5gmw-xhrv-c9v3: tinypool (dev-only dependency via vitest, fix breaks the build)
+      # - GHSA-85c8-ppgw-ccpr: tinypool (dev-only dependency via vitest, fix breaks the build)
       - name: Security audit
-        run: bun audit --audit-level=high --ignore GHSA-2883-xcg3-v3hh --ignore GHSA-p293-qw3h-jr36 --ignore GHSA-2xp9-vwfh-vxw4 --ignore GHSA-qhr7-859c-m2p7 --ignore GHSA-6j4f-fj2g-mc7p --ignore GHSA-vfj7-8cjw-p6xm --ignore GHSA-cjq9-62q9-8jv4 --ignore GHSA-vcvr-r3jv-pc5j --ignore GHSA-wq5f-xc86-pv6w --ignore GHSA-68fv-2mgg-jv7q --ignore GHSA-5gmw-xhrv-c9v3 --ignore GHSA-85c8-ppgw-ccpr
+        run: bun audit --audit-level=high --ignore GHSA-2883-xcg3-v3hh --ignore GHSA-p293-qw3h-jr36 --ignore GHSA-2xp9-vwfh-vxw4 --ignore GHSA-qhr7-859c-m2p7 --ignore GHSA-6j4f-fj2g-mc7p --ignore GHSA-vfj7-8cjw-p6xm --ignore GHSA-5gmw-xhrv-c9v3 --ignore GHSA-85c8-ppgw-ccpr
         # Fails the build (non-zero exit) if any HIGH or CRITICAL severity
         # vulnerability is found in dependencies. This step is NOT allowed
         # to be suppressed with `|| true` or `continue-on-error: true` —

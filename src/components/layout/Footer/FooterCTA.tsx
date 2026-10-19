@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { BOOKING_URL } from "@/lib/links";
 
 export function FooterCTA() {
   return (
@@ -23,16 +24,18 @@ export function FooterCTA() {
         </div>
 
         <div className="flex w-full flex-col items-stretch gap-3 sm:flex-row sm:items-center lg:w-auto">
-          <Link
-            href="/contact"
+          <a
+            href={BOOKING_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-cyan-600 px-6 py-3.5 text-sm font-semibold text-white shadow-md shadow-cyan-900/20 transition-all duration-200 hover:bg-cyan-500 sm:w-auto"
           >
             <span>Book Free Session</span>
             <ArrowRight className="h-4 w-4" />
-          </Link>
+          </a>
 
           <Link
-            href="/contact"
+            href="/contact#contact-form"
             className="inline-flex w-full items-center justify-center rounded-xl border border-slate-700 bg-slate-800/50 px-6 py-3.5 text-sm font-semibold text-slate-200 transition-all duration-200 hover:bg-slate-800 sm:w-auto"
           >
             Request Call Back

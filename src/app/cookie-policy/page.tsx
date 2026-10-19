@@ -11,102 +11,93 @@ export const metadata: Metadata = {
 
 const sections = [
   {
-    title: "1. What Cookies Are",
+    title: "1. What Storage We Use",
     body: [
       {
         heading: "Definition",
-        text: "Small text files stored on your device when you visit our website. They let a site remember information between visits.",
+        text: "Small data items stored on your device via browser cookies or local storage when you visit our website.",
       },
       {
         heading: "Scope",
-        text: "This policy covers cookies and equivalent local storage used on modulifyr.com. It should be read alongside our Privacy Policy.",
+        text: "This policy covers functional browser storage and analytics tags on modulifyr.com. It should be read alongside our Privacy Policy.",
       },
     ],
   },
   {
-    title: "2. Essential Cookies We Use",
+    title: "2. Functional Storage",
     body: [
       {
-        heading: "Consent Record",
-        text: "We store your cookie consent choice (accepted or denied) in your browser's local storage under the key modulifyr_cookie_consent, so we don't ask again on every visit.",
-      },
-      {
         heading: "Theme Preference",
-        text: "Your light/dark mode selection is stored locally so the site loads in your preferred appearance.",
+        text: "Your colour theme preference (light/dark mode) is saved in local storage via next-themes so the site loads in your chosen appearance.",
       },
       {
-        heading: "Region Selection",
-        text: "Your selected pricing region (Nepal/international) is stored in a cookie so pricing displays correctly on return visits.",
+        heading: "Region Choice",
+        text: "Your selected pricing region is saved in a cookie named modulifyr_region and in local storage for one year so pricing displays in your preferred currency.",
       },
       {
-        heading: "Why These Are Exempt",
-        text: "These are strictly necessary for the site to function as intended and are not subject to opt-out under GDPR or CCPA.",
+        heading: "Language Preference",
+        text: "Your language choice is saved in local storage under modulifyr_lang to render content in your chosen language.",
+      },
+      {
+        heading: "Purpose",
+        text: "This functional storage provides the exact features you select while navigating the site.",
       },
     ],
   },
   {
-    title: "3. No Advertising or Tracking Cookies",
+    title: "3. Analytics",
+    body: [
+      {
+        heading: "Google Tag Manager",
+        text: "We use Google Tag Manager to measure site usage, including pages viewed, traffic sources, device type, and browser type when a page opens.",
+      },
+      {
+        heading: "Provider & Policy",
+        text: "Google provides this analytics measurement capability. You can learn more by visiting Google's Privacy Policy at https://policies.google.com/privacy.",
+      },
+      {
+        heading: "Browser Control",
+        text: "You can block analytics scripts at any time using your browser settings or a content-blocking extension.",
+      },
+    ],
+  },
+  {
+    title: "4. No Advertising or Chat Tools",
     body: [
       {
         heading: "No Ad Tech",
-        text: "We do not use advertising cookies, retargeting pixels, or third-party marketing trackers of any kind.",
+        text: "We do not use advertising tools, retargeting pixels, or marketing trackers.",
       },
       {
-        heading: "No Cross-Site Tracking",
-        text: "We do not sell or share cookie data with data brokers or advertising networks.",
+        heading: "No Chat Widgets",
+        text: "We do not run third-party chat widgets on the site.",
       },
     ],
   },
   {
-    title: "4. Analytics",
-    body: [
-      {
-        heading: "Current Use",
-        text: "If we enable analytics in the future, tools will be configured to anonymize IP addresses and respect Do Not Track signals, consistent with our Privacy Policy.",
-      },
-      {
-        heading: "Consent-Gated",
-        text: "Analytics cookies, if introduced, will only load after you accept via the cookie banner.",
-      },
-    ],
-  },
-  {
-    title: "5. Your Consent Choices",
-    body: [
-      {
-        heading: "The Banner",
-        text: "On your first visit, a banner lets you Accept or Deny non-essential cookies. Your choice is saved and respected on future visits.",
-      },
-      {
-        heading: "Changing Your Mind",
-        text: "To change your choice, clear modulifyr_cookie_consent from your browser's local storage (see Section 6) and reload the page — the banner will reappear.",
-      },
-    ],
-  },
-  {
-    title: "6. Managing or Clearing Cookies",
+    title: "5. Managing Storage",
     body: [
       {
         heading: "Browser Settings",
-        text: "Most browsers let you view, delete, or block cookies and local storage through their privacy or security settings. See your browser's help documentation: Chrome, Firefox, Safari, Edge, or Opera.",
+        text: "You can view, manage, or clear cookies and local storage through your browser settings at any time.",
       },
       {
-        heading: "Impact of Blocking",
-        text: "Blocking essential cookies may cause preferences like theme or region to reset on each visit. It will not affect your ability to browse the site.",
+        heading: "Impact",
+        text: "Clearing or disabling local storage will simply reset your theme or region preferences to default values on future visits.",
       },
     ],
   },
   {
-    title: "7. Changes to This Policy",
+    title: "6. Changes to This Policy",
     body: [
       {
         heading: "Updates",
-        text: "We may update this Cookie Policy as our tooling changes. Material changes will be reflected with an updated date at the top of this page.",
+        text: "We may update this policy as our infrastructure evolves. Material changes will be noted with an updated date.",
       },
     ],
   },
   {
-    title: "8. Contact",
+    title: "7. Contact",
     body: [
       { heading: "Email", text: "contact@modulifyr.com" },
       {
@@ -130,7 +121,7 @@ export default function CookiePolicyPage() {
             <p className="text-text-muted text-lg leading-relaxed">
               What cookies Modulifyr uses, why, and how to control them.
             </p>
-            <p className="text-text-muted mt-3 text-sm">Last Updated: August 2026</p>
+            <p className="text-text-muted mt-3 text-sm">Last Updated: October 2026</p>
           </div>
         </div>
       </section>

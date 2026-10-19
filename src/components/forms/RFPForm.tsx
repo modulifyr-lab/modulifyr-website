@@ -8,10 +8,12 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { useRegion } from "@/components/RegionProvider";
 import { RegionSelector } from "@/components/RegionSelector";
-import { formatTierPrice } from "@/lib/pricing";
+import { formatTierPrice, formatPackageRange } from "@/lib/pricing";
+import type { PackagePricingKey } from "@/lib/pricing";
 import { REGIONS } from "@/lib/regions";
 import type { Region } from "@/lib/regions";
 import { CheckCircle2, AlertCircle, Loader2, ArrowRight, ShieldCheck, Globe } from "lucide-react";
+import { BOOKING_URL } from "@/lib/links";
 import Reveal from "@/components/ui/Reveal";
 
 const industries = ["Education", "Commerce", "Healthcare", "IT", "Retail", "Services", "Other"];
@@ -24,8 +26,23 @@ const projectTypes = [
   "Not sure yet — help me decide",
 ];
 
+const PACKAGE_SLUG_MAP: Record<string, { projectType: string; packageKey: PackagePricingKey }> = {
+  "strategy-sprint": {
+    projectType: projectTypes[0],
+    packageKey: "strategySprint",
+  },
+  "launch-kit": {
+    projectType: projectTypes[1],
+    packageKey: "launchKit",
+  },
+  "automation-layer": {
+    projectType: projectTypes[2],
+    packageKey: "automationLayer",
+  },
+};
+
 const projectPricing = {
-  "Strategy Sprint (Discovery) — 1–2 weeks": {
+  [projectTypes[0]]: {
     packageKey: "strategySprint",
     tierKeys: [
       "tier1_basicScoping",
@@ -40,7 +57,7 @@ const projectPricing = {
       "Tier 4 — Enterprise Strategy",
     ],
   },
-  "Launch Kit (Static Website) — 1–3 weeks": {
+  [projectTypes[1]]: {
     packageKey: "launchKit",
     tierKeys: ["tier1_essential", "tier2_business", "tier3_premium", "tier4_enterpriseLaunch"],
     tierNames: [
@@ -50,7 +67,7 @@ const projectPricing = {
       "Tier 4 — Enterprise Launch",
     ],
   },
-  "Automation Layer (Integrations & Automation) — 1–6 weeks": {
+  [projectTypes[2]]: {
     packageKey: "automationLayer",
     tierKeys: [
       "tier1_basicConnection",
@@ -72,15 +89,15 @@ function buildTierBudgets(projectType: string, region: Exclude<Region, null>): s
   if (!config) return buildFallbackBudgets(region);
   return config.tierKeys.map(
     (tierKey, index) =>
-      `${formatTierPrice(config.packageKey, tierKey, region)} · ${config.tierNames[index]}`
+      `${formatTierPrice(config.packageKey as PackagePricingKey, tierKey, region)} · ${config.tierNames[index]}`
   );
 }
 
 function buildFallbackBudgets(region: Exclude<Region, null>): string[] {
   return [
-    `${formatTierPrice("strategySprint", "tier1_basicScoping", region)} – ${formatTierPrice("strategySprint", "tier4_enterpriseStrategy", region)} · Strategy Sprint (Discovery)`,
-    `${formatTierPrice("launchKit", "tier1_essential", region)} – ${formatTierPrice("launchKit", "tier4_enterpriseLaunch", region)} · Launch Kit (Static Website)`,
-    `${formatTierPrice("automationLayer", "tier1_basicConnection", region)} – ${formatTierPrice("automationLayer", "tier4_enterpriseAutomation", region)} · Automation Layer`,
+    `${formatPackageRange("strategySprint", region)} · Strategy Sprint (Discovery)`,
+    `${formatPackageRange("launchKit", region)} · Launch Kit (Static Website)`,
+    `${formatPackageRange("automationLayer", region)} · Automation Layer`,
     "Not sure yet",
   ];
 }
@@ -125,57 +142,43 @@ export function RFPForm() {
   const [form, setForm] = useState<FormState>(initialForm);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
-  const [budgets, setBudgets] = useState<string[]>([]);
+  const [selectedTierIndex, setSelectedTierIndex] = useState<number | null>(null);
 
-  const prevRegion = useRef(region);
-  const prevProjectType = useRef(form.project_type);
-
-  // Initialize budgets based on URL params or defaults
+  // Read search params once on mount / searchParams change
   useEffect(() => {
-    const pkg = searchParams.get("pkg");
-    const tier = searchParams.get("tier");
+    const rawPkg = searchParams.get("pkg")?.toLowerCase();
+    const rawTier = searchParams.get("tier");
 
-    if (pkg) {
-      // Find matching project type
-      const matchedType = projectTypes.find((p) => p.toLowerCase().includes(pkg.toLowerCase()));
-      if (matchedType) {
-        setForm((prev) => ({ ...prev, project_type: matchedType }));
-        if (activeRegion) setBudgets(buildTierBudgets(matchedType, activeRegion));
-        if (tier) {
-          // Try to find matching tier
-          const tierList = activeRegion ? buildTierBudgets(matchedType, activeRegion) : [];
-          if (tierList) {
-            const matchedTier = tierList.find((t) => t.toLowerCase().includes(tier.toLowerCase()));
-            if (matchedTier) {
-              setForm((prev) => ({ ...prev, budget: matchedTier }));
-            }
-          }
+    if (rawPkg && PACKAGE_SLUG_MAP[rawPkg]) {
+      const { projectType } = PACKAGE_SLUG_MAP[rawPkg];
+      setForm((prev) => ({ ...prev, project_type: projectType }));
+
+      if (rawTier) {
+        const tierNum = parseInt(rawTier, 10);
+        if (tierNum >= 1 && tierNum <= 4) {
+          setSelectedTierIndex(tierNum - 1);
         }
       }
-    } else {
-      // Default to fallback budgets
-      setBudgets(activeRegion ? buildFallbackBudgets(activeRegion) : []);
     }
-  }, [searchParams, activeRegion]);
+  }, [searchParams]);
 
-  // Update budgets when project_type changes
-  useEffect(() => {
-    if (form.project_type && form.project_type !== prevProjectType.current) {
-      prevProjectType.current = form.project_type;
-      setBudgets(activeRegion ? buildTierBudgets(form.project_type, activeRegion) : []);
-      // Reset budget when package changes
-      setForm((prev) => ({ ...prev, budget: "" }));
-    }
-  }, [form.project_type, activeRegion]);
+  // Derive available budgets from form.project_type & activeRegion
+  const currentBudgets = activeRegion
+    ? form.project_type
+      ? buildTierBudgets(form.project_type, activeRegion)
+      : buildFallbackBudgets(activeRegion)
+    : [];
 
-  // Update budgets when region changes
+  // Derive selected budget string
+  const currentBudget =
+    selectedTierIndex !== null && currentBudgets[selectedTierIndex]
+      ? currentBudgets[selectedTierIndex]
+      : "";
+
+  // Keep form.budget in sync with derived currentBudget
   useEffect(() => {
-    if (prevRegion.current !== region) {
-      prevRegion.current = region;
-      setBudgets(activeRegion ? buildTierBudgets(form.project_type, activeRegion) : []);
-      setForm((f) => ({ ...f, budget: "" }));
-    }
-  }, [region, activeRegion, form.project_type]);
+    setForm((prev) => ({ ...prev, budget: currentBudget }));
+  }, [currentBudget]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -438,7 +441,10 @@ export function RFPForm() {
                           id="rfp-project-type"
                           name="project_type"
                           value={form.project_type}
-                          onChange={handleChange}
+                          onChange={(e) => {
+                            handleChange(e);
+                            setSelectedTierIndex(null);
+                          }}
                           className="border-border-base bg-bg-light text-text-primary focus:border-[#2D738D] focus:ring-[#2D738D]/10 cursor-pointer appearance-none rounded-xl border px-4 py-3 text-sm transition-colors focus:ring-2 focus:outline-none"
                         >
                           <option value="" disabled>
@@ -462,13 +468,13 @@ export function RFPForm() {
                           </label>
                         </div>
                         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3">
-                          {budgets.map((b) => (
+                          {currentBudgets.map((b, idx) => (
                             <button
-                              key={b}
+                              key={idx}
                               type="button"
-                              onClick={() => setForm((prev) => ({ ...prev, budget: b }))}
+                              onClick={() => setSelectedTierIndex(idx)}
                               className={`cursor-pointer rounded-xl border px-3 py-3 text-left text-xs font-semibold transition-all ${
-                                form.budget === b
+                                selectedTierIndex === idx
                                   ? "border-[#2D738D] bg-[#2D738D]/5 text-[#2D738D]"
                                   : "border-border-base bg-bg-light text-text-secondary hover:border-brand-navy"
                               }`}
@@ -652,11 +658,9 @@ export function RFPForm() {
                   <p className="text-text-secondary mb-6 text-sm leading-relaxed">
                     Book a free 15-minute discovery call directly with our lead architect.
                   </p>
-                  <Link href="/contact">
-                    <Button variant="outline" className="w-full">
-                      Book Discovery Call
-                    </Button>
-                  </Link>
+                  <Button href={BOOKING_URL} external variant="outline" className="w-full justify-center">
+                    Book Discovery Call
+                  </Button>
                 </div>
               </Reveal>
 

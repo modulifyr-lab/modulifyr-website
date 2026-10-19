@@ -15,7 +15,6 @@ export const translations: Record<Language, Record<string, string>> = {
   en: {
     // Navbar
     "nav.services": "Services",
-    "nav.pricing": "Pricing",
     "nav.process": "Process",
     "nav.industries": "Industries",
     "nav.work": "Work",
@@ -108,7 +107,6 @@ export const translations: Record<Language, Record<string, string>> = {
     "footer.custom_dev": "Custom Dev",
     "footer.process": "Process",
     "footer.tech_stack": "Tech Stack",
-    "footer.pricing": "Pricing",
     "footer.industries": "Industries",
     "footer.contact_heading": "Contact",
     "footer.location": "Birtamode, Ward 1, Gauri Tol, Jhapa, Nepal",
@@ -117,17 +115,10 @@ export const translations: Record<Language, Record<string, string>> = {
     "footer.terms": "Terms",
     "footer.copyright": "© 2026 Modulifyr Enterprise Pvt. Ltd. All rights reserved.",
     "footer.tagline_short": "Custom software development for businesses in Nepal and worldwide.",
-    "cookie.banner.title": "About cookies on this site",
-    "cookie.banner.text":
-      "We use cookies to collect and analyse information on site performance and usage to improve your experience.",
-    "cookie.banner.accept": "Allow all cookies",
-    "cookie.banner.deny": "Deny all",
-    "cookie.banner.learn_more": "Learn more",
   },
 
   ne: {
     "nav.services": "सेवाहरू",
-    "nav.pricing": "मूल्य निर्धारण",
     "nav.process": "प्रक्रिया",
     "nav.industries": "उद्योगहरू",
     "nav.work": "काम",
@@ -205,7 +196,6 @@ export const translations: Record<Language, Record<string, string>> = {
     "footer.custom_dev": "कस्टम विकास",
     "footer.process": "प्रक्रिया",
     "footer.tech_stack": "प्रविधि स्ट्याक",
-    "footer.pricing": "मूल्य निर्धारण",
     "footer.industries": "उद्योगहरू",
     "footer.contact_heading": "सम्पर्क",
     "footer.location": "बिर्तामोड, वडा नं. १, गौरी टोल, झापा, नेपाल",
@@ -214,12 +204,6 @@ export const translations: Record<Language, Record<string, string>> = {
     "footer.terms": "सर्तहरू",
     "footer.copyright": "© २०२६ Modulifyr Enterprise Pvt. Ltd. सर्वाधिकार सुरक्षित।",
     "footer.tagline_short": "नेपाल र विश्वभरका व्यवसायहरूका लागि कस्टम सफ्टवेयर विकास।",
-    "cookie.banner.title": "यस साइटमा कुकीहरू बारे",
-    "cookie.banner.text":
-      "तपाईंको अनुभव सुधार गर्न साइटको प्रदर्शन र प्रयोगको बारेमा जानकारी संकलन र विश्लेषण गर्न हामी कुकीहरू प्रयोग गर्दछौं।",
-    "cookie.banner.accept": "सबै कुकीहरू स्वीकार गर्नुहोस्",
-    "cookie.banner.deny": "सबै अस्वीकार गर्नुहोस्",
-    "cookie.banner.learn_more": "थप जान्नुहोस्",
   },
 };
 
