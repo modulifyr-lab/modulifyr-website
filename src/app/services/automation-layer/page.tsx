@@ -329,7 +329,7 @@ export default function AutomationLayerPage() {
       <section className="bg-bg-secondary py-12">
         <div className="container-custom">
           <Reveal variant="fade-scale">
-            <div className="border-border-base max-w-3xl rounded-2xl border bg-white p-8">
+            <div className="border-border-base max-w-3xl rounded-2xl border bg-bg-alt p-8">
               <div className="mb-4 flex items-start gap-3">
                 <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-[#2D738D]" />
                 <h3 className="text-foreground font-bold">What you are responsible for</h3>

@@ -149,7 +149,7 @@ export default async function ResourceArticlePage({ params }: Props) {
         <div className="container-custom">
           <div className="mx-auto grid max-w-6xl grid-cols-1 gap-16 lg:grid-cols-4">
             <article className="lg:col-span-3">
-              <div className="border-border-base rounded-3xl border bg-white p-8 md:p-12">
+              <div className="border-border-base rounded-3xl border bg-bg-alt p-8 md:p-12">
                 <p className="text-text-secondary border-border-base mb-8 border-b pb-8 text-xl leading-relaxed font-medium italic">
                   {resource.description}
                 </p>

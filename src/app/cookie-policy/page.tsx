@@ -151,7 +151,7 @@ export default function CookiePolicyPage() {
 
             {/* Content */}
             <div className="lg:col-span-3">
-              <div className="border-border-base rounded-3xl border bg-white p-8 md:p-12">
+              <div className="border-border-base rounded-3xl border bg-bg-alt p-8 md:p-12">
                 <p className="text-text-secondary border-border-base mb-10 border-b pb-8 leading-relaxed">
                   This Cookie Policy explains how Modulifyr Enterprise Pvt. Ltd. ("we", "us", "our")
                   uses cookies and similar local storage technologies on{" "}

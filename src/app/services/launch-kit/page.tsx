@@ -208,7 +208,7 @@ export default function LaunchKitPage() {
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             {animationGuide.map((row, i) => (
               <Reveal key={i} variant="fade-scale" delay={i * 100}>
-                <div className="border-border-base flex h-full items-start gap-4 rounded-xl border bg-white p-5">
+                <div className="border-border-base flex h-full items-start gap-4 rounded-xl border bg-bg-alt p-5">
                   <div className="bg-brand-navy flex h-8 w-8 shrink-0 items-center justify-center rounded-lg">
                     <span className="text-[10px] font-bold text-white">T{i + 1}</span>
                   </div>
@@ -404,7 +404,7 @@ export default function LaunchKitPage() {
               </div>
 
               <Reveal variant="fade-scale" delay={200}>
-                <div className="border-border-base rounded-2xl border bg-white p-8 shadow-sm">
+                <div className="border-border-base rounded-2xl border bg-bg-alt p-8 shadow-sm">
                   <h3 className="text-foreground mb-4 text-lg font-bold">Management Fee Range</h3>
                   <div className="font-heading text-[#2D738D] mb-2 text-3xl font-bold">
                     {activeRegion
@@ -444,7 +444,7 @@ export default function LaunchKitPage() {
       <section className="bg-bg-secondary py-12">
         <div className="container-custom">
           <Reveal variant="fade-scale">
-            <div className="border-border-base max-w-3xl rounded-2xl border bg-white p-8">
+            <div className="border-border-base max-w-3xl rounded-2xl border bg-bg-alt p-8">
               <div className="mb-4 flex items-start gap-3">
                 <AlertCircle className="text-[#2D738D] mt-0.5 h-5 w-5 shrink-0" />
                 <h3 className="text-foreground font-bold">What you are responsible for</h3>

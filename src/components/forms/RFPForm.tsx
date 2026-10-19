@@ -315,7 +315,7 @@ export function RFPForm() {
           <div className="grid grid-cols-1 gap-16 lg:grid-cols-3">
             <div className="lg:col-span-2">
               <Reveal variant="fade-scale" delay={100}>
-                <div className="border-border-base rounded-3xl border bg-white p-8 shadow-sm md:p-12">
+                <div className="border-border-base rounded-3xl border bg-bg-alt p-8 shadow-sm md:p-12">
                   {status === "error" && (
                     <div className="mb-8 flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-4">
                       <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-red-500" />

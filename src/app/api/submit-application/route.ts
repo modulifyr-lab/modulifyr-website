@@ -3,67 +3,15 @@ import { NextRequest, NextResponse } from "next/server";
 import { isRateLimited, getClientIp } from "@/lib/ratelimit";
 import logger from "@/lib/logger";
 import { forwardToWebhook } from "@/lib/webhook";
+import { validateCv } from "@/lib/cv";
 
 export const maxDuration = 30;
 
-// ─── All allowed roles (must match JobApplicationForm.tsx role groups) ────────
+// ─── All allowed roles (must match JobApplicationForm.tsx) ───────────────────
 const allowedRoles = [
-  // Engineering
+  "BDR / Growth Manager",
   "Full-Stack Engineer",
-  "Frontend Engineer",
-  "Backend Engineer",
-  "DevOps Engineer",
-  "Cloud Infrastructure Engineer",
-  "Security Engineer",
-  "QA Engineer",
-  "Solutions Architect",
-  "Technical Lead",
-  "Engineering Manager",
-  // Product Design
-  "UX Designer",
-  "UI Designer",
-  "Product Designer",
-  "UX Researcher",
-  "Design Lead",
-  // Product Management
-  "Product Manager",
-  "Senior Product Manager",
-  "Technical Project Manager",
-  "Project Manager",
-  // Marketing & Growth
-  "Growth Marketer",
-  "Digital Marketing Manager",
-  "Content Strategist",
-  "SEO Specialist",
-  "Paid Acquisition Specialist",
-  "Brand Manager",
-  "Community Manager",
-  "Publishing Manager",
-  // Sales & Client Success
-  "Business Development Manager",
-  "Sales Executive",
-  "Pre-Sales Engineer",
-  "Account Manager",
-  "Client Onboarding Specialist",
-  "Customer Success Manager",
-  "Technical Support Engineer",
-  "Customer Support Specialist",
-  // Data
-  "Data Analyst",
-  "Revenue Analyst",
-  // Operations, Finance & HR
-  "Operations Manager",
-  "HR Manager",
-  "HR Specialist",
-  "Recruiter",
-  "Finance Manager",
-  "Accountant",
-  "Financial Analyst",
-  "Chief of Staff",
-  "Executive Assistant",
-  "Legal Counsel",
-  "IT Administrator",
-  // Catch-all
+  "Brand & Content Lead",
   "Other / General Application",
 ];
 
@@ -80,10 +28,22 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const body = await req.json();
+    const formData = await req.formData();
+
+    const body = {
+      name: (formData.get("name") as string) || "",
+      email: (formData.get("email") as string) || "",
+      phone: (formData.get("phone") as string) || "",
+      role: (formData.get("role") as string) || "",
+      skills: (formData.get("skills") as string) || "",
+      portfolio_url: (formData.get("portfolio_url") as string) || "",
+      linkedin_url: (formData.get("linkedin_url") as string) || "",
+      cover_note: (formData.get("cover_note") as string) || "",
+      website: (formData.get("website") as string) || "",
+    };
 
     // ── Honeypot ──────────────────────────────────────────────────────────
-    if (body.website && String(body.website).trim() !== "") {
+    if (body.website && body.website.trim() !== "") {
       logger.info("Job application honeypot triggered", { ip });
       return NextResponse.json({ success: true }, { status: 200 });
     }
@@ -91,9 +51,21 @@ export async function POST(req: NextRequest) {
     // ── Required field validation ─────────────────────────────────────────
     const required = ["name", "email", "role", "skills", "cover_note"];
     for (const field of required) {
-      if (!body[field] || String(body[field]).trim() === "") {
+      if (!body[field as keyof typeof body] || body[field as keyof typeof body].trim() === "") {
         return NextResponse.json({ error: `Missing required field: ${field}` }, { status: 400 });
       }
+    }
+
+    // ── CV File validation ────────────────────────────────────────────────
+    const file = formData.get("cv");
+    if (!file || !(file instanceof File)) {
+      return NextResponse.json({ error: "Please attach your CV." }, { status: 400 });
+    }
+
+    const bytes = new Uint8Array(await file.arrayBuffer());
+    const cvCheck = validateCv({ name: file.name, size: file.size }, bytes);
+    if (!cvCheck.ok) {
+      return NextResponse.json({ error: cvCheck.error }, { status: 400 });
     }
 
     // ── Email format validation ───────────────────────────────────────────
@@ -103,11 +75,11 @@ export async function POST(req: NextRequest) {
     }
 
     // ── Max length validation ─────────────────────────────────────────────
-    if (String(body.name).length > 200)
+    if (body.name.length > 200)
       return NextResponse.json({ error: "Name is too long" }, { status: 400 });
-    if (String(body.skills).length > 500)
+    if (body.skills.length > 500)
       return NextResponse.json({ error: "Skills field is too long" }, { status: 400 });
-    if (String(body.cover_note).length > 5000)
+    if (body.cover_note.length > 5000)
       return NextResponse.json(
         { error: "Cover note is too long (max 5000 characters)" },
         { status: 400 }
@@ -120,11 +92,7 @@ export async function POST(req: NextRequest) {
 
     // ── URL validation (optional fields) ─────────────────────────────────
     const urlRegex = /^https?:\/\/.+/;
-    if (
-      body.portfolio_url &&
-      body.portfolio_url.trim() !== "" &&
-      !urlRegex.test(body.portfolio_url)
-    ) {
+    if (body.portfolio_url && body.portfolio_url.trim() !== "" && !urlRegex.test(body.portfolio_url)) {
       return NextResponse.json({ error: "Invalid portfolio URL" }, { status: 400 });
     }
     if (body.linkedin_url && body.linkedin_url.trim() !== "" && !urlRegex.test(body.linkedin_url)) {
@@ -134,12 +102,16 @@ export async function POST(req: NextRequest) {
     const payload = {
       name: body.name.trim(),
       email: body.email.trim().toLowerCase(),
-      phone: body.phone?.trim() || "Not provided",
+      phone: body.phone.trim() || "Not provided",
       role: body.role,
       skills: body.skills.trim(),
-      portfolio_url: body.portfolio_url?.trim() || "Not provided",
-      linkedin_url: body.linkedin_url?.trim() || "Not provided",
+      portfolio_url: body.portfolio_url.trim() || "Not provided",
+      linkedin_url: body.linkedin_url.trim() || "Not provided",
       cover_note: body.cover_note.trim(),
+      cv_filename: cvCheck.filename,
+      cv_mime: cvCheck.mime,
+      cv_size_bytes: file.size,
+      cv_base64: Buffer.from(bytes).toString("base64"),
     };
 
     const result = await forwardToWebhook("JOB", payload, { ip });
@@ -150,6 +122,7 @@ export async function POST(req: NextRequest) {
     logger.info("Job application submitted successfully", {
       email: payload.email,
       role: payload.role,
+      cv_size_bytes: payload.cv_size_bytes,
       ip,
     });
     return NextResponse.json({ success: true, message: "Application received" }, { status: 200 });

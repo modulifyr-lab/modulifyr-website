@@ -175,7 +175,7 @@ export default function TechnicalStandardsPage() {
             {standards.map((std, i) => (
               <div
                 key={i}
-                className="border-border-base rounded-3xl border bg-white p-8 transition-shadow hover:shadow-lg"
+                className="border-border-base rounded-3xl border bg-bg-alt p-8 transition-shadow hover:shadow-lg"
               >
                 <div className="mb-6 flex items-center gap-4">
                   <div
@@ -214,7 +214,7 @@ export default function TechnicalStandardsPage() {
               SLA agreements reference these metrics explicitly.
             </p>
           </div>
-          <div className="border-border-base overflow-hidden rounded-3xl border bg-white">
+          <div className="border-border-base overflow-hidden rounded-3xl border bg-bg-alt">
             <div className="bg-brand-navy grid grid-cols-3 px-8 py-4 text-xs font-bold tracking-widest text-white uppercase">
               <span>Metric</span>
               <span className="text-center">Target</span>

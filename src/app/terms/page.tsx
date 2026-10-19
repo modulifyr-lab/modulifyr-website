@@ -102,7 +102,7 @@ export default function TermsPage() {
             </div>
 
             <div className="lg:col-span-3">
-              <div className="border-border-base rounded-3xl border bg-white p-8 md:p-12">
+              <div className="border-border-base rounded-3xl border bg-bg-alt p-8 md:p-12">
                 <p className="text-text-secondary border-border-base mb-10 border-b pb-8 leading-relaxed">
                   Please read these Terms carefully before engaging with Modulifyr Enterprise Pvt.
                   Ltd. They establish the legal framework for all interactions between you and
