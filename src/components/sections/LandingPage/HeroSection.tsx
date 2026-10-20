@@ -95,12 +95,20 @@ export function HeroSection() {
         </div>
 
         {/* CTA */}
-        <div className="flex flex-wrap gap-3 pt-4">
-          <Button href="/request-proposal" className="bg-cta text-on-cta px-6 transition-colors duration-300 hover:opacity-90">
+        <div className="flex gap-3 pt-4 w-full justify-center">
+          <Button
+            href="/request-proposal"
+            className="bg-cta text-on-cta w-full px-6 transition-colors duration-300 hover:opacity-90"
+          >
             Request a Proposal
             <FilePenLine className="ml-1 h-6 w-6" />
           </Button>
-          <Button href={BOOKING_URL} external variant="outline" className="px-6 transition-colors duration-300">
+          <Button
+            href={BOOKING_URL}
+            external
+            variant="outline"
+            className="w-full px-6 transition-colors duration-300"
+          >
             Book a Discovery Call
           </Button>
         </div>
