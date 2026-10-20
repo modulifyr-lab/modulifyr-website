@@ -22,6 +22,7 @@ import { ServicesSection } from "@/components/sections/LandingPage/ServiceSectio
 import { ProcessSection } from "@/components/sections/LandingPage/ProcessSection";
 import { WhyModulifyrSection } from "@/components/sections/LandingPage/Whymodulifyrsection";
 import { BlogAndCaseStudiesSection } from "@/components/sections/LandingPage/BlodAndCaseStudiesSection";
+import { FeaturedCaseStudy } from "@/components/sections/LandingPage/FeaturedCaseStudy";
 
 export default function Home() {
   const organizationSchema = {
@@ -79,54 +80,7 @@ export default function Home() {
       <BlogAndCaseStudiesSection />
 
       {/* ── 7. FEATURED CASE STUDY ────────────────────────────────────────── */}
-      <section className="bg-bg-main py-24 transition-colors duration-300">
-        <div className="container-custom">
-          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
-            {/* Left Visual Panel */}
-            <div className="border-border-main group relative aspect-video overflow-hidden rounded-2xl border shadow-xl lg:col-span-6">
-              <Image
-                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80"
-                alt="The Planning Bord ERP Platform"
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/80 via-black/20 to-transparent p-8">
-                <span className="text-caption1 rounded-md bg-[#2D738D] px-3 py-1 font-bold text-white">
-                  ERP Platform
-                </span>
-              </div>
-            </div>
-
-            {/* Right Details */}
-            <div className="space-y-6 lg:col-span-6">
-              <span className="text-caption1 font-bold tracking-wider text-[#2D738D] uppercase">
-                Featured Case Study
-              </span>
-              <h2 className="text-h2 text-foreground font-bold">The Planning Bord</h2>
-              <p className="text-body1 text-text-alt leading-relaxed">
-                The Planning Bord is an integrated ERP platform designed to bring essential business
-                operations into one connected system. It combines inventory, HR, project management,
-                finance, and automation in a unified platform. The solution helps modern teams
-                streamline daily workflows, improve visibility, and manage their operations more
-                efficiently.
-              </p>
-              <div className="pt-2">
-                <Link href="/work">
-                  <button
-                    type="button"
-                    className="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-[#2D738D] px-6 py-3 text-sm font-semibold text-white transition-colors duration-100 ease-in hover:bg-[#235b70]"
-                  >
-                    View Details
-                    <ArrowRight className="h-4 w-4" />
-                  </button>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <FeaturedCaseStudy />
 
       {/* ── 8. FAQ ACCORDION ──────────────────────────────────────────────── */}
       <FaqAccordion />
