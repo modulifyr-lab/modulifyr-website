@@ -1,175 +1,234 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight, Boxes, FileCode2, GitBranch, Rocket } from "lucide-react";
-import { Button } from "@/components/Button";
+import {
+  Check,
+  Compass,
+  LifeBuoy,
+  PackageSearch,
+  Rocket,
+  TerminalSquare,
+  type LucideIcon,
+} from "lucide-react";
 
-const PROCESS_STEPS = [
+type ProcessStep = {
+  id: string;
+  title: string;
+  description: string;
+  deliverables: string[];
+  icon: LucideIcon;
+};
+
+const PROCESS_STEPS: ProcessStep[] = [
   {
     id: "01",
-    title: "Discovery & Architecture",
+    title: "Discovery",
     description:
-      "We map out your technical requirements and system architecture to establish a blueprint built for long-term scalability.",
-    icon: Boxes,
-    image: "/services/service-one.png",
+      "We start by embedding with your team to understand the 'why' behind the project. We map out current bottlenecks and define success metrics.",
+    deliverables: ["Discovery Report", "Product Backlog", "High-level Roadmap"],
+    icon: PackageSearch,
   },
   {
     id: "02",
-    title: "Agile Development",
+    title: "Architecture",
     description:
-      "Our team builds clean, maintainable, and well-documented custom code, iterating rapidly based on key feedback loops.",
-    icon: FileCode2,
-    image: "/services/service-two.png",
+      "Engineering is about trade-offs. We design a modular structure that optimizes for your specific scale, security, and performance constraints.",
+    deliverables: ["System Architecture", "Data Schema", "Integration Specs"],
+    icon: Compass,
   },
   {
     id: "03",
-    title: "Seamless Integration",
+    title: "Development",
     description:
-      "We integrate custom solutions directly into your legacy systems and third-party tools to ensure zero operational disruption.",
-    icon: GitBranch,
-    image: "/services/service-three.png",
+      "We build in focused sprints with regular demos. Our code is clean, modular, and designed to be maintained by any professional team.",
+    deliverables: ["Sytem Architecture Design", "Data Schema", "Integration Specs"],
+    icon: TerminalSquare,
   },
   {
     id: "04",
-    title: "Deployment & Scaling",
+    title: "Deployment",
     description:
-      "Rigorous testing, automated CI/CD deployment pipelines, and continuous monitoring keep your infrastructure bulletproof.",
+      "We handle the complexity of cloud infrastructure, ensuring a smooth transition with zero disruption to your existing operations.",
+    deliverables: ["Production Environment", "CI/CD Pipeline", "Backup Systems"],
     icon: Rocket,
-    image: "/services/service-four.png",
+  },
+  {
+    id: "05",
+    title: "Support",
+    description:
+      "We handle the complexity of cloud infrastructure, ensuring a smooth transition with zero disruption to your existing operations.",
+    deliverables: ["SLA Monitoring", "Security Patches", "Feature Iterations"],
+    icon: LifeBuoy,
   },
 ];
+
+const AUTO_ADVANCE_MS = 6000;
 
 export function ProcessSection() {
   const [activeStep, setActiveStep] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(false);
 
-  // Auto-advance through steps unless hovered
   useEffect(() => {
-    if (isPaused) return;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduceMotion(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setReduceMotion(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
 
-    const interval = setInterval(() => {
+  // Auto-advance unless hovered, focused, or the user prefers reduced motion
+  useEffect(() => {
+    if (isPaused || reduceMotion) return;
+
+    const timer = setTimeout(() => {
       setActiveStep((prev) => (prev + 1) % PROCESS_STEPS.length);
-    }, 4000);
+    }, AUTO_ADVANCE_MS);
 
-    return () => clearInterval(interval);
-  }, [isPaused]);
+    return () => clearTimeout(timer);
+  }, [activeStep, isPaused, reduceMotion]);
+
+  const current = PROCESS_STEPS[activeStep];
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+      e.preventDefault();
+      setActiveStep((prev) => (prev + 1) % PROCESS_STEPS.length);
+    } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+      e.preventDefault();
+      setActiveStep((prev) => (prev - 1 + PROCESS_STEPS.length) % PROCESS_STEPS.length);
+    }
+  };
 
   return (
     <section className="bg-background text-on-background relative overflow-hidden py-20 transition-colors duration-300 md:py-24">
       <div className="container-custom">
         {/* Header */}
-        <div className="mb-12 max-w-2xl">
+        <div className="mb-12 max-w-full">
           <span className="font-sans text-[20px] leading-[110%] font-normal text-[#FFC24B]">
-            HOW WE WORK
+            THE PROCESS
           </span>
           <h2 className="text-on-background mt-2 text-4xl leading-[1.1] font-bold">
-            Engineered Step-by-Step for Maximum Impact
+            Five-phase engineering approach, built to scale
           </h2>
+          <p className="text-on-surface-variant mt-3 text-base leading-[1.3]">
+            A structured process that brings clarity from discovery to deployment and beyond.
+          </p>
         </div>
 
-        {/* Grid Layout */}
-        <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
-          {/* LEFT: Interactive Step List */}
+        <div
+          className="grid gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-12"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          onFocus={() => setIsPaused(true)}
+          onBlur={() => setIsPaused(false)}
+        >
+          {/* LEFT: step tabs */}
           <div
-            className="flex flex-col gap-4 lg:col-span-7"
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
+            role="tablist"
+            aria-label="Process phases"
+            aria-orientation="vertical"
+            onKeyDown={handleKeyDown}
+            className="flex flex-row gap-2 overflow-x-auto pb-2 lg:flex-col lg:gap-1 lg:overflow-visible lg:pb-0"
           >
             {PROCESS_STEPS.map((step, index) => {
-              const Icon = step.icon;
               const isActive = activeStep === index;
 
               return (
                 <button
                   key={step.id}
+                  id={`process-tab-${step.id}`}
+                  role="tab"
                   type="button"
+                  aria-selected={isActive}
+                  aria-controls="process-panel"
+                  tabIndex={isActive ? 0 : -1}
                   onClick={() => setActiveStep(index)}
-                  className={`group relative flex items-start gap-5 rounded-2xl p-6 text-left transition-all duration-300 ${
-                    isActive
-                      ? "bg-surface border-outline/20 border shadow-lg"
-                      : "hover:bg-surface/50 border border-transparent"
-                  }`}
+                  className="group relative flex shrink-0 cursor-pointer items-baseline gap-3 rounded-lg px-4 py-3 text-left transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-[#4FB6C6] focus-visible:outline-none lg:py-3.5 lg:pr-8"
                 >
-                  {/* Step Number/Icon Badge */}
-                  <div
-                    className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border transition-all duration-300 ${
-                      isActive
-                        ? "border-[#FFC24B] bg-[#FFC24B]/10 text-[#FFC24B]"
-                        : "border-outline/30 bg-surface-container text-on-surface-variant group-hover:border-outline"
+                  <span
+                    className={`text-sm font-medium tabular-nums transition-colors duration-300 ${
+                      isActive ? "text-[#4FB6C6]" : "text-on-surface-variant/60"
                     }`}
                   >
-                    <Icon className="h-6 w-6" />
-                  </div>
+                    {step.id}
+                  </span>
+                  <span
+                    className={`text-2xl font-bold transition-colors duration-300 md:text-[28px] ${
+                      isActive
+                        ? "text-on-background"
+                        : "text-on-surface-variant/50 group-hover:text-on-surface-variant"
+                    }`}
+                  >
+                    {step.title}
+                  </span>
 
-                  {/* Step Text */}
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3">
-                      <span className="text-xs font-semibold tracking-wider text-[#FFC24B]">
-                        STEP {step.id}
-                      </span>
-                      <h3 className="text-on-background text-xl font-bold">{step.title}</h3>
-                    </div>
-                    <p
-                      className={`mt-2 text-sm leading-relaxed transition-all duration-300 ${
-                        isActive
-                          ? "text-on-surface-variant max-h-24 opacity-100"
-                          : "text-on-surface-variant/70 max-h-12 opacity-80 lg:max-h-0 lg:overflow-hidden lg:opacity-0"
-                      }`}
-                    >
-                      {step.description}
-                    </p>
-                  </div>
-
-                  {/* Progress Indicator Bar */}
-                  {isActive && (
-                    <div className="absolute right-6 bottom-0 left-6 h-[2px] animate-pulse rounded-full bg-[#FFC24B]" />
-                  )}
+                  {/* Active marker: vertical bar on desktop, underline on mobile */}
+                  <span
+                    aria-hidden="true"
+                    className={`absolute rounded-full bg-[#4FB6C6] transition-all duration-300 max-lg:right-4 max-lg:bottom-0 max-lg:left-4 max-lg:h-[2px] lg:top-1/2 lg:right-0 lg:h-10 lg:w-[2px] lg:-translate-y-1/2 ${
+                      isActive ? "opacity-100" : "opacity-0"
+                    }`}
+                  />
                 </button>
               );
             })}
-
-            {/* CTA Link */}
-            <div className="mt-6 pl-2">
-              <Link href="/process" className="group inline-block">
-                <Button variant="outline">
-                  Explore Full Methodology{" "}
-                  <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-                </Button>
-              </Link>
-            </div>
           </div>
 
-          {/* RIGHT: Dynamic Image Display */}
-          <div className="relative mx-auto aspect-square w-full max-w-[480px] lg:col-span-5">
-            {/* Background Glow Effect */}
-            <div className="absolute -inset-4 rounded-full bg-[#FFC24B]/5 blur-3xl" />
+          {/* RIGHT: detail card */}
+          <div
+            id="process-panel"
+            role="tabpanel"
+            aria-labelledby={`process-tab-${current.id}`}
+            className="border-outline/20 bg-surface relative min-h-[300px] overflow-hidden rounded-2xl border p-8 shadow-xl md:p-10"
+          >
+            {/* Soft glow behind the icon */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -right-10 -bottom-10 h-56 w-56 rounded-full bg-[#4FB6C6]/10 blur-3xl"
+            />
 
-            <div className="border-outline/20 bg-surface relative h-full w-full overflow-hidden rounded-3xl border shadow-2xl">
-              {PROCESS_STEPS.map((step, index) => (
-                <div
-                  key={step.id}
-                  className={`absolute inset-0 p-8 transition-all duration-700 ease-in-out ${
-                    activeStep === index
-                      ? "scale-100 opacity-100"
-                      : "pointer-events-none scale-95 opacity-0"
-                  }`}
-                >
-                  <Image
-                    src={step.image}
-                    alt={step.title}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 480px"
-                    className="object-contain p-6"
-                    priority={index === 0}
-                  />
-                </div>
-              ))}
+            {/* Content re-mounts per step so the fade replays on change */}
+            <div key={current.id} className="animate-process-in relative">
+              <p className="text-on-surface-variant/70 text-sm">{current.title}</p>
+
+              <p className="text-on-background mt-8 max-w-xl text-lg leading-relaxed">
+                {current.description}
+              </p>
+
+              <ul className="mt-8 flex flex-col gap-3">
+                {current.deliverables.map((item) => (
+                  <li key={item} className="text-on-background flex items-center gap-3 text-base">
+                    <Check className="h-4 w-4 shrink-0 text-[#4FB6C6]" aria-hidden="true" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes process-in {
+          from {
+            opacity: 0;
+            transform: translateY(6px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-process-in {
+          animation: process-in 350ms ease-out both;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .animate-process-in {
+            animation: none;
+          }
+        }
+      `}</style>
     </section>
   );
 }

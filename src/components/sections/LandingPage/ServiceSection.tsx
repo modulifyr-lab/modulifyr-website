@@ -58,8 +58,8 @@ export function ServicesSection() {
             {/* CTA */}
             <div className="mt-14">
               <Link href="/services" className="group inline-block">
-                <Button variant="outline">
-                  Explore Integration Solutions{" "}
+                <Button variant="outline" className="px-5">
+                  Explore Integration Solutions
                   <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
                 </Button>
               </Link>
