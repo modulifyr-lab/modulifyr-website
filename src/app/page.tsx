@@ -23,6 +23,7 @@ import { ProcessSection } from "@/components/sections/LandingPage/ProcessSection
 import { WhyModulifyrSection } from "@/components/sections/LandingPage/Whymodulifyrsection";
 import { BlogAndCaseStudiesSection } from "@/components/sections/LandingPage/BlodAndCaseStudiesSection";
 import { FeaturedCaseStudy } from "@/components/sections/LandingPage/FeaturedCaseStudy";
+import { CtaSection } from "@/components/sections/LandingPage/CTABanner";
 
 export default function Home() {
   const organizationSchema = {
@@ -86,36 +87,7 @@ export default function Home() {
       <FaqAccordion />
 
       {/* ── 9. CTA BANNER ─────────────────────────────────────────────────── */}
-      <section className="bg-bg-alt border-border-main relative overflow-hidden border-t py-24 transition-colors duration-300">
-        <div
-          className="pointer-events-none absolute top-1/2 -left-20 h-80 w-80 -translate-y-1/2 rounded-full opacity-20 blur-3xl"
-          style={{ background: "var(--gradient-primary)" }}
-        />
-        <div
-          className="pointer-events-none absolute top-1/2 -right-20 h-80 w-80 -translate-y-1/2 rounded-full opacity-20 blur-3xl"
-          style={{ background: "var(--gradient-primary)" }}
-        />
-
-        <div className="container-custom relative z-10 max-w-3xl space-y-6 text-center">
-          <h2 className="text-display text-foreground font-extrabold">Ready To Build Together?</h2>
-          <p className="text-subhead text-text-alt">Better technology starts here.</p>
-          <div className="flex flex-wrap justify-center gap-4 pt-4">
-            <Button
-              href="/request-proposal"
-              className="cursor-pointer rounded-lg bg-[#2D738D] px-8 py-3.5 text-base font-semibold text-white transition-colors duration-100 ease-in hover:bg-[#235b70]"
-            >
-              Request a Proposal
-            </Button>
-            <Button
-              href={BOOKING_URL}
-              external
-              className="bg-bg-main border-border-main text-foreground hover:bg-bg-alt cursor-pointer rounded-lg border px-8 py-3.5 text-base font-semibold transition-colors duration-100 ease-in"
-            >
-              Schedule Discovery Call
-            </Button>
-          </div>
-        </div>
-      </section>
+      <CtaSection />
     </div>
   );
 }
