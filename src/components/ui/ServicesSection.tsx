@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { useRegion } from "@/components/RegionProvider";
 import { RegionSelector } from "@/components/RegionSelector";
+import type { PackagePricingKey } from "@/lib/pricing";
 
 /* ── Currency ────────────────────────────────────────────────────────────────
    TODO: keys and rates below are placeholders. Align them with whatever
@@ -40,6 +41,7 @@ export interface ServiceTier {
 export interface ServiceData {
   id: string;
   slug: "strategy-sprint" | "launch-kit" | "automation-layer";
+  pkgKey: PackagePricingKey;
   title: string;
   tiersIntro: string;
   tiers: ServiceTier[];
@@ -50,6 +52,7 @@ export const SERVICES_DATA: ServiceData[] = [
   {
     id: "strategy-sprint",
     slug: "strategy-sprint",
+    pkgKey: "strategySprint",
     title: "Strategy Sprint",
     tiersIntro: "For unclear requirements, architecture decisions, and complex scoping.",
     tiers: [
@@ -75,6 +78,7 @@ export const SERVICES_DATA: ServiceData[] = [
   {
     id: "launch-kit",
     slug: "launch-kit",
+    pkgKey: "launchKit",
     title: "Launch Kit",
     tiersIntro: "For static landing pages, marketing sites, and brochure sites.",
     tiers: [
@@ -92,6 +96,7 @@ export const SERVICES_DATA: ServiceData[] = [
   {
     id: "automation-layer",
     slug: "automation-layer",
+    pkgKey: "automationLayer",
     title: "Automation Layer",
     tiersIntro: "For connecting existing systems, APIs, and workflows.",
     tiers: [
@@ -139,7 +144,7 @@ export function ServicesSection() {
             <span className="text-caption2 text-text-dim font-semibold tracking-wider uppercase">
               Display currency:
             </span>
-            <RegionSelector compact={false}/>
+            <RegionSelector compact={false} />
           </div>
         </div>
 
@@ -173,7 +178,7 @@ export function ServicesSection() {
 
                     {/* CTA: always visible below lg, revealed on hover/focus from lg up */}
                     <div className="mt-auto pt-5">
-                      <div className="border-border-main/60 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t pt-4 transition-all duration-300 ease-out lg:translate-y-1 lg:group-focus-within:translate-y-0 lg:group-focus-within:opacity-100 lg:group-hover:translate-y-0 lg:group-hover:opacity-100">
+                      <div className="border-border-main/60 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t pt-4 transition-all duration-300 ease-out lg:translate-y-1 lg:opacity-0 lg:group-focus-within:translate-y-0 lg:group-focus-within:opacity-100 lg:group-hover:translate-y-0 lg:group-hover:opacity-100">
                         <Link
                           href={service.link}
                           className="text-caption1 sm:text-body2 inline-flex items-center gap-1.5 font-bold text-[#2D738D] hover:underline"
