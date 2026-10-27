@@ -1,10 +1,10 @@
 "use client";
 
 import { ServicesSection } from "@/components/ui/ServicesSection";
-import { CheckCircle2, ShieldCheck } from "lucide-react";
+import { ArrowRight, CheckCircle2, ShieldCheck } from "lucide-react";
 import { RegionSelector } from "@/components/RegionSelector";
-import { Button } from "@/components/ui/Button";
 import { BOOKING_URL } from "@/lib/links";
+import { Button } from "@/components/Button";
 
 export default function ServicesClient() {
   return (
@@ -46,35 +46,29 @@ export default function ServicesClient() {
           </div>
         </div>
       </section> */}
-     
 
       {/* ── 2. SERVICES SECTION ────────────────────────────────────────────── */}
       <ServicesSection />
 
       {/* ── 3. CTA BANNER ─────────────────────────────────────────────────── */}
-      <section className="bg-bg-main border-border-main border-t py-24 transition-colors duration-300">
-        <div className="container-custom max-w-3xl space-y-6 text-center">
+      <section className="bg-bg-main border-border-main border-t py-16 transition-colors duration-300 sm:py-24">
+        <div className="container-custom max-w-3xl space-y-5 text-center sm:space-y-6">
           <h2 className="text-h2 text-foreground font-bold">
             Need Help Choosing the Right <span className="text-[#E8A33D]">Package</span>?
           </h2>
-          <p className="text-body1 text-text-alt leading-relaxed">
+          <p className="text-body2 sm:text-body1 text-text-alt leading-relaxed">
             Most engineering leaders start with our 2-week Strategy Sprint. We map your exact state
             architecture, benchmark bottlenecks, and specify whether a fixed Launch Kit or
             continuous Retainer maximizes your ROI.
           </p>
-          <div className="flex flex-wrap justify-center gap-4 pt-4">
-            <Button
-              href="/request-proposal"
-              className="cursor-pointer rounded-lg bg-[#2D738D] px-8 py-3.5 text-base font-semibold text-white transition-colors duration-100 ease-in hover:bg-[#235b70]"
-            >
+          <div className="flex flex-wrap justify-center gap-3 pt-2 sm:gap-4 sm:pt-4">
+            <Button href="/request-proposal">
               Request a Proposal
+              <ArrowRight className="h-4 w-4" />
             </Button>
-            <Button
-              href={BOOKING_URL}
-              external
-              className="bg-bg-main border-border-main text-foreground hover:bg-bg-alt cursor-pointer rounded-lg border px-8 py-3.5 text-base font-semibold transition-colors duration-100 ease-in"
-            >
+            <Button href={BOOKING_URL} external variant="outline">
               Book a Discovery Call
+              <ArrowRight className="h-4 w-4" />
             </Button>
           </div>
         </div>
