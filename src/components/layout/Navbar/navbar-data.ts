@@ -12,10 +12,6 @@ export interface NavGroup {
 
 export const NAV_GROUPS: NavGroup[] = [
   {
-    name: "Services",
-    href: "/services",
-  },
-  {
     name: "Company",
     items: [
       {
@@ -51,7 +47,7 @@ export const NAV_GROUPS: NavGroup[] = [
     ],
   },
   {
-    name: "Careers",
-    href: "/careers",
+    name: "Services",
+    href: "/services",
   },
 ];

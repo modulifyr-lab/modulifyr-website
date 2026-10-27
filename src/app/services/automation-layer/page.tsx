@@ -165,7 +165,11 @@ export default function AutomationLayerPage() {
             </Reveal>
             <Reveal variant="fade-up" delay={300}>
               <div className="mt-8 flex flex-wrap gap-4">
-                <Button href="/request-proposal?pkg=automation-layer" size="lg" className="bg-[#2D738D] hover:bg-[#235b70]">
+                <Button
+                  href="/request-proposal?pkg=automation-layer"
+                  size="lg"
+                  className="bg-[#2D738D] hover:bg-[#235b70]"
+                >
                   Request an Automation Layer
                 </Button>
                 <Button
@@ -329,7 +333,7 @@ export default function AutomationLayerPage() {
       <section className="bg-bg-secondary py-12">
         <div className="container-custom">
           <Reveal variant="fade-scale">
-            <div className="border-border-base max-w-3xl rounded-2xl border bg-bg-alt p-8">
+            <div className="border-border-base bg-bg-alt max-w-3xl rounded-2xl border p-8">
               <div className="mb-4 flex items-start gap-3">
                 <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-[#2D738D]" />
                 <h3 className="text-foreground font-bold">What you are responsible for</h3>
@@ -377,7 +381,10 @@ export default function AutomationLayerPage() {
                 will tell you which tier fits and whether your setup has any scope complications.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Button href="/request-proposal?pkg=automation-layer" className="bg-[#2D738D] hover:bg-[#235b70]">
+                <Button
+                  href="/request-proposal?pkg=automation-layer"
+                  className="bg-[#2D738D] hover:bg-[#235b70]"
+                >
                   Describe Your Setup
                 </Button>
                 <Button

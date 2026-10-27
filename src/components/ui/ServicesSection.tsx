@@ -1,75 +1,118 @@
 "use client";
 
-import { useState, useRef } from "react";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Compass, Layout, Workflow } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useRegion } from "@/components/RegionProvider";
-import { formatPackageRange } from "@/lib/pricing";
-import type { PackagePricingKey } from "@/lib/pricing";
+import { RegionSelector } from "@/components/RegionSelector";
 
-export interface ServiceCardData {
-  id: string;
-  slug: "strategy-sprint" | "launch-kit" | "automation-layer";
-  pkgKey: PackagePricingKey;
-  title: string;
-  subLabel: string;
-  description: string;
-  checklist: string[];
-  link: string;
-  icon: typeof Compass;
+/* ── Currency ────────────────────────────────────────────────────────────────
+   TODO: keys and rates below are placeholders. Align them with whatever
+   "@/lib/pricing" / RegionProvider already uses so there is one source of truth.
+   Unknown regions fall back to USD. */
+const CURRENCIES: Record<string, { code: string; rate: number; locale: string }> = {
+  US: { code: "USD", rate: 1, locale: "en-US" },
+  AU: { code: "AUD", rate: 1.5, locale: "en-AU" },
+  GB: { code: "GBP", rate: 0.78, locale: "en-GB" },
+  EU: { code: "EUR", rate: 0.92, locale: "de-DE" },
+  IN: { code: "INR", rate: 84, locale: "en-IN" },
+  NP: { code: "NPR", rate: 135, locale: "en-US" },
+};
+
+function formatRange(range: [number, number], region: string): string {
+  const cur = CURRENCIES[region] ?? CURRENCIES.US;
+  const convert = (usd: number) =>
+    cur.code === "USD" ? usd : Math.round((usd * cur.rate) / 10) * 10;
+  const fmt = new Intl.NumberFormat(cur.locale, {
+    style: "currency",
+    currency: cur.code,
+    maximumFractionDigits: 0,
+  });
+  return `${fmt.format(convert(range[0]))}–${fmt.format(convert(range[1]))}`;
 }
 
-export const SERVICES_DATA: ServiceCardData[] = [
+/* ── Data (prices in USD) ──────────────────────────────────────────────────── */
+export interface ServiceTier {
+  name: string;
+  usd: [number, number];
+  hint: string;
+}
+
+export interface ServiceData {
+  id: string;
+  slug: "strategy-sprint" | "launch-kit" | "automation-layer";
+  title: string;
+  tiersIntro: string;
+  tiers: ServiceTier[];
+  link: string;
+}
+
+export const SERVICES_DATA: ServiceData[] = [
   {
     id: "strategy-sprint",
     slug: "strategy-sprint",
-    pkgKey: "strategySprint",
     title: "Strategy Sprint",
-    subLabel: "Discovery Sprint",
-    description:
-      "We bring clarity to new projects, complex requirements, and systems that need a fresh direction. Through focused workshops, we define requirements, establish the right architecture, and create a prioritized roadmap before development begins.",
-    checklist: [
-      "Workshops & requirement breakdown",
-      "Architecture blueprint",
-      "Scope & tech stack recommendation",
-      "Delivery roadmap",
+    tiersIntro: "For unclear requirements, architecture decisions, and complex scoping.",
+    tiers: [
+      { name: "Basic Scoping", usd: [160, 240], hint: "One clear product, feature or decision" },
+      {
+        name: "Full Discovery",
+        usd: [320, 440],
+        hint: "Multi-feature work with several moving parts",
+      },
+      {
+        name: "Complex Architecture",
+        usd: [520, 680],
+        hint: "Large, unclear, legacy or multi-system scope",
+      },
+      {
+        name: "Enterprise Strategy",
+        usd: [800, 1120],
+        hint: "Enterprise-scale planning, procurement-ready scope",
+      },
     ],
     link: "/services/strategy-sprint",
-    icon: Compass,
   },
   {
     id: "launch-kit",
     slug: "launch-kit",
-    pkgKey: "launchKit",
     title: "Launch Kit",
-    subLabel: "Static Website Package",
-    description:
-      "Production-grade marketing and web systems built with modern web architecture and performance optimization.",
-    checklist: [
-      "Custom responsive design",
-      "Performance optimization",
-      "SEO configuration",
-      "Edge deployment",
+    tiersIntro: "For static landing pages, marketing sites, and brochure sites.",
+    tiers: [
+      { name: "Essential", usd: [240, 320], hint: "1–3 page static site" },
+      { name: "Business", usd: [480, 640], hint: "Small business or service website" },
+      { name: "Premium", usd: [800, 1040], hint: "Larger, brand-focused static site" },
+      {
+        name: "Enterprise Launch",
+        usd: [1280, 1760],
+        hint: "Large static site, procurement-grade delivery",
+      },
     ],
     link: "/services/launch-kit",
-    icon: Layout,
   },
   {
     id: "automation-layer",
     slug: "automation-layer",
-    pkgKey: "automationLayer",
     title: "Automation Layer",
-    subLabel: "Integrations Package",
-    description:
-      "Connect existing software, legacy tools, and APIs into a streamlined, automated operational ecosystem.",
-    checklist: [
-      "API & Webhook setup",
-      "System synchronization",
-      "Error monitoring",
-      "Workflow automation",
+    tiersIntro: "For connecting existing systems, APIs, and workflows.",
+    tiers: [
+      {
+        name: "Basic Connection",
+        usd: [280, 360],
+        hint: "Two systems, simple trigger-to-action logic",
+      },
+      { name: "Multi-System Sync", usd: [640, 880], hint: "Three to five systems, reliable sync" },
+      {
+        name: "Complex Pipeline",
+        usd: [1440, 1920],
+        hint: "Six or more systems, complex branching",
+      },
+      {
+        name: "Enterprise Automation",
+        usd: [2560, 3600],
+        hint: "Enterprise monitoring, recovery, support",
+      },
     ],
     link: "/services/automation-layer",
-    icon: Workflow,
   },
 ];
 
@@ -77,118 +120,82 @@ export function ServicesSection() {
   const { region } = useRegion();
   const displayRegion = region ?? "US";
 
-  const [activeCardIndex, setActiveCardIndex] = useState(0);
-  const dwellTimerRef = useRef<NodeJS.Timeout | null>(null);
-
-  const handlePointerEnter = (idx: number) => {
-    if (dwellTimerRef.current) clearTimeout(dwellTimerRef.current);
-    dwellTimerRef.current = setTimeout(() => {
-      setActiveCardIndex(idx);
-    }, 800);
-  };
-
-  const handlePointerLeave = () => {
-    if (dwellTimerRef.current) clearTimeout(dwellTimerRef.current);
-  };
-
   return (
-    <section className="py-20 bg-bg-main transition-colors duration-300">
+    <section className="bg-bg-main py-14 transition-colors duration-300 sm:py-20">
       <div className="container-custom">
         {/* Section Header */}
-        <div className="mb-14 text-center max-w-3xl mx-auto space-y-3">
-          <span className="text-caption1 font-bold text-[#2D738D] tracking-wider uppercase">
+        <div className="mx-auto mb-10 max-w-3xl space-y-3 text-center sm:mb-14">
+          <span className="text-caption1 font-bold tracking-wider text-[#2D738D] uppercase">
             OUR SERVICES
           </span>
-          <h2 className="text-h2 font-bold text-foreground">
-            Built for Every Stage
-          </h2>
-          <p className="text-body1 text-text-alt">
-            From strategy and websites to automation, our services are designed around your business needs.
+          <h2 className="text-h2 text-foreground font-bold">Built for Every Stage</h2>
+          <p className="text-body2 sm:text-body1 text-text-alt">
+            From strategy and websites to automation, our services are designed around your business
+            needs.
           </p>
+
+          {/* Currency Selector */}
+          <div className="flex flex-wrap items-center justify-center gap-3 pt-3">
+            <span className="text-caption2 text-text-dim font-semibold tracking-wider uppercase">
+              Display currency:
+            </span>
+            <RegionSelector compact={false}/>
+          </div>
         </div>
 
-        {/* 3-Card Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {SERVICES_DATA.map((service, idx) => {
-            const Icon = service.icon;
-            const isActive = activeCardIndex === idx;
-
-            return (
-              <div
-                key={service.id}
-                onPointerEnter={() => handlePointerEnter(idx)}
-                onPointerLeave={handlePointerLeave}
-                onClick={() => setActiveCardIndex(idx)}
-                className={`bg-bg-alt border-border-main rounded-2xl border p-8 flex flex-col justify-between transition-all duration-300 ease-out ${
-                  isActive ? "ring-2 ring-[#2D738D] shadow-lg scale-[1.01]" : "hover:border-[#2D738D]/50"
-                }`}
-              >
-                <div className="space-y-6">
-                  {/* Icon & Badges */}
-                  <div className="flex items-center justify-between">
-                    <div className="h-12 w-12 rounded-xl bg-[#2D738D]/10 text-[#2D738D] flex items-center justify-center">
-                      <Icon className="h-6 w-6" />
-                    </div>
-                    <span className="text-caption1 font-semibold text-text-dim bg-bg-main border border-border-main rounded-full px-3 py-1">
-                      {service.subLabel}
-                    </span>
-                  </div>
-
-                  {/* Title & Description */}
-                  <div className="space-y-2">
-                    <h3 className="text-h4 font-bold text-foreground">
-                      {service.title}
-                    </h3>
-                    <p className="text-body2 text-text-alt leading-relaxed">
-                      {service.description}
-                    </p>
-                  </div>
-
-                  {/* Price Block */}
-                  <div className="space-y-1 py-3 border-y border-border-main/60">
-                    <span className="text-caption2 font-semibold text-text-dim uppercase tracking-wider block">
-                      Price range
-                    </span>
-                    <div className="text-h4 font-extrabold text-foreground">
-                      {formatPackageRange(service.pkgKey, displayRegion)}
-                    </div>
-                    <span className="text-caption2 text-text-dim block">
-                      Tier 1 to Tier 4. Indicative range; final price confirmed in a written SOW.
-                    </span>
-                  </div>
-
-                  {/* Checklist */}
-                  <div className="space-y-2.5">
-                    {service.checklist.map((item, cIdx) => (
-                      <div key={cIdx} className="flex items-center gap-2.5 text-body2 text-foreground">
-                        <CheckCircle2 className="h-4 w-4 text-[#2D738D] shrink-0" />
-                        <span>{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Footer Links */}
-                <div className="pt-8 flex items-center justify-between">
-                  <Link
-                    href={service.link}
-                    className="inline-flex items-center gap-2 text-body2 font-bold text-[#2D738D] hover:underline"
-                  >
-                    View Details
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-
-                  <Link
-                    href={`/request-proposal?pkg=${service.slug}`}
-                    className="inline-flex items-center gap-2 text-body2 font-bold text-[#2D738D] hover:underline"
-                  >
-                    Request a Proposal
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </div>
+        {/* Tier Breakdown */}
+        <div className="space-y-10 sm:space-y-14">
+          {SERVICES_DATA.map((service) => (
+            <div key={`${service.id}-tiers`} className="space-y-4 sm:space-y-5">
+              <div className="space-y-1">
+                <h3 className="text-foreground text-xl font-bold sm:text-2xl">{service.title}</h3>
+                <p className="text-body2 text-text-alt">{service.tiersIntro}</p>
               </div>
-            );
-          })}
+
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 xl:grid-cols-4">
+                {service.tiers.map((tier, tIdx) => (
+                  <div
+                    key={tier.name}
+                    tabIndex={0}
+                    className="group bg-bg-alt border-border-main flex h-full cursor-pointer flex-col rounded-2xl border p-5 transition-all duration-300 ease-out focus-within:border-[#2D738D]/60 hover:-translate-y-0.5 hover:border-[#2D738D]/60 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2D738D]"
+                  >
+                    <div className="space-y-2">
+                      <h4 className="sm:text-body2 text-foreground text-sm leading-snug font-semibold">
+                        Tier {tIdx + 1} — {tier.name}
+                      </h4>
+                      <div className="text-xl leading-tight font-extrabold break-words text-[#3B9AB8] sm:text-2xl">
+                        {formatRange(tier.usd, displayRegion)}
+                      </div>
+                      <p className="text-caption1 sm:text-body2 text-text-alt leading-relaxed">
+                        {tier.hint}
+                      </p>
+                    </div>
+
+                    {/* CTA: always visible below lg, revealed on hover/focus from lg up */}
+                    <div className="mt-auto pt-5">
+                      <div className="border-border-main/60 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t pt-4 transition-all duration-300 ease-out lg:translate-y-1 lg:group-focus-within:translate-y-0 lg:group-focus-within:opacity-100 lg:group-hover:translate-y-0 lg:group-hover:opacity-100">
+                        <Link
+                          href={service.link}
+                          className="text-caption1 sm:text-body2 inline-flex items-center gap-1.5 font-bold text-[#2D738D] hover:underline"
+                        >
+                          View Details
+                          <ArrowRight className="h-4 w-4" />
+                        </Link>
+
+                        <Link
+                          href={`/request-proposal?pkg=${service.slug}&tier=${tIdx + 1}`}
+                          className="text-caption1 sm:text-body2 inline-flex items-center gap-1.5 font-bold text-[#2D738D] hover:underline"
+                        >
+                          Request a Proposal
+                          <ArrowRight className="h-4 w-4" />
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
