@@ -10,7 +10,7 @@ export default function ServicesClient() {
   return (
     <div className="flex w-full flex-col">
       {/* ── 1. HERO SECTION ────────────────────────────────────────────────── */}
-      {/*
+      
       <section className="bg-bg-main py-20 md:py-28 border-b border-border-main transition-colors duration-300">
         <div className="container-custom max-w-4xl text-center space-y-6">
           <span className="text-caption1 font-bold text-[#2D738D] tracking-wider uppercase">
@@ -47,7 +47,7 @@ export default function ServicesClient() {
           </div>
         </div>
       </section>
-      */}
+     
 
       {/* ── 2. SERVICES SECTION ────────────────────────────────────────────── */}
       <ServicesSection />
