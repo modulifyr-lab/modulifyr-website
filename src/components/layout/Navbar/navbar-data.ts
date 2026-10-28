@@ -50,4 +50,8 @@ export const NAV_GROUPS: NavGroup[] = [
     name: "Services",
     href: "/services",
   },
+  {
+    name: "Careers",
+    href: "/careers"
+  }
 ];
