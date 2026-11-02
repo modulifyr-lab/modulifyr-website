@@ -18,8 +18,8 @@ import {
   Database,
   Cloud,
 } from "lucide-react";
-import { Button } from "@/components/ui/Button";
 import { BOOKING_URL } from "@/lib/links";
+import { Button } from "@/components/Button";
 
 const PRINCIPLES = [
   {
@@ -89,7 +89,8 @@ const TEAM_MEMBERS: TeamMember[] = [
     fullName: "Dikshya Bhattarai",
     title: "UI UX Designer",
     department: "Design Team",
-    quote: "My approach to design is centered on understanding users, solving problems, and creating simple, effective digital experiences.",
+    quote:
+      "My approach to design is centered on understanding users, solving problems, and creating simple, effective digital experiences.",
     linkedin: "https://www.linkedin.com/in/dikshya-bhattarai-528107308/",
   },
   {
@@ -97,7 +98,8 @@ const TEAM_MEMBERS: TeamMember[] = [
     fullName: "Shreesha Shrestha",
     title: "UI UX Designer",
     department: "Design Team",
-    quote: "I design for clarity in complexity. Every screen I design earns trust — usable today, scalable tomorrow, consistent always.",
+    quote:
+      "I design for clarity in complexity. Every screen I design earns trust — usable today, scalable tomorrow, consistent always.",
     linkedin: "http://www.linkedin.com/in/shreesha-shrestha-939385219",
   },
   {
@@ -213,31 +215,24 @@ export default function AboutClient() {
   return (
     <div className="flex w-full flex-col">
       {/* ── 1. HERO SECTION ────────────────────────────────────────────────── */}
-      <section className="bg-bg-main py-20 md:py-28 border-b border-border-main transition-colors duration-300">
-        <div className="container-custom max-w-4xl text-center space-y-6">
-          <span className="text-caption1 font-bold text-[#2D738D] tracking-wider uppercase">
+      <section className="bg-bg-main border-border-main border-b py-20 transition-colors duration-300 md:py-28">
+        <div className="container-custom max-w-4xl space-y-6 text-center">
+          <span className="text-caption1 font-bold tracking-wider text-[#2D738D] uppercase">
             ABOUT MODULIFYR
           </span>
-          <h1 className="text-h1 font-bold text-foreground leading-[1.1]">
+          <h1 className="text-h1 text-foreground leading-[1.1] font-bold">
             We Build the Systems That <span className="text-[#6FA8B8]">Keep Working</span>.
           </h1>
-          <p className="text-body1 text-text-alt max-w-2xl mx-auto leading-relaxed">
+          <p className="text-body1 text-text-alt mx-auto max-w-2xl leading-relaxed">
             We started Modulifyr after seeing businesses outgrow software faster than vendors could
-            keep up. Off-the-shelf systems were too rigid, while custom builds often became difficult
-            to change and maintain.
+            keep up. Off-the-shelf systems were too rigid, while custom builds often became
+            difficult to change and maintain.
           </p>
           <div className="flex flex-wrap justify-center gap-4 pt-4">
-            <Button
-              href={BOOKING_URL}
-              external
-              className="bg-[#2D738D] hover:bg-[#235b70] text-white rounded-lg px-8 py-3.5 text-base font-semibold transition-colors duration-100 ease-in cursor-pointer"
-            >
+            <Button href={BOOKING_URL} external>
               Book a free Consultation Today
             </Button>
-            <Button
-              href="/services"
-              className="bg-bg-main border-border-main text-foreground hover:bg-bg-alt rounded-lg border px-8 py-3.5 text-base font-semibold transition-colors duration-100 ease-in cursor-pointer"
-            >
+            <Button href="/services" variant="outline">
               Explore Packages
             </Button>
           </div>
@@ -245,32 +240,30 @@ export default function AboutClient() {
       </section>
 
       {/* ── 2. OUR PRINCIPLES ──────────────────────────────────────────────── */}
-      <section className="py-24 bg-bg-alt/40 border-b border-border-main transition-colors duration-300">
+      <section className="bg-bg-alt/40 border-border-main border-b py-24 transition-colors duration-300">
         <div className="container-custom space-y-12">
-          <div className="text-center max-w-3xl mx-auto space-y-3">
-            <span className="text-caption1 font-bold text-[#2D738D] tracking-wider uppercase">
+          <div className="mx-auto max-w-3xl space-y-3 text-center">
+            <span className="text-caption1 font-bold tracking-wider text-[#2D738D] uppercase">
               OUR PRINCIPLES
             </span>
-            <h2 className="text-h2 font-bold text-foreground">
-              The way we build matters.
-            </h2>
+            <h2 className="text-h2 text-foreground font-bold">The way we build matters.</h2>
             <p className="text-body1 text-text-alt">
               A few principles guide every system we design, build, and maintain
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
             {PRINCIPLES.map((principle, idx) => {
               const Icon = principle.icon;
               return (
                 <div
                   key={idx}
-                  className="bg-bg-main border-border-main rounded-2xl border p-8 space-y-4 shadow-sm hover:border-[#2D738D]/50 transition-colors"
+                  className="bg-bg-main border-border-main space-y-4 rounded-2xl border p-8 shadow-sm transition-colors hover:border-[#2D738D]/50"
                 >
-                  <div className="h-12 w-12 rounded-xl bg-[#2D738D]/10 text-[#2D738D] flex items-center justify-center">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#2D738D]/10 text-[#2D738D]">
                     <Icon className="h-6 w-6" />
                   </div>
-                  <h3 className="text-h5 font-bold text-foreground">{principle.title}</h3>
+                  <h3 className="text-h5 text-foreground font-bold">{principle.title}</h3>
                   <p className="text-body2 text-text-alt leading-relaxed">{principle.desc}</p>
                 </div>
               );
@@ -280,13 +273,13 @@ export default function AboutClient() {
       </section>
 
       {/* ── 3. OUR APPROACH ────────────────────────────────────────────────── */}
-      <section className="py-24 bg-bg-main border-b border-border-main transition-colors duration-300">
+      <section className="bg-bg-main border-border-main border-b py-24 transition-colors duration-300">
         <div className="container-custom space-y-12">
-          <div className="text-center max-w-3xl mx-auto space-y-3">
-            <span className="text-caption1 font-bold text-[#2D738D] tracking-wider uppercase">
+          <div className="mx-auto max-w-3xl space-y-3 text-center">
+            <span className="text-caption1 font-bold tracking-wider text-[#2D738D] uppercase">
               OUR APPROACH
             </span>
-            <h2 className="text-h2 font-bold text-foreground">
+            <h2 className="text-h2 text-foreground font-bold">
               Start with the problem, not the software.
             </h2>
             <p className="text-body1 text-text-alt">
@@ -294,16 +287,14 @@ export default function AboutClient() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
             {APPROACH_STEPS.map((step) => (
               <div
                 key={step.number}
-                className="bg-bg-alt border-border-main rounded-2xl border p-8 space-y-4 shadow-sm"
+                className="bg-bg-alt border-border-main space-y-4 rounded-2xl border p-8 shadow-sm"
               >
-                <span className="text-h3 font-extrabold text-[#2D738D] block">
-                  {step.number}
-                </span>
-                <h3 className="text-h4 font-bold text-foreground">{step.title}</h3>
+                <span className="text-h3 block font-extrabold text-[#2D738D]">{step.number}</span>
+                <h3 className="text-h4 text-foreground font-bold">{step.title}</h3>
                 <p className="text-body2 text-text-alt leading-relaxed">{step.desc}</p>
               </div>
             ))}
@@ -312,13 +303,13 @@ export default function AboutClient() {
       </section>
 
       {/* ── 4. MEET THE TEAM ───────────────────────────────────────────────── */}
-      <section className="py-24 bg-bg-alt/40 border-b border-border-main transition-colors duration-300">
+      <section className="bg-bg-alt/40 border-border-main border-b py-24 transition-colors duration-300">
         <div className="container-custom space-y-12">
-          <div className="text-center max-w-3xl mx-auto space-y-3">
-            <span className="text-caption1 font-bold text-[#2D738D] tracking-wider uppercase">
+          <div className="mx-auto max-w-3xl space-y-3 text-center">
+            <span className="text-caption1 font-bold tracking-wider text-[#2D738D] uppercase">
               MEET THE TEAM
             </span>
-            <h2 className="text-h2 font-bold text-foreground">
+            <h2 className="text-h2 text-foreground font-bold">
               Built by people who care about the work
             </h2>
             <p className="text-body1 text-text-alt">
@@ -328,15 +319,15 @@ export default function AboutClient() {
           </div>
 
           {/* Roster grouped by department */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {TEAM_MEMBERS.map((member, idx) => (
               <div
                 key={idx}
-                className="bg-bg-main border-border-main rounded-2xl border p-8 space-y-4 shadow-sm hover:border-[#2D738D]/50 transition-colors flex flex-col justify-between"
+                className="bg-bg-main border-border-main flex flex-col justify-between space-y-4 rounded-2xl border p-8 shadow-sm transition-colors hover:border-[#2D738D]/50"
               >
                 <div className="space-y-4">
                   <div className="flex items-center gap-4">
-                    <div className="h-14 w-14 rounded-2xl bg-[#2D738D]/10 text-[#2D738D] font-bold text-lg flex items-center justify-center shrink-0 overflow-hidden relative">
+                    <div className="relative flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-[#2D738D]/10 text-lg font-bold text-[#2D738D]">
                       {member.isFounder ? (
                         <Image
                           src="/rijan-mainali.jpg"
@@ -349,26 +340,26 @@ export default function AboutClient() {
                       )}
                     </div>
                     <div>
-                      <h3 className="text-h5 font-bold text-foreground">{member.fullName}</h3>
+                      <h3 className="text-h5 text-foreground font-bold">{member.fullName}</h3>
                       <p className="text-caption1 font-semibold text-[#2D738D]">{member.title}</p>
                       <p className="text-caption2 text-text-dim">{member.department}</p>
                     </div>
                   </div>
 
                   {member.quote && (
-                    <p className="text-body2 text-text-alt italic leading-relaxed">
+                    <p className="text-body2 text-text-alt leading-relaxed italic">
                       &ldquo;{member.quote}&rdquo;
                     </p>
                   )}
                 </div>
 
-                <div className="pt-4 border-t border-border-main/60 flex items-center gap-3">
+                <div className="border-border-main/60 flex items-center gap-3 border-t pt-4">
                   {member.linkedin && (
                     <a
                       href={member.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-text-alt hover:text-[#2D738D] transition-colors p-1"
+                      className="text-text-alt p-1 transition-colors hover:text-[#2D738D]"
                     >
                       <Linkedin className="h-4 w-4" />
                     </a>
@@ -378,7 +369,7 @@ export default function AboutClient() {
                       href={member.portfolio}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-text-alt hover:text-[#2D738D] transition-colors p-1"
+                      className="text-text-alt p-1 transition-colors hover:text-[#2D738D]"
                     >
                       <ExternalLink className="h-4 w-4" />
                     </a>
@@ -391,13 +382,13 @@ export default function AboutClient() {
       </section>
 
       {/* ── 5. TECH STACK SHOWCASE ─────────────────────────────────────────── */}
-      <section className="py-24 bg-bg-main border-b border-border-main transition-colors duration-300">
+      <section className="bg-bg-main border-border-main border-b py-24 transition-colors duration-300">
         <div className="container-custom space-y-12">
-          <div className="text-center max-w-3xl mx-auto space-y-3">
-            <span className="text-caption1 font-bold text-[#2D738D] tracking-wider uppercase">
+          <div className="mx-auto max-w-3xl space-y-3 text-center">
+            <span className="text-caption1 font-bold tracking-wider text-[#2D738D] uppercase">
               TECH STACK
             </span>
-            <h2 className="text-h2 font-bold text-foreground">
+            <h2 className="text-h2 text-foreground font-bold">
               Modern Primitives &amp; Frameworks
             </h2>
             <p className="text-body1 text-text-alt">
@@ -405,22 +396,25 @@ export default function AboutClient() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
             {TECH_STACK.map((cat, idx) => {
               const Icon = cat.icon;
               return (
-                <div key={idx} className="bg-bg-alt border-border-main rounded-2xl border p-6 space-y-4 shadow-sm">
-                  <div className="flex items-center gap-3 pb-3 border-b border-border-main">
-                    <div className="h-9 w-9 rounded-lg bg-[#2D738D]/10 text-[#2D738D] flex items-center justify-center shrink-0">
+                <div
+                  key={idx}
+                  className="bg-bg-alt border-border-main space-y-4 rounded-2xl border p-6 shadow-sm"
+                >
+                  <div className="border-border-main flex items-center gap-3 border-b pb-3">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#2D738D]/10 text-[#2D738D]">
                       <Icon className="h-5 w-5" />
                     </div>
-                    <h3 className="text-h5 font-bold text-foreground">{cat.category}</h3>
+                    <h3 className="text-h5 text-foreground font-bold">{cat.category}</h3>
                   </div>
 
                   <div className="space-y-3">
                     {cat.items.map((item, iIdx) => (
                       <div key={iIdx} className="flex flex-col">
-                        <span className="text-body2 font-bold text-foreground">{item.name}</span>
+                        <span className="text-body2 text-foreground font-bold">{item.name}</span>
                         <span className="text-caption2 text-text-dim">{item.label}</span>
                       </div>
                     ))}
@@ -433,38 +427,45 @@ export default function AboutClient() {
       </section>
 
       {/* ── 6. CTA BANNER ─────────────────────────────────────────────────── */}
-      <section className="py-24 bg-bg-alt transition-colors duration-300">
-        <div className="container-custom max-w-3xl text-center space-y-8">
-          <h2 className="text-h2 font-bold text-foreground">
-            Have a system worth building?
-          </h2>
+      <section className="bg-bg-alt py-24 transition-colors duration-300">
+        <div className="container-custom max-w-3xl space-y-8 text-center">
+          <h2 className="text-h2 text-foreground font-bold">Have a system worth building?</h2>
           <p className="text-body1 text-text-alt leading-relaxed">
-            Tell us what you&apos;re trying to solve. We&apos;ll help you figure out what comes next.
+            Tell us what you&apos;re trying to solve. We&apos;ll help you figure out what comes
+            next.
           </p>
 
-          <div className="flex flex-wrap justify-center gap-6 text-body2 font-semibold text-text-alt">
-            <a href="tel:+9779764478571" className="flex items-center gap-2 hover:text-[#2D738D] transition-colors">
+          <div className="text-body2 text-text-alt flex flex-wrap justify-center gap-6 font-semibold">
+            <a
+              href="tel:+9779764478571"
+              className="flex items-center gap-2 transition-colors hover:text-[#2D738D]"
+            >
               <Phone className="h-4 w-4 text-[#2D738D]" /> Call our team
             </a>
             <span>•</span>
-            <a href="https://wa.me/9779764478571" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-[#2D738D] transition-colors">
+            <a
+              href="https://wa.me/9779764478571"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 transition-colors hover:text-[#2D738D]"
+            >
               <MessageSquare className="h-4 w-4 text-[#2D738D]" /> WhatsApp
             </a>
             <span>•</span>
-            <a href="mailto:contact@modulifyr.com" className="flex items-center gap-2 hover:text-[#2D738D] transition-colors">
+            <a
+              href="mailto:contact@modulifyr.com"
+              className="flex items-center gap-2 transition-colors hover:text-[#2D738D]"
+            >
               <Mail className="h-4 w-4 text-[#2D738D]" /> Email us
             </a>
           </div>
 
           <div className="pt-2">
             <Link href="/contact">
-              <button
-                type="button"
-                className="bg-[#2D738D] hover:bg-[#235b70] text-white rounded-lg px-8 py-3.5 text-base font-semibold transition-colors duration-100 ease-in cursor-pointer"
-              >
+              <Button className="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-white/25 bg-gradient-to-r from-[#4BA3C3] to-[#8CCBDB] px-8 py-3.5 text-base font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_8px_24px_-8px_rgba(75,163,195,0.6)] transition-all duration-150 ease-in hover:brightness-110 sm:w-auto">
                 Talk to experts
-                <ArrowRight className="ml-2 h-4 w-4 inline" />
-              </button>
+                <ArrowRight className="ml-2 inline h-4 w-4" />
+              </Button>
             </Link>
           </div>
         </div>
