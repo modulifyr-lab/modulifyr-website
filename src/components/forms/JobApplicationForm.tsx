@@ -15,22 +15,13 @@ import {
   FileText,
 } from "lucide-react";
 import { CV_ACCEPT, CV_MAX_BYTES } from "@/lib/cv";
-
-const roleGroups = [
-  {
-    label: "Open roles",
-    roles: ["BDR / Growth Manager", "Full-Stack Engineer", "Brand & Content Lead"],
-  },
-];
-
-const allRoles = [
-  "BDR / Growth Manager",
-  "Full-Stack Engineer",
-  "Brand & Content Lead",
-  "Other / General Application",
-];
-
-const featuredRoles = ["BDR / Growth Manager", "Full-Stack Engineer", "Brand & Content Lead"];
+import {
+  getOpenRoles,
+  getOpenRolesByDepartment,
+  isApplicableRole,
+  formatSeats,
+  GENERAL_APPLICATION_ROLE,
+} from "@/lib/careers";
 
 interface FormState {
   name: string;
@@ -67,8 +58,11 @@ export function JobApplicationForm({ preselectedRole }: JobApplicationFormProps)
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
+  const openRoles = getOpenRoles();
+  const openDepartments = getOpenRolesByDepartment();
+
   useEffect(() => {
-    if (preselectedRole && allRoles.includes(preselectedRole)) {
+    if (preselectedRole && isApplicableRole(preselectedRole)) {
       setForm((prev) => ({ ...prev, role: preselectedRole }));
     }
   }, [preselectedRole]);
@@ -186,29 +180,34 @@ export function JobApplicationForm({ preselectedRole }: JobApplicationFormProps)
   return (
     <div className="flex w-full flex-col">
       {/* Quick-click role badges */}
-      <section className="bg-bg-secondary border-border-base border-b py-12">
-        <div className="container-custom">
-          <p className="text-text-muted mb-5 text-xs font-bold tracking-widest uppercase">
-            Quick-select a role:
-          </p>
-          <div className="flex flex-wrap items-center gap-3">
-            {featuredRoles.map((role) => (
-              <button
-                key={role}
-                type="button"
-                className={`cursor-pointer rounded-full border px-4 py-2 text-xs font-semibold transition-colors ${
-                  form.role === role
-                    ? "border-[#2D738D] bg-[#2D738D]/10 text-[#2D738D]"
-                    : "border-border-base bg-bg-main text-foreground hover:border-[#2D738D]"
-                }`}
-                onClick={() => setForm((prev) => ({ ...prev, role }))}
-              >
-                {role}
-              </button>
-            ))}
+      {openRoles.length > 0 && (
+        <section className="bg-bg-secondary border-border-base border-b py-12">
+          <div className="container-custom">
+            <p className="text-text-muted mb-5 text-xs font-bold tracking-widest uppercase">
+              Quick-select a role:
+            </p>
+            <div className="flex flex-wrap items-center gap-3">
+              {openRoles.map((role) => (
+                <button
+                  key={role.title}
+                  type="button"
+                  className={`cursor-pointer rounded-full border px-4 py-2 text-xs font-semibold transition-colors ${
+                    form.role === role.title
+                      ? "border-[#2D738D] bg-[#2D738D]/10 text-[#2D738D]"
+                      : "border-border-base bg-bg-main text-foreground hover:border-[#2D738D]"
+                  }`}
+                  onClick={() => setForm((prev) => ({ ...prev, role: role.title }))}
+                >
+                  {role.title}{" "}
+                  <span className="text-[10px] font-normal opacity-75">
+                    ({formatSeats(role.seats)})
+                  </span>
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       <section className="bg-bg-light py-20">
         <div className="container-custom">
@@ -287,18 +286,18 @@ export function JobApplicationForm({ preselectedRole }: JobApplicationFormProps)
                         <option value="" disabled>
                           Select a role
                         </option>
-                        {roleGroups.map((group) => (
-                          <optgroup key={group.label} label={group.label}>
+                        {openDepartments.map((group) => (
+                          <optgroup key={group.department.id} label={group.department.label}>
                             {group.roles.map((r) => (
-                              <option key={r} value={r}>
-                                {r}
+                              <option key={r.title} value={r.title}>
+                                {r.title} ({formatSeats(r.seats)})
                               </option>
                             ))}
                           </optgroup>
                         ))}
                         <optgroup label="Other">
-                          <option value="Other / General Application">
-                            Other / General Application
+                          <option value={GENERAL_APPLICATION_ROLE}>
+                            {GENERAL_APPLICATION_ROLE}
                           </option>
                         </optgroup>
                       </select>
@@ -345,7 +344,7 @@ export function JobApplicationForm({ preselectedRole }: JobApplicationFormProps)
                         name="skills"
                         value={form.skills}
                         onChange={handleChange}
-                        placeholder="e.g. React, TypeScript, Node.js — or Outbound Sales, BDR, Growth — or Brand Strategy, Content Publishing"
+                        placeholder="e.g. React, TypeScript, Node.js — or Outbound Sales, Lead Generation — or Social Media, Content Writing"
                         maxLength={500}
                         className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:border-brand-teal focus:ring-brand-teal/10 rounded-xl border px-4 py-3 text-sm transition-colors focus:ring-2 focus:outline-none"
                       />
@@ -474,8 +473,8 @@ export function JobApplicationForm({ preselectedRole }: JobApplicationFormProps)
               <div className="bg-brand-navy rounded-3xl p-8 text-white">
                 <h3 className="font-heading mb-2 text-xl font-bold">Working at Modulifyr</h3>
                 <p className="text-text-muted mb-6 text-sm leading-relaxed">
-                  Pre-launch and bootstrapped. Contract roles are paid 20% of the revenue generated on
-                  your project or deal. If you join now, you are part of building the company
+                  Pre-launch and bootstrapped. Contract roles are paid 20% of the revenue generated
+                  on your project or deal. If you join now, you are part of building the company
                   itself.
                 </p>
                 <div className="space-y-4">
@@ -496,21 +495,29 @@ export function JobApplicationForm({ preselectedRole }: JobApplicationFormProps)
               </div>
 
               {/* Open roles card */}
-              <div className="bg-bg-secondary border-border-base rounded-3xl border p-8">
-                <h3 className="font-heading text-foreground mb-4 text-sm font-bold tracking-widest uppercase">
-                  Open Roles
-                </h3>
-                <div className="space-y-2">
-                  {featuredRoles.map((r) => (
-                    <div key={r} className="text-foreground font-semibold text-xs leading-snug">
-                      {r}
-                    </div>
-                  ))}
+              {openRoles.length > 0 && (
+                <div className="bg-bg-secondary border-border-base rounded-3xl border p-8">
+                  <h3 className="font-heading text-foreground mb-4 text-sm font-bold tracking-widest uppercase">
+                    Open Roles
+                  </h3>
+                  <div className="space-y-2">
+                    {openRoles.map((r) => (
+                      <div
+                        key={r.title}
+                        className="text-foreground flex items-baseline justify-between text-xs leading-snug"
+                      >
+                        <span className="font-semibold">{r.title}</span>
+                        <span className="text-text-muted ml-2 shrink-0 text-[10px]">
+                          {formatSeats(r.seats)}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-text-muted mt-4 text-xs">
+                    All roles are contract work paid 20% of the revenue generated.
+                  </p>
                 </div>
-                <p className="text-text-muted mt-4 text-xs">
-                  All roles are contract work paid 20% of the revenue generated.
-                </p>
-              </div>
+              )}
 
               <div className="bg-bg-secondary border-border-base rounded-3xl border p-8">
                 <h3 className="font-heading text-foreground mb-3 text-sm font-bold tracking-widest uppercase">

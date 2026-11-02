@@ -159,7 +159,7 @@ export default function AutomationLayerPage() {
             <Reveal variant="fade-up" delay={200}>
               <p className="text-text-muted text-xl leading-relaxed">
                 Connect your systems, eliminate manual data entry, and build reliable flows between
-                platforms. Three tiers based on how many systems are involved and how complex the
+                platforms. Four tiers based on how many systems are involved and how complex the
                 logic needs to be.
               </p>
             </Reveal>

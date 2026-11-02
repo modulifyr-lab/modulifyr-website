@@ -4,16 +4,9 @@ import { isRateLimited, getClientIp } from "@/lib/ratelimit";
 import logger from "@/lib/logger";
 import { forwardToWebhook } from "@/lib/webhook";
 import { validateCv } from "@/lib/cv";
+import { isApplicableRole } from "@/lib/careers";
 
 export const maxDuration = 30;
-
-// ─── All allowed roles (must match JobApplicationForm.tsx) ───────────────────
-const allowedRoles = [
-  "BDR / Growth Manager",
-  "Full-Stack Engineer",
-  "Brand & Content Lead",
-  "Other / General Application",
-];
 
 export async function POST(req: NextRequest) {
   const ip = getClientIp(req);
@@ -86,13 +79,21 @@ export async function POST(req: NextRequest) {
       );
 
     // ── Allowlist validation on role ──────────────────────────────────────
-    if (!allowedRoles.includes(body.role)) {
-      return NextResponse.json({ error: "Invalid role selection" }, { status: 400 });
+    // Validates against currently open roles or General Application from @/lib/careers
+    if (!isApplicableRole(body.role)) {
+      return NextResponse.json(
+        { error: "That role is not open for applications." },
+        { status: 400 }
+      );
     }
 
     // ── URL validation (optional fields) ─────────────────────────────────
     const urlRegex = /^https?:\/\/.+/;
-    if (body.portfolio_url && body.portfolio_url.trim() !== "" && !urlRegex.test(body.portfolio_url)) {
+    if (
+      body.portfolio_url &&
+      body.portfolio_url.trim() !== "" &&
+      !urlRegex.test(body.portfolio_url)
+    ) {
       return NextResponse.json({ error: "Invalid portfolio URL" }, { status: 400 });
     }
     if (body.linkedin_url && body.linkedin_url.trim() !== "" && !urlRegex.test(body.linkedin_url)) {
