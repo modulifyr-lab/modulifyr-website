@@ -176,13 +176,17 @@ export default function LaunchKitPage() {
             </Reveal>
             <Reveal variant="fade-up" delay={200}>
               <p className="text-text-muted text-xl leading-relaxed">
-                Static websites with no backend — fast, secure, and built to rank. Three tiers based
+                Static websites with no backend — fast, secure, and built to rank. Four tiers based
                 on page count, animation level, and how many review rounds you need before launch.
               </p>
             </Reveal>
             <Reveal variant="fade-up" delay={300}>
               <div className="mt-8 flex flex-wrap gap-4">
-                <Button href="/request-proposal?pkg=launch-kit" size="lg" className="bg-[#2D738D] hover:bg-[#235b70]">
+                <Button
+                  href="/request-proposal?pkg=launch-kit"
+                  size="lg"
+                  className="bg-[#2D738D] hover:bg-[#235b70]"
+                >
                   Request a Launch Kit
                 </Button>
                 <Button
@@ -208,7 +212,7 @@ export default function LaunchKitPage() {
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             {animationGuide.map((row, i) => (
               <Reveal key={i} variant="fade-scale" delay={i * 100}>
-                <div className="border-border-base flex h-full items-start gap-4 rounded-xl border bg-bg-alt p-5">
+                <div className="border-border-base bg-bg-alt flex h-full items-start gap-4 rounded-xl border p-5">
                   <div className="bg-brand-navy flex h-8 w-8 shrink-0 items-center justify-center rounded-lg">
                     <span className="text-[10px] font-bold text-white">T{i + 1}</span>
                   </div>
@@ -245,13 +249,11 @@ export default function LaunchKitPage() {
               <Reveal key={i} variant="fade-up" delay={i * 80}>
                 <Card
                   className={`relative flex h-full flex-col gap-5 ${
-                    tier.highlight
-                      ? "border-[#2D738D] ring-[#2D738D]/20 shadow-xl ring-1"
-                      : ""
+                    tier.highlight ? "border-[#2D738D] shadow-xl ring-1 ring-[#2D738D]/20" : ""
                   }`}
                 >
                   {tier.highlight && (
-                    <div className="bg-[#2D738D] absolute top-0 left-8 -translate-y-1/2 rounded-full px-3 py-1 text-[10px] font-bold tracking-widest text-white uppercase">
+                    <div className="absolute top-0 left-8 -translate-y-1/2 rounded-full bg-[#2D738D] px-3 py-1 text-[10px] font-bold tracking-widest text-white uppercase">
                       Most Common
                     </div>
                   )}
@@ -264,7 +266,7 @@ export default function LaunchKitPage() {
                           <div className="text-text-muted text-xs line-through">
                             {formatTierPriceStandard("launchKit", tier.tierKey, activeRegion)}
                           </div>
-                          <div className="font-heading text-[#2D738D] text-2xl font-bold">
+                          <div className="font-heading text-2xl font-bold text-[#2D738D]">
                             {formatTierPriceFounding("launchKit", tier.tierKey, activeRegion)}
                           </div>
                           <div className="text-text-muted mt-0.5 text-[11px]">
@@ -272,7 +274,7 @@ export default function LaunchKitPage() {
                           </div>
                         </div>
                       ) : (
-                        <div className="font-heading text-[#2D738D] text-2xl font-bold">
+                        <div className="font-heading text-2xl font-bold text-[#2D738D]">
                           {formatTierPriceStandard("launchKit", tier.tierKey, activeRegion)}
                         </div>
                       )
@@ -349,7 +351,7 @@ export default function LaunchKitPage() {
           <div className="mx-auto max-w-4xl">
             <div className="mb-12">
               <Reveal variant="fade-scale">
-                <span className="text-[#2D738D] mb-3 block text-xs font-bold tracking-widest uppercase">
+                <span className="mb-3 block text-xs font-bold tracking-widest text-[#2D738D] uppercase">
                   Add-On Service
                 </span>
               </Reveal>
@@ -372,8 +374,8 @@ export default function LaunchKitPage() {
                 <div className="space-y-6">
                   <Reveal variant="fade-up" delay={200}>
                     <div className="flex gap-4">
-                      <div className="bg-[#2D738D]/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
-                        <CheckCircle2 className="text-[#2D738D] h-5 w-5" />
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#2D738D]/10">
+                        <CheckCircle2 className="h-5 w-5 text-[#2D738D]" />
                       </div>
                       <div>
                         <h4 className="text-foreground mb-1 text-sm font-bold">Ownership First</h4>
@@ -387,8 +389,8 @@ export default function LaunchKitPage() {
 
                   <Reveal variant="fade-up" delay={250}>
                     <div className="flex gap-4">
-                      <div className="bg-[#2D738D]/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
-                        <CheckCircle2 className="text-[#2D738D] h-5 w-5" />
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#2D738D]/10">
+                        <CheckCircle2 className="h-5 w-5 text-[#2D738D]" />
                       </div>
                       <div>
                         <h4 className="text-foreground mb-1 text-sm font-bold">Itemized Costs</h4>
@@ -404,9 +406,9 @@ export default function LaunchKitPage() {
               </div>
 
               <Reveal variant="fade-scale" delay={200}>
-                <div className="border-border-base rounded-2xl border bg-bg-alt p-8 shadow-sm">
+                <div className="border-border-base bg-bg-alt rounded-2xl border p-8 shadow-sm">
                   <h3 className="text-foreground mb-4 text-lg font-bold">Management Fee Range</h3>
-                  <div className="font-heading text-[#2D738D] mb-2 text-3xl font-bold">
+                  <div className="font-heading mb-2 text-3xl font-bold text-[#2D738D]">
                     {activeRegion
                       ? formatManagedHostingPrice(activeRegion)
                       : "Select region for pricing"}
@@ -444,23 +446,23 @@ export default function LaunchKitPage() {
       <section className="bg-bg-secondary py-12">
         <div className="container-custom">
           <Reveal variant="fade-scale">
-            <div className="border-border-base max-w-3xl rounded-2xl border bg-bg-alt p-8">
+            <div className="border-border-base bg-bg-alt max-w-3xl rounded-2xl border p-8">
               <div className="mb-4 flex items-start gap-3">
-                <AlertCircle className="text-[#2D738D] mt-0.5 h-5 w-5 shrink-0" />
+                <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-[#2D738D]" />
                 <h3 className="text-foreground font-bold">What you are responsible for</h3>
               </div>
               <ul className="text-text-secondary space-y-2 text-sm">
                 <li className="flex items-start gap-2">
-                  <ChevronRight className="text-[#2D738D] mt-0.5 h-4 w-4 shrink-0" />
+                  <ChevronRight className="mt-0.5 h-4 w-4 shrink-0 text-[#2D738D]" />
                   All written copy — page text, headlines, CTAs, and any other content must be
                   provided by you before build begins
                 </li>
                 <li className="flex items-start gap-2">
-                  <ChevronRight className="text-[#2D738D] mt-0.5 h-4 w-4 shrink-0" />
+                  <ChevronRight className="mt-0.5 h-4 w-4 shrink-0 text-[#2D738D]" />
                   All image and media assets — photos, logos, icons, and brand files
                 </li>
                 <li className="flex items-start gap-2">
-                  <ChevronRight className="text-[#2D738D] mt-0.5 h-4 w-4 shrink-0" />
+                  <ChevronRight className="mt-0.5 h-4 w-4 shrink-0 text-[#2D738D]" />
                   Timely feedback during revision rounds — delays extend the delivery timeline
                 </li>
               </ul>
@@ -489,7 +491,10 @@ export default function LaunchKitPage() {
                 We will confirm the right tier and timeline.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Button href="/request-proposal?pkg=launch-kit" className="bg-[#2D738D] hover:bg-[#235b70]">
+                <Button
+                  href="/request-proposal?pkg=launch-kit"
+                  className="bg-[#2D738D] hover:bg-[#235b70]"
+                >
                   Request a Launch Kit
                 </Button>
                 <Button

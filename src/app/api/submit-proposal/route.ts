@@ -4,6 +4,7 @@ import { isRateLimited, getClientIp } from "@/lib/ratelimit";
 import logger from "@/lib/logger";
 import { forwardToWebhook } from "@/lib/webhook";
 import { REGION_CODES } from "@/lib/regions";
+import { PROJECT_TYPE_OPTIONS } from "@/lib/services";
 
 export const maxDuration = 30;
 
@@ -67,6 +68,10 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid industry selection" }, { status: 400 });
     }
 
+    if (!PROJECT_TYPE_OPTIONS.includes(body.project_type)) {
+      return NextResponse.json({ error: "Invalid project type selection" }, { status: 400 });
+    }
+
     // ── Region code validation and normalization ───────────────────────────
     const allowedRegionCodes: string[] = [...REGION_CODES, "not_selected"];
     const incomingRegionCode = body.region_code ? String(body.region_code).trim() : "";
@@ -74,8 +79,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid region" }, { status: 400 });
     }
 
-    const outgoingRegion =
-      incomingRegionCode === "NP" ? "Nepal / South Asia" : "International";
+    const outgoingRegion = incomingRegionCode === "NP" ? "Nepal / South Asia" : "International";
     const outgoingRegionCode = incomingRegionCode === "NP" ? "nepal" : "international";
     const outgoingRegionLabel =
       body.region && String(body.region).trim() !== ""

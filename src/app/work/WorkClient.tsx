@@ -173,7 +173,7 @@ export default function WorkClient() {
                   {cs.metrics.map((m, i) => (
                     <Reveal key={m.label} variant="fade-scale" delay={150 + i * 50}>
                       <div className="bg-bg-secondary border-border-base h-full rounded-2xl border p-5 text-center">
-                        <p className="text-[#2D738D] font-heading mb-1 text-sm leading-tight font-bold">
+                        <p className="font-heading mb-1 text-sm leading-tight font-bold text-[#2D738D]">
                           {m.value}
                         </p>
                         <p className="text-text-muted text-xs leading-tight">{m.label}</p>
@@ -257,7 +257,7 @@ export default function WorkClient() {
                 client,{" "}
                 <Link
                   href="/request-proposal"
-                  className="text-[#2D738D] font-semibold hover:underline"
+                  className="font-semibold text-[#2D738D] hover:underline"
                 >
                   request a proposal
                 </Link>
@@ -267,9 +267,9 @@ export default function WorkClient() {
           </div>
 
           <Reveal variant="fade-scale" delay={150}>
-            <div className="border-border-base max-w-2xl rounded-3xl border bg-bg-alt p-10 text-center">
-              <div className="bg-[#2D738D]/10 mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full">
-                <CheckCircle2 className="text-[#2D738D] h-8 w-8" />
+            <div className="border-border-base bg-bg-alt max-w-2xl rounded-3xl border p-10 text-center">
+              <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[#2D738D]/10">
+                <CheckCircle2 className="h-8 w-8 text-[#2D738D]" />
               </div>
               <h3 className="font-heading text-foreground mb-3 text-xl font-bold">
                 Technical Standards Available Now
@@ -291,107 +291,8 @@ export default function WorkClient() {
         </div>
       </section>
 
-      {/* Dedicated Product Team */}
-      <section className="bg-brand-navy py-24 text-white">
-        <div className="container-custom">
-          <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
-            <div className="flex flex-col gap-6">
-              <Reveal variant="fade-scale">
-                <span className="bg-[#2D738D]/20 text-[#2D738D] w-fit rounded-full px-3 py-1 text-xs font-bold tracking-widest uppercase">
-                  Available Engagement Model
-                </span>
-              </Reveal>
-              <Reveal variant="fade-up" delay={100}>
-                <h2 className="font-heading text-3xl font-bold md:text-4xl">
-                  Dedicated <span className="text-[#2D738D]">Product Team</span>
-                </h2>
-              </Reveal>
-              <Reveal variant="fade-up" delay={150}>
-                <p className="text-text-muted leading-relaxed">
-                  Most Nepal IT firms sell project-based work. We also offer a dedicated team model:
-                  a focused engineering team embedded in your product long-term, operating as an
-                  extension of your own team. Monthly retainer, no re-scoping overhead, no handoff
-                  risk
-                </p>
-              </Reveal>
-              <Reveal variant="fade-up" delay={200}>
-                <p className="text-text-muted text-sm leading-relaxed">
-                  Best suited for startups and scale-ups that have a working product and need
-                  reliable ongoing engineering capacity without the cost and overhead of hiring
-                  locally.
-                </p>
-              </Reveal>
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  { label: "Engagement type", val: "Monthly retainer" },
-                  { label: "Minimum term", val: "3 months" },
-                  { label: "Team size", val: "Scoped per project" },
-                  { label: "Onboarding", val: "2 weeks" },
-                ].map((item, i) => (
-                  <Reveal key={item.label} variant="fade-scale" delay={250 + i * 50}>
-                    <div className="h-full rounded-xl border border-white/10 bg-white/5 p-4">
-                      <p className="text-text-muted text-xs">{item.label}</p>
-                      <p className="mt-0.5 font-bold text-white">{item.val}</p>
-                    </div>
-                  </Reveal>
-                ))}
-              </div>
-              <Reveal variant="fade-up" delay={450}>
-                <Link href="/request-proposal" className="w-fit">
-                  <Button size="lg" className="bg-[#2D738D] hover:bg-[#235b70]">
-                    Discuss Dedicated Team <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
-              </Reveal>
-            </div>
-
-            <Reveal variant="fade-scale" delay={300}>
-              <div className="flex flex-col gap-6 rounded-3xl border border-white/10 bg-white/5 p-10">
-                <h3 className="font-heading text-xl font-bold text-white">
-                  How it's different from project work
-                </h3>
-                <div className="space-y-5">
-                  {[
-                    {
-                      label: "Scope changes",
-                      project: "New SOW required",
-                      team: "Handled in sprint",
-                    },
-                    {
-                      label: "Context switching",
-                      project: "Re-onboarding each phase",
-                      team: "Team already knows your codebase",
-                    },
-                    {
-                      label: "Delivery risk",
-                      project: "Handoff at project end",
-                      team: "Continuous ownership",
-                    },
-                    {
-                      label: "Budget",
-                      project: "Variable by milestone",
-                      team: "Fixed monthly cost",
-                    },
-                  ].map((row) => (
-                    <div key={row.label} className="grid grid-cols-3 gap-3 text-xs">
-                      <span className="text-text-muted font-semibold">{row.label}</span>
-                      <span className="rounded bg-red-500/10 px-2 py-1 text-center text-red-300/80">
-                        {row.project}
-                      </span>
-                      <span className="rounded bg-green-500/10 px-2 py-1 text-center text-green-300/80">
-                        {row.team}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
       {/* Confidentiality */}
-      <section className="bg-bg-secondary py-20">
+      <section className="bg-bg-secondary border-border-base border-t py-20">
         <div className="container-custom text-center">
           <div className="mx-auto flex max-w-3xl flex-col gap-8">
             <Reveal variant="fade-up">

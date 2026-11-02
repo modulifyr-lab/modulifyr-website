@@ -76,7 +76,7 @@ export function HeroSection() {
         <div className="flex flex-wrap items-center justify-center gap-6 font-semibold">
           <span className="text-on-background flex items-center justify-center gap-1.5 text-sm">
             <Clock className="text-cta h-4 w-4" />
-            Response within 24 hours
+            Response within 1 business day
           </span>
 
           <span className="text-on-surface-variant hidden sm:inline">•</span>
@@ -95,7 +95,7 @@ export function HeroSection() {
         </div>
 
         {/* CTA */}
-        <div className="flex gap-3 pt-4 w-full justify-center">
+        <div className="flex w-full justify-center gap-3 pt-4">
           <Button
             href="/request-proposal"
             className="bg-cta text-on-cta w-full px-6 transition-colors duration-300 hover:opacity-90"

@@ -34,7 +34,7 @@ export const DEFAULT_FAQ_ITEMS: FaqItem[] = [
   {
     question: "What happens after launch?",
     answer:
-      "We ensure smooth deployment with CI/CD pipelines, automated backups, and thorough documentation. Post-launch, we offer SLA monitoring, security patches, and retainer support for continuous feature development.",
+      "We ensure smooth deployment with CI/CD pipelines, automated backups, and thorough documentation. Post-launch, we offer SLA monitoring and security patches. Further feature work is scoped as a new engagement.",
   },
 ];
 

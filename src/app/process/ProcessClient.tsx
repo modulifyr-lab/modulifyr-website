@@ -107,7 +107,7 @@ export default function ProcessClient() {
                 <div className="flex flex-col gap-4 lg:w-1/3">
                   <Reveal variant="fade-up" delay={idx * 100}>
                     <div className="flex items-center gap-4">
-                      <div className="bg-[#2D738D] flex h-12 w-12 items-center justify-center rounded-full text-xl font-bold text-white">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#2D738D] text-xl font-bold text-white">
                         {idx + 1}
                       </div>
                       <h2 className="font-heading text-foreground text-2xl font-bold md:text-3xl">
@@ -127,7 +127,7 @@ export default function ProcessClient() {
 
                 <div className="lg:w-2/3">
                   <Reveal variant="fade-scale" delay={idx * 100 + 120}>
-                    <div className="border-border-base h-full rounded-3xl border bg-bg-alt p-8 shadow-sm transition-shadow group-hover:shadow-md">
+                    <div className="border-border-base bg-bg-alt h-full rounded-3xl border p-8 shadow-sm transition-shadow group-hover:shadow-md">
                       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
                         <div className="flex flex-col gap-4">
                           <h3 className="font-heading text-foreground border-border-base border-b pb-2 text-lg font-bold">
@@ -150,7 +150,7 @@ export default function ProcessClient() {
                                 key={i}
                                 className="text-text-secondary flex items-center gap-3 text-sm"
                               >
-                                <FileText className="text-[#2D738D] h-4 w-4" /> {item}
+                                <FileText className="h-4 w-4 text-[#2D738D]" /> {item}
                               </li>
                             ))}
                           </ul>
@@ -171,7 +171,7 @@ export default function ProcessClient() {
           <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
             <div className="flex flex-col gap-8">
               <Reveal variant="fade-scale">
-                <span className="bg-[#2D738D]/20 text-[#2D738D] w-fit rounded px-3 py-1 text-xs font-bold tracking-widest uppercase">
+                <span className="w-fit rounded bg-[#2D738D]/20 px-3 py-1 text-xs font-bold tracking-widest text-[#2D738D] uppercase">
                   Recommended Entry Point
                 </span>
               </Reveal>
@@ -256,7 +256,7 @@ export default function ProcessClient() {
                 </Button>
               </div>
             </Reveal>
-            <p className="text-text-muted text-xs">Average response time: &lt; 24 hours</p>
+            <p className="text-text-muted text-xs">Response within 1 business day</p>
           </div>
         </div>
       </section>

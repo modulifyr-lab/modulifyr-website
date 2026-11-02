@@ -33,7 +33,7 @@ const sections = [
   },
   {
     title: "6. Payment Terms",
-    body: "Payment terms for all engagements are defined in the applicable SOW. Generally: Discovery and Pilot phases are billed upfront or on a milestone basis. Full Build engagements use milestone-based payment schedules. Retainer agreements are billed monthly in advance. All invoices are due within 14 days of issuance. Late payments may incur a 1.5% monthly late fee. Modulifyr reserves the right to pause work on outstanding invoices after written notice.",
+    body: "Payment terms for all engagements are defined in the applicable SOW. Generally: Discovery and Pilot phases are billed upfront or on a milestone basis. Full Build engagements use milestone-based payment schedules. All invoices are due within 14 days of issuance. Late payments may incur a 1.5% monthly late fee. Modulifyr reserves the right to pause work on outstanding invoices after written notice.",
   },
   {
     title: "7. Warranties & Limitations",
@@ -92,7 +92,7 @@ export default function TermsPage() {
                     <a
                       key={i}
                       href={`#t${i}`}
-                      className="text-text-secondary hover:text-[#2D738D] hover:border-[#2D738D] border-l-2 border-transparent py-1.5 pl-3 text-sm transition-colors"
+                      className="text-text-secondary border-l-2 border-transparent py-1.5 pl-3 text-sm transition-colors hover:border-[#2D738D] hover:text-[#2D738D]"
                     >
                       {s.title.replace(/^\d+\. /, "")}
                     </a>
@@ -102,7 +102,7 @@ export default function TermsPage() {
             </div>
 
             <div className="lg:col-span-3">
-              <div className="border-border-base rounded-3xl border bg-bg-alt p-8 md:p-12">
+              <div className="border-border-base bg-bg-alt rounded-3xl border p-8 md:p-12">
                 <p className="text-text-secondary border-border-base mb-10 border-b pb-8 leading-relaxed">
                   Please read these Terms carefully before engaging with Modulifyr Enterprise Pvt.
                   Ltd. They establish the legal framework for all interactions between you and
