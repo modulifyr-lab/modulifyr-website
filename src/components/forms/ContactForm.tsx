@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { BOOKING_URL } from "@/lib/links";
+import { SERVICES } from "@/lib/services";
 
 interface FormState {
   name: string;
@@ -109,7 +110,7 @@ export function ContactForm() {
               {/* Trust signals */}
               <div className="text-caption1 text-text-alt flex flex-wrap items-center gap-6 pt-2 font-semibold">
                 <span className="flex items-center gap-1.5">
-                  <Clock className="h-4 w-4 text-[#2D738D]" /> Response within 24 hours
+                  <Clock className="h-4 w-4 text-[#2D738D]" /> Response within 1 business day
                 </span>
                 <span>•</span>
                 <span className="flex items-center gap-1.5">
@@ -146,7 +147,7 @@ export function ContactForm() {
               <div className="space-y-2">
                 <h2 className="text-h4 text-foreground font-bold">Send Us a Message</h2>
                 <p className="text-body2 text-text-alt">
-                  Tell us what you are working on and we will reply within 24 hours.
+                  Tell us what you are working on and we will reply within 1 business day.
                 </p>
               </div>
 
@@ -157,7 +158,7 @@ export function ContactForm() {
                   </div>
                   <h3 className="text-h5 text-foreground font-bold">Message Sent</h3>
                   <p className="text-body2 text-text-alt">
-                    Thank you. We received your message and will reply within 24 hours.
+                    Thank you. We received your message and will reply within 1 business day.
                   </p>
                   <button
                     type="button"
@@ -253,10 +254,11 @@ export function ContactForm() {
                       <option value="" disabled>
                         Select a service
                       </option>
-                      <option value="Strategy Sprint">Strategy Sprint</option>
-                      <option value="Launch Kit">Launch Kit</option>
-                      <option value="Automation Layer">Automation Layer</option>
-                      <option value="Custom ERP / Software">Custom ERP / Software</option>
+                      {SERVICES.map((s) => (
+                        <option key={s.slug} value={s.title}>
+                          {s.title}
+                        </option>
+                      ))}
                       <option value="Other Inquiries">Other Inquiries</option>
                     </select>
                   </div>

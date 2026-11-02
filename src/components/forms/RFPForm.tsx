@@ -3,7 +3,7 @@
 // src/components/forms/RFPForm.tsx
 // NOTE: No ratelimit imports here — rate limiting is handled server-side in the API route.
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { useRegion } from "@/components/RegionProvider";
@@ -15,35 +15,21 @@ import type { Region } from "@/lib/regions";
 import { CheckCircle2, AlertCircle, Loader2, ArrowRight, ShieldCheck, Globe } from "lucide-react";
 import { BOOKING_URL } from "@/lib/links";
 import Reveal from "@/components/ui/Reveal";
+import { SERVICES, PROJECT_TYPE_OPTIONS, getServiceByTitle, type Service } from "@/lib/services";
 
 const industries = ["Education", "Commerce", "Healthcare", "IT", "Retail", "Services", "Other"];
 
-// ─── Project types = the 3 active packages + coming soon ────────────────
-const projectTypes = [
-  "Strategy Sprint (Discovery) — 1–2 weeks",
-  "Launch Kit (Static Website) — 1–3 weeks",
-  "Automation Layer (Integrations & Automation) — 1–6 weeks",
-  "Not sure yet — help me decide",
-];
+const PACKAGE_SLUG_MAP: Record<string, { projectType: string; packageKey: PackagePricingKey }> =
+  Object.fromEntries(SERVICES.map((s) => [s.slug, { projectType: s.title, packageKey: s.pkgKey }]));
 
-const PACKAGE_SLUG_MAP: Record<string, { projectType: string; packageKey: PackagePricingKey }> = {
-  "strategy-sprint": {
-    projectType: projectTypes[0],
-    packageKey: "strategySprint",
-  },
-  "launch-kit": {
-    projectType: projectTypes[1],
-    packageKey: "launchKit",
-  },
-  "automation-layer": {
-    projectType: projectTypes[2],
-    packageKey: "automationLayer",
-  },
-};
-
-const projectPricing = {
-  [projectTypes[0]]: {
-    packageKey: "strategySprint",
+const projectPricing: Record<
+  PackagePricingKey,
+  {
+    tierKeys: readonly string[];
+    tierNames: readonly string[];
+  }
+> = {
+  strategySprint: {
     tierKeys: [
       "tier1_basicScoping",
       "tier2_fullDiscovery",
@@ -57,8 +43,7 @@ const projectPricing = {
       "Tier 4 — Enterprise Strategy",
     ],
   },
-  [projectTypes[1]]: {
-    packageKey: "launchKit",
+  launchKit: {
     tierKeys: ["tier1_essential", "tier2_business", "tier3_premium", "tier4_enterpriseLaunch"],
     tierNames: [
       "Tier 1 — Essential",
@@ -67,8 +52,7 @@ const projectPricing = {
       "Tier 4 — Enterprise Launch",
     ],
   },
-  [projectTypes[2]]: {
-    packageKey: "automationLayer",
+  automationLayer: {
     tierKeys: [
       "tier1_basicConnection",
       "tier2_multiSystemSync",
@@ -82,22 +66,21 @@ const projectPricing = {
       "Tier 4 — Enterprise Automation",
     ],
   },
-} as const;
+};
 
 function buildTierBudgets(projectType: string, region: Exclude<Region, null>): string[] {
-  const config = projectPricing[projectType as keyof typeof projectPricing];
+  const pkgKey = getServiceByTitle(projectType)?.pkgKey;
+  if (!pkgKey) return buildFallbackBudgets(region);
+  const config = projectPricing[pkgKey];
   if (!config) return buildFallbackBudgets(region);
   return config.tierKeys.map(
-    (tierKey, index) =>
-      `${formatTierPrice(config.packageKey as PackagePricingKey, tierKey, region)} · ${config.tierNames[index]}`
+    (tierKey, index) => `${formatTierPrice(pkgKey, tierKey, region)} · ${config.tierNames[index]}`
   );
 }
 
 function buildFallbackBudgets(region: Exclude<Region, null>): string[] {
   return [
-    `${formatPackageRange("strategySprint", region)} · Strategy Sprint (Discovery)`,
-    `${formatPackageRange("launchKit", region)} · Launch Kit (Static Website)`,
-    `${formatPackageRange("automationLayer", region)} · Automation Layer`,
+    ...SERVICES.map((s: Service) => `${formatPackageRange(s.pkgKey, region)} · ${s.title}`),
     "Not sure yet",
   ];
 }
@@ -246,7 +229,7 @@ export function RFPForm() {
                 <p className="text-text-secondary text-lg leading-relaxed">
                   Thank you for reaching out. We've logged your proposal request and you'll receive
                   a confirmation email shortly. Our team will review your submission and respond
-                  within 1–2 business days.
+                  within 1 business day.
                 </p>
               </div>
               <div className="mt-4 flex flex-wrap justify-center gap-4">
@@ -271,7 +254,7 @@ export function RFPForm() {
         <div className="container-custom">
           <div className="max-w-4xl">
             <Reveal variant="fade-scale">
-              <span className="text-[#2D738D] mb-4 block text-xs font-bold tracking-widest uppercase">
+              <span className="mb-4 block text-xs font-bold tracking-widest text-[#2D738D] uppercase">
                 Request for Proposal
               </span>
             </Reveal>
@@ -282,8 +265,8 @@ export function RFPForm() {
             </Reveal>
             <Reveal variant="fade-up" delay={200}>
               <p className="text-text-muted max-w-2xl text-xl leading-relaxed">
-                Submit your project requirements and receive a structured technical proposal,
-                architecture plan, and cost estimate within 48 hours.
+                Submit your project requirements and we will respond within 1 business day with next
+                steps toward a structured technical proposal, architecture plan, and cost estimate.
               </p>
             </Reveal>
             <Reveal variant="fade-up" delay={250}>
@@ -292,7 +275,7 @@ export function RFPForm() {
                   <ShieldCheck className="text-brand-teal h-4 w-4" /> NDA available
                 </span>
                 <span className="flex items-center gap-2">
-                  <Globe className="text-brand-teal h-4 w-4" /> Response {"<"} 24hrs
+                  <Globe className="text-brand-teal h-4 w-4" /> Response within 1 business day
                 </span>
               </div>
             </Reveal>
@@ -315,7 +298,7 @@ export function RFPForm() {
           <div className="grid grid-cols-1 gap-16 lg:grid-cols-3">
             <div className="lg:col-span-2">
               <Reveal variant="fade-scale" delay={100}>
-                <div className="border-border-base rounded-3xl border bg-bg-alt p-8 shadow-sm md:p-12">
+                <div className="border-border-base bg-bg-alt rounded-3xl border p-8 shadow-sm md:p-12">
                   {status === "error" && (
                     <div className="mb-8 flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-4">
                       <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-red-500" />
@@ -340,7 +323,7 @@ export function RFPForm() {
                           value={form.name}
                           onChange={handleChange}
                           placeholder="Your full name"
-                          className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:border-[#2D738D] focus:ring-[#2D738D]/10 rounded-xl border px-4 py-3 text-sm transition-colors focus:ring-2 focus:outline-none"
+                          className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted rounded-xl border px-4 py-3 text-sm transition-colors focus:border-[#2D738D] focus:ring-2 focus:ring-[#2D738D]/10 focus:outline-none"
                         />
                       </div>
                       <div className="flex flex-col gap-2">
@@ -357,7 +340,7 @@ export function RFPForm() {
                           value={form.company}
                           onChange={handleChange}
                           placeholder="Your company name"
-                          className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:border-[#2D738D] focus:ring-[#2D738D]/10 rounded-xl border px-4 py-3 text-sm transition-colors focus:ring-2 focus:outline-none"
+                          className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted rounded-xl border px-4 py-3 text-sm transition-colors focus:border-[#2D738D] focus:ring-2 focus:ring-[#2D738D]/10 focus:outline-none"
                         />
                       </div>
                       <div className="flex flex-col gap-2">
@@ -374,7 +357,7 @@ export function RFPForm() {
                           value={form.email}
                           onChange={handleChange}
                           placeholder="you@company.com"
-                          className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:border-[#2D738D] focus:ring-[#2D738D]/10 rounded-xl border px-4 py-3 text-sm transition-colors focus:ring-2 focus:outline-none"
+                          className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted rounded-xl border px-4 py-3 text-sm transition-colors focus:border-[#2D738D] focus:ring-2 focus:ring-[#2D738D]/10 focus:outline-none"
                         />
                       </div>
                       <div className="flex flex-col gap-2">
@@ -391,7 +374,7 @@ export function RFPForm() {
                           value={form.phone}
                           onChange={handleChange}
                           placeholder="+977 98XXXXXXXX"
-                          className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:border-[#2D738D] focus:ring-[#2D738D]/10 rounded-xl border px-4 py-3 text-sm transition-colors focus:ring-2 focus:outline-none"
+                          className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted rounded-xl border px-4 py-3 text-sm transition-colors focus:border-[#2D738D] focus:ring-2 focus:ring-[#2D738D]/10 focus:outline-none"
                         />
                       </div>
                     </div>
@@ -416,7 +399,7 @@ export function RFPForm() {
                           name="industry"
                           value={form.industry}
                           onChange={handleChange}
-                          className="border-border-base bg-bg-light text-text-primary focus:border-[#2D738D] focus:ring-[#2D738D]/10 cursor-pointer appearance-none rounded-xl border px-4 py-3 text-sm transition-colors focus:ring-2 focus:outline-none"
+                          className="border-border-base bg-bg-light text-text-primary cursor-pointer appearance-none rounded-xl border px-4 py-3 text-sm transition-colors focus:border-[#2D738D] focus:ring-2 focus:ring-[#2D738D]/10 focus:outline-none"
                         >
                           <option value="" disabled>
                             Select your industry
@@ -445,12 +428,12 @@ export function RFPForm() {
                             handleChange(e);
                             setSelectedTierIndex(null);
                           }}
-                          className="border-border-base bg-bg-light text-text-primary focus:border-[#2D738D] focus:ring-[#2D738D]/10 cursor-pointer appearance-none rounded-xl border px-4 py-3 text-sm transition-colors focus:ring-2 focus:outline-none"
+                          className="border-border-base bg-bg-light text-text-primary cursor-pointer appearance-none rounded-xl border px-4 py-3 text-sm transition-colors focus:border-[#2D738D] focus:ring-2 focus:ring-[#2D738D]/10 focus:outline-none"
                         >
                           <option value="" disabled>
                             Select a package
                           </option>
-                          {projectTypes.map((p) => (
+                          {PROJECT_TYPE_OPTIONS.map((p) => (
                             <option key={p} value={p}>
                               {p}
                             </option>
@@ -511,7 +494,7 @@ export function RFPForm() {
                         rows={6}
                         maxLength={8000}
                         placeholder="We currently use [system X] for [workflow Y]. The main challenge is... We need a solution that..."
-                        className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted focus:border-[#2D738D] focus:ring-[#2D738D]/10 resize-none rounded-xl border px-4 py-3 text-sm transition-colors focus:ring-2 focus:outline-none"
+                        className="border-border-base bg-bg-light text-text-primary placeholder:text-text-muted resize-none rounded-xl border px-4 py-3 text-sm transition-colors focus:border-[#2D738D] focus:ring-2 focus:ring-[#2D738D]/10 focus:outline-none"
                       />
                       <p className="text-text-muted text-right text-xs">
                         {form.message.length}/8000
@@ -564,7 +547,7 @@ export function RFPForm() {
                     <Link href="/privacy" className="text-brand-teal hover:underline">
                       Privacy Policy
                     </Link>
-                    . We respond within 24 hours.
+                    . We respond within 1 business day.
                   </p>
                 </div>
               </Reveal>
@@ -594,7 +577,7 @@ export function RFPForm() {
                       },
                     ].map((item) => (
                       <div key={item.step} className="flex gap-4">
-                        <span className="text-[#2D738D] font-heading text-lg font-bold">
+                        <span className="font-heading text-lg font-bold text-[#2D738D]">
                           {item.step}
                         </span>
                         <div>
@@ -640,7 +623,7 @@ export function RFPForm() {
                         className="border-border-base flex items-center justify-between border-b py-2 last:border-0"
                       >
                         <span className="text-text-secondary text-xs">{pkg.name}</span>
-                        <span className="text-[#2D738D] text-xs font-bold">{pkg.price}</span>
+                        <span className="text-xs font-bold text-[#2D738D]">{pkg.price}</span>
                       </div>
                     ))}
                   </div>
@@ -658,7 +641,12 @@ export function RFPForm() {
                   <p className="text-text-secondary mb-6 text-sm leading-relaxed">
                     Book a free 15-minute discovery call directly with our lead architect.
                   </p>
-                  <Button href={BOOKING_URL} external variant="outline" className="w-full justify-center">
+                  <Button
+                    href={BOOKING_URL}
+                    external
+                    variant="outline"
+                    className="w-full justify-center"
+                  >
                     Book Discovery Call
                   </Button>
                 </div>

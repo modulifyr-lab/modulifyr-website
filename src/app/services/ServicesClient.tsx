@@ -57,9 +57,9 @@ export default function ServicesClient() {
             Need Help Choosing the Right <span className="text-[#E8A33D]">Package</span>?
           </h2>
           <p className="text-body2 sm:text-body1 text-text-alt leading-relaxed">
-            Most engineering leaders start with our 2-week Strategy Sprint. We map your exact state
-            architecture, benchmark bottlenecks, and specify whether a fixed Launch Kit or
-            continuous Retainer maximizes your ROI.
+            Most engineering leaders start with our Strategy Sprint. We map your exact state
+            architecture, benchmark bottlenecks, and specify whether a fixed Launch Kit or an
+            Automation Layer maximizes your ROI.
           </p>
           <div className="flex flex-wrap justify-center gap-3 pt-2 sm:gap-4 sm:pt-4">
             <Button href="/request-proposal">
