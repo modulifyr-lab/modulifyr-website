@@ -32,5 +32,5 @@ export function Footer() {
         <FooterBottom />
       </div>
     </footer>
-  );p
+  );
 }
