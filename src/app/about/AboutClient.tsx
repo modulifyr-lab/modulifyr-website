@@ -381,6 +381,40 @@ export default function AboutClient() {
         </div>
       </section>
 
+      {/* ── 4B. RECOGNITION ────────────────────────────────────────────────── */}
+      <section className="bg-bg-main border-border-main border-b py-24 transition-colors duration-300">
+        <div className="container-custom grid items-center gap-12 lg:grid-cols-2">
+          <div className="space-y-4">
+            <span className="text-caption1 font-bold tracking-wider text-[#2D738D] uppercase">
+              RECOGNITION
+            </span>
+            <h2 className="text-h2 text-foreground font-bold">
+              Representing Koshi Province at Startup &amp; Idea Fest 2026
+            </h2>
+            <p className="text-body1 text-text-alt leading-relaxed">
+              Modulifyr took part as a Provincial Startup in Startup &amp; Idea Fest 2026, part of
+              the ICT Award programme, held at Anupam Foodland, Kathmandu on 19 and 20 November
+              2026. We presented our modular approach to software for Nepali businesses.
+            </p>
+            <p className="text-caption1 text-text-dim">
+              Certificate of Participation. The event is organised by its own partners and is not an
+              endorsement of Modulifyr.
+            </p>
+          </div>
+
+          <figure className="border-border-main bg-bg-alt overflow-hidden rounded-2xl border p-3 shadow-sm">
+            <Image
+              src="/recognition/startup-idea-fest-2026-certificate.webp"
+              alt="Certificate of Participation awarded to Modulifyr Enterprise Pvt. Ltd. (Koshi) as a Provincial Startup at Startup and Idea Fest 2026, Kathmandu, 19 and 20 November 2026"
+              width={1264}
+              height={887}
+              sizes="(min-width: 1024px) 560px, 100vw"
+              className="h-auto w-full rounded-lg"
+            />
+          </figure>
+        </div>
+      </section>
+
       {/* ── 5. TECH STACK SHOWCASE ─────────────────────────────────────────── */}
       <section className="bg-bg-main border-border-main border-b py-24 transition-colors duration-300">
         <div className="container-custom space-y-12">
