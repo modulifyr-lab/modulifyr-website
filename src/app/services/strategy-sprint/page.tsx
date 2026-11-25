@@ -154,9 +154,10 @@ export default function StrategySprintPage() {
             </Reveal>
             <Reveal variant="fade-up" delay={200}>
               <p className="text-text-muted text-xl leading-relaxed">
-                Most projects fail because scope was never properly defined. A Strategy Sprint gives
-                you a requirements document, architecture blueprint, and phased roadmap before any
-                code is written — so you know exactly what you are building and what it will cost.
+                Most projects go over budget because business needs and technical scope were never
+                aligned first. A Strategy Sprint gives your team clear requirements, realistic
+                cost estimates, and a prioritized roadmap before spending on development—so you
+                invest with certainty instead of guesswork.
               </p>
             </Reveal>
             <Reveal variant="fade-up" delay={300}>

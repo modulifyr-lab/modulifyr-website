@@ -28,11 +28,10 @@ export function FeaturedCaseStudy() {
               The Planning Bord
             </h2>
             <p className="text-on-background mt-5 max-w-xl text-base leading-[1.35]">
-              The Planning Bord is an integrated ERP platform designed to bring essential business
-              operations into one connected system. It combines inventory, HR, project management,
-              finance, and automation in a unified platform. The solution helps modern teams
-              streamline daily workflows, improve visibility, and manage their operations more
-              efficiently.
+              The Planning Bord is an internal R&amp;D operations workspace demonstrating how
+              discrete modules share a single clean data layer. Built to test modular architecture
+              boundaries across projects, workflows, and team visibility without creating brittle
+              monoliths.
             </p>
 
             <Link

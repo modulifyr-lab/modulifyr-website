@@ -2,154 +2,275 @@
 
 import * as React from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Layers, Cpu, Globe } from "lucide-react";
+import { Compass, Globe, Workflow, ShieldCheck, Cpu } from "lucide-react";
 import type { Group } from "three";
 
-// Standard Static Fallback JSX
-export function StaticFallback() {
+export type ArchitectureModuleId = "strategy" | "launch" | "automation" | "delivery";
+
+export interface ArchitectureModule {
+  id: ArchitectureModuleId;
+  label: string;
+  summary: string;
+  nodeIndex: number;
+}
+
+export const ARCHITECTURE_MODULES: readonly ArchitectureModule[] = [
+  {
+    id: "strategy",
+    label: "Strategy Sprint",
+    summary: "Prevent wasted spend with clear scope, timelines & roadmap",
+    nodeIndex: 5,
+  },
+  {
+    id: "launch",
+    label: "Launch Kit",
+    summary: "Fast, mobile-ready websites built to win local trust & leads",
+    nodeIndex: 1,
+  },
+  {
+    id: "automation",
+    label: "Automation Layer",
+    summary: "Eliminate manual entry by syncing your daily business tools",
+    nodeIndex: 0,
+  },
+  {
+    id: "delivery",
+    label: "Clean Handoff",
+    summary: "Full ownership, clear documentation & zero vendor lock-in",
+    nodeIndex: 3,
+  },
+];
+
+// Styled 2D fallback for SSR, reduced motion, or WebGL unavailable/context lost
+export function StaticFallback({
+  activeModule = "strategy",
+  onSelectModule,
+}: {
+  activeModule?: ArchitectureModuleId;
+  onSelectModule?: (id: ArchitectureModuleId) => void;
+}) {
+  const current =
+    ARCHITECTURE_MODULES.find((m) => m.id === activeModule) ?? ARCHITECTURE_MODULES[0];
+
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-lg">
-      <div className="bg-[#2D738D]/10 parallax-up absolute top-0 left-0 h-32 w-32 rounded-2xl" />
-      <div className="bg-brand-navy/5 parallax-down absolute right-0 bottom-0 h-48 w-48 rounded-[40px]" />
-      <div className="bg-background border-border-base parallax-subtle-up absolute top-1/2 left-1/2 flex h-80 w-80 -translate-x-1/2 -translate-y-1/2 flex-col gap-6 rounded-3xl border p-8 shadow-2xl">
-        <div className="bg-[#2D738D] flex h-16 w-16 items-center justify-center rounded-xl">
-          <Layers className="h-8 w-8 text-white" />
+    <div className="border-border-base bg-surface relative flex h-full min-h-[360px] w-full flex-col justify-between overflow-hidden rounded-3xl border p-6 shadow-sm sm:p-8">
+      <div className="relative z-10 flex items-center justify-between gap-4">
+        <div>
+          <p className="text-on-surface-variant text-xs font-semibold tracking-wider uppercase">
+            Modular Architecture
+          </p>
+          <p className="text-on-background mt-1 text-lg font-bold">{current.label}</p>
         </div>
-        <div className="flex flex-col gap-3">
-          <div className="bg-border-base h-4 w-3/4 rounded-full" />
-          <div className="bg-border-base h-4 w-1/2 rounded-full opacity-60" />
-        </div>
-        <div className="mt-auto grid grid-cols-3 gap-2">
-          <div className="bg-brand-teal/40 h-2 rounded-full" />
-          <div className="bg-brand-gold/40 h-2 rounded-full" />
-          <div className="bg-[#2D738D]/40 h-2 rounded-full" />
+        <div className="bg-cta/10 text-cta flex h-11 w-11 shrink-0 items-center justify-center rounded-xl">
+          <Compass className="h-5 w-5" />
         </div>
       </div>
-      {/* Floating modules */}
-      <div className="bg-brand-navy parallax-up absolute top-10 right-10 flex h-24 w-24 items-center justify-center rounded-2xl shadow-xl">
-        <Cpu className="h-10 w-10 text-white" />
+
+      <div className="relative my-6 grid grid-cols-2 gap-3">
+        {ARCHITECTURE_MODULES.map((mod) => {
+          const isActive = mod.id === activeModule;
+          const Icon =
+            mod.id === "strategy"
+              ? Compass
+              : mod.id === "launch"
+                ? Globe
+                : mod.id === "automation"
+                  ? Workflow
+                  : ShieldCheck;
+
+          return (
+            <button
+              key={mod.id}
+              type="button"
+              onClick={() => onSelectModule?.(mod.id)}
+              className={`cursor-pointer rounded-2xl border p-4 text-left transition-all duration-150 ${
+                isActive
+                  ? "border-cta bg-cta/10 text-on-background"
+                  : "border-border-base bg-background/70 text-on-surface-variant hover:border-cta/50"
+              }`}
+            >
+              <Icon className={`mb-2 h-4 w-4 ${isActive ? "text-cta" : "text-on-surface-variant"}`} />
+              <p className="text-on-background text-sm font-semibold">{mod.label}</p>
+              <p className="text-on-surface-variant mt-1 text-xs leading-snug">{mod.summary}</p>
+            </button>
+          );
+        })}
       </div>
-      <div className="bg-brand-gold parallax-down absolute bottom-10 left-10 flex h-20 w-20 items-center justify-center rounded-full shadow-xl">
-        <Globe className="text-foreground h-8 w-8" />
+
+      <div className="text-on-surface-variant border-border-base relative z-10 flex items-center justify-between border-t pt-4 text-xs">
+        <span className="flex items-center gap-1.5">
+          <Cpu className="text-cta h-3.5 w-3.5" />
+          Discrete data boundaries
+        </span>
+        <span>Zero rebuild upgrades</span>
       </div>
     </div>
   );
 }
 
-// 3D Orbiting Network Mesh Component
-function NetworkGroup() {
+const NODES: readonly { pos: [number, number, number]; moduleId?: ArchitectureModuleId; baseColor: string }[] = [
+  { pos: [-1.35, 0.95, 0.25], moduleId: "automation", baseColor: "#409EB7" },
+  { pos: [1.35, -0.55, 0.45], moduleId: "launch", baseColor: "#E8A33D" },
+  { pos: [0.25, -1.15, -0.55], baseColor: "#6FA8B8" },
+  { pos: [0.95, 1.1, -0.75], moduleId: "delivery", baseColor: "#3B82F6" },
+  { pos: [-0.95, -0.95, 0.75], baseColor: "#6FA8B8" },
+  { pos: [0.0, 0.1, 0.95], moduleId: "strategy", baseColor: "#2D738D" },
+];
+
+const CONNECTIONS: readonly [number, number][] = [
+  [0, 1],
+  [0, 3],
+  [0, 4],
+  [0, 5],
+  [1, 2],
+  [1, 3],
+  [1, 5],
+  [2, 4],
+  [2, 5],
+  [3, 5],
+  [4, 5],
+];
+
+function NetworkGroup({
+  activeModule,
+  onSelectModule,
+}: {
+  activeModule: ArchitectureModuleId;
+  onSelectModule?: (id: ArchitectureModuleId) => void;
+}) {
   const groupRef = React.useRef<Group>(null);
+  const ringRef = React.useRef<Group>(null);
   const mouse = React.useRef({ x: 0, y: 0 });
 
-  // 6 nodes representing modular architecture components
-  const nodes = React.useMemo(
-    () => [
-      { pos: [-1.4, 1.0, 0.2] },
-      { pos: [1.4, -0.6, 0.4] },
-      { pos: [0.2, -1.2, -0.6] },
-      { pos: [1.0, 1.2, -0.8] },
-      { pos: [-1.0, -1.0, 0.8] },
-      { pos: [0.0, 0.1, 1.1] },
-    ],
-    []
-  );
-
-  // Set up connection lines between nodes
-  const connections = React.useMemo(
-    () => [
-      [0, 1],
-      [0, 3],
-      [0, 4],
-      [0, 5],
-      [1, 2],
-      [1, 3],
-      [1, 5],
-      [2, 4],
-      [2, 5],
-      [3, 5],
-      [4, 5],
-    ],
-    []
-  );
-
   React.useEffect(() => {
-    // Track mouse coordinates on desktop
     const handleMouseMove = (e: MouseEvent) => {
       if (window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window) {
-        return; // Disable mouse-tilt on touch devices
+        return;
       }
       mouse.current.x = (e.clientX / window.innerWidth) * 2 - 1;
       mouse.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
     };
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
   const linePositions = React.useMemo(() => {
-    return connections.map(([startIdx, endIdx]) => {
-      const start = nodes[startIdx].pos;
-      const end = nodes[endIdx].pos;
+    return CONNECTIONS.map(([startIdx, endIdx]) => {
+      const start = NODES[startIdx].pos;
+      const end = NODES[endIdx].pos;
       return new Float32Array([...start, ...end]);
     });
-  }, [nodes, connections]);
+  }, []);
 
-  useFrame((state, delta) => {
-    if (!groupRef.current) return;
-
-    // Slow auto-rotation on idle (cap delta to prevent huge jumps)
+  useFrame((_, delta) => {
     const dt = Math.min(delta, 0.1);
-    groupRef.current.rotation.y += dt * 0.12;
-    groupRef.current.rotation.x += dt * 0.04;
 
-    // Mouse-driven offset (soft bounded spring feel)
-    const isTouch = window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window;
-    const targetY = isTouch ? 0 : mouse.current.x * 0.35;
-    const targetX = isTouch ? 0 : -mouse.current.y * 0.25;
+    if (groupRef.current) {
+      groupRef.current.rotation.y += dt * 0.14;
+      groupRef.current.rotation.x += dt * 0.03;
 
-    // Smooth LERP follow using delta
-    const lerpFactor = Math.min(dt * 3.6, 1.0);
-    groupRef.current.rotation.y += (targetY - groupRef.current.rotation.y) * lerpFactor;
-    groupRef.current.rotation.x += (targetX - groupRef.current.rotation.x) * lerpFactor;
+      const isTouch =
+        typeof window !== "undefined" &&
+        (window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window);
+
+      const targetY = isTouch ? 0 : mouse.current.x * 0.35;
+      const targetX = isTouch ? 0 : -mouse.current.y * 0.25;
+
+      const lerpFactor = Math.min(dt * 3.5, 1.0);
+      groupRef.current.rotation.y += (targetY - groupRef.current.rotation.y) * lerpFactor;
+      groupRef.current.rotation.x += (targetX - groupRef.current.rotation.x) * lerpFactor;
+    }
+
+    if (ringRef.current) {
+      ringRef.current.rotation.z += dt * 0.22;
+    }
   });
 
   return (
     <group ref={groupRef}>
-      {/* 1. Orbiting Nodes (low poly spheres) */}
-      {nodes.map((node, i) => (
-        <mesh key={i} position={node.pos as [number, number, number]}>
-          <sphereGeometry args={[0.12, 12, 12]} />
-          <meshBasicMaterial
-            color={i % 3 === 0 ? "#E84530" : i % 3 === 1 ? "#2B7FA8" : "#F5B52E"}
-          />
+      {/* Subtle orbital wireframe ring */}
+      <group ref={ringRef} rotation={[Math.PI / 3, 0.3, 0]}>
+        <mesh>
+          <torusGeometry args={[1.65, 0.012, 12, 72]} />
+          <meshStandardMaterial color="#4FB6C6" roughness={0.4} metalness={0.6} transparent opacity={0.35} />
         </mesh>
-      ))}
+      </group>
 
-      {/* 2. Connection lines */}
-      {linePositions.map((posArray, i) => (
-        <line key={i}>
-          <bufferGeometry>
-            <bufferAttribute
-              attach="attributes-position"
-              args={[posArray, 3]}
-              count={2}
-              itemSize={3}
+      {/* Nodes */}
+      {NODES.map((node, i) => {
+        const isActive = node.moduleId === activeModule;
+        const radius = isActive ? 0.24 : node.moduleId ? 0.17 : 0.11;
+
+        return (
+          <group key={i} position={node.pos}>
+            <mesh
+              onClick={(e) => {
+                e.stopPropagation();
+                if (node.moduleId) onSelectModule?.(node.moduleId);
+              }}
+            >
+              <icosahedronGeometry args={[radius, 1]} />
+              <meshPhysicalMaterial
+                color={isActive ? "#FFC24B" : node.baseColor}
+                roughness={0.25}
+                metalness={0.55}
+                clearcoat={0.6}
+                emissive={isActive ? "#E8A33D" : "#0F172A"}
+                emissiveIntensity={isActive ? 0.45 : 0.08}
+              />
+            </mesh>
+            {isActive && (
+              <mesh rotation={[Math.PI / 2, 0, 0]}>
+                <torusGeometry args={[radius + 0.11, 0.012, 10, 40]} />
+                <meshStandardMaterial color="#FFC24B" emissive="#FFC24B" emissiveIntensity={0.4} />
+              </mesh>
+            )}
+          </group>
+        );
+      })}
+
+      {/* Connection edges */}
+      {linePositions.map((posArray, i) => {
+        const [startIdx, endIdx] = CONNECTIONS[i];
+        const connectedToActive =
+          NODES[startIdx].moduleId === activeModule || NODES[endIdx].moduleId === activeModule;
+
+        return (
+          <line key={i}>
+            <bufferGeometry>
+              <bufferAttribute
+                attach="attributes-position"
+                args={[posArray, 3]}
+                count={2}
+                itemSize={3}
+              />
+            </bufferGeometry>
+            <lineBasicMaterial
+              color={connectedToActive ? "#4FB6C6" : "#64748B"}
+              opacity={connectedToActive ? 0.85 : 0.28}
+              transparent
             />
-          </bufferGeometry>
-          <lineBasicMaterial color="#475569" opacity={0.35} transparent linewidth={1} />
-        </line>
-      ))}
+          </line>
+        );
+      })}
     </group>
   );
 }
 
-export default function NetworkScene() {
+export default function NetworkScene({
+  activeModule = "strategy",
+  onSelectModule,
+}: {
+  activeModule?: ArchitectureModuleId;
+  onSelectModule?: (id: ArchitectureModuleId) => void;
+}) {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const [useFallback, setUseFallback] = React.useState<boolean | null>(null);
   const [isMounted, setIsMounted] = React.useState(false);
   const [isInViewport, setIsInViewport] = React.useState(true);
+  const [contextLost, setContextLost] = React.useState(false);
 
   React.useEffect(() => {
-    // Check if WebGL is supported
     const checkWebGL = () => {
       try {
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -168,16 +289,14 @@ export default function NetworkScene() {
     const supported = checkWebGL();
     setUseFallback(!supported);
 
-    // Defer Canvas mount to prevent blocking H1 text paint
     const timer = setTimeout(() => {
       setIsMounted(supported);
-    }, 450);
+    }, 250);
 
     return () => clearTimeout(timer);
   }, []);
 
   React.useEffect(() => {
-    // Viewport checking to pause render loop when out of sight
     const container = containerRef.current;
     if (!container) return;
 
@@ -192,35 +311,85 @@ export default function NetworkScene() {
     return () => observer.disconnect();
   }, []);
 
-  // Render static fallback until state is determined
-  if (useFallback === null || useFallback === true || !isMounted) {
+  const currentModule =
+    ARCHITECTURE_MODULES.find((m) => m.id === activeModule) ?? ARCHITECTURE_MODULES[0];
+
+  if (useFallback === null || useFallback === true || !isMounted || contextLost) {
     return (
-      <div ref={containerRef}>
-        <StaticFallback />
+      <div ref={containerRef} className="h-full w-full">
+        <StaticFallback activeModule={activeModule} onSelectModule={onSelectModule} />
       </div>
     );
   }
 
-  // Cap devicePixelRatio to avoid killing performance on heavy mobile displays
   const dpr = typeof window !== "undefined" ? Math.min(window.devicePixelRatio, 2) : 1;
 
   return (
     <div
       ref={containerRef}
-      className="relative mx-auto aspect-square w-full max-w-lg cursor-grab active:cursor-grabbing"
-      style={{ minHeight: "400px" }}
+      className="border-border-base bg-brand-navy relative flex h-full min-h-[380px] w-full flex-col justify-between overflow-hidden rounded-3xl border shadow-xl"
     >
-      <Canvas
-        camera={{ position: [0, 0, 4.2], fov: 45 }}
-        dpr={dpr}
-        // Conditionally set frameloop to stop rendering when not visible
-        frameloop={isInViewport ? "always" : "demand"}
-        style={{ pointerEvents: "auto" }}
-      >
-        <ambientLight intensity={1.5} />
-        <pointLight position={[10, 10, 10]} intensity={1.5} />
-        <NetworkGroup />
-      </Canvas>
+      {/* Top Semantic Module Overlay */}
+      <div className="pointer-events-none relative z-10 flex items-start justify-between p-5 sm:p-6">
+        <div className="rounded-xl border border-white/10 bg-black/40 px-4 py-2.5 backdrop-blur-sm">
+          <p className="text-[11px] font-semibold tracking-wider text-[#B8E0E9] uppercase">
+            Interactive Module Map
+          </p>
+          <p className="mt-0.5 text-sm font-bold text-white">{currentModule.label}</p>
+          <p className="text-xs text-slate-300">{currentModule.summary}</p>
+        </div>
+      </div>
+
+      {/* Full-Bleed 3D WebGL Canvas */}
+      <div className="absolute inset-0 cursor-grab active:cursor-grabbing">
+        <Canvas
+          camera={{ position: [0, 0, 4.3], fov: 45 }}
+          dpr={dpr}
+          frameloop={isInViewport ? "always" : "demand"}
+          onCreated={({ gl }) => {
+            const canvas = gl.domElement;
+            const handleLost = (e: Event) => {
+              e.preventDefault();
+              setContextLost(true);
+            };
+            const handleRestored = () => {
+              setContextLost(false);
+            };
+            canvas.addEventListener("webglcontextlost", handleLost);
+            canvas.addEventListener("webglcontextrestored", handleRestored);
+          }}
+        >
+          <fog attach="fog" args={["#0F1724", 4.5, 9]} />
+          {/* Three-Point Studio Lighting */}
+          <ambientLight intensity={0.75} color="#B8E0E9" />
+          <directionalLight position={[5, 6, 5]} intensity={1.8} color="#FFE8C2" />
+          <pointLight position={[-4, -3, -4]} intensity={1.4} color="#2D738D" />
+          <NetworkGroup activeModule={activeModule} onSelectModule={onSelectModule} />
+        </Canvas>
+      </div>
+
+      {/* Bottom Interactive Module Selector Controls */}
+      <div className="relative z-10 p-4 sm:p-5">
+        <div className="grid grid-cols-2 gap-2 rounded-2xl border border-white/10 bg-black/45 p-2 backdrop-blur-sm">
+          {ARCHITECTURE_MODULES.map((mod) => {
+            const isActive = mod.id === activeModule;
+            return (
+              <button
+                key={mod.id}
+                type="button"
+                onClick={() => onSelectModule?.(mod.id)}
+                className={`cursor-pointer truncate rounded-xl px-3 py-2 text-left text-xs font-semibold transition-colors duration-150 ${
+                  isActive
+                    ? "bg-[#2D738D] text-white"
+                    : "text-slate-300 hover:bg-white/10 hover:text-white"
+                }`}
+              >
+                {mod.label}
+              </button>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 }

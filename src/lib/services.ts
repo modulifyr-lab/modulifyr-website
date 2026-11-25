@@ -14,24 +14,24 @@ export const SERVICES: readonly Service[] = [
     pkgKey: "strategySprint",
     title: "Strategy Sprint",
     summary:
-      "A discovery sprint that turns an unclear idea into a requirements document, architecture blueprint and phased roadmap before any code is written.",
-    bestFor: "Unclear requirements, architecture decisions and complex scoping.",
+      "Avoid costly rework and blown budgets before writing a line of code. We turn messy ideas and operational bottlenecks into a clear, phased plan so your business knows exact costs, timelines, and priorities upfront.",
+    bestFor: "Businesses avoiding wasted spend, unclear scope, or risky system rebuilds.",
   },
   {
     slug: "launch-kit",
     pkgKey: "launchKit",
     title: "Launch Kit",
     summary:
-      "Static websites and landing pages with no backend: fast, secure and built to rank. Priced by page count, animation level and revision rounds.",
-    bestFor: "Landing pages, marketing sites and brochure sites.",
+      "Win customer trust online and turn local searches into real inquiries—fast. A mobile-ready, high-speed business website with zero server headaches, built to rank well and route leads straight to your team.",
+    bestFor: "Growing Nepal SMBs needing instant credibility, faster leads, and zero maintenance bloat.",
   },
   {
     slug: "automation-layer",
     pkgKey: "automationLayer",
     title: "Automation Layer",
     summary:
-      "Connect your existing systems and APIs, remove manual data entry and build reliable workflows between platforms. Priced by number of systems and logic complexity.",
-    bestFor: "Connecting existing systems, APIs and workflows.",
+      "Stop losing hours to manual copy-pasting between forms, spreadsheets, and team chats. We connect the tools you already use into reliable workflows that capture leads, trigger follow-ups, and prevent dropped orders.",
+    bestFor: "Teams losing staff hours or customer leads to manual data entry and disconnected tools.",
   },
 ];
 

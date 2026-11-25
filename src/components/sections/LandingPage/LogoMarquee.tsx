@@ -5,10 +5,10 @@ interface CapabilityTag {
 }
 
 const DEFAULT_CAPABILITY_TAGS: CapabilityTag[] = [
-  { name: "CUSTOM SOFTWARE" },
-  { name: "ERP SYSTEMS" },
-  { name: "WORKFLOW AUTOMATION" },
-  { name: "LEGACY REBUILDS" },
+  { name: "STRATEGY SPRINT" },
+  { name: "LAUNCH KIT" },
+  { name: "AUTOMATION LAYER" },
+  { name: "SYSTEM ARCHITECTURE" },
   { name: "API INTEGRATION" },
 ];
 

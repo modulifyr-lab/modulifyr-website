@@ -1,29 +1,17 @@
-import Image from "next/image";
-import Link from "next/link";
-import { Button } from "@/components/ui/Button";
-import { BOOKING_URL } from "@/lib/links";
-import { LogoMarquee } from "@/components/sections/LandingPage/LogoMarquee";
-import { IntegrationsShowcase } from "@/components/sections/LandingPage/IntegrationsShowcase";
-import { FaqAccordion } from "@/components/ui/FaqAccordion";
 import {
-  ShieldCheck,
-  Globe,
-  Clock,
-  DollarSign,
-  CheckCircle,
-  ArrowRight,
-  Layers,
-  CreditCard,
-  UserCheck,
-  Eye,
-} from "lucide-react";
-import { HeroSection } from "@/components/sections/LandingPage";
-import { ServicesSection } from "@/components/sections/LandingPage/ServiceSection";
-import { ProcessSection } from "@/components/sections/LandingPage/ProcessSection";
-import { WhyModulifyrSection } from "@/components/sections/LandingPage/Whymodulifyrsection";
-import { BlogAndCaseStudiesSection } from "@/components/sections/LandingPage/BlodAndCaseStudiesSection";
-import { FeaturedCaseStudy } from "@/components/sections/LandingPage/FeaturedCaseStudy";
-import { CtaSection } from "@/components/sections/LandingPage/CTABanner";
+  HeroSection,
+  LogoMarquee,
+  WhyModulifyrSection,
+  ServicesSection,
+  ScopeEstimatorSection,
+  ProcessSection,
+  IntegrationsShowcase,
+  FeaturedCaseStudy,
+  BlogAndCaseStudiesSection,
+  TalentCalloutSection,
+  CtaSection,
+} from "@/components/sections/LandingPage";
+import { FaqAccordion } from "@/components/ui/FaqAccordion";
 
 export default function Home() {
   const organizationSchema = {
@@ -59,34 +47,40 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
       />
 
-      {/* ── 1. HERO SECTION ────────────────────────────────────────────────── */}
+      {/* 1. 3D Interactive Hero Split */}
       <HeroSection />
 
-      {/* Below Hero: Continuous Logo Marquee */}
+      {/* 2. Continuous Capability Strip */}
       <LogoMarquee />
 
-      {/* ── 2. WHY MODULIFYR ───────────────────────────────────────────────── */}
+      {/* 3. Why Modulifyr */}
       <WhyModulifyrSection />
 
-      {/* ── 3. SERVICES SECTION ───────────────────────────────────────────── */}
+      {/* 4. Interactive Services & Micro-Demos */}
       <ServicesSection />
 
-      {/* ── 4. HOW WE WORK (5-PHASE PROCESS) ──────────────────────────────── */}
+      {/* 5. Interactive Scope & Budget Estimator */}
+      <ScopeEstimatorSection />
+
+      {/* 6. 5-Phase Engineering Process */}
       <ProcessSection />
 
-      {/* ── 5. INTEGRATIONS SHOWCASE ──────────────────────────────────────── */}
+      {/* 7. Nepal & Global Integrations */}
       <IntegrationsShowcase />
 
-      {/* ── 6. BLOGS & CASE STUDIES ───────────────────────────────────────── */}
-      <BlogAndCaseStudiesSection />
-
-      {/* ── 7. FEATURED CASE STUDY ────────────────────────────────────────── */}
+      {/* 8. Featured Internal Build */}
       <FeaturedCaseStudy />
 
-      {/* ── 8. FAQ ACCORDION ──────────────────────────────────────────────── */}
+      {/* 9. Insights, Standards & Guides */}
+      <BlogAndCaseStudiesSection />
+
+      {/* 10. Careers & Talent Callout */}
+      <TalentCalloutSection />
+
+      {/* 11. FAQ Accordion */}
       <FaqAccordion />
 
-      {/* ── 9. CTA BANNER ─────────────────────────────────────────────────── */}
+      {/* 12. Final Conversion Banner */}
       <CtaSection />
     </div>
   );

@@ -34,12 +34,12 @@ function persistRegion(r: Region) {
 
 export function RegionProvider({
   children,
-  initialRegion = null,
+  initialRegion = "NP",
 }: {
   children: React.ReactNode;
   initialRegion?: Region;
 }) {
-  const [region, setRegionState] = React.useState<Region>(initialRegion);
+  const [region, setRegionState] = React.useState<Region>(initialRegion ?? "NP");
   const [hasChosen, setHasChosen] = React.useState(Boolean(initialRegion));
 
   React.useEffect(() => {

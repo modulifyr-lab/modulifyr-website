@@ -3,7 +3,6 @@ import { FooterBottom } from "./FooterBottom";
 import { FooterBook } from "./FooterBook";
 import { FooterContactInfo } from "./FooterContactInfo";
 import { FooterLinks } from "./FooterLinks";
-import { FooterCTA } from "./FooterCTA";
 
 const QUICK_LINKS = [
   { name: "Home", href: "/" },

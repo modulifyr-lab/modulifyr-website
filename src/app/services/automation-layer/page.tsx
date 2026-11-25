@@ -158,9 +158,10 @@ export default function AutomationLayerPage() {
             </Reveal>
             <Reveal variant="fade-up" delay={200}>
               <p className="text-text-muted text-xl leading-relaxed">
-                Connect your systems, eliminate manual data entry, and build reliable flows between
-                platforms. Four tiers based on how many systems are involved and how complex the
-                logic needs to be.
+                Re-typing customer inquiries into spreadsheets and manually updating staff slows your
+                team down and costs you deals. Automation Layer connects the tools you already rely
+                on into dependable workflows with error alerts—saving hours every week and keeping
+                every lead tracked.
               </p>
             </Reveal>
             <Reveal variant="fade-up" delay={300}>

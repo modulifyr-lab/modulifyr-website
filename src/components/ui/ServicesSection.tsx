@@ -8,7 +8,7 @@ import { Button } from "@/components/Button";
 
 export function ServicesSection() {
   const { region } = useRegion();
-  const displayRegion = region ?? "US";
+  const displayRegion = region ?? "NP";
 
   return (
     <section className="bg-bg-main py-14 transition-colors duration-300 sm:py-20">
@@ -18,10 +18,10 @@ export function ServicesSection() {
           <span className="text-caption1 font-bold tracking-wider text-[#2D738D] uppercase">
             OUR SERVICES
           </span>
-          <h2 className="text-h2 text-foreground font-bold">Built for Every Stage</h2>
+          <h2 className="text-h2 text-foreground font-bold">Built for Measurable Growth</h2>
           <p className="text-body2 sm:text-body1 text-text-alt">
-            From strategy and websites to automation, our services are designed around your business
-            needs.
+            Fixed-scope packages designed to help Nepal SMBs and growing teams cut wasted spend,
+            convert more customers online, and save hours every week.
           </p>
 
           {/* Currency Selector */}

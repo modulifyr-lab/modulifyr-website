@@ -19,8 +19,8 @@ export function FooterBrand() {
       </Link>
 
       <p className="max-w-sm text-justify text-sm leading-relaxed text-slate-400">
-        Custom software systems for growing businesses. Modular ERP, automation, and integrations
-        built to scale — from Nepal, for clients worldwide.
+        Strategy Sprints, fast Launch Kit websites, and Automation Layers — built with clarity from
+        Nepal for clients worldwide.
       </p>
     </div>
   );

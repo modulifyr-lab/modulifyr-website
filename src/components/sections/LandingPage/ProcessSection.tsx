@@ -41,7 +41,7 @@ const PROCESS_STEPS: ProcessStep[] = [
     title: "Development",
     description:
       "We build in focused sprints with regular demos. Our code is clean, modular, and designed to be maintained by any professional team.",
-    deliverables: ["Sytem Architecture Design", "Data Schema", "Integration Specs"],
+    deliverables: ["Modular Source Codebase", "Weekly Sprint Demos", "Automated Test Coverage"],
     icon: TerminalSquare,
   },
   {
@@ -56,8 +56,8 @@ const PROCESS_STEPS: ProcessStep[] = [
     id: "05",
     title: "Support",
     description:
-      "We handle the complexity of cloud infrastructure, ensuring a smooth transition with zero disruption to your existing operations.",
-    deliverables: ["SLA Monitoring", "Security Patches", "Feature Iterations"],
+      "After launch, we keep your system fast and dependable with proactive monitoring, security patches, and incremental module upgrades as your team grows.",
+    deliverables: ["Uptime & Error Monitoring", "Security Patches", "Feature Iterations"],
     icon: LifeBuoy,
   },
 ];

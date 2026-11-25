@@ -1,1 +1,11 @@
 export { HeroSection } from "./HeroSection";
+export { LogoMarquee } from "./LogoMarquee";
+export { WhyModulifyrSection } from "./Whymodulifyrsection";
+export { ServicesSection } from "./ServiceSection";
+export { ScopeEstimatorSection } from "./ScopeEstimatorSection";
+export { ProcessSection } from "./ProcessSection";
+export { IntegrationsShowcase } from "./IntegrationsShowcase";
+export { FeaturedCaseStudy } from "./FeaturedCaseStudy";
+export { BlogAndCaseStudiesSection } from "./BlodAndCaseStudiesSection";
+export { TalentCalloutSection } from "./TalentCalloutSection";
+export { CtaSection } from "./CTABanner";

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { RegionProvider } from "@/components/RegionProvider";
-import { RegionModal } from "@/components/RegionModal";
 import { LanguageProvider } from "@/components/LanguageContext";
 import Script from "next/script";
 import { cookies } from "next/headers";
@@ -37,39 +36,29 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://modulifyr.com"),
   title: "2026 Custom Software Systems Built to Scale | Modulifyr",
   description:
-    "Modulifyr builds scalable custom software, ERP platforms, and automation systems for growing organizations in Nepal and worldwide.",
+    "Modulifyr delivers Strategy Sprints, fast Launch Kit websites, and Automation Layers for growing organizations in Nepal and worldwide.",
   authors: [{ name: "Modulifyr Engineering" }],
   keywords: [
-    "custom software development Nepal",
+    "Strategy Sprint Nepal",
+    "Launch Kit website Nepal",
+    "Automation Layer Nepal",
     "software company Birtamode",
     "software company Nepal",
-    "modular software systems Nepal",
-    "ERP system Nepal",
-    "custom ERP Nepal",
-    "school management system Nepal",
-    "hospital management software Nepal",
-    "retail POS system Nepal",
+    "system architecture consulting Nepal",
+    "static website development Nepal",
+    "workflow automation Nepal",
+    "API integration Nepal",
     "modular architecture",
     "system design Nepal",
-    "enterprise software Nepal",
     "B2B software solutions Nepal",
-    "custom software Jhapa",
     "software development Birtamode Jhapa",
-    "business software Nepal SME",
-    "custom software development",
-    "software company",
-    "modular software systems",
-    "ERP system",
-    "custom ERP",
-    "school management system",
-    "hospital management software",
-    "retail POS system",
+    "business automation Nepal SMB",
+    "Strategy Sprint",
+    "Launch Kit",
+    "Automation Layer",
     "system design",
-    "enterprise software",
-    "B2B software solutions",
-    "custom software",
-    "software development",
-    "business software SME",
+    "workflow automation",
+    "API integration",
   ],
   creator: "Modulifyr",
   openGraph: {
@@ -170,11 +159,11 @@ const schemaOrg = {
         },
       },
       serviceType: [
-        "Custom Software Development",
+        "Strategy Sprint",
+        "Launch Kit",
+        "Automation Layer",
         "System Architecture Consulting",
-        "ERP Development",
-        "Legacy System Modernization",
-        "Cloud Infrastructure",
+        "API & Workflow Integration",
       ],
       sameAs: [
         "https://www.instagram.com/modulifyr/",
@@ -194,7 +183,7 @@ const schemaOrg = {
       url: "https://modulifyr.com",
       name: "2026 Custom Software Systems Built to Scale | Modulifyr",
       description:
-        "Modulifyr builds scalable custom software, ERP platforms, and automation systems for growing organizations in Nepal and worldwide.",
+        "Modulifyr delivers Strategy Sprints, fast Launch Kit websites, and Automation Layers for growing organizations in Nepal and worldwide.",
       isPartOf: { "@id": "https://modulifyr.com/#website" },
       about: { "@id": "https://modulifyr.com/#organization" },
       primaryImageOfPage: {
@@ -212,7 +201,7 @@ const schemaOrg = {
       "@id": "https://modulifyr.com/#article",
       headline: "2026 Custom Software Systems Built to Scale",
       description:
-        "A concise overview of Modulifyr's modular software development, ERP, automation, and modernization services.",
+        "A concise overview of Modulifyr's Strategy Sprint, Launch Kit, and Automation Layer services.",
       image: "https://modulifyr.com/og-image.png",
       mainEntityOfPage: { "@id": "https://modulifyr.com/#webpage" },
       datePublished: "2025-01-01",
@@ -229,7 +218,7 @@ const schemaOrg = {
           name: "What does Modulifyr build?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Modulifyr designs and builds custom software systems, ERP platforms, workflow automation, integrations, and modernization projects.",
+            text: "Modulifyr delivers three fixed-scope services: Strategy Sprints for requirements and architecture, Launch Kit static websites, and Automation Layers connecting existing tools and APIs.",
           },
         },
         {
@@ -254,7 +243,7 @@ const schemaOrg = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const cookieRegion = (await cookies()).get(REGION_COOKIE)?.value;
-  const initialRegion = isRegion(cookieRegion) ? cookieRegion : null;
+  const initialRegion = isRegion(cookieRegion) ? cookieRegion : "NP";
 
   return (
     <html lang="en" suppressHydrationWarning>
@@ -302,7 +291,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         >
           <RegionProvider initialRegion={initialRegion}>
             <LanguageProvider>
-              <RegionModal />
               <Navbar />
               <main id="main-content" className="min-h-screen pt-20">
                 {children}

@@ -10,7 +10,7 @@ import { useRegion } from "@/components/RegionProvider";
 import { RegionSelector } from "@/components/RegionSelector";
 import { formatTierPrice, formatPackageRange } from "@/lib/pricing";
 import type { PackagePricingKey } from "@/lib/pricing";
-import { REGIONS } from "@/lib/regions";
+import { isRegion, REGIONS } from "@/lib/regions";
 import type { Region } from "@/lib/regions";
 import { CheckCircle2, AlertCircle, Loader2, ArrowRight, ShieldCheck, Globe } from "lucide-react";
 import { BOOKING_URL } from "@/lib/links";
@@ -110,7 +110,7 @@ const initialForm: FormState = {
 };
 
 export function RFPForm() {
-  const { region } = useRegion();
+  const { region, setRegion } = useRegion();
   const activeRegion = region;
 
   // Parse URL params from window.location.search on client side
@@ -131,6 +131,11 @@ export function RFPForm() {
   useEffect(() => {
     const rawPkg = searchParams.get("pkg")?.toLowerCase();
     const rawTier = searchParams.get("tier");
+    const rawRegion = searchParams.get("region")?.toUpperCase();
+
+    if (rawRegion && isRegion(rawRegion)) {
+      setRegion(rawRegion);
+    }
 
     if (rawPkg && PACKAGE_SLUG_MAP[rawPkg]) {
       const { projectType } = PACKAGE_SLUG_MAP[rawPkg];
@@ -143,7 +148,7 @@ export function RFPForm() {
         }
       }
     }
-  }, [searchParams]);
+  }, [searchParams, setRegion]);
 
   // Derive available budgets from form.project_type & activeRegion
   const currentBudgets = activeRegion

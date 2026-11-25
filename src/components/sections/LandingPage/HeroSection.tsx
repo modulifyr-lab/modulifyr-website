@@ -1,13 +1,14 @@
-import { CheckCircle, Clock, DollarSign, FilePenLine, Globe } from "lucide-react";
+import { CheckCircle, Clock, DollarSign, FilePenLine, Globe, Calculator } from "lucide-react";
+import Link from "next/link";
 import { Button } from "@/components/Button";
-import { BOOKING_URL } from "@/lib/links";
+import HomeNetworkWrapper from "@/components/ui/HomeNetworkWrapper";
 
 const PERSPECTIVE_GRID_SRC = "/Perspective-Grid.png";
 
 export function HeroSection() {
   return (
-    <section className="bg-background text-on-background relative isolate overflow-hidden py-14 transition-colors duration-300 md:py-24">
-      {/* Perspective Grid */}
+    <section className="bg-background text-on-background relative isolate overflow-hidden py-14 transition-colors duration-300 md:py-20 lg:py-24">
+      {/* Perspective Grid Backdrop */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-full overflow-hidden">
         <div
           className="absolute inset-x-0 bottom-0 h-full"
@@ -34,98 +35,87 @@ export function HeroSection() {
           <img
             src={PERSPECTIVE_GRID_SRC}
             alt=""
-            className="h-full w-full object-cover opacity-30 dark:opacity-20"
+            className="h-full w-full object-cover opacity-25 dark:opacity-15"
           />
         </div>
       </div>
 
-      {/* Hero Content */}
-      <div className="container-custom relative z-10 flex max-w-4xl flex-col items-center space-y-7 text-center">
-        {/* Eyebrow */}
-        <span className="text-primary px-4 font-medium tracking-widest uppercase">
-          Custom Software System
-        </span>
+      {/* 2-Column Balanced Hero Split */}
+      <div className="container-custom relative z-10">
+        <div className="grid grid-cols-1 items-stretch gap-12 lg:grid-cols-12 lg:gap-10">
+          {/* LEFT: Proposition & Conversion */}
+          <div className="flex flex-col justify-center space-y-6 lg:col-span-7">
+            {/* Regional & Domain Kicker */}
+            <p className="text-primary text-xs font-semibold tracking-widest uppercase sm:text-sm">
+              Birtamode, Nepal · Serving Local SMBs &amp; Global Teams
+            </p>
 
-        {/* Heading */}
-        <div className="font-heading font-bold">
-          <h1 className="text-center text-[60px] leading-[110%] tracking-[0%]">
-            Built Around Your{" "}
-            <span className="bg-[radial-gradient(50%_0%_at_0%_50%,var(--color-cta-container)_25.48%,var(--color-cta)_100%)] bg-clip-text text-transparent">
-              Business
-            </span>
-            .
-          </h1>
+            {/* Single Balanced Display Heading */}
+            <h1 className="font-heading text-on-background text-4xl leading-[1.08] font-bold tracking-tight [text-wrap:balance] sm:text-5xl lg:text-[56px]">
+              Modular Software Built Around{" "}
+              <span className="bg-[radial-gradient(50%_0%_at_0%_50%,var(--color-cta-container)_25.48%,var(--color-cta)_100%)] bg-clip-text text-transparent">
+                Your Business
+              </span>
+              . Built to Scale.
+            </h1>
 
-          <h1 className="text-center text-[60px] leading-[110%] tracking-[0%]">
-            Built to{" "}
-            <span className="bg-[radial-gradient(50%_0%_at_0%_50%,var(--color-cta-container)_25.48%,var(--color-cta)_100%)] bg-clip-text text-transparent">
-              Scale
-            </span>
-            .
-          </h1>
-        </div>
+            {/* Description */}
+            <p className="text-on-surface-variant max-w-2xl text-base leading-relaxed sm:text-lg">
+              We deliver Strategy Sprints, fast Launch Kit websites, and reliable Automation Layers
+              for growing businesses across Nepal and worldwide—fixed-scope packages with clear
+              pricing and zero bloat.
+            </p>
 
-        {/* Description */}
-        <p className="text-on-surface-variant w-214 text-lg leading-relaxed">
-          We build custom ERP platforms, workflow automation, integrations, and digital
-          infrastructure for growing organizations, designed around how your business actually
-          works.
-        </p>
+            {/* Primary & Secondary Actions */}
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <Button
+                href="/request-proposal"
+                className="bg-cta text-on-cta w-auto! max-w-none! px-7 whitespace-nowrap shrink-0 transition-colors duration-150 hover:opacity-90"
+              >
+                Request a Proposal
+                <FilePenLine className="h-4 w-4 shrink-0" />
+              </Button>
 
-        {/* Trust Points */}
-        <div className="flex flex-wrap items-center justify-center gap-6 font-semibold">
-          <span className="text-on-background flex items-center justify-center gap-1.5 text-sm">
-            <Clock className="text-cta h-4 w-4" />
-            Response within 1 business day
-          </span>
+              <Link
+                href="#scope-estimator"
+                className="border-cta text-cta hover:bg-cta/10 inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-[28px] border px-6 text-sm font-semibold whitespace-nowrap transition-colors duration-150"
+              >
+                <Calculator className="h-4 w-4 shrink-0" />
+                Estimate Project Scope
+              </Link>
+            </div>
 
-          <span className="text-on-surface-variant hidden sm:inline">•</span>
+            {/* Clean Unboxed Trust Metadata */}
+            <div className="border-border-base text-on-surface-variant flex flex-wrap items-center gap-x-5 gap-y-2 border-t pt-5 text-xs font-medium sm:text-sm">
+              <span className="flex items-center gap-1.5">
+                <DollarSign className="text-cta h-4 w-4 shrink-0" />
+                Transparent NPR &amp; USD pricing
+              </span>
+              <span aria-hidden="true">·</span>
+              <span className="flex items-center gap-1.5">
+                <Clock className="text-cta h-4 w-4 shrink-0" />
+                1-business-day response
+              </span>
+              <span aria-hidden="true">·</span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle className="text-cta h-4 w-4 shrink-0" />
+                NDA available
+              </span>
+              <span aria-hidden="true">·</span>
+              <Link
+                href="/careers"
+                className="text-cta hover:underline flex items-center gap-1.5 font-semibold"
+              >
+                <Globe className="h-4 w-4 shrink-0" />
+                Hiring contract builders
+              </Link>
+            </div>
+          </div>
 
-          <span className="text-on-background flex items-center justify-center gap-1.5 text-sm">
-            <DollarSign className="text-cta h-4 w-4" />
-            Transparent pricing
-          </span>
-
-          <span className="text-on-surface-variant hidden sm:inline">•</span>
-
-          <span className="text-on-background flex items-center justify-center gap-1.5 text-sm">
-            <CheckCircle className="text-cta h-4 w-4" />
-            No hidden cost
-          </span>
-        </div>
-
-        {/* CTA */}
-        <div className="flex w-full justify-center gap-3 pt-4">
-          <Button
-            href="/request-proposal"
-            className="bg-cta text-on-cta w-full px-6 transition-colors duration-300 hover:opacity-90"
-          >
-            Request a Proposal
-            <FilePenLine className="ml-1 h-6 w-6" />
-          </Button>
-          <Button
-            href={BOOKING_URL}
-            external
-            variant="outline"
-            className="w-full px-6 transition-colors duration-300"
-          >
-            Book a Discovery Call
-          </Button>
-        </div>
-
-        {/* Bottom Information */}
-        <div className="text-caption1 text-on-surface-variant flex items-center gap-6 pt-2">
-          <span className="flex items-center gap-1.5">
-            <FilePenLine className="text-cta h-4 w-4" />
-            NDA Available
-          </span>
-
-          <span>•</span>
-
-          <span className="flex items-center gap-1.5">
-            <Globe className="text-cta h-4 w-4" />
-            Global Collaboration
-          </span>
+          {/* RIGHT: Interactive 3D Modular Network Viewport */}
+          <div className="min-h-[380px] lg:col-span-5">
+            <HomeNetworkWrapper />
+          </div>
         </div>
       </div>
     </section>

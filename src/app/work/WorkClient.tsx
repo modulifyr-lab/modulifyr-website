@@ -21,19 +21,19 @@ const caseStudies = [
     label: "Proprietary Alpha Build",
     labelColor: "text-[#2D738D]",
     title: "The Planning Bord",
-    subtitle: "Internal R&D Project — Comprehensive ERP System",
+    subtitle: "Internal R&D Project — Modular Operations Workspace",
     tags: ["React", "Vercel", "TailwindCSS", "Modular Architecture"],
     liveUrl: "https://the-planning-bord.vercel.app",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80",
     problem:
-      "The system needed to bring inventory, project tracking, HR, and finance into a single platform. Without a unified data layer, each function would require manual reconciliation and separate tooling — creating compounding maintenance overhead as the product grew.",
+      "The system needed to bring task tracking, operations workflows, and reporting into a single workspace. Without a unified data layer, each function would require manual reconciliation and separate tooling — creating compounding maintenance overhead as the product grew.",
     architecture:
-      "Built as a single modular platform where each function (inventory, HR, projects, finance) operates as a discrete module with clean data boundaries. Modules share a common data layer so inventory changes immediately reflect in finance reporting. The modular design means new workflows can be added without touching unrelated modules.",
+      "Built as a single modular application where each operational workflow operates as a discrete module with clean data boundaries. Modules share a common data layer so changes stay consistent across views, and new workflows can be added without touching unrelated modules.",
     outcome:
-      "A working ERP platform demonstrating our core architectural approach: modular, independently maintainable, and extensible. The Planning Bord is an active internal build — new modules are being added as the product evolves.",
+      "A working internal R&D prototype demonstrating our core architectural approach: modular, independently maintainable, and extensible.",
     metrics: [
       { label: "Architecture pattern", value: "Modular" },
-      { label: "Platform type", value: "ERP" },
+      { label: "Project type", value: "Internal R&D" },
       { label: "Status", value: "Active internal build" },
     ],
   },

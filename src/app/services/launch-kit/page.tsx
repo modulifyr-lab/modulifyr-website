@@ -176,8 +176,9 @@ export default function LaunchKitPage() {
             </Reveal>
             <Reveal variant="fade-up" delay={200}>
               <p className="text-text-muted text-xl leading-relaxed">
-                Static websites with no backend — fast, secure, and built to rank. Four tiers based
-                on page count, animation level, and how many review rounds you need before launch.
+                Customers check you online before they ever call or walk in. Launch Kit gives your
+                business a fast, mobile-first website built to rank locally and capture inquiries
+                reliably—without sluggish templates, server headaches, or surprise maintenance bills.
               </p>
             </Reveal>
             <Reveal variant="fade-up" delay={300}>

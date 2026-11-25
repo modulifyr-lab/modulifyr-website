@@ -57,9 +57,9 @@ export default function ServicesClient() {
             Need Help Choosing the Right <span className="text-[#E8A33D]">Package</span>?
           </h2>
           <p className="text-body2 sm:text-body1 text-text-alt leading-relaxed">
-            Most engineering leaders start with our Strategy Sprint. We map your exact state
-            architecture, benchmark bottlenecks, and specify whether a fixed Launch Kit or an
-            Automation Layer maximizes your ROI.
+            Not sure where to start? Most businesses begin with a focused Strategy Sprint so you
+            know exact costs, priorities, and whether a Launch Kit website or an Automation Layer
+            delivers the fastest return for your team.
           </p>
           <div className="flex flex-wrap justify-center gap-3 pt-2 sm:gap-4 sm:pt-4">
             <Button href="/request-proposal">

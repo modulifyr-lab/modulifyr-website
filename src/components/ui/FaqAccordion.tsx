@@ -19,7 +19,7 @@ export const DEFAULT_FAQ_ITEMS: FaqItem[] = [
   {
     question: "How do I know Modulifyr is a fit for my business?",
     answer:
-      "Modulifyr is ideal for growing SMBs and enterprises that have outgrown generic tools like spreadsheets or rigid SaaS platforms, and need tailored ERPs, automation, or custom integrations built to scale with their operations.",
+      "Modulifyr is ideal for growing SMBs and teams that need clear technical scoping through a Strategy Sprint, a fast static web presence via Launch Kit, or an Automation Layer connecting their existing tools without manual busywork.",
   },
   {
     question: "Can you integrate our new system with existing tools we use?",

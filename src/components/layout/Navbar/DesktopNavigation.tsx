@@ -30,7 +30,7 @@ export function DesktopNavigation({
               key={group.name}
               href={group.href}
               role="menuitem"
-              className={`group relative text-sm leading-none font-medium tracking-[0.28px] transition-colors duration-300 ease-in ${
+              className={`group relative text-sm leading-none font-medium tracking-[0.28px] whitespace-nowrap shrink-0 transition-colors duration-300 ease-in ${
                 isActive ? "text-cta" : "text-on-surface-variant"
               } hover:text-cta`}
             >

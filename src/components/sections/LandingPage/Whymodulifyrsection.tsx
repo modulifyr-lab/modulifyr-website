@@ -97,17 +97,17 @@ export function WhyModulifyrSection() {
     <section className="bg-background text-on-background relative overflow-hidden py-20 transition-colors duration-300 md:py-24">
       <div className="container-custom relative">
         {/* Header */}
-        <div className="max-w-6xl">
-          <span className="font-sans text-[20px] leading-[110%] font-normal text-[#FFC24B]">
-            WHY MODULIFYR
+        <div className="max-w-4xl">
+          <span className="font-sans text-sm font-semibold tracking-wider text-[#FFC24B] uppercase">
+            Why Modulifyr
           </span>
 
-          <h2 className="text-on-background mt-2 text-3xl leading-[1.15] font-bold md:text-4xl">
-            Because your business shouldn&apos;t have to adapt to a software.
+          <h2 className="text-on-background mt-2 text-3xl leading-[1.15] font-bold md:text-4xl [text-wrap:balance]">
+            Because your business shouldn&apos;t have to adapt to rigid software.
           </h2>
 
-          <p className="text-on-surface-variant mt-3 text-base leading-[1.3]">
-            Flexible systems, clear costs, and a transparent process.
+          <p className="text-on-surface-variant mt-3 text-base leading-relaxed">
+            Flexible modules, published NPR &amp; USD ranges, and direct collaboration from Birtamode to global teams.
           </p>
         </div>
 
@@ -116,16 +116,15 @@ export function WhyModulifyrSection() {
           {REASONS.map((reason, index) => (
             <article
               key={index}
-              className="flex min-h-[320px] flex-col border-r border-l-0 border-[#5B8A99]/60 pr-6 pl-8 last:border-r-0 lg:pr-8"
+              className="border-[#5B8A99]/40 flex min-h-[290px] flex-col border-b pb-8 sm:border-b-0 sm:pb-0 lg:border-r lg:pr-8 lg:pl-8 lg:first:pl-0 lg:last:border-r-0"
             >
               <div className="h-14 text-left">{reason.icon}</div>
 
-              <h3 className="text-on-background mt-10 min-h-[56px] text-xl leading-[1.2] font-medium md:text-[22px]">
+              <h3 className="text-on-background mt-8 text-xl leading-[1.2] font-semibold md:text-[22px]">
                 {reason.title}
               </h3>
 
-              {/* Description pinned to the bottom so all columns align */}
-              <p className="text-on-surface-variant mt-12 max-w-[280px] text-base leading-[1.4]">
+              <p className="text-on-surface-variant mt-4 max-w-[280px] text-sm leading-relaxed sm:text-base">
                 {reason.description}
               </p>
             </article>

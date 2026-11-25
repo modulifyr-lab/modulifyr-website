@@ -98,7 +98,11 @@ export function Navbar() {
       <nav
         ref={navbarRef}
         aria-label="Main navigation"
-        className={`bg-background fixed top-0 right-0 left-0 z-50 flex h-24 items-center border-b border-transparent duration-300 [border-image:linear-gradient(90deg,rgba(232,90,51,0.3)_0%,rgba(255,194,75,0.3)_100%)_1]`}
+        className={`bg-background/95 fixed top-0 right-0 left-0 z-50 flex h-20 items-center border-b backdrop-blur-md transition-all duration-300 ${
+          scrolled
+            ? "border-border-base shadow-sm"
+            : "border-transparent [border-image:linear-gradient(90deg,rgba(232,90,51,0.3)_0%,rgba(255,194,75,0.3)_100%)_1]"
+        }`}
       >
         <div className="container-custom flex w-full items-center justify-between">
           <NavbarLogo />
