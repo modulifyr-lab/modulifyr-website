@@ -112,8 +112,8 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* RIGHT: Interactive 3D Modular Network Viewport */}
-          <div className="min-h-[380px] lg:col-span-5">
+          {/* RIGHT: Interactive 3D Modular Geometry Viewport */}
+          <div className="min-h-[400px] lg:col-span-5 lg:min-h-[430px]">
             <HomeNetworkWrapper />
           </div>
         </div>

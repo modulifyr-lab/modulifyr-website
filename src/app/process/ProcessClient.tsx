@@ -12,7 +12,6 @@ import {
   FileText,
   Calendar,
 } from "lucide-react";
-import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Card, CardTitle } from "@/components/ui/Card";
 import Reveal from "@/components/ui/Reveal";
@@ -21,57 +20,57 @@ import { BOOKING_URL } from "@/lib/links";
 const steps = [
   {
     icon: Search,
-    title: "Discovery",
-    duration: "2-4 Weeks",
-    desc: "Understanding business operations, workflows, and technical requirements.",
-    deliverables: ["Discovery Report", "Product Backlog", "High-level Roadmap"],
+    title: "Discovery & Scoping",
+    duration: "3–10 Days (Strategy Sprint)",
+    desc: "Mapping business operations, bottlenecks, and clear scope before writing code.",
+    deliverables: ["Requirements Document", "Prioritized Roadmap", "Cost & Timeline Clarity"],
     details:
-      "We start by embedding with your team to understand the 'why' behind the project. We map out current bottlenecks and define success metrics.",
+      "We start by learning how your team works today, where time or leads are lost, and what scope actually solves the problem without wasted spend.",
   },
   {
     icon: PenTool,
-    title: "Architecture",
-    duration: "3-6 Weeks",
-    desc: "Designing system structure, modules, integrations, and scalability roadmap.",
-    deliverables: ["System Architecture Diagram", "Data Schema", "Integration Specs"],
+    title: "Blueprint & Prototype",
+    duration: "Included in Sprint / Launch Kit",
+    desc: "Designing clean system boundaries, Figma page flows, or integration maps.",
+    deliverables: ["Architecture Blueprint", "Figma Wireframes / Prototypes", "Integration Map"],
     details:
-      "Engineering is about trade-offs. We design a modular structure that optimizes for your specific scale, security, and performance constraints.",
+      "Before engineering begins, you review and approve the structure—whether that is page layouts for a Launch Kit or webhook logic for an Automation Layer.",
   },
   {
     icon: Code2,
-    title: "Development",
-    duration: "Iterative",
-    desc: "Building secure, maintainable systems tailored to your organization.",
-    deliverables: ["Modular Source Code", "Environment Setup", "Documentation"],
+    title: "Focused Build",
+    duration: "1–6 Weeks by Tier",
+    desc: "Building fast Launch Kit sites and retry-safe Automation Layer workflows.",
+    deliverables: ["Production Code / Workflows", "Structured Revisions", "Clear Documentation"],
     details:
-      "We build in focused sprints with regular demos. Our code is clean, modular, and designed to be maintained by any professional team.",
+      "We build in fixed-scope sprints with predictable pricing and milestone updates so your team sees tangible progress every week.",
   },
   {
     icon: CheckCircle2,
     title: "Quality Assurance",
-    duration: "Parallel",
-    desc: "Rigorous testing of modular integrity, security, and performance benchmarks.",
-    deliverables: ["Test Reports", "Security Audit", "Performance Logs"],
+    duration: "Pre-Launch",
+    desc: "Verifying mobile responsiveness, security checks, and workflow error alerts.",
+    deliverables: ["Responsive & Speed Checks", "Error Alert Validation", "Security Review"],
     details:
-      "Automated testing and manual QA ensure that the new system is reliable and secure before it touches production data.",
+      "Every site is tested across mobile and desktop viewports, and every automation flow is tested against failure states before going live.",
   },
   {
     icon: Globe,
-    title: "Deployment",
-    duration: "1-2 Weeks",
-    desc: "Cloud deployment, infrastructure configuration, and testing.",
-    deliverables: ["Production Environment", "CI/CD Pipeline", "Backup Systems"],
+    title: "Launch & Handoff",
+    duration: "Clean Ownership",
+    desc: "Deployment-ready handoff to your domain and accounts with zero vendor lock-in.",
+    deliverables: ["Live Deployment", "Runbook & Docs", "Full Code & Account Ownership"],
     details:
-      "We handle the complexity of cloud infrastructure, ensuring a smooth transition with zero disruption to your existing operations.",
+      "You own your domain, hosting accounts, and code from day one. We provide straightforward handoff documentation so any developer can maintain it.",
   },
   {
     icon: Clock,
-    title: "Ongoing Support",
-    duration: "Contractual",
-    desc: "Maintenance, upgrades, and continuous improvements.",
-    deliverables: ["SLA Monitoring", "Security Patches", "Feature Iterations"],
+    title: "Optional Maintenance",
+    duration: "When Needed",
+    desc: "Optional managed hosting for Launch Kit or SLA-backed monitoring for higher tiers.",
+    deliverables: ["Uptime Monitoring", "Itemized Third-Party Costs", "Future Scope Additions"],
     details:
-      "A custom system is an investment. We provide ongoing support and updates to ensure it continues to serve your organization as it grows.",
+      "Need hands-off upkeep after launch? Choose optional managed hosting for static sites or add new automation flows as your business grows.",
   },
 ];
 
@@ -177,50 +176,50 @@ export default function ProcessClient() {
               </Reveal>
               <Reveal variant="fade-up" delay={100}>
                 <h2 className="font-heading text-4xl font-bold md:text-5xl">
-                  The Low-Risk <span className="text-[#2D738D]">Pilot Offering</span>
+                  Start With a <span className="text-[#2D738D]">Strategy Sprint</span>
                 </h2>
               </Reveal>
               <Reveal variant="fade-up" delay={200}>
                 <p className="text-text-muted text-lg leading-relaxed">
-                  Not ready for a full-scale build? Start with a fixed-fee, time-boxed pilot. Prove
-                  the core functionality and technical feasibility before committing to a larger
-                  roadmap.
+                  Unsure whether you need a Launch Kit website, an Automation Layer, or a multi-phase
+                  build? Start with a fixed-fee Strategy Sprint to lock down exact requirements,
+                  costs, and timelines before spending on development.
                 </p>
               </Reveal>
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                 <Reveal variant="fade-scale" delay={300}>
                   <div className="flex flex-col gap-2">
-                    <div className="text-brand-gold text-xl font-bold">4-8 Weeks</div>
-                    <p className="text-text-muted text-sm">Accelerated prototype delivery</p>
+                    <div className="text-brand-gold text-xl font-bold">3 Days – 2 Weeks</div>
+                    <p className="text-text-muted text-sm">Fast clarity before committing</p>
                   </div>
                 </Reveal>
                 <Reveal variant="fade-scale" delay={400}>
                   <div className="flex flex-col gap-2">
                     <div className="text-brand-gold text-xl font-bold">Fixed-Fee</div>
-                    <p className="text-text-muted text-sm">Predictable costs, zero surprises</p>
+                    <p className="text-text-muted text-sm">Published NPR &amp; USD pricing</p>
                   </div>
                 </Reveal>
               </div>
               <Reveal variant="fade-up" delay={500}>
-                <Button href={BOOKING_URL} external size="lg" className="w-fit">
-                  Book a 15-Minute Pilot Briefing
+                <Button href="/services/strategy-sprint" size="lg" className="w-fit">
+                  Explore Strategy Sprint Tiers
                 </Button>
               </Reveal>
             </div>
 
             <Reveal variant="fade-scale" delay={250}>
-              <Card className="translate-y-0 border-white/10 bg-white/5 p-12 hover:shadow-none">
-                <CardTitle className="mb-8 text-2xl text-white">Engagement Outcome</CardTitle>
+              <Card className="translate-y-0 border-white/10 bg-white/5 p-8 hover:shadow-none sm:p-12">
+                <CardTitle className="mb-8 text-2xl text-white">What You Walk Away With</CardTitle>
                 <div className="space-y-6">
                   {[
-                    "Working prototype for core critical flow",
-                    "Simulated test data & user journey",
-                    "Modular technical architecture blueprint",
-                    "Accurate timeline & estimate for Full Build",
-                    "Signed code ownership & IP handoff",
+                    "Written requirements document covering goals and edge cases",
+                    "Clear tech stack recommendation with plain-English trade-offs",
+                    "Architecture blueprint & integration mapping (Tier 2+)",
+                    "Phased roadmap with realistic cost & time estimates",
+                    "100% ownership—build with Modulifyr or any engineering team",
                   ].map((item, i) => (
                     <div key={i} className="flex items-center gap-4">
-                      <CheckCircle2 className="text-brand-teal h-5 w-5" />
+                      <CheckCircle2 className="text-brand-teal h-5 w-5 shrink-0" />
                       <span className="text-text-muted">{item}</span>
                     </div>
                   ))}

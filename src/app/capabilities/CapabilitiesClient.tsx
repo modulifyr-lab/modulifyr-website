@@ -122,7 +122,7 @@ const stackByType = [
       { layer: "Deployment", choice: "Vercel / AWS", note: "Based on client control needs" },
       { layer: "Observability", choice: "Better Stack", note: "Errors, logs, and uptime monitoring" },
     ],
-    useCases: "SaaS platforms, dashboards, ERPs, portals, internal systems, admin tools.",
+    useCases: "Web applications, dashboards, portals, internal tools, and scoped client builds.",
   },
   {
     type: "Mobile App",
@@ -347,7 +347,7 @@ export default function CapabilitiesClient() {
                   </div>
 
                   <div className="border-border-base overflow-hidden rounded-xl border">
-                    <div className="bg-bg-secondary grid grid-cols-3 px-5 py-2.5 text-xs font-bold tracking-widest text-text-alt uppercase">
+                    <div className="bg-bg-secondary grid grid-cols-2 px-4 py-2.5 text-xs font-bold tracking-widest text-text-alt uppercase sm:px-5 md:grid-cols-3">
                       <span>Layer</span>
                       <span>Choice</span>
                       <span className="hidden md:block">Notes</span>
@@ -355,11 +355,13 @@ export default function CapabilitiesClient() {
                     {product.stack.map((row, i) => (
                       <div
                         key={row.layer}
-                        className={`border-border-base grid grid-cols-3 border-t px-5 py-3 ${i % 2 === 0 ? "bg-bg-alt" : "bg-bg-light"}`}
+                        className={`border-border-base grid grid-cols-2 gap-2 border-t px-4 py-3 sm:px-5 md:grid-cols-3 ${i % 2 === 0 ? "bg-bg-alt" : "bg-bg-light"}`}
                       >
                         <span className="text-text-muted text-xs font-semibold">{row.layer}</span>
                         <span className="text-foreground text-xs font-bold">{row.choice}</span>
-                        <span className="text-text-muted hidden text-xs md:block">{row.note}</span>
+                        <span className="text-text-muted col-span-2 text-xs md:col-span-1">
+                          {row.note}
+                        </span>
                       </div>
                     ))}
                   </div>
@@ -471,7 +473,7 @@ export default function CapabilitiesClient() {
           </Reveal>
           <Reveal variant="fade-scale" delay={100}>
             <div className="border-border-base overflow-hidden rounded-2xl border bg-bg-alt">
-              <div className="bg-brand-navy grid grid-cols-3 px-6 py-3 text-xs font-bold tracking-widest text-white uppercase">
+              <div className="bg-brand-navy hidden grid-cols-3 px-6 py-3 text-xs font-bold tracking-widest text-white uppercase sm:grid">
                 <span>Technology</span>
                 <span>Why We Avoid It</span>
                 <span>Use Instead</span>
@@ -479,7 +481,7 @@ export default function CapabilitiesClient() {
               {avoidList.map((row, i) => (
                 <div
                   key={row.tech}
-                  className={`border-border-base grid grid-cols-3 items-center border-b px-6 py-4 last:border-0 ${i % 2 === 1 ? "bg-bg-light" : ""}`}
+                  className={`border-border-base grid grid-cols-1 gap-2 border-b px-5 py-4 last:border-0 sm:grid-cols-3 sm:items-center sm:px-6 ${i % 2 === 1 ? "bg-bg-light" : ""}`}
                 >
                   <div className="flex items-center gap-2">
                     <XCircle className="h-4 w-4 shrink-0 text-red-400" />

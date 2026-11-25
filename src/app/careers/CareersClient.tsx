@@ -51,10 +51,12 @@ const DEPARTMENT_ICONS: Record<DepartmentId, LucideIcon> = {
 };
 
 export default function CareersClient() {
-  const [expandedCategories, setExpandedCategories] = useState<string[]>([]);
+  const openDepartments = getOpenRolesByDepartment();
+  const [expandedCategories, setExpandedCategories] = useState<string[]>(() =>
+    openDepartments.map((group) => group.department.id)
+  );
   const [selectedRole, setSelectedRole] = useState<string>("");
 
-  const openDepartments = getOpenRolesByDepartment();
   const totalOpenCount = openDepartments.reduce((acc, group) => acc + group.roles.length, 0);
 
   const toggleCategory = (id: string) => {
@@ -80,13 +82,11 @@ export default function CareersClient() {
           </p>
           {totalOpenCount > 0 && (
             <div className="pt-2">
-              <a href="#open-positions">
-                <button
-                  type="button"
-                  className="cursor-pointer rounded-lg bg-[#2D738D] px-8 py-3.5 text-base font-semibold text-white transition-colors duration-100 ease-in hover:bg-[#235b70]"
-                >
-                  View open positions
-                </button>
+              <a
+                href="#open-positions"
+                className="inline-flex cursor-pointer items-center justify-center rounded-lg bg-[#2D738D] px-8 py-3.5 text-base font-semibold text-white transition-colors duration-100 ease-in hover:bg-[#235b70]"
+              >
+                View open positions
               </a>
             </div>
           )}
@@ -203,13 +203,11 @@ export default function CareersClient() {
                 No open positions right now. Send us your resume and we will reach out when
                 something fits.
               </p>
-              <a href="#application-form">
-                <button
-                  type="button"
-                  className="cursor-pointer rounded-lg bg-[#2D738D] px-8 py-3 text-sm font-semibold text-white transition-colors duration-100 ease-in hover:bg-[#235b70]"
-                >
-                  Drop Your Resume
-                </button>
+              <a
+                href="#application-form"
+                className="inline-flex cursor-pointer items-center justify-center rounded-lg bg-[#2D738D] px-8 py-3 text-sm font-semibold text-white transition-colors duration-100 ease-in hover:bg-[#235b70]"
+              >
+                Drop Your Resume
               </a>
             </div>
           ) : (
@@ -261,7 +259,7 @@ export default function CareersClient() {
                         {group.roles.map((role) => (
                           <div
                             key={role.title}
-                            className="bg-bg-main border-border-main/60 flex items-center justify-between rounded-xl border p-3.5 transition-colors hover:border-[#2D738D]/50"
+                            className="bg-bg-main border-border-main/60 flex flex-wrap items-center justify-between gap-3 rounded-xl border p-3.5 transition-colors hover:border-[#2D738D]/50"
                           >
                             <div className="flex flex-col gap-0.5">
                               <span className="text-text-muted text-xs">
@@ -269,7 +267,7 @@ export default function CareersClient() {
                               </span>
                               <div className="flex items-center gap-3">
                                 <span
-                                  className="h-2.5 w-2.5 rounded-full bg-[#6FA8B8]"
+                                  className="h-2.5 w-2.5 shrink-0 rounded-full bg-[#6FA8B8]"
                                   title="Open position"
                                 />
                                 <span className="text-body2 text-foreground font-semibold">
@@ -280,7 +278,7 @@ export default function CareersClient() {
                             <a
                               href="#application-form"
                               onClick={() => setSelectedRole(role.title)}
-                              className="text-xs font-bold text-[#2D738D] hover:underline"
+                              className="text-xs font-bold whitespace-nowrap text-[#2D738D] hover:underline"
                             >
                               Apply Now →
                             </a>
@@ -305,14 +303,12 @@ export default function CareersClient() {
             we&apos;ll reach out.
           </p>
           <div className="pt-2">
-            <a href="#application-form">
-              <button
-                type="button"
-                className="cursor-pointer rounded-lg bg-[#2D738D] px-8 py-3.5 text-base font-semibold text-white transition-colors duration-100 ease-in hover:bg-[#235b70]"
-              >
-                Drop Your Resume
-                <ArrowRight className="ml-2 inline h-4 w-4" />
-              </button>
+            <a
+              href="#application-form"
+              className="inline-flex cursor-pointer items-center justify-center rounded-lg bg-[#2D738D] px-8 py-3.5 text-base font-semibold text-white transition-colors duration-100 ease-in hover:bg-[#235b70]"
+            >
+              Drop Your Resume
+              <ArrowRight className="ml-2 inline h-4 w-4" />
             </a>
           </div>
         </div>

@@ -1,8 +1,7 @@
 "use client";
 
 import { ServicesSection } from "@/components/ui/ServicesSection";
-import { ArrowRight, CheckCircle2, ShieldCheck } from "lucide-react";
-import { RegionSelector } from "@/components/RegionSelector";
+import { ArrowRight } from "lucide-react";
 import { BOOKING_URL } from "@/lib/links";
 import { Button } from "@/components/Button";
 

@@ -135,7 +135,7 @@ const whatWeConnect = [
 
 export default function AutomationLayerPage() {
   const { region } = useRegion();
-  const activeRegion = region;
+  const activeRegion = region ?? "NP";
 
   return (
     <div className="flex w-full flex-col">
@@ -278,7 +278,7 @@ export default function AutomationLayerPage() {
                   </p>
 
                   <p className="text-text-secondary text-sm leading-relaxed">
-                    {tier.descriptionInternational}
+                    {activeRegion === "NP" ? tier.descriptionNepal : tier.descriptionInternational}
                   </p>
 
                   <div>
@@ -311,7 +311,7 @@ export default function AutomationLayerPage() {
 
                   <div className="mt-auto pt-2">
                     <Link
-                      href={`/request-proposal?pkg=automation-layer&tier=${i + 1}`}
+                      href={`/request-proposal?pkg=automation-layer&tier=${i + 1}&region=${activeRegion}`}
                       className="w-full"
                     >
                       <Button

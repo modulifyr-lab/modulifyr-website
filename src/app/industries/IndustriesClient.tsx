@@ -22,96 +22,90 @@ const industries = [
     name: "Education",
     color: "text-[#2D738D]",
     bg: "bg-[#2D738D]/10",
-    tagline: "Scalable platforms for learning institutions",
-    desc: "From student information systems to e-learning platforms, we build modular infrastructure that adapts as institutions grow. Our systems support enrollment management, curriculum delivery, assessment, and reporting.",
+    tagline: "Schools, colleges, and training institutes",
+    desc: "Replace slow brochure sites and scattered admission spreadsheets with a fast Launch Kit web presence and automated inquiry routing straight to your admissions team.",
     useCases: [
-      "Student Information Systems (SIS)",
-      "Learning Management Systems (LMS)",
-      "Admissions & enrollment portals",
-      "Assessment & grading platforms",
-      "Library and resource management",
+      "Fast admissions & course info websites (Launch Kit)",
+      "Inquiry form → spreadsheet & staff alert sync (Automation Layer)",
+      "Online fee/prospectus request routing",
+      "Scoping digital initiatives before spending (Strategy Sprint)",
     ],
-    clients: "Universities, schools, training organizations",
+    clients: "Schools, colleges, consultancies, training centers",
   },
   {
     icon: ShoppingCart,
-    name: "Commerce",
+    name: "Commerce & Wholesale",
     color: "text-brand-teal",
     bg: "bg-brand-teal/10",
-    tagline: "End-to-end commerce infrastructure",
-    desc: "We build commerce platforms that go beyond basic storefronts — from B2B ordering systems to custom marketplace architectures with integrated logistics, pricing engines, and analytics.",
+    tagline: "Distributors, suppliers, and B2B sellers",
+    desc: "Turn wholesale inquiries into tracked orders faster. Pair a credible catalog website with automated lead capture and sheet/CRM updates so your sales team never misses a follow-up.",
     useCases: [
-      "Custom B2B & B2C platforms",
-      "Multi-vendor marketplace systems",
-      "Order management & fulfillment",
-      "Dynamic pricing engines",
-      "Customer data platforms",
+      "Product catalog & wholesale inquiry sites (Launch Kit)",
+      "Order/quote request → sheet & team chat alerts (Automation Layer)",
+      "CRM and accounting tool sync without manual re-entry",
+      "Clear technical roadmap before custom integrations (Strategy Sprint)",
     ],
-    clients: "Distributors, wholesalers, online retailers",
+    clients: "Distributors, wholesalers, trading businesses",
   },
   {
     icon: Heart,
-    name: "Healthcare",
+    name: "Healthcare & Clinics",
     color: "text-[#2D738D]",
     bg: "bg-[#2D738D]/10",
-    tagline: "Secure systems for clinical operations",
-    desc: "We design healthcare software with security and compliance at the foundation. Patient management, scheduling, billing, and clinical workflow systems built to handle sensitive data with the utmost care.",
+    tagline: "Clinics, dental practices, and diagnostic centers",
+    desc: "Make it effortless for patients in Nepal to find your services, check timings, and request appointments online while keeping front-desk follow-ups automated.",
     useCases: [
-      "Patient Management Systems",
-      "Appointment & scheduling platforms",
-      "Medical billing & claims",
-      "Clinical workflow tools",
-      "Telemedicine infrastructure",
+      "Mobile-first clinic & doctor profile websites (Launch Kit)",
+      "Appointment request embeds & confirmation alerts (Automation Layer)",
+      "Patient inquiry routing to reception sheets & email",
+      "Workflow scoping before multi-branch upgrades (Strategy Sprint)",
     ],
-    clients: "Clinics, hospitals, health startups",
+    clients: "Clinics, diagnostic labs, specialty practices",
   },
   {
     icon: Cpu,
-    name: "IT & Technology",
+    name: "IT & Startups",
     color: "text-brand-teal",
     bg: "bg-brand-teal/10",
-    tagline: "Internal tooling and developer platforms",
-    desc: "For technology companies that need custom internal infrastructure — developer portals, internal dashboards, SaaS module systems, and DevOps tooling built to engineering-grade standards.",
+    tagline: "Product teams, SaaS builders, and tech agencies",
+    desc: "Validate ideas with clear architecture before writing production code, launch sharp marketing sites quickly, and automate internal ops webhooks across your stack.",
     useCases: [
-      "Internal developer portals",
-      "SaaS feature module systems",
-      "Admin & operations dashboards",
-      "API gateway & orchestration",
-      "Data pipeline tooling",
+      "Technical scoping, architecture & risk plans (Strategy Sprint)",
+      "High-speed product launch & waitlist pages (Launch Kit)",
+      "Webhook, API & n8n operational pipelines (Automation Layer)",
+      "Third-party tool sync with retry logic & error alerts",
     ],
-    clients: "SaaS companies, tech teams, MSPs",
+    clients: "Startups, SaaS teams, digital agencies",
   },
   {
     icon: Store,
-    name: "Retail",
+    name: "Retail & Hospitality",
     color: "text-[#2D738D]",
     bg: "bg-[#2D738D]/10",
-    tagline: "Modern retail operations platforms",
-    desc: "Replace outdated POS and inventory systems with modular retail infrastructure. We build point-of-sale, stock management, customer loyalty, and supplier integration systems for modern retail environments.",
+    tagline: "Local stores, cafes, hotels, and multi-outlet brands",
+    desc: "Stand out on local search and social links with a fast site built to drive visits, bookings, and direct inquiries—backed by automated order and booking notifications.",
     useCases: [
-      "Point-of-Sale (POS) systems",
-      "Inventory & stock management",
-      "Customer loyalty platforms",
-      "Supplier integration portals",
-      "Omnichannel order routing",
+      "Fast local storefront & menu/room showcase sites (Launch Kit)",
+      "Booking & bulk-order alerts to staff channels (Automation Layer)",
+      "Multi-step quote or catering request forms",
+      "Clear digital upgrade planning (Strategy Sprint)",
     ],
-    clients: "Retailers, franchise networks, supermarkets",
+    clients: "Retailers, hotels, restaurants, local brands",
   },
   {
     icon: Briefcase,
     name: "Professional Services",
     color: "text-brand-teal",
     bg: "bg-brand-teal/10",
-    tagline: "Operational platforms for service businesses",
-    desc: "Law firms, consulting agencies, accounting practices, and other professional service organizations benefit from custom CRM, project tracking, billing, and client portal systems tailored to their workflows.",
+    tagline: "Law firms, accounting practices, and consultancies",
+    desc: "Win high-trust clients with a clean, authoritative website and automate consultation booking, intake forms, and client record creation without admin bottlenecks.",
     useCases: [
-      "Client relationship management (CRM)",
-      "Project & matter management",
-      "Time tracking & billing",
-      "Client portals & document sharing",
-      "Compliance & audit tools",
+      "Credibility-focused firm websites & SEO structure (Launch Kit)",
+      "Consultation booking + intake → CRM/sheet sync (Automation Layer)",
+      "Automated follow-up & team assignment notifications",
+      "Process & integration blueprints (Strategy Sprint)",
     ],
-    clients: "Law firms, agencies, consultancies",
+    clients: "Consultancies, CA firms, law practices, agencies",
   },
 ];
 
@@ -182,14 +176,14 @@ export default function IndustriesClient() {
             </Reveal>
             <Reveal variant="fade-up" delay={100}>
               <h1 className="font-heading mb-8 text-4xl font-bold text-white md:text-6xl">
-                Modular Architecture <span className="text-[#2D738D]">Across Industries</span>
+                Practical Digital Upgrades <span className="text-[#2D738D]">Across Sectors</span>
               </h1>
             </Reveal>
             <Reveal variant="fade-up" delay={200}>
               <p className="text-text-muted max-w-2xl text-xl leading-relaxed">
-                Our modular approach adapts to the specific operational requirements of each sector.
-                The architecture patterns are the same — the implementation is entirely tailored to
-                your industry's workflows, compliance needs, and data structures.
+                We help Nepal SMBs and international teams apply our three fixed-scope packages—Strategy
+                Sprint, Launch Kit, and Automation Layer—to eliminate manual busywork and win more
+                customer inquiries in their sector.
               </p>
             </Reveal>
           </div>
@@ -238,11 +232,11 @@ export default function IndustriesClient() {
                           ))}
                         </ul>
                       </div>
-                      <div className="border-border-base mt-auto flex items-center justify-between border-t pt-4">
+                      <div className="border-border-base mt-auto flex flex-wrap items-center justify-between gap-3 border-t pt-4">
                         <span className="text-text-muted text-xs italic">{industry.clients}</span>
                         <Link href="/request-proposal">
-                          <Button size="sm" variant="outline" className="group text-xs">
-                            Start a Project{" "}
+                          <Button size="sm" variant="outline" className="group text-xs whitespace-nowrap">
+                            Request Proposal{" "}
                             <ArrowRight className="ml-1 h-3 w-3 transition-transform group-hover:translate-x-1" />
                           </Button>
                         </Link>
@@ -267,9 +261,9 @@ export default function IndustriesClient() {
             </Reveal>
             <Reveal variant="fade-up" delay={100}>
               <p className="text-text-secondary mb-8 text-lg leading-relaxed">
-                Our modular architecture approach is industry-agnostic. If your organization has
-                operational workflows that need a custom system, we can build it — regardless of
-                sector.
+                Whether you need clear scoping before investing, a fast website to convert local
+                traffic, or automated workflows connecting your daily tools, our three packages
+                adapt to any industry.
               </p>
             </Reveal>
             <Reveal variant="fade-scale" delay={150}>

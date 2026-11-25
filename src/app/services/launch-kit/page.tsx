@@ -46,8 +46,10 @@ const tiers = [
     tierKey: "tier2_business",
     duration: "2–3 weeks",
     bestFor: "Service businesses, agencies, professional portfolios, small corporate sites",
-    descriptionNepal: "Full‑featured website with a CMS – easy to manage and update.",
-    descriptionInternational: "Dynamic website with CMS integration – no SLA required.",
+    descriptionNepal:
+      "Turn local searches into real inquiries with a fast 4–10 page site, smooth scroll, and booking embed.",
+    descriptionInternational:
+      "Responsive 4–10 page site with Figma prototypes, soft motion, and lead capture.",
     included: [
       "4–10 responsive pages",
       "Soft animations — scroll reveals, hover states, smooth scroll",
@@ -75,9 +77,10 @@ const tiers = [
     tierKey: "tier3_premium",
     duration: "3–4 weeks",
     bestFor: "Brands that need a high-end digital presence with full motion design",
-    descriptionNepal: "Website plus third‑party integrations (CRM, email, analytics).",
+    descriptionNepal:
+      "Stand out in competitive Nepal markets with 11–20 pages, interactive flows, full SEO, and analytics.",
     descriptionInternational:
-      "Comprehensive website with API integrations and scalable architecture.",
+      "High-craft multi-page website with full motion design, analytics setup, and scalable structure.",
     included: [
       "11–20 responsive pages",
       "Full animation — scroll-triggered sequences, background motion, micro-interactions",
@@ -153,7 +156,7 @@ const animationGuide = [
 
 export default function LaunchKitPage() {
   const { region } = useRegion();
-  const activeRegion = region;
+  const activeRegion = region ?? "NP";
 
   return (
     <div className="flex w-full flex-col">
@@ -294,7 +297,7 @@ export default function LaunchKitPage() {
                   </p>
 
                   <p className="text-text-secondary text-sm leading-relaxed">
-                    {tier.descriptionInternational}
+                    {activeRegion === "NP" ? tier.descriptionNepal : tier.descriptionInternational}
                   </p>
 
                   <div>
@@ -327,7 +330,7 @@ export default function LaunchKitPage() {
 
                   <div className="mt-auto pt-2">
                     <Link
-                      href={`/request-proposal?pkg=launch-kit&tier=${i + 1}`}
+                      href={`/request-proposal?pkg=launch-kit&tier=${i + 1}&region=${activeRegion}`}
                       className="w-full"
                     >
                       <Button

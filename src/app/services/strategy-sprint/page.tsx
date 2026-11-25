@@ -131,7 +131,7 @@ const whatYouOwnAfter = [
 
 export default function StrategySprintPage() {
   const { region } = useRegion();
-  const activeRegion = region;
+  const activeRegion = region ?? "NP";
 
   return (
     <div className="flex w-full flex-col">
@@ -271,7 +271,7 @@ export default function StrategySprintPage() {
                   </p>
 
                   <p className="text-text-secondary text-sm leading-relaxed">
-                    {tier.descriptionInternational}
+                    {activeRegion === "NP" ? tier.descriptionNepal : tier.descriptionInternational}
                   </p>
 
                   <div>
@@ -306,7 +306,7 @@ export default function StrategySprintPage() {
 
                   <div className="mt-auto pt-2">
                     <Link
-                      href={`/request-proposal?pkg=strategy-sprint&tier=${i + 1}`}
+                      href={`/request-proposal?pkg=strategy-sprint&tier=${i + 1}&region=${activeRegion}`}
                       className="w-full"
                     >
                       <Button

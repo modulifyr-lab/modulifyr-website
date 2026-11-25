@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import {
   ShieldCheck,
@@ -394,7 +393,8 @@ export default function AboutClient() {
             <p className="text-body1 text-text-alt leading-relaxed">
               Modulifyr took part as a Provincial Startup in Startup &amp; Idea Fest 2026, part of
               the ICT Award programme, held at Anupam Foodland, Kathmandu on 19 and 20 November
-              2026. We presented our modular approach to software for Nepali businesses.
+              2026. We presented our fixed-scope approach—Strategy Sprints, Launch Kits, and
+              Automation Layers—for Nepali businesses.
             </p>
             <p className="text-caption1 text-text-dim">
               Certificate of Participation. The event is organised by its own partners and is not an
@@ -494,13 +494,17 @@ export default function AboutClient() {
             </a>
           </div>
 
-          <div className="pt-2">
-            <Link href="/contact">
-              <Button className="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-white/25 bg-gradient-to-r from-[#4BA3C3] to-[#8CCBDB] px-8 py-3.5 text-base font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_8px_24px_-8px_rgba(75,163,195,0.6)] transition-all duration-150 ease-in hover:brightness-110 sm:w-auto">
-                Talk to experts
-                <ArrowRight className="ml-2 inline h-4 w-4" />
-              </Button>
-            </Link>
+          <div className="flex flex-wrap justify-center gap-4 pt-2">
+            <Button
+              href="/contact"
+              className="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-white/25 bg-gradient-to-r from-[#4BA3C3] to-[#8CCBDB] px-8 py-3.5 text-base font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_8px_24px_-8px_rgba(75,163,195,0.6)] transition-all duration-150 ease-in hover:brightness-110 sm:w-auto"
+            >
+              Talk to experts
+              <ArrowRight className="ml-2 inline h-4 w-4" />
+            </Button>
+            <Button href="/careers" variant="outline" className="w-full sm:w-auto">
+              View Open Roles
+            </Button>
           </div>
         </div>
       </section>
