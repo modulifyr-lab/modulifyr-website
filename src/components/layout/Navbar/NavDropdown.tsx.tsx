@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
+import Magnetic from "@/components/ui/Magnetic";
 import type { NavGroup } from "./navbar-data";
 
 interface NavDropdownProps {
@@ -21,29 +22,31 @@ export function NavDropdown({ group, pathname, isOpen, onToggle, onClose }: NavD
 
   return (
     <div className="relative">
-      <button
-        type="button"
-        role="menuitem"
-        aria-expanded={isOpen}
-        onClick={onToggle}
-        className={`group relative inline-flex h-6 cursor-pointer items-center gap-1 text-sm leading-none font-medium tracking-[0.28px] transition-colors duration-300 ease-in ${
-          isActive || isOpen ? "text-cta" : "text-on-surface-variant"
-        } hover:text-cta`}
-      >
-        {group.name}
+      <Magnetic radius={5} scale={1.06} className="px-1 py-1.5">
+        <button
+          type="button"
+          role="menuitem"
+          aria-expanded={isOpen}
+          onClick={onToggle}
+          className={`group relative inline-flex h-6 cursor-pointer items-center gap-1 text-sm leading-none font-medium tracking-[0.28px] transition-colors duration-300 ease-in ${
+            isActive || isOpen ? "text-cta" : "text-on-surface-variant"
+          } hover:text-cta`}
+        >
+          {group.name}
 
-        <ChevronDown
-          className={`h-4 w-4 shrink-0 transition-transform duration-300 ${
-            isOpen ? "text-cta rotate-180" : ""
-          }`}
-        />
+          <ChevronDown
+            className={`h-4 w-4 shrink-0 transition-transform duration-300 ${
+              isOpen ? "text-cta rotate-180" : ""
+            }`}
+          />
 
-        <span
-          className={`bg-cta absolute -bottom-1.5 left-0 h-0.5 w-full transition-transform duration-300 ease-in ${
-            isActive || isOpen ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-          }`}
-        />
-      </button>
+          <span
+            className={`bg-cta absolute -bottom-1.5 left-0 h-0.5 w-full transition-transform duration-300 ease-in ${
+              isActive || isOpen ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+            }`}
+          />
+        </button>
+      </Magnetic>
 
       {isOpen && (
         <div
