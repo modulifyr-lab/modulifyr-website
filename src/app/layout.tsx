@@ -6,6 +6,7 @@ import { LanguageProvider } from "@/components/LanguageContext";
 import Script from "next/script";
 import { cookies } from "next/headers";
 import { isRegion, REGION_COOKIE } from "@/lib/regions";
+import { buildRootSchemaOrg } from "@/lib/structured-data";
 
 import { DM_Sans, Syne, Inter } from "next/font/google";
 import { Navbar } from "../components/layout/Navbar";
@@ -102,144 +103,7 @@ export const metadata: Metadata = {
   },
 };
 
-const schemaOrg = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": "https://modulifyr.com/#organization",
-      name: "Modulifyr Enterprise Pvt. Ltd.",
-      alternateName: "Modulifyr",
-      url: "https://modulifyr.com",
-      logo: {
-        "@type": "ImageObject",
-        url: "https://modulifyr.com/company-logo.png",
-        width: 512,
-        height: 512,
-      },
-      description:
-        "Custom modular software systems for small and medium-sized businesses in education, healthcare, retail, commerce, and IT.",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "Gauri Tol, Ward 1",
-        addressLocality: "Birtamode",
-        addressRegion: "Jhapa",
-        addressCountry: "NP",
-      },
-      geo: {
-        "@type": "GeoCoordinates",
-        latitude: 26.6478125,
-        longitude: 87.9888125,
-      },
-      contactPoint: {
-        "@type": "ContactPoint",
-        email: "contact@modulifyr.com",
-        contactType: "sales",
-        availableLanguage: ["English", "Nepali"],
-      },
-      areaServed: ["US", "GB", "CA", "AU", "NP", "EU"],
-      foundingDate: "2025",
-      foundingLocation: {
-        "@type": "Place",
-        name: "Birtamode, Ward 1, Gauri Tol, Jhapa, Nepal",
-      },
-      founder: {
-        "@type": "Person",
-        "@id": "https://modulifyr.com/#founder",
-        name: "Rijan Mainali",
-        jobTitle: "Founder & Lead Engineer",
-        image: "https://modulifyr.com/rijan-mainali.jpg",
-        worksFor: { "@id": "https://modulifyr.com/#organization" },
-        address: {
-          "@type": "PostalAddress",
-          streetAddress: "Gauri Tol, Ward 1",
-          addressLocality: "Birtamode",
-          addressRegion: "Jhapa",
-          addressCountry: "NP",
-        },
-      },
-      serviceType: [
-        "Strategy Sprint",
-        "Launch Kit",
-        "Automation Layer",
-        "System Architecture Consulting",
-        "API & Workflow Integration",
-      ],
-      sameAs: [
-        "https://www.instagram.com/modulifyr/",
-        "https://x.com/modulifyr",
-        "https://web.facebook.com/profile.php?id=61591920842310",
-        "https://www.linkedin.com/company/modulifyr/",
-        "https://clutch.co/profile/modulifyr",
-        "https://github.com/Modulifyr",
-        "https://themanifest.com/company/modulifyr",
-        "https://rocketreach.co/modulifyr-profile_b6410cbccbf776ff",
-        "https://www.trustpilot.com/review/modulifyr.com",
-      ],
-    },
-    {
-      "@type": "WebPage",
-      "@id": "https://modulifyr.com/#webpage",
-      url: "https://modulifyr.com",
-      name: "2026 Custom Software Systems Built to Scale | Modulifyr",
-      description:
-        "Modulifyr delivers Strategy Sprints, fast Launch Kit websites, and Automation Layers for growing organizations in Nepal and worldwide.",
-      isPartOf: { "@id": "https://modulifyr.com/#website" },
-      about: { "@id": "https://modulifyr.com/#organization" },
-      primaryImageOfPage: {
-        "@type": "ImageObject",
-        url: "https://modulifyr.com/og-image.png",
-        width: 1200,
-        height: 630,
-      },
-      datePublished: "2025-01-01",
-      dateModified: "2026-07-23",
-      author: { "@id": "https://modulifyr.com/#founder" },
-    },
-    {
-      "@type": "Article",
-      "@id": "https://modulifyr.com/#article",
-      headline: "2026 Custom Software Systems Built to Scale",
-      description:
-        "A concise overview of Modulifyr's Strategy Sprint, Launch Kit, and Automation Layer services.",
-      image: "https://modulifyr.com/og-image.png",
-      mainEntityOfPage: { "@id": "https://modulifyr.com/#webpage" },
-      datePublished: "2025-01-01",
-      dateModified: "2026-07-23",
-      author: { "@id": "https://modulifyr.com/#founder" },
-      publisher: { "@id": "https://modulifyr.com/#organization" },
-    },
-    {
-      "@type": "FAQPage",
-      "@id": "https://modulifyr.com/#faq",
-      mainEntity: [
-        {
-          "@type": "Question",
-          name: "What does Modulifyr build?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Modulifyr delivers three fixed-scope services: Strategy Sprints for requirements and architecture, Launch Kit static websites, and Automation Layers connecting existing tools and APIs.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Where does Modulifyr work with clients?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Modulifyr is based in Birtamode, Nepal and works with organizations in Nepal and worldwide through remote collaboration.",
-          },
-        },
-      ],
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://modulifyr.com/#website",
-      url: "https://modulifyr.com",
-      name: "Modulifyr",
-      publisher: { "@id": "https://modulifyr.com/#organization" },
-    },
-  ],
-};
+const schemaOrg = buildRootSchemaOrg();
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const cookieRegion = (await cookies()).get(REGION_COOKIE)?.value;
