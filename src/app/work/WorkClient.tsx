@@ -121,127 +121,133 @@ export default function WorkClient() {
       </section>
 
       {/* Public Case Study */}
-      {caseStudies.map((cs) => (
-        <section key={cs.id} className="py-24">
-          <div className="container-custom">
-            <div className="mb-10 flex flex-col gap-2">
-              <Reveal variant="fade-scale">
-                <span className={`text-xs font-bold tracking-widest uppercase ${cs.labelColor}`}>
-                  {cs.label}
-                </span>
-              </Reveal>
-              <Reveal variant="fade-up" delay={100}>
-                <h2 className="font-heading text-foreground text-4xl font-bold">{cs.title}</h2>
-              </Reveal>
-              <Reveal variant="fade-up" delay={150}>
-                <p className="text-text-muted text-sm font-semibold tracking-widest uppercase">
-                  {cs.subtitle}
-                </p>
-              </Reveal>
-            </div>
-
-            <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-2">
-              {/* Left: image + metrics */}
-              <div className="flex flex-col gap-6">
-                <Reveal variant="fade-scale" delay={100}>
-                  <TiltCard className="border-border-base group relative aspect-[4/3] overflow-hidden rounded-3xl border shadow-2xl">
-                    <Image
-                      src={cs.image}
-                      alt={cs.title}
-                      fill
-                      priority
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                      className="parallax-subtle-up object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="from-brand-navy/70 absolute inset-0 flex items-end bg-gradient-to-t to-transparent p-8">
-                      <div className="flex flex-wrap gap-2">
-                        {cs.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="rounded-full bg-white/20 px-3 py-1 text-xs font-bold text-white backdrop-blur-sm"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </TiltCard>
+      {caseStudies.map((cs, csIdx) => {
+        const baseDelay = csIdx * 120;
+        return (
+          <section key={cs.id} className="py-24">
+            <div className="container-custom">
+              <div className="mb-10 flex flex-col gap-2">
+                <Reveal variant="fade-up" delay={baseDelay}>
+                  <span className={`text-xs font-bold tracking-widest uppercase ${cs.labelColor}`}>
+                    {cs.label}
+                  </span>
                 </Reveal>
+                <Reveal variant="fade-up" delay={baseDelay + 80}>
+                  <h2 className="font-heading text-foreground text-4xl font-bold">{cs.title}</h2>
+                </Reveal>
+                <Reveal variant="fade-up" delay={baseDelay + 140}>
+                  <p className="text-text-muted text-sm font-semibold tracking-widest uppercase">
+                    {cs.subtitle}
+                  </p>
+                </Reveal>
+              </div>
 
-                {/* Metrics */}
-                <div className="grid grid-cols-3 gap-4">
-                  {cs.metrics.map((m, i) => (
-                    <Reveal key={m.label} variant="fade-scale" delay={150 + i * 50}>
-                      <div className="bg-bg-secondary border-border-base h-full rounded-2xl border p-5 text-center">
-                        <p className="font-heading mb-1 text-sm leading-tight font-bold text-[#2D738D]">
-                          {m.value}
-                        </p>
-                        <p className="text-text-muted text-xs leading-tight">{m.label}</p>
+              <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-2">
+                {/* Left: image + metrics */}
+                <div className="flex flex-col gap-6">
+                  <Reveal variant="fade-up" delay={baseDelay + 120}>
+                    <TiltCard className="border-border-base group relative aspect-[4/3] overflow-hidden rounded-3xl border shadow-2xl">
+                      <Image
+                        src={cs.image}
+                        alt={cs.title}
+                        fill
+                        priority
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                        className="parallax-subtle-up object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      <div className="from-brand-navy/70 absolute inset-0 flex items-end bg-gradient-to-t to-transparent p-8">
+                        <div className="flex flex-wrap gap-2">
+                          {cs.tags.map((tag, tagIdx) => (
+                            <Reveal
+                              key={tag}
+                              variant="fade-up"
+                              delay={baseDelay + 180 + tagIdx * 50}
+                            >
+                              <span className="inline-block rounded-full bg-white/20 px-3 py-1 text-xs font-bold text-white backdrop-blur-sm">
+                                {tag}
+                              </span>
+                            </Reveal>
+                          ))}
+                        </div>
                       </div>
-                    </Reveal>
-                  ))}
+                    </TiltCard>
+                  </Reveal>
+
+                  {/* Metrics */}
+                  <div className="grid grid-cols-3 gap-4">
+                    {cs.metrics.map((m, i) => (
+                      <Reveal key={m.label} variant="fade-up" delay={baseDelay + 180 + i * 80}>
+                        <div className="bg-bg-secondary border-border-base h-full rounded-2xl border p-5 text-center">
+                          <p className="font-heading mb-1 text-sm leading-tight font-bold text-[#2D738D]">
+                            {m.value}
+                          </p>
+                          <p className="text-text-muted text-xs leading-tight">{m.label}</p>
+                        </div>
+                      </Reveal>
+                    ))}
+                  </div>
+
+                  <Reveal variant="fade-up" delay={baseDelay + 340}>
+                    <Link href={cs.liveUrl} target="_blank" rel="noopener noreferrer">
+                      <Button className="group flex w-full items-center justify-center gap-2">
+                        View Live Project{" "}
+                        <ExternalLink className="h-4 w-4 transition-transform group-hover:scale-110" />
+                      </Button>
+                    </Link>
+                  </Reveal>
                 </div>
 
-                <Reveal variant="fade-up" delay={250}>
-                  <Link href={cs.liveUrl} target="_blank" rel="noopener noreferrer">
-                    <Button className="group flex w-full items-center justify-center gap-2">
-                      View Live Project{" "}
-                      <ExternalLink className="h-4 w-4 transition-transform group-hover:scale-110" />
-                    </Button>
-                  </Link>
-                </Reveal>
-              </div>
-
-              {/* Right: problem → architecture → outcome */}
-              <div className="flex flex-col gap-8">
-                <Reveal variant="fade-up" delay={150}>
-                  <div className="flex flex-col gap-3">
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-red-100 bg-red-50">
-                        <AlertTriangle className="h-4 w-4 text-red-500" />
+                {/* Right: problem → architecture → outcome */}
+                <div className="flex flex-col gap-8">
+                  <Reveal variant="fade-up" delay={baseDelay + 160}>
+                    <div className="flex flex-col gap-3">
+                      <div className="flex items-center gap-3">
+                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-red-100 bg-red-50">
+                          <AlertTriangle className="h-4 w-4 text-red-500" />
+                        </div>
+                        <h3 className="font-heading text-foreground font-bold">The Problem</h3>
                       </div>
-                      <h3 className="font-heading text-foreground font-bold">The Problem</h3>
+                      <p className="text-text-secondary pl-11 text-sm leading-relaxed">
+                        {cs.problem}
+                      </p>
                     </div>
-                    <p className="text-text-secondary pl-11 text-sm leading-relaxed">
-                      {cs.problem}
-                    </p>
-                  </div>
-                </Reveal>
+                  </Reveal>
 
-                <Reveal variant="fade-up" delay={250}>
-                  <div className="flex flex-col gap-3">
-                    <div className="flex items-center gap-3">
-                      <div className="bg-brand-teal/10 border-brand-teal/20 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border">
-                        <Layers className="text-brand-teal h-4 w-4" />
+                  <Reveal variant="fade-up" delay={baseDelay + 260}>
+                    <div className="flex flex-col gap-3">
+                      <div className="flex items-center gap-3">
+                        <div className="bg-brand-teal/10 border-brand-teal/20 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border">
+                          <Layers className="text-brand-teal h-4 w-4" />
+                        </div>
+                        <h3 className="font-heading text-foreground font-bold">
+                          The Architecture Decision
+                        </h3>
                       </div>
-                      <h3 className="font-heading text-foreground font-bold">
-                        The Architecture Decision
-                      </h3>
+                      <p className="text-text-secondary pl-11 text-sm leading-relaxed">
+                        {cs.architecture}
+                      </p>
                     </div>
-                    <p className="text-text-secondary pl-11 text-sm leading-relaxed">
-                      {cs.architecture}
-                    </p>
-                  </div>
-                </Reveal>
+                  </Reveal>
 
-                <Reveal variant="fade-up" delay={350}>
-                  <div className="flex flex-col gap-3">
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-green-100 bg-green-50">
-                        <Target className="h-4 w-4 text-green-600" />
+                  <Reveal variant="fade-up" delay={baseDelay + 360}>
+                    <div className="flex flex-col gap-3">
+                      <div className="flex items-center gap-3">
+                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-green-100 bg-green-50">
+                          <Target className="h-4 w-4 text-green-600" />
+                        </div>
+                        <h3 className="font-heading text-foreground font-bold">The Outcome</h3>
                       </div>
-                      <h3 className="font-heading text-foreground font-bold">The Outcome</h3>
+                      <p className="text-text-secondary pl-11 text-sm leading-relaxed">
+                        {cs.outcome}
+                      </p>
                     </div>
-                    <p className="text-text-secondary pl-11 text-sm leading-relaxed">
-                      {cs.outcome}
-                    </p>
-                  </div>
-                </Reveal>
+                  </Reveal>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
-      ))}
+          </section>
+        );
+      })}
 
       {/* Coming soon — honest placeholder instead of fabricated NDA studies */}
       <section className="bg-bg-secondary py-24">
@@ -266,7 +272,7 @@ export default function WorkClient() {
             </Reveal>
           </div>
 
-          <Reveal variant="fade-scale" delay={150}>
+          <Reveal variant="fade-up" delay={150}>
             <div className="border-border-base bg-bg-alt max-w-2xl rounded-3xl border p-10 text-center">
               <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[#2D738D]/10">
                 <CheckCircle2 className="h-8 w-8 text-[#2D738D]" />
