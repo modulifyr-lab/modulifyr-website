@@ -15,7 +15,14 @@ import {
   Mail,
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { BOOKING_URL } from "@/lib/links";
+import {
+  BOOKING_URL,
+  CONTACT_EMAIL,
+  FULL_ADDRESS,
+  GOOGLE_MAPS_URL,
+  PHONE_HREF,
+  WHATSAPP_HREF,
+} from "@/lib/links";
 import { SERVICES } from "@/lib/services";
 
 interface FormState {
@@ -333,11 +340,9 @@ export function ContactForm() {
                 <MapPin className="h-5 w-5" />
               </div>
               <h3 className="text-h4 text-foreground font-bold">Birtamode HQ</h3>
-              <p className="text-body2 text-text-alt leading-relaxed">
-                Gauri Tole, Birtamode-1, Jhapa, Nepal
-              </p>
+              <p className="text-body2 text-text-alt leading-relaxed">{FULL_ADDRESS}</p>
               <a
-                href="https://www.google.com/maps/search/?api=1&query=Modulifyr+Enterprise+Pvt.+Ltd."
+                href={GOOGLE_MAPS_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-caption1 inline-flex items-center gap-1.5 pt-2 font-bold text-[#2D738D] hover:underline"
@@ -422,14 +427,14 @@ export function ContactForm() {
 
           <div className="text-body2 text-text-alt flex flex-wrap justify-center gap-6 font-semibold">
             <a
-              href="tel:+9779764478571"
+              href={PHONE_HREF}
               className="flex items-center gap-2 transition-colors hover:text-[#2D738D]"
             >
               <Phone className="h-4 w-4 text-[#2D738D]" /> Call our team
             </a>
             <span>•</span>
             <a
-              href="https://wa.me/9779764478571"
+              href={WHATSAPP_HREF}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 transition-colors hover:text-[#2D738D]"
@@ -438,7 +443,7 @@ export function ContactForm() {
             </a>
             <span>•</span>
             <a
-              href="mailto:contact@modulifyr.com"
+              href={`mailto:${CONTACT_EMAIL}`}
               className="flex items-center gap-2 transition-colors hover:text-[#2D738D]"
             >
               <Mail className="h-4 w-4 text-[#2D738D]" /> Email us

@@ -1,8 +1,7 @@
-import { DEFAULT_FAQ_ITEMS } from "@/lib/faq";
+import { DEFAULT_FAQ_ITEMS, type FaqItem } from "@/lib/faq";
 import { SERVICES } from "@/lib/services";
 import { getPackageRange } from "@/lib/pricing";
-
-const SITE_URL = "https://modulifyr.com";
+import { CONTACT_EMAIL, FULL_ADDRESS, PHONE_SCHEMA, SITE_URL } from "@/lib/links";
 
 export function buildRootSchemaOrg() {
   const nprMinValues = SERVICES.map((service) => getPackageRange(service.pkgKey, "NP")[0]);
@@ -35,8 +34,8 @@ export function buildRootSchemaOrg() {
         image: [`${SITE_URL}/og-image.png`, `${SITE_URL}/company-logo.png`],
         description:
           "2-person founder-led engineering & growth studio in Birtamode, Nepal delivering fast Launch Kit websites, Automation Layers, Strategy Sprints, and custom Next.js & Hono web apps.",
-        email: "contact@modulifyr.com",
-        telephone: "+977-9764478571",
+        email: CONTACT_EMAIL,
+        telephone: PHONE_SCHEMA,
         priceRange: `${formatNpr(overallMinNpr)} - ${formatNpr(overallMaxNpr)}`,
         currenciesAccepted: "NPR, USD, GBP, CAD, AUD, EUR",
         address: {
@@ -55,8 +54,8 @@ export function buildRootSchemaOrg() {
           {
             "@type": "ContactPoint",
             contactType: "sales",
-            email: "contact@modulifyr.com",
-            telephone: "+977-9764478571",
+            email: CONTACT_EMAIL,
+            telephone: PHONE_SCHEMA,
             areaServed: ["NP", "US", "GB", "CA", "AU", "EU"],
             availableLanguage: ["English", "Nepali"],
           },
@@ -88,7 +87,7 @@ export function buildRootSchemaOrg() {
         foundingDate: "2025",
         foundingLocation: {
           "@type": "Place",
-          name: "Gauri Tole, Birtamode-1, Jhapa, Nepal",
+          name: FULL_ADDRESS,
         },
         founder: {
           "@type": "Person",
@@ -162,6 +161,14 @@ export function buildRootSchemaOrg() {
         inLanguage: "en",
         publisher: { "@id": `${SITE_URL}/#organization` },
       },
+    ],
+  };
+}
+
+export function buildHomeFaqSchemaOrg(items: readonly FaqItem[] = DEFAULT_FAQ_ITEMS) {
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
       {
         "@type": "WebPage",
         "@id": `${SITE_URL}/#webpage`,
@@ -186,18 +193,21 @@ export function buildRootSchemaOrg() {
       {
         "@type": "FAQPage",
         "@id": `${SITE_URL}/#faq`,
-        url: `${SITE_URL}/#faq`,
+        url: SITE_URL,
+        name: "Frequently Asked Questions | Modulifyr",
         inLanguage: "en",
-        isPartOf: { "@id": `${SITE_URL}/#website` },
+        isPartOf: { "@id": `${SITE_URL}/#webpage` },
         about: { "@id": `${SITE_URL}/#organization` },
-        mainEntity: DEFAULT_FAQ_ITEMS.map((item) => ({
-          "@type": "Question",
-          name: item.question,
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: item.answer,
-          },
-        })),
+        mainEntity: items
+          .filter((item): item is { question: string; answer: string } => Boolean(item.answer))
+          .map((item) => ({
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: item.answer,
+            },
+          })),
       },
     ],
   };

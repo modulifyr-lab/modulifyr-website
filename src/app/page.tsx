@@ -12,10 +12,19 @@ import {
   CtaSection,
 } from "@/components/sections/LandingPage";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
+import { buildHomeFaqSchemaOrg } from "@/lib/structured-data";
+
+const homeFaqSchema = buildHomeFaqSchemaOrg();
 
 export default function Home() {
   return (
     <div className="flex w-full flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(homeFaqSchema).replace(/</g, "\\u003c"),
+        }}
+      />
 
       {/* 1. Hero Section */}
       <HeroSection />

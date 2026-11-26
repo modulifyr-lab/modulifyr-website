@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/Button";
-import { resources } from "../page";
+import { RESOURCES } from "@/lib/resources";
 import { ArrowLeft, ArrowRight, Clock } from "lucide-react";
 
 // Fixed: Next.js 15 requires params as Promise<>
@@ -39,12 +39,12 @@ A lean, affordable setup: uptime checks (Better Stack or UptimeRobot) on critica
 };
 
 export async function generateStaticParams() {
-  return resources.filter((r) => !r.isPdf).map((r) => ({ slug: r.slug }));
+  return RESOURCES.filter((r) => !r.isPdf).map((r) => ({ slug: r.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const resource = resources.find((r) => r.slug === slug);
+  const resource = RESOURCES.find((r) => r.slug === slug);
   if (!resource) return { title: "Resource Not Found | Modulifyr" };
   return {
     title: `${resource.title} | Modulifyr Resources`,
@@ -57,7 +57,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ResourceArticlePage({ params }: Props) {
   const { slug } = await params;
-  const resource = resources.find((r) => r.slug === slug && !r.isPdf);
+  const resource = RESOURCES.find((r) => r.slug === slug && !r.isPdf);
   if (!resource) notFound();
 
   const content = articleContent[slug];
@@ -74,7 +74,7 @@ export default async function ResourceArticlePage({ params }: Props) {
       return { type: "paragraph", text: block.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>") };
     });
 
-  const otherArticles = resources.filter((r) => r.slug !== slug && !r.isPdf);
+  const otherArticles = RESOURCES.filter((r) => r.slug !== slug && !r.isPdf);
 
   return (
     <div className="flex w-full flex-col">

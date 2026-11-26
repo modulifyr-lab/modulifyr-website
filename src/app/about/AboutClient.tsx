@@ -17,7 +17,7 @@ import {
   Database,
   Cloud,
 } from "lucide-react";
-import { BOOKING_URL } from "@/lib/links";
+import { BOOKING_URL, CONTACT_EMAIL, PHONE_HREF, WHATSAPP_HREF } from "@/lib/links";
 import { Button } from "@/components/Button";
 
 const PRINCIPLES = [
@@ -411,14 +411,14 @@ export default function AboutClient() {
 
           <div className="text-body2 text-text-alt flex flex-wrap justify-center gap-6 font-semibold">
             <a
-              href="tel:+9779764478571"
+              href={PHONE_HREF}
               className="flex items-center gap-2 transition-colors hover:text-[#2D738D]"
             >
               <Phone className="h-4 w-4 text-[#2D738D]" /> Call our team
             </a>
             <span>•</span>
             <a
-              href="https://wa.me/9779764478571"
+              href={WHATSAPP_HREF}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 transition-colors hover:text-[#2D738D]"
@@ -427,7 +427,7 @@ export default function AboutClient() {
             </a>
             <span>•</span>
             <a
-              href="mailto:contact@modulifyr.com"
+              href={`mailto:${CONTACT_EMAIL}`}
               className="flex items-center gap-2 transition-colors hover:text-[#2D738D]"
             >
               <Mail className="h-4 w-4 text-[#2D738D]" /> Email us

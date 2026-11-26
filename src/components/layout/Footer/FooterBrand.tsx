@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { FULL_ADDRESS } from "@/lib/links";
 
 export function FooterBrand() {
   return (
@@ -20,7 +21,7 @@ export function FooterBrand() {
 
       <p className="max-w-sm text-justify text-sm leading-relaxed text-slate-400">
         Founder-led engineering &amp; growth studio delivering Launch Kit websites, Automation
-        Layers, and custom Next.js &amp; Hono web apps from Birtamode, Nepal for clients worldwide.
+        Layers, and custom Next.js &amp; Hono web apps from {FULL_ADDRESS} for clients worldwide.
       </p>
     </div>
   );

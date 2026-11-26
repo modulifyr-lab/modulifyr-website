@@ -9,6 +9,8 @@ const QUICK_LINKS = [
   { name: "About Us", href: "/about" },
   { name: "Services", href: "/services" },
   { name: "Case Studies", href: "/work" },
+  { name: "Resources", href: "/resources" },
+  { name: "Blog", href: "/blog" },
   { name: "Careers", href: "/careers", badge: "We're Hiring" },
   { name: "Contact Us", href: "/contact" },
 ];

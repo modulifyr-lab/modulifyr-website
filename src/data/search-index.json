@@ -1,0 +1,114 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "resource:modular-architecture",
+      "kind": "resource",
+      "slug": "modular-architecture",
+      "title": "Modular Architecture Deep Dive",
+      "description": "A comprehensive guide on designing scalable systems using strategic modularism and domain-driven design.",
+      "category": "Architecture",
+      "type": "Whitepaper",
+      "href": "/downloads/modulifyr-capability-deck.pdf",
+      "meta": "24 Pages · PDF",
+      "isDownload": true,
+      "keywords": [
+        "modular architecture",
+        "domain-driven design",
+        "capability deck",
+        "whitepaper",
+        "system design",
+        "pdf"
+      ]
+    },
+    {
+      "id": "resource:modernization-roadmap",
+      "kind": "resource",
+      "slug": "modernization-roadmap",
+      "title": "System Modernization Roadmap",
+      "description": "Strategic framework for migrating legacy tools and manual spreadsheets into modular TypeScript, Next.js, and n8n workflows without downtime.",
+      "category": "Strategy",
+      "type": "Playbook",
+      "href": "/downloads/modulifyr-technical-briefing.pdf",
+      "meta": "12 Pages · PDF",
+      "isDownload": true,
+      "keywords": [
+        "modernization",
+        "legacy migration",
+        "spreadsheets",
+        "typescript",
+        "nextjs",
+        "n8n",
+        "playbook",
+        "pdf"
+      ]
+    },
+    {
+      "id": "resource:sre-best-practices",
+      "kind": "resource",
+      "slug": "sre-best-practices",
+      "title": "Reliability & Monitoring for Lean Teams",
+      "description": "Pragmatic uptime alerting, structured error logging, and database backup practices for lean Next.js, Hono, PostgreSQL, and n8n systems.",
+      "category": "Operations",
+      "type": "Technical Guide",
+      "href": "/resources/sre-best-practices",
+      "meta": "6 min read",
+      "isDownload": false,
+      "keywords": [
+        "reliability",
+        "monitoring",
+        "uptime",
+        "hono",
+        "postgresql",
+        "backups",
+        "n8n",
+        "webhooks",
+        "sre"
+      ]
+    },
+    {
+      "id": "resource:technical-standards",
+      "kind": "resource",
+      "slug": "technical-standards",
+      "title": "Technical Engineering Standards",
+      "description": "Six pillars of founder-reviewed engineering quality: TypeScript, CI checks, OWASP security hygiene, OpenAPI docs, PostgreSQL backups, and uptime alerting.",
+      "category": "Engineering",
+      "type": "Standards Guide",
+      "href": "/about/technical-standards",
+      "meta": "Engineering",
+      "isDownload": false,
+      "keywords": [
+        "technical standards",
+        "owasp",
+        "openapi",
+        "typescript",
+        "ci",
+        "postgresql",
+        "security",
+        "qa"
+      ]
+    },
+    {
+      "id": "blog:engineering-blog",
+      "kind": "blog",
+      "slug": "engineering-blog",
+      "title": "Modulifyr Engineering Blog",
+      "description": "Architecture decisions, engineering patterns, and practical perspectives from Modulifyr in Birtamode, Nepal.",
+      "category": "Engineering",
+      "type": "Blog Hub",
+      "href": "/blog",
+      "meta": "All Articles",
+      "isDownload": false,
+      "keywords": [
+        "blog",
+        "articles",
+        "engineering insights",
+        "architecture",
+        "nepal",
+        "nextjs",
+        "hono",
+        "automation"
+      ]
+    }
+  ]
+}

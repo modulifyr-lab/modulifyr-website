@@ -1,15 +1,22 @@
 import { Mail, MapPin, Phone } from "lucide-react";
+import {
+  ADDRESS_LINE_1,
+  ADDRESS_LINE_2,
+  CONTACT_EMAIL,
+  PHONE_DISPLAY,
+  PHONE_HREF,
+} from "@/lib/links";
 
 const CONTACT_INFO = [
   {
     icon: Phone,
-    label: "+977 9764478571",
-    href: "tel:+9779764478571",
+    label: PHONE_DISPLAY,
+    href: PHONE_HREF,
   },
   {
     icon: Mail,
-    label: "contact@modulifyr.com",
-    href: "mailto:contact@modulifyr.com",
+    label: CONTACT_EMAIL,
+    href: `mailto:${CONTACT_EMAIL}`,
   },
 ];
 
@@ -40,9 +47,9 @@ export function FooterContactInfo() {
           <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-cyan-400" />
 
           <span className="leading-relaxed">
-            Gauri Tole, Birtamode-1,
+            {ADDRESS_LINE_1}
             <br />
-            Jhapa, Nepal
+            {ADDRESS_LINE_2}
           </span>
         </div>
       </div>

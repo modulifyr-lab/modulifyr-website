@@ -7,10 +7,11 @@ import Script from "next/script";
 import { cookies } from "next/headers";
 import { isRegion, REGION_COOKIE } from "@/lib/regions";
 import { buildRootSchemaOrg } from "@/lib/structured-data";
+import { getAllPosts } from "@/lib/notion-blog";
+import { buildSearchIndex } from "@/lib/search-index";
 
 import { DM_Sans, Syne, Inter } from "next/font/google";
-import { Navbar } from "../components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
+import { SiteLayout } from "@/components/layout";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -108,6 +109,8 @@ const schemaOrg = buildRootSchemaOrg();
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const cookieRegion = (await cookies()).get(REGION_COOKIE)?.value;
   const initialRegion = isRegion(cookieRegion) ? cookieRegion : "NP";
+  const blogPosts = await getAllPosts();
+  const searchItems = buildSearchIndex(blogPosts);
 
   return (
     <html lang="en" suppressHydrationWarning>
@@ -155,11 +158,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         >
           <RegionProvider initialRegion={initialRegion}>
             <LanguageProvider>
-              <Navbar />
-              <main id="main-content" className="min-h-screen pt-20">
-                {children}
-              </main>
-              <Footer />
+              <SiteLayout searchItems={searchItems}>{children}</SiteLayout>
             </LanguageProvider>
           </RegionProvider>
         </ThemeProvider>

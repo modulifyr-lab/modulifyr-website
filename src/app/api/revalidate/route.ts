@@ -22,6 +22,7 @@ export async function POST(req: NextRequest) {
     // re-fetch and the deleted post will simply not be in the Notion response.
     revalidatePath("/blog");
     revalidatePath("/feed.xml");
+    revalidatePath("/", "layout");
 
     // ── If a slug is provided, revalidate that specific post page too ─────
     // For deletions: this clears the cached page so Next.js re-runs

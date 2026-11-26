@@ -1,21 +1,36 @@
 "use client";
 
-import { Menu, Moon, Sun, X } from "lucide-react";
+import { Menu, Moon, Search, Sun, X } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useLanguage } from "@/components/LanguageContext";
 
 interface MobileControlsProps {
   menuOpen: boolean;
   onToggleMenu: () => void;
+  onOpenSearch: () => void;
   menuButtonRef: React.RefObject<HTMLButtonElement | null>;
 }
 
-export function MobileControls({ menuOpen, onToggleMenu, menuButtonRef }: MobileControlsProps) {
+export function MobileControls({
+  menuOpen,
+  onToggleMenu,
+  onOpenSearch,
+  menuButtonRef,
+}: MobileControlsProps) {
   const { resolvedTheme, setTheme } = useTheme();
   const { t } = useLanguage();
 
   return (
-    <div className="flex items-center gap-3 lg:hidden">
+    <div className="flex items-center gap-2 lg:hidden">
+      <button
+        type="button"
+        onClick={onOpenSearch}
+        aria-label="Search blog posts and resources"
+        className="text-on-background hover:bg-surface-container inline-flex h-10 w-10 items-center justify-center rounded-lg transition-colors"
+      >
+        <Search className="h-5 w-5" aria-hidden="true" />
+      </button>
+
       <button
         type="button"
         onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}

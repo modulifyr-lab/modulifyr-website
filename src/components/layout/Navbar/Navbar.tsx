@@ -4,18 +4,25 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 
 import { useLanguage } from "@/components/LanguageContext";
+import { LOCAL_SEARCH_INDEX, type SearchIndexItem } from "@/lib/search-index";
 
 import { DesktopActions } from "./DesktopActions";
 import { DesktopNavigation } from "./DesktopNavigation";
+import { HeaderSearchModal } from "./HeaderSearchModal";
 import { MobileControls } from "./MobileControls";
 import { MobileMenu } from "./MobileMenu";
 import { NavbarLogo } from "./NavbarLogo";
 
-export function Navbar() {
+interface NavbarProps {
+  searchItems?: SearchIndexItem[];
+}
+
+export function Navbar({ searchItems = LOCAL_SEARCH_INDEX.items }: NavbarProps) {
   const pathname = usePathname();
   const { t } = useLanguage();
 
   const [menuOpen, setMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
@@ -36,6 +43,7 @@ export function Navbar() {
 
   useEffect(() => {
     setMenuOpen(false);
+    setSearchOpen(false);
     setActiveDropdown(null);
   }, [pathname]);
 
@@ -55,9 +63,22 @@ export function Navbar() {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        setActiveDropdown(null);
+        setMenuOpen(false);
+        setSearchOpen((prev) => !prev);
+        return;
+      }
+
       if (event.key !== "Escape") return;
 
       setActiveDropdown(null);
+
+      if (searchOpen) {
+        setSearchOpen(false);
+        return;
+      }
 
       if (menuOpen) {
         setMenuOpen(false);
@@ -70,15 +91,15 @@ export function Navbar() {
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [menuOpen]);
+  }, [menuOpen, searchOpen]);
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
+    document.body.style.overflow = menuOpen || searchOpen ? "hidden" : "";
 
     return () => {
       document.body.style.overflow = "";
     };
-  }, [menuOpen]);
+  }, [menuOpen, searchOpen]);
 
   const toggleDropdown = (groupName: string) => {
     setActiveDropdown((current) => (current === groupName ? null : groupName));
@@ -114,17 +135,27 @@ export function Navbar() {
             onCloseDropdown={() => setActiveDropdown(null)}
           />
 
-          <DesktopActions />
+          <DesktopActions onOpenSearch={() => setSearchOpen(true)} />
 
           <MobileControls
             menuOpen={menuOpen}
             onToggleMenu={() => setMenuOpen((current) => !current)}
+            onOpenSearch={() => {
+              setMenuOpen(false);
+              setSearchOpen(true);
+            }}
             menuButtonRef={menuButtonRef}
           />
         </div>
       </nav>
 
       <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
+
+      <HeaderSearchModal
+        open={searchOpen}
+        items={searchItems}
+        onClose={() => setSearchOpen(false)}
+      />
     </>
   );
 }
