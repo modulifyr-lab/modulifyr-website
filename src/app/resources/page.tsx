@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Card, CardTitle } from "@/components/ui/Card";
-import { FileBox, BookOpen, Terminal, Layers, ArrowRight, Download } from "lucide-react";
+import { FileBox, BookOpen, Layers, ArrowRight, Download } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Engineering Resources & Whitepapers",
@@ -27,21 +27,10 @@ export const resources = [
     category: "Architecture",
   },
   {
-    slug: "micro-frontend-orchestration",
-    title: "Micro-Frontend Orchestration",
-    description:
-      "Technical implementation patterns for managing large-scale frontend applications with independent modules.",
-    type: "Technical Guide",
-    icon: "terminal",
-    stats: "15 min read",
-    isPdf: false,
-    category: "Frontend",
-  },
-  {
     slug: "modernization-roadmap",
     title: "System Modernization Roadmap",
     description:
-      "Strategic framework for migrating legacy monolithic systems to modern modular architectures without downtime.",
+      "Strategic framework for migrating legacy tools and manual spreadsheets into modular TypeScript, Next.js, and n8n workflows without downtime.",
     type: "Playbook",
     icon: "book",
     stats: "12 Pages · PDF",
@@ -51,20 +40,19 @@ export const resources = [
   },
   {
     slug: "sre-best-practices",
-    title: "SRE Best Practices for Startups",
+    title: "Reliability & Monitoring for Lean Teams",
     description:
-      "How we implement site reliability engineering for early-to-mid stage companies to ensure 99.9% uptime.",
-    type: "Case Study",
+      "Pragmatic uptime alerting, structured error logging, and database backup practices for lean Next.js, Hono, PostgreSQL, and n8n systems.",
+    type: "Technical Guide",
     icon: "filebox",
-    stats: "8 min read",
+    stats: "6 min read",
     isPdf: false,
-    category: "DevOps",
+    category: "Operations",
   },
 ];
 
 const iconMap: Record<string, React.ReactNode> = {
   layers: <Layers className="text-[#2D738D] h-6 w-6" />,
-  terminal: <Terminal className="text-brand-teal h-6 w-6" />,
   book: <BookOpen className="text-brand-gold h-6 w-6" />,
   filebox: <FileBox className="text-foreground dark:text-brand-teal h-6 w-6" />,
 };
@@ -79,8 +67,8 @@ export default function ResourcesPage() {
               Engineering <span className="text-[#2D738D]">Knowledge</span> Base
             </h1>
             <p className="text-text-alt text-xl leading-relaxed">
-              Open-source guides, technical whitepapers, and strategic frameworks developed by
-              Modulifyr's engineering team to help organizations build better software.
+              Practical guides, technical playbooks, and architectural notes from our founder-led
+              engineering studio to help organizations build reliable software.
             </p>
           </div>
         </div>
@@ -88,7 +76,7 @@ export default function ResourcesPage() {
 
       <section className="py-24">
         <div className="container-custom">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
             {resources.map((res, index) => (
               <Card
                 key={index}

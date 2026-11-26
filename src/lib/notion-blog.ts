@@ -239,6 +239,17 @@ function blocksToHtml(blocks: NotionBlock[]): string {
   return parts.join("\n");
 }
 
+function isDraftOrDuplicate(post: Pick<BlogPost, "title" | "slug">): boolean {
+  const title = post.title.toLowerCase();
+  const slug = post.slug.toLowerCase();
+  return (
+    title.includes("[duplicate") ||
+    title.includes("duplicate - delete") ||
+    title.includes("[draft]") ||
+    slug.includes("duplicate")
+  );
+}
+
 // ─── Public API ───────────────────────────────────────────────────────────────
 export async function getAllPosts(): Promise<BlogPost[]> {
   if (!isConfigured()) return [];
@@ -263,7 +274,7 @@ export async function getAllPosts(): Promise<BlogPost[]> {
     const posts: BlogPost[] = [];
     for (const page of data.results ?? []) {
       const post = pageToPost(page);
-      if (post.slug && post.title) {
+      if (post.slug && post.title && !isDraftOrDuplicate(post)) {
         posts.push(post);
       }
     }
@@ -302,6 +313,9 @@ export async function getPostBySlug(slug: string): Promise<BlogPostWithContent |
     const page = queryData.results?.[0];
     if (!page) return null;
 
+    const basePost = pageToPost(page);
+    if (isDraftOrDuplicate(basePost)) return null;
+
     const blocksRes = await fetch(`${NOTION_API_BASE}/blocks/${page.id}/children?page_size=100`, {
       method: "GET",
       headers: notionHeaders(),
@@ -314,7 +328,7 @@ export async function getPostBySlug(slug: string): Promise<BlogPostWithContent |
     const blocksData = (await blocksRes.json()) as { results?: NotionBlock[] };
     const contentHtml = blocksToHtml(blocksData.results ?? []);
 
-    return { ...pageToPost(page), readTime: estimateReadTime(contentHtml), contentHtml };
+    return { ...basePost, readTime: estimateReadTime(contentHtml), contentHtml };
   } catch (err) {
     console.warn("[notion-blog] getPostBySlug failed", err);
     return null;

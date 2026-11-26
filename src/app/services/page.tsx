@@ -2,11 +2,11 @@ import { Metadata } from "next";
 import ServicesClient from "./ServicesClient";
 
 export const metadata: Metadata = {
-  title: "Custom Software Services & Pricing | Modulifyr Nepal",
+  title: "Services & Pricing | Launch Kit, Automation Layer & Custom MVPs | Modulifyr",
   description:
-    "Three fixed-scope packages with published price ranges: Strategy Sprint, Launch Kit and Automation Layer. Built from Birtamode, Nepal for clients in Nepal and worldwide.",
+    "Three transparent packages—Launch Kit websites, Automation Layer workflows, and Strategy Sprints—plus focused custom web apps & MVPs (TypeScript, Next.js, Hono, PostgreSQL).",
   alternates: {
-    canonical: "/pricing",
+    canonical: "/services",
   },
 };
 

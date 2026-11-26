@@ -16,11 +16,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useRegion } from "@/components/RegionProvider";
-import {
-  formatTierPriceStandard,
-  formatTierPriceFounding,
-  FOUNDING_SLOTS_REMAINING,
-} from "@/lib/pricing";
+import { formatTierPriceStandard } from "@/lib/pricing";
 import Reveal from "@/components/ui/Reveal";
 
 const tiers = [
@@ -70,38 +66,17 @@ const tiers = [
     name: "Tier 3 — Complex Architecture",
     tierKey: "tier3_complexArchitecture",
     duration: "1–2 weeks",
-    bestFor: "Large, unclear, legacy, or multi-team scope",
+    bestFor: "Multi-workflow custom web apps, MVPs, or cross-system automation scoping",
     descriptionNepal:
-      "Comprehensive strategy covering market positioning, feature prioritisation, and go‑to‑market.",
+      "Full technical architecture, database design, and integration map for custom builds.",
     descriptionInternational:
-      "Full strategic package including competitive analysis and feature prioritisation.",
+      "Deep technical blueprint covering Next.js / Hono architecture, PostgreSQL schema, and API dependencies.",
     included: [
       "Full workshop series — 3 to 5 sessions across stakeholders",
-      "Complete architecture blueprint",
+      "Complete architecture blueprint & database schema",
       "Integration mapping across all connected systems",
       "Risk analysis and mitigation plan",
       "Detailed phased roadmap with dependencies and sequencing",
-    ],
-    notIncluded: [],
-    highlight: false,
-  },
-  {
-    name: "Tier 4 — Enterprise Strategy",
-    tierKey: "tier4_enterpriseStrategy",
-    duration: "2–3 weeks",
-    bestFor: "Enterprise-scale initiatives requiring SLA-backed delivery",
-    descriptionNepal:
-      "All‑in‑one strategy with a detailed implementation plan to hit the ground running.",
-    descriptionInternational:
-      "Enterprise‑grade strategy with SLA‑backed delivery and procurement‑friendly documentation.",
-    included: [
-      "Full workshop series — 5+ sessions across all stakeholders",
-      "Complete architecture blueprint with technical specifications",
-      "Integration mapping across all connected systems",
-      "Risk analysis and mitigation plan",
-      "Detailed phased roadmap with dependencies, sequencing, and resource estimates",
-      "SLA-backed delivery commitments",
-      "Procurement-friendly documentation and SOWs",
     ],
     notIncluded: [],
     highlight: false,
@@ -154,10 +129,11 @@ export default function StrategySprintPage() {
             </Reveal>
             <Reveal variant="fade-up" delay={200}>
               <p className="text-text-muted text-xl leading-relaxed">
-                Most projects go over budget because business needs and technical scope were never
-                aligned first. A Strategy Sprint gives your team clear requirements, realistic
-                cost estimates, and a prioritized roadmap before spending on development—so you
-                invest with certainty instead of guesswork.
+                Built specifically for scoping custom web apps, MVPs, and complex multi-system
+                automations before writing production code. Lock down exact architecture, timelines,
+                and milestone pricing in 3–10 days—and 100% of your Strategy Sprint fee can be
+                credited toward your build with Modulifyr. (If you just need a straightforward
+                Launch Kit website, you can skip the sprint and start directly.)
               </p>
             </Reveal>
             <Reveal variant="fade-up" delay={300}>
@@ -209,18 +185,19 @@ export default function StrategySprintPage() {
           <div className="mb-12">
             <Reveal variant="fade-up">
               <h2 className="font-heading text-foreground mb-3 text-3xl font-bold">
-                Four Tiers — Priced by Complexity
+                Three Tiers — Priced by Complexity
               </h2>
             </Reveal>
             <Reveal variant="fade-up" delay={100}>
               <p className="text-text-secondary max-w-2xl text-sm leading-relaxed">
-                Price increases with scope complexity and deliverable count. Not sure which fits?
-                Describe your project in a contact message — we will tell you.
+                100% of your Strategy Sprint fee can be credited toward a Custom Web App, MVP, or
+                Automation Layer build with us. Not sure which tier fits? Describe your project and
+                we will tell you honestly.
               </p>
             </Reveal>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
             {tiers.map((tier, i) => (
               <Reveal key={i} variant="fade-up" delay={i * 80}>
                 <Card
@@ -239,23 +216,9 @@ export default function StrategySprintPage() {
                   <div>
                     <h3 className="text-foreground mb-1 text-base font-bold">{tier.name}</h3>
                     {activeRegion ? (
-                      FOUNDING_SLOTS_REMAINING > 0 ? (
-                        <div className="flex flex-col gap-1">
-                          <div className="text-text-muted text-xs line-through">
-                            {formatTierPriceStandard("strategySprint", tier.tierKey, activeRegion)}
-                          </div>
-                          <div className="font-heading text-[#2D738D] text-2xl font-bold">
-                            {formatTierPriceFounding("strategySprint", tier.tierKey, activeRegion)}
-                          </div>
-                          <div className="text-text-muted mt-0.5 text-[11px]">
-                            Founding client pricing — {FOUNDING_SLOTS_REMAINING} spots remaining.
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="font-heading text-[#2D738D] text-2xl font-bold">
-                          {formatTierPriceStandard("strategySprint", tier.tierKey, activeRegion)}
-                        </div>
-                      )
+                      <div className="font-heading text-[#2D738D] text-2xl font-bold">
+                        {formatTierPriceStandard("strategySprint", tier.tierKey, activeRegion)}
+                      </div>
                     ) : (
                       <div className="text-text-muted text-sm font-semibold">
                         Select region for pricing

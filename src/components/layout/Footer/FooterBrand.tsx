@@ -19,8 +19,8 @@ export function FooterBrand() {
       </Link>
 
       <p className="max-w-sm text-justify text-sm leading-relaxed text-slate-400">
-        Strategy Sprints, fast Launch Kit websites, and Automation Layers — built with clarity from
-        Nepal for clients worldwide.
+        Founder-led engineering &amp; growth studio delivering Launch Kit websites, Automation
+        Layers, and custom Next.js &amp; Hono web apps from Birtamode, Nepal for clients worldwide.
       </p>
     </div>
   );

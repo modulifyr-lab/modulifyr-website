@@ -26,9 +26,9 @@ const industries = [
     desc: "Replace slow brochure sites and scattered admission spreadsheets with a fast Launch Kit web presence and automated inquiry routing straight to your admissions team.",
     useCases: [
       "Fast admissions & course info websites (Launch Kit)",
-      "Inquiry form → spreadsheet & staff alert sync (Automation Layer)",
-      "Online fee/prospectus request routing",
-      "Scoping digital initiatives before spending (Strategy Sprint)",
+      "Inquiry form → WhatsApp, sheet & staff alerts (Automation Layer)",
+      "Custom student/admissions portals (Next.js, Hono & PostgreSQL)",
+      "Technical scoping before custom builds (Strategy Sprint)",
     ],
     clients: "Schools, colleges, consultancies, training centers",
   },
@@ -38,12 +38,12 @@ const industries = [
     color: "text-brand-teal",
     bg: "bg-brand-teal/10",
     tagline: "Distributors, suppliers, and B2B sellers",
-    desc: "Turn wholesale inquiries into tracked orders faster. Pair a credible catalog website with automated lead capture and sheet/CRM updates so your sales team never misses a follow-up.",
+    desc: "Turn wholesale inquiries into tracked orders faster. Pair a credible catalog website with automated lead capture, eSewa/Khalti payment webhooks, and sheet/CRM updates.",
     useCases: [
       "Product catalog & wholesale inquiry sites (Launch Kit)",
-      "Order/quote request → sheet & team chat alerts (Automation Layer)",
-      "CRM and accounting tool sync without manual re-entry",
-      "Clear technical roadmap before custom integrations (Strategy Sprint)",
+      "Order/quote request → WhatsApp & sheet alerts (Automation Layer)",
+      "Custom B2B ordering portals (Next.js, Hono & PostgreSQL)",
+      "Clear technical roadmap before custom builds (Strategy Sprint)",
     ],
     clients: "Distributors, wholesalers, trading businesses",
   },
@@ -53,12 +53,12 @@ const industries = [
     color: "text-[#2D738D]",
     bg: "bg-[#2D738D]/10",
     tagline: "Clinics, dental practices, and diagnostic centers",
-    desc: "Make it effortless for patients in Nepal to find your services, check timings, and request appointments online while keeping front-desk follow-ups automated.",
+    desc: "Make it effortless for patients in Nepal to find your services, check timings, and book appointments online while keeping front-desk follow-ups automated.",
     useCases: [
       "Mobile-first clinic & doctor profile websites (Launch Kit)",
-      "Appointment request embeds & confirmation alerts (Automation Layer)",
-      "Patient inquiry routing to reception sheets & email",
-      "Workflow scoping before multi-branch upgrades (Strategy Sprint)",
+      "Appointment request embeds & WhatsApp reminders (Automation Layer)",
+      "Custom booking & intake portals (Next.js, Hono & PostgreSQL)",
+      "Workflow scoping before custom builds (Strategy Sprint)",
     ],
     clients: "Clinics, diagnostic labs, specialty practices",
   },
@@ -68,14 +68,14 @@ const industries = [
     color: "text-brand-teal",
     bg: "bg-brand-teal/10",
     tagline: "Product teams, SaaS builders, and tech agencies",
-    desc: "Validate ideas with clear architecture before writing production code, launch sharp marketing sites quickly, and automate internal ops webhooks across your stack.",
+    desc: "Scope your MVP cleanly before writing production code, launch fast marketing sites, and ship lean custom web apps or n8n operational pipelines.",
     useCases: [
-      "Technical scoping, architecture & risk plans (Strategy Sprint)",
+      "MVP architecture, database & risk scoping (Strategy Sprint)",
+      "Custom SaaS web apps & MVPs (TypeScript, Next.js, Hono, PostgreSQL)",
       "High-speed product launch & waitlist pages (Launch Kit)",
       "Webhook, API & n8n operational pipelines (Automation Layer)",
-      "Third-party tool sync with retry logic & error alerts",
     ],
-    clients: "Startups, SaaS teams, digital agencies",
+    clients: "Startups, SaaS founders, digital agencies",
   },
   {
     icon: Store,
@@ -86,9 +86,9 @@ const industries = [
     desc: "Stand out on local search and social links with a fast site built to drive visits, bookings, and direct inquiries—backed by automated order and booking notifications.",
     useCases: [
       "Fast local storefront & menu/room showcase sites (Launch Kit)",
-      "Booking & bulk-order alerts to staff channels (Automation Layer)",
+      "Booking & bulk-order alerts to WhatsApp/staff channels (Automation Layer)",
       "Multi-step quote or catering request forms",
-      "Clear digital upgrade planning (Strategy Sprint)",
+      "Custom reservation/loyalty tools scoped via Strategy Sprint",
     ],
     clients: "Retailers, hotels, restaurants, local brands",
   },
@@ -101,9 +101,9 @@ const industries = [
     desc: "Win high-trust clients with a clean, authoritative website and automate consultation booking, intake forms, and client record creation without admin bottlenecks.",
     useCases: [
       "Credibility-focused firm websites & SEO structure (Launch Kit)",
-      "Consultation booking + intake → CRM/sheet sync (Automation Layer)",
-      "Automated follow-up & team assignment notifications",
-      "Process & integration blueprints (Strategy Sprint)",
+      "Consultation booking + intake → CRM/Notion/sheet sync (Automation Layer)",
+      "Client document & status portals (Next.js, Hono & PostgreSQL)",
+      "Custom workflow scoping (Strategy Sprint)",
     ],
     clients: "Consultancies, CA firms, law practices, agencies",
   },
@@ -181,9 +181,9 @@ export default function IndustriesClient() {
             </Reveal>
             <Reveal variant="fade-up" delay={200}>
               <p className="text-text-muted max-w-2xl text-xl leading-relaxed">
-                We help Nepal SMBs and international teams apply our three fixed-scope packages—Strategy
-                Sprint, Launch Kit, and Automation Layer—to eliminate manual busywork and win more
-                customer inquiries in their sector.
+                We help Nepal SMBs and global founders apply our focused offerings—Launch Kit
+                websites, Automation Layers, Strategy Sprints, and custom Next.js, Hono &amp;
+                PostgreSQL web apps—to eliminate manual busywork and win more customers.
               </p>
             </Reveal>
           </div>

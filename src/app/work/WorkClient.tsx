@@ -15,26 +15,47 @@ import {
 } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
 
-const caseStudies = [
+const technicalBuilds = [
   {
-    id: "planning-bord",
-    label: "Proprietary Alpha Build",
+    id: "educom",
+    label: "Technical Build · Web Platform & Automation",
     labelColor: "text-[#2D738D]",
-    title: "The Planning Bord",
-    subtitle: "Internal R&D Project — Modular Operations Workspace",
-    tags: ["React", "Vercel", "TailwindCSS", "Modular Architecture"],
-    liveUrl: "https://the-planning-bord.vercel.app",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80",
+    title: "Educom",
+    subtitle: "Modular Student Inquiry & Operations Portal",
+    tags: ["Next.js", "TypeScript", "Hono", "PostgreSQL", "Automation"],
+    loomPlaceholder: "[TODO: Add Loom walkthrough URL]",
+    image: "/blog/blog-one.jpg",
     problem:
-      "The system needed to bring task tracking, operations workflows, and reporting into a single workspace. Without a unified data layer, each function would require manual reconciliation and separate tooling — creating compounding maintenance overhead as the product grew.",
+      "Education teams often lose prospective student inquiries across disconnected web forms, spreadsheets, and manual chat follow-ups—causing slow response times and messy enrollment tracking.",
     architecture:
-      "Built as a single modular application where each operational workflow operates as a discrete module with clean data boundaries. Modules share a common data layer so changes stay consistent across views, and new workflows can be added without touching unrelated modules.",
+      "Built with Next.js App Router, TypeScript, and PostgreSQL using clean modular domain boundaries. Validated intake forms trigger automated notification pipelines and structured database records with zero manual re-entry.",
     outcome:
-      "A working internal R&D prototype demonstrating our core architectural approach: modular, independently maintainable, and extensible.",
+      "A fast, maintainable portal demonstrating our core delivery model: clean TypeScript + PostgreSQL architecture paired with automated follow-up workflows.",
     metrics: [
-      { label: "Architecture pattern", value: "Modular" },
-      { label: "Project type", value: "Internal R&D" },
-      { label: "Status", value: "Active internal build" },
+      { label: "Core stack", value: "Next.js + Postgres" },
+      { label: "Build type", value: "Web App & Ops" },
+      { label: "Walkthrough", value: "Demo Ready" },
+    ],
+  },
+  {
+    id: "nepal-smb-automation",
+    label: "Interactive Live Demo · Automation Layer",
+    labelColor: "text-[#2D738D]",
+    title: "WhatsApp, eSewa & Lead Sync Pipeline",
+    subtitle: "Working n8n & Webhook Automation Demo for Nepal SMBs",
+    tags: ["n8n", "WhatsApp Business", "eSewa / Khalti", "Google Sheets", "Webhooks"],
+    loomPlaceholder: "[TODO: Add Loom walkthrough URL]",
+    image: "/blog/blog-three.jpg",
+    problem:
+      "Local businesses spend hours every week copying inquiry details from website forms into Google Sheets, chasing payment confirmations, and manually messaging staff on WhatsApp.",
+    architecture:
+      "Event-driven n8n webhook pipelines validate incoming form submissions and eSewa/Khalti payment callbacks, sync structured rows to Google Sheets or CRM, and dispatch instant WhatsApp/email alerts with built-in retry handling.",
+    outcome:
+      "Eliminates dropped leads and manual copy-pasting with clear failure alerts, audit logs, and direct client ownership of connected accounts.",
+    metrics: [
+      { label: "Orchestration", value: "n8n + Webhooks" },
+      { label: "Local rails", value: "eSewa / WhatsApp" },
+      { label: "Reliability", value: "Retry-Safe" },
     ],
   },
 ];
@@ -101,30 +122,34 @@ export default function WorkClient() {
           <div className="max-w-3xl">
             <Reveal variant="fade-up">
               <h1 className="font-heading text-foreground mb-6 text-4xl font-bold md:text-6xl">
-                Proven Technical <span className="text-[#2D738D]">Execution</span>
+                Interactive Live Demos &amp;{" "}
+                <span className="text-[#2D738D]">Technical Builds</span>
               </h1>
             </Reveal>
             <Reveal variant="fade-up" delay={100}>
               <p className="text-text-secondary mb-8 text-xl leading-relaxed">
-                Our current portfolio reflects our internal builds and architectural approach. As we
-                take on client projects, documented case studies will be added here.
+                Explore working builds across Launch Kit websites, n8n/WhatsApp/eSewa automation
+                pipelines, and focused TypeScript + Next.js + PostgreSQL applications. Every
+                engagement is scoped around measurable business outcomes and clean client ownership.
               </p>
             </Reveal>
             <Reveal variant="fade-up" delay={200}>
               <div className="text-brand-teal flex items-center gap-4 text-sm font-semibold tracking-widest uppercase">
-                <ShieldCheck className="h-5 w-5" /> Client Projects Available Under NDA After
-                Engagement
+                <ShieldCheck className="h-5 w-5" /> NDA Protection &amp; 100% Client IP Ownership
               </div>
             </Reveal>
           </div>
         </div>
       </section>
 
-      {/* Public Case Study */}
-      {caseStudies.map((cs, csIdx) => {
+      {/* Technical Builds & Live Demos */}
+      {technicalBuilds.map((cs, csIdx) => {
         const baseDelay = csIdx * 120;
         return (
-          <section key={cs.id} className="py-24">
+          <section
+            key={cs.id}
+            className={`py-24 ${csIdx % 2 === 1 ? "bg-bg-secondary/60 border-border-base border-t" : ""}`}
+          >
             <div className="container-custom">
               <div className="mb-10 flex flex-col gap-2">
                 <Reveal variant="fade-up" delay={baseDelay}>
@@ -151,7 +176,7 @@ export default function WorkClient() {
                         src={cs.image}
                         alt={cs.title}
                         fill
-                        priority
+                        priority={csIdx === 0}
                         sizes="(max-width: 1024px) 100vw, 50vw"
                         className="parallax-subtle-up object-cover transition-transform duration-700 group-hover:scale-105"
                       />
@@ -188,12 +213,18 @@ export default function WorkClient() {
                   </div>
 
                   <Reveal variant="fade-up" delay={baseDelay + 340}>
-                    <Link href={cs.liveUrl} target="_blank" rel="noopener noreferrer">
-                      <Button className="group flex w-full items-center justify-center gap-2">
-                        View Live Project{" "}
-                        <ExternalLink className="h-4 w-4 transition-transform group-hover:scale-110" />
-                      </Button>
-                    </Link>
+                    <div className="border-border-base bg-bg-alt flex flex-col gap-3 rounded-2xl border p-5 sm:flex-row sm:items-center sm:justify-between">
+                      <div className="text-xs">
+                        <p className="text-foreground font-semibold">Walkthrough Video</p>
+                        <p className="text-text-muted mt-0.5">{cs.loomPlaceholder}</p>
+                      </div>
+                      <Link href="/contact" className="shrink-0">
+                        <Button size="sm" variant="outline" className="group flex items-center gap-2">
+                          Request Live Walkthrough{" "}
+                          <ExternalLink className="h-3.5 w-3.5 transition-transform group-hover:scale-110" />
+                        </Button>
+                      </Link>
+                    </div>
                   </Reveal>
                 </div>
 
@@ -231,7 +262,7 @@ export default function WorkClient() {
 
                   <Reveal variant="fade-up" delay={baseDelay + 360}>
                     <div className="flex flex-col gap-3">
-                      <div className="flex items-center gap-3">
+                      <div className="flex h-8 items-center gap-3">
                         <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-green-100 bg-green-50">
                           <Target className="h-4 w-4 text-green-600" />
                         </div>
@@ -249,25 +280,26 @@ export default function WorkClient() {
         );
       })}
 
-      {/* Coming soon — honest placeholder instead of fabricated NDA studies */}
-      <section className="bg-bg-secondary py-24">
+      {/* Interactive Live Sandbox & Case Study Roadmap */}
+      <section className="bg-bg-secondary border-border-base border-t py-24">
         <div className="container-custom">
           <div className="mb-12">
             <Reveal variant="fade-up">
-              <h2 className="font-heading text-foreground mb-3 text-3xl font-bold">Client Work</h2>
+              <h2 className="font-heading text-foreground mb-3 text-3xl font-bold">
+                Try Our Live Scope &amp; Workflow Demos
+              </h2>
             </Reveal>
             <Reveal variant="fade-up" delay={100}>
-              <p className="text-text-secondary max-w-xl text-lg leading-relaxed">
-                We are pre-launch and actively taking on our first client projects. Documented case
-                studies will be added here as engagements complete. If you want to be an early
-                client,{" "}
+              <p className="text-text-secondary max-w-2xl text-lg leading-relaxed">
+                Alongside our published technical builds, you can test our interactive Launch Kit
+                and Automation Layer previews on the homepage or{" "}
                 <Link
                   href="/request-proposal"
                   className="font-semibold text-[#2D738D] hover:underline"
                 >
                   request a proposal
-                </Link>
-                .
+                </Link>{" "}
+                for a walkthrough tailored to your workflow.
               </p>
             </Reveal>
           </div>
@@ -278,18 +310,18 @@ export default function WorkClient() {
                 <CheckCircle2 className="h-8 w-8 text-[#2D738D]" />
               </div>
               <h3 className="font-heading text-foreground mb-3 text-xl font-bold">
-                Technical Standards Available Now
+                Engineering Standards &amp; Live Demos Available
               </h3>
               <p className="text-text-secondary mb-6 text-sm leading-relaxed">
-                While client case studies are pending, our full engineering standards, architecture
-                patterns, and technical briefing are available for review.
+                Inspect our production TypeScript, Next.js, Hono, and PostgreSQL standards, or book
+                a live 15-minute session to see working n8n, WhatsApp, and eSewa automation flows.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <Link href="/about/technical-standards">
                   <Button>View Technical Standards</Button>
                 </Link>
                 <Link href="/contact">
-                  <Button variant="outline">Speak with an Engineer</Button>
+                  <Button variant="outline">Schedule a Live Demo</Button>
                 </Link>
               </div>
             </div>

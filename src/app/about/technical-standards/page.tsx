@@ -30,12 +30,12 @@ const standards = [
     bg: "bg-[#2D738D]/10",
     title: "Code Quality",
     items: [
-      "All code reviewed by a senior engineer before merging",
-      "TypeScript enforced across all JavaScript/Node.js projects",
+      "Founder-led architecture & code review before production merges",
+      "Strict TypeScript enforced across Next.js and Hono codebases",
       "ESLint + Prettier on every commit via pre-commit hooks",
-      "Cyclomatic complexity limits enforced via static analysis",
-      "80% unit test coverage minimum, 60% integration coverage",
-      "No direct console.log in production — structured logging only",
+      "Modular boundaries separating UI, API handlers, and database access",
+      "Zero hardcoded secrets or unvalidated external payloads",
+      "Structured error logging for rapid debugging",
     ],
   },
   {
@@ -44,12 +44,12 @@ const standards = [
     bg: "bg-brand-teal/10",
     title: "Version Control & CI/CD",
     items: [
-      "Trunk-based development with feature flags for large changes",
-      "All deployments via CI/CD — zero manual production deploys",
-      "GitHub Actions: lint → test → build → deploy pipeline on every PR",
-      "Environment parity enforced: dev / staging / production always in sync",
-      "Automated dependency updates via Dependabot with weekly audits",
-      "All production releases tagged with semantic versioning",
+      "Clean branch-and-PR workflow with protected main builds",
+      "Automated deployments via Vercel and GitHub Actions",
+      "CI checks: lint → type-check → unit test → build on every PR",
+      "Environment parity across local dev, preview, and production",
+      "Automated dependency updates via Dependabot",
+      "Full GitHub repository ownership handed to client",
     ],
   },
   {
@@ -58,12 +58,12 @@ const standards = [
     bg: "bg-[#2D738D]/10",
     title: "Security Standards",
     items: [
-      "OWASP Top 10 review conducted on every production system",
-      "Secrets managed via environment variables — never hardcoded",
-      "HTTPS enforced on all endpoints with HSTS headers enabled",
-      "SQL injection prevention via parameterized queries and ORMs",
-      "Regular dependency vulnerability scans (npm audit, pip audit)",
-      "Rate limiting and input sanitization on all public-facing APIs",
+      "OWASP hygiene checklist applied on every web app and API",
+      "Secrets managed strictly via environment variables",
+      "HTTPS enforced on all endpoints with security headers",
+      "SQL injection prevention via parameterized ORM queries (Drizzle/Prisma)",
+      "Regular dependency vulnerability checks (npm audit)",
+      "Rate limiting and Zod input validation on public API routes",
     ],
   },
   {
@@ -72,12 +72,12 @@ const standards = [
     bg: "bg-brand-teal/10",
     title: "Documentation Standards",
     items: [
-      "All public APIs documented with OpenAPI 3.0 specification",
-      "Architecture Decision Records (ADRs) for all major technical decisions",
-      "README files include local dev setup, env vars, and deploy instructions",
-      "Data flow diagrams required for all systems handling PII",
-      "Runbooks for all production incident and recovery scenarios",
-      "Inline code comments required for all non-obvious logic",
+      "Public REST/Hono APIs documented with OpenAPI 3.0 specification",
+      "Architecture Decision Records (ADRs) for major technical choices",
+      "README files covering local setup, env vars, and deployment",
+      "Data flow diagrams for automation pipelines and webhook integrations",
+      "Operational runbooks for error recovery and workflow alerts",
+      "Clear handoff notes so any future engineer can maintain the codebase",
     ],
   },
   {
@@ -86,12 +86,12 @@ const standards = [
     bg: "bg-[#2D738D]/10",
     title: "Testing Protocol",
     items: [
-      "Unit tests for all business logic with mocked dependencies",
-      "Integration tests for all API routes and database interactions",
-      "End-to-end tests for all critical user flows before each release",
-      "Performance testing on every major feature against SLA thresholds",
-      "Security penetration testing before every production launch",
-      "Regression suite run on every pull request via automated CI",
+      "Unit tests (Vitest) for pricing, validation, and core business logic",
+      "Integration checks for critical API routes and webhook handlers",
+      "Cross-viewport mobile & desktop QA before go-live",
+      "Failure-state verification for n8n and webhook retry logic",
+      "Automated regression checks run on pull requests via CI",
+      "Lighthouse speed & Core Web Vitals checks before launch",
     ],
   },
   {
@@ -100,23 +100,23 @@ const standards = [
     bg: "bg-brand-teal/10",
     title: "Infrastructure Standards",
     items: [
-      "Infrastructure-as-code via Terraform for all cloud resources",
-      "Containerized workloads with Docker for environment consistency",
-      "Auto-scaling policies configured before production go-live",
-      "Database backups automated at minimum every 24 hours",
-      "Disaster recovery procedures documented and tested quarterly",
-      "Uptime monitoring and alerting configured on day one of production",
+      "Reproducible setups with Vercel, Cloudflare, or Docker",
+      "Managed PostgreSQL with automated daily backups",
+      "Best-effort uptime monitoring and instant failure alerting",
+      "Retry-safe webhook queues to prevent dropped leads or payments",
+      "Third-party SaaS/hosting accounts registered directly in client's name",
+      "Zero vendor lock-in at project completion",
     ],
   },
 ];
 
 const performanceTargets = [
   { metric: "Core Web Vitals (LCP)", target: "< 2.5s", tool: "Lighthouse" },
-  { metric: "API Response Time (p95)", target: "< 300ms", tool: "Production APM" },
-  { metric: "Time to First Byte", target: "< 200ms", tool: "Server metrics" },
-  { metric: "Database Query (p95)", target: "< 100ms", tool: "Query profiling" },
-  { metric: "Production Uptime SLA", target: "99.9%", tool: "30-day rolling" },
-  { metric: "Error Rate", target: "< 0.1%", tool: "Error tracking" },
+  { metric: "API Response Time (p95)", target: "< 300ms", tool: "Route benchmarks" },
+  { metric: "Time to First Byte", target: "< 200ms", tool: "Edge CDN metrics" },
+  { metric: "Database Query (p95)", target: "< 100ms", tool: "PostgreSQL profiling" },
+  { metric: "Uptime Alerting", target: "Automated checks", tool: "Health endpoint monitor" },
+  { metric: "Error Visibility", target: "Real-time alerts", tool: "Structured logs & webhooks" },
 ];
 
 export default function TechnicalStandardsPage() {
@@ -166,8 +166,8 @@ export default function TechnicalStandardsPage() {
             </h2>
             <p className="text-text-secondary text-lg leading-relaxed">
               Our technical standards span six domains — from the first line of code to production
-              monitoring. These are verified on every project during code review, QA, and pre-launch
-              audits.
+              monitoring. These are verified on every project during code review, QA, and
+              release-readiness audits.
             </p>
           </div>
 
@@ -210,8 +210,8 @@ export default function TechnicalStandardsPage() {
               Performance Benchmarks
             </h2>
             <p className="text-text-secondary text-lg leading-relaxed">
-              Every system we ship is benchmarked against these targets before production go-live.
-              SLA agreements reference these metrics explicitly.
+              Every website, custom web app, and automation workflow we ship is checked against
+              these practical targets before production go-live.
             </p>
           </div>
           <div className="border-border-base overflow-hidden rounded-3xl border bg-bg-alt">

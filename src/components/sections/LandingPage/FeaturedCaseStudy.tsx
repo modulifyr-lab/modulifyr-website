@@ -10,8 +10,8 @@ export function FeaturedCaseStudy() {
           {/* LEFT: image */}
           <div className="relative aspect-[1.62/1] w-full overflow-hidden rounded-xl lg:col-span-6">
             <Image
-              src="/case-studies/planning-bord.jpg"
-              alt="Team reviewing color palettes and designs for The Planning Bord"
+              src="/blog/blog-one.jpg"
+              alt="Educom platform architecture and live automation workflow preview"
               fill
               priority
               sizes="(max-width: 1024px) 100vw, 50vw"
@@ -22,23 +22,22 @@ export function FeaturedCaseStudy() {
           {/* RIGHT: details */}
           <div className="lg:col-span-6">
             <span className="font-sans text-xl leading-[110%] font-normal text-[#FFC24B]">
-              Featured Case Study
+              Featured Technical Build
             </span>
             <h2 className="text-on-background mt-4 text-4xl leading-[1.1] font-bold">
-              The Planning Bord
+              Educom &amp; Automated Inquiry Pipelines
             </h2>
             <p className="text-on-background mt-5 max-w-xl text-base leading-[1.35]">
-              The Planning Bord is an internal R&amp;D operations workspace demonstrating how
-              discrete modules share a single clean data layer. Built to test modular architecture
-              boundaries across projects, workflows, and team visibility without creating brittle
-              monoliths.
+              Our technical builds pair fast Next.js + TypeScript web interfaces with PostgreSQL
+              and reliable n8n, WhatsApp Business, and eSewa/Khalti webhook workflows—turning
+              scattered inquiries and manual follow-ups into measurable operations.
             </p>
 
             <Link
               href="/work"
               className="group mt-10 inline-flex items-center gap-2 rounded-full border border-white/20 bg-gradient-to-r from-[#4A9DB8] to-[#8CCBDA] px-10 py-4 text-base font-medium text-white shadow-lg shadow-[#4FB6C6]/10 transition-all duration-300 hover:brightness-110 focus-visible:ring-2 focus-visible:ring-[#4FB6C6] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0F172A] focus-visible:outline-none"
             >
-              View Details
+              Explore Live Demos &amp; Builds
               <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </div>

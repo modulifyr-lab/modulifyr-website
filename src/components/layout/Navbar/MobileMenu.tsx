@@ -28,9 +28,14 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
               <Link
                 href={group.href}
                 onClick={onClose}
-                className="text-on-background hover:text-cta text-lg font-bold transition-colors"
+                className="text-on-background hover:text-cta inline-flex items-center gap-2 text-lg font-bold transition-colors"
               >
-                {group.name}
+                <span>{group.name}</span>
+                {group.badge && (
+                  <span className="bg-cta/12 text-cta border-cta/25 rounded border px-2 py-0.5 text-[11px] font-semibold">
+                    {group.badge}
+                  </span>
+                )}
               </Link>
             ) : (
               <>

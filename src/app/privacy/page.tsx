@@ -149,7 +149,7 @@ const sections = [
       { heading: "Email", text: "contact@modulifyr.com" },
       {
         heading: "Address",
-        text: "Modulifyr Enterprise Pvt. Ltd., Birtamode, Ward 1, Gauri Tol, Jhapa, Nepal",
+        text: "Modulifyr Enterprise Pvt. Ltd., Gauri Tole, Birtamode-1, Jhapa, Nepal",
       },
       { heading: "Response Time", text: "Within 5 business days." },
     ],

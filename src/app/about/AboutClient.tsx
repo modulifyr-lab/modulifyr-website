@@ -76,94 +76,19 @@ const TEAM_MEMBERS: TeamMember[] = [
   {
     name: "Rijan M",
     fullName: "Rijan Mainali",
-    title: "CEO & Founder",
-    department: "CEO",
-    quote: "Building software systems that scale seamlessly and stand the test of time.",
+    title: "Founder, Architecture & Engineering",
+    department: "Engineering & Architecture",
+    quote: "Building modular web apps, fast sites, and reliable automations that scale cleanly.",
     linkedin: "https://www.linkedin.com/in/rijan-mainali/",
     portfolio: "https://rijanmainali.vercel.app",
     isFounder: true,
   },
   {
-    name: "Dikshya B",
-    fullName: "Dikshya Bhattarai",
-    title: "UI UX Designer",
-    department: "Design Team",
-    quote:
-      "My approach to design is centered on understanding users, solving problems, and creating simple, effective digital experiences.",
-    linkedin: "https://www.linkedin.com/in/dikshya-bhattarai-528107308/",
-  },
-  {
-    name: "Shreesha S",
-    fullName: "Shreesha Shrestha",
-    title: "UI UX Designer",
-    department: "Design Team",
-    quote:
-      "I design for clarity in complexity. Every screen I design earns trust — usable today, scalable tomorrow, consistent always.",
-    linkedin: "http://www.linkedin.com/in/shreesha-shrestha-939385219",
-  },
-  {
-    name: "Lijala T",
-    fullName: "Lijala Tuladhar",
-    title: "UI UX Designer",
-    department: "Design Team",
-    quote: "Good design makes things feel effortless.",
-    linkedin: "https://www.linkedin.com/in/lijala-tuladhar/",
-  },
-  {
-    name: "Sumina L",
-    fullName: "Sumina Lakshyam",
-    title: "UI UX Designer",
-    department: "Design Team",
-    quote: "Designing intentional interfaces with focus on user empathy and accessibility.",
-    linkedin: "https://www.linkedin.com/company/modulifyr/",
-  },
-  {
-    name: "Saurab S",
-    fullName: "Saurab Shrestha",
-    title: "Full-Stack Engineer",
-    department: "Engineering",
-    quote: "Crafting scalable backend architectures and robust full-stack applications.",
-    linkedin: "https://www.linkedin.com/in/saurab-shrestha-30b705259/",
-    portfolio: "https://merofolio.netlify.app/",
-  },
-  {
-    name: "Aadesh L",
-    fullName: "Aadesh Loktam",
-    title: "Software Engineer",
-    department: "Engineering",
-    quote: "Building resilient systems through clean code and modern engineering standards.",
-    linkedin: "https://www.linkedin.com/company/modulifyr/",
-  },
-  {
-    name: "Karana D",
-    fullName: "Karana Dhungana",
-    title: "Business Development Specialist",
-    department: "Business Development",
-    quote: "Connecting business challenges with tailored digital engineering solutions.",
-    linkedin: "https://www.linkedin.com/company/modulifyr/",
-  },
-  {
-    name: "Karan K",
-    fullName: "Karan Khadka",
-    title: "Business Development Specialist",
-    department: "Business Development",
-    quote: "Fostering long-term client trust through transparent communication and value.",
-    linkedin: "https://www.linkedin.com/company/modulifyr/",
-  },
-  {
-    name: "Sunish S",
-    fullName: "Sunish Shrestha",
-    title: "Business Development",
-    department: "Business Development",
-    quote: "Building genuine client partnerships through trust and transparency.",
-    linkedin: "http://www.linkedin.com/in/sunish-shrestha",
-  },
-  {
-    name: "Samikshya K",
-    fullName: "Samikshya Khatri",
-    title: "Business Development Specialist",
-    department: "Business Development",
-    quote: "Helping organizations navigate digital transformation and system upgrades.",
+    name: "GP",
+    fullName: "[TODO: Partner Name]",
+    title: "Client Growth & Outreach Partner",
+    department: "Outreach & Client Growth",
+    quote: "[TODO: Add Partner Bio — Outreach, client discovery, and regional partnerships.]",
     linkedin: "https://www.linkedin.com/company/modulifyr/",
   },
 ];
@@ -173,9 +98,9 @@ const TECH_STACK = [
     category: "Frontend",
     icon: Code2,
     items: [
-      { name: "React", label: "UI Library" },
-      { name: "Next.js", label: "Full-stack SSR" },
-      { name: "Tailwind CSS", label: "Design Engine" },
+      { name: "TypeScript", label: "End-to-end type safety" },
+      { name: "Next.js & React", label: "App Router & static delivery" },
+      { name: "Tailwind CSS", label: "Modular UI component system" },
     ],
   },
   {
@@ -183,29 +108,26 @@ const TECH_STACK = [
     icon: Server,
     items: [
       { name: "Hono", label: "Typesafe, edge-compatible API framework" },
-      { name: "Next.js", label: "API Routes / full-stack backend for React-based sites" },
+      { name: "Next.js API Routes", label: "Full-stack React endpoints & webhooks" },
+      { name: "n8n / Webhooks", label: "Workflow & integration orchestration" },
     ],
   },
   {
     category: "Database",
     icon: Database,
     items: [
-      { name: "PostgreSQL", label: "Relational DB" },
-      { name: "MySQL", label: "Relational DB" },
-      { name: "SQLite", label: "Embedded DB" },
-      { name: "MariaDB", label: "Relational DB" },
-      { name: "MongoDB", label: "Document Store" },
-      { name: "Redis", label: "In-Memory Cache" },
+      { name: "PostgreSQL", label: "Primary relational database" },
+      { name: "Redis", label: "Rate limiting & caching" },
+      { name: "SQLite", label: "Lightweight embedded storage" },
     ],
   },
   {
     category: "Infrastructure",
     icon: Cloud,
     items: [
-      { name: "Vercel", label: "Edge Network" },
-      { name: "AWS", label: "Cloud Primitive" },
-      { name: "Render", label: "Cloud Platform" },
-      { name: "Docker", label: "Containerization" },
+      { name: "Vercel", label: "Edge hosting & CI previews" },
+      { name: "Docker", label: "Containerized deployments" },
+      { name: "GitHub Actions", label: "Automated lint, test & build" },
     ],
   },
 ];
@@ -306,19 +228,19 @@ export default function AboutClient() {
         <div className="container-custom space-y-12">
           <div className="mx-auto max-w-3xl space-y-3 text-center">
             <span className="text-caption1 font-bold tracking-wider text-[#2D738D] uppercase">
-              MEET THE TEAM
+              FOUNDER-LED CORE TEAM
             </span>
             <h2 className="text-h2 text-foreground font-bold">
-              Built by people who care about the work
+              Direct engineering &amp; growth—no account-manager layers
             </h2>
             <p className="text-body1 text-text-alt">
-              Modulifyr is a growing team across engineering, design, and business development,
-              building the company from the ground up.
+              Modulifyr operates as a focused 2-person Founder-Led Engineering &amp; Growth Studio
+              in Gauri Tole, Birtamode-1, Jhapa, Nepal—pairing direct architectural execution with
+              dedicated client outreach.
             </p>
           </div>
 
-          {/* Roster grouped by department */}
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mx-auto grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-2">
             {TEAM_MEMBERS.map((member, idx) => (
               <div
                 key={idx}
@@ -358,6 +280,7 @@ export default function AboutClient() {
                       href={member.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label={`${member.fullName} LinkedIn`}
                       className="text-text-alt p-1 transition-colors hover:text-[#2D738D]"
                     >
                       <Linkedin className="h-4 w-4" />
@@ -368,6 +291,7 @@ export default function AboutClient() {
                       href={member.portfolio}
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label={`${member.fullName} Portfolio`}
                       className="text-text-alt p-1 transition-colors hover:text-[#2D738D]"
                     >
                       <ExternalLink className="h-4 w-4" />
@@ -376,6 +300,22 @@ export default function AboutClient() {
                 </div>
               </div>
             ))}
+          </div>
+
+          <div className="bg-bg-main border-border-main mx-auto flex max-w-4xl flex-col items-center justify-between gap-4 rounded-2xl border p-6 text-center sm:flex-row sm:text-left">
+            <div>
+              <p className="text-foreground text-base font-bold">
+                We&apos;re actively expanding our engineering &amp; growth bench
+              </p>
+              <p className="text-text-alt text-sm">
+                Explore open contract roles with 20% project revenue share and real production
+                ownership.
+              </p>
+            </div>
+            <Button href="/careers" variant="outline" className="shrink-0">
+              See Open Roles
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
           </div>
         </div>
       </section>

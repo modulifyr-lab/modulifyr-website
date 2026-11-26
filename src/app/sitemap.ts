@@ -7,6 +7,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Core pages
     { url: `${base}/`, changeFrequency: "weekly", priority: 1.0 },
     { url: `${base}/services`, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${base}/services/strategy-sprint`, changeFrequency: "monthly", priority: 0.85 },
+    { url: `${base}/services/launch-kit`, changeFrequency: "monthly", priority: 0.85 },
+    { url: `${base}/services/automation-layer`, changeFrequency: "monthly", priority: 0.85 },
     { url: `${base}/request-proposal`, changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/capabilities`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/process`, changeFrequency: "monthly", priority: 0.8 },
@@ -20,13 +23,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/contact`, changeFrequency: "monthly", priority: 0.6 },
     { url: `${base}/privacy`, changeFrequency: "yearly", priority: 0.3 },
     { url: `${base}/terms`, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${base}/cookie-policy`, changeFrequency: "yearly", priority: 0.3 },
 
     // Resource articles (non-PDF) — these are static so include them
-    {
-      url: `${base}/resources/micro-frontend-orchestration`,
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
     { url: `${base}/resources/sre-best-practices`, changeFrequency: "monthly", priority: 0.6 },
 
     // Blog posts are dynamically generated from Notion — not listed here.

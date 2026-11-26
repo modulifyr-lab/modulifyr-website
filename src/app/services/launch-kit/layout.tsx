@@ -1,9 +1,9 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Launch Kit — Custom Static Websites & Landing Pages | Modulifyr",
+  title: "Launch Kit — Modular Next.js Websites & Landing Pages | Modulifyr",
   description:
-    "Static websites with no backend — fast, secure, and built to rank. Priced by scope with clear, fixed fees and multiple tiers.",
+    "Fast, SEO-ready websites built on our modular Next.js and Tailwind component system. Clear fixed fees across three delivery tiers.",
   alternates: {
     canonical: "/services/launch-kit",
   },

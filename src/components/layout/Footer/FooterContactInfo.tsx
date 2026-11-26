@@ -40,7 +40,7 @@ export function FooterContactInfo() {
           <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-cyan-400" />
 
           <span className="leading-relaxed">
-            Birtamode, Ward 1, Gauri Tole,
+            Gauri Tole, Birtamode-1,
             <br />
             Jhapa, Nepal
           </span>

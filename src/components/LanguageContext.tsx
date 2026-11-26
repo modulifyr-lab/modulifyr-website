@@ -31,7 +31,7 @@ export const translations: Record<Language, Record<string, string>> = {
     // Home hero
     "home.hero.headline": "Custom Software Systems Built to Scale With Your Organization",
     "home.hero.sub":
-      "Modulifyr designs and builds modular software systems for organizations that require flexibility, scalability, and long-term reliability. We partner with companies worldwide and in Birtamode, Ward 1, Gauri Tol, Jhapa, Nepal to architect and deliver software tailored to their operations.",
+      "Modulifyr designs and builds modular software systems for organizations that require flexibility, scalability, and long-term reliability. We partner with companies worldwide and in Gauri Tole, Birtamode-1, Jhapa, Nepal to architect and deliver software tailored to their operations.",
     "home.hero.cta_primary": "Request Proposal",
     "home.hero.cta_secondary": "Book Discovery Call",
     "home.hero.badge_nda": "NDA available",
@@ -97,7 +97,7 @@ export const translations: Record<Language, Record<string, string>> = {
 
     // Footer
     "footer.tagline":
-      "Custom modular software systems for SMBs that have outgrown off-the-shelf tools. Based in Birtamode, Ward 1, Gauri Tol, Jhapa, Nepal. Building for clients worldwide.",
+      "Custom modular software systems for SMBs that have outgrown off-the-shelf tools. Based in Gauri Tole, Birtamode-1, Jhapa, Nepal. Building for clients worldwide.",
     "footer.company": "Company",
     "footer.about": "About",
     "footer.work": "Work",
@@ -109,7 +109,7 @@ export const translations: Record<Language, Record<string, string>> = {
     "footer.tech_stack": "Tech Stack",
     "footer.industries": "Industries",
     "footer.contact_heading": "Contact",
-    "footer.location": "Birtamode, Ward 1, Gauri Tol, Jhapa, Nepal",
+    "footer.location": "Gauri Tole, Birtamode-1, Jhapa, Nepal",
     "footer.response_time": "Response within 1 business day",
     "footer.privacy": "Privacy Policy",
     "footer.terms": "Terms",

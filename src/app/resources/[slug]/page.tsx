@@ -9,73 +9,32 @@ import { ArrowLeft, ArrowRight, Clock } from "lucide-react";
 type Props = { params: Promise<{ slug: string }> };
 
 const articleContent: Record<string, string> = {
-  "micro-frontend-orchestration": `
-**What is a Micro-Frontend?**
-
-A micro-frontend is an architectural approach that applies microservice principles to frontend development. Instead of a single monolithic frontend application, you decompose the UI into independent, deployable units — each owned by a separate team.
-
-**Why It Matters for Enterprise Applications**
-
-At a certain scale, a single frontend codebase becomes a bottleneck. Multiple teams modify the same files, merge conflicts are constant, and a bug in one module can break the entire application. Micro-frontends address this by giving each team true ownership of their UI slice.
-
-**Orchestration Patterns**
-
-The three primary orchestration patterns are: (1) Build-time integration, where micro-frontends are combined as npm packages at build time — simple but couples deployment; (2) Runtime integration via iframes — maximum isolation but poor UX; (3) Runtime integration via JavaScript — the most common modern approach, using Module Federation (Webpack 5) or import maps.
-
-**Module Federation in Practice**
-
-Module Federation allows one Next.js or Webpack application to dynamically load and execute code from another deployed application at runtime. Each micro-frontend exposes a remote entry point. The host application loads these at runtime, not at build time.
-
-This enables truly independent deployments: Team A can ship a new version of their micro-frontend without the host application knowing, touching, or redeploying anything.
-
-**The Hidden Costs**
-
-Micro-frontends are not free. Cross-team communication becomes an engineering discipline. Shared design system components must be versioned and published as packages. Authentication state must be shared across independently deployed applications. Performance monitoring becomes more complex.
-
-Our recommendation: adopt micro-frontends only when organizational boundaries (multiple teams, independent release cycles) genuinely demand it. For most applications under 5 teams, a well-structured modular monofrontend is simpler and equally maintainable.
-
-**Shell Application Design**
-
-The shell (host) application is responsible for: routing between micro-frontends, shared authentication state, global navigation, and error boundary management for failed remote loads. Keep the shell minimal. The less logic in the shell, the less risk of it becoming a bottleneck.
-
-**Testing Strategy**
-
-Each micro-frontend should have its own complete test suite: unit, integration, and component tests. Contract testing (using tools like Pact) ensures that changes to one micro-frontend's API don't silently break the integration with others.
-    `,
   "sre-best-practices": `
-**SRE Is a Mindset, Not a Role**
+**Reliability Is a Habit, Not a Big Team**
 
-Site Reliability Engineering was formalized at Google, but the principles apply at any scale. At its core, SRE is about treating operations as a software engineering problem. Manual, repetitive operational work should be automated. Reliability should be measured, not assumed.
+You do not need a dedicated reliability department to run dependable software. For lean businesses running Next.js web apps, Hono APIs, PostgreSQL databases, and n8n automations, reliability comes down to catching silent failures early and keeping recovery boring.
 
-**Service Level Objectives: The Foundation**
+**Define Clear Reliability Targets**
 
-Before writing any SRE tooling, define your SLOs. An SLO answers: what is the minimum level of reliability that users actually require? Not "as high as possible" — a specific, measurable number. 99.9% availability. P95 API response time under 500ms. Fewer than 0.5% error rate.
+Instead of vague goals, define what actually matters to customers: pages load quickly on mobile networks, inquiry forms and WhatsApp webhooks deliver without silent drops, and database writes stay consistent.
 
-SLOs must be based on user experience, not infrastructure metrics. Server CPU at 80% is not an SLO. Users completing checkout successfully at 99.8% is an SLO.
+Measure user-facing outcomes—such as whether a checkout or admission inquiry completed—rather than staring at raw CPU graphs.
 
-**Error Budgets in Practice**
+**Prevent Silent Automation Failures**
 
-The error budget is 100% minus the SLO. If your availability SLO is 99.9%, your monthly error budget is ~43 minutes of downtime. The error budget is a shared resource between the product team and the reliability team.
+The most common failure mode in small-business software is an automation webhook breaking quietly while no one checks logs for days. Every n8n, Zapier, or Hono webhook flow should include automatic retries with backoff, a dead-letter log, and an instant email or Discord/WhatsApp alert when a step fails repeatedly.
 
-When the budget is healthy, ship features. When it's depleted, freeze feature releases and focus on reliability improvements. This simple rule eliminates the perpetual tension between "ship fast" and "ship safely."
+**Automated Backups & Clean Deploys**
 
-**Toil Identification and Elimination**
+Every production PostgreSQL database needs automated daily backups and tested restore steps before launch. Deployments should run through automated CI checks (type-checking, linting, unit tests, and build verification) so broken code never reaches users.
 
-Toil is manual, repetitive, non-creative operational work that grows linearly with system size. Common sources: manually triggered deployments, manual database connection pool resets, manually verified backup jobs, manual certificate renewals.
+**A Lightweight Incident Checklist**
 
-The SRE mandate is to keep toil below 50% of engineering time. The mechanism is automation. For every recurring manual task, ask: can this be triggered automatically? Can it be verified automatically? Can failure be auto-remediated?
+Even a small studio benefits from a simple protocol: triage severity quickly (customer-blocking vs. minor visual issue), roll back or hotfix cleanly, notify the affected stakeholder honestly, and write down one concrete preventive fix so the same bug cannot repeat.
 
-**Incident Management Protocol**
+**Pragmatic Monitoring Stack**
 
-Even a 3-person team needs a lightweight incident protocol. At minimum: a severity classification (P1 = user-facing outage, P2 = degraded, P3 = minor, P4 = cosmetic), a designated incident commander during live incidents, a communication template for stakeholders, and a mandatory blameless postmortem within 24 hours of resolution.
-
-The blameless postmortem is the most important artifact. It documents the timeline, root cause, contributing factors, and action items. Not: "engineer X made a mistake." Instead: "the system allowed X to happen — what change prevents this class of failure?"
-
-**Monitoring Stack for Startups**
-
-A pragmatic monitoring stack: Uptime monitoring (Better Uptime or similar) for availability checks, structured application logging (Axiom, Logtail, or Datadog) for error tracking, distributed tracing (OpenTelemetry + backend of choice) for performance analysis, and alerting to an on-call rotation via PagerDuty or similar.
-
-Set up monitoring before your first production deployment. Not after the first incident.
+A lean, affordable setup: uptime checks (Better Stack or UptimeRobot) on critical URLs and health endpoints, structured JSON error logs on API routes, and automated dependency alerts via Dependabot. Set this up before go-live, not after the first outage.
     `,
 };
 

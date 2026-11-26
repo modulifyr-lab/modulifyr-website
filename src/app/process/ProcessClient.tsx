@@ -29,18 +29,22 @@ const steps = [
   },
   {
     icon: PenTool,
-    title: "Blueprint & Prototype",
+    title: "Blueprint & Component Plan",
     duration: "Included in Sprint / Launch Kit",
-    desc: "Designing clean system boundaries, Figma page flows, or integration maps.",
-    deliverables: ["Architecture Blueprint", "Figma Wireframes / Prototypes", "Integration Map"],
+    desc: "Mapping system boundaries, modular Next.js & Tailwind page sections, or webhook logic.",
+    deliverables: [
+      "Architecture Blueprint",
+      "Modular Layouts (Tier 3 Figma Optional)",
+      "Integration Map",
+    ],
     details:
-      "Before engineering begins, you review and approve the structure—whether that is page layouts for a Launch Kit or webhook logic for an Automation Layer.",
+      "Before engineering begins, you review and approve the structure—whether that is modular page flows for a Launch Kit, TypeScript/Hono endpoints for a custom app, or webhook logic for an Automation Layer.",
   },
   {
     icon: Code2,
     title: "Focused Build",
-    duration: "1–6 Weeks by Tier",
-    desc: "Building fast Launch Kit sites and retry-safe Automation Layer workflows.",
+    duration: "3 Days – 6 Weeks by Scope",
+    desc: "Building fast Launch Kit sites, custom Next.js/Hono web apps, and retry-safe n8n workflows.",
     deliverables: ["Production Code / Workflows", "Structured Revisions", "Clear Documentation"],
     details:
       "We build in fixed-scope sprints with predictable pricing and milestone updates so your team sees tangible progress every week.",
@@ -48,7 +52,7 @@ const steps = [
   {
     icon: CheckCircle2,
     title: "Quality Assurance",
-    duration: "Pre-Launch",
+    duration: "Before Go-Live",
     desc: "Verifying mobile responsiveness, security checks, and workflow error alerts.",
     deliverables: ["Responsive & Speed Checks", "Error Alert Validation", "Security Review"],
     details:
@@ -67,10 +71,10 @@ const steps = [
     icon: Clock,
     title: "Optional Maintenance",
     duration: "When Needed",
-    desc: "Optional managed hosting for Launch Kit or SLA-backed monitoring for higher tiers.",
-    deliverables: ["Uptime Monitoring", "Itemized Third-Party Costs", "Future Scope Additions"],
+    desc: "Optional managed hosting for Launch Kit sites or ongoing workflow checks.",
+    deliverables: ["Uptime Alerting", "Itemized Third-Party Costs", "Future Scope Additions"],
     details:
-      "Need hands-off upkeep after launch? Choose optional managed hosting for static sites or add new automation flows as your business grows.",
+      "Need hands-off upkeep after launch? Choose optional managed hosting for websites or add new automation flows as your business grows.",
   },
 ];
 
@@ -181,9 +185,10 @@ export default function ProcessClient() {
               </Reveal>
               <Reveal variant="fade-up" delay={200}>
                 <p className="text-text-muted text-lg leading-relaxed">
-                  Unsure whether you need a Launch Kit website, an Automation Layer, or a multi-phase
-                  build? Start with a fixed-fee Strategy Sprint to lock down exact requirements,
-                  costs, and timelines before spending on development.
+                  Building a custom web app, MVP, or multi-system automation? Start with a fixed-fee
+                  Strategy Sprint to lock down exact architecture, scope, and milestones before
+                  writing production code—and credit the sprint fee toward your build. (For simple
+                  Launch Kit websites, you can skip the sprint and start directly.)
                 </p>
               </Reveal>
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">

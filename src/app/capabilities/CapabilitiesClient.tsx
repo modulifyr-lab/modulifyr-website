@@ -6,15 +6,12 @@ import Reveal from "@/components/ui/Reveal";
 import Marquee from "@/components/ui/Marquee";
 import {
   ShieldCheck,
-  Database,
   Server,
   Code2,
   Lock,
   FileCode,
   Download,
   Layout,
-  Smartphone,
-  Monitor,
   XCircle,
   CheckCircle2,
 } from "lucide-react";
@@ -74,168 +71,96 @@ function TiltCard({
 
 const stackByType = [
   {
-    type: "Static Website",
+    type: "Launch Kit Websites",
     icon: Layout,
     color: "text-[#2D738D]",
     bg: "bg-[#2D738D]/10",
-    primary: "Astro",
-    notes: "Preferred for content sites and low-JS delivery",
+    primary: "Next.js + Tailwind CSS",
+    notes: "Modular component system built for fast 3–7 day launches",
     stack: [
       {
         layer: "Framework",
-        choice: "Astro",
-        note: "Preferred; Next.js static export if it may later become a web app",
+        choice: "Next.js (App Router)",
+        note: "Fast static/hybrid delivery with room to grow into a full app",
       },
-      { layer: "Styling", choice: "TailwindCSS", note: "Shared style system across the company" },
-      { layer: "Content", choice: "MDX / CMS / Notion-driven", note: "Keep editing simple" },
-      { layer: "Deployment", choice: "Cloudflare Pages / Vercel", note: "Fast global delivery" },
-      { layer: "Testing", choice: "Playwright / Vitest", note: "Visual and functional checks" },
+      { layer: "Styling", choice: "Tailwind CSS", note: "Modulifyr modular component system" },
+      { layer: "Content", choice: "MDX / Notion-driven", note: "Clean editing without CMS bloat" },
+      { layer: "Lead & Payments", choice: "WhatsApp, Cal.com, eSewa/Khalti links", note: "Direct inquiry capture" },
+      { layer: "Deployment", choice: "Vercel / Cloudflare", note: "Global edge CDN & SSL" },
     ],
-    useCases: "Brochure sites, landing pages, marketing pages, docs, SEO-first pages.",
+    useCases: "Local business sites, clinics, schools, consultancies, landing pages & portfolios.",
   },
   {
-    type: "Web Application",
+    type: "Custom Web Apps & MVPs",
     icon: Code2,
     color: "text-brand-teal",
     bg: "bg-brand-teal/10",
-    primary: "Next.js + NestJS",
-    notes: "Full-stack React + structured backend",
+    primary: "TypeScript + Next.js + Hono + PostgreSQL",
+    notes: "Lean, type-safe full-stack architecture scoped via Strategy Sprint",
     stack: [
       {
         layer: "Frontend",
-        choice: "Next.js (App Router)",
-        note: "Full-stack React application framework",
+        choice: "Next.js (App Router) + React",
+        note: "Server & client components with strict TypeScript",
       },
-      { layer: "UI", choice: "React + TypeScript", note: "Shared component model" },
-      { layer: "Styling", choice: "TailwindCSS", note: "Uniform across products" },
-      { layer: "API", choice: "NestJS", note: "Best fit for structured backend systems" },
-      { layer: "ORM", choice: "Prisma", note: "Type-safe DB access and migrations" },
-      { layer: "Database", choice: "PostgreSQL", note: "Default for all serious systems" },
-      {
-        layer: "Cache / Queue",
-        choice: "Redis + BullMQ",
-        note: "Caching, throttling, background jobs",
-      },
-      { layer: "State", choice: "Zustand + TanStack Query", note: "Local state vs server state" },
-      { layer: "Auth", choice: "Auth.js / Better Auth", note: "Choose per project needs" },
-      { layer: "Email", choice: "Resend + React Email", note: "Transactional and product emails" },
-      { layer: "Deployment", choice: "Vercel / AWS", note: "Based on client control needs" },
-      { layer: "Observability", choice: "Better Stack", note: "Errors, logs, and uptime monitoring" },
+      { layer: "Styling", choice: "Tailwind CSS", note: "Uniform, accessible component system" },
+      { layer: "API", choice: "Hono / Next.js Route Handlers", note: "Lightweight, fast, typed REST endpoints" },
+      { layer: "Database & ORM", choice: "PostgreSQL + Drizzle / Prisma", note: "Relational integrity & clean migrations" },
+      { layer: "Validation", choice: "Zod", note: "Runtime schema validation + shared TS inference" },
+      { layer: "Auth", choice: "Better Auth / Auth.js", note: "Session & role-based access control" },
+      { layer: "Email & Caching", choice: "Resend + Upstash Redis", note: "Transactional email & rate limiting" },
+      { layer: "Deployment", choice: "Vercel / Docker", note: "Client-owned repositories & cloud accounts" },
     ],
-    useCases: "Web applications, dashboards, portals, internal tools, and scoped client builds.",
+    useCases: "SaaS MVPs, customer portals, booking tools, and internal operations dashboards.",
   },
   {
-    type: "Mobile App",
-    icon: Smartphone,
-    color: "text-[#2D738D]",
-    bg: "bg-[#2D738D]/10",
-    primary: "Expo (React Native)",
-    notes: "Single codebase for iOS & Android",
-    stack: [
-      {
-        layer: "Framework",
-        choice: "React Native + Expo",
-        note: "Single codebase for iOS and Android",
-      },
-      { layer: "Routing", choice: "Expo Router", note: "Simple file-based routing" },
-      { layer: "Styling", choice: "NativeWind", note: "Tailwind-like style workflow" },
-      { layer: "State", choice: "Zustand / React Query", note: "Reuse company patterns" },
-      { layer: "Backend", choice: "NestJS API (shared)", note: "Same API as web products" },
-    ],
-    useCases: "iOS and Android companion apps, customer-facing apps, field apps, operations tools.",
-  },
-  {
-    type: "Desktop App",
-    icon: Monitor,
-    color: "text-brand-teal",
-    bg: "bg-brand-teal/10",
-    primary: "Tauri (Electron fallback)",
-    notes: "Tauri first for small fast binaries",
-    stack: [
-      { layer: "UI", choice: "React + TypeScript", note: "Reuse web components where possible" },
-      { layer: "Primary shell", choice: "Tauri", note: "Preferred — small binary, secure, fast" },
-      { layer: "Fallback shell", choice: "Electron", note: "When speed of delivery matters more" },
-      { layer: "Local DB", choice: "SQLite", note: "Offline-first use cases" },
-      {
-        layer: "Packaging",
-        choice: "Tauri bundler / Electron packager",
-        note: "Cross-platform installers",
-      },
-    ],
-    useCases:
-      "Internal desktop tools, companion apps, offline-first utilities, secure local workflows.",
-  },
-  {
-    type: "Backend / API / Automation",
+    type: "Automation Layer & Integrations",
     icon: Server,
     color: "text-[#2D738D]",
     bg: "bg-[#2D738D]/10",
-    primary: "NestJS + TypeScript",
-    notes: "Structured, scalable, maintainable",
+    primary: "n8n + Webhooks + TypeScript",
+    notes: "Retry-safe workflows connecting forms, WhatsApp, Notion, Sheets, and payments",
     stack: [
-      { layer: "Runtime", choice: "Node.js + TypeScript", note: "Shared language with frontend" },
-      { layer: "Framework", choice: "NestJS", note: "Structured, scalable, maintainable" },
-      { layer: "Validation", choice: "Zod", note: "Runtime safety + TS inference" },
-      { layer: "Jobs", choice: "BullMQ + Redis", note: "Queues, retries, async tasks" },
+      { layer: "Orchestration", choice: "n8n / Zapier / Make", note: "Visual workflows (client-owned accounts)" },
+      { layer: "Custom Connectors", choice: "Hono + TypeScript + Zod", note: "Signed webhooks & payload validation" },
       {
-        layer: "Integration style",
-        choice: "REST + Webhooks",
-        note: "Default unless real reason to deviate",
+        layer: "Channels & CRMs",
+        choice: "WhatsApp, Notion, Google Sheets, Email",
+        note: "Instant lead sync & team alerts",
       },
-      { layer: "Logging", choice: "Structured JSON logging", note: "Production-friendly" },
-      { layer: "Security", choice: "OWASP review + audits", note: "Baseline per project" },
+      { layer: "Payments", choice: "eSewa, Khalti & Stripe webhooks", note: "Payment verification & ledger updates" },
+      { layer: "Reliability", choice: "Retry logic + failure alerts", note: "Zero silent dropped leads" },
+      { layer: "Security", choice: "HMAC signatures + env secrets", note: "Rate-limited endpoints" },
     ],
-    useCases: "APIs, integrations, workflows, scheduled jobs, business logic, internal services.",
-  },
-  {
-    type: "Data & Analytics",
-    icon: Database,
-    color: "text-brand-teal",
-    bg: "bg-brand-teal/10",
-    primary: "PostgreSQL + Python",
-    notes: "Keep logic close to the data",
-    stack: [
-      { layer: "Database", choice: "PostgreSQL", note: "Primary source and reporting source" },
-      { layer: "ETL / batch", choice: "Python", note: "When data processing truly benefits" },
-      {
-        layer: "Analytics layer",
-        choice: "SQL models / views",
-        note: "Keep logic close to the data",
-      },
-      { layer: "BI", choice: "Dashboard tools", note: "Choose per client" },
-      { layer: "Automation", choice: "Scheduled jobs", note: "Reusable and observable" },
-    ],
-    useCases: "Reporting, BI, dashboards, operational analytics, ETL, data cleanup, exports.",
+    useCases: "Lead routing, invoice/receipt sync, staff alerts, CRM updates & webhook bridges.",
   },
 ];
 
 const avoidList = [
-  { tech: "MongoDB", reason: "Poor fit for relational systems", useInstead: "PostgreSQL" },
-  { tech: "Flutter", reason: "Separate ecosystem and language", useInstead: "Expo (React Native)" },
+  { tech: "MongoDB", reason: "Poor fit for relational business data", useInstead: "PostgreSQL" },
   {
     tech: "GraphQL by default",
-    reason: "Added complexity without clear benefit",
-    useInstead: "REST + Zod",
+    reason: "Unnecessary complexity for lean web apps",
+    useInstead: "REST / Hono + Zod",
   },
   {
-    tech: "Go (too early)",
-    reason: "More backend language overhead at our scale",
-    useInstead: "TypeScript / NestJS",
+    tech: "Bloated enterprise frameworks",
+    reason: "Slows delivery for small teams without adding value",
+    useInstead: "Next.js + Hono + TypeScript",
   },
   {
-    tech: "console.log in production",
-    reason: "Poor observability",
-    useInstead: "Structured JSON logging",
+    tech: "Unmonitored manual scripts",
+    reason: "Silent failures lose customer leads",
+    useInstead: "n8n / Webhooks with retry alerts",
   },
 ];
 
 const infra = [
-  { layer: "Containers", choice: "Docker" },
+  { layer: "Hosting & Edge", choice: "Vercel / Cloudflare / Docker" },
   { layer: "CI/CD", choice: "GitHub Actions" },
-  { layer: "IaC", choice: "Terraform" },
-  { layer: "Monitoring", choice: "Better Stack" },
-  { layer: "Cloud", choice: "AWS / GCP / Azure / Vercel" },
-  { layer: "Repo hygiene", choice: "Dependabot, linting, audits" },
+  { layer: "Database", choice: "Managed PostgreSQL + Daily Backups" },
+  { layer: "Uptime Alerting", choice: "Better Stack / Health Checks" },
+  { layer: "Repo Hygiene", choice: "Dependabot, ESLint, Vitest" },
 ];
 
 export default function CapabilitiesClient() {
@@ -291,15 +216,15 @@ export default function CapabilitiesClient() {
         items={[
           "TypeScript",
           "React",
-          "NextJS",
-          "NestJS",
+          "Next.js",
+          "TailwindCSS",
+          "Hono",
           "PostgreSQL",
-          "Prisma",
-          "Expo",
-          "Tauri",
+          "n8n",
+          "Zod",
           "Vercel",
           "Docker",
-          "TailwindCSS",
+          "GitHub Actions",
         ]}
         speed={20}
       />
@@ -444,10 +369,12 @@ export default function CapabilitiesClient() {
                 <Reveal variant="fade-up" delay={300}>
                   <div className="flex h-full flex-col gap-6">
                     <FileCode className="text-brand-gold h-12 w-12" />
-                    <h3 className="font-heading text-foreground text-lg font-bold">99.9% SLA</h3>
+                    <h3 className="font-heading text-foreground text-lg font-bold">
+                      Clean Handoff &amp; Alerting
+                    </h3>
                     <p className="text-text-secondary text-sm leading-relaxed">
-                      Tiered support agreements and uptime SLAs for critical systems. Incident
-                      runbooks required.
+                      100% client GitHub &amp; account ownership, clear runbooks, and automated
+                      uptime &amp; failure alerting.
                     </p>
                   </div>
                 </Reveal>
@@ -509,13 +436,12 @@ export default function CapabilitiesClient() {
           </Reveal>
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
             {[
-              { q: "Need content-first site", a: "Astro" },
-              { q: "Need product app with backend", a: "Next.js + NestJS" },
-              { q: "Need iOS and Android app", a: "Expo (React Native)" },
-              { q: "Need desktop with small footprint", a: "Tauri" },
-              { q: "Need desktop quickly", a: "Electron" },
-              { q: "Need APIs / integrations", a: "NestJS" },
-              { q: "Need reporting / ETL", a: "PostgreSQL + Python" },
+              { q: "Need a fast business website", a: "Launch Kit (Next.js + Tailwind)" },
+              { q: "Need a custom web app or MVP", a: "Next.js + Hono + PostgreSQL" },
+              { q: "Need forms, WhatsApp & CRM synced", a: "Automation Layer (n8n / Webhooks)" },
+              { q: "Need payment gateway integration", a: "eSewa / Khalti / Stripe Webhooks" },
+              { q: "Need architecture clarity first", a: "Strategy Sprint (credited to build)" },
+              { q: "Need hands-off hosting & updates", a: "Optional Managed Hosting" },
             ].map((item, i) => (
               <Reveal key={item.q} variant="fade-scale" delay={i * 50}>
                 <div className="border-border-base flex h-full items-center justify-between rounded-xl border bg-bg-alt px-5 py-4">

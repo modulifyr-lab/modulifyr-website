@@ -34,22 +34,19 @@ const projectPricing: Record<
       "tier1_basicScoping",
       "tier2_fullDiscovery",
       "tier3_complexArchitecture",
-      "tier4_enterpriseStrategy",
     ],
     tierNames: [
       "Tier 1 — Basic Scoping",
       "Tier 2 — Full Discovery",
       "Tier 3 — Complex Architecture",
-      "Tier 4 — Enterprise Strategy",
     ],
   },
   launchKit: {
-    tierKeys: ["tier1_essential", "tier2_business", "tier3_premium", "tier4_enterpriseLaunch"],
+    tierKeys: ["tier1_essential", "tier2_business", "tier3_premium"],
     tierNames: [
       "Tier 1 — Essential",
       "Tier 2 — Business",
       "Tier 3 — Premium",
-      "Tier 4 — Enterprise Launch",
     ],
   },
   automationLayer: {
@@ -57,13 +54,11 @@ const projectPricing: Record<
       "tier1_basicConnection",
       "tier2_multiSystemSync",
       "tier3_complexPipeline",
-      "tier4_enterpriseAutomation",
     ],
     tierNames: [
       "Tier 1 — Basic Connection",
       "Tier 2 — Multi-System Sync",
       "Tier 3 — Complex Pipeline",
-      "Tier 4 — Enterprise Automation",
     ],
   },
 };
@@ -143,7 +138,7 @@ export function RFPForm() {
 
       if (rawTier) {
         const tierNum = parseInt(rawTier, 10);
-        if (tierNum >= 1 && tierNum <= 4) {
+        if (tierNum >= 1 && tierNum <= 3) {
           setSelectedTierIndex(tierNum - 1);
         }
       }
@@ -606,15 +601,15 @@ export function RFPForm() {
                       ? [
                           {
                             name: "Strategy Sprint",
-                            price: `${formatTierPrice("strategySprint", "tier1_basicScoping", activeRegion)} – ${formatTierPrice("strategySprint", "tier4_enterpriseStrategy", activeRegion)}`,
+                            price: `${formatTierPrice("strategySprint", "tier1_basicScoping", activeRegion)} – ${formatTierPrice("strategySprint", "tier3_complexArchitecture", activeRegion)}`,
                           },
                           {
                             name: "Launch Kit",
-                            price: `${formatTierPrice("launchKit", "tier1_essential", activeRegion)} – ${formatTierPrice("launchKit", "tier4_enterpriseLaunch", activeRegion)}`,
+                            price: `${formatTierPrice("launchKit", "tier1_essential", activeRegion)} – ${formatTierPrice("launchKit", "tier3_premium", activeRegion)}`,
                           },
                           {
                             name: "Automation Layer",
-                            price: `${formatTierPrice("automationLayer", "tier1_basicConnection", activeRegion)} – ${formatTierPrice("automationLayer", "tier4_enterpriseAutomation", activeRegion)}`,
+                            price: `${formatTierPrice("automationLayer", "tier1_basicConnection", activeRegion)} – ${formatTierPrice("automationLayer", "tier3_complexPipeline", activeRegion)}`,
                           },
                         ]
                       : [

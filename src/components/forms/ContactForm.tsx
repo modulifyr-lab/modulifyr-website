@@ -334,7 +334,7 @@ export function ContactForm() {
               </div>
               <h3 className="text-h4 text-foreground font-bold">Birtamode HQ</h3>
               <p className="text-body2 text-text-alt leading-relaxed">
-                Birtamode, Ward 1, Gauri Tol, Jhapa, Nepal
+                Gauri Tole, Birtamode-1, Jhapa, Nepal
               </p>
               <a
                 href="https://www.google.com/maps/search/?api=1&query=Modulifyr+Enterprise+Pvt.+Ltd."
@@ -389,7 +389,7 @@ export function ContactForm() {
                 Modulifyr — Engineering systems that scale
               </span>
               <h3 className="text-body1 text-foreground font-bold">
-                Birtamode, Ward 1, Gauri Tol, Jhapa, Nepal
+                Gauri Tole, Birtamode-1, Jhapa, Nepal
               </h3>
               <p className="text-caption1 text-text-alt">Mon–Fri, 9:00 AM–6:00 PM NPT</p>
               <p className="text-caption2 text-text-dim">
@@ -397,7 +397,7 @@ export function ContactForm() {
                 hours.
               </p>
               <a
-                href="https://www.google.com/maps/search/?api=1&query=Birtamode+Ward+1+Gauri+Tol+Jhapa+Nepal"
+                href="https://www.google.com/maps/search/?api=1&query=Gauri+Tole+Birtamode-1+Jhapa+Nepal"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-caption1 inline-flex items-center gap-1.5 pt-1 font-bold text-[#2D738D] hover:underline"

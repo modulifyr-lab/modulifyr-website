@@ -12,21 +12,21 @@ export const DEFAULT_FAQ_ITEMS: readonly { question: string; answer: string }[] 
   {
     question: "How do I know Modulifyr is a fit for my business?",
     answer:
-      "Modulifyr is ideal for growing SMBs and teams that need clear technical scoping through a Strategy Sprint, a fast static web presence via Launch Kit, or an Automation Layer connecting their existing tools without manual busywork.",
+      "Modulifyr is ideal for SMBs and founders who need a fast Launch Kit website on Next.js & Tailwind, an Automation Layer connecting existing tools via n8n/webhooks, or a custom web app/MVP scoped through a Strategy Sprint.",
   },
   {
     question: "Can you integrate our new system with existing tools we use?",
     answer:
-      "Yes. We specialize in API integrations, webhooks, and legacy system modernization. We connect your existing databases, payment gateways, CRM, and accounting software into one unified data flow.",
+      "Yes. We build REST/webhook integrations and automated workflows across n8n, Zapier, Make, WhatsApp Business, Notion, Google Sheets, CRM tools, and payment gateways like eSewa, Khalti, and Stripe.",
   },
   {
     question: "How do I start a project with Modulifyr?",
     answer:
-      "You can start by booking a discovery call or scheduling a 2-week Strategy Sprint. We map out your current bottlenecks, architecture requirements, and project roadmap before any development commitments.",
+      "For a straightforward Launch Kit website or single automation, you can request a proposal or book a discovery call directly. For custom web apps, MVPs, or complex automations, start with a 3–10 day Strategy Sprint—100% of the sprint fee is credited if you build with us.",
   },
   {
     question: "What happens after launch?",
     answer:
-      "We ensure smooth deployment with CI/CD pipelines, automated backups, and thorough documentation. Post-launch, we offer SLA monitoring and security patches. Further feature work is scoped as a new engagement.",
+      "You get 100% ownership of your repository, domain, and accounts plus clear handoff documentation. Post-launch, we offer optional managed hosting, uptime alerting, and workflow health checks, or scope new features as a follow-on milestone.",
   },
 ];

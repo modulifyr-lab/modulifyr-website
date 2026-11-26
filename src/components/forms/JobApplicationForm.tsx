@@ -473,7 +473,7 @@ export function JobApplicationForm({ preselectedRole }: JobApplicationFormProps)
               <div className="bg-brand-navy rounded-3xl p-8 text-white">
                 <h3 className="font-heading mb-2 text-xl font-bold">Working at Modulifyr</h3>
                 <p className="text-text-muted mb-6 text-sm leading-relaxed">
-                  Pre-launch and bootstrapped. Contract roles are paid 20% of the revenue generated
+                  Founder-led and bootstrapped. Contract roles are paid 20% of the revenue generated
                   on your project or deal. If you join now, you are part of building the company
                   itself.
                 </p>

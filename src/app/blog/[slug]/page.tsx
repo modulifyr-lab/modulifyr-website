@@ -138,7 +138,7 @@ export default async function BlogPostPage({ params }: Props) {
                   <div>
                     <p className="text-foreground text-sm font-bold">Modulifyr Engineering Team</p>
                     <p className="text-text-dim text-xs">
-                      Birtamode, Ward 1, Gauri Tol, Jhapa, Nepal · modulifyr.com
+                      Gauri Tole, Birtamode-1, Jhapa, Nepal · modulifyr.com
                     </p>
                   </div>
                 </div>

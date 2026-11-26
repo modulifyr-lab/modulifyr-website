@@ -57,7 +57,7 @@ const sections = [
   },
   {
     title: "12. Contact",
-    body: "For questions about these Terms, contact us at contact@modulifyr.com. Address: Modulifyr Enterprise Pvt. Ltd., Birtamode, Ward 1, Gauri Tol, Jhapa, Nepal. Response time: within 5 business days.",
+    body: "For questions about these Terms, contact us at contact@modulifyr.com. Address: Modulifyr Enterprise Pvt. Ltd., Gauri Tole, Birtamode-1, Jhapa, Nepal. Response time: within 5 business days.",
   },
 ];
 

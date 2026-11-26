@@ -7,6 +7,7 @@ export interface NavDropdownItem {
 export interface NavGroup {
   name: string;
   href?: string;
+  badge?: string;
   items?: NavDropdownItem[];
 }
 
@@ -22,7 +23,7 @@ export const NAV_GROUPS: NavGroup[] = [
       {
         label: "Case Studies",
         href: "/work",
-        description: "Featured projects & client outcomes",
+        description: "Live demos & technical builds",
       },
       {
         label: "Technical Standards",
@@ -52,6 +53,7 @@ export const NAV_GROUPS: NavGroup[] = [
   },
   {
     name: "Careers",
-    href: "/careers"
-  }
+    href: "/careers",
+    badge: "We're Hiring",
+  },
 ];

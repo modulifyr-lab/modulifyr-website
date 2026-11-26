@@ -1,4 +1,4 @@
-import { CheckCircle, Clock, DollarSign, FilePenLine, Globe, Calculator } from "lucide-react";
+import { CheckCircle, Clock, DollarSign, FilePenLine, Calculator } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/Button";
 
@@ -58,9 +58,9 @@ export function HeroSection() {
 
           {/* Description */}
           <p className="text-on-surface-variant max-w-2xl text-base leading-relaxed sm:text-lg">
-            We deliver Strategy Sprints, fast Launch Kit websites, and reliable Automation Layers
-            for growing businesses across Nepal and worldwide—fixed-scope packages with clear
-            pricing and zero bloat.
+            We deliver fast Launch Kit websites, reliable Automation Layers, and focused Custom
+            Web Apps &amp; MVPs for growing businesses across Nepal and worldwide—clear pricing,
+            founder-led engineering, and zero bloat.
           </p>
 
           {/* Primary & Secondary Actions */}
@@ -96,16 +96,8 @@ export function HeroSection() {
             <span aria-hidden="true">·</span>
             <span className="flex items-center gap-1.5">
               <CheckCircle className="text-cta h-4 w-4 shrink-0" />
-              NDA available
+              100% client IP ownership
             </span>
-            <span aria-hidden="true">·</span>
-            <Link
-              href="/careers"
-              className="text-cta flex items-center gap-1.5 font-semibold hover:underline"
-            >
-              <Globe className="h-4 w-4 shrink-0" />
-              Hiring contract builders
-            </Link>
           </div>
         </div>
       </div>

@@ -27,23 +27,23 @@ const DEMO_TABS: readonly {
   {
     slug: "strategy-sprint",
     number: "01.",
-    headline: "Know exact costs and priorities before spending on code",
+    headline: "Scope custom web apps, MVPs, and complex automations upfront",
     outcome:
-      "Stop guessing budgets or rebuilding half-finished software. Get clear scope, realistic timelines, and a prioritized plan in 3–10 days.",
+      "Lock down exact architecture, PostgreSQL schema, and milestone pricing in 3–10 days before building—with 100% of the sprint fee credited toward your build.",
   },
   {
     slug: "launch-kit",
     number: "02.",
-    headline: "Turn local searches and social clicks into real inquiries",
+    headline: "Turn local searches and social clicks into real inquiries in 3–7 days",
     outcome:
-      "Earn customer trust from day one with a fast, mobile-first site built to rank locally—zero server upkeep or sluggish templates.",
+      "Built on our modular Next.js & Tailwind component system—fast, mobile-first, SEO-ready, and wired to WhatsApp, booking, or payment forms.",
   },
   {
     slug: "automation-layer",
     number: "03.",
     headline: "Save hours weekly by eliminating manual data entry",
     outcome:
-      "Sync incoming inquiries, customer records, and team alerts automatically so follow-ups go out fast and no lead is dropped.",
+      "Sync incoming inquiries, WhatsApp alerts, and payment/ledger records via n8n, Zapier, Make, or webhooks so no lead is dropped.",
   },
 ];
 
@@ -121,7 +121,7 @@ function StrategyMicroDemo() {
       )}
 
       <p className="text-on-surface-variant border-border-base border-t pt-4 text-xs">
-        You own the complete requirements doc and architecture blueprint—build with us or any team.
+        100% of your Strategy Sprint fee can be credited toward a Custom Web App, MVP, or Automation build.
       </p>
     </div>
   );
@@ -199,7 +199,8 @@ function LaunchKitMicroDemo() {
       </div>
 
       <p className="text-on-surface-variant border-border-base border-t pt-4 text-xs">
-        Delivered with Figma prototypes, structured revisions, and Vercel/Netlify-ready deployment.
+        Built on Modulifyr&apos;s modular Next.js &amp; Tailwind component system—fast 3–7 day delivery,
+        SEO-ready, and Vercel-ready deployment. (Bespoke Figma reserved for Tier 3 or add-on.)
       </p>
     </div>
   );

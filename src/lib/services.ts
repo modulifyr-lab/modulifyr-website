@@ -14,23 +14,23 @@ export const SERVICES: readonly Service[] = [
     pkgKey: "strategySprint",
     title: "Strategy Sprint",
     summary:
-      "Avoid costly rework and blown budgets before writing a line of code. We turn messy ideas and operational bottlenecks into a clear, phased plan so your business knows exact costs, timelines, and priorities upfront.",
-    bestFor: "Businesses avoiding wasted spend, unclear scope, or risky system rebuilds.",
+      "Scoping for custom web apps, MVPs, and complex multi-system automations before writing production code. We lock down architecture, database design, and milestones upfront—and credit 100% of the sprint fee toward your build.",
+    bestFor: "Founders and teams scoping custom web apps, MVPs, or multi-system integrations.",
   },
   {
     slug: "launch-kit",
     pkgKey: "launchKit",
     title: "Launch Kit",
     summary:
-      "Win customer trust online and turn local searches into real inquiries—fast. A mobile-ready, high-speed business website with zero server headaches, built to rank well and route leads straight to your team.",
-    bestFor: "Growing Nepal SMBs needing instant credibility, faster leads, and zero maintenance bloat.",
+      "Win customer trust online and turn searches into real inquiries in 3–7 days. Built on our modular Next.js & Tailwind component system—responsive, SEO-ready, and wired to booking, WhatsApp, or payment forms.",
+    bestFor: "Nepal SMBs and growing brands needing a fast, high-trust website without agency bloat.",
   },
   {
     slug: "automation-layer",
     pkgKey: "automationLayer",
     title: "Automation Layer",
     summary:
-      "Stop losing hours to manual copy-pasting between forms, spreadsheets, and team chats. We connect the tools you already use into reliable workflows that capture leads, trigger follow-ups, and prevent dropped orders.",
+      "Stop losing hours to manual copy-pasting between forms, spreadsheets, and team chats. We connect your tools via n8n, Zapier, Make, and custom webhooks with retry logic and error alerts.",
     bestFor: "Teams losing staff hours or customer leads to manual data entry and disconnected tools.",
   },
 ];

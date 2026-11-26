@@ -8,8 +8,6 @@ import Link from "next/link";
 import { useRegion } from "@/components/RegionProvider";
 import {
   formatTierPriceStandard,
-  formatTierPriceFounding,
-  FOUNDING_SLOTS_REMAINING,
   formatManagedHostingPrice,
 } from "@/lib/pricing";
 import Reveal from "@/components/ui/Reveal";
@@ -18,25 +16,25 @@ const tiers = [
   {
     name: "Tier 1 — Essential",
     tierKey: "tier1_essential",
-    duration: "7–10 business days",
-    bestFor: "Validation pages, waitlists, single-event sites, simple portfolios",
-    descriptionNepal: "A professionally designed landing page to launch your idea in 7–10 days.",
-    descriptionInternational: "Professional landing page built for speed – get online quickly.",
+    duration: "3–5 business days",
+    bestFor: "Validation pages, local service businesses, single-event sites, clean portfolios",
+    descriptionNepal:
+      "Get online in 3–5 days with our fast modular Next.js & Tailwind component system.",
+    descriptionInternational:
+      "Fast 1–3 page launch built on Modulifyr's modular Next.js & Tailwind component system.",
     included: [
-      "1–3 responsive pages",
-      "Clean structural layout — no animations",
-      "1 Figma low-fidelity wireframe for approval before build",
-      "1 round of minor adjustments after delivery",
-      "Contact form connected to a form-handling service — submissions go to your email",
-      "Deployment-ready handoff — Vercel or Netlify compatible",
-      "Mobile-first responsive design",
+      "1–3 responsive pages built on Modulifyr's modular Next.js & Tailwind component system",
+      "Mobile-first responsive layout — clean, fast, zero heavy motion bloat",
+      "1 round of structured revisions after preview",
+      "Contact form & WhatsApp click-to-chat routing — submissions go straight to your inbox",
+      "Basic on-page SEO meta tags & sitemap setup",
+      "Deployment-ready handoff — Vercel compatible, 100% client code & domain ownership",
     ],
     notIncluded: [
-      "Any animations or transitions",
-      "Custom illustrations or graphic design",
+      "Bespoke Figma design from scratch (available as an optional priced add-on or in Tier 3)",
+      "Heavy scroll animations or 3D elements",
       "Copywriting — all text must be provided by client",
       "Domain purchase or hosting subscription",
-      "SEO beyond basic meta tags",
       "Custom server-side logic or databases",
     ],
     highlight: false,
@@ -44,30 +42,26 @@ const tiers = [
   {
     name: "Tier 2 — Business",
     tierKey: "tier2_business",
-    duration: "2–3 weeks",
-    bestFor: "Service businesses, agencies, professional portfolios, small corporate sites",
+    duration: "5–7 business days",
+    bestFor: "Service businesses, clinics, consultancies, agencies, small corporate sites",
     descriptionNepal:
-      "Turn local searches into real inquiries with a fast 4–10 page site, smooth scroll, and booking embed.",
+      "Turn local searches into real inquiries with 4–10 modular pages, booking, WhatsApp, and payment links.",
     descriptionInternational:
-      "Responsive 4–10 page site with Figma prototypes, soft motion, and lead capture.",
+      "Responsive 4–10 page site built on our modular Next.js & Tailwind system with booking & payment integration.",
     included: [
-      "4–10 responsive pages",
-      "Soft animations — scroll reveals, hover states, smooth scroll",
-      "2 Figma high-fidelity prototypes — desktop and mobile views",
-      "2 structured revision rounds during design and build",
-      "Contact form with validation, connected to a form-handling service",
-      "One additional lightweight interactive element — e.g. newsletter signup, quote estimator, or simple calculator — powered by third-party tools, no custom server required",
-      "Booking/scheduling embed (e.g. Calendly) if needed — client's own account",
-      "SEO meta tags and basic on-page structure",
-      "Reusable component architecture for long-term consistency",
-      "Deployment-ready handoff",
+      "4–10 responsive pages built on Modulifyr's modular Next.js & Tailwind component system",
+      "Subtle hover & transition polish — fast load times without bloated animation scripts",
+      "2 structured revision rounds during build",
+      "Lead capture forms with validation + WhatsApp routing",
+      "Booking/scheduling embed (Cal.com / Calendly) & eSewa / Khalti / Stripe payment link integration",
+      "On-page SEO structure, OpenGraph meta tags & Google Business alignment",
+      "Reusable component structure + Vercel deployment handoff",
     ],
     notIncluded: [
-      "Background animations or 3D elements",
+      "Bespoke Figma prototypes from scratch (optional priced add-on, or included in Tier 3)",
+      "Heavy motion sequences or custom 3D elements",
       "Copywriting — all text must be provided by client",
       "Domain purchase or hosting subscription",
-      "Analytics platform subscription",
-      "Custom illustration or photography",
       "Custom server-side logic, databases, or user accounts",
     ],
     highlight: true,
@@ -75,82 +69,49 @@ const tiers = [
   {
     name: "Tier 3 — Premium",
     tierKey: "tier3_premium",
-    duration: "3–4 weeks",
-    bestFor: "Brands that need a high-end digital presence with full motion design",
+    duration: "2–4 weeks",
+    bestFor: "Brands that need bespoke Figma design, interactive motion, and 11–20 custom pages",
     descriptionNepal:
-      "Stand out in competitive Nepal markets with 11–20 pages, interactive flows, full SEO, and analytics.",
+      "Stand out in competitive markets with bespoke Figma design, 11–20 pages, interactive flows, and full SEO.",
     descriptionInternational:
-      "High-craft multi-page website with full motion design, analytics setup, and scalable structure.",
+      "Custom multi-page website with bespoke Figma prototypes, tailored motion design, and analytics setup.",
     included: [
       "11–20 responsive pages",
-      "Full animation — scroll-triggered sequences, background motion, micro-interactions",
-      "4 high-fidelity interactive Figma prototypes covering all key flows",
+      "Bespoke Figma prototypes covering all key flows before build",
+      "Custom motion — scroll-triggered reveals & micro-interactions",
       "3 comprehensive revision rounds throughout design and build",
-      "Multiple contact/inquiry forms with validation, connected to a form-handling service",
-      "Several lightweight interactive elements — e.g. multi-step forms, quote calculators, dynamic filtering — powered by third-party tools or stateless functions, no custom server or database required",
-      "Booking/scheduling embed (e.g. Calendly) if needed — client's own account",
-      "Full SEO meta structure across all pages",
-      "Analytics integration setup — platform subscription paid by client",
-      "Performance-optimised asset delivery",
-      "Deployment-ready handoff",
+      "Multiple contact/inquiry forms with validation & lead routing",
+      "Interactive elements — multi-step forms, quote calculators, or dynamic filtering",
+      "Booking/scheduling embed & payment gateway link setup",
+      "Full SEO meta structure across all pages + analytics integration setup",
+      "Performance-optimised asset delivery & clean repository handoff",
     ],
     notIncluded: [
       "Copywriting — all text must be provided by client",
       "Domain purchase or hosting subscription",
       "Analytics platform subscription",
       "Custom 3D modeling or video production",
-      "Custom server infrastructure, databases, or persistent user data storage",
-    ],
-    highlight: false,
-  },
-  {
-    name: "Tier 4 — Enterprise Launch",
-    tierKey: "tier4_enterpriseLaunch",
-    duration: "4–5 weeks",
-    bestFor: "Enterprise launches requiring procurement-ready documentation",
-    descriptionNepal: "Complete launch suite including social setup, SEO basics, and analytics.",
-    descriptionInternational:
-      "Full launch suite with procurement‑ready SOWs and optional SLA support.",
-    included: [
-      "20+ responsive pages",
-      "Full animation — scroll-triggered sequences, background motion, micro-interactions",
-      "5+ high-fidelity interactive Figma prototypes covering all key flows",
-      "4 comprehensive revision rounds throughout design and build",
-      "Multiple contact/inquiry forms with validation, connected to a form-handling service",
-      "Multiple lightweight interactive elements — e.g. multi-step forms, quote calculators, dynamic filtering — powered by third-party tools or stateless functions, no custom server or database required",
-      "Booking/scheduling embed (e.g. Calendly) if needed — client's own account",
-      "Full SEO meta structure across all pages",
-      "Analytics integration setup — platform subscription paid by client",
-      "Performance-optimised asset delivery",
-      "Social media profile setup and basic optimisation",
-      "SEO basics implementation",
-      "Analytics dashboard configuration",
-      "Procurement-ready SOWs",
-      "Optional SLA support available",
-      "Deployment-ready handoff",
-    ],
-    notIncluded: [
-      "Copywriting — all text must be provided by client",
-      "Domain purchase or hosting subscription",
-      "Analytics platform subscription",
-      "Custom 3D modeling or video production",
-      "Custom server infrastructure, databases, or persistent user data storage",
+      "Custom server infrastructure, databases, or persistent user data storage (see Custom Web Apps)",
     ],
     highlight: false,
   },
 ] as const;
 
 const animationGuide = [
-  { tier: "Tier 1", motion: "None", example: "Static layout, no movement" },
+  {
+    tier: "Tier 1",
+    motion: "Modular & Fast",
+    example: "Modulifyr Next.js & Tailwind component system — crisp, clean, 3–5 day delivery",
+  },
   {
     tier: "Tier 2",
-    motion: "Soft",
-    example: "Fade-ins on scroll, hover colour changes, smooth page scroll",
+    motion: "Modular + Polish",
+    example: "Subtle UI transitions, booking & WhatsApp/payment integration — 5–7 day delivery",
   },
   {
     tier: "Tier 3",
-    motion: "Full",
-    example: "Scroll-triggered sequences, background animations, advanced transitions",
+    motion: "Bespoke Figma + Motion",
+    example: "Custom Figma prototypes, scroll-triggered sequences & interactive flows",
   },
 ];
 
@@ -237,18 +198,19 @@ export default function LaunchKitPage() {
           <div className="mb-12">
             <Reveal variant="fade-up">
               <h2 className="font-heading text-foreground mb-3 text-3xl font-bold">
-                Four Tiers — Priced by Scope
+                Three Tiers — Priced by Scope
               </h2>
             </Reveal>
             <Reveal variant="fade-up" delay={100}>
               <p className="text-text-secondary max-w-2xl text-sm leading-relaxed">
-                Price scales with page count, animation complexity, and revision rounds. Not sure
-                which tier fits? Describe your project and we will advise.
+                Tiers 1 &amp; 2 launch fast on our modular Next.js &amp; Tailwind component system
+                (3–7 business days). Need bespoke Figma design from scratch? Choose Tier 3 or add it
+                on.
               </p>
             </Reveal>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
             {tiers.map((tier, i) => (
               <Reveal key={i} variant="fade-up" delay={i * 80}>
                 <Card
@@ -265,23 +227,9 @@ export default function LaunchKitPage() {
                   <div>
                     <h3 className="text-foreground mb-1 text-base font-bold">{tier.name}</h3>
                     {activeRegion ? (
-                      FOUNDING_SLOTS_REMAINING > 0 ? (
-                        <div className="flex flex-col gap-1">
-                          <div className="text-text-muted text-xs line-through">
-                            {formatTierPriceStandard("launchKit", tier.tierKey, activeRegion)}
-                          </div>
-                          <div className="font-heading text-2xl font-bold text-[#2D738D]">
-                            {formatTierPriceFounding("launchKit", tier.tierKey, activeRegion)}
-                          </div>
-                          <div className="text-text-muted mt-0.5 text-[11px]">
-                            Founding client pricing — {FOUNDING_SLOTS_REMAINING} spots remaining.
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="font-heading text-2xl font-bold text-[#2D738D]">
-                          {formatTierPriceStandard("launchKit", tier.tierKey, activeRegion)}
-                        </div>
-                      )
+                      <div className="font-heading text-2xl font-bold text-[#2D738D]">
+                        {formatTierPriceStandard("launchKit", tier.tierKey, activeRegion)}
+                      </div>
                     ) : (
                       <div className="text-text-muted text-sm font-semibold">
                         Select region for pricing

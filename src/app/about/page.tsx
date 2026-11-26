@@ -4,7 +4,7 @@ import AboutClient from "./AboutClient";
 export const metadata: Metadata = {
   title: "About Modulifyr | Rijan Mainali — Founder, Birtamode Nepal",
   description:
-    "Modulifyr is a software development company founded by Rijan Mainali in Birtamode, Nepal. We build modular, scalable systems for SMBs in education, healthcare, retail, and commerce.",
+    "Modulifyr is a founder-led engineering and growth studio based in Gauri Tole, Birtamode-1, Jhapa, Nepal, delivering Launch Kits, Automation Layers, and Custom Web Apps.",
   alternates: {
     canonical: "/about",
   },
@@ -16,7 +16,7 @@ const founderSchema = {
   "@type": "Person",
   "@id": "https://modulifyr.com/#founder",
   name: "Rijan Mainali",
-  jobTitle: "Founder & CEO",
+  jobTitle: "Founder, Architecture & Engineering",
   image: "https://modulifyr.com/rijan-mainali.jpg",
   worksFor: {
     "@type": "Organization",
@@ -25,6 +25,7 @@ const founderSchema = {
   },
   address: {
     "@type": "PostalAddress",
+    streetAddress: "Gauri Tole, Birtamode-1",
     addressLocality: "Birtamode",
     addressRegion: "Jhapa",
     addressCountry: "NP",

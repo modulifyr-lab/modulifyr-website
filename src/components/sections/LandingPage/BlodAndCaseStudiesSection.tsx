@@ -6,10 +6,10 @@ import Reveal from "@/components/ui/Reveal";
 
 const POSTS = [
   {
-    tag: "Internal R&D Build",
-    title: "Inside The Planning Bord: Modular System Architecture",
+    tag: "Technical Builds",
+    title: "Educom & Automated Lead Pipelines: Modular Execution",
     description:
-      "How separating operational workflows into discrete modules with clean boundaries prevents brittle monoliths.",
+      "How we combine fast Next.js frontends, PostgreSQL backends, and retry-safe n8n + WhatsApp workflows for SMBs.",
     image: "/blog/blog-one.jpg",
     alt: "Modular system screens and layout components",
     href: "/work",

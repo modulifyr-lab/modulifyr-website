@@ -71,6 +71,21 @@ const nextConfig: NextConfig = {
         destination: "/contact",
         permanent: true,
       },
+      {
+        source: "/case-studies",
+        destination: "/work",
+        permanent: true,
+      },
+      {
+        source: "/automation-layer",
+        destination: "/services/automation-layer",
+        permanent: true,
+      },
+      {
+        source: "/technical-standards",
+        destination: "/about/technical-standards",
+        permanent: true,
+      },
     ];
   },
 };

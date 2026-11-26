@@ -31,11 +31,16 @@ export function DesktopNavigation({
               <Link
                 href={group.href}
                 role="menuitem"
-                className={`group relative text-sm leading-none font-medium tracking-[0.28px] whitespace-nowrap shrink-0 transition-colors duration-300 ease-in ${
+                className={`group relative inline-flex items-center gap-1.5 text-sm leading-none font-medium tracking-[0.28px] whitespace-nowrap shrink-0 transition-colors duration-300 ease-in ${
                   isActive ? "text-cta" : "text-on-surface-variant"
                 } hover:text-cta`}
               >
                 {group.name}
+                {group.badge && (
+                  <span className="bg-cta/12 text-cta border-cta/25 rounded border px-1.5 py-0.5 text-[10px] font-semibold tracking-normal">
+                    {group.badge}
+                  </span>
+                )}
 
                 <span
                   className={`bg-cta absolute -bottom-3 left-0 h-0.5 w-full cursor-pointer transition-transform duration-300 ease-in ${

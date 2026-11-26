@@ -2,13 +2,11 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { ArrowRight, Check, Calculator, Sparkles } from "lucide-react";
+import { ArrowRight, Check, Calculator } from "lucide-react";
 import { useRegion } from "@/components/RegionProvider";
 import { REGIONS, REGION_CODES, type Region } from "@/lib/regions";
 import {
-  formatTierPriceFounding,
   formatTierPriceStandard,
-  FOUNDING_SLOTS_REMAINING,
   type PackagePricingKey,
 } from "@/lib/pricing";
 import { SERVICES, type Service } from "@/lib/services";
@@ -29,11 +27,11 @@ const PACKAGE_TIERS: Record<PackagePricingKey, readonly TierOption[]> = {
       tierNumber: 1,
       label: "Tier 1 · Basic Scoping",
       duration: "3–5 business days",
-      scopeSummary: "Single product or feature with a clear initial boundary.",
+      scopeSummary: "Single custom MVP feature or automation workflow with clear boundaries.",
       deliverables: [
         "Written brief & requirements document",
-        "High-level tech stack recommendation",
-        "Phased delivery roadmap",
+        "Next.js / Hono / PostgreSQL stack plan",
+        "Phased delivery roadmap (credited toward build)",
       ],
     },
     {
@@ -41,11 +39,11 @@ const PACKAGE_TIERS: Record<PackagePricingKey, readonly TierOption[]> = {
       tierNumber: 2,
       label: "Tier 2 · Full Discovery",
       duration: "1 week",
-      scopeSummary: "Multi-feature business systems with 2–4 connected modules.",
+      scopeSummary: "Custom web apps & MVPs with 2–4 connected user/data modules.",
       deliverables: [
-        "2–3 structured stakeholder workshops",
-        "System & component architecture blueprint",
-        "Phased roadmap with time estimates",
+        "2–3 structured discovery workshops",
+        "System, database & API blueprint",
+        "Phased roadmap with time estimates (credited toward build)",
       ],
     },
     {
@@ -53,23 +51,11 @@ const PACKAGE_TIERS: Record<PackagePricingKey, readonly TierOption[]> = {
       tierNumber: 3,
       label: "Tier 3 · Complex Architecture",
       duration: "1–2 weeks",
-      scopeSummary: "Large, unclear, legacy, or multi-team system scope.",
+      scopeSummary: "Multi-workflow custom apps or cross-system automation scoping.",
       deliverables: [
         "3–5 deep-dive architecture workshops",
         "Full integration map & risk mitigation plan",
-        "Dependency-sequenced engineering roadmap",
-      ],
-    },
-    {
-      tierKey: "tier4_enterpriseStrategy",
-      tierNumber: 4,
-      label: "Tier 4 · Enterprise Strategy",
-      duration: "2–3 weeks",
-      scopeSummary: "Enterprise governance, SLA planning, and formal SOW readiness.",
-      deliverables: [
-        "5+ cross-department workshops & specs",
-        "Procurement-ready SOW & resource estimates",
-        "SLA-backed delivery blueprint",
+        "Dependency-sequenced build roadmap (credited toward build)",
       ],
     },
   ],
@@ -78,48 +64,36 @@ const PACKAGE_TIERS: Record<PackagePricingKey, readonly TierOption[]> = {
       tierKey: "tier1_essential",
       tierNumber: 1,
       label: "Tier 1 · Essential",
-      duration: "7–10 business days",
-      scopeSummary: "1–3 responsive pages for rapid local business launch.",
+      duration: "3–5 business days",
+      scopeSummary: "1–3 responsive pages built on our modular Next.js & Tailwind component system.",
       deliverables: [
-        "Mobile-first responsive layout (no animations)",
-        "Figma wireframe approval + 1 revision round",
-        "Email-connected contact form + Vercel handoff",
+        "Mobile-first responsive layout (modular Next.js + Tailwind)",
+        "SEO meta tags + WhatsApp / email lead form routing",
+        "1 revision round + Vercel deployment handoff",
       ],
     },
     {
       tierKey: "tier2_business",
       tierNumber: 2,
       label: "Tier 2 · Business",
-      duration: "2–3 weeks",
-      scopeSummary: "4–10 pages with smooth scroll reveals and booking/quote tools.",
+      duration: "5–7 business days",
+      scopeSummary: "4–10 pages built on our modular Next.js & Tailwind system with booking & payments.",
       deliverables: [
-        "Desktop & mobile Figma high-fidelity prototypes",
-        "Soft animations + 2 structured revision rounds",
-        "Booking embed, calculator/newsletter & SEO tags",
+        "Modular Next.js & Tailwind build (optional Figma add-on)",
+        "Booking embed, WhatsApp & eSewa/Khalti/Stripe link setup",
+        "On-page SEO structure + 2 structured revision rounds",
       ],
     },
     {
       tierKey: "tier3_premium",
       tierNumber: 3,
       label: "Tier 3 · Premium",
-      duration: "3–4 weeks",
-      scopeSummary: "11–20 pages with full motion design and analytics integration.",
+      duration: "2–4 weeks",
+      scopeSummary: "11–20 pages with custom Figma design, interactive motion & analytics setup.",
       deliverables: [
-        "4 interactive Figma prototypes + 3 revisions",
+        "Bespoke Figma prototypes covering key flows + 3 revisions",
         "Scroll-triggered motion & micro-interactions",
         "Multi-step forms, filtering & full SEO structure",
-      ],
-    },
-    {
-      tierKey: "tier4_enterpriseLaunch",
-      tierNumber: 4,
-      label: "Tier 4 · Enterprise Launch",
-      duration: "4–5 weeks",
-      scopeSummary: "20+ pages with full launch suite, analytics dashboard & SOWs.",
-      deliverables: [
-        "5+ interactive prototypes + 4 revision rounds",
-        "SEO basics, social setup & analytics dashboard",
-        "Procurement-ready SOWs + optional SLA support",
       ],
     },
   ],
@@ -129,7 +103,7 @@ const PACKAGE_TIERS: Record<PackagePricingKey, readonly TierOption[]> = {
       tierNumber: 1,
       label: "Tier 1 · Basic Connection",
       duration: "1–2 weeks",
-      scopeSummary: "Connect 2 tools to eliminate repetitive manual copy-pasting.",
+      scopeSummary: "Connect 2 tools via n8n, Make, Zapier, or webhooks.",
       deliverables: [
         "2 systems connected (trigger → action flow)",
         "Basic failure alert notifications",
@@ -153,23 +127,11 @@ const PACKAGE_TIERS: Record<PackagePricingKey, readonly TierOption[]> = {
       tierNumber: 3,
       label: "Tier 3 · Complex Pipeline",
       duration: "4–6 weeks",
-      scopeSummary: "6+ systems or conditional branching across departments.",
+      scopeSummary: "6+ systems or conditional branching across workflows.",
       deliverables: [
         "Multi-directional conditional workflows",
         "Comprehensive error recovery & health alerts",
         "End-to-end operational runbook",
-      ],
-    },
-    {
-      tierKey: "tier4_enterpriseAutomation",
-      tierNumber: 4,
-      label: "Tier 4 · Enterprise Automation",
-      duration: "6–8 weeks",
-      scopeSummary: "Unlimited integrations with custom monitoring & 3-month support.",
-      deliverables: [
-        "Custom monitoring dashboard & alerting rules",
-        "SLA-backed uptime & SOW compliance",
-        "3 months ongoing optimization included",
       ],
     },
   ],
@@ -181,27 +143,17 @@ export function ScopeEstimatorSection() {
 
   const [selectedSlug, setSelectedSlug] = React.useState<Service["slug"]>("launch-kit");
   const [tierIndex, setTierIndex] = React.useState<number>(1);
-  const [useFoundingRate, setUseFoundingRate] = React.useState<boolean>(
-    FOUNDING_SLOTS_REMAINING > 0
-  );
 
   const selectedService =
     SERVICES.find((s) => s.slug === selectedSlug) ?? SERVICES[1];
   const tiers = PACKAGE_TIERS[selectedService.pkgKey];
   const activeTier = tiers[tierIndex] ?? tiers[0];
 
-  const foundingPrice = formatTierPriceFounding(
+  const displayPrice = formatTierPriceStandard(
     selectedService.pkgKey,
     activeTier.tierKey,
     activeRegion
   );
-  const standardPrice = formatTierPriceStandard(
-    selectedService.pkgKey,
-    activeTier.tierKey,
-    activeRegion
-  );
-
-  const displayPrice = useFoundingRate ? foundingPrice : standardPrice;
   const proposalHref = `/request-proposal?pkg=${selectedService.slug}&tier=${activeTier.tierNumber}&region=${activeRegion}`;
 
   return (
@@ -322,44 +274,14 @@ export function ScopeEstimatorSection() {
               </div>
             </div>
 
-            {/* Step 3: Founding Client Toggle */}
-            <div className="border-border-base flex flex-col justify-between gap-4 border-t pt-5 sm:flex-row sm:items-center">
-              <div className="flex items-start gap-3">
-                <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-[#E8A33D]" />
-                <div>
-                  <p className="text-on-background text-sm font-semibold">
-                    Founding Partner Rate (20% Off)
-                  </p>
-                  <p className="text-on-surface-variant text-xs">
-                    {FOUNDING_SLOTS_REMAINING} founding client slots remaining for early partners.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex shrink-0 items-center gap-1 rounded-lg border border-border-base bg-background p-1">
-                <button
-                  type="button"
-                  onClick={() => setUseFoundingRate(true)}
-                  className={`cursor-pointer rounded-md px-3 py-1.5 text-xs font-semibold whitespace-nowrap transition-colors ${
-                    useFoundingRate
-                      ? "bg-cta text-on-cta"
-                      : "text-on-surface-variant hover:text-on-background"
-                  }`}
-                >
-                  Founding Rate
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setUseFoundingRate(false)}
-                  className={`cursor-pointer rounded-md px-3 py-1.5 text-xs font-semibold whitespace-nowrap transition-colors ${
-                    !useFoundingRate
-                      ? "bg-cta text-on-cta"
-                      : "text-on-surface-variant hover:text-on-background"
-                  }`}
-                >
-                  Standard Rate
-                </button>
-              </div>
+            {/* Step 3: Commercial Terms Note */}
+            <div className="border-border-base flex flex-col justify-between gap-2 border-t pt-5 sm:flex-row sm:items-center">
+              <p className="text-on-background text-sm font-semibold">
+                Milestone billing &amp; 100% client IP ownership
+              </p>
+              <p className="text-on-surface-variant text-xs">
+                Third-party SaaS &amp; hosting accounts stay in your name at cost.
+              </p>
             </div>
           </div>
 
@@ -385,9 +307,6 @@ export function ScopeEstimatorSection() {
                   {displayPrice}
                 </div>
                 <div className="mt-2 flex flex-wrap items-center gap-3 text-xs text-slate-300">
-                  {useFoundingRate && (
-                    <span className="line-through opacity-70 tabular-nums">{standardPrice}</span>
-                  )}
                   <span>Delivery: {activeTier.duration}</span>
                   <span aria-hidden="true">·</span>
                   <span>{REGIONS[activeRegion].label} ({REGIONS[activeRegion].currency})</span>

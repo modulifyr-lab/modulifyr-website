@@ -16,11 +16,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useRegion } from "@/components/RegionProvider";
-import {
-  formatTierPriceStandard,
-  formatTierPriceFounding,
-  FOUNDING_SLOTS_REMAINING,
-} from "@/lib/pricing";
+import { formatTierPriceStandard } from "@/lib/pricing";
 import Reveal from "@/components/ui/Reveal";
 
 const tiers = [
@@ -74,11 +70,11 @@ const tiers = [
     tierKey: "tier3_complexPipeline",
     duration: "4–6 weeks",
     bestFor: "6+ systems or flows with conditional logic and branching",
-    descriptionNepal: "Full automation of your entire operational process – from lead to delivery.",
+    descriptionNepal: "Full automation of your operational process — from lead capture to billing.",
     descriptionInternational:
-      "Enterprise automation suite with SLA‑guaranteed uptime and PO acceptance.",
+      "Multi-system workflow pipeline with conditional branching, error recovery, and clear documentation.",
     included: [
-      "6 or more systems connected, or highly complex logic in fewer systems",
+      "6 or more systems connected, or complex conditional logic across fewer systems",
       "Multi-directional flows with conditional branching",
       "Full error handling with alerting and context",
       "Monitoring setup — flow health visibility",
@@ -86,50 +82,28 @@ const tiers = [
     ],
     notIncluded: [
       "Custom monitoring dashboard UI — monitoring is tool-based, not a built interface",
-      "Subscriptions to any connected platform",
+      "Subscriptions to any connected platform (n8n, Make, Zapier, WhatsApp API fees)",
       "Ongoing maintenance beyond the build — handled separately",
-    ],
-    highlight: false,
-  },
-  {
-    name: "Tier 4 — Enterprise Automation",
-    tierKey: "tier4_enterpriseAutomation",
-    duration: "6–8 weeks",
-    bestFor: "Enterprise-scale automation requiring dedicated support and SLAs",
-    descriptionNepal:
-      "Custom enterprise‑grade automation with full integration and ongoing optimisation.",
-    descriptionInternational:
-      "Complete enterprise solution with dedicated support, SLAs, and procurement compliance.",
-    included: [
-      "Unlimited systems connected, or highly complex logic across many systems",
-      "Multi-directional flows with advanced conditional branching",
-      "Full error handling with alerting, context, and automated recovery",
-      "Monitoring setup with custom dashboards and alerting rules",
-      "Comprehensive documentation covering all flows, error states, and recovery steps",
-      "SLA-backed uptime guarantees",
-      "Procurement-compliant documentation and SOWs",
-      "Dedicated support channel during business hours",
-      "Ongoing optimization and maintenance included for 3 months",
-    ],
-    notIncluded: [
-      "Subscriptions to any connected platform",
-      "Custom UI development beyond monitoring dashboards",
     ],
     highlight: false,
   },
 ] as const;
 
 const whatWeConnect = [
-  { icon: GitMerge, label: "APIs & webhooks", desc: "REST, GraphQL, or webhook-based connections" },
+  {
+    icon: GitMerge,
+    label: "APIs, WhatsApp & eSewa/Khalti webhooks",
+    desc: "REST, webhook triggers, WhatsApp alerts, and payment status sync",
+  },
   {
     icon: RefreshCw,
-    label: "Data sync jobs",
-    desc: "Scheduled or event-driven sync between platforms",
+    label: "CRM, Notion & Sheets sync",
+    desc: "Scheduled or event-driven sync between forms, Notion, Sheets, and CRMs",
   },
   {
     icon: Activity,
-    label: "n8n workflows",
-    desc: "Visual workflow automation — n8n subscription paid by client",
+    label: "n8n, Zapier & Make workflows",
+    desc: "Visual workflow automation — third-party SaaS/API costs paid directly by client",
   },
 ];
 
@@ -217,7 +191,7 @@ export default function AutomationLayerPage() {
           <div className="mb-12">
             <Reveal variant="fade-up">
               <h2 className="font-heading text-foreground mb-3 text-3xl font-bold">
-                Four Tiers — Priced by System Count and Complexity
+                Three Tiers — Priced by System Count and Complexity
               </h2>
             </Reveal>
             <Reveal variant="fade-up" delay={100}>
@@ -229,7 +203,7 @@ export default function AutomationLayerPage() {
             </Reveal>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
             {tiers.map((tier, i) => (
               <Reveal key={i} variant="fade-up" delay={i * 80}>
                 <Card
@@ -246,23 +220,9 @@ export default function AutomationLayerPage() {
                   <div>
                     <h3 className="text-foreground mb-1 text-base font-bold">{tier.name}</h3>
                     {activeRegion ? (
-                      FOUNDING_SLOTS_REMAINING > 0 ? (
-                        <div className="flex flex-col gap-1">
-                          <div className="text-text-muted text-xs line-through">
-                            {formatTierPriceStandard("automationLayer", tier.tierKey, activeRegion)}
-                          </div>
-                          <div className="font-heading text-2xl font-bold text-[#2D738D]">
-                            {formatTierPriceFounding("automationLayer", tier.tierKey, activeRegion)}
-                          </div>
-                          <div className="text-text-muted mt-0.5 text-[11px]">
-                            Founding client pricing — {FOUNDING_SLOTS_REMAINING} spots remaining.
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="font-heading text-2xl font-bold text-[#2D738D]">
-                          {formatTierPriceStandard("automationLayer", tier.tierKey, activeRegion)}
-                        </div>
-                      )
+                      <div className="font-heading text-2xl font-bold text-[#2D738D]">
+                        {formatTierPriceStandard("automationLayer", tier.tierKey, activeRegion)}
+                      </div>
                     ) : (
                       <div className="text-text-muted text-sm font-semibold">
                         Select region for pricing

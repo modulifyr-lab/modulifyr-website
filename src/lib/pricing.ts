@@ -1,7 +1,7 @@
 import { REGIONS } from "@/lib/regions";
 import type { Region } from "@/lib/regions";
 
-export const FOUNDING_SLOTS_REMAINING = 10;
+export const FOUNDING_SLOTS_REMAINING = 0;
 
 export const pricingStandard = {
   strategySprint: {
@@ -29,14 +29,6 @@ export const pricingStandard = {
       AUD: [925, 1205],
       EUR: [565, 740],
     },
-    tier4_enterpriseStrategy: {
-      USD: [1000, 1400],
-      NPR: [110000, 150000],
-      GBP: [740, 1035],
-      CAD: [1390, 1945],
-      AUD: [1420, 1985],
-      EUR: [870, 1220],
-    },
   },
   launchKit: {
     tier1_essential: {
@@ -63,14 +55,6 @@ export const pricingStandard = {
       AUD: [1420, 1845],
       EUR: [870, 1130],
     },
-    tier4_enterpriseLaunch: {
-      USD: [1600, 2200],
-      NPR: [160000, 220000],
-      GBP: [1185, 1630],
-      CAD: [2225, 3060],
-      AUD: [2270, 3125],
-      EUR: [1390, 1915],
-    },
   },
   automationLayer: {
     tier1_basicConnection: {
@@ -96,14 +80,6 @@ export const pricingStandard = {
       CAD: [2500, 3335],
       AUD: [2555, 3410],
       EUR: [1565, 2090],
-    },
-    tier4_enterpriseAutomation: {
-      USD: [3200, 4500],
-      NPR: [320000, 450000],
-      GBP: [2370, 3330],
-      CAD: [4450, 6255],
-      AUD: [4545, 6390],
-      EUR: [2785, 3915],
     },
   },
 } as const;
@@ -134,14 +110,6 @@ export const pricingFounding = {
       AUD: [740, 965],
       EUR: [450, 590],
     },
-    tier4_enterpriseStrategy: {
-      USD: [800, 1120],
-      NPR: [88000, 120000],
-      GBP: [590, 830],
-      CAD: [1110, 1555],
-      AUD: [1135, 1590],
-      EUR: [695, 975],
-    },
   },
   launchKit: {
     tier1_essential: {
@@ -168,14 +136,6 @@ export const pricingFounding = {
       AUD: [1135, 1475],
       EUR: [695, 905],
     },
-    tier4_enterpriseLaunch: {
-      USD: [1280, 1760],
-      NPR: [128000, 176000],
-      GBP: [945, 1300],
-      CAD: [1780, 2445],
-      AUD: [1815, 2495],
-      EUR: [1115, 1530],
-    },
   },
   automationLayer: {
     tier1_basicConnection: {
@@ -201,14 +161,6 @@ export const pricingFounding = {
       CAD: [2000, 2670],
       AUD: [2045, 2725],
       EUR: [1250, 1670],
-    },
-    tier4_enterpriseAutomation: {
-      USD: [2560, 3600],
-      NPR: [256000, 360000],
-      GBP: [1895, 2665],
-      CAD: [3560, 5005],
-      AUD: [3635, 5110],
-      EUR: [2225, 3130],
     },
   },
 } as const;
