@@ -98,8 +98,18 @@ export const CAREER_ROLES: readonly CareerRole[] = [
   { title: "Client Onboarding Specialist", department: "client-services", open: false, seats: 0 },
 
   // sales-partnerships (4)
-  {title: "Business Development Manager",department: "sales-partnerships",open: false,seats: 0 },
-  {title: "Business Development Representative",department: "sales-partnerships",open: true,seats: 7 },
+  {
+    title: "Business Development Manager",
+    department: "sales-partnerships",
+    open: false,
+    seats: 0,
+  },
+  {
+    title: "Business Development Representative",
+    department: "sales-partnerships",
+    open: true,
+    seats: 7,
+  },
   { title: "Sales Executive", department: "sales-partnerships", open: false, seats: 0 },
   { title: "Pre-Sales Engineer", department: "sales-partnerships", open: false, seats: 0 },
 

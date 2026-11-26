@@ -33,7 +33,7 @@ export function buildRootSchemaOrg() {
         },
         image: [`${SITE_URL}/og-image.png`, `${SITE_URL}/company-logo.png`],
         description:
-          "2-person founder-led engineering & growth studio in Birtamode, Nepal delivering fast Launch Kit websites, Automation Layers, Strategy Sprints, and custom Next.js & Hono web apps.",
+          "Bootstrapped engineering & growth studio in Birtamode, Nepal delivering fast Launch Kit websites, Automation Layers, Strategy Sprints, and custom Next.js & Hono web apps.",
         email: CONTACT_EMAIL,
         telephone: PHONE_SCHEMA,
         priceRange: `${formatNpr(overallMinNpr)} - ${formatNpr(overallMaxNpr)}`,

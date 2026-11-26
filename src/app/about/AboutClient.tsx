@@ -85,11 +85,9 @@ const TEAM_MEMBERS: TeamMember[] = [
   },
   {
     name: "Deepika C",
-    fullName: "Deepika hauhan",
+    fullName: "Deepika Chauhan",
     title: "Business Development Representative",
     department: "Sales",
-    quote: "",
-    linkedin: "https://www.linkedin.com/company/modulifyr/",
   },
 ];
 
@@ -228,15 +226,14 @@ export default function AboutClient() {
         <div className="container-custom space-y-12">
           <div className="mx-auto max-w-3xl space-y-3 text-center">
             <span className="text-caption1 font-bold tracking-wider text-[#2D738D] uppercase">
-              FOUNDER-LED CORE TEAM
+              BOOTSTRAPPED
             </span>
             <h2 className="text-h2 text-foreground font-bold">
               Direct engineering &amp; growth—no account-manager layers
             </h2>
             <p className="text-body1 text-text-alt">
-              Modulifyr operates as a focused 2-person Founder-Led Engineering &amp; Growth Studio
-              in Gauri Tole, Birtamode-1, Jhapa, Nepal—pairing direct architectural execution with
-              dedicated client outreach.
+              Modulifyr is bootstrapped with no outside investment. We are testing whether a
+              company can succeed without it. Based in Gauri Tole, Birtamode-1, Jhapa, Nepal.
             </p>
           </div>
 
