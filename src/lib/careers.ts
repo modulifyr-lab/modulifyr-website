@@ -72,7 +72,7 @@ export const CAREER_ROLES: readonly CareerRole[] = [
   { title: "Lead Engineer", department: "engineering", open: false, seats: 0 },
   { title: "Backend Engineer", department: "engineering", open: false, seats: 0 },
   { title: "Frontend Engineer", department: "engineering", open: false, seats: 0 },
-  { title: "Full-Stack Engineer", department: "engineering", open: true, seats: 5 },
+  { title: "Full-Stack Engineer", department: "engineering", open: true, seats: 2 },
   { title: "DevOps Engineer", department: "engineering", open: false, seats: 0 },
   { title: "Cloud Infrastructure Engineer", department: "engineering", open: false, seats: 0 },
   { title: "Security Engineer", department: "engineering", open: false, seats: 0 },
@@ -85,7 +85,7 @@ export const CAREER_ROLES: readonly CareerRole[] = [
   { title: "Product Manager", department: "product", open: false, seats: 0 },
   { title: "Senior Product Manager", department: "product", open: false, seats: 0 },
   { title: "UX Designer", department: "product", open: false, seats: 0 },
-  { title: "UI Designer", department: "product", open: false, seats: 0 },
+  { title: "UI Designer", department: "product", open: true, seats: 4 },
   { title: "Product Designer", department: "product", open: false, seats: 0 },
   { title: "UX Researcher", department: "product", open: false, seats: 0 },
   { title: "Design Lead", department: "product", open: false, seats: 0 },
@@ -98,18 +98,8 @@ export const CAREER_ROLES: readonly CareerRole[] = [
   { title: "Client Onboarding Specialist", department: "client-services", open: false, seats: 0 },
 
   // sales-partnerships (4)
-  {
-    title: "Business Development Manager",
-    department: "sales-partnerships",
-    open: false,
-    seats: 0,
-  },
-  {
-    title: "Business Development Representative",
-    department: "sales-partnerships",
-    open: true,
-    seats: 2,
-  },
+  {title: "Business Development Manager",department: "sales-partnerships",open: false,seats: 0 },
+  {title: "Business Development Representative",department: "sales-partnerships",open: true,seats: 7 },
   { title: "Sales Executive", department: "sales-partnerships", open: false, seats: 0 },
   { title: "Pre-Sales Engineer", department: "sales-partnerships", open: false, seats: 0 },
 
