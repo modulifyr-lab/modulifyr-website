@@ -87,6 +87,8 @@ const TEAM_MEMBERS: TeamMember[] = [
     name: "Deepika C",
     fullName: "Deepika Chauhan",
     title: "Business Development Representative",
+    quote: "Connecting businesses with modular systems, reliable automations, and clear next step",
+    linkdin: "https://www.linkedin.com/in/deepika-c-9aa1713a0",
     department: "Sales",
   },
 ];
