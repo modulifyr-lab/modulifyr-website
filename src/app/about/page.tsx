@@ -2,11 +2,24 @@ import { Metadata } from "next";
 import AboutClient from "./AboutClient";
 
 export const metadata: Metadata = {
-  title: "About Modulifyr | Rijan Mainali — Founder, Birtamode Nepal",
+  title: "About Modulifyr | Software & Automation Studio in Birtamode, Nepal",
   description:
-    "Modulifyr is a founder-led engineering and growth studio based in Gauri Tole, Birtamode-1, Jhapa, Nepal, delivering Launch Kits, Automation Layers, and Custom Web Apps.",
+    "Modulifyr Enterprise Pvt. Ltd. is a founder-led engineering studio in Gauri Tole, Birtamode-1, Jhapa, Nepal delivering Strategy Sprints, Launch Kits, and Automation Layers worldwide.",
   alternates: {
     canonical: "/about",
+  },
+  openGraph: {
+    title: "About Modulifyr | Software & Automation Studio in Birtamode, Nepal",
+    description:
+      "Founded by Rijan Mainali in Birtamode, Jhapa, Nepal—delivering Strategy Sprint, Launch Kit, and Automation Layer packages.",
+    url: "/about",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Modulifyr | Birtamode, Nepal",
+    description:
+      "Meet the founder-led engineering team delivering Strategy Sprints, Launch Kits, and Automation Layers.",
   },
 };
 

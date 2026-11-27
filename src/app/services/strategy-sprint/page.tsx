@@ -66,7 +66,7 @@ const tiers = [
     name: "Tier 3 — Complex Architecture",
     tierKey: "tier3_complexArchitecture",
     duration: "1–2 weeks",
-    bestFor: "Multi-workflow custom web apps, MVPs, or cross-system automation scoping",
+    bestFor: "Multi-workflow platforms or cross-system automation scoping",
     descriptionNepal:
       "Full technical architecture, database design, and integration map for custom builds.",
     descriptionInternational:
@@ -129,7 +129,7 @@ export default function StrategySprintPage() {
             </Reveal>
             <Reveal variant="fade-up" delay={200}>
               <p className="text-text-muted text-xl leading-relaxed">
-                Built specifically for scoping custom web apps, MVPs, and complex multi-system
+                Built specifically for scoping complex digital platforms and multi-system
                 automations before writing production code. Lock down exact architecture, timelines,
                 and milestone pricing in 3–10 days—and 100% of your Strategy Sprint fee can be
                 credited toward your build with Modulifyr. (If you just need a straightforward
@@ -190,9 +190,9 @@ export default function StrategySprintPage() {
             </Reveal>
             <Reveal variant="fade-up" delay={100}>
               <p className="text-text-secondary max-w-2xl text-sm leading-relaxed">
-                100% of your Strategy Sprint fee can be credited toward a Custom Web App, MVP, or
-                Automation Layer build with us. Not sure which tier fits? Describe your project and
-                we will tell you honestly.
+                100% of your Strategy Sprint fee can be credited toward a Launch Kit or Automation
+                Layer build with us. Not sure which tier fits? Describe your project and we will
+                tell you honestly.
               </p>
             </Reveal>
           </div>

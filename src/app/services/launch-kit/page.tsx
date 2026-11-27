@@ -91,7 +91,7 @@ const tiers = [
       "Domain purchase or hosting subscription",
       "Analytics platform subscription",
       "Custom 3D modeling or video production",
-      "Custom server infrastructure, databases, or persistent user data storage (see Custom Web Apps)",
+      "Custom server infrastructure, databases, or persistent user accounts (scope via Strategy Sprint)",
     ],
     highlight: false,
   },

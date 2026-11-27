@@ -2,7 +2,8 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/Button";
-import { RESOURCES } from "@/lib/resources";
+import { RESOURCES as resources } from "@/lib/resources";
+import { ReadingProgressBar } from "@/components/ui/ReadingProgressBar";
 import { ArrowLeft, ArrowRight, Clock } from "lucide-react";
 
 // Fixed: Next.js 15 requires params as Promise<>
@@ -10,41 +11,49 @@ type Props = { params: Promise<{ slug: string }> };
 
 const articleContent: Record<string, string> = {
   "sre-best-practices": `
-**Reliability Is a Habit, Not a Big Team**
+**SRE Is a Mindset, Not a Role**
 
-You do not need a dedicated reliability department to run dependable software. For lean businesses running Next.js web apps, Hono APIs, PostgreSQL databases, and n8n automations, reliability comes down to catching silent failures early and keeping recovery boring.
+Site Reliability Engineering was formalized at Google, but the principles apply at any scale. At its core, SRE is about treating operations as a software engineering problem. Manual, repetitive operational work should be automated. Reliability should be measured, not assumed.
 
-**Define Clear Reliability Targets**
+**Service Level Objectives: The Foundation**
 
-Instead of vague goals, define what actually matters to customers: pages load quickly on mobile networks, inquiry forms and WhatsApp webhooks deliver without silent drops, and database writes stay consistent.
+Before writing any SRE tooling, define your SLOs. An SLO answers: what is the minimum level of reliability that users actually require? Not "as high as possible" — a specific, measurable number. 99.9% availability. P95 API response time under 500ms. Fewer than 0.5% error rate.
 
-Measure user-facing outcomes—such as whether a checkout or admission inquiry completed—rather than staring at raw CPU graphs.
+SLOs must be based on user experience, not infrastructure metrics. Server CPU at 80% is not an SLO. Users completing checkout successfully at 99.8% is an SLO.
 
-**Prevent Silent Automation Failures**
+**Error Budgets in Practice**
 
-The most common failure mode in small-business software is an automation webhook breaking quietly while no one checks logs for days. Every n8n, Zapier, or Hono webhook flow should include automatic retries with backoff, a dead-letter log, and an instant email or Discord/WhatsApp alert when a step fails repeatedly.
+The error budget is 100% minus the SLO. If your availability SLO is 99.9%, your monthly error budget is ~43 minutes of downtime. The error budget is a shared resource between the product team and the reliability team.
 
-**Automated Backups & Clean Deploys**
+When the budget is healthy, ship features. When it's depleted, freeze feature releases and focus on reliability improvements. This simple rule eliminates the perpetual tension between "ship fast" and "ship safely."
 
-Every production PostgreSQL database needs automated daily backups and tested restore steps before launch. Deployments should run through automated CI checks (type-checking, linting, unit tests, and build verification) so broken code never reaches users.
+**Toil Identification and Elimination**
 
-**A Lightweight Incident Checklist**
+Toil is manual, repetitive, non-creative operational work that grows linearly with system size. Common sources: manually triggered deployments, manual database connection pool resets, manually verified backup jobs, manual certificate renewals.
 
-Even a small studio benefits from a simple protocol: triage severity quickly (customer-blocking vs. minor visual issue), roll back or hotfix cleanly, notify the affected stakeholder honestly, and write down one concrete preventive fix so the same bug cannot repeat.
+The SRE mandate is to keep toil below 50% of engineering time. The mechanism is automation. For every recurring manual task, ask: can this be triggered automatically? Can it be verified automatically? Can failure be auto-remediated?
 
-**Pragmatic Monitoring Stack**
+**Incident Management Protocol**
 
-A lean, affordable setup: uptime checks (Better Stack or UptimeRobot) on critical URLs and health endpoints, structured JSON error logs on API routes, and automated dependency alerts via Dependabot. Set this up before go-live, not after the first outage.
+Even a 3-person team needs a lightweight incident protocol. At minimum: a severity classification (P1 = user-facing outage, P2 = degraded, P3 = minor, P4 = cosmetic), a designated incident commander during live incidents, a communication template for stakeholders, and a mandatory blameless postmortem within 24 hours of resolution.
+
+The blameless postmortem is the most important artifact. It documents the timeline, root cause, contributing factors, and action items. Not: "engineer X made a mistake." Instead: "the system allowed X to happen — what change prevents this class of failure?"
+
+**Monitoring Stack for Startups**
+
+A pragmatic monitoring stack: Uptime monitoring (Better Uptime or similar) for availability checks, structured application logging (Axiom, Logtail, or Datadog) for error tracking, distributed tracing (OpenTelemetry + backend of choice) for performance analysis, and alerting to an on-call rotation via PagerDuty or similar.
+
+Set up monitoring before your first production deployment. Not after the first incident.
     `,
 };
 
 export async function generateStaticParams() {
-  return RESOURCES.filter((r) => !r.isPdf).map((r) => ({ slug: r.slug }));
+  return resources.filter((r) => !r.isPdf).map((r) => ({ slug: r.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const resource = RESOURCES.find((r) => r.slug === slug);
+  const resource = resources.find((r) => r.slug === slug);
   if (!resource) return { title: "Resource Not Found | Modulifyr" };
   return {
     title: `${resource.title} | Modulifyr Resources`,
@@ -52,12 +61,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     alternates: {
       canonical: `/resources/${slug}`,
     },
+    openGraph: {
+      title: `${resource.title} | Modulifyr Resources`,
+      description: resource.description,
+      url: `/resources/${slug}`,
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${resource.title} | Modulifyr Resources`,
+      description: resource.description,
+    },
   };
 }
 
 export default async function ResourceArticlePage({ params }: Props) {
   const { slug } = await params;
-  const resource = RESOURCES.find((r) => r.slug === slug && !r.isPdf);
+  const resource = resources.find((r) => r.slug === slug && !r.isPdf);
   if (!resource) notFound();
 
   const content = articleContent[slug];
@@ -74,10 +94,11 @@ export default async function ResourceArticlePage({ params }: Props) {
       return { type: "paragraph", text: block.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>") };
     });
 
-  const otherArticles = RESOURCES.filter((r) => r.slug !== slug && !r.isPdf);
+  const otherArticles = resources.filter((r) => r.slug !== slug && !r.isPdf);
 
   return (
     <div className="flex w-full flex-col">
+      <ReadingProgressBar />
       <section className="bg-brand-navy py-20 text-white">
         <div className="container-custom max-w-4xl">
           <Link

@@ -44,7 +44,7 @@ const steps = [
     icon: Code2,
     title: "Focused Build",
     duration: "3 Days – 6 Weeks by Scope",
-    desc: "Building fast Launch Kit sites, custom Next.js/Hono web apps, and retry-safe n8n workflows.",
+    desc: "Building fast Launch Kit sites, scoped Strategy Sprint architectures, and retry-safe n8n workflows.",
     deliverables: ["Production Code / Workflows", "Structured Revisions", "Clear Documentation"],
     details:
       "We build in fixed-scope sprints with predictable pricing and milestone updates so your team sees tangible progress every week.",
@@ -185,10 +185,10 @@ export default function ProcessClient() {
               </Reveal>
               <Reveal variant="fade-up" delay={200}>
                 <p className="text-text-muted text-lg leading-relaxed">
-                  Building a custom web app, MVP, or multi-system automation? Start with a fixed-fee
-                  Strategy Sprint to lock down exact architecture, scope, and milestones before
-                  writing production code—and credit the sprint fee toward your build. (For simple
-                  Launch Kit websites, you can skip the sprint and start directly.)
+                  Planning a multi-page digital rollout or cross-system automation? Start with a
+                  fixed-fee Strategy Sprint to lock down exact architecture, scope, and milestones
+                  before writing production code—and credit the sprint fee toward your build. (For
+                  simple Launch Kit websites, you can skip the sprint and start directly.)
                 </p>
               </Reveal>
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">

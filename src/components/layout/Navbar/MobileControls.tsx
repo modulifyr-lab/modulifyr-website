@@ -1,8 +1,8 @@
 "use client";
 
-import { Menu, Moon, Search, Sun, X } from "lucide-react";
-import { useTheme } from "next-themes";
+import { Menu, Search, X } from "lucide-react";
 import { useLanguage } from "@/components/LanguageContext";
+import { ThemeToggle } from "./ThemeToggle";
 
 interface MobileControlsProps {
   menuOpen: boolean;
@@ -17,7 +17,6 @@ export function MobileControls({
   onOpenSearch,
   menuButtonRef,
 }: MobileControlsProps) {
-  const { resolvedTheme, setTheme } = useTheme();
   const { t } = useLanguage();
 
   return (
@@ -26,20 +25,12 @@ export function MobileControls({
         type="button"
         onClick={onOpenSearch}
         aria-label="Search blog posts and resources"
-        className="text-on-background hover:bg-surface-container inline-flex h-10 w-10 items-center justify-center rounded-lg transition-colors"
+        className="text-on-background hover:bg-surface-container flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg p-2 transition-colors"
       >
         <Search className="h-5 w-5" aria-hidden="true" />
       </button>
 
-      <button
-        type="button"
-        onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-        aria-label={t("nav.toggle_theme")}
-        className="text-on-background hover:bg-surface-container inline-flex h-10 w-10 items-center justify-center rounded-lg transition-colors"
-      >
-        <Sun className="hidden h-5 w-5 dark:block" aria-hidden="true" />
-        <Moon className="block h-5 w-5 dark:hidden" aria-hidden="true" />
-      </button>
+      <ThemeToggle className="h-10 w-10" />
 
       <button
         ref={menuButtonRef}

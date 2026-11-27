@@ -15,11 +15,24 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Our Technical Standards | Modulifyr",
+  title: "Our Technical Standards | Engineering Quality & Security | Modulifyr",
   description:
-    "The engineering standards, code quality requirements, security practices, and delivery protocols Modulifyr applies to every project.",
+    "The TypeScript, CI/CD, OWASP security hygiene, testing, and PostgreSQL infrastructure standards Modulifyr applies across Strategy Sprints, Launch Kits, and Automation Layers.",
   alternates: {
     canonical: "/about/technical-standards",
+  },
+  openGraph: {
+    title: "Our Technical Standards | Engineering Quality & Security | Modulifyr",
+    description:
+      "Founder-reviewed engineering standards across code quality, CI/CD, OWASP security, testing, and uptime monitoring.",
+    url: "/about/technical-standards",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Our Technical Standards | Modulifyr",
+    description:
+      "Code quality, OWASP security, OpenAPI docs, and infrastructure standards applied to every project.",
   },
 };
 
@@ -210,8 +223,8 @@ export default function TechnicalStandardsPage() {
               Performance Benchmarks
             </h2>
             <p className="text-text-secondary text-lg leading-relaxed">
-              Every website, custom web app, and automation workflow we ship is checked against
-              these practical targets before production go-live.
+              Every Launch Kit website, Automation Layer workflow, and system blueprint we deliver
+              is checked against these practical targets before production go-live.
             </p>
           </div>
           <div className="border-border-base overflow-hidden rounded-3xl border bg-bg-alt">

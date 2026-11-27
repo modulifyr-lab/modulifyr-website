@@ -2,11 +2,24 @@ import { Metadata } from "next";
 import { RFPForm } from "@/components/forms/RFPForm";
 
 export const metadata: Metadata = {
-  title: "Request a Technical Proposal",
+  title: "Request a Proposal | Strategy Sprint, Launch Kit & Automation | Modulifyr",
   description:
-    "Submit your project requirements to receive a structured technical proposal, architecture plan, and cost estimate from Modulifyr.",
+    "Submit your project scope to receive a fixed-fee proposal, delivery timeline, and NPR/USD estimate from Modulifyr within 1 business day.",
   alternates: {
     canonical: "/request-proposal",
+  },
+  openGraph: {
+    title: "Request a Proposal | Strategy Sprint, Launch Kit & Automation | Modulifyr",
+    description:
+      "Request a structured proposal and NPR/USD estimate for Strategy Sprint, Launch Kit, or Automation Layer.",
+    url: "/request-proposal",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Request a Proposal | Modulifyr",
+    description:
+      "Get a fixed-scope proposal for your Strategy Sprint, Launch Kit website, or Automation Layer.",
   },
 };
 

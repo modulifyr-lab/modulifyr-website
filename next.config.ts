@@ -86,6 +86,26 @@ const nextConfig: NextConfig = {
         destination: "/about/technical-standards",
         permanent: true,
       },
+      {
+        source: "/case-studies/planning-bord",
+        destination: "/work",
+        permanent: true,
+      },
+      {
+        source: "/case-studies/planning-board",
+        destination: "/work",
+        permanent: true,
+      },
+      {
+        source: "/work/planning-bord",
+        destination: "/work",
+        permanent: true,
+      },
+      {
+        source: "/work/planning-board",
+        destination: "/work",
+        permanent: true,
+      },
     ];
   },
 };

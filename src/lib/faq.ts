@@ -12,17 +12,17 @@ export const DEFAULT_FAQ_ITEMS: readonly { question: string; answer: string }[] 
   {
     question: "How do I know Modulifyr is a fit for my business?",
     answer:
-      "Modulifyr is ideal for SMBs and founders who need a fast Launch Kit website on Next.js & Tailwind, an Automation Layer connecting existing tools via n8n/webhooks, or a custom web app/MVP scoped through a Strategy Sprint.",
+      "Modulifyr is ideal for SMBs and founders who need a Strategy Sprint to map architecture and scope upfront, a fast Launch Kit website on Next.js & Tailwind, or an Automation Layer connecting existing tools via n8n and webhooks.",
   },
   {
     question: "Can you integrate our new system with existing tools we use?",
     answer:
-      "Yes. We build REST/webhook integrations and automated workflows across n8n, Zapier, Make, WhatsApp Business, Notion, Google Sheets, CRM tools, and payment gateways like eSewa, Khalti, and Stripe.",
+      "Yes. We build REST/webhook integrations and automated workflows across n8n, Zapier, Make, WhatsApp Business, Notion, Google Sheets, CRM tools, and payment gateways like eSewa, Khalti, Fonepay, and Stripe.",
   },
   {
     question: "How do I start a project with Modulifyr?",
     answer:
-      "For a straightforward Launch Kit website or single automation, you can request a proposal or book a discovery call directly. For custom web apps, MVPs, or complex automations, start with a 3–10 day Strategy Sprint—100% of the sprint fee is credited if you build with us.",
+      "For a straightforward Launch Kit website or single automation, you can request a proposal or book a discovery call directly. For complex multi-system builds or deep integrations, start with a 3–10 day Strategy Sprint—100% of the sprint fee is credited if you build with us.",
   },
   {
     question: "What happens after launch?",

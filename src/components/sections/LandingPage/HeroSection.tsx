@@ -58,9 +58,9 @@ export function HeroSection() {
 
           {/* Description */}
           <p className="text-on-surface-variant max-w-2xl text-base leading-relaxed sm:text-lg">
-            We deliver fast Launch Kit websites, reliable Automation Layers, and focused Custom
-            Web Apps &amp; MVPs for growing businesses across Nepal and worldwide—clear pricing,
-            founder-led engineering, and zero bloat.
+            We deliver Strategy Sprints, fast mobile-first Launch Kit websites, and reliable
+            CRM/eSewa/Khalti/Fonepay Automation Layers for growing businesses across Nepal and
+            worldwide—clear fixed-scope pricing, founder-led engineering, and zero bloat.
           </p>
 
           {/* Primary & Secondary Actions */}

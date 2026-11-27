@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FULL_ADDRESS } from "@/lib/links";
+import { NewsletterForm } from "./NewsletterForm";
 
 export function FooterBrand() {
   return (
@@ -20,9 +20,11 @@ export function FooterBrand() {
       </Link>
 
       <p className="max-w-sm text-justify text-sm leading-relaxed text-slate-400">
-        Founder-led engineering &amp; growth studio delivering Launch Kit websites, Automation
-        Layers, and custom Next.js &amp; Hono web apps from {FULL_ADDRESS} for clients worldwide.
+        Strategy Sprints, fast Launch Kit websites, and Automation Layers — built with clarity from
+        Nepal for clients worldwide.
       </p>
+
+      <NewsletterForm />
     </div>
   );
 }

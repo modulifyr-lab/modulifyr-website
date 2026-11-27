@@ -7,11 +7,11 @@ import Script from "next/script";
 import { cookies } from "next/headers";
 import { isRegion, REGION_COOKIE } from "@/lib/regions";
 import { buildRootSchemaOrg } from "@/lib/structured-data";
-import { getAllPosts } from "@/lib/notion-blog";
-import { buildSearchIndex } from "@/lib/search-index";
+import { THEME_STORAGE_KEY } from "@/lib/theme";
 
 import { DM_Sans, Syne, Inter } from "next/font/google";
-import { SiteLayout } from "@/components/layout";
+import { Navbar } from "../components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -36,37 +36,29 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://modulifyr.com"),
-  title: "2026 Custom Software Systems Built to Scale | Modulifyr",
+  title: "Modulifyr | Software, Websites & Business Automation in Nepal",
   description:
-    "Modulifyr delivers Strategy Sprints, fast Launch Kit websites, and Automation Layers for growing organizations in Nepal and worldwide.",
+    "Software, fast mobile-first websites, and CRM/eSewa/Khalti/Fonepay workflow automation for SMBs in Birtamode, Jhapa, Nepal, and global teams via Strategy Sprint, Launch Kit, and Automation Layer.",
   authors: [{ name: "Modulifyr Engineering" }],
   keywords: [
-    "Strategy Sprint Nepal",
-    "Launch Kit website Nepal",
-    "Automation Layer Nepal",
-    "software company Birtamode",
     "software company Nepal",
-    "system architecture consulting Nepal",
-    "static website development Nepal",
+    "software company Birtamode Jhapa",
+    "business website development Nepal",
     "workflow automation Nepal",
-    "API integration Nepal",
-    "modular architecture",
-    "system design Nepal",
-    "B2B software solutions Nepal",
-    "software development Birtamode Jhapa",
-    "business automation Nepal SMB",
+    "eSewa Khalti Fonepay WhatsApp automation",
+    "CRM automation Nepal SMB",
     "Strategy Sprint",
     "Launch Kit",
     "Automation Layer",
-    "system design",
-    "workflow automation",
-    "API integration",
+    "custom business software Nepal",
+    "Next.js web development Nepal",
+    "n8n automation agency",
   ],
   creator: "Modulifyr",
   openGraph: {
-    title: "Modulifyr | Custom Software Systems Built to Scale",
+    title: "Modulifyr | Software, Websites & Business Automation in Nepal",
     description:
-      "Engineering tailored modular software solutions for businesses across Nepal and worldwide. Based in Birtamode, Jhapa.",
+      "Fast mobile-first websites, workflow automation, and scoped software systems for businesses in Birtamode, Nepal, and worldwide.",
     url: "/",
     siteName: "Modulifyr",
     locale: "en_US",
@@ -75,7 +67,7 @@ export const metadata: Metadata = {
         url: "https://modulifyr.com/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Modulifyr - Custom Modular Systems",
+        alt: "Modulifyr — Software, Websites & Business Automation in Nepal",
       },
     ],
     type: "website",
@@ -83,9 +75,9 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     creator: "@modulifyr",
-    title: "Modulifyr | Custom Software Systems",
+    title: "Modulifyr | Software, Websites & Business Automation in Nepal",
     description:
-      "Engineering tailored solutions for complex operational requirements with modular architecture.",
+      "Strategy Sprint, Launch Kit websites, and Automation Layer workflows for Nepal SMBs and international teams.",
     images: ["https://modulifyr.com/og-image.png"],
   },
   icons: {
@@ -109,8 +101,6 @@ const schemaOrg = buildRootSchemaOrg();
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const cookieRegion = (await cookies()).get(REGION_COOKIE)?.value;
   const initialRegion = isRegion(cookieRegion) ? cookieRegion : "NP";
-  const blogPosts = await getAllPosts();
-  const searchItems = buildSearchIndex(blogPosts);
 
   return (
     <html lang="en" suppressHydrationWarning>
@@ -154,11 +144,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           attribute="class"
           defaultTheme="system"
           enableSystem
-          disableTransitionOnChange
+          storageKey={THEME_STORAGE_KEY}
         >
           <RegionProvider initialRegion={initialRegion}>
             <LanguageProvider>
-              <SiteLayout searchItems={searchItems}>{children}</SiteLayout>
+              <Navbar />
+              <main id="main-content" className="min-h-screen pt-20">
+                {children}
+              </main>
+              <Footer />
             </LanguageProvider>
           </RegionProvider>
         </ThemeProvider>

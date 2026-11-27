@@ -27,23 +27,23 @@ const DEMO_TABS: readonly {
   {
     slug: "strategy-sprint",
     number: "01.",
-    headline: "Scope custom web apps, MVPs, and complex automations upfront",
+    headline: "System Architecture & Technical Scoping Blueprint",
     outcome:
-      "Lock down exact architecture, PostgreSQL schema, and milestone pricing in 3–10 days before building—with 100% of the sprint fee credited toward your build.",
+      "Lock down exact architecture, database schema, and milestone pricing in 3–10 days before building—with 100% of the sprint fee credited toward your build.",
   },
   {
     slug: "launch-kit",
     number: "02.",
-    headline: "Turn local searches and social clicks into real inquiries in 3–7 days",
+    headline: "Fast Mobile-First Business Websites & Local SEO",
     outcome:
-      "Built on our modular Next.js & Tailwind component system—fast, mobile-first, SEO-ready, and wired to WhatsApp, booking, or payment forms.",
+      "Turn local and international searches into real inquiries in 3–7 days. Modular Next.js & Tailwind pages wired to WhatsApp, booking, and payment forms.",
   },
   {
     slug: "automation-layer",
     number: "03.",
-    headline: "Save hours weekly by eliminating manual data entry",
+    headline: "Business Workflow, CRM & eSewa/Khalti/Fonepay Automation",
     outcome:
-      "Sync incoming inquiries, WhatsApp alerts, and payment/ledger records via n8n, Zapier, Make, or webhooks so no lead is dropped.",
+      "Sync incoming inquiries, WhatsApp alerts, CRMs, and payment/ledger records via n8n, Zapier, Make, or webhooks so no lead is dropped.",
   },
 ];
 
@@ -121,7 +121,7 @@ function StrategyMicroDemo() {
       )}
 
       <p className="text-on-surface-variant border-border-base border-t pt-4 text-xs">
-        100% of your Strategy Sprint fee can be credited toward a Custom Web App, MVP, or Automation build.
+        100% of your Strategy Sprint fee can be credited toward a Launch Kit or Automation Layer build.
       </p>
     </div>
   );

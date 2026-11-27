@@ -76,5 +76,10 @@ describe("structured data (Organization + home FAQPage)", () => {
       expect(faq.mainEntity[index].acceptedAnswer["@type"]).toBe("Answer");
       expect(faq.mainEntity[index].acceptedAnswer.text).toBe(item.answer);
     });
+
+    const serialized = JSON.stringify({ root: buildRootSchemaOrg(), home: schema });
+    expect(serialized).not.toContain("2026 Custom Software");
+    expect(serialized).not.toContain("Custom Web Apps & MVPs");
+    expect(serialized.toLowerCase()).not.toContain("planning bord");
   });
 });

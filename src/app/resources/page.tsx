@@ -6,11 +6,24 @@ import { FileBox, BookOpen, Layers, ArrowRight, Download } from "lucide-react";
 import { RESOURCES } from "@/lib/resources";
 
 export const metadata: Metadata = {
-  title: "Engineering Resources & Whitepapers",
+  title: "Engineering Resources & Whitepapers | Modulifyr",
   description:
-    "Explore Modulifyr's collection of engineering guides, modular architecture whitepapers, and technical case studies.",
+    "Explore Modulifyr's engineering playbooks, modular architecture whitepapers, and operational guides for scaling reliable business systems.",
   alternates: {
     canonical: "/resources",
+  },
+  openGraph: {
+    title: "Engineering Resources & Whitepapers | Modulifyr",
+    description:
+      "Technical guides, whitepapers, and architecture playbooks from Modulifyr.",
+    url: "/resources",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Engineering Resources & Whitepapers | Modulifyr",
+    description:
+      "Architecture whitepapers, modernization playbooks, and reliability guides from Modulifyr.",
   },
 };
 

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { getPostBySlug, getAllPosts } from "@/lib/notion-blog";
+import { ReadingProgressBar } from "@/components/ui/ReadingProgressBar";
 import { ArrowLeft, Clock, User } from "lucide-react";
 
 export const revalidate = 3600;
@@ -34,11 +35,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: `/blog/${slug}`,
     },
     openGraph: {
-      title: notionPost.title,
+      title: `${notionPost.title} | Modulifyr Blog`,
       description: notionPost.excerpt,
+      url: `/blog/${slug}`,
       type: "article",
       publishedTime: notionPost.dateISO,
       authors: ["Modulifyr Engineering"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${notionPost.title} | Modulifyr Blog`,
+      description: notionPost.excerpt,
     },
   };
 }
@@ -81,6 +88,7 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <div className="flex w-full flex-col">
+      <ReadingProgressBar />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}

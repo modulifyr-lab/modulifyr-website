@@ -27,10 +27,10 @@ const PACKAGE_TIERS: Record<PackagePricingKey, readonly TierOption[]> = {
       tierNumber: 1,
       label: "Tier 1 · Basic Scoping",
       duration: "3–5 business days",
-      scopeSummary: "Single custom MVP feature or automation workflow with clear boundaries.",
+      scopeSummary: "Single focused website overhaul or workflow automation with clear boundaries.",
       deliverables: [
         "Written brief & requirements document",
-        "Next.js / Hono / PostgreSQL stack plan",
+        "Next.js / n8n / PostgreSQL stack plan",
         "Phased delivery roadmap (credited toward build)",
       ],
     },
@@ -39,7 +39,7 @@ const PACKAGE_TIERS: Record<PackagePricingKey, readonly TierOption[]> = {
       tierNumber: 2,
       label: "Tier 2 · Full Discovery",
       duration: "1 week",
-      scopeSummary: "Custom web apps & MVPs with 2–4 connected user/data modules.",
+      scopeSummary: "Multi-page digital platforms & 2–4 connected operational modules.",
       deliverables: [
         "2–3 structured discovery workshops",
         "System, database & API blueprint",
@@ -51,7 +51,7 @@ const PACKAGE_TIERS: Record<PackagePricingKey, readonly TierOption[]> = {
       tierNumber: 3,
       label: "Tier 3 · Complex Architecture",
       duration: "1–2 weeks",
-      scopeSummary: "Multi-workflow custom apps or cross-system automation scoping.",
+      scopeSummary: "Multi-workflow software blueprints & cross-system automation scoping.",
       deliverables: [
         "3–5 deep-dive architecture workshops",
         "Full integration map & risk mitigation plan",

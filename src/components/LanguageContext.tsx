@@ -46,22 +46,19 @@ export const translations: Record<Language, Record<string, string>> = {
       '"Our work focuses on building long-term digital infrastructure rather than short-term software products."',
 
     // Services
-    "services.label": "Our Capabilities",
-    "services.headline": "What We Do",
-    "services.sub": "Engineering tailored solutions for complex operational requirements.",
+    "services.label": "Our Services",
+    "services.headline": "Three Fixed-Scope Packages",
+    "services.sub": "Strategy Sprint, Launch Kit websites, and Automation Layer workflows.",
     "services.explore_all": "Explore All Services",
-    "services.custom_dev": "Custom Software Development",
-    "services.custom_dev_desc":
-      "Design and development of tailored systems aligned with your workflows, data structures, and operational processes.",
-    "services.architecture": "System Architecture",
-    "services.architecture_desc":
-      "Design scalable architectures that allow software to evolve as your organization grows.",
-    "services.integrations": "Integrations & Automation",
-    "services.integrations_desc":
-      "Connect internal tools, APIs, databases, and third-party platforms into unified workflows.",
-    "services.modernization": "Modernization & Rebuilds",
-    "services.modernization_desc":
-      "Replace legacy systems with modern, scalable platforms built for future expansion.",
+    "services.strategy_sprint": "Strategy Sprint",
+    "services.strategy_sprint_desc":
+      "Scope complex platforms and multi-tool workflows before writing code, with 100% credited toward your build.",
+    "services.launch_kit": "Launch Kit",
+    "services.launch_kit_desc":
+      "Fast, mobile-first Next.js websites built to convert local and global searches into real inquiries.",
+    "services.automation_layer": "Automation Layer",
+    "services.automation_layer_desc":
+      "Connect forms, WhatsApp, CRMs, and eSewa/Khalti/Fonepay/Stripe webhooks without manual copy-pasting.",
 
     // How we work
     "process.headline": "How We Work",
@@ -97,24 +94,23 @@ export const translations: Record<Language, Record<string, string>> = {
 
     // Footer
     "footer.tagline":
-      "Custom modular software systems for SMBs that have outgrown off-the-shelf tools. Based in Gauri Tole, Birtamode-1, Jhapa, Nepal. Building for clients worldwide.",
-    "footer.company": "Company",
-    "footer.about": "About",
-    "footer.work": "Work",
-    "footer.careers": "Careers",
+      "Software, fast Launch Kit websites, and workflow automation for SMBs in Gauri Tole, Birtamode-1, Jhapa, Nepal and global teams.",
+    "footer.quick_links": "Quick Links",
+    "footer.home": "Home",
+    "footer.about": "About Us",
+    "footer.services": "Services",
+    "footer.work": "Case Studies",
+    "footer.resources": "Resources",
     "footer.blog": "Blog",
-    "footer.services_heading": "Services",
-    "footer.custom_dev": "Custom Dev",
-    "footer.process": "Process",
-    "footer.tech_stack": "Tech Stack",
-    "footer.industries": "Industries",
+    "footer.careers": "Careers",
+    "footer.contact": "Contact Us",
     "footer.contact_heading": "Contact",
     "footer.location": "Gauri Tole, Birtamode-1, Jhapa, Nepal",
     "footer.response_time": "Response within 1 business day",
     "footer.privacy": "Privacy Policy",
     "footer.terms": "Terms",
     "footer.copyright": "© 2026 Modulifyr Enterprise Pvt. Ltd. All rights reserved.",
-    "footer.tagline_short": "Custom software development for businesses in Nepal and worldwide.",
+    "footer.tagline_short": "Software, websites, and automation for businesses in Nepal and worldwide.",
   },
 
   ne: {
@@ -143,22 +139,19 @@ export const translations: Record<Language, Record<string, string>> = {
     "home.philosophy.body": "धेरै व्यवसायहरू कठोर सफ्टवेयरमा निर्भर छन्।",
     "home.philosophy.quote":
       '"हाम्रो काम अल्पकालीन सफ्टवेयर उत्पादनभन्दा दीर्घकालीन डिजिटल पूर्वाधार निर्माणमा केन्द्रित छ।"',
-    "services.label": "हाम्रा क्षमताहरू",
-    "services.headline": "हामी के गर्छौं",
-    "services.sub": "जटिल सञ्चालन आवश्यकताहरूका लागि अनुकूलित समाधानहरूको इन्जिनियरिङ।",
+    "services.label": "हाम्रा सेवाहरू",
+    "services.headline": "तीन स्पष्ट प्याकेजहरू",
+    "services.sub": "Strategy Sprint, Launch Kit वेबसाइट र Automation Layer कार्यप्रवाह।",
     "services.explore_all": "सबै सेवाहरू हेर्नुहोस्",
-    "services.custom_dev": "कस्टम सफ्टवेयर विकास",
-    "services.custom_dev_desc":
-      "तपाईंको कार्यप्रवाह, डेटा संरचना र सञ्चालन प्रक्रियाहरूसँग मेल खाने अनुकूलित प्रणालीहरूको डिजाइन र विकास।",
-    "services.architecture": "प्रणाली आर्किटेक्चर",
-    "services.architecture_desc":
-      "तपाईंको संस्था बढ्दै जाँदा सफ्टवेयरलाई विकसित हुन दिने मापनीय आर्किटेक्चरहरू डिजाइन गर्नुहोस्।",
-    "services.integrations": "एकीकरण र स्वचालन",
-    "services.integrations_desc":
-      "आन्तरिक उपकरणहरू, API हरू, डेटाबेसहरू र तृतीय-पक्ष प्लेटफर्महरूलाई एकीकृत कार्यप्रवाहमा जोड्नुहोस्।",
-    "services.modernization": "आधुनिकीकरण र पुनर्निर्माण",
-    "services.modernization_desc":
-      "पुराना प्रणालीहरूलाई भविष्यको विस्तारका लागि निर्मित आधुनिक, मापनीय प्लेटफर्महरूले प्रतिस्थापन गर्नुहोस्।",
+    "services.strategy_sprint": "Strategy Sprint",
+    "services.strategy_sprint_desc":
+      "कोड लेख्नु अघि जटिल प्रणाली र कार्यप्रवाहको स्पष्ट योजना बनाउनुहोस्, जसको १००% शुल्क निर्माणमा समायोजन हुन्छ।",
+    "services.launch_kit": "Launch Kit",
+    "services.launch_kit_desc":
+      "स्थानीय र विश्वव्यापी खोजबाट वास्तविक सोधपुछ बढाउने छिटो, मोबाइल-मैत्री Next.js वेबसाइटहरू।",
+    "services.automation_layer": "Automation Layer",
+    "services.automation_layer_desc":
+      "फर्म, WhatsApp, CRM र eSewa/Khalti/Fonepay/Stripe वेबहुकलाई म्यानुअल काम बिना स्वचालित जोड्नुहोस्।",
     "process.headline": "हामी कसरी काम गर्छौं",
     "process.sub": "मड्युलर प्रणालीहरू डेलिभर गर्न व्यवस्थित, इन्जिनियरिङ-प्रथम दृष्टिकोण।",
     "process.discovery": "खोज",
@@ -186,24 +179,23 @@ export const translations: Record<Language, Record<string, string>> = {
     "cta.primary": "प्रस्ताव अनुरोध गर्नुहोस्",
     "cta.secondary": "खोज कल तालिका गर्नुहोस्",
     "footer.tagline":
-      "तयारी उपकरणहरू भन्दा बढेका SMB हरूका लागि कस्टम मड्युलर सफ्टवेयर प्रणालीहरू।",
-    "footer.company": "कम्पनी",
+      "गौरी टोल, बिर्तामोड-१, झापा, नेपाल तथा विश्वभरका व्यवसायहरूका लागि सफ्टवेयर, छिटो वेबसाइट र स्वचालन सेवाहरू।",
+    "footer.quick_links": "छिटो लिङ्कहरू",
+    "footer.home": "गृहपृष्ठ",
     "footer.about": "हाम्रो बारे",
-    "footer.work": "काम",
-
+    "footer.services": "सेवाहरू",
+    "footer.work": "केस स्टडीज",
+    "footer.resources": "स्रोतहरू",
+    "footer.blog": "ब्लग",
     "footer.careers": "करियर",
-    "footer.services_heading": "सेवाहरू",
-    "footer.custom_dev": "कस्टम विकास",
-    "footer.process": "प्रक्रिया",
-    "footer.tech_stack": "प्रविधि स्ट्याक",
-    "footer.industries": "उद्योगहरू",
+    "footer.contact": "सम्पर्क गर्नुहोस्",
     "footer.contact_heading": "सम्पर्क",
-    "footer.location": "बिर्तामोड, वडा नं. १, गौरी टोल, झापा, नेपाल",
+    "footer.location": "गौरी टोल, बिर्तामोड-१, झापा, नेपाल",
     "footer.response_time": "१ कार्य दिनभित्र जवाफ",
     "footer.privacy": "गोपनीयता नीति",
     "footer.terms": "सर्तहरू",
     "footer.copyright": "© २०२६ Modulifyr Enterprise Pvt. Ltd. सर्वाधिकार सुरक्षित।",
-    "footer.tagline_short": "नेपाल र विश्वभरका व्यवसायहरूका लागि कस्टम सफ्टवेयर विकास।",
+    "footer.tagline_short": "नेपाल र विश्वभरका व्यवसायहरूका लागि सफ्टवेयर, वेबसाइट र स्वचालन।",
   },
 };
 

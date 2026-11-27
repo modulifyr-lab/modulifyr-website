@@ -1,9 +1,11 @@
 import { MetadataRoute } from "next";
+import { getAllPosts } from "@/lib/notion-blog";
+import { RESOURCES } from "@/lib/resources";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = "https://modulifyr.com";
 
-  return [
+  const staticRoutes: MetadataRoute.Sitemap = [
     // Core pages
     { url: `${base}/`, changeFrequency: "weekly", priority: 1.0 },
     { url: `${base}/services`, changeFrequency: "monthly", priority: 0.9 },
@@ -24,11 +26,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/privacy`, changeFrequency: "yearly", priority: 0.3 },
     { url: `${base}/terms`, changeFrequency: "yearly", priority: 0.3 },
     { url: `${base}/cookie-policy`, changeFrequency: "yearly", priority: 0.3 },
-
-    // Resource articles (non-PDF) — these are static so include them
-    { url: `${base}/resources/sre-best-practices`, changeFrequency: "monthly", priority: 0.6 },
-
-    // Blog posts are dynamically generated from Notion — not listed here.
-    // They will be indexed by Google via the /blog page and RSS feed.
+    ...RESOURCES.filter((r) => !r.isPdf).map((r) => ({
+      url: `${base}/resources/${r.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })),
   ];
+
+  const posts = await getAllPosts();
+  const blogRoutes: MetadataRoute.Sitemap = posts.map((post) => ({
+    url: `${base}/blog/${post.slug}`,
+    ...(post.dateISO ? { lastModified: new Date(post.dateISO) } : {}),
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
+  return [...staticRoutes, ...blogRoutes];
 }

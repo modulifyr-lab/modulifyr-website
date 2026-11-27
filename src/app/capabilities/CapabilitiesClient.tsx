@@ -91,27 +91,27 @@ const stackByType = [
     useCases: "Local business sites, clinics, schools, consultancies, landing pages & portfolios.",
   },
   {
-    type: "Custom Web Apps & MVPs",
+    type: "Strategy Sprint Architecture",
     icon: Code2,
     color: "text-brand-teal",
     bg: "bg-brand-teal/10",
     primary: "TypeScript + Next.js + Hono + PostgreSQL",
-    notes: "Lean, type-safe full-stack architecture scoped via Strategy Sprint",
+    notes: "Architecture, schema & integration blueprints scoped before build",
     stack: [
       {
-        layer: "Frontend",
+        layer: "Frontend Architecture",
         choice: "Next.js (App Router) + React",
-        note: "Server & client components with strict TypeScript",
+        note: "Modular component boundaries with strict TypeScript",
       },
-      { layer: "Styling", choice: "Tailwind CSS", note: "Uniform, accessible component system" },
-      { layer: "API", choice: "Hono / Next.js Route Handlers", note: "Lightweight, fast, typed REST endpoints" },
-      { layer: "Database & ORM", choice: "PostgreSQL + Drizzle / Prisma", note: "Relational integrity & clean migrations" },
+      { layer: "Design System", choice: "Tailwind CSS", note: "Uniform, accessible component architecture" },
+      { layer: "API Contracts", choice: "Hono / REST + OpenAPI", note: "Lightweight, fast, typed API specs" },
+      { layer: "Database Design", choice: "PostgreSQL + Drizzle / Prisma", note: "Relational schema & migration roadmap" },
       { layer: "Validation", choice: "Zod", note: "Runtime schema validation + shared TS inference" },
-      { layer: "Auth", choice: "Better Auth / Auth.js", note: "Session & role-based access control" },
-      { layer: "Email & Caching", choice: "Resend + Upstash Redis", note: "Transactional email & rate limiting" },
-      { layer: "Deployment", choice: "Vercel / Docker", note: "Client-owned repositories & cloud accounts" },
+      { layer: "Auth & Access", choice: "Session & RBAC Blueprints", note: "Clear permission & security boundaries" },
+      { layer: "Email & Caching", choice: "Resend + Upstash Redis", note: "Transactional email & rate-limit design" },
+      { layer: "Deployment Plan", choice: "Vercel / Docker", note: "Client-owned repositories & cloud accounts" },
     ],
-    useCases: "SaaS MVPs, customer portals, booking tools, and internal operations dashboards.",
+    useCases: "Technical discovery, database modeling, system integration plans & build roadmaps.",
   },
   {
     type: "Automation Layer & Integrations",
@@ -437,10 +437,10 @@ export default function CapabilitiesClient() {
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
             {[
               { q: "Need a fast business website", a: "Launch Kit (Next.js + Tailwind)" },
-              { q: "Need a custom web app or MVP", a: "Next.js + Hono + PostgreSQL" },
-              { q: "Need forms, WhatsApp & CRM synced", a: "Automation Layer (n8n / Webhooks)" },
-              { q: "Need payment gateway integration", a: "eSewa / Khalti / Stripe Webhooks" },
               { q: "Need architecture clarity first", a: "Strategy Sprint (credited to build)" },
+              { q: "Need forms, WhatsApp & CRM synced", a: "Automation Layer (n8n / Webhooks)" },
+              { q: "Need payment gateway integration", a: "eSewa / Khalti / Fonepay / Stripe" },
+              { q: "Need multi-system roadmap", a: "Strategy Sprint (Tier 2 or Tier 3)" },
               { q: "Need hands-off hosting & updates", a: "Optional Managed Hosting" },
             ].map((item, i) => (
               <Reveal key={item.q} variant="fade-scale" delay={i * 50}>

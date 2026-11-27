@@ -23,7 +23,6 @@ const technicalBuilds = [
     title: "Educom",
     subtitle: "Modular Student Inquiry & Operations Portal",
     tags: ["Next.js", "TypeScript", "Hono", "PostgreSQL", "Automation"],
-    loomPlaceholder: "[TODO: Add Loom walkthrough URL]",
     image: "/blog/blog-one.jpg",
     problem:
       "Education teams often lose prospective student inquiries across disconnected web forms, spreadsheets, and manual chat follow-ups—causing slow response times and messy enrollment tracking.",
@@ -44,7 +43,6 @@ const technicalBuilds = [
     title: "WhatsApp, eSewa & Lead Sync Pipeline",
     subtitle: "Working n8n & Webhook Automation Demo for Nepal SMBs",
     tags: ["n8n", "WhatsApp Business", "eSewa / Khalti", "Google Sheets", "Webhooks"],
-    loomPlaceholder: "[TODO: Add Loom walkthrough URL]",
     image: "/blog/blog-three.jpg",
     problem:
       "Local businesses spend hours every week copying inquiry details from website forms into Google Sheets, chasing payment confirmations, and manually messaging staff on WhatsApp.",
@@ -215,8 +213,10 @@ export default function WorkClient() {
                   <Reveal variant="fade-up" delay={baseDelay + 340}>
                     <div className="border-border-base bg-bg-alt flex flex-col gap-3 rounded-2xl border p-5 sm:flex-row sm:items-center sm:justify-between">
                       <div className="text-xs">
-                        <p className="text-foreground font-semibold">Walkthrough Video</p>
-                        <p className="text-text-muted mt-0.5">{cs.loomPlaceholder}</p>
+                        <p className="text-foreground font-semibold">Live Architecture Walkthrough</p>
+                        <p className="text-text-muted mt-0.5">
+                          See the live workflow and codebase structure on a 15-minute call.
+                        </p>
                       </div>
                       <Link href="/contact" className="shrink-0">
                         <Button size="sm" variant="outline" className="group flex items-center gap-2">

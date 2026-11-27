@@ -165,7 +165,7 @@ function blocksToHtml(blocks: NotionBlock[]): string {
         parts.push(`<p class="notion-p">${inlineToHtml(block.paragraph?.rich_text ?? [])}</p>`);
         break;
       case "heading_1":
-        parts.push(`<h1 class="notion-h1">${inlineToHtml(block.heading_1?.rich_text ?? [])}</h1>`);
+        parts.push(`<h2 class="notion-h2">${inlineToHtml(block.heading_1?.rich_text ?? [])}</h2>`);
         break;
       case "heading_2":
         parts.push(`<h2 class="notion-h2">${inlineToHtml(block.heading_2?.rich_text ?? [])}</h2>`);
@@ -272,11 +272,25 @@ export async function getAllPosts(): Promise<BlogPost[]> {
     }
     const data = (await res.json()) as { results?: NotionPage[] };
     const posts: BlogPost[] = [];
+    const seenSlugs = new Set<string>();
+    const seenTitles = new Set<string>();
     for (const page of data.results ?? []) {
       const post = pageToPost(page);
-      if (post.slug && post.title && !isDraftOrDuplicate(post)) {
-        posts.push(post);
+      if (!post.slug || !post.title || isDraftOrDuplicate(post)) {
+        continue;
       }
+      const normSlug = post.slug.trim().toLowerCase();
+      const normTitle = post.title
+        .trim()
+        .toLowerCase()
+        .replace(/\[[^\]]*\]/g, "")
+        .replace(/\s+/g, " ");
+      if (seenSlugs.has(normSlug) || seenTitles.has(normTitle)) {
+        continue;
+      }
+      seenSlugs.add(normSlug);
+      seenTitles.add(normTitle);
+      posts.push(post);
     }
     return posts;
   } catch (err) {

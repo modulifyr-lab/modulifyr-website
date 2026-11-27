@@ -6,6 +6,12 @@ import { formatPackageRange } from "@/lib/pricing";
 import { SERVICES, serviceDetailHref, serviceRequestHref, type Service } from "@/lib/services";
 import { Button } from "@/components/Button";
 
+const SERVICE_SUBTITLES: Record<Service["slug"], string> = {
+  "strategy-sprint": "System Architecture & Technical Scoping Blueprint",
+  "launch-kit": "Fast Mobile-First Business Websites & Local SEO",
+  "automation-layer": "Business Workflow, CRM & eSewa/Khalti/Fonepay Automation",
+};
+
 export function ServicesSection() {
   const { region } = useRegion();
   const displayRegion = region ?? "NP";
@@ -18,10 +24,12 @@ export function ServicesSection() {
           <span className="text-caption1 font-bold tracking-wider text-[#2D738D] uppercase">
             OUR SERVICES
           </span>
-          <h2 className="text-h2 text-foreground font-bold">Built for Measurable Growth</h2>
+          <h1 className="text-h2 text-foreground font-bold">
+            Three Fixed-Scope Packages Built for Measurable Growth
+          </h1>
           <p className="text-body2 sm:text-body1 text-text-alt">
-            Fixed-scope packages designed to help Nepal SMBs and growing teams cut wasted spend,
-            convert more customers online, and save hours every week.
+            Transparent packages designed to help Nepal SMBs and international teams cut wasted
+            spend, convert more customers online, and save hours every week.
           </p>
 
           {/* Currency Selector */}
@@ -43,8 +51,13 @@ export function ServicesSection() {
                 key={service.slug}
                 className="bg-bg-alt border-border-main flex h-full flex-col rounded-2xl border p-8 shadow-sm transition-all duration-300"
               >
-                <div className="space-y-4">
-                  <h3 className="text-foreground text-2xl font-bold">{service.title}</h3>
+                <div className="space-y-3">
+                  <div>
+                    <h2 className="text-foreground text-2xl font-bold">{service.title}</h2>
+                    <h3 className="mt-1 text-sm font-semibold text-[#2D738D]">
+                      {SERVICE_SUBTITLES[service.slug]}
+                    </h3>
+                  </div>
                   <p className="text-body2 text-text-alt leading-relaxed">{service.summary}</p>
                   <p className="text-caption1 text-text-dim">
                     <strong className="text-foreground font-semibold">Best for: </strong>

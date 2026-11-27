@@ -6,11 +6,24 @@ import { getAllPosts } from "@/lib/notion-blog";
 import Reveal from "@/components/ui/Reveal";
 
 export const metadata: Metadata = {
-  title: "Engineering Blog | Modulifyr — Software Insights for Nepal & Beyond",
+  title: "Engineering Blog | Software & Automation Insights | Modulifyr",
   description:
-    "Technical insights, architecture patterns, and practical engineering perspectives from the Modulifyr team in Birtamode, Nepal.",
+    "Practical architecture patterns, website performance guides, and business automation insights from Modulifyr in Birtamode, Nepal for local and global teams.",
   alternates: {
     canonical: "/blog",
+  },
+  openGraph: {
+    title: "Engineering Blog | Software & Automation Insights | Modulifyr",
+    description:
+      "Architecture decisions, TypeScript/Next.js practices, and workflow automation guides from Modulifyr.",
+    url: "/blog",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Engineering Blog | Modulifyr",
+    description:
+      "Technical guides and architecture patterns from the Modulifyr engineering team in Nepal.",
   },
 };
 

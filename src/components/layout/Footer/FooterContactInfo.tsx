@@ -3,6 +3,7 @@ import {
   ADDRESS_LINE_1,
   ADDRESS_LINE_2,
   CONTACT_EMAIL,
+  GOOGLE_MAPS_URL,
   PHONE_DISPLAY,
   PHONE_HREF,
 } from "@/lib/links";
@@ -43,7 +44,12 @@ export function FooterContactInfo() {
           );
         })}
 
-        <div className="flex items-start gap-3 text-sm text-slate-400">
+        <a
+          href={GOOGLE_MAPS_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-start gap-3 text-sm text-slate-400 transition-colors hover:text-cyan-400"
+        >
           <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-cyan-400" />
 
           <span className="leading-relaxed">
@@ -51,7 +57,7 @@ export function FooterContactInfo() {
             <br />
             {ADDRESS_LINE_2}
           </span>
-        </div>
+        </a>
       </div>
     </div>
   );

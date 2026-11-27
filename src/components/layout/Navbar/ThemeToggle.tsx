@@ -1,37 +1,54 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+import { getNextThemeMode, persistThemeMode } from "@/lib/theme";
 
-export function ThemeToggle() {
+const emptySubscribe = () => () => {};
+
+interface ThemeToggleProps {
+  className?: string;
+}
+
+export function ThemeToggle({ className = "h-9 w-9" }: ThemeToggleProps) {
   const { resolvedTheme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const isMounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const isDark = isMounted && resolvedTheme === "dark";
+  const label = isMounted
+    ? isDark
+      ? "Switch to light mode"
+      : "Switch to dark mode"
+    : "Toggle theme";
 
-  if (!mounted) {
-    return (
-      <button
-        type="button"
-        aria-label="Toggle theme"
-        className="text-on-surface-variant inline-flex h-9 w-9 items-center justify-center rounded-lg"
-      />
-    );
-  }
-
-  const isDark = resolvedTheme === "dark";
+  const handleToggle = () => {
+    const nextTheme = getNextThemeMode(resolvedTheme);
+    persistThemeMode(nextTheme);
+    setTheme(nextTheme);
+  };
 
   return (
     <button
       type="button"
-      onClick={() => setTheme(isDark ? "light" : "dark")}
-      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-      className="text-on-surface-variant hover:bg-surface-container hover:text-on-background inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg transition-colors"
+      onClick={handleToggle}
+      aria-label={label}
+      aria-pressed={isMounted ? isDark : undefined}
+      title={label}
+      className={`border-border-base/70 bg-surface-container/40 text-on-surface-variant hover:border-cta/40 hover:bg-surface-container hover:text-on-background relative inline-flex cursor-pointer items-center justify-center rounded-lg border transition-colors duration-200 ${className}`}
     >
-      {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+      <Sun
+        className="hidden h-4 w-4 text-[#FFC24B] transition-transform duration-200 dark:block"
+        aria-hidden="true"
+      />
+      <Moon
+        className="block h-4 w-4 transition-transform duration-200 dark:hidden"
+        aria-hidden="true"
+      />
     </button>
   );
 }
