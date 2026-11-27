@@ -1,39 +1,13 @@
 import { REGIONS } from "@/lib/regions";
 import type { Region } from "@/lib/regions";
 
-export const FOUNDING_SLOTS_REMAINING = 0;
+export const FOUNDING_SLOTS_REMAINING = 3;
 
 export const pricingStandard = {
-  strategySprint: {
-    tier1_basicScoping: {
-      USD: [200, 300],
-      NPR: [25000, 35000],
-      GBP: [150, 220],
-      CAD: [280, 420],
-      AUD: [285, 425],
-      EUR: [175, 260],
-    },
-    tier2_fullDiscovery: {
-      USD: [400, 550],
-      NPR: [45000, 60000],
-      GBP: [300, 405],
-      CAD: [555, 765],
-      AUD: [570, 780],
-      EUR: [350, 480],
-    },
-    tier3_complexArchitecture: {
-      USD: [650, 850],
-      NPR: [70000, 90000],
-      GBP: [480, 630],
-      CAD: [905, 1180],
-      AUD: [925, 1205],
-      EUR: [565, 740],
-    },
-  },
   launchKit: {
     tier1_essential: {
       USD: [300, 400],
-      NPR: [30000, 40000],
+      NPR: [24000, 32000],
       GBP: [220, 295],
       CAD: [415, 555],
       AUD: [425, 570],
@@ -82,39 +56,39 @@ export const pricingStandard = {
       EUR: [1565, 2090],
     },
   },
+  strategySprint: {
+    tier1_basicScoping: {
+      USD: [200, 300],
+      NPR: [25000, 35000],
+      GBP: [150, 220],
+      CAD: [280, 420],
+      AUD: [285, 425],
+      EUR: [175, 260],
+    },
+    tier2_fullDiscovery: {
+      USD: [400, 550],
+      NPR: [45000, 60000],
+      GBP: [300, 405],
+      CAD: [555, 765],
+      AUD: [570, 780],
+      EUR: [350, 480],
+    },
+    tier3_complexArchitecture: {
+      USD: [650, 1400],
+      NPR: [70000, 150000],
+      GBP: [480, 1035],
+      CAD: [905, 1945],
+      AUD: [925, 1990],
+      EUR: [565, 1220],
+    },
+  },
 } as const;
 
 export const pricingFounding = {
-  strategySprint: {
-    tier1_basicScoping: {
-      USD: [160, 240],
-      NPR: [20000, 28000],
-      GBP: [120, 175],
-      CAD: [225, 335],
-      AUD: [225, 340],
-      EUR: [140, 210],
-    },
-    tier2_fullDiscovery: {
-      USD: [320, 440],
-      NPR: [36000, 48000],
-      GBP: [240, 325],
-      CAD: [445, 610],
-      AUD: [455, 625],
-      EUR: [280, 385],
-    },
-    tier3_complexArchitecture: {
-      USD: [520, 680],
-      NPR: [56000, 72000],
-      GBP: [385, 505],
-      CAD: [720, 945],
-      AUD: [740, 965],
-      EUR: [450, 590],
-    },
-  },
   launchKit: {
     tier1_essential: {
       USD: [240, 320],
-      NPR: [24000, 32000],
+      NPR: [19200, 25600],
       GBP: [175, 235],
       CAD: [335, 445],
       AUD: [340, 455],
@@ -163,16 +137,44 @@ export const pricingFounding = {
       EUR: [1250, 1670],
     },
   },
+  strategySprint: {
+    tier1_basicScoping: {
+      USD: [160, 240],
+      NPR: [20000, 28000],
+      GBP: [120, 175],
+      CAD: [225, 335],
+      AUD: [225, 340],
+      EUR: [140, 210],
+    },
+    tier2_fullDiscovery: {
+      USD: [320, 440],
+      NPR: [36000, 48000],
+      GBP: [240, 325],
+      CAD: [445, 610],
+      AUD: [455, 625],
+      EUR: [280, 385],
+    },
+    tier3_complexArchitecture: {
+      USD: [520, 1120],
+      NPR: [56000, 120000],
+      GBP: [385, 830],
+      CAD: [720, 1555],
+      AUD: [740, 1590],
+      EUR: [450, 975],
+    },
+  },
 } as const;
 
-export const managedHostingPricing = {
-  USD: [50, 150],
-  NPR: [5000, 15000],
-  GBP: [35, 110],
-  CAD: [70, 210],
-  AUD: [70, 215],
-  EUR: [45, 130],
+export const monthlyCarePricing = {
+  USD: 40,
+  NPR: 2500,
+  GBP: 30,
+  CAD: 55,
+  AUD: 60,
+  EUR: 35,
 } as const;
+
+export const managedHostingPricing = monthlyCarePricing;
 
 export const pricing = FOUNDING_SLOTS_REMAINING > 0 ? pricingFounding : pricingStandard;
 
@@ -244,9 +246,13 @@ export function formatTierPriceActive(
   return formatTierPriceStandard(pkg, tier, region);
 }
 
-export function formatManagedHostingPrice(region: Exclude<Region, null>): string {
+export function formatMonthlyCarePrice(region: Exclude<Region, null>): string {
   const currency = REGIONS[region].currency;
-  return formatPrice(managedHostingPricing[currency], region);
+  return formatPrice(monthlyCarePricing[currency], region);
+}
+
+export function formatManagedHostingPrice(region: Exclude<Region, null>): string {
+  return formatMonthlyCarePrice(region);
 }
 
 export function getPackageRange(

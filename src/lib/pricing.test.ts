@@ -2,6 +2,9 @@ import { describe, it, expect } from "vitest";
 import {
   getPackageRange,
   formatPackageRange,
+  formatMonthlyCarePrice,
+  formatTierPriceActive,
+  formatTierPriceStandard,
   FOUNDING_SLOTS_REMAINING,
   pricingFounding,
   pricingStandard,
@@ -10,7 +13,28 @@ import {
 import { REGION_CODES, REGIONS } from "./regions";
 
 describe("pricing helpers", () => {
-  const packages: PackagePricingKey[] = ["strategySprint", "launchKit", "automationLayer"];
+  const packages: PackagePricingKey[] = ["launchKit", "automationLayer", "strategySprint"];
+
+  it("exposes 3 active Founding Client slots and aligned package ranges across currencies", () => {
+    expect(FOUNDING_SLOTS_REMAINING).toBe(3);
+    expect(getPackageRange("launchKit", "NP")[0]).toBe(19200);
+    expect(getPackageRange("launchKit", "US")[0]).toBe(240);
+    expect(formatTierPriceStandard("launchKit", "tier1_essential", "NP").replace(/\s/g, " ")).toBe(
+      "NPR 24,000 – NPR 32,000"
+    );
+    expect(formatTierPriceActive("launchKit", "tier1_essential", "NP").replace(/\s/g, " ")).toBe(
+      "NPR 19,200 – NPR 25,600"
+    );
+
+    expect(getPackageRange("automationLayer", "NP")[0]).toBe(28000);
+    expect(getPackageRange("automationLayer", "US")[0]).toBe(280);
+
+    expect(getPackageRange("strategySprint", "NP")).toEqual([20000, 120000]);
+    expect(getPackageRange("strategySprint", "US")).toEqual([160, 1120]);
+
+    expect(formatMonthlyCarePrice("NP").replace(/\s/g, " ")).toBe("NPR 2,500");
+    expect(formatMonthlyCarePrice("US")).toBe("$40");
+  });
 
   it("getPackageRange returns min of tier mins and max of tier maxes from active table", () => {
     const activeTable = FOUNDING_SLOTS_REMAINING > 0 ? pricingFounding : pricingStandard;

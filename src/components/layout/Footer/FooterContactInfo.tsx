@@ -58,6 +58,10 @@ export function FooterContactInfo() {
             {ADDRESS_LINE_2}
           </span>
         </a>
+
+        <p className="pt-1 text-xs leading-relaxed text-slate-400">
+          बिर्तामोड, झापाबाट नेपालभर र विश्वभर सेवा — सिधै WhatsApp वा फोनमा कुरा गर्नुहोस्।
+        </p>
       </div>
     </div>
   );

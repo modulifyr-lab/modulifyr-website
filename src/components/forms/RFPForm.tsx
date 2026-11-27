@@ -106,7 +106,7 @@ const initialForm: FormState = {
 
 export function RFPForm() {
   const { region, setRegion } = useRegion();
-  const activeRegion = region;
+  const activeRegion: Exclude<Region, null> = region ?? "NP";
 
   // Parse URL params from window.location.search on client side
   const [searchParams, setSearchParams] = useState<URLSearchParams>(new URLSearchParams());
@@ -445,8 +445,7 @@ export function RFPForm() {
                       <div className="flex flex-col gap-2 md:col-span-2">
                         <div className="flex items-center justify-between">
                           <label className="text-foreground text-sm font-semibold">
-                            Budget Range (
-                            {activeRegion ? REGIONS[activeRegion].currency : "select region"}){" "}
+                            Budget Range ({REGIONS[activeRegion].currency}){" "}
                             <span className="text-[#2D738D]">*</span>
                           </label>
                         </div>
@@ -597,27 +596,20 @@ export function RFPForm() {
                     Package Price Guide
                   </h3>
                   <div className="space-y-2">
-                    {(activeRegion
-                      ? [
-                          {
-                            name: "Strategy Sprint",
-                            price: `${formatTierPrice("strategySprint", "tier1_basicScoping", activeRegion)} – ${formatTierPrice("strategySprint", "tier3_complexArchitecture", activeRegion)}`,
-                          },
-                          {
-                            name: "Launch Kit",
-                            price: `${formatTierPrice("launchKit", "tier1_essential", activeRegion)} – ${formatTierPrice("launchKit", "tier3_premium", activeRegion)}`,
-                          },
-                          {
-                            name: "Automation Layer",
-                            price: `${formatTierPrice("automationLayer", "tier1_basicConnection", activeRegion)} – ${formatTierPrice("automationLayer", "tier3_complexPipeline", activeRegion)}`,
-                          },
-                        ]
-                      : [
-                          { name: "Strategy Sprint", price: "Select region for pricing" },
-                          { name: "Launch Kit", price: "Select region for pricing" },
-                          { name: "Automation Layer", price: "Select region for pricing" },
-                        ]
-                    ).map((pkg) => (
+                    {[
+                      {
+                        name: "Launch Kit",
+                        price: `${formatTierPrice("launchKit", "tier1_essential", activeRegion)} – ${formatTierPrice("launchKit", "tier3_premium", activeRegion)}`,
+                      },
+                      {
+                        name: "Automation Layer",
+                        price: `${formatTierPrice("automationLayer", "tier1_basicConnection", activeRegion)} – ${formatTierPrice("automationLayer", "tier3_complexPipeline", activeRegion)}`,
+                      },
+                      {
+                        name: "Strategy Sprint",
+                        price: `${formatTierPrice("strategySprint", "tier1_basicScoping", activeRegion)} – ${formatTierPrice("strategySprint", "tier3_complexArchitecture", activeRegion)}`,
+                      },
+                    ].map((pkg) => (
                       <div
                         key={pkg.name}
                         className="border-border-base flex items-center justify-between border-b py-2 last:border-0"

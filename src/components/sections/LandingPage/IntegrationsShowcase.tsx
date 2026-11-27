@@ -21,7 +21,7 @@ const INTEGRATION_ROWS: { direction: "left" | "right"; duration: number; apps: I
       { name: "Fonepay", category: "QR & Bank Pay", accent: "#DC2626", code: "FP" },
       { name: "Google Workspace", category: "Docs & Mail", accent: "#2563EB", code: "GW" },
       { name: "Zoho CRM", category: "Sales & Ops", accent: "#EA580C", code: "ZO" },
-      { name: "WhatsApp Business", category: "Customer Alerts", accent: "#059669", code: "WA" },
+      { name: "Click-to-WhatsApp", category: "Email, Telegram & SMS Alerts", accent: "#059669", code: "WA" },
     ],
   },
   {
@@ -43,9 +43,9 @@ const INTEGRATION_ROWS: { direction: "left" | "right"; duration: number; apps: I
       { name: "n8n", category: "Workflows", accent: "#EA580C", code: "n8" },
       { name: "Notion", category: "Docs & CMS", accent: "#334155", code: "NO" },
       { name: "Stripe", category: "Global Billing", accent: "#4F46E5", code: "ST" },
-      { name: "Resend", category: "Transactional Email", accent: "#0F172A", code: "RS" },
-      { name: "Calendly", category: "Bookings", accent: "#0284C7", code: "CA" },
-      { name: "Zoom", category: "Client Calls", accent: "#2563EB", code: "ZM" },
+      { name: "Resend", category: "Email Alerts", accent: "#0F172A", code: "RS" },
+      { name: "Sparrow / Aakash SMS", category: "Nepali SMS Alerts", accent: "#0284C7", code: "SM" },
+      { name: "Telegram", category: "Instant Team Alerts", accent: "#2563EB", code: "TG" },
     ],
   },
 ];
@@ -130,7 +130,7 @@ export function IntegrationsShowcase() {
           <div
             className="integration-rows flex flex-col gap-5 lg:col-span-7"
             role="group"
-            aria-label="Supported integrations including eSewa, Khalti, Fonepay, Google Workspace, Zoho CRM, WhatsApp Business, AWS, PostgreSQL, GitHub, Slack, Jira, Figma"
+            aria-label="Supported integrations including eSewa, Khalti, Fonepay, Google Workspace, Zoho CRM, Click-to-WhatsApp, Sparrow SMS, Telegram, AWS, PostgreSQL, GitHub, Slack"
           >
             {INTEGRATION_ROWS.map((row, i) => (
               <MarqueeRow key={i} {...row} />

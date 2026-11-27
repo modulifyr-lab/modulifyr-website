@@ -8,7 +8,6 @@ import {
   IntegrationsShowcase,
   FeaturedCaseStudy,
   BlogAndCaseStudiesSection,
-  TalentCalloutSection,
   CtaSection,
 } from "@/components/sections/LandingPage";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
@@ -53,10 +52,7 @@ export default function Home() {
       {/* 9. Insights, Standards & Guides */}
       <BlogAndCaseStudiesSection />
 
-      {/* 10. Careers & Talent Callout */}
-      <TalentCalloutSection />
-
-      {/* 11. FAQ Accordion */}
+      {/* 10. FAQ Accordion */}
       <FaqAccordion />
 
       {/* 12. Final Conversion Banner */}

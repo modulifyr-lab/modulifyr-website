@@ -10,28 +10,28 @@ export interface Service {
 
 export const SERVICES: readonly Service[] = [
   {
-    slug: "strategy-sprint",
-    pkgKey: "strategySprint",
-    title: "Strategy Sprint",
-    summary:
-      "Scope complex websites, software systems, and multi-tool automations before writing production code. We lock down architecture, database design, and milestones upfront—and credit 100% of the sprint fee toward your Launch Kit or Automation Layer build.",
-    bestFor: "Founders and teams scoping multi-page platforms or cross-system integrations.",
-  },
-  {
     slug: "launch-kit",
     pkgKey: "launchKit",
     title: "Launch Kit",
     summary:
-      "Win customer trust online and convert local & international searches into real inquiries in 3–7 days. Built on our modular Next.js & Tailwind component system—mobile-first, SEO-ready, and wired to booking, WhatsApp, or payment forms.",
-    bestFor: "SMBs in Nepal and global teams needing a fast, high-trust website without agency bloat.",
+      "Your customers check Google and WhatsApp before they ever call. We build fast, mobile-first business websites in 3–7 days—wired to WhatsApp, online booking, and payment links so local searches turn into real leads. You own 100% of your code and domain.",
+    bestFor: "Businesses in Nepal and global teams needing a fast, high-trust website without delays.",
   },
   {
     slug: "automation-layer",
     pkgKey: "automationLayer",
     title: "Automation Layer",
     summary:
-      "Stop losing hours to manual copy-pasting between forms, spreadsheets, CRMs, and team chats. We connect your tools via n8n, Zapier, Make, and eSewa/Khalti/Fonepay/Stripe webhooks with retry logic and error alerts.",
+      "Stop losing leads to slow replies or manual copy-pasting. We connect website forms, Facebook/Google lead ads, CRMs, Google Sheets, and eSewa/Khalti/Fonepay/Stripe webhooks via REST APIs, webhooks & scheduled sync—with instant Email, Telegram & Nepali SMS (Sparrow/Aakash) alerts.",
     bestFor: "Teams losing staff hours or customer leads to manual data entry and disconnected tools.",
+  },
+  {
+    slug: "strategy-sprint",
+    pkgKey: "strategySprint",
+    title: "Strategy Sprint",
+    summary:
+      "IT & digitalization consulting before you commit to a big build. Start with a Free 20-Minute Checkup; if your team needs deep multi-tool research, we audit your workflow and compare off-the-shelf software vs custom builds—100% credited toward your build if you start within 30 days.",
+    bestFor: "Founders and teams deciding between off-the-shelf tools and custom software systems.",
   },
 ];
 

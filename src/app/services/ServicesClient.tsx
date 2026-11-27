@@ -15,21 +15,21 @@ export default function ServicesClient() {
       <section className="bg-bg-alt/50 border-border-main border-t py-16 transition-colors duration-300 sm:py-24">
         <div className="container-custom max-w-3xl space-y-5 text-center sm:space-y-6">
           <h2 className="text-h2 text-foreground font-bold">
-            Need Help Choosing the Right <span className="text-[#E8A33D]">Package</span>?
+            Not Sure Where to <span className="text-[#E8A33D]">Start</span>?
           </h2>
           <p className="text-body2 sm:text-body1 text-text-alt leading-relaxed">
-            Want a fast, SEO-ready business website? Start directly with a Launch Kit. Need forms,
-            WhatsApp, CRMs, or payment gateways synced? Choose an Automation Layer. Planning a
-            complex multi-system rollout? Start with a Strategy Sprint—and credit 100% of the fee
-            toward your build.
+            Every project starts with a Free 20-Minute Checkup call. Need a fast website? Start with
+            Launch Kit. Losing inquiries in forms or sheets? Choose Automation Layer. Need deep
+            multi-tool research first? Book a Strategy Sprint—with 100% of the fee credited toward
+            your build within 30 days.
           </p>
           <div className="flex flex-wrap justify-center gap-3 pt-2 sm:gap-4 sm:pt-4">
-            <Button href="/request-proposal">
-              Request a Proposal
+            <Button href={BOOKING_URL} external>
+              Book a Free 20-Min Checkup
               <ArrowRight className="h-4 w-4" />
             </Button>
-            <Button href={BOOKING_URL} external variant="outline">
-              Book a Discovery Call
+            <Button href="/request-proposal" variant="outline">
+              Request a Proposal
               <ArrowRight className="h-4 w-4" />
             </Button>
           </div>

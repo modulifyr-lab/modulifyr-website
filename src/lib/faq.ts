@@ -5,28 +5,28 @@ export interface FaqItem {
 
 export const DEFAULT_FAQ_ITEMS: readonly { question: string; answer: string }[] = [
   {
-    question: "What does Modulifyr do differently from other software development companies?",
-    answer:
-      "We design modular software systems tailored to your exact operational workflows. Instead of forced off-the-shelf constraints or rigid legacy monoliths, our founder-led team builds clean, maintainable systems with pay-as-we-build milestones and zero hidden costs.",
-  },
-  {
-    question: "How do I know Modulifyr is a fit for my business?",
-    answer:
-      "Modulifyr is ideal for SMBs and founders who need a Strategy Sprint to map architecture and scope upfront, a fast Launch Kit website on Next.js & Tailwind, or an Automation Layer connecting existing tools via n8n and webhooks.",
-  },
-  {
-    question: "Can you integrate our new system with existing tools we use?",
-    answer:
-      "Yes. We build REST/webhook integrations and automated workflows across n8n, Zapier, Make, WhatsApp Business, Notion, Google Sheets, CRM tools, and payment gateways like eSewa, Khalti, Fonepay, and Stripe.",
-  },
-  {
     question: "How do I start a project with Modulifyr?",
     answer:
-      "For a straightforward Launch Kit website or single automation, you can request a proposal or book a discovery call directly. For complex multi-system builds or deep integrations, start with a 3–10 day Strategy Sprint—100% of the sprint fee is credited if you build with us.",
+      "Every project starts with a Free 20-Minute Checkup call—never a paid barrier. We look at your website, lead flow, or manual bottlenecks, recommend the simplest fix (Launch Kit website, Automation Layer, or off-the-shelf software), and only suggest a paid Strategy Sprint if you need deep multi-tool research (100% credited if you start your build within 30 days).",
+  },
+  {
+    question: "What does Modulifyr do differently from other software development companies?",
+    answer:
+      "We speak plain business English, publish clear NPR and USD prices upfront, and deliver fast without agency bloat. You get direct engineering communication from Birtamode, milestone billing, and 100% ownership of your code, domain, and accounts.",
+  },
+  {
+    question: "Can you integrate our website and forms with existing tools we use?",
+    answer:
+      "Yes. We connect website and Facebook/Google lead forms, CRMs, Google Sheets, Notion, and eSewa, Khalti, Fonepay, or Stripe webhooks using REST APIs, webhooks & scheduled sync—sending instant alerts via Click-to-WhatsApp routing, Email, Telegram, or Nepali SMS (Sparrow/Aakash).",
+  },
+  {
+    question: "Do I need to pay for third-party tools like hosting, domains, or SMS credits?",
+    answer:
+      "Yes. Third-party subscriptions (domain names, Vercel hosting if needed, SMS credits, or external tool plans) stay registered in your own business name and are billed at cost—so you never get locked into an agency markup.",
   },
   {
     question: "What happens after launch?",
     answer:
-      "You get 100% ownership of your repository, domain, and accounts plus clear handoff documentation. Post-launch, we offer optional managed hosting, uptime alerting, and workflow health checks, or scope new features as a follow-on milestone.",
+      "You receive 100% ownership of your code repository, domain, and connected accounts plus plain-English handover notes. If you want ongoing peace of mind, our optional Monthly Care & Lead-Ops Plan covers uptime monitoring, form/lead health checks, and up to 2 small text, photo, or banner updates per month.",
   },
 ];

@@ -22,15 +22,15 @@ export function FeaturedCaseStudy() {
           {/* RIGHT: details */}
           <div className="lg:col-span-6">
             <span className="font-sans text-xl leading-[110%] font-normal text-[#FFC24B]">
-              Featured Technical Build
+              Internal Working Demo
             </span>
             <h2 className="text-on-background mt-4 text-4xl leading-[1.1] font-bold">
-              Educom &amp; Automated Inquiry Pipelines
+              Educom &amp; Automated Lead Sync Pipelines
             </h2>
             <p className="text-on-background mt-5 max-w-xl text-base leading-[1.35]">
-              Our technical builds pair fast Next.js + TypeScript web interfaces with PostgreSQL
-              and reliable n8n, WhatsApp Business, and eSewa/Khalti webhook workflows—turning
-              scattered inquiries and manual follow-ups into measurable operations.
+              Our internal working demos pair fast Next.js + TypeScript web interfaces with
+              PostgreSQL, REST APIs, webhooks &amp; scheduled sync, and eSewa/Khalti callbacks—routing
+              every inquiry to Email, Telegram, Nepali SMS, and Click-to-WhatsApp follow-ups.
             </p>
 
             <Link

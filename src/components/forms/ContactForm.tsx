@@ -341,6 +341,9 @@ export function ContactForm() {
               </div>
               <h3 className="text-h4 text-foreground font-bold">Birtamode HQ</h3>
               <p className="text-body2 text-text-alt leading-relaxed">{FULL_ADDRESS}</p>
+              <p className="text-caption1 text-text-alt leading-relaxed">
+                बिर्तामोड, झापाबाट नेपालभर र विश्वभर सेवा — सिधै WhatsApp वा फोनमा कुरा गर्नुहोस्।
+              </p>
               <a
                 href={GOOGLE_MAPS_URL}
                 target="_blank"

@@ -4,8 +4,8 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { RegionProvider } from "@/components/RegionProvider";
 import { LanguageProvider } from "@/components/LanguageContext";
 import Script from "next/script";
-import { cookies } from "next/headers";
-import { isRegion, REGION_COOKIE } from "@/lib/regions";
+import { cookies, headers } from "next/headers";
+import { isRegion, REGION_COOKIE, type Region } from "@/lib/regions";
 import { buildRootSchemaOrg } from "@/lib/structured-data";
 import { THEME_STORAGE_KEY } from "@/lib/theme";
 
@@ -98,9 +98,26 @@ export const metadata: Metadata = {
 
 const schemaOrg = buildRootSchemaOrg();
 
+function resolveInitialRegion(cookieValue: string | undefined, countryHeader: string | null): Exclude<Region, null> {
+  if (isRegion(cookieValue)) return cookieValue;
+  const code = countryHeader?.toUpperCase();
+  if (!code || code === "NP") return "NP";
+  if (code === "GB") return "GB";
+  if (code === "CA") return "CA";
+  if (code === "AU") return "AU";
+  const euroCountries = new Set([
+    "AT", "BE", "CY", "DE", "EE", "ES", "FI", "FR", "GR", "HR", "IE", "IT", "LT", "LU", "LV", "MT", "NL", "PT", "SI", "SK",
+  ]);
+  if (euroCountries.has(code)) return "EU";
+  return "US";
+}
+
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const cookieRegion = (await cookies()).get(REGION_COOKIE)?.value;
-  const initialRegion = isRegion(cookieRegion) ? cookieRegion : "NP";
+  const cookieStore = await cookies();
+  const headerStore = await headers();
+  const cookieRegion = cookieStore.get(REGION_COOKIE)?.value;
+  const countryHeader = headerStore.get("x-vercel-ip-country") ?? headerStore.get("cf-ipcountry");
+  const initialRegion = resolveInitialRegion(cookieRegion, countryHeader);
 
   return (
     <html lang="en" suppressHydrationWarning>

@@ -139,9 +139,9 @@ const stackByType = [
 const avoidList = [
   { tech: "MongoDB", reason: "Poor fit for relational business data", useInstead: "PostgreSQL" },
   {
-    tech: "GraphQL by default",
-    reason: "Unnecessary complexity for lean web apps",
-    useInstead: "REST / Hono + Zod",
+    tech: "Over-engineered API layers",
+    reason: "Unnecessary complexity for lean business web apps",
+    useInstead: "REST APIs, webhooks & scheduled sync",
   },
   {
     tech: "Bloated enterprise frameworks",
@@ -441,7 +441,7 @@ export default function CapabilitiesClient() {
               { q: "Need forms, WhatsApp & CRM synced", a: "Automation Layer (n8n / Webhooks)" },
               { q: "Need payment gateway integration", a: "eSewa / Khalti / Fonepay / Stripe" },
               { q: "Need multi-system roadmap", a: "Strategy Sprint (Tier 2 or Tier 3)" },
-              { q: "Need hands-off hosting & updates", a: "Optional Managed Hosting" },
+              { q: "Need hands-off hosting & updates", a: "Optional Monthly Care & Lead-Ops Plan" },
             ].map((item, i) => (
               <Reveal key={item.q} variant="fade-scale" delay={i * 50}>
                 <div className="border-border-base flex h-full items-center justify-between rounded-xl border bg-bg-alt px-5 py-4">

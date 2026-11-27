@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Facebook, Instagram, Twitter } from "lucide-react";
-import { RegionSelector } from "@/components/RegionSelector";
 
 const SOCIAL_LINKS = [
   {
@@ -44,7 +43,6 @@ export function FooterBottom() {
       <p className="text-center">Copyright © 2026 Modulifyr Enterprise Pvt. Ltd. All rights reserved.</p>
 
       <div className="flex flex-wrap items-center justify-center gap-6">
-        <RegionSelector compact />
         <Link href="/privacy" className="transition-colors hover:text-slate-400">
           Privacy
         </Link>

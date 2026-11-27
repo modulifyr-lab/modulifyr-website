@@ -2,24 +2,24 @@ import { Metadata } from "next";
 import WorkClient from "./WorkClient";
 
 export const metadata: Metadata = {
-  title: "Case Studies & Technical Builds | Modulifyr",
+  title: "Working Demos & Internal Builds | Modulifyr",
   description:
-    "Explore Modulifyr's technical builds and live automation demos—including Educom and retry-safe n8n, WhatsApp Business, and eSewa/Khalti workflows.",
+    "Explore Modulifyr's internal working demos—including Educom and retry-safe REST API, eSewa/Khalti webhook, Email, Telegram & Nepali SMS workflows.",
   alternates: {
     canonical: "/work",
   },
   openGraph: {
-    title: "Case Studies & Technical Builds | Modulifyr",
+    title: "Working Demos & Internal Builds | Modulifyr",
     description:
-      "Working Next.js builds and n8n, WhatsApp, and eSewa/Khalti automation demos engineered by Modulifyr.",
+      "Internal working Next.js builds and eSewa/Khalti lead automation demos engineered by Modulifyr.",
     url: "/work",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Case Studies & Technical Builds | Modulifyr",
+    title: "Working Demos & Internal Builds | Modulifyr",
     description:
-      "Explore Launch Kit websites, Educom architecture, and live Nepal SMB automation pipelines.",
+      "Explore Launch Kit websites, Educom architecture, and working Nepal SMB lead automation pipelines.",
   },
 };
 

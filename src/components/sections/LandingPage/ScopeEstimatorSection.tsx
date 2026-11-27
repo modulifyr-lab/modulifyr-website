@@ -2,10 +2,13 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { ArrowRight, Check, Calculator } from "lucide-react";
+import { ArrowRight, Calculator, Check, ShieldCheck } from "lucide-react";
 import { useRegion } from "@/components/RegionProvider";
 import { REGIONS, REGION_CODES, type Region } from "@/lib/regions";
 import {
+  FOUNDING_SLOTS_REMAINING,
+  formatMonthlyCarePrice,
+  formatTierPriceActive,
   formatTierPriceStandard,
   type PackagePricingKey,
 } from "@/lib/pricing";
@@ -21,55 +24,17 @@ interface TierOption {
 }
 
 const PACKAGE_TIERS: Record<PackagePricingKey, readonly TierOption[]> = {
-  strategySprint: [
-    {
-      tierKey: "tier1_basicScoping",
-      tierNumber: 1,
-      label: "Tier 1 · Basic Scoping",
-      duration: "3–5 business days",
-      scopeSummary: "Single focused website overhaul or workflow automation with clear boundaries.",
-      deliverables: [
-        "Written brief & requirements document",
-        "Next.js / n8n / PostgreSQL stack plan",
-        "Phased delivery roadmap (credited toward build)",
-      ],
-    },
-    {
-      tierKey: "tier2_fullDiscovery",
-      tierNumber: 2,
-      label: "Tier 2 · Full Discovery",
-      duration: "1 week",
-      scopeSummary: "Multi-page digital platforms & 2–4 connected operational modules.",
-      deliverables: [
-        "2–3 structured discovery workshops",
-        "System, database & API blueprint",
-        "Phased roadmap with time estimates (credited toward build)",
-      ],
-    },
-    {
-      tierKey: "tier3_complexArchitecture",
-      tierNumber: 3,
-      label: "Tier 3 · Complex Architecture",
-      duration: "1–2 weeks",
-      scopeSummary: "Multi-workflow software blueprints & cross-system automation scoping.",
-      deliverables: [
-        "3–5 deep-dive architecture workshops",
-        "Full integration map & risk mitigation plan",
-        "Dependency-sequenced build roadmap (credited toward build)",
-      ],
-    },
-  ],
   launchKit: [
     {
       tierKey: "tier1_essential",
       tierNumber: 1,
       label: "Tier 1 · Essential",
       duration: "3–5 business days",
-      scopeSummary: "1–3 responsive pages built on our modular Next.js & Tailwind component system.",
+      scopeSummary: "1–3 responsive mobile-first pages to get your business credible online fast.",
       deliverables: [
-        "Mobile-first responsive layout (modular Next.js + Tailwind)",
-        "SEO meta tags + WhatsApp / email lead form routing",
-        "1 revision round + Vercel deployment handoff",
+        "Mobile-first responsive layout (1–3 fast pages)",
+        "Local SEO tags + Click-to-WhatsApp & email lead routing",
+        "1 revision round + 100% code & domain ownership handoff",
       ],
     },
     {
@@ -77,10 +42,10 @@ const PACKAGE_TIERS: Record<PackagePricingKey, readonly TierOption[]> = {
       tierNumber: 2,
       label: "Tier 2 · Business",
       duration: "5–7 business days",
-      scopeSummary: "4–10 pages built on our modular Next.js & Tailwind system with booking & payments.",
+      scopeSummary: "4–10 business pages with online booking embed, WhatsApp & payment links.",
       deliverables: [
-        "Modular Next.js & Tailwind build (optional Figma add-on)",
-        "Booking embed, WhatsApp & eSewa/Khalti/Stripe link setup",
+        "4–10 fast pages with clean conversion-focused sections",
+        "Cal.com / Calendly booking & eSewa / Khalti / Stripe link setup",
         "On-page SEO structure + 2 structured revision rounds",
       ],
     },
@@ -89,11 +54,11 @@ const PACKAGE_TIERS: Record<PackagePricingKey, readonly TierOption[]> = {
       tierNumber: 3,
       label: "Tier 3 · Premium",
       duration: "2–4 weeks",
-      scopeSummary: "11–20 pages with custom Figma design, interactive motion & analytics setup.",
+      scopeSummary: "11–20 pages with bespoke Figma design, interactive forms & analytics.",
       deliverables: [
-        "Bespoke Figma prototypes covering key flows + 3 revisions",
-        "Scroll-triggered motion & micro-interactions",
-        "Multi-step forms, filtering & full SEO structure",
+        "Custom Figma prototypes covering key flows + 3 revisions",
+        "Interactive quote calculators or multi-step inquiry forms",
+        "Full SEO structure across all pages + analytics setup",
       ],
     },
   ],
@@ -103,11 +68,11 @@ const PACKAGE_TIERS: Record<PackagePricingKey, readonly TierOption[]> = {
       tierNumber: 1,
       label: "Tier 1 · Basic Connection",
       duration: "1–2 weeks",
-      scopeSummary: "Connect 2 tools via n8n, Make, Zapier, or webhooks.",
+      scopeSummary: "Connect 2 tools via REST APIs, webhooks & scheduled sync.",
       deliverables: [
-        "2 systems connected (trigger → action flow)",
-        "Basic failure alert notifications",
-        "Clear developer handover documentation",
+        "Website / Facebook lead form → CRM or Google Sheets sync",
+        "Instant alerts via Email, Telegram, or Nepali SMS (Sparrow/Aakash)",
+        "Plain-English handover guide & error alerts",
       ],
     },
     {
@@ -117,9 +82,9 @@ const PACKAGE_TIERS: Record<PackagePricingKey, readonly TierOption[]> = {
       duration: "2–4 weeks",
       scopeSummary: "3–5 systems synced reliably with automatic retries.",
       deliverables: [
-        "Bidirectional sync across 3–5 business tools",
-        "Automatic retry logic & context-rich alerts",
-        "Flow health monitoring & full docs",
+        "Sync across forms, CRMs, Sheets & eSewa/Khalti/Fonepay/Stripe webhooks",
+        "Automatic retry logic & context-rich failure alerts",
+        "Flow health monitoring & full handover docs",
       ],
     },
     {
@@ -127,11 +92,49 @@ const PACKAGE_TIERS: Record<PackagePricingKey, readonly TierOption[]> = {
       tierNumber: 3,
       label: "Tier 3 · Complex Pipeline",
       duration: "4–6 weeks",
-      scopeSummary: "6+ systems or conditional branching across workflows.",
+      scopeSummary: "6+ systems or conditional branching across operations.",
       deliverables: [
-        "Multi-directional conditional workflows",
-        "Comprehensive error recovery & health alerts",
+        "Multi-step conditional workflows across departments",
+        "Full error recovery, duplicate prevention & staff alerts",
         "End-to-end operational runbook",
+      ],
+    },
+  ],
+  strategySprint: [
+    {
+      tierKey: "tier1_basicScoping",
+      tierNumber: 1,
+      label: "Tier 1 · Focused Tool Audit",
+      duration: "3–5 business days",
+      scopeSummary: "Plain-English tool evaluation & scope clarity before committing to code.",
+      deliverables: [
+        "Off-the-shelf software vs custom build recommendation",
+        "Clear feature boundaries & milestone budget estimate",
+        "100% fee credited toward your build within 30 days",
+      ],
+    },
+    {
+      tierKey: "tier2_fullDiscovery",
+      tierNumber: 2,
+      label: "Tier 2 · Full Digitalization Audit",
+      duration: "1 week",
+      scopeSummary: "Multi-department workflow review across 2–4 operational bottlenecks.",
+      deliverables: [
+        "2–3 structured stakeholder workshops",
+        "System, database & integration blueprint",
+        "Phased rollout roadmap (100% credited within 30 days)",
+      ],
+    },
+    {
+      tierKey: "tier3_complexArchitecture",
+      tierNumber: 3,
+      label: "Tier 3 · Complex System Blueprint",
+      duration: "1–2 weeks",
+      scopeSummary: "Deep multi-tool architecture & custom software specification.",
+      deliverables: [
+        "3–5 deep-dive consulting workshops",
+        "Full integration map, risk plan & vendor comparison",
+        "Step-by-step build roadmap (100% credited within 30 days)",
       ],
     },
   ],
@@ -142,19 +145,28 @@ export function ScopeEstimatorSection() {
   const activeRegion: Exclude<Region, null> = region ?? "NP";
 
   const [selectedSlug, setSelectedSlug] = React.useState<Service["slug"]>("launch-kit");
-  const [tierIndex, setTierIndex] = React.useState<number>(1);
+  const [tierIndex, setTierIndex] = React.useState<number>(0);
+  const [includeMonthlyCare, setIncludeMonthlyCare] = React.useState<boolean>(false);
 
   const selectedService =
-    SERVICES.find((s) => s.slug === selectedSlug) ?? SERVICES[1];
+    SERVICES.find((s) => s.slug === selectedSlug) ?? SERVICES[0];
   const tiers = PACKAGE_TIERS[selectedService.pkgKey];
   const activeTier = tiers[tierIndex] ?? tiers[0];
 
-  const displayPrice = formatTierPriceStandard(
+  const activePrice = formatTierPriceActive(
     selectedService.pkgKey,
     activeTier.tierKey,
     activeRegion
   );
-  const proposalHref = `/request-proposal?pkg=${selectedService.slug}&tier=${activeTier.tierNumber}&region=${activeRegion}`;
+  const standardPrice = formatTierPriceStandard(
+    selectedService.pkgKey,
+    activeTier.tierKey,
+    activeRegion
+  );
+  const monthlyCarePrice = formatMonthlyCarePrice(activeRegion);
+  const proposalHref = `/request-proposal?pkg=${selectedService.slug}&tier=${activeTier.tierNumber}&region=${activeRegion}${
+    includeMonthlyCare ? "&care=monthly" : ""
+  }`;
 
   return (
     <section
@@ -165,20 +177,31 @@ export function ScopeEstimatorSection() {
         {/* Header */}
         <div className="mb-12 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <div className="max-w-2xl">
-            <span className="font-sans text-sm font-semibold tracking-wider text-[#E8A33D] uppercase">
-              Transparent Pricing &amp; Scope Estimator
-            </span>
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="font-sans text-sm font-semibold tracking-wider text-[#E8A33D] uppercase">
+                Transparent Pricing &amp; Scope Estimator
+              </span>
+              {FOUNDING_SLOTS_REMAINING > 0 && (
+                <span className="rounded-full border border-[#4FB6C6]/40 bg-[#4FB6C6]/10 px-3 py-0.5 text-xs font-bold text-[#2D738D] dark:text-[#8CCBDA]">
+                  {FOUNDING_SLOTS_REMAINING} Founding Client slots remaining
+                </span>
+              )}
+            </div>
             <h2 className="text-on-background mt-2 text-3xl leading-[1.12] font-bold sm:text-4xl">
               Estimate Your Project Scope in Real Time
             </h2>
             <p className="text-on-surface-variant mt-3 text-base leading-relaxed">
-              Pick your currency, package, and complexity tier to see exact published ranges—built
-              for Nepal SMB budgets and international engagements alike.
+              Pick your currency, package, and tier to see exact published pricing—built for Nepal
+              businesses and global agency or SMB teams alike.
             </p>
           </div>
 
-          {/* Inline Region / Currency Switcher */}
-          <div className="flex flex-wrap items-center gap-1.5 rounded-xl border border-border-base bg-surface p-1.5">
+          {/* Inline 6-Currency Switcher */}
+          <div
+            className="border-border-base bg-surface flex flex-wrap items-center gap-1.5 rounded-xl border p-1.5"
+            role="group"
+            aria-label="Currency selector"
+          >
             {REGION_CODES.map((code) => {
               const isSelected = activeRegion === code;
               return (
@@ -192,7 +215,7 @@ export function ScopeEstimatorSection() {
                       : "text-on-surface-variant hover:text-on-background"
                   }`}
                 >
-                  {code === "NP" ? "Nepal · NPR" : `${code} · ${REGIONS[code].currency}`}
+                  {REGIONS[code].currency}
                 </button>
               );
             })}
@@ -206,7 +229,7 @@ export function ScopeEstimatorSection() {
             {/* Step 1: Service Track */}
             <div className="space-y-3">
               <p className="text-on-surface-variant text-xs font-semibold tracking-wider uppercase">
-                01. Choose Service Track
+                01. Choose Package
               </p>
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
                 {SERVICES.map((svc) => {
@@ -217,7 +240,7 @@ export function ScopeEstimatorSection() {
                       type="button"
                       onClick={() => {
                         setSelectedSlug(svc.slug);
-                        setTierIndex(1);
+                        setTierIndex(0);
                       }}
                       className={`cursor-pointer rounded-2xl border p-4 text-left transition-all duration-150 ${
                         isActive
@@ -239,7 +262,7 @@ export function ScopeEstimatorSection() {
             <div className="space-y-3">
               <div className="flex items-center justify-between gap-4">
                 <p className="text-on-surface-variant text-xs font-semibold tracking-wider uppercase">
-                  02. Select Complexity Tier
+                  02. Select Tier
                 </p>
                 <span className="text-on-surface-variant text-xs font-medium tabular-nums">
                   {activeTier.duration}
@@ -277,10 +300,10 @@ export function ScopeEstimatorSection() {
             {/* Step 3: Commercial Terms Note */}
             <div className="border-border-base flex flex-col justify-between gap-2 border-t pt-5 sm:flex-row sm:items-center">
               <p className="text-on-background text-sm font-semibold">
-                Milestone billing &amp; 100% client IP ownership
+                Milestone billing &amp; 100% code/domain ownership
               </p>
               <p className="text-on-surface-variant text-xs">
-                Third-party SaaS &amp; hosting accounts stay in your name at cost.
+                External hosting, domains &amp; SMS credits stay in your name at cost.
               </p>
             </div>
           </div>
@@ -291,7 +314,9 @@ export function ScopeEstimatorSection() {
               <div className="flex items-center justify-between gap-3 border-b border-white/10 pb-5">
                 <div>
                   <p className="text-xs font-semibold tracking-wider text-[#B8E0E9] uppercase">
-                    Estimated Investment
+                    {FOUNDING_SLOTS_REMAINING > 0
+                      ? `Founding Partner Rate · ${FOUNDING_SLOTS_REMAINING} Slots Left`
+                      : "Estimated Investment"}
                   </p>
                   <p className="mt-1 text-sm text-slate-300">
                     {selectedService.title} · {activeTier.label}
@@ -304,18 +329,27 @@ export function ScopeEstimatorSection() {
 
               <div className="my-6">
                 <div className="font-heading text-3xl font-bold tracking-tight text-white tabular-nums sm:text-4xl">
-                  {displayPrice}
+                  {activePrice}
                 </div>
+                {FOUNDING_SLOTS_REMAINING > 0 && (
+                  <p className="mt-1.5 text-xs text-slate-300">
+                    Standard rate:{" "}
+                    <span className="line-through opacity-80">{standardPrice}</span> · 20% Founding
+                    Partner discount active
+                  </p>
+                )}
                 <div className="mt-2 flex flex-wrap items-center gap-3 text-xs text-slate-300">
                   <span>Delivery: {activeTier.duration}</span>
                   <span aria-hidden="true">·</span>
-                  <span>{REGIONS[activeRegion].label} ({REGIONS[activeRegion].currency})</span>
+                  <span>
+                    {REGIONS[activeRegion].label} ({REGIONS[activeRegion].currency})
+                  </span>
                 </div>
               </div>
 
               <div className="space-y-3 border-t border-white/10 pt-5">
                 <p className="text-xs font-semibold tracking-wider text-slate-300 uppercase">
-                  Included in this scope
+                  Included in this tier
                 </p>
                 <ul className="space-y-2.5">
                   {activeTier.deliverables.map((item) => (
@@ -326,6 +360,18 @@ export function ScopeEstimatorSection() {
                   ))}
                 </ul>
               </div>
+
+              {includeMonthlyCare && (
+                <div className="mt-5 rounded-xl border border-[#4FB6C6]/35 bg-[#4FB6C6]/10 px-4 py-3 text-xs text-slate-200">
+                  <div className="flex items-center justify-between font-bold text-white">
+                    <span>+ Monthly Care &amp; Lead-Ops Plan</span>
+                    <span>{monthlyCarePrice} / mo</span>
+                  </div>
+                  <p className="mt-1 text-slate-300">
+                    Monitoring, uptime checks &amp; up to 2 small text/photo/banner updates monthly.
+                  </p>
+                </div>
+              )}
             </div>
 
             <div className="mt-8 flex flex-col gap-3 pt-4">
@@ -344,6 +390,46 @@ export function ScopeEstimatorSection() {
               </Link>
             </div>
           </div>
+        </div>
+
+        {/* Monthly Care & Lead-Ops Plan Add-On Card directly below Estimator */}
+        <div className="border-border-base bg-surface mt-6 flex flex-col justify-between gap-5 rounded-3xl border p-6 shadow-sm sm:flex-row sm:items-center sm:p-7">
+          <div className="flex items-start gap-4">
+            <div className="bg-cta/10 text-cta flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl">
+              <ShieldCheck className="h-5 w-5" />
+            </div>
+            <div className="space-y-1">
+              <div className="flex flex-wrap items-center gap-2.5">
+                <h3 className="text-on-background text-base font-bold">
+                  Optional Add-On: Monthly Care &amp; Lead-Ops Plan
+                </h3>
+                <span className="text-cta text-sm font-extrabold tabular-nums">
+                  {monthlyCarePrice} / month
+                </span>
+              </div>
+              <p className="text-on-surface-variant max-w-3xl text-xs leading-relaxed sm:text-sm">
+                Keep your site and lead forms healthy after launch: uptime monitoring, broken-link
+                &amp; form checks, and{" "}
+                <strong className="text-on-background font-semibold">
+                  up to 2 small text, photo, or banner updates per month
+                </strong>{" "}
+                (unused updates do not roll over; new pages or redesigns scoped separately).
+              </p>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setIncludeMonthlyCare((prev) => !prev)}
+            aria-pressed={includeMonthlyCare}
+            className={`shrink-0 cursor-pointer rounded-full border px-5 py-2.5 text-xs font-bold whitespace-nowrap transition-colors ${
+              includeMonthlyCare
+                ? "border-cta bg-cta text-on-cta"
+                : "border-cta text-cta hover:bg-cta/10"
+            }`}
+          >
+            {includeMonthlyCare ? "Added to Estimate ✓" : "Include Monthly Care"}
+          </button>
         </div>
       </div>
     </section>

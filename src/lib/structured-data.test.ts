@@ -36,9 +36,9 @@ describe("structured data (Organization + home FAQPage)", () => {
     expect(catalog["@type"]).toBe("OfferCatalog");
     expect(catalog.itemListElement).toHaveLength(SERVICES.length);
     expect(catalog.itemListElement.map((o) => o.itemOffered.name)).toEqual([
-      "Strategy Sprint",
       "Launch Kit",
       "Automation Layer",
+      "Strategy Sprint",
     ]);
 
     for (const offer of catalog.itemListElement) {
@@ -69,6 +69,7 @@ describe("structured data (Organization + home FAQPage)", () => {
 
     expect(faq["@type"]).toBe("FAQPage");
     expect(faq.mainEntity).toHaveLength(DEFAULT_FAQ_ITEMS.length);
+    expect(faq.mainEntity[0].acceptedAnswer.text).toContain("Free 20-Minute Checkup");
 
     DEFAULT_FAQ_ITEMS.forEach((item, index) => {
       expect(faq.mainEntity[index]["@type"]).toBe("Question");

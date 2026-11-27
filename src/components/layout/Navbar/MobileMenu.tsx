@@ -2,8 +2,6 @@
 
 import Link from "next/link";
 import { NAV_GROUPS } from "./navbar-data";
-import LanguageSwitcher from "@/contexts/LanguageSwitcher";
-import { RegionSelector } from "@/components/RegionSelector";
 
 interface MobileMenuProps {
   open: boolean;
@@ -59,17 +57,6 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
             )}
           </div>
         ))}
-
-        <div className="flex flex-col gap-3 py-2">
-          <span className="text-on-surface-variant text-xs font-bold tracking-wider uppercase">
-            Preferences
-          </span>
-
-          <div className="flex items-center justify-between">
-            <RegionSelector compact={false} />
-            <LanguageSwitcher />
-          </div>
-        </div>
 
         <Link
           href="/contact"

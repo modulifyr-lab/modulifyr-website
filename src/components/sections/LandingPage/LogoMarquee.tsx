@@ -5,11 +5,11 @@ interface CapabilityTag {
 }
 
 const DEFAULT_CAPABILITY_TAGS: CapabilityTag[] = [
-  { name: "STRATEGY SPRINT" },
   { name: "LAUNCH KIT" },
   { name: "AUTOMATION LAYER" },
-  { name: "SYSTEM ARCHITECTURE" },
-  { name: "API INTEGRATION" },
+  { name: "STRATEGY SPRINT" },
+  { name: "REST APIs & WEBHOOKS" },
+  { name: "CUSTOM WEB APPS" },
 ];
 
 interface LogoMarqueeProps {

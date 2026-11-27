@@ -16,67 +16,75 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useRegion } from "@/components/RegionProvider";
-import { formatTierPriceStandard } from "@/lib/pricing";
+import {
+  FOUNDING_SLOTS_REMAINING,
+  formatTierPriceActive,
+  formatTierPriceStandard,
+} from "@/lib/pricing";
+import { BOOKING_URL } from "@/lib/links";
+import { REGIONS, REGION_CODES } from "@/lib/regions";
 import Reveal from "@/components/ui/Reveal";
 
 const tiers = [
   {
-    name: "Tier 1 — Basic Scoping",
+    name: "Tier 1 — Focused Tool Audit",
     tierKey: "tier1_basicScoping",
     duration: "3–5 business days",
-    bestFor: "Single product or feature with a relatively clear scope",
-    descriptionNepal: "Get a clear strategic roadmap tailored to your business – fast and focused.",
+    bestFor: "Businesses choosing the right website, CRM, or workflow setup before spending",
+    descriptionNepal:
+      "Get a plain-English tool recommendation & scope plan so you never pay for software you don't need.",
     descriptionInternational:
-      "Rapid strategic planning to align your product vision with market needs.",
+      "Focused consulting to compare off-the-shelf software vs custom development for one workflow.",
     included: [
-      "1 async discovery session — written brief or single call",
-      "Requirements document covering goals, constraints, and assumptions",
-      "High-level tech stack recommendation with reasoning",
-      "Simple phased roadmap — phases only, no hour estimates",
+      "Follow-up deep-dive after your Free 20-Minute Checkup",
+      "Comparison of ready-made tools vs custom development options",
+      "Plain-English scope summary with budget & timeline boundaries",
+      "100% of fee credited if you start a build within 30 days",
     ],
     notIncluded: [
-      "Architecture diagrams or system blueprints",
-      "Risk analysis document",
-      "Multiple stakeholder sessions",
+      "Multi-department workflow mapping",
+      "Full custom database schema & API diagrams",
+      "Multiple stakeholder workshops",
     ],
     highlight: false,
   },
   {
-    name: "Tier 2 — Full Discovery",
+    name: "Tier 2 — Full Digitalization Audit",
     tierKey: "tier2_fullDiscovery",
     duration: "1 week",
-    bestFor: "Multi-feature projects or systems with 2–4 moving parts",
-    descriptionNepal: "Map user journeys and identify key opportunities for your product.",
-    descriptionInternational: "Strategic user‑flow mapping with actionable insights.",
+    bestFor: "Businesses connecting 2–4 workflows across sales, forms, billing & teams",
+    descriptionNepal:
+      "Map how inquiries, staff follow-ups, and payments flow across your business and get a clear rollout plan.",
+    descriptionInternational:
+      "Structured multi-tool digitalization audit with vendor evaluation, integration map & phased rollout.",
     included: [
-      "2–3 structured discovery calls or workshops",
-      "Detailed requirements breakdown per feature area",
-      "Architecture blueprint with system and component diagram",
-      "Tech stack recommendation with justification",
-      "Phased roadmap with rough time estimates per phase",
+      "2–3 structured consulting sessions with your key staff",
+      "Tool-by-tool audit (forms, CRM, sheets, SMS, payments)",
+      "Clear system blueprint & build vs buy recommendations",
+      "Phased rollout roadmap with milestone estimates",
+      "100% of fee credited if you start a build within 30 days",
     ],
     notIncluded: [
-      "Risk analysis document",
-      "Legacy system audit",
-      "More than 3 stakeholder sessions",
+      "Full multi-branch legacy codebase audit",
+      "More than 3 stakeholder workshops",
     ],
     highlight: true,
   },
   {
-    name: "Tier 3 — Complex Architecture",
+    name: "Tier 3 — Complex System Blueprint",
     tierKey: "tier3_complexArchitecture",
     duration: "1–2 weeks",
-    bestFor: "Multi-workflow platforms or cross-system automation scoping",
+    bestFor: "Larger portals, multi-workflow operations, or white-label agency system specs",
     descriptionNepal:
-      "Full technical architecture, database design, and integration map for custom builds.",
+      "Complete technical architecture, database schema, and integration plan before custom engineering.",
     descriptionInternational:
-      "Deep technical blueprint covering Next.js / Hono architecture, PostgreSQL schema, and API dependencies.",
+      "Deep technical blueprint covering Next.js / PostgreSQL architecture, API contracts & build sequencing.",
     included: [
-      "Full workshop series — 3 to 5 sessions across stakeholders",
-      "Complete architecture blueprint & database schema",
-      "Integration mapping across all connected systems",
-      "Risk analysis and mitigation plan",
-      "Detailed phased roadmap with dependencies and sequencing",
+      "Full workshop series (3–5 stakeholder sessions)",
+      "Complete system architecture blueprint & PostgreSQL data model",
+      "Integration mapping across all third-party tools & webhooks",
+      "Risk mitigation plan & dependency-sequenced delivery roadmap",
+      "100% of fee credited if you start a build within 30 days",
     ],
     notIncluded: [],
     highlight: false,
@@ -86,26 +94,23 @@ const tiers = [
 const whatYouOwnAfter = [
   {
     icon: FileText,
-    label: "Requirements document",
-    desc: "Written, structured, shareable with any team or investor",
+    label: "Plain-English Tool Audit Report",
+    desc: "Know which off-the-shelf tools to adopt and what actually needs custom work",
   },
   {
     icon: Map,
-    label: "Delivery roadmap",
-    desc: "Phased plan with clear sequencing — not a vague list of features",
+    label: "Clear Rollout Roadmap",
+    desc: "Phased steps with fixed milestone pricing — never a vague wish list",
   },
   {
     icon: Layers,
-    label: "Architecture blueprint",
-    desc: "Tier 2 and 3 only — system diagram you own and can build from",
+    label: "100% Build Credit (30 Days)",
+    desc: "Every rupee/dollar you invest goes straight toward your build if you proceed",
   },
 ];
 
-// Custom 3D Tilt Card (if needed, but restricted on pricing tiers per instruction)
-// Remember: Pricing page and pricing-tier-like sections should not use too much tilt to keep readability clean, but we can have soft fade-ups/reveals.
-
 export default function StrategySprintPage() {
-  const { region } = useRegion();
+  const { region, setRegion } = useRegion();
   const activeRegion = region ?? "NP";
 
   return (
@@ -116,9 +121,9 @@ export default function StrategySprintPage() {
           <div className="max-w-3xl">
             <Reveal variant="fade-scale">
               <div className="mb-4 flex items-center gap-2">
-                <Search className="text-[#2D738D] h-6 w-6" />
-                <span className="text-[#2D738D] text-xs font-bold tracking-widest uppercase">
-                  Discovery & Strategy
+                <Search className="h-6 w-6 text-[#2D738D]" />
+                <span className="text-xs font-bold tracking-widest text-[#2D738D] uppercase">
+                  03 · Digitalization Consulting &amp; Tool Audit
                 </span>
               </div>
             </Reveal>
@@ -129,25 +134,39 @@ export default function StrategySprintPage() {
             </Reveal>
             <Reveal variant="fade-up" delay={200}>
               <p className="text-text-muted text-xl leading-relaxed">
-                Built specifically for scoping complex digital platforms and multi-system
-                automations before writing production code. Lock down exact architecture, timelines,
-                and milestone pricing in 3–10 days—and 100% of your Strategy Sprint fee can be
-                credited toward your build with Modulifyr. (If you just need a straightforward
-                Launch Kit website, you can skip the sprint and start directly.)
+                Every engagement starts with a{" "}
+                <strong className="text-white">Free 20-Minute Checkup</strong>—never a paid gate.
+                When your team needs deep multi-tool research across CRM, websites, payments, and
+                off-the-shelf vs custom software, Strategy Sprint gives you a clear plan before
+                writing code.
               </p>
             </Reveal>
+
+            <Reveal variant="fade-up" delay={250}>
+              <div className="mt-6 rounded-2xl border border-[#4FB6C6]/40 bg-[#4FB6C6]/10 px-5 py-4 text-sm leading-relaxed text-[#E2F4F7]">
+                <strong>Start with a Free 20-Minute Checkup.</strong> Need deep multi-tool research?{" "}
+                <strong>100% of your Strategy Sprint fee is credited toward your build</strong> if
+                you start within 30 days.
+              </div>
+            </Reveal>
+
             <Reveal variant="fade-up" delay={300}>
               <div className="mt-8 flex flex-wrap gap-4">
-                <Button href="/request-proposal?pkg=strategy-sprint" size="lg" className="bg-[#2D738D] hover:bg-[#235b70]">
-                  Request a Strategy Sprint
+                <Button
+                  href={BOOKING_URL}
+                  external
+                  size="lg"
+                  className="bg-[#2D738D] hover:bg-[#235b70]"
+                >
+                  Book Free 20-Min Checkup First
                 </Button>
                 <Button
-                  href="/contact"
+                  href="/request-proposal?pkg=strategy-sprint"
                   size="lg"
                   variant="outline"
                   className="border-white/30 text-white hover:bg-white/10"
                 >
-                  Ask a Question First
+                  Request Deep Tool Audit
                 </Button>
               </div>
             </Reveal>
@@ -159,14 +178,14 @@ export default function StrategySprintPage() {
       <section className="bg-bg-secondary border-border-base border-b py-12">
         <div className="container-custom">
           <p className="text-text-muted mb-8 text-xs font-bold tracking-widest uppercase">
-            What you own after the sprint
+            What you own after the audit
           </p>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {whatYouOwnAfter.map((item, i) => (
               <Reveal key={i} variant="fade-scale" delay={i * 100}>
                 <div className="flex h-full gap-4">
-                  <div className="bg-[#2D738D]/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
-                    <item.icon className="text-[#2D738D] h-5 w-5" />
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#2D738D]/10">
+                    <item.icon className="h-5 w-5 text-[#2D738D]" />
                   </div>
                   <div>
                     <h3 className="text-foreground mb-1 text-sm font-bold">{item.label}</h3>
@@ -182,19 +201,49 @@ export default function StrategySprintPage() {
       {/* Tiers */}
       <section className="py-24">
         <div className="container-custom">
-          <div className="mb-12">
-            <Reveal variant="fade-up">
-              <h2 className="font-heading text-foreground mb-3 text-3xl font-bold">
-                Three Tiers — Priced by Complexity
-              </h2>
-            </Reveal>
-            <Reveal variant="fade-up" delay={100}>
-              <p className="text-text-secondary max-w-2xl text-sm leading-relaxed">
-                100% of your Strategy Sprint fee can be credited toward a Launch Kit or Automation
-                Layer build with us. Not sure which tier fits? Describe your project and we will
-                tell you honestly.
-              </p>
-            </Reveal>
+          <div className="mb-12 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+            <div>
+              <Reveal variant="fade-up">
+                <div className="mb-2 flex flex-wrap items-center gap-3">
+                  <h2 className="font-heading text-foreground text-3xl font-bold">
+                    Consulting &amp; Audit Tiers
+                  </h2>
+                  {FOUNDING_SLOTS_REMAINING > 0 && (
+                    <span className="rounded-full border border-[#4FB6C6]/40 bg-[#4FB6C6]/10 px-3 py-0.5 text-xs font-bold text-[#2D738D]">
+                      {FOUNDING_SLOTS_REMAINING} Founding Client slots remaining
+                    </span>
+                  )}
+                </div>
+              </Reveal>
+              <Reveal variant="fade-up" delay={100}>
+                <p className="text-text-secondary max-w-2xl text-sm leading-relaxed">
+                  Already know you just need a business website or single workflow automation? Skip
+                  this sprint and start with your Free 20-Min Checkup—or pick an audit tier below.
+                </p>
+              </Reveal>
+            </div>
+
+            {/* 6-Currency Selector */}
+            <div
+              className="border-border-base bg-bg-alt inline-flex flex-wrap items-center gap-1 self-start rounded-xl border p-1"
+              role="group"
+              aria-label="Select display currency"
+            >
+              {REGION_CODES.map((code) => (
+                <button
+                  key={code}
+                  type="button"
+                  onClick={() => setRegion(code)}
+                  className={`cursor-pointer rounded-lg px-2.5 py-1 text-xs font-bold transition-colors ${
+                    activeRegion === code
+                      ? "bg-[#2D738D] text-white"
+                      : "text-text-alt hover:text-foreground"
+                  }`}
+                >
+                  {REGIONS[code].currency}
+                </button>
+              ))}
+            </div>
           </div>
 
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
@@ -208,21 +257,23 @@ export default function StrategySprintPage() {
                   }`}
                 >
                   {tier.highlight && (
-                    <div className="bg-[#2D738D] absolute top-0 left-8 -translate-y-1/2 rounded-full px-3 py-1 text-[10px] font-bold tracking-widest text-white uppercase">
+                    <div className="absolute top-0 left-8 -translate-y-1/2 rounded-full bg-[#2D738D] px-3 py-1 text-[10px] font-bold tracking-widest text-white uppercase">
                       Most Common
                     </div>
                   )}
 
                   <div>
                     <h3 className="text-foreground mb-1 text-base font-bold">{tier.name}</h3>
-                    {activeRegion ? (
-                      <div className="font-heading text-[#2D738D] text-2xl font-bold">
-                        {formatTierPriceStandard("strategySprint", tier.tierKey, activeRegion)}
-                      </div>
-                    ) : (
-                      <div className="text-text-muted text-sm font-semibold">
-                        Select region for pricing
-                      </div>
+                    <div className="font-heading text-2xl font-bold text-[#2D738D] tabular-nums">
+                      {formatTierPriceActive("strategySprint", tier.tierKey, activeRegion)}
+                    </div>
+                    {FOUNDING_SLOTS_REMAINING > 0 && (
+                      <p className="text-text-muted mt-1 text-xs">
+                        Standard:{" "}
+                        <span className="line-through">
+                          {formatTierPriceStandard("strategySprint", tier.tierKey, activeRegion)}
+                        </span>
+                      </p>
                     )}
                     <div className="text-brand-teal mt-2 flex items-center gap-1.5 text-xs font-semibold uppercase">
                       <Clock className="h-3 w-3" /> {tier.duration}
@@ -288,41 +339,27 @@ export default function StrategySprintPage() {
         </div>
       </section>
 
-      {/* Third-party disclaimer */}
+      {/* Concise Note */}
       <section className="bg-bg-secondary py-12">
         <div className="container-custom">
           <Reveal variant="fade-scale">
-            <div className="border-border-base max-w-3xl rounded-2xl border bg-bg-alt p-8">
+            <div className="border-border-base bg-bg-alt max-w-3xl rounded-2xl border p-8">
               <div className="mb-4 flex items-start gap-3">
-                <AlertCircle className="text-[#2D738D] mt-0.5 h-5 w-5 shrink-0" />
-                <h3 className="text-foreground font-bold">What you are responsible for</h3>
+                <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-[#2D738D]" />
+                <h3 className="text-foreground font-bold">How the 30-day credit works</h3>
               </div>
               <ul className="text-text-secondary space-y-2 text-sm">
                 <li className="flex items-start gap-2">
-                  <ChevronRight className="text-[#2D738D] mt-0.5 h-4 w-4 shrink-0" />
-                  Access to relevant stakeholders during the sprint window — delays on your end
-                  extend the timeline
+                  <ChevronRight className="mt-0.5 h-4 w-4 shrink-0 text-[#2D738D]" />
+                  100% of your Strategy Sprint fee is deducted from your Launch Kit, Automation
+                  Layer, or custom build invoice if you start within 30 days
                 </li>
                 <li className="flex items-start gap-2">
-                  <ChevronRight className="text-[#2D738D] mt-0.5 h-4 w-4 shrink-0" />
-                  Any existing documentation, system diagrams, or business process docs you want
-                  incorporated
-                </li>
-                <li className="flex items-start gap-2">
-                  <ChevronRight className="text-[#2D738D] mt-0.5 h-4 w-4 shrink-0" />
-                  Timely responses during discovery — a sprint cannot run one direction for days
-                  then reverse
+                  <ChevronRight className="mt-0.5 h-4 w-4 shrink-0 text-[#2D738D]" />
+                  If you decide to pause or hire another vendor, you keep 100% of the written
+                  tool audit and roadmap documents
                 </li>
               </ul>
-              <p className="text-text-muted border-border-base mt-6 border-t pt-4 text-xs leading-relaxed">
-                <strong className="text-foreground">
-                  Third-party tool costs are entirely your responsibility.
-                </strong>{" "}
-                Modulifyr does not cover, pay for, or manage costs for any external platforms —
-                including but not limited to Vercel, Netlify, any domain registrar, n8n cloud,
-                Supabase, any SaaS subscription, or API usage fees. These are direct client costs,
-                billed to and owned by the client.
-              </p>
             </div>
           </Reveal>
         </div>
@@ -334,15 +371,15 @@ export default function StrategySprintPage() {
           <Reveal variant="fade-scale">
             <div className="bg-brand-navy max-w-3xl rounded-3xl p-12 text-white">
               <h2 className="font-heading mb-3 text-2xl font-bold text-white">
-                Not sure which tier fits?
+                Start with your Free 20-Min Checkup
               </h2>
               <p className="text-text-muted mb-8 text-sm leading-relaxed">
-                Describe your project briefly. We will tell you which tier is appropriate and why —
-                no commitment required.
+                Not sure if you need an audit or just a simple website/automation fix? Talk to us
+                first—we&apos;ll give you an honest answer in 20 minutes.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Button href="/request-proposal?pkg=strategy-sprint" className="bg-[#2D738D] hover:bg-[#235b70]">
-                  Describe Your Project
+                <Button href={BOOKING_URL} external className="bg-[#2D738D] hover:bg-[#235b70]">
+                  Book Free 20-Min Checkup
                 </Button>
                 <Button
                   href="/services"

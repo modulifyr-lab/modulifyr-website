@@ -1,24 +1,24 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Strategy Sprint | Technical Scoping & Software Architecture | Modulifyr",
+  title: "Strategy Sprint | IT & Digitalization Consulting & Tool Audit | Modulifyr",
   description:
-    "A fixed-fee discovery sprint to map your requirements, database architecture, and delivery roadmap before writing code—100% credited toward your build.",
+    "Start with a Free 20-Min Checkup. Deep IT & digitalization consulting and tool audits from NPR 20,000–1,20,000 ($160–$1,120)—100% credited if you build within 30 days.",
   alternates: {
     canonical: "/services/strategy-sprint",
   },
   openGraph: {
-    title: "Strategy Sprint | Technical Scoping & Software Architecture | Modulifyr",
+    title: "Strategy Sprint | IT & Digitalization Consulting & Tool Audit | Modulifyr",
     description:
-      "Lock down scope, system architecture, and delivery milestones in 3–10 days before committing to full engineering.",
+      "Compare off-the-shelf software vs custom systems with a clear rollout plan—100% credited toward your build within 30 days.",
     url: "/services/strategy-sprint",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Strategy Sprint | Modulifyr",
+    title: "Strategy Sprint | Digitalization Consulting | Modulifyr",
     description:
-      "Fixed-scope software discovery and architecture blueprint—100% credited toward your build.",
+      "Start with a Free 20-Min Checkup. Deep consulting & tool audits 100% credited within 30 days.",
   },
 };
 

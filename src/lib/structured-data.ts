@@ -33,7 +33,7 @@ export function buildRootSchemaOrg() {
         },
         image: [`${SITE_URL}/og-image.png`, `${SITE_URL}/company-logo.png`],
         description:
-          "Software, websites, and business automation studio in Birtamode, Jhapa, Nepal serving local SMBs and global teams with Strategy Sprint, Launch Kit, and Automation Layer packages.",
+          "Websites, lead systems, custom software, and business automation studio in Birtamode, Jhapa, Nepal serving Nepal SMBs and clients in the US, UK, Europe, Australia, and Canada.",
         email: CONTACT_EMAIL,
         telephone: PHONE_SCHEMA,
         priceRange: `${formatNpr(overallMinNpr)} - ${formatNpr(overallMaxNpr)}`,
@@ -78,13 +78,14 @@ export function buildRootSchemaOrg() {
           { "@type": "Place", name: "Worldwide" },
         ],
         knowsAbout: [
-          "Strategy Sprint",
           "Launch Kit",
           "Automation Layer",
-          "Custom Software & Business Systems",
+          "Strategy Sprint",
           "Fast Mobile-First Business Websites & Local SEO",
-          "Business Workflow, CRM & eSewa/Khalti/Fonepay Automation",
-          "n8n & WhatsApp Automation",
+          "Lead Capture, CRM & eSewa/Khalti/Fonepay Automation",
+          "IT & Digitalization Consulting & Tool Audits",
+          "Custom Web Apps & White-Label Agency Builds",
+          "REST APIs, Webhooks & Email/Telegram/SMS Alerts",
         ],
         knowsLanguage: ["en", "ne"],
         foundingDate: "2025",
@@ -109,7 +110,7 @@ export function buildRootSchemaOrg() {
         },
         hasOfferCatalog: {
           "@type": "OfferCatalog",
-          name: "Fixed-Scope Local SMB & Digital Software Services",
+          name: "Fixed-Scope Websites, Automation & Digital Consulting Services",
           itemListElement: SERVICES.map((service) => {
             const [minNpr, maxNpr] = getPackageRange(service.pkgKey, "NP");
             const serviceUrl = `${SITE_URL}/services/${service.slug}`;
