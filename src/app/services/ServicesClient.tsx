@@ -24,13 +24,21 @@ export default function ServicesClient() {
             your build within 30 days.
           </p>
           <div className="flex flex-wrap justify-center gap-3 pt-2 sm:gap-4 sm:pt-4">
-            <Button href={BOOKING_URL} external>
+            <Button
+              href={BOOKING_URL}
+              external
+              className="w-auto! max-w-none! px-7 whitespace-nowrap"
+            >
               Book a Free 20-Min Checkup
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight className="h-4 w-4 shrink-0" />
             </Button>
-            <Button href="/request-proposal" variant="outline">
+            <Button
+              href="/request-proposal"
+              variant="outline"
+              className="w-auto! max-w-none! px-7 whitespace-nowrap"
+            >
               Request a Proposal
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight className="h-4 w-4 shrink-0" />
             </Button>
           </div>
         </div>

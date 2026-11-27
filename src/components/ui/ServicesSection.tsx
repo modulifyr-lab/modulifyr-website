@@ -186,7 +186,7 @@ export function ServicesSection() {
 
         {/* Custom Web Apps & White-Label Agency Builds Callout */}
         <div className="bg-bg-alt border-border-main mt-10 flex flex-col justify-between gap-6 rounded-2xl border p-8 shadow-sm lg:flex-row lg:items-center">
-          <div className="max-w-3xl space-y-2">
+          <div className="min-w-0 max-w-3xl flex-1 space-y-2">
             <div className="flex flex-wrap items-center gap-3">
               <span className="text-xs font-bold tracking-wider text-[#E8A33D] uppercase">
                 Custom Web Apps &amp; White-Label Agency Builds
@@ -205,10 +205,16 @@ export function ServicesSection() {
               and direct engineering communication for businesses and agency partners.
             </p>
           </div>
-          <Button href={BOOKING_URL} external className="max-w-none! shrink-0 whitespace-nowrap">
-            Book a Free 20-Min Checkup
-            <CalendarCheck className="h-4 w-4 shrink-0" />
-          </Button>
+          <div className="shrink-0">
+            <Button
+              href={BOOKING_URL}
+              external
+              className="w-auto! max-w-none! px-6 whitespace-nowrap"
+            >
+              Book a Free 20-Min Checkup
+              <CalendarCheck className="h-4 w-4 shrink-0" />
+            </Button>
+          </div>
         </div>
       </div>
     </section>
